@@ -1,0 +1,302 @@
+﻿<local:BaseWindow x:Class="Def_Writer.ModLocalization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Def_Writer"
+	d:DataContext="{d:DesignInstance Type=local:LocaleInfo}"
+	mc:Ignorable="d"
+	Title="{DynamicResource TitleSetupLocalization}"
+	Height="500"
+	Width="800"
+	WindowStartupLocation="CenterOwner">
+	<local:BaseWindow.Resources>
+		<local:BooleanVisibilityConverter
+			x:Key="BooleanVisibilityConverter" />
+	</local:BaseWindow.Resources>
+	<Grid
+		Margin="10">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="*" />
+			<ColumnDefinition
+				Width="5" />
+			<ColumnDefinition
+				Width="3*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="5" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		<TextBlock
+			Grid.ColumnSpan="3"
+			Padding="0,0,0,5">
+			<Run
+				Text="{DynamicResource TextUsageTips1}" />
+			<LineBreak />
+			<Run
+				Text="{DynamicResource TextUsageTips2}" /></TextBlock>
+		<Grid
+			Grid.Row="1"
+			Grid.ColumnSpan="3"
+			Margin="0,0,0,10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Text="{DynamicResource TextLocaleName}" />
+			<TextBox
+				x:Name="TextLocaleName"
+				Grid.Column="1"
+				Text="{Binding LocaleName}">
+				<TextBox.Style>
+					<Style
+						TargetType="TextBox">
+						<Style.Triggers>
+							<Trigger
+								Property="Text"
+								Value="">
+								<Setter
+									Property="Background"
+									Value="Yellow" />
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</TextBox.Style>
+			</TextBox>
+		</Grid>
+		<StackPanel
+			Grid.Row="2">
+			<Button
+				x:Name="ButtonClean"
+				Content="{DynamicResource ButtonCleanUpSame}"
+				ToolTip="{DynamicResource ButtonCleanUpSameTip}"
+				Click="ButtonCleanClick" />
+		</StackPanel>
+		<DataGrid
+			x:Name="TableLocale"
+			Grid.Row="4"
+			Margin="0,5,0,0"
+			RowHeaderWidth="0"
+			IsReadOnly="True"
+			AutoGenerateColumns="false"
+			CanUserSortColumns="False"
+			GridLinesVisibility="Horizontal"
+			d:ItemsSource="{d:SampleData ItemCount=2}"
+			SelectionMode="Single"
+			SelectionChanged="TableLocaleChanged">
+			<DataGrid.Columns>
+				<DataGridTextColumn
+					Header="{DynamicResource HeaderLocale}"
+					Width="*"
+					Binding="{Binding LocaleValue}">
+					<DataGridTextColumn.CellStyle>
+						<Style
+							TargetType="DataGridCell">
+							<Setter
+								Property="ToolTip"
+								Value="{Binding LocaleDisplay}" />
+						</Style>
+					</DataGridTextColumn.CellStyle>
+				</DataGridTextColumn>
+				<DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Button
+								BorderThickness="0"
+								Visibility="{Binding Path=HasLocale, Converter={StaticResource BooleanVisibilityConverter},Mode=OneWay}"
+								VerticalAlignment="Top"
+								Click="DeleteLocalClick">
+								<Image
+									Source="/Images/DeleteTranslation.png" />
+							</Button>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Grid
+			Grid.Row="2"
+			Grid.Column="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Button
+				x:Name="ButtonSyncWithUni"
+				Grid.Column="0"
+				Content="{DynamicResource ButtonSyncWithUni}"
+				HorizontalAlignment="Left"
+				Click="ButtonSyncingClick">
+				<Button.Style>
+					<Style
+						TargetType="Button">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding Path=CurrentLocale}"
+								Value="universal">
+								<Setter
+									Property="Visibility"
+									Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button
+				x:Name="ButtonSyncOrder"
+				Grid.Column="1"
+				Margin="5,0,0,0"
+				Content="{DynamicResource ButtonSyncOrder}"
+				HorizontalAlignment="Left"
+				Click="ButtonSyncingClick" />
+			<Button
+				x:Name="ButtonAdd"
+				Grid.Column="3"
+				Margin="5,0,0,0"
+				HorizontalAlignment="Left"
+				Click="OperateButtonClick">
+				<Image
+					Source="/Images/AddRow.png" />
+			</Button>
+			<Button
+				x:Name="ButtonUp"
+				Grid.Column="4"
+				Margin="5,0,0,0"
+				HorizontalAlignment="Left"
+				Click="OperateButtonClick">
+				<Image
+					Source="/Images/Up.png" />
+			</Button>
+			<Button
+				x:Name="ButtonDown"
+				Grid.Column="5"
+				Margin="5,0,0,0"
+				HorizontalAlignment="Left"
+				Click="OperateButtonClick">
+				<Image
+					Source="/Images/Down.png" />
+			</Button>
+			<Button
+				x:Name="ButtonDelete"
+				Grid.Column="6"
+				Margin="5,0,0,0"
+				HorizontalAlignment="Left"
+				Click="OperateButtonClick">
+				<Image
+					Source="/Images/DeleteRow.png" />
+			</Button>
+		</Grid>
+		<DataGrid
+			x:Name="TableDict"
+			RowHeaderWidth="0"
+			Grid.Row="4"
+			Grid.Column="2"
+			Margin="0,5,0,0"
+			CanUserAddRows="True"
+			AutoGenerateColumns="false"
+			CanUserSortColumns="False"
+			GridLinesVisibility="Horizontal"
+			d:ItemsSource="{d:SampleData ItemCount=2}">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn
+					Header="{DynamicResource HeaderKey}"
+					Width="*">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox
+								BorderThickness="0"
+								Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Red" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn
+					Header="{DynamicResource HeaderValue}"
+					Width="*">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBox
+								BorderThickness="0"
+								Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Red" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+		<StackPanel
+			Grid.Row="5"
+			Grid.ColumnSpan="3"
+			Margin="0,15,0,0"
+			Orientation="Horizontal"
+			FlowDirection="RightToLeft">
+			<Button
+				x:Name="ButtonSave"
+				Content="{DynamicResource ButtonSave}"
+				Padding="50,5,50,5"
+				FontSize="14"
+				Click="ButtonCloseClick" />
+			<Button
+				x:Name="ButtonCancel"
+				Content="{DynamicResource ButtonCancel}"
+				Padding="50,5,50,5"
+				Margin="10,0,0,0"
+				FontSize="14"
+				Click="ButtonCloseClick" />
+		</StackPanel>
+	</Grid>
+</local:BaseWindow>

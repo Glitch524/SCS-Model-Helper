@@ -1,0 +1,58 @@
+﻿<Window x:Class="Def_Writer.AddonHookup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Def_Writer"
+        mc:Ignorable="d"
+        Title="AddonHookup" Height="450" Width="800">
+    <Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="*" />
+			<ColumnDefinition
+				Width="3*" />
+		</Grid.ColumnDefinitions>
+		<Grid
+			Grid.ColumnSpan="2">
+			<TextBlock
+				Text="AddonHookup用于定义套件模型（比如仪表盘套件、挡风玻璃套件）"
+				Margin="0,0,0,10"/>
+		</Grid>
+		<DataGrid
+			x:Name="TableSui"
+			Grid.Row="1"
+			IsReadOnly="True">
+			<DataGrid.Columns>
+				<DataGridTextColumn
+					Header="定义文件"
+					Width="*"
+					Binding="{Binding Path=.}">
+					<DataGridTextColumn.CellStyle>
+						<Style
+							TargetType="DataGridCell">
+							<Setter
+								Property="ToolTip"
+								Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
+						</Style>
+					</DataGridTextColumn.CellStyle>
+				</DataGridTextColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+		<DataGrid
+			x:Name="TableModels"
+			Margin="5,0,0,0"
+			Grid.Row="1"
+			Grid.Column="1">
+
+		</DataGrid>
+	</Grid>
+</Window>

@@ -1,0 +1,489 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:s="clr-namespace:System;assembly=mscorlib">
+	<s:String x:Key="ETS2">Euro Truck Simulator 2</s:String>
+	<s:String x:Key="ATS">American Truck Simulator</s:String>
+	<s:String x:Key="ETS2Short">ETS2</s:String>
+	<s:String x:Key="ATSShort">ATS</s:String>
+	<!--MainWindow-->
+	<s:String x:Key="TitleMain">Def Writer</s:String>
+	<s:String x:Key="SCSProjectLocation">Project Location</s:String>
+	<s:String x:Key="SCSProjectLocationTipNotExist">The Directory of the project is not exist</s:String>
+	<s:String x:Key="ModelDisplayName">Display Name</s:String>
+	<s:String x:Key="ButtonLocale">Localization</s:String>
+	<s:String x:Key="ModelPrice">Price(ETS2 → EUR, ATS → USD)</s:String>
+	<s:String x:Key="ModelPriceErrNot0">Price cannot be 0, or the accessory will not be visible to the player.</s:String>
+	<s:String x:Key="ModelPriceErrNoNumber">Characters other than number is not allowed</s:String>
+	<s:String x:Key="ModelUnlockLevel">Unlock Level</s:String>
+	<s:String x:Key="ModelFilePath">Model Path(.pim will be transformed to .pmd)</s:String>
+	<s:String x:Key="ModelFilePathUK">Model Path for UK(File with _uk suffix will be auto filled)</s:String>
+	<s:String x:Key="ModelName">Model Name</s:String>
+	<s:String x:Key="ModelNameTip">(Might be invisible when over 12 characters)</s:String>
+	<s:String x:Key="ModelIcon">Icon Name(Recommend location: material\ui\accessory\)</s:String>
+	<s:String x:Key="ModelType">Model Type </s:String>
+	<s:String x:Key="ModelTypeTip">(Auto filled by modelPath)</s:String>
+	<s:String x:Key="ModelLook">Look</s:String>
+	<s:String x:Key="ModelVariant">Variant</s:String>
+	<!--Truck List-->
+	<s:String
+		x:Key="ModelTruckTip1">If theres new trucks that cannot find in here, press "New Truck" to and new trucks</s:String>
+	<s:String
+		x:Key="ModelTruckTip2">"Delete Truck" will delete selected trucks(not checked trucks)</s:String>
+	<s:String
+		x:Key="ModelTruckTip3">Model type, look and variant can be separatly set in the following list.</s:String>
+	<s:String
+		x:Key="ButtonInitializeTrucks">Initialize Trucks</s:String>
+	<s:String
+		x:Key="ExpanderETS2">Euro Truck Simulator 2(Expand to apply/export to ETS2)</s:String>
+	<s:String
+		x:Key="ExpanderATS">American Truck Simulator(Expand to apply/export to ATS)</s:String>
+	<s:String
+		x:Key="TruckID">Truck ID</s:String>
+	<s:String
+		x:Key="TruckName">Truck Name</s:String>
+	<s:String
+		x:Key="TruckDescription">Truck Description</s:String>
+	<!--Side Button-->
+	<s:String
+		x:Key="ButtonDeleteTruck">Delete Truck</s:String>
+	<s:String
+		x:Key="CheckBoxDeleteUnchecked">Delete Existing Unchecked Sii</s:String>
+	<!--Localization Menu-->
+	<s:String
+		x:Key="MenuResTip">Hovering items to show values</s:String>
+	<s:String
+		x:Key="ResourceValueHeader">All values of the key:</s:String>
+	<s:String
+		x:Key="MenuResOption">Open "Localization"</s:String>
+
+	<!--MainWindow.CS-->
+	<s:String
+		x:Key="MessageLoadTruckErr">Error occurs when loading truck list, reseting truck list</s:String>
+	<s:String
+		x:Key="MessageCleanupAsk">Clean up all contents below?</s:String>
+	<s:String
+		x:Key="MessageNoManifest">The Project dose not have a manifest file, maybe set up manifest first?</s:String>
+	<s:String
+		x:Key="MessageProjectLocationFirst">Please set the project location first</s:String>
+	<s:String
+		x:Key="DialogTitleChooseIcon">Choose Icon File(Only support .tga and .dds file)</s:String>
+	<s:String
+		x:Key="DialogFilterChooseIcon">Icon File|*.tga;*.dds|All Files|*.*</s:String>
+	<s:String
+		x:Key="MessageCreateAccessoryFail">Unable to create accessory directory</s:String>
+	<s:String
+		x:Key="MessageIconInvalidChar">Icon path should not contain spaces and brackets, or icon files will not be recognized</s:String>
+	<s:String
+		x:Key="MessageIconOutsideProject">Icon Files should be in the project</s:String>
+	<s:String
+		x:Key="DialogTitleChooseModel">Choose Model File(.pim will be automaticly transformed to .pmd)</s:String>
+	<s:String
+		x:Key="DialogTitleChooseModelUK">Choose Model File(UK)(.pim will be automaticly transformed to .pmd)</s:String>
+	<s:String
+		x:Key="DialogFilterChooseModel">Model Files|*.pmd;*.pim|All Files|*.*</s:String>
+	<s:String
+		x:Key="MessageInvalidExt">The extension of the file should be pim or pmd</s:String>
+	<s:String
+		x:Key="MessageModelOutsideProject">Model Files should be in the project</s:String>
+	<!--Create SII-->
+	<s:String
+		x:Key="MessageCreateSiiNoExpanded">Please at least expand a game list</s:String>
+	<s:String
+		x:Key="MessageCreateSiiNotFilled">Please fill in all necessary content</s:String>
+	<s:String
+		x:Key="MessageCreateSiiNotFilled2">The background of the unfilled necessary content is yellow</s:String>
+	<s:String
+		x:Key="MessageCreateSiiResult">Create sii files success</s:String>
+	<s:String
+		x:Key="MessageCreateSiiZero">There's no sii files need to create.</s:String>
+	<!--DED file-->
+	<s:String
+		x:Key="SaveDED">Save Configuration</s:String>
+	<s:String
+		x:Key="LoadDED">Load Configuration</s:String>
+	<s:String
+		x:Key="DialogFilterDED">Def Configuration File|*.ded|AllFiles|*.*</s:String>
+	<s:String
+		x:Key="MessageSaveDED">File Saved</s:String>
+	<s:String
+		x:Key="MessageLoadDEDErrNotDED">Looks like this file is not the configuration file</s:String>
+	<s:String
+		x:Key="MessageLoadDEDErrFail">An error occurs when loading, some data might be missing</s:String>
+	<!--Add Truck-->
+	<s:String
+		x:Key="ButtonAddTruck">New Truck</s:String>
+	<s:String
+		x:Key="MessageAddErrNotFilled">Please at least fill in the TruckID and Truck name</s:String>
+	<s:String
+		x:Key="MessageAddErrSameID">There's already a truck with the same ID</s:String>
+
+	
+	
+	<!--MOD Manifest-->
+	<s:String
+		x:Key="TitleModPreparation">MOD Manifest</s:String>
+	<s:String
+		x:Key="BasicInfo">Basic Info</s:String>
+	<s:String
+		x:Key="ModVersion">MOD Version:</s:String>
+	<s:String
+		x:Key="ProjectName">Display Name:</s:String>
+	<s:String
+		x:Key="ProjectNameTip">This string is not necessary when you want to create a steam workshop mod.</s:String>
+	<s:String
+		x:Key="Author">Author:</s:String>
+	<s:String
+		x:Key="CheckBoxMP">MP Mod Optional</s:String>
+	<s:String
+		x:Key="CheckBoxMPTip">Specifies whether players can join a multiplayer game with this mod installed, even if the server or other players do not have this mod. Such mod must not affect gameplay in a way that would require all participants to have it installed.</s:String>
+	<!--Icon-->
+	<s:String
+		x:Key="TitleModIcon">MOD Icon（JPG 276x162）</s:String>
+	<s:String
+		x:Key="IconName">Icon Filename:</s:String>
+	<!--Category-->
+	<s:String
+		x:Key="TitleCategory">Category</s:String>
+	<s:String
+		x:Key="TextCategoryTip">Currently the game limit categories up to 2 per mod. If you use more than two only first two will be used.</s:String>
+	<!--Description-->
+	<s:String
+		x:Key="TitleDescription">MOD Description</s:String>
+	<s:String
+		x:Key="DescriptionFileName">Description Filename:</s:String>
+	<s:String
+		x:Key="HeaderLocale">Locale</s:String>
+	<s:String
+		x:Key="TextFontColor">Font Color:</s:String>
+	<s:String
+		x:Key="ColorNormal">Normal</s:String>
+	<s:String
+		x:Key="ColorRed">Red</s:String>
+	<s:String
+		x:Key="ColorGreen">Green</s:String>
+	<s:String
+		x:Key="ColorBlue">Blue</s:String>
+	<s:String
+		x:Key="ColorWhite">White</s:String>
+	<s:String
+		x:Key="ColorOrange">Orang</s:String>
+
+	<!--Mod manifest.CS-->
+	<s:String
+		x:Key="MessageLoadManifestErrNotManifest">Looks like this file is not manifest file</s:String>
+	<s:String
+		x:Key="MessageLoadManifestErrFail">Error occurs when loading manifest file</s:String>
+	<s:String
+		x:Key="DialogIconFilter">Image File|*.jpg;*.jpe*;*.png;*.tif;*.tga|All Files|*.*</s:String>
+	<s:String
+		x:Key="MessageIconErrWrongSize">The size of the image does not meet the requirement</s:String>
+	<s:String
+		x:Key="MessageIconErrWrongSize2">Image size should be 276x162, please change the image size and try again</s:String>
+	<s:String
+		x:Key="MessageIconErrWrongSize3">Would you like to open the image location?</s:String>
+	<s:String
+		x:Key="MessageIconErrNotValidImage">The file you choose is not an image file, or is not the supported image file</s:String>
+	<s:String
+		x:Key="MessageDeleteLocaleErrUni">Universal Description is necessary</s:String>
+	<s:String
+		x:Key="MessageDeleteLocaleDoubleCheck">Are you sure to delete this version of description?</s:String>
+	<s:String
+		x:Key="MessageSaveResultNoIcon">No image was selected, export a empty image as the mod icon.</s:String>
+
+
+
+	<!--Create Addon Hookup-->
+	<s:String
+		x:Key="TitleAddonHookup">Create Addon Hookup</s:String>
+
+
+
+	<!--Clean Sii Files-->
+	<s:String
+		x:Key="TitleCleanSii">Clean SII Files</s:String>
+	<s:String
+		x:Key="TextProjectLocation">Project Location:</s:String>
+	<s:String
+		x:Key="HeadPath">Path</s:String>
+	<s:String
+		x:Key="MessageLoadSiiErrNoSii">There's no sii files in the project</s:String>
+	<s:String
+		x:Key="Unknown">Unknown</s:String>
+	<s:String
+		x:Key="MessageLoadSiiErr">Error occurs when loading</s:String>
+	<s:String
+		x:Key="MessageDeleteDoubleCheck">This action will delete all checked sii files(include all files in other model names), are you sure to continue?</s:String>
+	<s:String
+		x:Key="MessageDeleteDoubleCheck2">Make sure there's no check by mistake in other list if necessary</s:String>
+	<s:String
+		x:Key="MessageOpenErrNoSelected">Please select a sii file first</s:String>
+	<s:String
+		x:Key="MessageOpenErrNotExist">File is not exist</s:String>
+	<s:String
+		x:Key="UnknownFile">Unknown File</s:String>
+
+
+
+	<!--Create Hookup Sii File-->
+	<s:String
+		x:Key="TitleCreateHookupSii">Create Hookup Sii File</s:String>
+	<s:String
+		x:Key="TextHookupName">Hookup Name(No more than 12 characters)</s:String>
+	<s:String
+		x:Key="TextModelPath">Model File Path</s:String>
+	<s:String
+		x:Key="TextAnimPath">Animation File Path</s:String>
+	<s:String
+		x:Key="DialogTitleModel">Choose Model File(.pim will be automaticly transformed to .pmd)</s:String>
+	<s:String
+		x:Key="DialogFilterModel">Model File|*.pmd;*.pim|All Files|*.*</s:String>
+	<s:String
+		x:Key="DialogTitleAnim">Choose Animation File(.pia will be automaticly transformed to .pma)</s:String>
+	<s:String
+		x:Key="DialogFilterAnim">Animation File|*.pma;*.pia|All Files|*.*</s:String>
+	<s:String
+		x:Key="MessageFileErrOutside">File must be in Project Directory</s:String>
+	<s:String
+		x:Key="MessageFileErrNotModel">The Extension of the file should be pim or pmd</s:String>
+	<s:String
+		x:Key="MessageFileErrNotAnim">The Extension of the file should be pia or pma</s:String>
+	<s:String
+		x:Key="MessageCreateErrNotFilled">Please fill in all contents</s:String>
+	<s:String
+		x:Key="MessageCreateSuccess">File Created</s:String>
+
+
+
+
+
+	<!--Localization-->
+	<s:String
+		x:Key="TitleSetupLocalization">Localization</s:String>
+	<s:String
+		x:Key="TextUsageTips1">Key-Value pair defined in here can be use by inputing "@@key@@", and the localized value will be shown in game</s:String>
+	<s:String
+		x:Key="TextUsageTips2">Universal list will be the default value of all unset language(English will be set as the first priority default language)</s:String>
+	<s:String
+		x:Key="TextLocaleName">Localization Filename(normally will use mod name):</s:String>
+	<s:String
+		x:Key="ButtonCleanUpSame">Cleanup same language as Uni.</s:String>
+	<s:String
+		x:Key="ButtonCleanUpSameTip">Because it will only work properly when creating localization files for each language</s:String>
+	<s:String
+		x:Key="ButtonSyncWithUni">Sync with Universal</s:String>
+	<s:String
+		x:Key="ButtonSyncOrder">Sync Order(with all language)</s:String>
+	<s:String
+		x:Key="HeaderKey">Key</s:String>
+	<s:String
+		x:Key="HeaderValue">Value</s:String>
+	<!--Localization.cs-->
+	<s:String
+		x:Key="MessageLoadErrNotLocale">Looks like this file is not a localization file</s:String>
+	<s:String
+		x:Key="MessageLoadErr">Error occurs when loading localization file</s:String>
+	<s:String
+		x:Key="MessageSyncResultZero">There's nothing needs to sync</s:String>
+	<s:String
+		x:Key="MessageSyncResultTo">{0} key(s) synced to Universal</s:String>
+	<s:String
+		x:Key="MessageSyncResultFrom">{0} key(s) synced from Universal</s:String>
+	<s:String
+		x:Key="MessageTitleSyncResult">Syncing Complete</s:String>
+	<s:String
+		x:Key="MessageDeleteErr">Universal Localization is necessary</s:String>
+	<s:String
+		x:Key="MessageSaveErrNoName">Please fill in the localization name first</s:String>
+	<s:String
+		x:Key="MessageSaveSuccess">File saved</s:String>
+
+
+
+
+
+
+
+	<s:String
+		x:Key="MessageTitleNotice">Notice</s:String>
+	<s:String
+		x:Key="MessageTitleErr">Error</s:String>
+	<s:String
+		x:Key="StatusEmpty">Empty</s:String>
+	<s:String
+		x:Key="ButtonOK">OK</s:String>
+	<s:String
+		x:Key="ButtonCancel">Cancel</s:String>
+	<s:String
+		x:Key="ButtonSave">Save</s:String>
+	<s:String
+		x:Key="ButtonClose">Close</s:String>
+	<s:String
+		x:Key="ButtonStart">Start</s:String>
+	<s:String
+		x:Key="ButtonBrowse">Browse</s:String>
+	<s:String
+		x:Key="ButtonCover">Cover</s:String>
+	<s:String
+		x:Key="ButtonDelete">Delete</s:String>
+	<s:String
+		x:Key="ButtonOpenFile">Open File</s:String>
+	<s:String
+		x:Key="CheckBoxSelectAll">Select All</s:String>
+
+
+
+	<!--Truck Description ETS2-->
+	<x:Static
+		x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
+	<s:String
+		x:Key="TruckDesc.daf.xf">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.iveco.hiway">EOL</s:String>
+	<s:String
+		x:Key="TruckDesc.iveco.stralis">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.man.tgx">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.mercedes.actros">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.renault.etech_t">Currently no accessory locator</s:String>
+	<s:String
+		x:Key="TruckDesc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
+	<s:String
+		x:Key="TruckDesc.renault.premium">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.scania.r">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.scania.streamline">EOL</s:String>
+	<s:String
+		x:Key="TruckDesc.volvo.fh16">EOL</s:String>
+	<s:String
+		x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 45°</s:String>
+	<x:Static
+		x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.volvo.fh_2024">Toybed has a small table, clipping may happen when sitting</s:String>
+
+
+	<!--Truck Description ATS-->
+	<s:String
+		x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
+	<x:Static
+		x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.freightliner.ecascadia">WIP</s:String>
+	<s:String
+		x:Key="TruckDesc.intnational.9900i">EOL</s:String>
+	<x:Static
+		x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.intnational.lt">Toybed is just as same as LoneStar</s:String>
+	<x:Static
+		x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<s:String
+		x:Key="TruckDesc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<s:String
+		x:Key="TruckDesc.kenworth.w990">WIP</s:String>
+	<x:Static
+		x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.mack.pioneer">WIP</s:String>
+	<x:Static
+		x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.peterbilt.579_2022">WIP</s:String>
+	<x:Static
+		x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.volvo.vnl2024">WIP</s:String>
+	<s:String
+		x:Key="TruckDesc.volvo.vnr_electric">WIP</s:String>
+	<s:String
+		x:Key="TruckDesc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<x:Static
+		x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
+	<x:Static
+		x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
+	<s:String
+		x:Key="TruckDesc.westernstar.4900">WIP</s:String>
+
+
+	<!--accessory-->
+	<s:String
+		x:Key="Acc.cup_holder">Cup Holder</s:String>
+	<s:String
+		x:Key="Acc.curtain_f">Curtains(ETS2)</s:String>
+	<s:String
+		x:Key="Acc.drvplate">Driver's Plate</s:String>
+	<s:String
+		x:Key="Acc.codrv_plate">Co-Driver's Plate</s:String>
+	<s:String
+		x:Key="Acc.flag_l">Left Window Flag(ETS2)</s:String>
+	<s:String
+		x:Key="Acc.flag_r">Right Window Flag(ETS2)</s:String>
+	<s:String
+		x:Key="Acc.flag_f_l">Front Flags(left)(ATS)</s:String>
+	<s:String
+		x:Key="Acc.flag_f_r">Front Flags(right)(ATS)</s:String>
+	<s:String
+		x:Key="Acc.inlight_bck">Light Board(Back wall)(ETS2)</s:String>
+	<s:String
+		x:Key="Acc.bckpanel">Back Panel Items(Back wall)(ATS)</s:String>
+	<s:String
+		x:Key="Acc.l_pillow">Pillow Items</s:String>
+	<s:String
+		x:Key="Acc.set_cabinet">Cabinet Sets(ATS)</s:String>
+	<s:String
+		x:Key="Acc.set_glass">Windshield Sets</s:String>
+	<s:String
+		x:Key="Acc.set_lglass">Windshield Corner</s:String>
+	<s:String
+		x:Key="Acc.sterring_w">Steering Wheel</s:String>
+	<s:String
+		x:Key="Acc.toyhang">Hanging Items</s:String>
+	<s:String
+		x:Key="Acc.toyac">Air Conditioner Items</s:String>
+	<s:String
+		x:Key="Acc.toystand">Console Items</s:String>
+	<s:String
+		x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
+	<s:String
+		x:Key="Acc.toybed">Bed Items</s:String>
+	<s:String
+		x:Key="Acc.toybig">Center Floor Items</s:String>
+	<s:String
+		x:Key="Acc.toyback">Sleeper Floor Items(ATS)</s:String>
+	<s:String
+		x:Key="Acc.toysofa">Sofa Items(ATS)</s:String>
+	<s:String
+		x:Key="Acc.toytable">Table Items(ATS)</s:String>
+</ResourceDictionary>
