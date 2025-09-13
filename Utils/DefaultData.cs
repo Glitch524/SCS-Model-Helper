@@ -69,6 +69,7 @@ namespace Def_Writer.Utils {
 		public static ObservableCollection<AccessoryInfo> Accessories {
 			get {
 				MAccessories ??= GetAccessories();
+				LanguageUtil.ChangeLanguage += AccessoryChangeLanguage;
 				return MAccessories;
 			}
 		}

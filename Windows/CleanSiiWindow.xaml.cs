@@ -11,11 +11,11 @@ namespace Def_Writer;
 /// <summary>
 /// CleanSii.xaml 的交互逻辑
 /// </summary>
-public partial class CleanSii : BaseWindow
+public partial class CleanSiiWindow : BaseWindow
 {
 
 	string ProjectLocation;
-    public CleanSii(string projectLocation)
+    public CleanSiiWindow(string projectLocation)
     {
         InitializeComponent();
 		ProjectLocation = projectLocation;

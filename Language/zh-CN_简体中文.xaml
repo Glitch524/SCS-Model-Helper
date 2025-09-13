@@ -73,12 +73,16 @@
 	<s:String x:Key="MessageSaveDED">文件已保存</s:String>
 	<s:String x:Key="MessageLoadDEDErrNotDED">这个文件似乎不是配置文件</s:String>
 	<s:String x:Key="MessageLoadDEDErrFail">读取出现错误，可能有数据丢失</s:String>
+	<!--生成图标定义文件-->
+	<s:String x:Key="TitleCreateIconDefFiles">生成图标定义文件</s:String>
+	<s:String x:Key="TextIconNoMatTobj">图标的mat文件或tobj文件不存在，是否自动生成文件？</s:String>
+	<s:String x:Key="CheckBoxCreateAtAcc">在accessory文件夹处生成</s:String>
+	<s:String x:Key="TextIconNotInAcc">图标文件不在Accessory文件夹内，只能将mat和tobj文件生成在Accessory文件夹处</s:String>
+
 	<!--新增车型页-->
 	<s:String x:Key="TitleAddTruck">新增车型</s:String>
-	<s:String
-		x:Key="MessageAddErrNotFilled">请至少填写卡车的ID与名称</s:String>
-	<s:String
-		x:Key="MessageAddErrSameID">已有相同ID的卡车</s:String>
+	<s:String x:Key="MessageAddErrNotFilled">请至少填写卡车的ID与名称</s:String>
+	<s:String x:Key="MessageAddErrSameID">已有相同ID的卡车</s:String>
 	
 	
 	<!--MOD基本内容页-->
@@ -188,6 +192,8 @@
 	<s:String x:Key="MessageTitleNotice">注意</s:String>
 	<s:String x:Key="MessageTitleErr">错误</s:String>
 	<s:String x:Key="StatusEmpty">空</s:String>
+	<s:String x:Key="ButtonYes">是</s:String>
+	<s:String x:Key="ButtonNo">否</s:String>
 	<s:String x:Key="ButtonOK">确定</s:String>
 	<s:String x:Key="ButtonCancel">取消</s:String>
 	<s:String x:Key="ButtonSave">保存</s:String>
@@ -281,4 +287,49 @@
 	<s:String x:Key="Acc.toyback">卧铺地板物品（美卡）</s:String>
 	<s:String x:Key="Acc.toysofa">后座的沙发（美卡）</s:String>
 	<s:String x:Key="Acc.toytable">卧铺桌面物品（美卡）</s:String>
+	
+	<!--locale中文名-->
+	<s:String x:Key="locale.universal">通用</s:String>
+	<s:String x:Key="locale.en_gb">英语-英国</s:String>
+	<s:String x:Key="locale.en_us">英语-美国</s:String>
+	<s:String x:Key="locale.zh_cn">简体中文</s:String>
+	<s:String x:Key="locale.zh_tw">繁体中文</s:String>
+	<s:String x:Key="locale.ja_jp">日语</s:String>
+	<s:String x:Key="locale.bg_bg">保加利亚语</s:String>
+	<s:String x:Key="locale.ca_es">嘉泰罗尼亚</s:String>
+	<s:String x:Key="locale.cs_cz">捷克语</s:String>
+	<s:String x:Key="locale.da_dk">丹麦语</s:String>
+	<s:String x:Key="locale.de_de">德语</s:String>
+	<s:String x:Key="locale.el_gr">希腊语</s:String>
+	<s:String x:Key="locale.es_es">西班牙语</s:String>
+	<s:String x:Key="locale.es_la">拉丁西班牙语</s:String>
+	<s:String x:Key="locale.et_ee">爱沙尼亚语</s:String>
+	<s:String x:Key="locale.eu_es">巴斯克语-西班牙</s:String>
+	<s:String x:Key="locale.fi_fi">芬兰语</s:String>
+	<s:String x:Key="locale.fr_fr">法语</s:String>
+	<s:String x:Key="locale.gl_es">加利西亚语-西班牙</s:String>
+	<s:String x:Key="locale.hr_hr">克罗埃西亚语</s:String>
+	<s:String x:Key="locale.hu_hu">匈牙利语</s:String>
+	<s:String x:Key="locale.it_it">意大利语</s:String>
+	<s:String x:Key="locale.ka_ge">格鲁吉亚语</s:String>
+	<s:String x:Key="locale.ko_kr">韩语</s:String>
+	<s:String x:Key="locale.lt_lt">立陶宛语</s:String>
+	<s:String x:Key="locale.lv_lv">拉脱维亚语</s:String>
+	<s:String x:Key="locale.mk_mk">马其顿语</s:String>
+	<s:String x:Key="locale.nl_nl">荷兰语</s:String>
+	<s:String x:Key="locale.no_no">挪威语</s:String>
+	<s:String x:Key="locale.pl_pl">波兰语</s:String>
+	<s:String x:Key="locale.pl_si">波兰语-?</s:String>
+	<s:String x:Key="locale.pt_br">葡萄牙语-巴西</s:String>
+	<s:String x:Key="locale.pt_pt">葡萄牙语-葡萄牙</s:String>
+	<s:String x:Key="locale.ro_ro">罗马尼亚语</s:String>
+	<s:String x:Key="locale.ru_ru">俄语</s:String>
+	<s:String x:Key="locale.sk_sk">斯洛伐克语</s:String>
+	<s:String x:Key="locale.sl_sl">斯洛文尼亚语</s:String>
+	<s:String x:Key="locale.sr_sp">塞尔维亚语西里尔字母</s:String>
+	<s:String x:Key="locale.sr_sr">塞尔维亚语</s:String>
+	<s:String x:Key="locale.sv_se">瑞典语</s:String>
+	<s:String x:Key="locale.tr_tr">土耳其语</s:String>
+	<s:String x:Key="locale.uk_uk">乌克兰语</s:String>
+	<s:String x:Key="locale.vi_vn">越南语</s:String>
 </ResourceDictionary>

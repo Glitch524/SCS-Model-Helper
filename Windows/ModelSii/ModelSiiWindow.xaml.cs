@@ -22,7 +22,7 @@ namespace Def_Writer;
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class ModelSiiWindow: BaseWindow {
-	private readonly ModelInfo ModelInfo = new();
+	private readonly AccessoryAddonItem ModelInfo = new();
 
 	public string ProjectLocation {
 		get => ModelInfo.ProjectLocation;
@@ -74,19 +74,9 @@ public partial class ModelSiiWindow: BaseWindow {
 
 	private readonly ContextMenu MenuModelType, MenuLook, MenuVariant, MenuStringRes;
 
-	delegate void Test();
-
-	Test? Testt;
 	public ModelSiiWindow() {
 		InitializeComponent();
 		LanguageUtil.InitLanguage();
-
-		Testt += Test1;
-		Testt += Test2;
-
-		Testt += Test3;
-
-		Testt();
 
 
 		TextProjectLocation.DataContext = ModelInfo;
@@ -324,21 +314,21 @@ public partial class ModelSiiWindow: BaseWindow {
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
 		ContextMenu cm = (ContextMenu)item.Parent;
-		if (cm == MenuModelType) {
-			Truck truck = (Truck)item.DataContext;
-			truck.ModelType = item.Name;
-		} else if (cm == MenuLook) {
-			Truck truck = (Truck)item.DataContext;
-			truck.Look = item.Name;
-		} else if (cm == MenuVariant) {
-			Truck truck = (Truck)item.DataContext;
-			truck.Variant = item.Name;
-		} else if (cm == MenuStringRes) {
-			if (item.Name.Equals("openLocalization")) {
-				OpenLocalization();
-			} else {
+		if (cm == MenuStringRes) {
+			if (item.Name.Equals("openLocalization"))
+				ButtonLocalizationClick(sender, e);
+			else 
 				DisplayName = $"@@{item.Name}@@";
-			}
+		} else {
+			Truck truck = (Truck)item.DataContext;
+			if (cm == MenuModelType) {
+				truck.ModelType = item.Name;
+			} else if (cm == MenuLook) {
+				truck.Look = item.Name;
+			} else if (cm == MenuVariant) {
+				truck.Variant = item.Name;
+			} else
+				return;
 		}
 		//TextBox caller = cm.PlacementTarget;
 	}
@@ -430,7 +420,7 @@ public partial class ModelSiiWindow: BaseWindow {
 			History.Default.Save();
 			ProjectLocation = folderDialog.FolderName;
 			CheckIfNeedPrepare(folderDialog.FolderName);
-			var result = MessageBox.Show(this, GetString("MessageCleanupAsk"), "注意", MessageBoxButton.YesNo);
+			var result = MessageBox.Show(this, GetString("MessageCleanupAsk"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 			if (result == MessageBoxResult.Yes) {
 				DisplayName = "";
 				IconName = "";
@@ -458,54 +448,40 @@ public partial class ModelSiiWindow: BaseWindow {
 
 	private void CheckIfNeedPrepare(string location) {
 		if (Directory.Exists(location)) {
-			if(!File.Exists(Paths.ManifestFile(location))) {
-				var result = MessageBox.Show(this, GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
-				if (result == MessageBoxResult.Yes) {
-					ProjectPreparation prepare = new(location) {
-						Owner = this
-					};
-					prepare.ShowDialog();
-				}
+			if (File.Exists(Paths.ManifestFile(location)))
+				return;
+			var result = MessageBox.Show(this, GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+			if (result == MessageBoxResult.Yes) {
+				ProjectPreparation prepare = new(location) {
+					Owner = this
+				};
+				prepare.ShowDialog();
 			}
 		}
 	}
 
 	private void ClearButtonVisibility(object sender, TextChangedEventArgs e) {
-		if (sender is TextBox box) {
-			Button clear;
-			switch (box.Name) {
-				case "TextIconName":
-					clear = ButtonIconNameClear;
-					break;
-				case "TextModelPath":
-					clear = ButtonChooseModelClear;
-					break;
-				case "TextModelPathUK":
-					clear = ButtonChooseModelUKClear;
-					break;
-				default:
-					return;
-			}
-			clear.Visibility = box.Text.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
-		}
+		Button clear;
+		if (sender == TextIconName)
+			clear = ButtonIconNameClear;
+		else if (sender == TextModelPath)
+			clear = ButtonChooseModelClear;
+		else if (sender == TextModelPathUK)
+			clear = ButtonChooseModelUKClear;
+		else
+			return;
+		clear.Visibility = ((TextBox)sender).Text.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
 	}
 
 	private void ButtonClearClick(object sender, RoutedEventArgs e) {
-		if (sender is Button clear) {
-			switch (clear.Name) {
-				case "ButtonIconNameClear":
-					IconName = "";
-					break;
-				case "ButtonChooseModelClear":
-					ModelPath = "";
-					break;
-				case "ButtonChooseModelUKClear":
-					ModelPathUK = "";
-					break;
-				default:
-					return;
-			}
-		}
+		if (sender == ButtonIconNameClear)
+			IconName = "";
+		else if (sender == ButtonChooseModelClear)
+			ModelPath = "";
+		else if (sender == ButtonChooseModelUKClear)
+			ModelPathUK = "";
+		else
+			return;
 	}
 
 	private void ButtonChooseIcon(object sender, RoutedEventArgs e) {
@@ -540,7 +516,6 @@ public partial class ModelSiiWindow: BaseWindow {
 					MessageBox.Show(this, GetString("MessageIconInvalidChar"));
 					return;
 				}
-
 				var siiIconLocation = CheckIconFileExistence(pathAcc, iconFile);
 				if (siiIconLocation == null)
 					return;
@@ -574,9 +549,10 @@ public partial class ModelSiiWindow: BaseWindow {
 		else if (accExist)
 			siiIconLocation = pathAcc + '\\' + tobjName;
 		else {
-			var locationEqual = String.Equals(iconParent, pathAcc);
-
-			var dialog = new CreateIconFiles(!locationEqual) {
+			var accessoryLocation = Paths.AccessoryDir(ProjectLocation);
+			var notInAcc = !iconFile.FullName.StartsWith(accessoryLocation);
+			var atAcc = String.Equals(iconParent, pathAcc);
+			var dialog = new CreateIconFiles(notInAcc, atAcc) {
 				Owner = this
 			};
 
@@ -589,7 +565,6 @@ public partial class ModelSiiWindow: BaseWindow {
 					genLocation = iconParent;
 			} else
 				return null;
-			siiIconLocation = genLocation + '\\' + tobjName;
 			{
 				using StreamWriter sw = new(genLocation + '\\' + matName);
 				sw.WriteLine("material: \"ui\"");
@@ -598,6 +573,7 @@ public partial class ModelSiiWindow: BaseWindow {
 				sw.WriteLine($"\ttexture_name: \"texture\"");
 				sw.WriteLine("}");
 			}
+			siiIconLocation = genLocation + '\\' + tobjName;
 			{
 				string iconLocation = iconFile.FullName.Replace(ProjectLocation, "");
 				iconLocation = iconLocation.Replace('\\', '/');
@@ -614,71 +590,67 @@ public partial class ModelSiiWindow: BaseWindow {
 	}
 
 	private void ButtonChooseModelClick(object sender, RoutedEventArgs e) {
-		if (sender is Button button) {
-			var clickUK = button == ButtonChooseModelUK;
-			if (ProjectLocation.Length == 0) {
-				MessageBox.Show(this, GetString("MessageProjectLocationFirst"));
+		var clickUK = sender == ButtonChooseModelUK;
+		if (ProjectLocation.Length == 0) {
+			MessageBox.Show(this, GetString("MessageProjectLocationFirst"));
+			return;
+		}
+		var fileDialog = new OpenFileDialog {
+			Multiselect = false,
+			DefaultDirectory = ProjectLocation,
+			DefaultExt = "pmd",
+			Title = GetString(clickUK ? "DialogTitleChooseModel" : "DialogTitleChooseModelUK"),
+			Filter = GetString("DialogFilterChooseModel"),
+			InitialDirectory = GetInitialPath()
+		};
+		if (fileDialog.ShowDialog() != true)
+			return;
+		string path = fileDialog.FileName;
+		if (path.StartsWith(ProjectLocation) && path.Length > ProjectLocation.Length) {
+			if (!path.EndsWith(".pim") && !path.EndsWith(".pmd")) {
+				MessageBox.Show(this, GetString("MessageInvalidExt"));
 				return;
 			}
-			var fileDialog = new OpenFileDialog {
-				Multiselect = false,
-				DefaultDirectory = ProjectLocation,
-				DefaultExt = "pmd",
-				Title = GetString(clickUK ? "DialogTitleChooseModel" : "DialogTitleChooseModelUK"),
-				Filter = GetString("DialogFilterChooseModel"),
-				InitialDirectory = GetInitialPath()
-			};
-			if (fileDialog.ShowDialog() != true)
-				return;
-			string path = fileDialog.FileName;
-			if (path.StartsWith(ProjectLocation) && path.Length > ProjectLocation.Length) {
-				if (path.EndsWith(".pim") || path.EndsWith(".pmd")) {
-					History.Default.ModelLocation = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
-					History.Default.Save();
-					LoadLooksAndVariants(path);//修改模型路径后，look和variant都不同，需要重新读取
-					string inProjectPath = path.Replace(ProjectLocation, "");
-					{
-						var s = inProjectPath.Split('\\');
-						for (int i = s.Length - 2; i > 0; i--) {
-							foreach (AccessoryInfo info in accessoryType) {//根据路径猜测模型的类型
-								if (info.Accessory.Equals(s[i]))
-									ModelType = info.Accessory;
-							}
-						}
-					}
-					string?
-						modelPath = null,
-						modelName = null,
-						modelPathUK = null;
-					if (clickUK) {
-						modelPathUK = inProjectPath.Replace('\\', '/');
-						modelPathUK = modelPathUK[..^4];
-						if (modelPathUK.EndsWith("_uk")) {
-							modelName = modelPathUK[(modelPathUK.LastIndexOf('/') + 1)..^3];
-							if (File.Exists(path[..^7] + ".pim") || File.Exists(path[..^7] + ".pmd"))
-								modelPath = modelPathUK[..^3] + ".pmd";
-						}
-						modelPathUK += ".pmd";
-					} else {
-						modelPath = inProjectPath.Replace('\\', '/');
-						modelPath = modelPath[..^4];
-						modelName = modelPath[(modelPath.LastIndexOf('/') + 1)..];
-						if (File.Exists(path[..^4] + "_uk.pim") || File.Exists(path[..^4] + "_uk.pmd"))
-							modelPathUK = modelPath + "_uk.pmd";
-						modelPath += ".pmd";
-					}
-					if (modelPath != null)
-						ModelPath = modelPath;
-					if (modelPathUK != null)
-						ModelPathUK = modelPathUK;
-					if (modelName != null)
-						ModelName = modelName;
-				} else {
-					MessageBox.Show(this, GetString("MessageInvalidExt"));
+			History.Default.ModelLocation = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
+			History.Default.Save();
+			LoadLooksAndVariants(path);//修改模型路径后，look和variant都不同，需要重新读取
+			string inProjectPath = path.Replace(ProjectLocation, "");
+			var s = inProjectPath.Split('\\');
+			for (int i = s.Length - 2; i > 0; i--) {
+				foreach (AccessoryInfo info in accessoryType) {//根据路径猜测模型的类型
+					if (info.Accessory.Equals(s[i]))
+						ModelType = info.Accessory;
 				}
-			} else
-				MessageBox.Show(this, GetString("MessageModelOutsideProject"));
-		}
+			}
+			string?
+				modelPath = null,
+				modelName = null,
+				modelPathUK = null;
+			if (clickUK) {
+				modelPathUK = inProjectPath.Replace('\\', '/');
+				modelPathUK = modelPathUK[..^4];
+				if (modelPathUK.EndsWith("_uk")) {
+					modelName = modelPathUK[(modelPathUK.LastIndexOf('/') + 1)..^3];
+					if (File.Exists(path[..^7] + ".pim") || File.Exists(path[..^7] + ".pmd"))
+						modelPath = modelPathUK[..^3] + ".pmd";
+				}
+				modelPathUK += ".pmd";
+			} else {
+				modelPath = inProjectPath.Replace('\\', '/');
+				modelPath = modelPath[..^4];
+				modelName = modelPath[(modelPath.LastIndexOf('/') + 1)..];
+				if (File.Exists(path[..^4] + "_uk.pim") || File.Exists(path[..^4] + "_uk.pmd"))
+					modelPathUK = modelPath + "_uk.pmd";
+				modelPath += ".pmd";
+			}
+			if (modelPath != null)
+				ModelPath = modelPath;
+			if (modelPathUK != null)
+				ModelPathUK = modelPathUK;
+			if (modelName != null)
+				ModelName = modelName;
+		} else
+			MessageBox.Show(this, GetString("MessageModelOutsideProject"));
 	}
 
 	private string GetInitialPath() {
@@ -746,14 +718,14 @@ public partial class ModelSiiWindow: BaseWindow {
 		var numberCreated = 0;
 		foreach (Truck truck in isETS2 ? trucksETS2 : trucksATS) {
 			String siiFile = Paths.SiiFile(ProjectLocation, truck.TruckID, truck.ModelType, ModelName);
-			if (!truck.Check) {
-				if (DeleteUnchecked) {
-					if (File.Exists(siiFile))
-						File.Delete(siiFile);
-				}
+			if (truck.Check) {
+				if (truck.ModelType.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)
+					continue;
+			} else {
+				if (DeleteUnchecked && File.Exists(siiFile)) 
+					File.Delete(siiFile);
 				continue;
-			} else if (truck.ModelType.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)
-				continue;
+			}
 			DirectoryInfo sii = new(siiFile);
 			if (!sii.Parent!.Exists)
 				sii.Parent!.Create();
@@ -915,7 +887,7 @@ public partial class ModelSiiWindow: BaseWindow {
 	}
 
 	private void ButtonCleanSiiClick(object sender, RoutedEventArgs e) {
-		CleanSii cleanSii = new(ProjectLocation) {
+		CleanSiiWindow cleanSii = new(ProjectLocation) {
 			Owner = this
 		};
 		cleanSii.ShowDialog();
@@ -1014,27 +986,27 @@ public partial class ModelSiiWindow: BaseWindow {
 	}
 
 	private void ButtonCoverValue(object sender, RoutedEventArgs e) {
-		bool setter(Truck truck) {
-			if (sender == ButtonCoverModelType) {
-				truck.ModelType = TextModelType.Text;
-			} else if (sender == ButtonCoverLook) {
-				truck.Look = TextLook.Text;
-			} else if (sender == ButtonCoverVariant) {
-				truck.Variant = TextVariant.Text;
+		void ForeachValue(Action<Truck> value, bool extraETS2 = true, bool extraATS = true) {
+			if (ExpanderETS2.IsExpanded && extraETS2) {
+				foreach (Truck t in trucksETS2) {
+					if (t.Check)
+						value(t);
+				}
 			}
-			return true;
-		}
-		if (ExpanderETS2.IsExpanded) {
-			foreach (Truck t in trucksETS2) {
-				if (t.Check)
-					setter(t);
+			if (ExpanderATS.IsExpanded && extraATS) {
+				foreach (Truck t in trucksATS) {
+					if (t.Check)
+						value(t);
+				}
 			}
 		}
-		if (ExpanderATS.IsExpanded) {
-			foreach (Truck t in trucksATS) {
-				if (t.Check)
-					setter(t);
-			}
+		if (sender == ButtonCoverModelType) {
+			var acc = (AccessoryInfo)TextModelType.SelectedItem!;
+			ForeachValue((t) => t.ModelType = TextModelType.Text, acc.ForETS2, acc.ForATS);
+		} else if (sender == ButtonCoverLook) {
+			ForeachValue((t) => t.Look = TextLook.Text);
+		} else if (sender == ButtonCoverVariant) {
+			ForeachValue((t) => t.Variant = TextVariant.Text);
 		}
 	}
 
@@ -1062,8 +1034,11 @@ public partial class ModelSiiWindow: BaseWindow {
 	}
 
 	private void ButtonAddonHookupClick(object sender, RoutedEventArgs e) {
-
-    }
+		AccessoryHookupWindow addonHookup = new(ProjectLocation) {
+			Owner = this
+		};
+		addonHookup.ShowDialog();
+	}
 
 	private void ComboLanguage_Checked(object sender, RoutedEventArgs e) {
 		LanguageUtil.SwitchLanguage(ComboLanguage.IsChecked == true ? LanguageUtil.LANG_ZH_CN : LanguageUtil.LANG_EN_US);
@@ -1078,10 +1053,6 @@ public partial class ModelSiiWindow: BaseWindow {
 	}
 
 	private void ButtonLocalizationClick(object sender, RoutedEventArgs e) {
-		OpenLocalization();
-	}
-
-	private void OpenLocalization() {
 		var modLocalization = new ModLocalization(ProjectLocation) {
 			Owner = this
 		};
@@ -1089,8 +1060,8 @@ public partial class ModelSiiWindow: BaseWindow {
 	}
 }
 
-public class ModelInfo: INotifyPropertyChanged {
-	public ModelInfo() {
+public class AccessoryAddonItem: INotifyPropertyChanged {
+	public AccessoryAddonItem() {
 		MProjectLocation = History.Default.ProjectLocation;
 		MDisplayName = History.Default.DisplayName;
 		MPrice = History.Default.Price.ToString();
@@ -1247,18 +1218,5 @@ public class ModelInfo: INotifyPropertyChanged {
 
 	public void InvokeChange(string name) {
 		PropertyChanged?.Invoke(this, new(name));
-	}
-}
-public class ProjectExistenceConverter: IValueConverter {
-	public object? Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-		var v = (string)value;
-		if (Directory.Exists(v))
-			return new SolidColorBrush(Colors.Black);
-		else
-			return new SolidColorBrush(Colors.Red);
-	}
-
-	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-		throw new NotImplementedException();
 	}
 }

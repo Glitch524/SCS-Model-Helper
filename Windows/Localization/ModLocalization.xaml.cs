@@ -295,8 +295,12 @@ public partial class ModLocalization : BaseWindow
 			if (locale.LocaleValue.Equals(Localization.LocaleValueUni))
 				continue;
 			var dict = locale.Dictionary;
+			if (dict.Count == 0)
+				continue;
 			var same = true;
-			for (int i = 0; i< universalDict.Count; i++) {
+			for (int i = 0; i < universalDict.Count; i++) {
+				if (i >= dict.Count)
+					break;
 				if (universalDict[i].Key != dict[i].Key || universalDict[i].Value != dict[i].Value) {
 					same = false;
 					break;
@@ -358,7 +362,6 @@ public class LocaleInfo: INotifyPropertyChanged {
 public class Localization: Locale.Locale {
 	public static ObservableCollection<Localization> GetLocales() {
 		ObservableCollection<Localization> l = [];
-		l.Add(new(LocaleValueUni, LocaleDisplayUni));
 		foreach (var locale in SupportedLocales) {
 			l.Add(new(locale[0], locale[1]));
 		}

@@ -21,13 +21,15 @@ namespace Def_Writer.Utils
 		public const string LANG_ZH_CN = "zh-CN";
 		public const string LANG_EN_US = "en-US";
 
+		public delegate void ChangeLanguageDelegate();
+		public static event ChangeLanguageDelegate? ChangeLanguage;
 		public static void SwitchLanguage(string locale) {
 			var md = Application.Current.Resources.MergedDictionaries;
 			SetupLanguage();
 			var selected = langs[locale];
 			md.Remove(selected.Second);
 			md.Add(selected.Second);
-			DefaultData.AccessoryChangeLanguage();
+			ChangeLanguage?.Invoke();
 		}
 
 		public static void InitLanguage() {

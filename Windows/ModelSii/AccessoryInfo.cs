@@ -7,15 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Def_Writer.Windows.ModelSii {
-	public class AccessoryInfo(string accessory, string name, bool ets2, bool ats): INotifyPropertyChanged {
+	public class AccessoryInfo(string accessory, string name, bool forEts2, bool forAts): INotifyPropertyChanged {
 		private string MAccessory = accessory;
 		private string MName = name;
-		private bool METS2 = ets2;
-		private bool MATS = ats;
+		private bool MForETS2 = forEts2;
+		private bool MForATS = forAts;
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 
-		public AccessoryInfo(string accessory, bool ets2, bool ats) : this(accessory, Util.GetString($"Acc.{accessory}"), ets2, ats) {
+		public AccessoryInfo(string accessory, bool forEts2, bool forAts) : this(accessory, Util.GetString($"Acc.{accessory}"), forEts2, forAts) {
 
 		}
 
@@ -36,19 +36,19 @@ namespace Def_Writer.Windows.ModelSii {
 		}
 		public void RefreshName() => Name = Util.GetString($"Acc.{Accessory}");
 
-		public bool ETS2 {
-			get => METS2;
+		public bool ForETS2 {
+			get => MForETS2;
 			set {
-				METS2 = value;
-				InvokeChange(nameof(ETS2));
+				MForETS2 = value;
+				InvokeChange(nameof(ForETS2));
 			}
 		}
 
-		public bool ATS {
-			get => MATS;
+		public bool ForATS {
+			get => MForATS;
 			set {
-				MATS = value;
-				InvokeChange(nameof(ATS));
+				MForATS = value;
+				InvokeChange(nameof(ForATS));
 			}
 		}
 

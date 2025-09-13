@@ -1,11 +1,12 @@
-﻿using System.ComponentModel;
+﻿using Def_Writer.Utils;
+using System.ComponentModel;
 using System.IO;
+using System.Printing;
 
 namespace Def_Writer.Locale; 
 
 public abstract class Locale(string localeValue, string localeDisplay): INotifyPropertyChanged {
 	public static readonly string LocaleValueUni = "universal";
-	public static readonly string LocaleDisplayUni = "通用";
 
 	private string mLocaleValue = localeValue;
 	public string LocaleValue {
@@ -28,49 +29,25 @@ public abstract class Locale(string localeValue, string localeDisplay): INotifyP
 	public event PropertyChangedEventHandler? PropertyChanged;
 	protected void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 
-	protected static string[][] SupportedLocales = [
-		["en_gb", "英语-英国"],
-		["en_us", "英语-美国"],
-		["zh_cn", "简体中文"],
-		["zh_tw", "繁体中文"],
-		["ja_jp", "日语-日本"],
-		["gb_gb", "保加利亚语-保加利亚"],
-		["ca_es", "嘉泰罗尼亚"],
-		["cs_cz", "捷克语-捷克"],
-		["da_dk", "丹麦语-丹麦"],
-		["de_de", "德语-德国"],
-		["el_gr", "希腊语-希腊"],
-		["es_es", "西班牙语-西班牙"],
-		["es_la", "西班牙语-？"],
-		["et_ee", "爱沙尼亚语-爱沙尼亚"],
-		["eu_es", "巴斯克语-巴斯克"],
-		["fi_fi", "芬兰语-芬兰"],
-		["fr_fr", "法语-法国"],
-		["gl_es", "加利西亚语-加利西亚"],
-		["hr_hr", "克罗埃西亚语-克罗埃西亚"],
-		["hu_hu", "匈牙利语-匈牙利"],
-		["it_it", "意大利语-意大利"],
-		["ka_ge", "格鲁吉亚语-格鲁吉亚"],
-		["ko_kr", "韩语-韩国"],
-		["lt_lt", "立陶宛语-立陶宛"],
-		["lv_lv", "拉脱维亚语-拉脱维亚"],
-		["mk_mk", "马其顿语-马其顿"],
-		["nl_nl", "荷兰语-荷兰"],
-		["no_no", "挪威语-挪威"],
-		["pl_pl", "波兰语-波兰"],
-		["pl_si", "波兰语-？"],
-		["pt_br", "葡萄牙语-巴西"],
-		["pt_pt", "葡萄牙语-葡萄牙"],
-		["ro_ro", "罗马尼亚语-罗马尼亚"],
-		["ru_ru", "俄语-俄国"],
-		["sk_sk", "斯洛伐克语-斯洛伐克"],
-		["sl_sl", "斯洛文尼亚语-斯洛文尼亚"],
-		["sr_sp", "塞尔维亚语-？"],
-		["sr_sr", "塞尔维亚语-另一个？"],
-		["sv_se", "瑞典语-瑞典"],
-		["tr_tr", "土耳其语-土耳其"],
-		["uk_uk", "乌克兰语-乌克兰（uk_uk）"],
-		["vi_vn", "越南语-越南"]];
+	protected static List<string[]> SupportedLocales {
+		get => GetLocalePair(
+			LocaleValueUni,
+			"en_gb", "en_us", "zh_cn", "zh_tw", "ja_jp", "bg_bg", 
+			"ca_es", "cs_cz", "da_dk", "de_de", "el_gr", "es_es", 
+			"es_la", "et_ee", "eu_es", "fi_fi", "fr_fr", "gl_es", 
+			"hr_hr", "hu_hu", "it_it", "ka_ge", "ko_kr", "lt_lt",
+			"lv_lv", "mk_mk", "nl_nl", "no_no", "pl_pl", "pl_si",
+			"pt_br", "pt_pt", "ro_ro", "ru_ru", "sk_sk", "sl_sl", 
+			"sr_sp", "sr_sr", "sv_se", "tr_tr", "uk_uk", "vi_vn");
+	}
+
+	private static List<string[]> GetLocalePair(params string[] locales) {
+		List<string[]> localeList = [];
+		foreach(var locale in locales) {
+			localeList.Add([locale, Util.GetString($"locale.{locale}")]);
+		}
+		return localeList;
+	}
 }
 
 public static class LocaleUtil {
@@ -91,7 +68,7 @@ public static class LocaleUtil {
 							using StreamReader sr = new(file.FullName);
 							string? line = sr.ReadLine()?.Trim();
 							if (line == null || !line.Equals("SiiNunit"))
-								throw new("这个文件似乎不是配置文件");
+								throw new(Util.GetString("MessageLoadErrNotLocale"));
 							string? stringKey = null;
 							while((line = sr.ReadLine()?.Trim()) != null) {
 								if (line.StartsWith("key[]")) {

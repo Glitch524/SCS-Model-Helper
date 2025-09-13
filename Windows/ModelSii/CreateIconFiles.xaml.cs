@@ -7,21 +7,21 @@ namespace Def_Writer
     /// </summary>
     public partial class CreateIconFiles : Window
     {
-        public CreateIconFiles(bool showCheckbox)
-        {
+		bool NotInAcc = false;
+        public CreateIconFiles(bool notInAcc, bool atAcc)// notInAcc表示图标没有在配件文件夹内
+		{
             InitializeComponent();
-            if (showCheckbox) {
+			if (notInAcc) {
+				TextNotInAcc.Visibility = Visibility.Visible;
+			} else if (atAcc)
+				BoxCreateOnAccessory.Visibility = Visibility.Collapsed;
+			else {
 				BoxCreateOnAccessory.Visibility = Visibility.Visible;
-                BoxCreateOnAccessory.IsChecked = History.Default.IconDefCreateOnAccessory;
-			} else
-                BoxCreateOnAccessory.Visibility = Visibility.Collapsed;
-        }
+				BoxCreateOnAccessory.IsChecked = History.Default.IconDefCreateOnAccessory;
+			}
+		}
 
-        public bool CreateOnAccessory {
-            get {
-                return BoxCreateOnAccessory.IsChecked == true;
-            }
-        }
+		public bool CreateOnAccessory => BoxCreateOnAccessory.IsChecked == true || NotInAcc;
 
 		private void Button_Click(object sender, RoutedEventArgs e) {
             History.Default.IconDefCreateOnAccessory = BoxCreateOnAccessory.IsChecked == true;

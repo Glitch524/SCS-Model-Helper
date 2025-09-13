@@ -474,7 +474,6 @@ public class DescLocale(string localeValue, string localeDisplay): Locale.Locale
 
 	public static ObservableCollection<DescLocale> GetLocales() {
 		ObservableCollection<DescLocale> l = [];
-		l.Add(new(LocaleValueUni, LocaleDisplayUni));
 		foreach(var locale in SupportedLocales) {
 			l.Add(new(locale[0], locale[1]));
 		}

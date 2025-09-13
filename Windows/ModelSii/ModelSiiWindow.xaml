@@ -5,8 +5,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:Def_Writer"
-	xmlns:class="clr-namespace:Def_Writer.Class"
-	d:DataContext="{d:DesignInstance Type=local:ModelInfo}"
+	xmlns:sii="clr-namespace:Def_Writer.Windows.ModelSii"
+	d:DataContext="{d:DesignInstance Type=local:AccessoryAddonItem}"
 	mc:Ignorable="d"
 	Title="{DynamicResource TitleMain}"
 	Width="1000"
@@ -590,7 +590,7 @@
 						Content="{DynamicResource ButtonCover}"
 						Click="ButtonCoverValue" />
 					<TextBox
-						d:DataContext="{d:DesignInstance Type=class:AccessoryInfo}"
+						d:DataContext="{d:DesignInstance Type=sii:AccessoryInfo}"
 						x:Name="TextAccName"
 						Grid.Row="1"
 						Text="{Binding Name}"
