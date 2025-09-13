@@ -112,7 +112,7 @@
 		x:Key="MessageLoadDEDErrFail">An error occurs when loading, some data might be missing</s:String>
 	<!--Add Truck-->
 	<s:String
-		x:Key="ButtonAddTruck">New Truck</s:String>
+		x:Key="TitleAddTruck">New Truck</s:String>
 	<s:String
 		x:Key="MessageAddErrNotFilled">Please at least fill in the TruckID and Truck name</s:String>
 	<s:String

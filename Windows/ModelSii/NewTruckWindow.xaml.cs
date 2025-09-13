@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Def_Writer.Utils;
+using Def_Writer.Windows.ModelSii;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Def_Writer {
@@ -54,9 +56,9 @@ namespace Def_Writer {
 					}
 				}
 				if (IsETS2)
-					History.Default.TruckHistoryETS2 = Utils.JoinTruck(Trucks);
+					History.Default.TruckHistoryETS2 = Truck.JoinTruck(Trucks);
 				else
-					History.Default.TruckHistoryATS = Utils.JoinTruck(Trucks);
+					History.Default.TruckHistoryATS = Truck.JoinTruck(Trucks);
 				History.Default.Save();
 				DialogResult = true;
 			} catch (Exception ex) {

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Def_Writer.Utils;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -263,7 +264,7 @@ public partial class ModLocalization : BaseWindow
 
 	private void CreateLocaleSii(Localization locale, ObservableCollection<LocalePair>? dict = null) {
 		dict ??= locale.Dictionary;
-		var localeFile = Utils.LocaleFile(ProjectLocation, locale.LocaleValue, LocaleName);
+		var localeFile = Paths.LocaleFile(ProjectLocation, locale.LocaleValue, LocaleName);
 		var hasValue = false;
 		{
 			using StreamWriter sw = new(localeFile);

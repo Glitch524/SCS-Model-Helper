@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Def_Writer.Utils;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -114,7 +115,7 @@ public partial class ProjectPreparation: BaseWindow {
 	}
 
 	private void LoadFiles() {
-		var manifest = Utils.ManifestFile(ProjectLocation);
+		var manifest = Paths.ManifestFile(ProjectLocation);
 		if (File.Exists(manifest)) {
 			static string GetContent(string line) {
 				var start = line.IndexOf('"');
@@ -318,7 +319,7 @@ public partial class ProjectPreparation: BaseWindow {
 				}
 			}
 
-			var manifestFile = Utils.ManifestFile(saveLocation);
+			var manifestFile = Paths.ManifestFile(saveLocation);
 			using StreamWriter mWriter = new(manifestFile);
 			mWriter.WriteLine("SiiNunit");
 			mWriter.WriteLine("{");

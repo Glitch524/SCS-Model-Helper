@@ -38,13 +38,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\AddRow.png" />
-    <Resource Include="Images\Copy.png" />
-    <Resource Include="Images\DeleteRow.png" />
-    <Resource Include="Images\DeleteTranslation.png" />
-    <Resource Include="Images\Down.png" />
-    <Resource Include="Images\IconPlaceholder.png" />
-    <Resource Include="Images\Up.png" />
+    <EmbeddedResource Include="Images\AddRow.png" />
+    <EmbeddedResource Include="Images\Copy.png" />
+    <EmbeddedResource Include="Images\DeleteRow.png" />
+    <EmbeddedResource Include="Images\DeleteTranslation.png" />
+    <EmbeddedResource Include="Images\Down.png" />
+    <EmbeddedResource Include="Images\IconPlaceholder.png" />
+    <EmbeddedResource Include="Images\Up.png" />
   </ItemGroup>
 
   <ItemGroup>

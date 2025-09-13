@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Def_Writer.Utils;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -28,7 +29,7 @@ public partial class CleanSii : BaseWindow
 
 	readonly Dictionary<string, ObservableCollection<CreatedSii>> ExistingSIIs = [];
 	private void LoadCreatedSii() {
-		var defDir = new DirectoryInfo(Utils.DefTruckDir(ProjectLocation));
+		var defDir = new DirectoryInfo(Paths.DefTruckDir(ProjectLocation));
 		void NoSii() {
 			MessageBox.Show(this, GetString("MessageLoadSiiErrNoSii"));
 			Close();
@@ -63,7 +64,7 @@ public partial class CleanSii : BaseWindow
 	}
 
 	private void GetFileDetail(string file) {
-		var pathShort = file.Replace(Utils.DefTruckDir(ProjectLocation), "");
+		var pathShort = file.Replace(Paths.DefTruckDir(ProjectLocation), "");
 		var modelName = "";
 		var truckID = "";
 		var modelType = "";
@@ -182,9 +183,9 @@ public class CreatedSii: INotifyPropertyChanged {
 	public CreatedSii(string path, string pathShort) {
 		MPath = path;
 		MPathShort = pathShort;
-		MTruckID = Utils.GetString("UnknownFile");
+		MTruckID = Util.GetString("UnknownFile");
 		MModelType = "";
-		ModelName = Utils.GetString("Unknown");
+		ModelName = Util.GetString("Unknown");
 		MIngameName = "";
 		MLook = "";
 		MVariant = "";

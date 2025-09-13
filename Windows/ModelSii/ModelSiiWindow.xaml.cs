@@ -1,7 +1,10 @@
 ﻿using Def_Writer.Locale;
+using Def_Writer.Utils;
+using Def_Writer.Windows.ModelSii;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -18,7 +21,7 @@ namespace Def_Writer;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow: BaseWindow {
+public partial class ModelSiiWindow: BaseWindow {
 	private readonly ModelInfo ModelInfo = new();
 
 	public string ProjectLocation {
@@ -71,10 +74,20 @@ public partial class MainWindow: BaseWindow {
 
 	private readonly ContextMenu MenuModelType, MenuLook, MenuVariant, MenuStringRes;
 
-	public MainWindow() {
+	delegate void Test();
+
+	Test? Testt;
+	public ModelSiiWindow() {
 		InitializeComponent();
-		Utils.MainWindow = this;
-		Utils.InitLanguage();
+		LanguageUtil.InitLanguage();
+
+		Testt += Test1;
+		Testt += Test2;
+
+		Testt += Test3;
+
+		Testt();
+
 
 		TextProjectLocation.DataContext = ModelInfo;
 		TextDisplayName.DataContext = ModelInfo;
@@ -109,6 +122,15 @@ public partial class MainWindow: BaseWindow {
 
 		SetupStringResMenu();
 		Closing += SaveOnClosing;
+	}
+	void Test1() {
+		Debug.WriteLine("test1");
+	}
+	void Test2() {
+		Debug.WriteLine("test2");
+	}
+	void Test3() {
+		Debug.WriteLine("test3");
 	}
 
 	private void LoadLooksAndVariants(string? path = null) {
@@ -334,20 +356,19 @@ public partial class MainWindow: BaseWindow {
 	}
 
 	void ForeachList(bool isEts2, string truckList, ObservableCollection<Truck> target) {
-		truckList = "init";
-		if (truckList.Length == 0 || truckList.Equals("init") || !truckList.Contains(DefaultData.itemSplit)) {
+		if (truckList.Length == 0 || truckList.Equals("init") || !truckList.Contains(DefaultData.ItemSplit)) {
 			foreach (Truck t in DefaultData.GetDefaultTrucks(isEts2)) {
 				target.Add(t);
 			}
 			if (isEts2) {
-				History.Default.TruckHistoryETS2 = Utils.JoinTruck(target);
+				History.Default.TruckHistoryETS2 = Truck.JoinTruck(target);
 			} else {
-				History.Default.TruckHistoryATS = Utils.JoinTruck(target);
+				History.Default.TruckHistoryATS = Truck.JoinTruck(target);
 			}
 			History.Default.Save();
 			return;
 		}
-		var lines = truckList.Split(DefaultData.lineSplit);
+		var lines = truckList.Split(DefaultData.LineSplit);
 		try {
 			foreach (string line in lines) {
 				if (line.Length == 0)
@@ -378,8 +399,8 @@ public partial class MainWindow: BaseWindow {
 		History.Default.ModelPath = ModelPath;
 		History.Default.ModelPathUK = ModelPathUK;
 
-		History.Default.TruckHistoryETS2 = Utils.JoinTruck(trucksETS2);
-		History.Default.TruckHistoryATS = Utils.JoinTruck(trucksATS);
+		History.Default.TruckHistoryETS2 = Truck.JoinTruck(trucksETS2);
+		History.Default.TruckHistoryATS = Truck.JoinTruck(trucksATS);
 
 		History.Default.Save();
 	}
@@ -437,7 +458,7 @@ public partial class MainWindow: BaseWindow {
 
 	private void CheckIfNeedPrepare(string location) {
 		if (Directory.Exists(location)) {
-			if(!File.Exists(Utils.ManifestFile(location))) {
+			if(!File.Exists(Paths.ManifestFile(location))) {
 				var result = MessageBox.Show(this, GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.Yes) {
 					ProjectPreparation prepare = new(location) {
@@ -492,7 +513,7 @@ public partial class MainWindow: BaseWindow {
 			MessageBox.Show(this, GetString("MessageProjectLocationFirst"));
 			return;
 		}
-		var pathAcc = Utils.AccessoryDir(ProjectLocation);
+		var pathAcc = Paths.AccessoryDir(ProjectLocation);
 		var fileDialog = new OpenFileDialog {
 			Multiselect = false,
 			DefaultDirectory = pathAcc,
@@ -724,7 +745,7 @@ public partial class MainWindow: BaseWindow {
 	private int CreateSii(bool isETS2) {
 		var numberCreated = 0;
 		foreach (Truck truck in isETS2 ? trucksETS2 : trucksATS) {
-			String siiFile = Utils.SiiFile(ProjectLocation, truck.TruckID, truck.ModelType, ModelName);
+			String siiFile = Paths.SiiFile(ProjectLocation, truck.TruckID, truck.ModelType, ModelName);
 			if (!truck.Check) {
 				if (DeleteUnchecked) {
 					if (File.Exists(siiFile))
@@ -798,8 +819,8 @@ public partial class MainWindow: BaseWindow {
 			sw.WriteLine($"\tLook |=|{TextLook.Text}");
 			sw.WriteLine($"\tVariant |=|{TextVariant.Text}");
 			sw.WriteLine($"\tSelectedHeader |=|{Truck.DEDHeader()}");
-			sw.WriteLine($"\tSelectedETS2 |=|{Utils.JoinDED(trucksETS2)}");
-			sw.WriteLine($"\tSelectedATS |=|{Utils.JoinDED(trucksATS)}");
+			sw.WriteLine($"\tSelectedETS2 |=|{Truck.JoinDED(trucksETS2)}");
+			sw.WriteLine($"\tSelectedATS |=|{Truck.JoinDED(trucksATS)}");
 			sw.WriteLine("}");
 			MessageBox.Show(this, GetString("MessageSaveDED"));
 		}
@@ -875,7 +896,7 @@ public partial class MainWindow: BaseWindow {
 								Variant = read[1];
 								break;
 							case "selectedheader":
-								dedHeaders.AddRange(read[1].Split(DefaultData.itemSplit));
+								dedHeaders.AddRange(read[1].Split(DefaultData.ItemSplit));
 								break;
 							case "selectedets2":
 								SetSelected(dedHeaders, read[1], trucksETS2);
@@ -901,14 +922,14 @@ public partial class MainWindow: BaseWindow {
 	}
 		
 	private static void SetSelected(List<string> dedHeaders, string read, ObservableCollection<Truck> truckList) {
-		List<string> selected = [..read.Split(DefaultData.lineSplit)];
+		List<string> selected = [..read.Split(DefaultData.LineSplit)];
 		foreach (Truck truck in truckList) {
 			truck.Check = false;
 			truck.ModelType = "";
 			truck.Look = "";
 			truck.Variant = "";
 			foreach (string line in selected) {
-				var s = line.Trim().Split(DefaultData.itemSplit);
+				var s = line.Trim().Split(DefaultData.ItemSplit);
 				if (truck.TruckID.Equals(s[dedHeaders.IndexOf(nameof(truck.TruckID))])) {
 					truck.Check = true;
 					GetData(dedHeaders, nameof(truck.ModelType), s, (v) => truck.ModelType = v);
@@ -962,7 +983,7 @@ public partial class MainWindow: BaseWindow {
 			}
 			TableTrucksETS2.UnselectAll();
 			if (changed)
-				History.Default.TruckHistoryETS2 = Utils.JoinTruck(trucksETS2);
+				History.Default.TruckHistoryETS2 = Truck.JoinTruck(trucksETS2);
 		} else if (sender == ButtonDeleteTruckATS) {
 			while (TableTrucksATS.SelectedIndex != -1) {
 				changed = true;
@@ -971,7 +992,7 @@ public partial class MainWindow: BaseWindow {
 			}
 			TableTrucksATS.UnselectAll();
 			if (changed)
-				History.Default.TruckHistoryETS2 = Utils.JoinTruck(trucksATS);
+				History.Default.TruckHistoryETS2 = Truck.JoinTruck(trucksATS);
 		}
 		History.Default.Save();
 	}
@@ -1045,7 +1066,7 @@ public partial class MainWindow: BaseWindow {
     }
 
 	private void ComboLanguage_Checked(object sender, RoutedEventArgs e) {
-		Utils.SwitchLanguage(ComboLanguage.IsChecked == true ? Utils.LANG_ZH_CN : Utils.LANG_EN_US);
+		LanguageUtil.SwitchLanguage(ComboLanguage.IsChecked == true ? LanguageUtil.LANG_ZH_CN : LanguageUtil.LANG_EN_US);
 
 	}
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Def_Writer.Utils;
+using Microsoft.Win32;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
@@ -60,7 +61,7 @@ public partial class CreateHookup: BaseWindow {
 
 			var fileDialog = new OpenFileDialog {
 				Multiselect = false,
-				InitialDirectory = Utils.IntDecorsDir(ProjectLocation),
+				InitialDirectory = Paths.IntDecorsDir(ProjectLocation),
 				DefaultExt = "pmd",
 				Title = GetString(ChooseModel ? "DialogTitleModel" : "DialogTitleAnim"),
 				Filter = GetString(ChooseModel ? "DialogFilterModel" : "DialogFilterAnim")
@@ -105,7 +106,7 @@ public partial class CreateHookup: BaseWindow {
 				MessageBox.Show(this, GetString("MessageCreateErrNotFilled"));
 				return;
 			}
-			var hookupBase = Utils.HookupFile(ProjectLocation,HookupName);
+			var hookupBase = Paths.HookupFile(ProjectLocation,HookupName);
 			using StreamWriter sw = new(hookupBase);
 			sw.WriteLine("SiiNunit");
 			sw.WriteLine("{");
@@ -139,7 +140,7 @@ public class HookupInfo: INotifyPropertyChanged {
 	}
 	public string ProjectLocationShow {
 		get {
-			return Utils.GetString("TextProjectLocation") + MProjectLocation;
+			return Util.GetString("TextProjectLocation") + MProjectLocation;
 		}
 	}
 
