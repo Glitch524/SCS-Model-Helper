@@ -1,0 +1,84 @@
+﻿<base:BaseWindow
+	x:Class="SCS_Mod_Helper.Accessory.PhysicsToy.PhysicsToyWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.PhysicsToy"
+	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	d:DataContext="{d:DesignInstance Type=local:PhysicsToyViewModel}"
+	mc:Ignorable="d"
+	Width="900"
+	Height="Auto"
+	WindowStartupLocation="CenterOwner"
+	Title="{DynamicResource TitlePhysicsToyData}"
+	SizeToContent="Height"
+	Loaded="OnLoaded">
+	<Grid
+		x:Name="GridMain"
+		Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		<StackPanel
+			Margin="0,0,0,5"
+			Grid.ColumnSpan="3">
+			<TextBlock
+				Text="定义物理模型，在主体模型定义添加data并指定即可添加物理模型" />
+			<TextBlock
+				Margin="0,5,0,0"
+				Text="选择一个物理定义插入到模型定义中" />
+		</StackPanel>
+
+		<local:PhysicsToyUC
+			x:Name="UCPhysics"
+			LocalPhysics="True"
+			d:Height="433"
+			Grid.Row="1"/>
+
+		<StackPanel
+			Grid.Row="2"
+			Margin="0,10,0,0"
+			Orientation="Horizontal"
+			FlowDirection="RightToLeft">
+			<Button
+				x:Name="ButtonSelect"
+				Content="{DynamicResource ButtonSelect}"
+				Padding="50,5,50,5"
+				Margin="0,0,5,0"
+				Visibility="Collapsed"
+				Click="ButtonResultClick">
+				<Button.Style>
+					<Style
+						TargetType="Button">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding CurrentPhysicsItem, ElementName=UCPhysics}"
+								Value="{x:Null}">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button
+				x:Name="ButtonSave"
+				Content="{DynamicResource ButtonSave}"
+				Padding="50,5,50,5"
+				Margin="0,0,5,0"
+				Click="ButtonResultClick" />
+			<Button
+				x:Name="ButtonCancel"
+				Content="{DynamicResource ButtonCancel}"
+				Padding="50,5,50,5"
+				Click="ButtonResultClick" />
+		</StackPanel>
+	</Grid>
+</base:BaseWindow>

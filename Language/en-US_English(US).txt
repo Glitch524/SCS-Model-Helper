@@ -53,7 +53,6 @@
 	<s:String x:Key="MessageDeleteLocaleErrUni">Universal Description is necessary</s:String>
 	<s:String x:Key="MessageDeleteLocaleDoubleCheck">Are you sure to delete this version of description?</s:String>
 	<s:String x:Key="MessageCopyDescNotEmpty">Current description is not empty, are you sure to overwrite this content?</s:String>
-	<s:String x:Key="MessageManifestNotFilled">Please fill in all necessary content</s:String>
 
 
 
@@ -312,7 +311,7 @@
 	<s:String x:Key="TitleAbout">About</s:String>
 	<s:String x:Key="Desc1">Exporting Koikatsu card to Blender→Adjust model in Blender→Making SCS Mod→Making this app.</s:String>
 	<s:String x:Key="Desc2">I don't even know what I will do next.</s:String>
-	<s:String x:Key="Desc3">I'm planning to make paint job definition, update might happen if someone cares</s:String>
+	<s:String x:Key="Desc3">I'm planning to make paint job definition, update might happen, if someone cares</s:String>
 
 
 

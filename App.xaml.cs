@@ -1,13 +1,16 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using SCS_Mod_Helper.Language;
 using System.Windows;
+using System.Windows.Navigation;
 
-namespace Def_Writer;
+namespace SCS_Mod_Helper;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
 public partial class App : Application
 {
+	App() {
+
+	}
 }
 

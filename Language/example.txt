@@ -1,0 +1,11 @@
+you can copy the xaml file and try to translate it.
+after that rename the file to 'locale'_'language name'.xaml
+the application will try to read the xaml file and use the translation
+locale: en-US, zh-CN, etc.
+language name: name that will be shown in the language list
+
+你可以复制en-US_English(US).txt文件然后进行翻译
+接着重命名文件为 语言-地区_语言名称.xaml
+软件会尝试读取xaml文件并使用翻译
+语言-地区：例如en-US、zh-CN等
+语言名称将会作为语言的名称显示在软件的语言列表内

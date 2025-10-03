@@ -1,0 +1,114 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <RootNamespace>SCS_Mod_Helper</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+	  <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Window1.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App.config" />
+    <None Remove="Images\Add.png" />
+    <None Remove="Images\AddFile.png" />
+    <None Remove="Images\AddRow.png" />
+    <None Remove="Images\Copy.png" />
+    <None Remove="Images\Delete.png" />
+    <None Remove="Images\DeleteFile.png" />
+    <None Remove="Images\DeleteRow.png" />
+    <None Remove="Images\DeleteTranslation.png" />
+    <None Remove="Images\Down.png" />
+    <None Remove="Images\ExclamationPoint.png" />
+    <None Remove="Images\ExpandDown.png" />
+    <None Remove="Images\Folder.png" />
+    <None Remove="Images\IconPlaceholder.png" />
+    <None Remove="Images\ListBox.png" />
+    <None Remove="Images\Paste.png" />
+    <None Remove="Images\Settings.png" />
+    <None Remove="Images\Up.png" />
+    <None Remove="Images\Web.png" />
+    <None Remove="Images\WebReferenceFolder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="App.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="10.0.0-rc.1.25451.107" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\AddFile.png" />
+    <Resource Include="Images\AddRow.png" />
+    <Resource Include="Images\Copy.png" />
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\DeleteFile.png" />
+    <Resource Include="Images\DeleteRow.png" />
+    <Resource Include="Images\DeleteTranslation.png" />
+    <Resource Include="Images\Down.png" />
+    <Resource Include="Images\ExclamationPoint.png" />
+    <Resource Include="Images\ExpandDown.png" />
+    <Resource Include="Images\Folder.png" />
+    <Resource Include="Images\IconPlaceholder.png" />
+    <Resource Include="Images\ListBox.png" />
+    <Resource Include="Images\Paste.png" />
+    <Resource Include="Images\Settings.png" />
+    <Resource Include="Images\Up.png" />
+    <Resource Include="Images\Web.png" />
+    <Resource Include="Images\WebReferenceFolder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Manifest\ModBasic.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModBasic.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Accessory\AccAddon\AccAddonHistory.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AccAddonHistory.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Language\en-US_English%28US%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Language\example.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Manifest\ModBasic.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>ModBasic.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Accessory\AccAddon\AccAddonHistory.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AccAddonHistory.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

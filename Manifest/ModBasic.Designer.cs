@@ -8,16 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCS_Mod_Helper.Properties {
+namespace SCS_Mod_Helper.Manifest {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class ModBasic : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static ModBasic defaultInstance = ((ModBasic)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ModBasic())));
         
-        public static Settings Default {
+        public static ModBasic Default {
             get {
                 return defaultInstance;
             }
@@ -26,12 +26,24 @@ namespace SCS_Mod_Helper.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Language {
+        public string ProjectLocation {
             get {
-                return ((string)(this["Language"]));
+                return ((string)(this["ProjectLocation"]));
             }
             set {
-                this["Language"] = value;
+                this["ProjectLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Author {
+            get {
+                return ((string)(this["Author"]));
+            }
+            set {
+                this["Author"] = value;
             }
         }
     }

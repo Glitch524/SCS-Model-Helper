@@ -1,109 +1,41 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:s="clr-namespace:System;assembly=mscorlib">
+	xmlns:s="clr-namespace:System;assembly=mscorlib"
+	xml:space="preserve">
+
+	<!--回车	&#x000D;	&#13;-->
+	<!--换行	&#x000A;	&#10;-->
+	<!--空格	&#x0020;	&#32;-->
+	<!--Tab		&#x0009;	&#9;-->
+	
 	<s:String x:Key="ETS2">欧洲卡车模拟2</s:String>
 	<s:String x:Key="ATS">美洲卡车模拟</s:String>
 	<s:String x:Key="ETS2Short">欧卡2</s:String>
 	<s:String x:Key="ATSShort">美卡</s:String>
-	<!--主页-->
-	<s:String x:Key="TitleMain">Def Writer</s:String>
-	<s:String x:Key="SCSProjectLocation">项目目录</s:String>
-	<s:String x:Key="SCSProjectLocationTipNotExist">项目目录文件夹不存在</s:String>
-	<s:String x:Key="ModelDisplayName">游戏内名称</s:String>
-	<s:String x:Key="ButtonLocale">多语言</s:String>
-	<s:String x:Key="ModelPrice">价格(以各自默认货币为单位)</s:String>
-	<s:String x:Key="ModelPriceErrNot0">价格不能为0，否则会不显示</s:String>
-	<s:String x:Key="ModelPriceErrNoNumber">输入的内容必须为数字</s:String>
-	<s:String x:Key="ModelUnlockLevel">解锁等级</s:String>
-	<s:String x:Key="ModelFilePath">模型路径（选择pim会自动改成pmd）</s:String>
-	<s:String x:Key="ModelFilePathUK">模型路径(UK) 非必须 如果文件后缀是_uk会自动匹配</s:String>
-	<s:String x:Key="ModelName">模型名称</s:String>
-	<s:String x:Key="ModelNameTip">（超过12个字符可能会不显示）</s:String>
-	<s:String x:Key="ModelIcon">图标（建议放在material\ui\accessory\内）</s:String>
-	<s:String x:Key="ModelType">模型类型</s:String>
-	<s:String x:Key="ModelTypeTip">（根据mod路径匹配）</s:String>
-	<s:String x:Key="ModelLook">外观(Look)</s:String>
-	<s:String x:Key="ModelVariant">变体(Variant)</s:String>
-	<!--卡车列表-->
-	<s:String x:Key="ModelTruckTip1">如有这里没有的新车型，点击新增添加</s:String>
-	<s:String x:Key="ModelTruckTip2">删除按钮会删除选中的车型（不是打勾，而是左键选中）</s:String>
-	<s:String x:Key="ModelTruckTip3">Model类型、外观和变体可以在下面分别设置</s:String>
-	<s:String x:Key="ButtonInitializeTrucks">初始化车型数据</s:String>
-	<s:String x:Key="ExpanderETS2">欧洲卡车模拟2 （展开以输出/应用至欧卡2）</s:String>
-	<s:String x:Key="ExpanderATS">美洲卡车模拟（展开以输出/应用至美卡）</s:String>
-	<s:String x:Key="TruckID">卡车ID</s:String>
-	<s:String x:Key="TruckName">卡车名称</s:String>
-	<s:String x:Key="TruckDescription">卡车备注</s:String>
-	<!--侧边按钮-->
-	<s:String x:Key="ButtonDeleteTruck">删除车型</s:String>
-	<s:String x:Key="CheckBoxDeleteUnchecked">删除已存在但未勾选的sii文件</s:String>
-	
-	
-	<!--多语言菜单-->
-	<s:String x:Key="MenuResTip">鼠标放在选项上会显示对应的值</s:String>
-	<s:String x:Key="ResourceValueHeader">语句键对应各语言的值：</s:String>
-	<s:String x:Key="MenuResOption">打开“多语言”</s:String>
-	
-	<!--主页.CS-->
-	<s:String x:Key="MessageLoadTruckErr">读取卡车列表出错，重置卡车列表</s:String>
-	<s:String x:Key="MessageCleanupAsk">是否清空下面的内容</s:String>
-	<s:String x:Key="MessageNoManifest">项目文件夹内没有manifest文件，是否先进行项目准备？</s:String>
-	<s:String x:Key="MessageProjectLocationFirst">请先输入项目目录</s:String>
-	<s:String x:Key="DialogTitleChooseIcon">选择图标文件（仅支持tga和dds）</s:String>
-	<s:String x:Key="DialogFilterChooseIcon">物品图标|*.tga;*.dds|所有文件|*.*</s:String>
-	<s:String x:Key="MessageCreateAccessoryFail">创建accessory失败</s:String>
-	<s:String x:Key="MessageIconInvalidChar">图片文件路径内不能有空格和括号，否则会导致tobj中的路径无法被正常识别</s:String>
-	<s:String x:Key="MessageIconOutsideProject">图标文件需要在Mod项目之中，否则这么写也没用的哦</s:String>
-	<s:String x:Key="DialogTitleChooseModel">选择mod文件（pim会自动改成pmd）</s:String>
-	<s:String x:Key="DialogTitleChooseModelUK">选择mod文件的UK版本（pim会自动改成pmd）</s:String>
-	<s:String x:Key="DialogFilterChooseModel">mod文件|*.pmd;*.pim|所有文件|*.*</s:String>
-	<s:String x:Key="MessageInvalidExt">Model文件必须是pim或pmd，否则这么写也没用的哦</s:String>
-	<s:String x:Key="MessageModelOutsideProject">Model文件需要在Mod项目之中，否则这么写也没用的哦</s:String>
-	<!--创建SII-->
-	<s:String x:Key="MessageCreateSiiNoExpanded">请至少展开一个列表</s:String>
-	<s:String x:Key="MessageCreateSiiNotFilled">请填好必填内容</s:String>
-	<s:String x:Key="MessageCreateSiiNotFilled2">必填内容未填时为黄色</s:String>
-	<s:String x:Key="MessageCreateSiiResult">创建完成</s:String>
-	<s:String x:Key="MessageCreateSiiZero">没有需要写的车型</s:String>
-	<!--DED文件-->
-	<s:String x:Key="SaveDED">保存配置</s:String>
-	<s:String x:Key="LoadDED">读取配置</s:String>
-	<s:String x:Key="DialogFilterDED">def配置文件|*.ded|所有文件|*.*</s:String>
-	<s:String x:Key="MessageSaveDED">文件已保存</s:String>
-	<s:String x:Key="MessageLoadDEDErrNotDED">这个文件似乎不是配置文件</s:String>
-	<s:String x:Key="MessageLoadDEDErrFail">读取出现错误，可能有数据丢失</s:String>
-	<!--生成图标定义文件-->
-	<s:String x:Key="TitleCreateIconDefFiles">生成图标定义文件</s:String>
-	<s:String x:Key="TextIconNoMatTobj">图标的mat文件或tobj文件不存在，是否自动生成文件？</s:String>
-	<s:String x:Key="CheckBoxCreateAtAcc">在accessory文件夹处生成</s:String>
-	<s:String x:Key="TextIconNotInAcc">图标文件不在Accessory文件夹内，只能将mat和tobj文件生成在Accessory文件夹处</s:String>
-
-	<!--新增车型页-->
-	<s:String x:Key="TitleAddTruck">新增车型</s:String>
-	<s:String x:Key="MessageAddErrNotFilled">请至少填写卡车的ID与名称</s:String>
-	<s:String x:Key="MessageAddErrSameID">已有相同ID的卡车</s:String>
-	
-	
 	<!--MOD基本内容页-->
-	<s:String x:Key="TitleModPreparation">MOD基本内容</s:String>
+	<s:String x:Key="TitleModManifest">MOD基本内容</s:String>
 	<s:String x:Key="BasicInfo">基本信息</s:String>
 	<s:String x:Key="ModVersion">MOD版本：</s:String>
-	<s:String x:Key="ProjectName">项目正式名称：</s:String>
-	<s:String x:Key="ProjectNameTip">如果是发布在Steam创意工坊其实没有必要填</s:String>
+	<s:String x:Key="ProjectName">项目名称：</s:String>
+	<s:String x:Key="ProjectDisplayName">项目游戏内名称：</s:String>
+	<s:String x:Key="ProjectDisplayNameTip">如果是发布在Steam创意工坊其实没有必要填</s:String>
 	<s:String x:Key="Author">作者：</s:String>
 	<s:String x:Key="CheckBoxMP">多人模式非必须mod</s:String>
 	<s:String x:Key="CheckBoxMPTip">指能否启用此mod进入多人模式，即使他人没有安装此mod。要求mod不能涉及影响游戏玩法的内容</s:String>
-	<!--图标-->
+	<s:String x:Key="TextAppLanguage">软件语言：</s:String>
+	<s:String x:Key="TipsCustomLanguage">在软件的文件夹找到Language文件夹，在里面放好翻译好且按照格式重命名的xaml即可识别使用</s:String>
+		<!--图标-->
 	<s:String x:Key="TitleModIcon">MOD图标（JPG 276x162）</s:String>
 	<s:String x:Key="IconName">图标文件名：</s:String>
-	<!--类别-->
+		<!--类别-->
 	<s:String x:Key="TitleCategory">类别（Category）</s:String>
-	<s:String x:Key="TextCategoryTip">最多支持2个类别，超过只算前2个</s:String>
-	<!--描述-->
+	<s:String x:Key="TextCategoryTip">最多支持2个类别&#10;超过只算最新的2个</s:String>
+		<!--描述-->
 	<s:String x:Key="TitleDescription">MOD描述内容</s:String>
 	<s:String x:Key="DescriptionFileName">描述文件名称：</s:String>
 	<s:String x:Key="HeaderLocale">地区</s:String>
+	<s:String x:Key="TipsCopyFromUniversal">从Universal复制</s:String>
 	<s:String x:Key="TextFontColor">字体颜色：</s:String>
 	<s:String x:Key="ColorNormal">默认颜色</s:String>
 	<s:String x:Key="ColorRed">红色</s:String>
@@ -111,34 +43,206 @@
 	<s:String x:Key="ColorBlue">蓝色</s:String>
 	<s:String x:Key="ColorWhite">白色</s:String>
 	<s:String x:Key="ColorOrange">橙色</s:String>
-	<!--Mod基本内容页.CS-->
+		<!--Mod基本内容页.CS-->
 	<s:String x:Key="MessageLoadManifestErrNotManifest">这个文件似乎不是Manifest文件</s:String>
 	<s:String x:Key="MessageLoadManifestErrFail">读取manifest文件出现错误</s:String>
-	<s:String x:Key="DialogIconFilter">图片文件|*.jpg;*.jpe*;*.png;*.tif;*.tga|所有文件|*.*</s:String>
-	<s:String x:Key="MessageIconErrWrongSize">图片的尺寸不符合要求</s:String>
-	<s:String x:Key="MessageIconErrWrongSize2">应为276x162，请修改后再次选择</s:String>
-	<s:String x:Key="MessageIconErrWrongSize3">是否打开文件所在位置？</s:String>
+	<s:String x:Key="DialogFilterIcon">图片文件|*.jpg;*.jpe*;*.png;*.tif;*.tga</s:String>
+	<s:String x:Key="MessageIconErrWrongSize">图片的尺寸不符合要求&#10;应为276x162，请修改后再次选择&#10;是否打开文件所在位置？</s:String>
 	<s:String x:Key="MessageIconErrNotValidImage">选择的文件不是（系统支持的）图片文件</s:String>
 	<s:String x:Key="MessageDeleteLocaleErrUni">至少需要一个通用描述</s:String>
 	<s:String x:Key="MessageDeleteLocaleDoubleCheck">是否删除这个语言的描述</s:String>
-	<s:String x:Key="MessageSaveResultNoIcon">因为没有选定图片，将使用空白图片作为图标</s:String>
+	<s:String x:Key="MessageCopyDescNotEmpty">当前的描述内容不为空，是否覆盖这些内容？</s:String>
+	<s:String x:Key="MessageManifestNotFilled">请填好必填内容</s:String>
 
 
+	<!--摆件模型定义页-->
+	<s:String x:Key="TitleAccessoryAddon">生成摆件模型定义文件&#10;(Accessory Addon)</s:String>
+	<s:String x:Key="SCSProjectLocation">项目目录</s:String>
+	<s:String x:Key="SCSProjectLocationTipNotExist">项目目录文件夹不存在</s:String>
+	<s:String x:Key="ModelName">模型名称</s:String>
+	<s:String x:Key="ModelDisplayName">游戏内名称</s:String>
+	<s:String x:Key="ModelPrice">价格(以各自默认货币为单位)</s:String>
+	<s:String x:Key="ModelPriceErrNot0">价格不能为0，否则会不显示</s:String>
+	<s:String x:Key="ModelPriceErrNoNumber">输入的内容必须为数字</s:String>
+	<s:String x:Key="ModelUnlockLevel">解锁等级</s:String>
+	<s:String x:Key="ModelIcon">图标(TGA 256x64)</s:String>
+	<s:String x:Key="PartType">部件类型</s:String>
+	<s:String x:Key="PartTypeTip">游戏中会在模型图标右上角显示对应类型（默认为未知）</s:String>
+	<s:String x:Key="ModelFilePath">模型路径（选择pim会自动改成pmd）</s:String>
+	<s:String x:Key="ModelFilePathUK">模型路径(UK)</s:String>
+	<s:String x:Key="ModelFilePathUKTip">非必须 如果文件后缀是_uk会自动匹配</s:String>
+	<s:String x:Key="ModelCollPath">模型碰撞文件路径</s:String>
+	<s:String x:Key="ModelNameTip">超过12个字符可能会不显示</s:String>
+	<s:String x:Key="ModelIconTip">建议放在material\ui\accessory\内</s:String>
+	<s:String x:Key="ModelType">模型类型</s:String>
+	<s:String x:Key="ModelTypeTip">（根据mod路径匹配）</s:String>
+	<s:String x:Key="ModelLook">外观(Look)</s:String>
+	<s:String x:Key="ModelVariant">变体(Variant)</s:String>
+	<s:String x:Key="HideIn">隐藏</s:String>
+	<s:String x:Key="Others">其他参数</s:String>
+	<s:String x:Key="OthersTip">上述没有的内容可以在下面添加&#10;右键会显示推荐项&#10;重复项只会使用最前的值</s:String>
+		<!--Others列表-->
+	<s:String x:Key="HeaderOthersName">内容</s:String>
+	<s:String x:Key="HeaderIsArray">数组</s:String>
+	<s:String x:Key="HeaderUseQuote">引号</s:String>
+	<s:String x:Key="HeaderOthersValue">值</s:String>
+		<!--其他内容-->
+	<s:String x:Key="MenuOthersExteriorModel">车外模型</s:String>
+	<s:String x:Key="MenuOthersExteriorModelUK">车外模型（UK）</s:String>
+	<s:String x:Key="MenuOthersData">物理模型(data)</s:String>
+	<s:String x:Key="MenuOthersSuitableFor">适用于...(suitable__for)</s:String>
+	<s:String x:Key="MenuOthersConflictWith">与...冲突(conflict__with)</s:String>
+	<s:String x:Key="MenuOthersDefaults">默认套件(defaults)</s:String>
+	<s:String x:Key="MenuOthersOverrides">覆盖(overrides)</s:String>
+	<s:String x:Key="MenuOtherRequire">需要(require)</s:String>
+	
+		<!--卡车列表-->
+	<s:String x:Key="ModelTruckTip">如有这里没有的新车型，点击新增添加&#10;删除按钮会删除选中的车型（不是打勾，而是左键选中）&#10;Model类型、外观和变体可以在下面分别设置</s:String>
+	<s:String x:Key="ButtonInitializeTrucks">初始化车型数据</s:String>
+	<s:String x:Key="ExpanderETS2">欧洲卡车模拟2 （展开以输出/应用至欧卡2）</s:String>
+	<s:String x:Key="ExpanderATS">美洲卡车模拟（展开以输出/应用至美卡）</s:String>
+	<s:String x:Key="TruckID">卡车ID</s:String>
+	<s:String x:Key="TruckName">卡车名称</s:String>
+	<s:String x:Key="TruckDescription">卡车备注</s:String>
+		<!--侧边按钮-->
+	<s:String x:Key="ButtonDeleteTruck">删除车型</s:String>
+	<s:String x:Key="CheckBoxDeleteUnchecked">删除已存在但未勾选的sii文件</s:String>
+	
+		<!--多语言菜单-->
+	<s:String x:Key="MenuResTip">鼠标放在选项上会显示对应的值</s:String>
+	<s:String x:Key="ResourceValueHeader">语句键对应各语言的值：</s:String>
+	<s:String x:Key="MenuResOption">打开“多语言”</s:String>
+	
+		<!--部件类型-->
+	<s:String x:Key="PartTypeUnknown">未知</s:String>
+	<s:String x:Key="PartTypeAftermarket">售后部件</s:String>
+	<s:String x:Key="PartTypeFactory">原厂部件</s:String>
+	<s:String x:Key="PartTypeLicensed">特许部件</s:String>
+	
+	
+		<!--摆件模型定义页.CS-->
+	<s:String x:Key="MessageLoadTruckErr">读取卡车列表出错，重置卡车列表</s:String>
+	<s:String x:Key="MessageLoadOtherskErr">读取其他内容列表出错</s:String>
+	<s:String x:Key="MessageNoManifest">项目文件夹内没有manifest文件，是否继续？</s:String>
+	<s:String x:Key="MessageProjectLocationFirst">请先输入项目目录</s:String>
+	<s:String x:Key="DialogTitleChooseIcon">选择图标文件（仅支持tga和dds）</s:String>
+	<s:String x:Key="DialogFilterChooseIcon">物品图标|*.tga;*.dds</s:String>
+	<s:String x:Key="MessageCreateAccessoryFail">创建accessory失败</s:String>
+	<s:String x:Key="MessageIconInvalidChar">图片文件路径内不能有空格和括号，否则会导致tobj中的路径无法被正常识别</s:String>
+	<s:String x:Key="MessageIconOutsideProject">图标文件需要在Mod项目之中，否则这么写也没用的哦</s:String>
+	<s:String x:Key="DialogTitleChooseModel">选择mod文件（pim会自动改成pmd）</s:String>
+	<s:String x:Key="DialogTitleChooseModelUK">选择mod文件的UK版本（pim会自动改成pmd）</s:String>
+	<s:String x:Key="DialogTitleChooseColl">选择mod文件的碰撞文件（pic会自动改成pmc）</s:String>
+	<s:String x:Key="DialogFilterChooseModel">mod文件|*.pmd;*.pim</s:String>
+	<s:String x:Key="DialogFilterChooseColl">碰撞文件|*.pmc;*.pic</s:String>
+	<s:String x:Key="MessageInvalidExt">Model文件必须是pim或pmd，否则这么写也没用的哦</s:String>
+	<s:String x:Key="MessageInvalidExtColl">碰撞文件必须是pic或pmc，否则这么写也没用的哦</s:String>
+	<s:String x:Key="MessageModelOutsideProject">Model文件需要在Mod项目之中，否则这么写也没用的哦</s:String>
+		<!--创建SII-->
+	<s:String x:Key="MessageCreateSiiNoExpanded">请至少展开一个列表</s:String>
+	<s:String x:Key="MessageCreateSiiNotFilled">请填好必填内容&#10;必填内容未填时为黄色</s:String>
+	<s:String x:Key="MessageCreateSiiResult">创建完成</s:String>
+	<s:String x:Key="MessageCreateSiiZero">没有需要写的车型</s:String>
+		<!--DED文件-->
+	<s:String x:Key="SaveDED">保存配置</s:String>
+	<s:String x:Key="LoadDED">读取配置</s:String>
+	<s:String x:Key="DialogFilterDED">def配置文件|*.ded</s:String>
+	<s:String x:Key="MessageSaveDED">文件已保存</s:String>
+	<s:String x:Key="MessageLoadDEDErrNotDED">这个文件似乎不是配置文件</s:String>
+	<s:String x:Key="MessageLoadDEDDifferentProject">文件的项目路径与本项目不一致，是否继续使用？&#10;DED文件的项目：{0}&#10;目前项目：{1}</s:String>
+	<s:String x:Key="MessageLoadDEDErrFail">读取出现错误，可能有数据丢失</s:String>
+		<!--生成图标定义文件-->
+	<s:String x:Key="TitleCreateIconDefFiles">生成图标定义文件</s:String>
+	<s:String x:Key="TextIconNoMatTobj">图标的mat文件或tobj文件不存在，是否自动生成文件？</s:String>
+	<s:String x:Key="CheckBoxCreateAtAcc">在accessory文件夹处生成</s:String>
+	<s:String x:Key="TextIconNotInAcc">图标文件不在Accessory文件夹内，只能将mat和tobj文件生成在Accessory文件夹处</s:String>
+
+		<!--新增车型页-->
+	<s:String x:Key="TitleAddTruck">新增车型</s:String>
+	<s:String x:Key="MessageAddErrNotFilled">请至少填写卡车的ID与名称</s:String>
+	<s:String x:Key="MessageAddErrSameID">已有相同ID的卡车</s:String>
+	
+		<!--隐藏代码页-->
+	<s:String x:Key="TitleHideIn">勾选下列内容让物品在选中的视角中隐藏</s:String>
+	
+	
 
 	<!--套件模型定义页-->
-	<s:String x:Key="TitleAddonHookup">生成套件模型定义文件</s:String>
-
+	<s:String x:Key="TitleAccessoryHookup">生成套件模型定义文件&#10;(Accessory Hookup)</s:String>
+	<s:String x:Key="DescAccessoryHookup">Hookup用于定义套件模型（比如仪表盘套件、挡风玻璃套件）使用时需要填写suitable_for</s:String>
+	<s:String x:Key="TitleAddonStorageStorage">套件档案名（addon_hookup_storage）</s:String>
+	<s:String x:Key="HeaderHookupName">定义文件</s:String>
+	<s:String x:Key="HeaderAccessoryName">摆件名称</s:String>
+	<!--保存套件定义-->
+	<s:String x:Key="MessageSaveBeforeStart">请确保档案名、定义文件名、套件模型名称、物理模型名称的等必填内容填写好，否则会跳过或停止保存。</s:String>
+	<s:String x:Key="MessageSaveNoName">请先输入档案名</s:String>
+	<s:String x:Key="MessageSaveSui0">没有需要保存的内容</s:String>
+	<s:String x:Key="MessageSaved">内容已保存</s:String>
+	
+	
+	
+	
+	<!--物理模型定义页-->
+	<s:String x:Key="TitlePhysicsToyData">设置物理模型</s:String>
+	<s:String x:Key="HeaderPhysicsName">物理定义</s:String>
+	<s:String x:Key="ButtonAddToOthers">添加到“其他参数”</s:String>
+	<s:String x:Key="ButtonSaveToPhysicList">保存到软件的物理列表</s:String>
+	<s:String x:Key="TitlePhysicsName">物理定义名称</s:String>
+	<s:String x:Key="TitleToyType">玩具类型</s:String>
+	<s:String x:Key="TitleToyMass">重量</s:String>
+	<s:String x:Key="TitleCogOffset">重心偏移</s:String>
+	<s:String x:Key="TitleLinearStiffness">线刚度</s:String>
+	<s:String x:Key="TipLinearStiffness">影响绳子的弹性</s:String>
+	<s:String x:Key="TitleLinearDamping">线阻尼</s:String>
+	<s:String x:Key="TipLinearDamping">玩具摆动的阻尼</s:String>
+	<s:String x:Key="TitleLocatorHookOffset">定位点偏移</s:String>
+	<s:String x:Key="TipLocatorHookOffset">相对玩具定位点连接处的偏移</s:String>
+	<s:String x:Key="TitleRestPositionOffset">静止位置偏移</s:String>
+	<s:String x:Key="TitleRestRotationOffset">静止旋转偏移</s:String>
+	<s:String x:Key="TitleInstanceOffset">实例偏移</s:String>
+	<s:String x:Key="TitleRopeMaterial">绳子材质</s:String>
+	<s:String x:Key="DescAngular">以下定义仅在带关节的玩具有效(TT_joint)</s:String>
+	<s:String x:Key="TitleAngularStiffness">角刚度</s:String>
+	<s:String x:Key="TipAngularStiffness">与角阻尼一起影响振荡的频率和幅度</s:String>
+	<s:String x:Key="TitleAngularDamping">角刚度</s:String>
+	<s:String x:Key="TipAngularDamping">与角刚度一起影响振荡的频率和幅度</s:String>
+	<s:String x:Key="TitleAngularAmplitude">角度幅度</s:String>
+	<s:String x:Key="TipAngularAmplitude">相对于平衡位置的最大偏转</s:String>
+	<s:String x:Key="DescRope">以下定义仅在带绳子的玩具适用(TT_rope或TT_double_rope)</s:String>
+	<s:String x:Key="TitleRopeWidth">绳子宽度</s:String>
+	<s:String x:Key="TitleRopeLength">绳子长度</s:String>
+	<s:String x:Key="TitleRopeHookOffset">绳子挂点偏移</s:String>
+	<s:String x:Key="TipRopeHookOffset">double_rope - 距离挂点中心的距离，定位点在正中间</s:String>
+	<s:String x:Key="TitleRopeToyOffset">绳子玩具偏移</s:String>
+	<s:String x:Key="TipRopeToyOffset">double_rope - distance between rope tingles at toy</s:String>
+	<s:String x:Key="TitleRopeResolution">绳子分辨率</s:String>
+	<s:String x:Key="TipRopeResolution">绳子内部除了锚点一段的节点外的节点数</s:String>
+	<s:String x:Key="TitlePositionIterations">position_iterations</s:String>
+	<s:String x:Key="TipPositionIterations">Number of iterations in position solver</s:String>
+	<s:String x:Key="TitleRopeLinearDensity">绳子线性密度</s:String>
+	<s:String x:Key="TipRopeLinearDensity">绳子每一米的重量</s:String>
+	<s:String x:Key="TitleNodeDamping">节点阻尼</s:String>
+	<s:String x:Key="TipNodeDamping">绳子节点的速度阻尼</s:String>
+	
+	<!--物理模型定义页.cs-->
+	<s:String x:Key="MessageResultPhysSaved">物理定义已保存</s:String>
+	<s:String x:Key="DialogTitleChooseRope">选择绳子材质文件（mat文件或贴图文件）</s:String>
+	<s:String x:Key="DialogFilterChooseRope">绳子材质文件|*.mat|绳子贴图文件|*.tga;*.dds</s:String>
+	<s:String x:Key="MessageErrorChooseRope">选择的文件必须是mat文件或其贴图，否则这么写也没用的哦</s:String>
+	
+	
+	
+	
 
 
 	<!--清理SII文件页-->
-	<s:String x:Key="TitleCleanSii">清理SII文件</s:String>
+	<s:String x:Key="TitleCleanSii">清理套件模型定义文件</s:String>
 	<s:String x:Key="TextProjectLocation">项目路径：</s:String>
 	<s:String x:Key="HeadPath">路径</s:String>
 	<s:String x:Key="MessageLoadSiiErrNoSii">项目没有任何sii文件</s:String>
 	<s:String x:Key="Unknown">未知</s:String>
 	<s:String x:Key="MessageLoadSiiErr">读取出现错误</s:String>
-	<s:String x:Key="MessageDeleteDoubleCheck">将会删除所有勾上的sii文件（包括不同模型名称的列表内的文件），是否继续</s:String>
-	<s:String x:Key="MessageDeleteDoubleCheck2">建议仔细确认其他列表没有误选</s:String>
+	<s:String x:Key="MessageDeleteDoubleCheck">将会删除所有勾上的sii文件（包括不同模型名称的列表内的文件），是否继续&#10;建议仔细确认其他列表没有误选</s:String>
 	<s:String x:Key="MessageOpenErrNoSelected">请先选择一个sii文件</s:String>
 	<s:String x:Key="MessageOpenErrNotExist">文件不存在</s:String>
 	<s:String x:Key="UnknownFile">未知文件</s:String>
@@ -151,9 +255,9 @@
 	<s:String x:Key="TextModelPath">模型文件路径</s:String>
 	<s:String x:Key="TextAnimPath">动画文件路径</s:String>
 	<s:String x:Key="DialogTitleModel">选择模型文件（pim会自动改成pmd）</s:String>
-	<s:String x:Key="DialogFilterModel">模型文件|*.pmd;*.pim|所有文件|*.*</s:String>
+	<s:String x:Key="DialogFilterModel">模型文件|*.pmd;*.pim</s:String>
 	<s:String x:Key="DialogTitleAnim">选择动画文件（pia会自动改成pma）</s:String>
-	<s:String x:Key="DialogFilterAnim">动画文件|*.pma;*.pia|所有文件|*.*</s:String>
+	<s:String x:Key="DialogFilterAnim">动画文件|*.pma;*.pia</s:String>
 	<s:String x:Key="MessageFileErrOutside">文件必须在Mod项目之中</s:String>
 	<s:String x:Key="MessageFileErrNotModel">模型文件必须是pim或pmd</s:String>
 	<s:String x:Key="MessageFileErrNotAnim">动画文件必须是pia或pma</s:String>
@@ -166,8 +270,7 @@
 
 	<!--设置多语言字典页-->
 	<s:String x:Key="TitleSetupLocalization">多语言字典</s:String>
-	<s:String x:Key="TextUsageTips1">在此定义的键值对，可以通过输入“@@key@@”使用，游戏内会显示对应语言的value</s:String>
-	<s:String x:Key="TextUsageTips2">通用列表将用作所有未设置语言的默认语言（默认以英语为通用语言）</s:String>
+	<s:String x:Key="TextUsageTips">在此定义的键值对，可以通过输入“@@key@@”使用，游戏内会显示对应语言的value&#10;通用列表将用作所有未设置语言的默认语言（默认以英语为通用语言）</s:String>
 	<s:String x:Key="TextLocaleName">字典名称（一般使用mod名称）：</s:String>
 	<s:String x:Key="ButtonCleanUpSame">清理与Universal重复的语言</s:String>
 	<s:String x:Key="ButtonCleanUpSameTip">因为保存时需要每个语言都生成一个才能正常使用</s:String>
@@ -175,16 +278,28 @@
 	<s:String x:Key="ButtonSyncOrder">(对所有)同步顺序</s:String>
 	<s:String x:Key="HeaderKey">语句键（Key）</s:String>
 	<s:String x:Key="HeaderValue">语句值（Value）</s:String>
-	<!--设置多语言字典页.cs-->
+		<!--设置多语言字典页.cs-->
 	<s:String x:Key="MessageLoadErrNotLocale">这个文件似乎不是字典文件</s:String>
 	<s:String x:Key="MessageLoadErr">读取locale文件出现错误</s:String>
 	<s:String x:Key="MessageSyncResultZero">没有需要同步的内容</s:String>
 	<s:String x:Key="MessageSyncResultTo">向Universal同步{0}个语句</s:String>
 	<s:String x:Key="MessageSyncResultFrom">从Universal同步{0}个语句</s:String>
 	<s:String x:Key="MessageTitleSyncResult">同步完成</s:String>
-	<s:String x:Key="MessageDeleteErr">至少需要一个通用语言</s:String>
-	<s:String x:Key="MessageSaveErrNoName">请先输入Locale名称</s:String>
+	<s:String x:Key="MessageSaveErrNoName">翻译文件列表中存在未命名的文件</s:String>
 	<s:String x:Key="MessageSaveSuccess">文件已保存</s:String>
+	<s:String x:Key="MessageDeleteLocale">确定是否删除此翻译文件？</s:String>
+	<s:String x:Key="MessageUniEmpty">通用翻译为空,没有定义翻译的语言可能无法正常显示，是否继续？</s:String>
+	
+	
+	
+	
+	<!--关于-->
+	<s:String x:Key="TitleAbout">关于</s:String>
+	<s:String x:Key="Desc1">恋活卡片导出→Blender→做SCS的Mod→Making this app.</s:String>
+	<s:String x:Key="Desc2">我自己也不知道我接着会做什么</s:String>
+	<s:String x:Key="Desc3">目前计划做喷漆的定义功能，如果有人在意的话会更新</s:String>
+	
+	
 	
 	
 	
@@ -199,12 +314,12 @@
 	<s:String x:Key="ButtonSave">保存</s:String>
 	<s:String x:Key="ButtonClose">关闭</s:String>
 	<s:String x:Key="ButtonStart">开始</s:String>
-	<s:String x:Key="ButtonBrowse">浏览</s:String>
-	<s:String x:Key="ButtonCover">覆盖</s:String>
 	<s:String x:Key="ButtonDelete">删除</s:String>
 	<s:String x:Key="ButtonOpenFile">打开文件</s:String>
+	<s:String x:Key="ButtonSelect">选定</s:String>
 	<s:String x:Key="CheckBoxSelectAll">全选</s:String>
 
+	<s:String x:Key="FilterAllFiles">所有文件|*.*</s:String>
 
 
 	<!--卡车备注 ETS2-->

@@ -1,7 +1,8 @@
-﻿using Def_Writer.Windows.ModelSii;
+﻿using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Language;
 using System.Collections.ObjectModel;
 
-namespace Def_Writer.Utils {
+namespace SCS_Mod_Helper.Utils {
 	    class DefaultData{
 		public static List<Truck> GetDefaultTrucks(bool isETS2) {
 			return isETS2 ? GetDefaultTrucksETS2() : GetDefaultTrucksATS();
@@ -74,32 +75,57 @@ namespace Def_Writer.Utils {
 			}
 		}
 
+
+		public const string TypeCupHolder = "cup_holder";
+		public const string TypeCurtainF = "curtain_f";
+		public const string TypeDrvPlate = "drvplate";
+		public const string TypeCoDrvPlate = "codrv_plate";
+		public const string TypeFlagL = "flag_l";
+		public const string TypeFlagR = "flag_r";
+		public const string TypeFlagFL = "flag_f_l";
+		public const string TypeFlagFR = "flag_f_r";
+		public const string TypeInlightBck = "inlight_bck";
+		public const string TypeBckPanel = "bckpanel";
+		public const string TypeLPillow = "l_pillow";
+		public const string TypeSetCabinet = "set_cabinet";
+		public const string TypeSetGlass = "set_glass";
+		public const string TypeSetLGlass = "set_lglass";
+		public const string TypeSterringW = "sterring_w";
+		public const string TypeToyHang = "toyhang";
+		public const string TypeToyAc = "toyac";
+		public const string TypeToyStand = "toystand";
+		public const string TypeToySeat = "toyseat";
+		public const string TypeToyBed = "toybed";
+		public const string TypeToyBig = "toybig";
+		public const string TypeToyBack = "toyback";
+		public const string TypeToySofa = "toysofa";
+		public const string TypeToyTable = "toytable";
 		public static ObservableCollection<AccessoryInfo> GetAccessories() {
 			return[
-				new("cup_holder", true, true),
-				new("curtain_f", true, false),
-				new("drvplate", true, true),
-				new("codrv_plate", true, true),
-				new("flag_l", true, false),
-				new("flag_r", true, false),
-				new("flag_f_l", false, true),
-				new("flag_f_r", false, true),
-				new("inlight_bck", true, false),
-				new("bckpanel", false, true),
-				new("l_pillow", true, true),
-				new("set_cabinet", false, true),
-				new("set_glass", true, true),
-				new("set_lglass", true, true),
-				new("sterring_w", true, true),
-				new("toyhang", true, true),
-				new("toyac", true, true),
-				new("toystand", true, true),
-				new("toyseat", true, true),
-				new("toybed", true, true),
-				new("toybig", true, true),
-				new("toyback", false, true),
-				new("toysofa", false, true),
-				new("toytable", false, true),
+				new(TypeCupHolder, true, true),
+				new(TypeCurtainF, true, false),
+				new(TypeDrvPlate, true, true),
+				new(TypeCoDrvPlate, true, true),
+				new(TypeFlagL, true, false),
+				new(TypeFlagR, true, false),
+				new(TypeFlagFL, false, true),
+				new(TypeFlagFR, false, true),
+				new(TypeInlightBck, true, false),
+				new(TypeBckPanel, false, true),
+				new(TypeLPillow, true, true),
+				new(TypeSetCabinet, false, true),
+				new(TypeSetGlass, true, true),
+				new(TypeSetLGlass, true, true),
+				new(TypeSterringW, true, true),
+				new(TypeToyHang, true, true),
+				new(TypeToyAc, true, true),
+				new(TypeToyStand, true, true),
+				new(TypeToySeat, true, true),
+				new(TypeToyBed, true, true),
+				new(TypeToyBig, true, true),
+				new(TypeToyBack, false, true),
+				new(TypeToySofa, false, true),
+				new(TypeToyTable, false, true),
 			];
 		}
 

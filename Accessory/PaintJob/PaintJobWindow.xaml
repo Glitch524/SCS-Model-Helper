@@ -1,0 +1,152 @@
+﻿<base:BaseWindow x:Class="SCS_Mod_Helper.Accessory.PaintJob.PaintJobWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.PaintJob"
+	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PaintJobWindow">
+	<base:BaseWindow.Resources>
+		<LinearGradientBrush
+			x:Key="SpectrumLine"
+			StartPoint="0,1">
+			<GradientStop
+				Color="#ff0000" />
+			<GradientStop
+				Color="#ff00ff"
+				Offset="0.167" />
+			<GradientStop
+				Color="#0000ff"
+				Offset="0.333" />
+			<GradientStop
+				Color="#00ffff"
+				Offset="0.5" />
+			<GradientStop
+				Color="#00ff00"
+				Offset="0.667" />
+			<GradientStop
+				Color="#ffff00"
+				Offset="0.833" />
+			<GradientStop
+				Color="#ff0000"
+				Offset="1" />
+		</LinearGradientBrush>
+
+	</base:BaseWindow.Resources>
+
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid>
+			<Rectangle
+				Fill="Red" />
+			<Rectangle>
+				<Rectangle.Fill>
+					<LinearGradientBrush
+						StartPoint="0,0.5"
+						EndPoint="1,0.5">
+						<GradientStop
+							Offset="0"
+							Color="White" />
+						<GradientStop
+							Offset="1"
+							Color="Transparent" />
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Rectangle>
+				<Rectangle.Fill>
+					<LinearGradientBrush
+						StartPoint="0.5,0"
+						EndPoint="0.5,1">
+						<GradientStop
+							Offset="0"
+							Color="Transparent" />
+						<GradientStop
+							Offset="1"
+							Color="Black" />
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Thumb
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				Width="30"
+				Height="30"
+				Background="Transparent"
+				BorderBrush="White"
+				BorderThickness="3">
+			</Thumb>
+		</Grid>
+		<Slider
+			x:Name="SliderSpectrum"
+			Height="15"
+			Grid.Row="1"
+			Background="{StaticResource SpectrumLine}"
+			Maximum="6"
+			Value="4.034"
+			UseLayoutRounding="False"
+			TickPlacement="Both"
+			TickFrequency="0.0001">
+			<Slider.Template>
+				<ControlTemplate>
+					<Grid>
+						<Grid.RowDefinitions>
+						</Grid.RowDefinitions>
+						<Rectangle
+							Height="10"
+							Grid.Row="1"
+							Fill="{StaticResource SpectrumLine}"/>
+						<Track>
+							<Track.DecreaseRepeatButton>
+								<RepeatButton
+									Background="Transparent"
+									Command="Slider.DecreaseLarge"
+									BorderThickness="0" />
+							</Track.DecreaseRepeatButton>
+							<Track.Thumb>
+								<Thumb
+									Width="{TemplateBinding Height}"
+									Height="{TemplateBinding Height}"
+									BorderBrush="#FF707070"
+									BorderThickness="0,1,0,1">
+									<Thumb.Template>
+										<ControlTemplate>
+											<Ellipse
+												Width="{TemplateBinding Width}"
+												Height="{TemplateBinding Height}"
+												Fill="White"
+												Stroke="Black" />
+										</ControlTemplate>
+									</Thumb.Template>
+								</Thumb>
+							</Track.Thumb>
+							<Track.IncreaseRepeatButton>
+								<RepeatButton
+									Background="Transparent"
+									Command="Slider.IncreaseLarge"
+									BorderThickness="0" />
+							</Track.IncreaseRepeatButton>
+						</Track>
+					</Grid>
+				</ControlTemplate>
+			</Slider.Template>
+		</Slider>
+
+		
+		<TextBox
+			Margin="20,309,20,0"
+			Background="{StaticResource SpectrumLine}"
+			TextWrapping="Wrap"
+			Text="{Binding Value, ElementName=SliderSpectrum}"
+			VerticalAlignment="Top" />
+
+	</Grid>
+</base:BaseWindow>

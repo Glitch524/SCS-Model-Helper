@@ -1,0 +1,1454 @@
+﻿<UserControl 
+	x:Class="SCS_Mod_Helper.Accessory.PhysicsToy.PhysicsToyUC"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.PhysicsToy"
+	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
+	d:DataContext="{d:DesignInstance Type=local:PhysicsToyViewModel}"
+	mc:Ignorable="d"
+	d:Background="White"
+	Width="Auto"
+	Height="Auto"
+	ScrollViewer.CanContentScroll="True"
+	ScrollViewer.VerticalScrollBarVisibility="Auto">
+	<UserControl.Resources>
+		<utils:FloatConverter
+			x:Key="FloatConverter" />
+	</UserControl.Resources>
+	<Grid
+		x:Name="GridMain">
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="100" />
+			<ColumnDefinition
+				Width="15" />
+			<ColumnDefinition
+				Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid
+			Grid.Row="0"
+			Grid.RowSpan="2"
+			Height="{Binding ActualHeight, ElementName=GridPhysics, Mode=OneWay}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="*" />
+			</Grid.RowDefinitions>
+			<Button
+				x:Name="ButtonPhysicAdd"
+				Grid.Column="1"
+				Click="ButtonAddRowClick">
+				<Image
+					Source="/Images/AddRow.png" />
+			</Button>
+			<Button
+				x:Name="ButtonPhysicUp"
+				Grid.Column="2"
+				HorizontalAlignment="Left"
+				Click="SortButtonClick">
+				<Image
+					Source="/Images/Up.png" />
+				<Button.Style>
+					<Style
+						TargetType="Button">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+								Value="-1">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+							<DataTrigger
+								Binding="{Binding ItemsSource.Count, ElementName=TablePhysicDatas}"
+								Value="1">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button
+				x:Name="ButtonPhysicDown"
+				Grid.Column="3"
+				HorizontalAlignment="Left"
+				Click="SortButtonClick">
+				<Image
+					Source="/Images/Down.png" />
+				<Button.Style>
+					<Style
+						TargetType="Button">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+								Value="-1">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+							<DataTrigger
+								Binding="{Binding ItemsSource.Count, ElementName=TablePhysicDatas}"
+								Value="1">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button
+				x:Name="ButtonPhysicRemove"
+				Grid.Column="4"
+				Click="ButtonDeleteRowClick">
+				<Image
+					Source="/Images/DeleteRow.png" />
+				<Button.Style>
+					<Style
+						TargetType="Button">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+								Value="-1">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<DataGrid
+				x:Name="TablePhysicDatas"
+				Grid.Row="1"
+				Grid.ColumnSpan="5"
+				CanUserAddRows="False"
+				RowHeaderWidth="0"
+				CanUserSortColumns="False"
+				VerticalGridLinesBrush="Transparent"
+				SelectionMode="Single"
+				Background="Transparent"
+				ItemsSource="{Binding PhysicsItems}"
+				SelectedItem="{Binding CurrentPhysicsItem}"
+				AutoGenerateColumns="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn
+						Header="{DynamicResource HeaderPhysicsName}"
+						Width="*"
+						Binding="{Binding PhysicsName, UpdateSourceTrigger=PropertyChanged}">
+						<DataGridTextColumn.CellStyle>
+							<Style
+								TargetType="DataGridCell">
+								<Setter
+									Property="ToolTip"
+									Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
+							</Style>
+						</DataGridTextColumn.CellStyle>
+					</DataGridTextColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
+
+		<GridSplitter
+			Width="3"
+			Grid.Row="0"
+			Grid.RowSpan="2"
+			Grid.Column="1"
+			Margin="4,0,4,0"
+			ResizeBehavior="PreviousAndNext"
+			HorizontalAlignment="Center"
+			Background="#FF4C4B4B" />
+
+		<Grid
+			x:Name="GridPhysics"
+			Grid.Row="1"
+			Grid.Column="2">
+			<Grid.Style>
+				<Style
+					TargetType="Grid">
+					<Style.Triggers>
+						<DataTrigger
+							Binding="{Binding ItemsSource.Count, ElementName=TablePhysicDatas, Mode=OneWay}"
+							Value="0">
+							<Setter
+								Property="Visibility"
+								Value="Hidden" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Grid.Style>
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="5" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
+			<StackPanel
+				x:Name="PanelSaveButton"
+				Orientation="Horizontal"
+				Margin="0,0,0,5">
+				<Button
+					x:Name="ButtonAddToOthers"
+					Content="{DynamicResource ButtonAddToOthers}"
+					Click="ButtonPhysicsClick">
+					<Button.Style>
+						<Style
+							TargetType="Button">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button
+					x:Name="ButtonSaveToPhysList"
+					Margin="5,0,0,0"
+					Content="{DynamicResource ButtonSaveToPhysicList}"
+					Click="ButtonPhysicsClick">
+					<Button.Style>
+						<Style
+							TargetType="Button">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</StackPanel>
+			<Grid
+				Grid.Row="1">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="10" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="10" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="10" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="10" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="10" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<StackPanel>
+					<TextBlock>
+						<Run
+							Text="{DynamicResource TitlePhysicsName}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextPhysicsName"
+						Padding="3,3,3,3"
+						Text="{Binding CurrentPhysicsItem.PhysicsName, UpdateSourceTrigger=PropertyChanged}">
+						<TextBox.Style>
+							<Style
+								TargetType="TextBox">
+								<Style.Triggers>
+									<Trigger
+										Property="Text"
+										Value="">
+										<Setter
+											Property="Background"
+											Value="Yellow" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</TextBox.Style>
+					</TextBox>
+				</StackPanel>
+				<StackPanel
+					Grid.Column="2">
+					<TextBlock>
+						<Run
+							Text="{DynamicResource TitleToyType}" />
+					</TextBlock>
+					<ComboBox
+						x:Name="TextToyType"
+						IsEditable="True"
+						IsReadOnly="True"
+						Text="{Binding CurrentPhysicsItem.ToyType, UpdateSourceTrigger=PropertyChanged}">
+						<ComboBox.Items>
+							<ComboBoxItem
+								Content="TT_rope" />
+							<ComboBoxItem
+								Content="TT_double_rope" />
+							<ComboBoxItem
+								Content="TT_joint" />
+							<ComboBoxItem
+								Content="TT_joint_free" />
+						</ComboBox.Items>
+					</ComboBox>
+				</StackPanel>
+				<Grid
+					Margin="0,0,0,0"
+					Grid.Column="4"
+					Grid.ColumnSpan="3">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="3"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top"
+						Text="{DynamicResource ModelFilePath}" />
+					<TextBox
+						x:Name="TextPhysicsModelPath"
+						Grid.Row="1"
+						Grid.Column="0"
+						Padding="3,3,3,3"
+						Text="{Binding CurrentPhysicsItem.ModelPath}"
+						TextWrapping="Wrap"
+						BorderThickness="1,1,0,1"
+						MaxLines="2">
+						<TextBox.Style>
+							<Style
+								TargetType="TextBox">
+								<Style.Triggers>
+									<Trigger
+										Property="Text"
+										Value="">
+										<Setter
+											Property="Background"
+											Value="Yellow" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</TextBox.Style>
+					</TextBox>
+					<Button
+						x:Name="ButtonPhysicsModelPathClear"
+						Grid.Row="1"
+						Grid.Column="1"
+						Content=" × "
+						Click="ButtonClearClick"
+						BorderThickness="0,1,1,1"
+						Background="Transparent"
+						BorderBrush="#FFABADB3">
+						<Button.Style>
+							<Style
+								TargetType="Button">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Text, ElementName=TextPhysicsModelPath}"
+										Value="">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Button.Style>
+					</Button>
+					<Button
+						x:Name="ButtonChoosePhysicsModel"
+						Grid.Row="1"
+						Grid.Column="2"
+						Padding="3,3,3,3"
+						Click="ButtonChooseModelClick"
+						VerticalAlignment="Top"
+						BorderThickness="0,1,1,1"
+						BorderBrush="#FFABADB3"
+						Grid.ColumnSpan="2">
+						<Image
+							Source="/Images/Folder.png" />
+					</Button>
+				</Grid>
+
+				<StackPanel
+					Grid.Row="2"
+					Grid.Column="0">
+					<TextBlock
+						Grid.Row="0"
+						Grid.ColumnSpan="2"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top"
+						Text="{DynamicResource ModelLook}" />
+					<ComboBox
+						x:Name="TextPhysicsLook"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.Look}"
+						ItemsSource="{Binding CurrentPhysicsItem.LookList}"
+						IsEditable="True"
+						IsTextSearchEnabled="True" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="2"
+					Grid.Column="2">
+					<TextBlock
+						Grid.Row="0"
+						Grid.ColumnSpan="2"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top"
+						Text="{DynamicResource ModelVariant}" />
+					<ComboBox
+						x:Name="TextPhysicsVariant"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.Variant}"
+						ItemsSource="{Binding CurrentPhysicsItem.VariantList}"
+						IsEditable="True"
+						IsTextSearchEnabled="True" />
+				</StackPanel>
+				<Grid
+					Margin="0,0,0,0"
+					Grid.Row="2"
+					Grid.Column="4"
+					Grid.ColumnSpan="3">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						x:Name="CheckUsePhysicsCollPath"
+						Grid.Row="0"
+						Grid.Column="0"
+						Grid.ColumnSpan="3"
+						VerticalAlignment="Top"
+						Text="{DynamicResource ModelCollPath}" />
+					<TextBox
+						x:Name="TextPhysicsCollPath"
+						Grid.Row="1"
+						Grid.Column="0"
+						Padding="3,3,3,3"
+						Text="{Binding CurrentPhysicsItem.CollPath}"
+						TextWrapping="Wrap"
+						BorderThickness="1,1,0,1"
+						MaxLines="2" />
+					<Button
+						x:Name="ButtonPhysicsCollPathClear"
+						Grid.Row="1"
+						Grid.Column="1"
+						Content=" × "
+						Click="ButtonClearClick"
+						BorderThickness="0,1,1,1"
+						Background="Transparent"
+						BorderBrush="#FFABADB3">
+						<Button.Style>
+							<Style
+								TargetType="Button">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Text, ElementName=TextPhysicsCollPath}"
+										Value="">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Button.Style>
+					</Button>
+					<Button
+						x:Name="ButtonChoosePhysicsColl"
+						Grid.Row="1"
+						Grid.Column="2"
+						Padding="3,3,3,3"
+						Click="ButtonChooseModelClick"
+						VerticalAlignment="Top"
+						BorderThickness="0,1,1,1"
+						BorderBrush="#FFABADB3"
+						Grid.ColumnSpan="2">
+						<Image
+							Source="/Images/Folder.png" />
+					</Button>
+				</Grid>
+
+				<StackPanel
+					Grid.Row="6">
+					<TextBlock>
+						<Run
+							Text="{DynamicResource TitleToyMass}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextToyMass"
+						Text="{Binding CurrentPhysicsItem.Mass, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<Grid
+					Grid.Row="6"
+					Grid.Column="2">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7">
+						<Run
+							Text="{DynamicResource TitleCogOffset}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextCogOffset0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.CogOffset0, Converter={StaticResource FloatConverter}}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextCogOffset1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.CogOffset1, Converter={StaticResource FloatConverter}}"
+						BorderThickness="0,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextCogOffset2"
+						Grid.Row="1"
+						Grid.Column="4"
+						Text="{Binding CurrentPhysicsItem.CogOffset2, Converter={StaticResource FloatConverter}}"
+						d:Text="0.000000"
+						BorderThickness="0,1,1,1"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center" />
+				</Grid>
+				<StackPanel
+					Grid.Row="6"
+					Grid.Column="4">
+					<TextBlock
+						ToolTip="{DynamicResource TipLinearStiffness}">
+						<Run
+							Text="{DynamicResource TitleLinearStiffness}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextLinearStiffness"
+						Text="{Binding CurrentPhysicsItem.LinearStiffness, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="6"
+					Grid.Column="6">
+					<TextBlock
+						ToolTip="{DynamicResource TitleLinearDamping}">
+						<Run
+							Text="{DynamicResource TitleLinearDamping}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextLinearDamping"
+						Text="{Binding CurrentPhysicsItem.LinearDamping, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+
+				<Grid
+					Grid.Row="8"
+					Grid.Column="0">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7"
+						ToolTip="{DynamicResource TipLocatorHookOffset}">
+						<Run
+							Text="{DynamicResource TitleLocatorHookOffset}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextLocatorHookOffset0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.LocatorHookOffset0, Converter={StaticResource FloatConverter}}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextLocatorHookOffset1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.LocatorHookOffset1, Converter={StaticResource FloatConverter}}"
+						BorderThickness="0,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextLocatorHookOffset2"
+						Grid.Row="1"
+						Grid.Column="4"
+						Text="{Binding CurrentPhysicsItem.LocatorHookOffset2, Converter={StaticResource FloatConverter}}"
+						d:Text="0.000000"
+						BorderThickness="0,1,1,1"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center" />
+				</Grid>
+				<Grid
+					Grid.Row="8"
+					Grid.Column="2">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7">
+						<Run
+							Text="{DynamicResource TitleRestPositionOffset}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRestPositionOffset0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.RestPositionOffset0, Converter={StaticResource FloatConverter}}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextRestPositionOffset1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.RestPositionOffset1, Converter={StaticResource FloatConverter}}"
+						BorderThickness="0,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextRestPositionOffset2"
+						Grid.Row="1"
+						Grid.Column="4"
+						Text="{Binding CurrentPhysicsItem.RestPositionOffset2, Converter={StaticResource FloatConverter}}"
+						d:Text="0.000000"
+						BorderThickness="0,1,1,1"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center" />
+				</Grid>
+				<Grid
+					Grid.Row="8"
+					Grid.Column="4">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7">
+						<Run
+							Text="{DynamicResource TitleRestRotationOffset}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRestRotationOffset0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.RestRotationOffset0, Converter={StaticResource FloatConverter}}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextRestRotationOffset1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.RestRotationOffset1, Converter={StaticResource FloatConverter}}"
+						BorderThickness="0,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextRestRotationOffset2"
+						Grid.Row="1"
+						Grid.Column="4"
+						Text="{Binding CurrentPhysicsItem.RestRotationOffset2, Converter={StaticResource FloatConverter}}"
+						d:Text="0.000000"
+						BorderThickness="0,1,1,1"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center" />
+				</Grid>
+				<Grid
+					Grid.Row="8"
+					Grid.Column="6">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						x:Name="TitleInstanceOffset">
+						<Run
+							Text="{DynamicResource TitleInstanceOffset}" />
+					</TextBlock>
+					<Button
+						x:Name="ButtonInstanceOffsetAdd"
+						Grid.Column="1"
+						Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
+						Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
+						Click="ButtonInstanceOffsetClicked">
+						<Image
+							Source="/Images/Add.png" />
+					</Button>
+					<Button
+						x:Name="ButtonInstanceOffsetRemove"
+						Grid.Column="2"
+						Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
+						Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
+						Click="ButtonInstanceOffsetClicked"
+						Margin="5,0,5,0">
+						<Image
+							Source="/Images/Delete.png" />
+					</Button>
+					<Button
+						x:Name="ButtonInstanceOffsetList"
+						Grid.Column="3"
+						Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
+						Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
+						Click="ButtonInstanceOffsetClicked">
+						<Image
+							Source="/Images/ListBox.png" />
+					</Button>
+					<Grid
+						Grid.Row="1"
+						Grid.ColumnSpan="4">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<TextBox
+							x:Name="TextInstanceOffset0"
+							Grid.Row="1"
+							Text="{Binding CurrentPhysicsItem.InstanceOffset0, Converter={StaticResource FloatConverter}}"
+							BorderThickness="1,1,0,1"
+							d:Text="0.000000"
+							FontSize="11"
+							PreviewTextInput="FloatOnly"
+							VerticalContentAlignment="Center"
+							HorizontalContentAlignment="Right" />
+						<Label
+							Grid.Row="1"
+							Grid.Column="1"
+							BorderBrush="#FFABADB3"
+							BorderThickness="0,1,0,1"
+							Padding="0,0,0,0">
+							<Run
+								Text="," />
+						</Label>
+						<TextBox
+							x:Name="TextInstanceOffset1"
+							Grid.Row="1"
+							Grid.Column="2"
+							Text="{Binding CurrentPhysicsItem.InstanceOffset1, Converter={StaticResource FloatConverter}}"
+							BorderThickness="0,1,0,1"
+							d:Text="0.000000"
+							FontSize="11"
+							PreviewTextInput="FloatOnly"
+							VerticalContentAlignment="Center"
+							HorizontalContentAlignment="Center" />
+						<Label
+							Grid.Row="1"
+							Grid.Column="3"
+							BorderBrush="#FFABADB3"
+							BorderThickness="0,1,0,1"
+							Padding="0,0,0,0">
+							<Run
+								Text="," />
+						</Label>
+						<TextBox
+							x:Name="TextInstanceOffset2"
+							Grid.Row="1"
+							Grid.Column="4"
+							Text="{Binding CurrentPhysicsItem.InstanceOffset2, Converter={StaticResource FloatConverter}}"
+							d:Text="0.000000"
+							BorderThickness="0,1,1,1"
+							FontSize="11"
+							PreviewTextInput="FloatOnly"
+							VerticalContentAlignment="Center" />
+					</Grid>
+				</Grid>
+				<Grid
+					Grid.Row="10"
+					Grid.Column="0"
+					Grid.ColumnSpan="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="3">
+						<Run
+							Text="{DynamicResource TitleRopeMaterial}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeMaterial"
+						Grid.Row="1"
+						Grid.Column="0"
+						Padding="3,3,3,3"
+						Text="{Binding CurrentPhysicsItem.RopeMaterial}"
+						TextWrapping="Wrap"
+						BorderThickness="1,1,0,1"
+						MaxLines="2" />
+					<Button
+						x:Name="ButtonRopeMaterialClear"
+						Grid.Row="1"
+						Grid.Column="1"
+						Content=" × "
+						Click="ButtonClearClick"
+						BorderThickness="0,1,1,1"
+						Background="Transparent"
+						BorderBrush="#FFABADB3">
+						<Button.Style>
+							<Style
+								TargetType="Button">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Text, ElementName=TextRopeMaterial}"
+										Value="">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Button.Style>
+					</Button>
+					<Button
+						x:Name="ButtonChooseRopeMaterial"
+						Grid.Row="1"
+						Grid.Column="2"
+						Padding="3,3,3,3"
+						Click="ButtonChooseRopeClick"
+						VerticalAlignment="Top"
+						BorderThickness="0,1,1,1"
+						BorderBrush="#FFABADB3"
+						Grid.ColumnSpan="2">
+						<Image
+							Source="/Images/Folder.png" />
+					</Button>
+				</Grid>
+			</Grid>
+
+			<Grid
+				x:Name="GridAngular"
+				Grid.Row="3"
+				Visibility="{Binding AngularVisibility}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Border
+					Height="1"
+					Grid.ColumnSpan="7"
+					Padding="0,2,0,2"
+					Margin="0,5,0,5"
+					VerticalAlignment="Center"
+					Background="#FF4C4B4B"
+					HorizontalAlignment="Stretch" />
+				<TextBlock
+					Margin="0,0,0,10"
+					Grid.Row="1"
+					Grid.ColumnSpan="7">
+					<Run
+						Text="{DynamicResource DescAngular}" />
+				</TextBlock>
+				<Grid
+					Grid.Row="2"
+					Grid.Column="0">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7"
+						ToolTip="{DynamicResource TipAngularStiffness}">
+						<Run
+							Text="{DynamicResource TitleAngularStiffness}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextAngularStiffness0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.AngularStiffness0}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextAngularStiffness1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.AngularStiffness1}"
+						d:Text="0.000000"
+						PreviewTextInput="FloatOnly"
+						BorderThickness="0,1,1,1"
+						VerticalContentAlignment="Center" />
+				</Grid>
+				<Grid
+					Grid.Row="2"
+					Grid.Column="2">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7"
+						ToolTip="{DynamicResource TipAngularDamping}">
+						<Run
+							Text="{DynamicResource TitleAngularDamping}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextAngularDamping0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.AngularDamping0}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextAngularDamping1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.AngularDamping1}"
+						d:Text="0.000000"
+						PreviewTextInput="FloatOnly"
+						BorderThickness="0,1,1,1"
+						VerticalContentAlignment="Center" />
+				</Grid>
+				<Grid
+					Grid.Row="2"
+					Grid.Column="4">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.ColumnSpan="7"
+						ToolTip="{DynamicResource TipAngularAmplitude}">
+						<Run
+							Text="{DynamicResource TitleAngularAmplitude}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextAngularAmplitude0"
+						Grid.Row="1"
+						Text="{Binding CurrentPhysicsItem.AngularAmplitude0}"
+						BorderThickness="1,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Right" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextAngularAmplitude1"
+						Grid.Row="1"
+						Grid.Column="2"
+						Text="{Binding CurrentPhysicsItem.AngularAmplitude1}"
+						BorderThickness="0,1,0,1"
+						d:Text="0.000000"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,0,1"
+						Padding="0,0,0,0">
+						<Run
+							Text="," />
+					</Label>
+					<TextBox
+						x:Name="TextAngularAmplitude2"
+						Grid.Row="1"
+						Grid.Column="4"
+						Text="{Binding CurrentPhysicsItem.AngularAmplitude2}"
+						d:Text="0.000000"
+						BorderThickness="0,1,1,1"
+						FontSize="11"
+						PreviewTextInput="FloatOnly"
+						VerticalContentAlignment="Center" />
+				</Grid>
+			</Grid>
+
+			<Grid
+				x:Name="GridRope"
+				Grid.Row="4"
+				Visibility="{Binding RopeDataVisibility}">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="5" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<Border
+					Height="1"
+					Grid.ColumnSpan="7"
+					Padding="0,2,0,2"
+					Margin="0,5,0,5"
+					VerticalAlignment="Center"
+					Background="#FF4C4B4B"
+					HorizontalAlignment="Stretch" />
+
+				<TextBlock
+					Margin="0,0,0,10"
+					Grid.Row="1"
+					Grid.ColumnSpan="7">
+					<Run
+						Text="{DynamicResource DescRope}" />
+				</TextBlock>
+				<StackPanel
+					Grid.Row="2">
+					<TextBlock>
+						<Run
+							Text="{DynamicResource TitleRopeWidth}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeWidth"
+						Text="{Binding CurrentPhysicsItem.RopeWidth, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="2"
+					Grid.Column="2">
+					<TextBlock>
+						<Run
+							Text="{DynamicResource TitleRopeLength}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeLength"
+						Text="{Binding CurrentPhysicsItem.RopeLength, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="2"
+					Grid.Column="4">
+					<TextBlock
+						ToolTip="{DynamicResource TipRopeHookOffset}">
+						<Run
+							Text="{DynamicResource TitleRopeHookOffset}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeHookOffset"
+						Text="{Binding CurrentPhysicsItem.RopeHookOffset, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="2"
+					Grid.Column="6">
+					<TextBlock
+						ToolTip="{DynamicResource TipRopeToyOffset}">
+						<Run
+							Text="{DynamicResource TitleRopeToyOffset}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeToyOffset"
+						Text="{Binding CurrentPhysicsItem.RopeToyOffset, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="4"
+					Grid.Column="0">
+					<TextBlock
+						ToolTip="{DynamicResource TipRopeResolution}">
+						<Run
+							Text="{DynamicResource TitleRopeResolution}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeResolution"
+						Text="{Binding CurrentPhysicsItem.RopeResolution}"
+						PreviewTextInput="NumberOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="4"
+					Grid.Column="2">
+					<TextBlock
+						ToolTip="{DynamicResource TipPositionIterations}">
+						<Run
+							Text="{DynamicResource TitlePositionIterations}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextPositionIterations"
+						Text="{Binding CurrentPhysicsItem.PositionIterations}"
+						PreviewTextInput="NumberOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="4"
+					Grid.Column="4">
+					<TextBlock
+						ToolTip="{DynamicResource TipRopeLinearDensity}">
+						<Run
+							Text="{DynamicResource TitleRopeLinearDensity}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextRopeLinearDensity"
+						Text="{Binding CurrentPhysicsItem.RopeLinearDensity, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+				<StackPanel
+					Grid.Row="4"
+					Grid.Column="6">
+					<TextBlock
+						ToolTip="{DynamicResource TipNodeDamping}">
+						<Run
+							Text="{DynamicResource TitleNodeDamping}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextNodeDamping"
+						Text="{Binding CurrentPhysicsItem.NodeDamping, Converter={StaticResource FloatConverter}}"
+						PreviewTextInput="FloatOnly" />
+				</StackPanel>
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>
