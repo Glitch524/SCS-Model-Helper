@@ -203,9 +203,8 @@
 								x:Name="TextDisplayName"
 								Padding="3,3,3,3"
 								Text="{Binding DisplayName}"
-								MaxLines="1"
 								TextWrapping="Wrap"
-								BorderThickness="1,1,0,1"
+								BorderThickness="1,1,1,1"
 								VerticalAlignment="Top">
 								<TextBox.Style>
 									<Style
@@ -226,10 +225,12 @@
 								x:Name="ButtonChooseRes"
 								Grid.Column="1"
 								Click="ChooseStringRes"
+								VerticalAlignment="Top"
 								HorizontalAlignment="Left"
 								Padding="3,3,3,3"
-								Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+								BorderThickness="0,1,1,1"
+								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
 								BorderBrush="#FFABADB3">
 								<Image
 									Source="/Images/Web.png" />
@@ -370,7 +371,7 @@
 								Grid.Column="1"
 								Content=" × "
 								Click="ButtonClearClick"
-								BorderThickness="0,1,0,1"
+								BorderThickness="0,1,1,1"
 								Background="Transparent"
 								BorderBrush="#FFABADB3">
 								<Button.Style>
@@ -392,9 +393,11 @@
 								x:Name="ButtonIconName"
 								Grid.Column="2"
 								Padding="3,3,3,3"
+								BorderThickness="0,1,1,1"
 								Click="ButtonChooseIcon"
-								Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								VerticalAlignment="Top"
 								BorderBrush="#FFABADB3">
 								<Image
 									Source="/Images/Folder.png" />
@@ -507,8 +510,8 @@
 							x:Name="ButtonChooseModel"
 							Grid.Column="2"
 							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
 							Click="ButtonChooseModelClick"
 							VerticalAlignment="Top"
 							BorderThickness="0,1,1,1"
@@ -583,8 +586,8 @@
 							x:Name="ButtonChooseModelUK"
 							Grid.Column="2"
 							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
 							Click="ButtonChooseModelClick"
 							VerticalAlignment="Top"
 							BorderThickness="0,1,1,1"
@@ -701,7 +704,6 @@
 						<ComboBox
 							x:Name="TextModelType"
 							Padding="3,3,3,3"
-							BorderThickness="1,1,0,1"
 							Text="{Binding ModelType}"
 							DisplayMemberPath="Accessory"
 							IsEditable="True"
@@ -713,8 +715,10 @@
 							x:Name="ButtonCoverModelType"
 							Grid.Column="1"
 							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+							BorderThickness="0,1,0,1"
+							VerticalAlignment="Top"
 							Click="ButtonCoverValue"
 							BorderBrush="#FFABADB3">
 							<Image
@@ -727,7 +731,6 @@
 							Padding="3,3,3,3"
 							TextWrapping="Wrap"
 							IsReadOnly="True"
-							BorderThickness="0,1,1,1"
 							VerticalContentAlignment="Center"
 							ToolTip="{Binding CurrentAcc.Name}" />
 					</Grid>
@@ -765,15 +768,16 @@
 						Text="{Binding Look}"
 						ItemsSource="{Binding LookList}"
 						IsEditable="True"
-						BorderThickness="1,1,0,1"
 						IsTextSearchEnabled="True" />
 					<Button
 						x:Name="ButtonCoverLook"
 						Grid.Row="1"
 						Grid.Column="1"
 						Padding="3,3,3,3"
-						Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-						Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+						Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+						Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+						BorderThickness="0,1,1,1"
+						VerticalAlignment="Top"
 						Click="ButtonCoverValue"
 						BorderBrush="#FFABADB3">
 						<Image
@@ -793,15 +797,16 @@
 						Text="{Binding Variant}"
 						ItemsSource="{Binding VariantList}"
 						IsEditable="True"
-						BorderThickness="1,1,0,1"
 						IsTextSearchEnabled="True" />
 					<Button
 						x:Name="ButtonCoverVariant"
 						Grid.Row="1"
 						Grid.Column="4"
 						Padding="3,3,3,3"
-						Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-						Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+						Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+						Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+						BorderThickness="0,1,1,1"
+						VerticalAlignment="Top"
 						Click="ButtonCoverValue"
 						BorderBrush="#FFABADB3">
 						<Image
@@ -838,15 +843,16 @@
 							<TextBox
 								x:Name="TextHideIn"
 								Padding="3,3,3,3"
-								BorderThickness="1,1,0,1"
 								IsReadOnly="True"
 								Text="{Binding HideIn}" />
 							<Button
 								x:Name="ButtonSetHideIn"
 								Grid.Column="1"
 								Padding="3,3,3,3"
-								Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								BorderThickness="0,1,1,1"
+								VerticalAlignment="Top"
 								Click="ButtonHideIn"
 								BorderBrush="#FFABADB3">
 								<Image

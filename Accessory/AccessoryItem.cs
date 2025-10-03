@@ -11,31 +11,6 @@ namespace SCS_Mod_Helper.Accessory {
 			string modelColl,
 			string look,
 			string variant): INotifyPropertyChanged {
-		public const string NameDisplayName = "name";
-		public const string NamePrice = "price";
-		public const string NameUnlockLevel = "unlock";
-		public const string NameIconName = "icon";
-		public const string NamePartType = "part_type";
-		public const string NameCollPath = "coll";
-		public const string NameLook = "look";
-		public const string NameVariant = "variant";
-
-		public const string NameData = "data";
-		public const string NameSuitableFor = "suitable_for";
-		public const string NameConflictWith = "conflict_with";
-		public const string NameDefaults = "defaults";
-		public const string NameOverrides = "overrides";
-		public const string NameRequire = "require";
-
-		public static List<string> ArrayItems = [
-			NameData, 
-			NameSuitableFor, 
-			NameConflictWith, 
-			NameDefaults, 
-			NameOverrides, 
-			NameRequire];
-
-
 
 		protected string mModelName = modelName;
 		public string ModelName {

@@ -86,7 +86,7 @@ class AccDataIO {
 	}
 	private static void WriteEmptyLine(StreamWriter sw) => sw.WriteLine("");
 
-	private static bool IsArray(string name) => name switch {
+	public static bool IsArray(string name) => name switch {
 		NameMFCategory or
 		NameData or
 		NameSuitableFor or
@@ -100,7 +100,7 @@ class AccDataIO {
 		_ => false,
 	};
 
-	private static bool HasQuote(string name) => name switch {
+	public static bool HasQuote(string name) => name switch {
 		NameMFPackageVersion or
 		NameMFDisplayName or
 		NameMFAuthor or

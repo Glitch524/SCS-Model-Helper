@@ -87,14 +87,8 @@ public partial class AccHookupWindow: BaseWindow {
 
 	private readonly ContextMenu MenuStringRes = new();
 	private void SetupStringResMenu() {
-		MenuStringRes.Items.Clear();
-		AccessoryDataUtil.SetupStringResMenu((item, click) => {
-			if (click)
-				item.Click += OnMenuClicked;
-			MenuStringRes.Items.Add(item);
-		});
 		MenuStringRes.PlacementTarget = ButtonChooseRes;
-		MenuStringRes.Placement = PlacementMode.Top;
+		AccessoryDataUtil.SetupStringResMenu(MenuStringRes, (item) => item.Click += OnMenuClicked);
 	}
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
@@ -110,8 +104,10 @@ public partial class AccHookupWindow: BaseWindow {
 				modLocalization.ShowDialog();
 				if (modLocalization.HasChanges)
 					SetupStringResMenu();
-			} else
-				ViewModel.DisplayName = $"@@{item.Name}@@";
+			} else {
+				var start = TextDisplayName.SelectionStart;
+				ViewModel.DisplayName = ViewModel.DisplayName.Insert(start, $"@@{item.Name}@@");
+			}
 		} else if (cm == MenuOthers) {
 			OthersItem o = (OthersItem)item.DataContext;
 			var name = (string)item.Tag;

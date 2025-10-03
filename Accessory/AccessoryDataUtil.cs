@@ -1,36 +1,40 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon;
+﻿using Microsoft.Win32;
+using SCS_Mod_Helper.Accessory.AccAddon;
 using SCS_Mod_Helper.Utils;
-using Microsoft.Win32;
 using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory
 {
     public static class AccessoryDataUtil {
-		public static void SetupStringResMenu(Action<MenuItem, bool> action) {
-			var res = Instances.LocaleDict;//value的value是重复次数，重复次数最多而且大于3的大概就是通用语言
+		public static void SetupStringResMenu(ContextMenu MenuStringRes, Action<MenuItem> action) {
+			MenuStringRes.Placement = PlacementMode.Top;
+			MenuStringRes.Items.Clear();
+
+			var res = Instances.LocaleDict;
 			MenuItem head = new() {
 				Name = "head",
 				Header = Util.GetString("MenuResTip"),
 				IsEnabled = false
 			};
-			action(head, false);
+			MenuStringRes.Items.Add(head);
 			MenuItem separator = new() {
 				Height = 3,
 				Background = new SolidColorBrush(Colors.LightGray),
 				IsEnabled = false
 			};
-			action(separator, false);
+			MenuStringRes.Items.Add(separator);
 			if (res.Count == 0) {
 				MenuItem empty = new() {
 					Name = "empty",
 					Header = Util.GetString("StatusEmpty"),
 					IsEnabled = false
 				};
-				action(empty, false);
+				MenuStringRes.Items.Add(empty);
 			} else {
 				foreach (var pair in res) {
 					MenuItem item = new() {
@@ -47,7 +51,8 @@ namespace SCS_Mod_Helper.Accessory
 					}
 					item.ToolTip = tips.ToString();
 					ToolTipService.SetInitialShowDelay(item, 500);
-					action(item, true);
+					action(item);
+					MenuStringRes.Items.Add(item);
 				}
 			}
 			MenuItem separator2 = new() {
@@ -55,12 +60,13 @@ namespace SCS_Mod_Helper.Accessory
 				Background = new SolidColorBrush(Colors.LightGray),
 				IsEnabled = false
 			};
-			action(separator2, false);
+			MenuStringRes.Items.Add(separator2);
 			MenuItem openLocalization = new() {
 				Name = "openLocalization",
 				Header = Util.GetString("MenuResOption")
 			};
-			action(openLocalization, true);
+			action(openLocalization);
+			MenuStringRes.Items.Add(openLocalization);
 		}
 
 		public static string GetInitialPath(params string[] paths) {

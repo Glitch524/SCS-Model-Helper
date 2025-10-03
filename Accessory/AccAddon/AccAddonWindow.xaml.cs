@@ -6,10 +6,10 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
@@ -93,15 +93,11 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private readonly ContextMenu MenuStringRes = new();
 	private void SetupStringResMenu() {
-		MenuStringRes.Items.Clear();
-		AccessoryDataUtil.SetupStringResMenu((item, click) => {
-			if (click)
-				item.Click += OnMenuClicked;
-			MenuStringRes.Items.Add(item);
-		});
 		MenuStringRes.PlacementTarget = ButtonChooseRes;
-		MenuStringRes.Placement = PlacementMode.Top;
+		AccessoryDataUtil.SetupStringResMenu(MenuStringRes, (item) => item.Click += OnMenuClicked);
 	}
+
+	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
 
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
@@ -114,8 +110,10 @@ public partial class AccAddonWindow: BaseWindow {
 				modLocalization.ShowDialog();
 				if (modLocalization.HasChanges)
 					SetupStringResMenu();
-			} else
-				AddonItem.DisplayName = $"@@{item.Name}@@";
+			} else {
+				var start = TextDisplayName.SelectionStart;
+				AddonItem.DisplayName = AddonItem.DisplayName.Insert(start, $"@@{item.Name}@@");
+			}
 		} else if (cm == MenuOthers) {
 			OthersItem o = (OthersItem)item.DataContext;
 			var name = (string)item.Tag;
@@ -134,8 +132,6 @@ public partial class AccAddonWindow: BaseWindow {
 		}
 		//TextBox caller = cm.PlacementTarget;
 	}
-
-	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
 
 	private void SaveOnClosing(object? sender, CancelEventArgs e) => AddonItem.SaveHistory();
 

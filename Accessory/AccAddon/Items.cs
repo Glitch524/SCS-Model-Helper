@@ -21,71 +21,69 @@ public class OthersItem: INotifyPropertyChanged {
 	public OthersItem(string othersName, string othersValue, string othersNameTip = "") {
 		mOthersName = othersName;
 		mOthersValue = othersValue;
-		if (othersNameTip.Length == 0) {
-			switch (mOthersName) {
-				case AccDataIO.NameData:
-					othersNameTip = Util.GetString("MenuOthersData");
-					IsData = true;
-					IsArray = true;
-					UseQuoteMark = false;
-					CheckBoxEnabled = false;
-					break;
-				case AccDataIO.NameSuitableFor:
-					othersNameTip = Util.GetString("MenuOthersSuitableFor");
-					IsArray = true;
-					UseQuoteMark = true;
-					CheckBoxEnabled = false;
-					break;
-				case AccDataIO.NameConflictWith:
-					othersNameTip = Util.GetString("MenuOthersConflictWith");
-					IsArray = true;
-					UseQuoteMark = true;
-					CheckBoxEnabled = false;
-					break;
-				case AccDataIO.NameDefaults:
-					othersNameTip = Util.GetString("MenuOthersDefaults");
-					IsArray = true;
-					UseQuoteMark = true;
-					CheckBoxEnabled = false;
-					break;
-				case AccDataIO.NameOverrides:
-					othersNameTip = Util.GetString("MenuOthersOverrides");
-					IsArray = true;
-					UseQuoteMark = true;
-					CheckBoxEnabled = false;
-					break;
-				case AccDataIO.NameRequire:
-					othersNameTip = Util.GetString("MenuOtherRequire");
-					IsArray = true;
-					UseQuoteMark = true;
-					CheckBoxEnabled = false;
-					break;
-			}
-		}
 		mOthersNameTip = othersNameTip;
+		if (othersNameTip.Length == 0) {
+			SetData(othersName);
+		}
 	}
+
+	private void SetData(string othersName) {
+		switch (othersName) {
+			case AccDataIO.NameData:
+				OthersNameTip = Util.GetString("MenuOthersData");
+				IsData = true;
+				IsArray = true;
+				UseQuoteMark = false;
+				CheckBoxEnabled = false;
+				break;
+			case AccDataIO.NameSuitableFor:
+				OthersNameTip = Util.GetString("MenuOthersSuitableFor");
+				IsArray = true;
+				UseQuoteMark = true;
+				CheckBoxEnabled = false;
+				break;
+			case AccDataIO.NameConflictWith:
+				OthersNameTip = Util.GetString("MenuOthersConflictWith");
+				IsArray = true;
+				UseQuoteMark = true;
+				CheckBoxEnabled = false;
+				break;
+			case AccDataIO.NameDefaults:
+				OthersNameTip = Util.GetString("MenuOthersDefaults");
+				IsArray = true;
+				UseQuoteMark = true;
+				CheckBoxEnabled = false;
+				break;
+			case AccDataIO.NameOverrides:
+				OthersNameTip = Util.GetString("MenuOthersOverrides");
+				IsArray = true;
+				UseQuoteMark = true;
+				CheckBoxEnabled = false;
+				break;
+			case AccDataIO.NameRequire:
+				OthersNameTip = Util.GetString("MenuOtherRequire");
+				IsArray = true;
+				UseQuoteMark = true;
+				CheckBoxEnabled = false;
+				break;
+			default:
+				OthersNameTip = "";
+				IsArray = false;
+				UseQuoteMark = false;
+				CheckBoxEnabled = true;
+				break;
+		}
+	}
+
 	public OthersItem() : this("", "") { }
 	private string mOthersName;
 	public string OthersName {
 		get => mOthersName;
 		set {
 			mOthersName = value;
-			if (AccessoryItem.ArrayItems.Contains(value)) {
-				IsArray = true;
-				if (value == "data") {
-					IsData = true;
-					UseQuoteMark = false;
-				} else {
-					IsData = false;
-					UseQuoteMark = true;
-				}
-				CheckBoxEnabled = false;
-			} else {
-				CheckBoxEnabled = true;
-				IsData = false;
-			}
-
 			InvokeChange(nameof(OthersName));
+
+			SetData(mOthersName);
 		}
 	}
 
