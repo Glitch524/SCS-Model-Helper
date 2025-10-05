@@ -53,6 +53,7 @@
 	<s:String x:Key="MessageDeleteLocaleErrUni">Universal Description is necessary</s:String>
 	<s:String x:Key="MessageDeleteLocaleDoubleCheck">Are you sure to delete this version of description?</s:String>
 	<s:String x:Key="MessageCopyDescNotEmpty">Current description is not empty, are you sure to overwrite this content?</s:String>
+	<s:String x:Key="MessageManifestNotFilled">Please fill in all necessary content</s:String>
 
 
 
@@ -62,6 +63,8 @@
 	<s:String x:Key="SCSProjectLocationTipNotExist">The Directory of the project is not exist</s:String>
 	<s:String x:Key="ModelName">Model Name</s:String>
 	<s:String x:Key="ModelDisplayName">Display Name</s:String>
+	<s:String x:Key="CheckResResult">Every languages' result shows like this:</s:String>
+	<s:String x:Key="CheckResResultTips">The Result may be different in game.</s:String>
 	<s:String x:Key="ModelPrice">Price(ETS2 → EUR, ATS → USD)</s:String>
 	<s:String x:Key="ModelPriceErrNot0">Price cannot be 0, or the accessory will not be visible to the player.</s:String>
 	<s:String x:Key="ModelPriceErrNoNumber">Characters other than number is not allowed</s:String>
@@ -233,8 +236,8 @@
 	
 	
 
-	<!--Clean Sii Files-->
-	<s:String x:Key="TitleCleanSii">Clean Accessory Addon Files</s:String>
+	<!--Created Sii Files-->
+	<s:String x:Key="TitleCreatedSii">Created Accessory Addon Files</s:String>
 	<s:String x:Key="TextProjectLocation">Project Location:</s:String>
 	<s:String x:Key="HeadPath">Path</s:String>
 	<s:String x:Key="MessageLoadSiiErrNoSii">There's no sii files in the project</s:String>
@@ -311,7 +314,7 @@
 	<s:String x:Key="TitleAbout">About</s:String>
 	<s:String x:Key="Desc1">Exporting Koikatsu card to Blender→Adjust model in Blender→Making SCS Mod→Making this app.</s:String>
 	<s:String x:Key="Desc2">I don't even know what I will do next.</s:String>
-	<s:String x:Key="Desc3">I'm planning to make paint job definition, update might happen, if someone cares</s:String>
+	<s:String x:Key="Desc3">I'm planning to make paint job definition, update might happen if someone cares</s:String>
 
 
 

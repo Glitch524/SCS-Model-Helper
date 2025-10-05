@@ -412,7 +412,7 @@ class AccDataIO {
 				WriteLine(sw, NameLook, truck.Look);
 			if (truck.Variant != "default")
 				WriteLine(sw, NameVariant, truck.Variant);
-			if (accAddonItem.HideIn != "" && accAddonItem.HideIn != "0x0")
+			if (accAddonItem.HideIn != 0)
 				WriteLine(sw, NameAAHideIn, accAddonItem.HideIn);
 
 			List<string> physName = [];

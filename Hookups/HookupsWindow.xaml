@@ -7,18 +7,15 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Hookups"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
-	d:DataContext="{d:DesignInstance Type=local:HookupInfo}"
+	d:DataContext="{d:DesignInstance Type=local:HookupBinding}"
 	mc:Ignorable="d"
 	Title="{DynamicResource TitleCreateHookupSii}"
 	WindowStartupLocation="CenterOwner"
 	Height="Auto"
 	Width="500"
 	SizeToContent="Height">
-	<base:BaseWindow.Resources>
-		<utils:MultiNullCheckConverter
-			x:Key="MultiNullCheck" />
-	</base:BaseWindow.Resources>
 	<StackPanel
+		x:Name="PanelMain"
 		Margin="10,10,10,10">
 		<TextBlock
 			x:Name="TextProjectLocation"
@@ -27,15 +24,37 @@
 			Text="{Binding ProjectLocationShow}"
 			VerticalAlignment="Top"
 			d:Text="{DynamicResource TextProjectLocation}" />
+		<Grid
+			Margin="0,5,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="5" />
+				<ColumnDefinition
+					Width="*" />
+			</Grid.ColumnDefinitions>
+			<RadioButton
+				x:Name="RadioAnimationHookup"
+				GroupName="HookupTypeGroup"
+				IsChecked="{Binding IsAnimHookup}"
+				Content="{DynamicResource RadioAnimHookup}" />
+			<RadioButton
+				Grid.Column="2"
+				x:Name="RadioCompassHookup"
+				GroupName="HookupTypeGroup"
+				Content="{DynamicResource RadioCompassHookup}" />
+		</Grid>
 		<TextBlock
-			Margin="0,10,0,0"
+			Margin="0,5,0,0"
 			TextWrapping="Wrap"
 			Text="{DynamicResource TextHookupName}"
 			VerticalAlignment="Top" />
 		<TextBox
 			x:Name="TextName"
 			TextWrapping="Wrap"
-			Text="{Binding HookupName}" />
+			Text="{Binding HookupName, UpdateSourceTrigger=PropertyChanged}"
+			Height="{Binding ActualHeight, ElementName=TextModel, Mode=OneWay}" />
 		<TextBlock
 			Margin="0,10,0,0"
 			TextWrapping="Wrap"
@@ -53,7 +72,7 @@
 				Grid.Column="0"
 				TextWrapping="Wrap"
 				BorderThickness="1,1,0,1"
-				Text="{Binding ModelLocation}" />
+				Text="{Binding ModelLocation, UpdateSourceTrigger=PropertyChanged}" />
 			<Button
 				x:Name="ButtonChooseModel"
 				Padding="3,3,3,3"
@@ -65,28 +84,38 @@
 				<Image Source="/Images/Folder.png" />
 			</Button>
 		</Grid>
-		<TextBlock
-			Margin="0,10,0,0"
-			TextWrapping="Wrap"
-			Text="{DynamicResource TextAnimPath}"
-			VerticalAlignment="Top" />
-		<Grid>
+		<Grid
+			Visibility="{Binding AnimVisibility}">
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition
 					Width="*" />
 				<ColumnDefinition
 					Width="Auto" />
 			</Grid.ColumnDefinitions>
+			<TextBlock
+				Margin="0,10,0,0"
+				Grid.ColumnSpan="2"
+				TextWrapping="Wrap"
+				Text="{DynamicResource TextAnimPath}"
+				VerticalAlignment="Top" />
 			<TextBox
 				x:Name="TextAnimation"
 				Grid.Column="0"
+				Grid.Row="1"
 				TextWrapping="Wrap"
 				BorderThickness="1,1,0,1"
-				Text="{Binding AnimationLocation}" />
+				Text="{Binding AnimationLocation, UpdateSourceTrigger=PropertyChanged}" />
 			<Button
 				x:Name="ButtonChooseAnimation"
 				Padding="3,3,3,3"
 				Grid.Column="1"
+				Grid.Row="1"
 				HorizontalAlignment="Left"
 				VerticalAlignment="Top"
 				Click="ButtonChooseFile"
@@ -109,22 +138,8 @@
 				Content="{DynamicResource ButtonOK}"
 				Grid.Column="0"
 				VerticalAlignment="Top"
-				Click="ButtonResult">
-				<Button.IsEnabled>
-					<MultiBinding
-						Converter="{StaticResource MultiNullCheck}"
-						ConverterParameter="AND,Nonull">
-						<Binding
-							Path="Text"
-							ElementName="TextName" />
-						<Binding
-							Path="Text"
-							ElementName="TextModel" />
-						<Binding
-							Path="Text"
-							ElementName="TextAnimation" />
-					</MultiBinding>
-				</Button.IsEnabled>
+				Click="ButtonResult"
+				IsEnabled="{Binding StartClickable}">
 			</Button>
 			<Button
 				x:Name="ButtonCancel"

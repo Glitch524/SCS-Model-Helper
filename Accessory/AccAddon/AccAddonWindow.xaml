@@ -18,6 +18,10 @@
 	<base:BaseWindow.Resources>
 		<utils:ValueEqualsConverter
 			x:Key="ValueEquals" />
+		<utils:HideInConverter
+			x:Key="HideInConverter" />
+		<utils:MultiNullCheckConverter
+			x:Key="MultiNullCheck" />
 		<ContextMenu
 			x:Key="MenuModelType" />
 		<ContextMenu
@@ -147,7 +151,114 @@
 						<RowDefinition
 							Height="*" />
 					</Grid.RowDefinitions>
-					<StackPanel>
+
+					<StackPanel
+						Grid.ColumnSpan="3">
+						<TextBlock
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							Text="{DynamicResource ModelDisplayName}" />
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBox
+								x:Name="TextDisplayName"
+								Padding="3,3,3,3"
+								Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
+								TextWrapping="Wrap"
+								BorderThickness="1,1,1,1"
+								VerticalAlignment="Top">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+							<Button
+								x:Name="ButtonCheckRes"
+								Grid.Column="1"
+								Click="CheckStringRes"
+								Visibility="{Binding CheckResVisibility}"
+								VerticalAlignment="Top"
+								HorizontalAlignment="Left"
+								Padding="3,3,3,3"
+								BorderThickness="0,1,1,1"
+								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								BorderBrush="#FFABADB3">
+								<Image
+									Source="/Images/Search.png" />
+							</Button>
+							<Popup
+								x:Name="PopupCheckRes"
+								PlacementTarget="{Binding ElementName=ButtonCheckRes}"
+								PopupAnimation="Slide"
+								AllowsTransparency="True"
+								IsOpen="{Binding PopupCheckOpen}"
+								StaysOpen="False">
+								<Grid
+									Background="White">
+									<Border
+										BorderBrush="Gray"
+										BorderThickness="1" />
+									<StackPanel
+										Margin="10">
+										<TextBlock>
+											<Run
+												Text="{DynamicResource CheckResResult}" />
+										</TextBlock>
+										<Border
+											Margin="0,10,0,10"
+											Background="Gray"
+											Height="1" />
+										<TextBlock
+											Text="{Binding CheckResResult}" />
+										<Border
+											Margin="0,10,0,10"
+											Background="Gray"
+											Height="1" />
+										<TextBlock>
+											<Run
+												Text="{DynamicResource CheckResResultTips}" />
+										</TextBlock>
+									</StackPanel>
+								</Grid>
+							</Popup>
+							<Button
+								x:Name="ButtonChooseRes"
+								Grid.Column="2"
+								Click="ChooseStringRes"
+								VerticalAlignment="Top"
+								HorizontalAlignment="Left"
+								Padding="3,3,3,3"
+								BorderThickness="0,1,1,1"
+								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+								BorderBrush="#FFABADB3">
+								<Image
+									Source="/Images/Web.png" />
+							</Button>
+						</Grid>
+					</StackPanel>
+					
+					<StackPanel
+						Grid.Row="1"
+						Margin="0,5,0,0">
 						<StackPanel
 							Orientation="Horizontal">
 							<TextBlock
@@ -187,55 +298,31 @@
 					</StackPanel>
 
 					<StackPanel
-						Grid.Column="2">
-						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelDisplayName}" />
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBox
-								x:Name="TextDisplayName"
-								Padding="3,3,3,3"
-								Text="{Binding DisplayName}"
+						Grid.Row="1"
+						Grid.Column="2"
+						Margin="0,5,0,0">
+						<StackPanel
+							Orientation="Horizontal">
+							<TextBlock
 								TextWrapping="Wrap"
-								BorderThickness="1,1,1,1"
-								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox">
-										<Style.Triggers>
-											<Trigger
-												Property="Text"
-												Value="">
-												<Setter
-													Property="Background"
-													Value="Yellow" />
-											</Trigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-							<Button
-								x:Name="ButtonChooseRes"
-								Grid.Column="1"
-								Click="ChooseStringRes"
 								VerticalAlignment="Top"
-								HorizontalAlignment="Left"
-								Padding="3,3,3,3"
-								BorderThickness="0,1,1,1"
-								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								BorderBrush="#FFABADB3">
+								Text="{DynamicResource PartType}" />
+							<Border
+								ToolTip="{DynamicResource PartTypeTip}"
+								Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
 								<Image
-									Source="/Images/Web.png" />
-							</Button>
-						</Grid>
+									Source="/Images/ExclamationPoint.png" />
+							</Border>
+						</StackPanel>
+						<ComboBox
+							x:Name="TextPartType"
+							Padding="3,3,3,3"
+							DisplayMemberPath="PartTypeDisplay"
+							SelectedValuePath="PartTypeValue"
+							SelectedValue="{Binding PartType}"
+							ItemsSource="{Binding PartTypes}"
+							IsEditable="True"
+							IsReadOnly="true" />
 					</StackPanel>
 
 					<StackPanel
@@ -403,35 +490,6 @@
 									Source="/Images/Folder.png" />
 							</Button>
 						</Grid>
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="3"
-						Grid.Column="2"
-						Margin="0,5,0,0">
-
-						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								TextWrapping="Wrap"
-								VerticalAlignment="Top"
-								Text="{DynamicResource PartType}" />
-							<Border
-								ToolTip="{DynamicResource PartTypeTip}"
-								Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
-								<Image
-									Source="/Images/ExclamationPoint.png" />
-							</Border>
-						</StackPanel>
-						<ComboBox
-							x:Name="TextPartType"
-							Padding="3,3,3,3"
-							DisplayMemberPath="PartTypeDisplay"
-							SelectedValuePath="PartTypeValue"
-							SelectedValue="{Binding PartType}"
-							ItemsSource="{Binding PartTypes}"
-							IsEditable="True"
-							IsReadOnly="true" />
 					</StackPanel>
 				</Grid>
 
@@ -708,8 +766,8 @@
 							DisplayMemberPath="Accessory"
 							IsEditable="True"
 							IsTextSearchEnabled="True"
-							ItemsSource="{Binding AccessoryType}"
-							SelectedValue="{Binding CurrentAcc, Mode=TwoWay}">
+							ItemsSource="{Binding ModelTypes}"
+							SelectedValue="{Binding CurrentModelType, Mode=TwoWay}">
 						</ComboBox>
 						<Button
 							x:Name="ButtonCoverModelType"
@@ -726,13 +784,13 @@
 						</Button>
 						<TextBox
 							x:Name="TextAccName"
-							Text="{Binding CurrentAcc.Name}"
+							Text="{Binding CurrentModelType.Name}"
 							Grid.Column="2"
 							Padding="3,3,3,3"
 							TextWrapping="Wrap"
 							IsReadOnly="True"
 							VerticalContentAlignment="Center"
-							ToolTip="{Binding CurrentAcc.Name}" />
+							ToolTip="{Binding CurrentModelType.Name}" />
 					</Grid>
 				</StackPanel>
 
@@ -829,7 +887,7 @@
 						<TextBlock
 							TextWrapping="Wrap"
 							VerticalAlignment="Top">
-						<Run
+							<Run
 								Text="{DynamicResource HideIn}" />
 
 						</TextBlock>
@@ -844,7 +902,7 @@
 								x:Name="TextHideIn"
 								Padding="3,3,3,3"
 								IsReadOnly="True"
-								Text="{Binding HideIn}" />
+								Text="{Binding HideIn, Converter={StaticResource HideInConverter}}" />
 							<Button
 								x:Name="ButtonSetHideIn"
 								Grid.Column="1"
@@ -858,6 +916,82 @@
 								<Image
 									Source="/Images/Add.png" />
 							</Button>
+							<Popup
+								x:Name="PopupHideIn"
+								PlacementTarget="{Binding ElementName=ButtonSetHideIn}"
+								PopupAnimation="Slide"
+								AllowsTransparency="True"
+								StaysOpen="False"
+								Placement="Top">
+								<Grid>
+									<Border
+										Background="White"
+										BorderThickness="1" 
+										BorderBrush="Gray"/>
+									<StackPanel
+										Margin="10">
+										<TextBlock
+											Text="{DynamicResource TitleHideIn}"
+											TextWrapping="Wrap" />
+										<CheckBox
+											x:Name="CheckMainView"
+											Content="Main View"
+											Margin="0,5,0,0"
+											Tag="0x7"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckReflectionCube"
+											Content="Reflection Cube"
+											Margin="0,5,0,0"
+											Tag="0x1F8"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckCloseMirror"
+											Content="Close Mirror"
+											Margin="0,5,0,0"
+											Tag="0x600"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckFarMirror"
+											Content="Far Mirror"
+											Margin="0,5,0,0"
+											Tag="0x1800"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckSideMirror"
+											Content="Side Mirror"
+											Margin="0,5,0,0"
+											Tag="0x2000"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckFrontMirror"
+											Content="Front Mirror"
+											Margin="0,5,0,0"
+											Tag="0x4000"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckShadows"
+											Content="Shadows"
+											Margin="0,5,0,0"
+											Tag="0x1FFE0000"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+										<CheckBox
+											x:Name="CheckRainReflection"
+											Content="Rain reflection"
+											Margin="0,5,0,0"
+											Tag="0xE0000000"
+											Checked="HideInChecked"
+											Unchecked="HideInUnchecked" />
+									</StackPanel>
+								</Grid>
+							</Popup>
 						</Grid>
 					</StackPanel>
 				</Grid>
@@ -1624,6 +1758,113 @@
 			</Expander>
 		</Grid>
 
+		<Popup
+			x:Name="PopupAddTruck"
+			PopupAnimation="Slide"
+			AllowsTransparency="True"
+			IsOpen="{Binding PopupAddTruckOpen}">
+			<Grid Width="500">
+				<Border
+					Background="White"
+					BorderThickness="1"
+					BorderBrush="Gray" />
+				<Grid
+					Margin="10">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="10" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.Row="0"
+						Grid.Column="0">
+						<Run
+							Text="{DynamicResource TruckID}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextNewTruckID"
+						Grid.Row="1"
+						Grid.Column="0"
+						Padding="3,3,3,3"
+						Text="{Binding AddTruckID}"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top" />
+					<TextBlock
+						Grid.Row="0"
+						Grid.Column="2">
+						<Run
+							Text="{DynamicResource TruckName}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextNewIngameName"
+						Grid.Row="1"
+						Grid.Column="2"
+						Padding="3,3,3,3"
+						Text="{Binding AddTruckIngameName}"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top" />
+					<TextBlock
+						Grid.Row="2"
+						Grid.Column="0"
+						Grid.ColumnSpan="3"
+						Margin="0,5,0,0">
+						<Run
+							Text="{DynamicResource TruckDescription}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextNewDescription"
+						Grid.Row="3"
+						Grid.Column="0"
+						Grid.ColumnSpan="3"
+						Padding="3,3,3,3"
+						Text="{Binding AddTruckDescription}"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top" />
+					<Button
+						x:Name="ButtonAddTruckOK"
+						Content="{DynamicResource ButtonOK}"
+						Margin="0,10,0,0"
+						Grid.Row="4"
+						Grid.Column="0"
+						Click="ButtonAddTruckResultClick">
+						<Button.IsEnabled>
+							<MultiBinding
+								Converter="{StaticResource MultiNullCheck}"
+								ConverterParameter="AND,Nonull">
+								<Binding
+									ElementName="TextNewTruckID"
+									Path="Text" />
+								<Binding
+									ElementName="TextNewIngameName"
+									Path="Text" />
+							</MultiBinding>
+						</Button.IsEnabled>
+					</Button>
+					<Button
+						x:Name="ButtonAddTruckCancel"
+						Content="{DynamicResource ButtonCancel}"
+						Margin="0,10,0,0"
+						Grid.Row="4"
+						Grid.Column="2"
+						Click="ButtonAddTruckResultClick" />
+				</Grid>
+			</Grid>
+		</Popup>
 
 		<GridSplitter
 			Grid.Row="1"

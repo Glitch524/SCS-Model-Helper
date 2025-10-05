@@ -61,6 +61,8 @@
 	<s:String x:Key="SCSProjectLocationTipNotExist">项目目录文件夹不存在</s:String>
 	<s:String x:Key="ModelName">模型名称</s:String>
 	<s:String x:Key="ModelDisplayName">游戏内名称</s:String>
+	<s:String x:Key="CheckResResult">每个语言的展示结果如下：</s:String>
+	<s:String x:Key="CheckResResultTips">结果可能与游戏不一致</s:String>
 	<s:String x:Key="ModelPrice">价格(以各自默认货币为单位)</s:String>
 	<s:String x:Key="ModelPriceErrNot0">价格不能为0，否则会不显示</s:String>
 	<s:String x:Key="ModelPriceErrNoNumber">输入的内容必须为数字</s:String>
@@ -235,8 +237,8 @@
 	
 
 
-	<!--清理SII文件页-->
-	<s:String x:Key="TitleCleanSii">清理套件模型定义文件</s:String>
+	<!--浏览已创建模型定义文件-->
+	<s:String x:Key="TitleCreatedSii">浏览已创建模型定义文件</s:String>
 	<s:String x:Key="TextProjectLocation">项目路径：</s:String>
 	<s:String x:Key="HeadPath">路径</s:String>
 	<s:String x:Key="MessageLoadSiiErrNoSii">项目没有任何sii文件</s:String>
@@ -251,6 +253,8 @@
 
 	<!--生成模型绑定文件页-->
 	<s:String x:Key="TitleCreateHookupSii">生成模型绑定文件</s:String>
+	<s:String x:Key="RadioAnimHookup">动画绑定</s:String>
+	<s:String x:Key="RadioCompassHookup">罗盘绑定</s:String>
 	<s:String x:Key="TextHookupName">Hookup名称（不要大于12个字符）</s:String>
 	<s:String x:Key="TextModelPath">模型文件路径</s:String>
 	<s:String x:Key="TextAnimPath">动画文件路径</s:String>

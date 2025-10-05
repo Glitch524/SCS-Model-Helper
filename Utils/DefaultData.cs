@@ -66,12 +66,12 @@ namespace SCS_Mod_Helper.Utils {
 			];
 		}
 
-		private static ObservableCollection<AccessoryInfo>? MAccessories = null;
-		public static ObservableCollection<AccessoryInfo> Accessories {
+		private static ObservableCollection<ModelTypeInfo>? mModelTypes = null;
+		public static ObservableCollection<ModelTypeInfo> ModelTypes {
 			get {
-				MAccessories ??= GetAccessories();
+				mModelTypes ??= GetModelTypes();
 				LanguageUtil.ChangeLanguage += AccessoryChangeLanguage;
-				return MAccessories;
+				return mModelTypes;
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace SCS_Mod_Helper.Utils {
 		public const string TypeToyBack = "toyback";
 		public const string TypeToySofa = "toysofa";
 		public const string TypeToyTable = "toytable";
-		public static ObservableCollection<AccessoryInfo> GetAccessories() {
+		public static ObservableCollection<ModelTypeInfo> GetModelTypes() {
 			return[
 				new(TypeCupHolder, true, true),
 				new(TypeCurtainF, true, false),
@@ -130,7 +130,7 @@ namespace SCS_Mod_Helper.Utils {
 		}
 
 		public static void AccessoryChangeLanguage() {
-			foreach(var acc in Accessories) {
+			foreach(var acc in ModelTypes) {
 				acc.RefreshName();
 			}
 		}

@@ -11,10 +11,13 @@ namespace SCS_Mod_Helper.Hookups;
 /// CreateHookup.xaml 的交互逻辑
 /// </summary>
 public partial class HookupsWindow: BaseWindow {
-	private readonly HookupInfo HookupInfo = new();
+	private readonly HookupBinding HookupInfo = new();
 
 	public string ProjectLocation {
 		get => HookupInfo.ProjectLocation; set => HookupInfo.ProjectLocation = value;
+	}
+	private bool IsAnimHookup {
+		get => HookupInfo.IsAnimHookup; set => HookupInfo.IsAnimHookup = value;
 	}
 	public string HookupName {
 		get => HookupInfo.HookupName; set => HookupInfo.HookupName = value;
@@ -29,10 +32,7 @@ public partial class HookupsWindow: BaseWindow {
 	public HookupsWindow() {
 		InitializeComponent();
 		ProjectLocation = Instances.ModelProject.ProjectLocation;
-		TextProjectLocation.DataContext = HookupInfo;
-		TextName.DataContext = HookupInfo;
-		TextModel.DataContext = HookupInfo;
-		TextAnimation.DataContext = HookupInfo;
+		PanelMain.DataContext = HookupInfo;
 	}
 
 	private void ButtonChooseFile(object sender, RoutedEventArgs e) {
@@ -82,7 +82,7 @@ public partial class HookupsWindow: BaseWindow {
 
 	private void ButtonResult(object sender, RoutedEventArgs e) {
 		if (sender == ButtonOK) {
-			if (HookupName.Length == 0 || ModelLocation.Length == 0 || AnimationLocation.Length == 0) {
+			if (HookupName.Length == 0 || ModelLocation.Length == 0 || (IsAnimHookup && AnimationLocation.Length == 0)) {
 				MessageBox.Show(this, GetString("MessageCreateErrNotFilled"));
 				return;
 			}
@@ -90,10 +90,11 @@ public partial class HookupsWindow: BaseWindow {
 			using StreamWriter sw = new(hookupBase);
 			sw.WriteLine("SiiNunit");
 			sw.WriteLine("{");
-			sw.WriteLine($"\tanimated_hookup : {HookupName}");
+			sw.WriteLine($"\t{(IsAnimHookup ? "animated_hookup" : "compass_hookup")} : {HookupName}");
 			sw.WriteLine("\t{");
 			sw.WriteLine($"\t\tmodel: \"{ModelLocation}\"");
-			sw.WriteLine($"\t\tanimation: \"{AnimationLocation}\"");
+			if (IsAnimHookup)
+				sw.WriteLine($"\t\tanimation: \"{AnimationLocation}\"");
 			sw.WriteLine("\t}");
 			sw.WriteLine("}");
 
@@ -103,64 +104,4 @@ public partial class HookupsWindow: BaseWindow {
 	}
 }
 
-public class HookupInfo: INotifyPropertyChanged {
-
-	public HookupInfo() {
-	}
-
-	public string MProjectLocation = "";
-	public string ProjectLocation {
-		get {
-			return MProjectLocation;
-		}
-		set {
-			MProjectLocation = value;
-			InvokeChange(nameof(ProjectLocationShow));
-		}
-	}
-	public string ProjectLocationShow {
-		get {
-			return Util.GetString("TextProjectLocation") + MProjectLocation;
-		}
-	}
-
-	public string MHookupName = "";
-	public string HookupName {
-		get {
-			return MHookupName;
-		}
-		set {
-			MHookupName = value;
-			InvokeChange(nameof(HookupName));
-		}
-	}
-
-	public string MModelLocation = "";
-	public string ModelLocation {
-		get {
-			return MModelLocation;
-		}
-		set {
-			MModelLocation = value;
-			InvokeChange(nameof(ModelLocation));
-		}
-	}
-
-	public string MAnimationLocation = "";
-	public string AnimationLocation {
-		get {
-			return MAnimationLocation;
-		}
-		set {
-			MAnimationLocation = value;
-			InvokeChange(nameof(AnimationLocation));
-		}
-	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	public void InvokeChange(string name) {
-		PropertyChanged?.Invoke(this, new(name));
-	}
-}
 

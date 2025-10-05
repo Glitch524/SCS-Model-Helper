@@ -1,7 +1,7 @@
-﻿using SCS_Mod_Helper.Accessory.PhysicsToy;
+﻿using Microsoft.Win32;
+using SCS_Mod_Helper.Accessory.PhysicsToy;
 using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
-using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -34,8 +34,7 @@ public class AccessoryAddonItem: AccessoryItem {
 		try {
 			AccAddonHistory.Default.Price = Price ?? 1;
 			AccAddonHistory.Default.UnlockLevel = UnlockLevel ?? 0;
-		} catch {
-		}
+		} catch {}
 		AccAddonHistory.Default.IconName = IconName;
 		AccAddonHistory.Default.PartType = PartType;
 		AccAddonHistory.Default.ModelPath = ModelPath;
@@ -64,6 +63,62 @@ public class AccessoryAddonItem: AccessoryItem {
 		}
 	}
 
+	private string mCheckResResult = "";
+	public string CheckResResult {
+		get => mCheckResResult;
+		set {
+			mCheckResResult = value;
+			InvokeChange(nameof(CheckResResult));
+		}
+	}
+
+	private bool mPopupCheckOpen = false;
+	public bool PopupCheckOpen {
+		get => mPopupCheckOpen;
+		set {
+			mPopupCheckOpen = value;
+			InvokeChange(nameof(PopupCheckOpen));
+		}
+	}
+
+	public void CheckNameStringRes() {
+		var localeDict = Instances.LocaleDict;
+		int localeCount = localeDict.First().Value.Count;
+		bool hasKey = false;
+		string[] values;
+		if (localeCount == 0) {
+			values = [DisplayName.Replace("@@", "")];
+		} else {
+			values = new string[localeCount];
+			var split = DisplayName.Split("@@");
+			for (int i = 0; i < split.Length; i++) {
+				if (i % 2 == 1) {
+					var list = localeDict.GetValueOrDefault(split[i]);
+					if (list != null) {
+						hasKey = true;
+						for (int j = 0; j < values.Length; j++) {
+							values[j] += list[j];
+						}
+						continue;
+					}
+				}
+				if (split[i] != "") {
+					for (int j = 0; j < values.Length; j++) {
+						values[j] += split[i];
+					}
+				}
+			}
+		}
+		string result;
+		if (hasKey)
+			result = string.Join('\n', values);
+		else
+			result = values[0];
+
+		CheckResResult = result;
+		PopupCheckOpen = true;
+	}
+
 	private string mModelPathUK;
 	public string ModelPathUK {
 		get => mModelPathUK;
@@ -78,15 +133,15 @@ public class AccessoryAddonItem: AccessoryItem {
 		get => mModelType;
 		set {
 			mModelType = value;
-			if (CurrentAcc != null && value != CurrentAcc.Accessory) {
-				CurrentAcc = null;
+			if (CurrentModelType != null && value != CurrentModelType.Accessory) {
+				CurrentModelType = null;
 			}
 			InvokeChange(nameof(ModelType));
 		}
 	}
 
-	protected string mHideIn;
-	public string HideIn {
+	protected uint mHideIn;
+	public uint HideIn {
 		get => mHideIn;
 		set {
 			mHideIn = value;
@@ -100,6 +155,8 @@ public class AccessoryAddonItem: AccessoryItem {
 		set {
 			mTruckExpandedETS2 = value;
 			InvokeChange(nameof(TruckExpandedETS2));
+
+			PopupAddTruckOpen = false;
 		}
 	}
 	private bool mTruckExpandedATS = true;
@@ -108,6 +165,17 @@ public class AccessoryAddonItem: AccessoryItem {
 		set {
 			mTruckExpandedATS = value;
 			InvokeChange(nameof(TruckExpandedATS));
+
+			PopupAddTruckOpen = false;
+		}
+	}
+
+	private bool mPopupAddTruckOpen = false;
+	public bool PopupAddTruckOpen {
+		get => mPopupAddTruckOpen;
+		set {
+			mPopupAddTruckOpen = value;
+			InvokeChange(nameof(PopupAddTruckOpen));
 		}
 	}
 
@@ -175,22 +243,22 @@ public class AccessoryAddonItem: AccessoryItem {
 		
 
 	//配件类型、look、variant列表以及菜单
-	private ObservableCollection<AccessoryInfo>? mAccessoryType = null;
-	public ObservableCollection<AccessoryInfo> AccessoryType {
+	private ObservableCollection<ModelTypeInfo>? mModelTypes = null;
+	public ObservableCollection<ModelTypeInfo> ModelTypes {
 		get {
-			mAccessoryType ??= DefaultData.Accessories;
-			return mAccessoryType;
+			mModelTypes ??= DefaultData.ModelTypes;
+			return mModelTypes;
 		}
 	}
 
-	private readonly AccessoryInfo emptyAcc = new();
+	private readonly ModelTypeInfo emptyAcc = new();
 
-	private AccessoryInfo? mCurrentAcc = null;
-	public AccessoryInfo? CurrentAcc {
-		get => mCurrentAcc ?? emptyAcc;
+	private ModelTypeInfo? mCurrentModelType = null;
+	public ModelTypeInfo? CurrentModelType {
+		get => mCurrentModelType ?? emptyAcc;
 		set {
-			mCurrentAcc = value ?? emptyAcc;
-			InvokeChange(nameof(CurrentAcc));
+			mCurrentModelType = value ?? emptyAcc;
+			InvokeChange(nameof(CurrentModelType));
 		}
 	}
 
@@ -251,6 +319,7 @@ public class AccessoryAddonItem: AccessoryItem {
 
 	public void StartCreateSii() {
 		try {
+			PopupAddTruckOpen = false;
 			if (!TruckExpandedETS2 && !TruckExpandedATS)
 				throw new(Util.GetString("MessageCreateSiiNoExpanded"));
 			if (ProjectLocation.Length == 0 ||
@@ -329,7 +398,7 @@ public class AccessoryAddonItem: AccessoryItem {
 		string inProjectPath = path.Replace(ProjectLocation, "");
 		var s = inProjectPath.Split('\\');
 		for (int i = s.Length - 2; i > 0; i--) {
-			foreach (AccessoryInfo info in AccessoryType) {//根据路径猜测模型的类型
+			foreach (ModelTypeInfo info in ModelTypes) {//根据路径猜测模型的类型
 				if (info.Accessory.Equals(s[i]))
 					ModelType = info.Accessory;
 			}
@@ -414,13 +483,14 @@ public class AccessoryAddonItem: AccessoryItem {
 
 	string? LoadedFilename = null;
 	public void SaveDED() {
+		PopupAddTruckOpen = false;
 		SaveFileDialog saveFileDialog = new() {
 			Title = Util.GetString("SaveDED"),
 			AddExtension = true,
 			DefaultDirectory = Paths.DefaultDEDDir(),
+			InitialDirectory = GetDEDInitDir(),
 			DefaultExt = "ded",
 			Filter = Util.GetFilter("DialogFilterDED"),
-			InitialDirectory = AccAddonHistory.Default.DEDLocation,
 		};
 		if (LoadedFilename == null) {
 			if (DisplayName.Length > 0 && ModelType.Length > 0 && ModelName.Length > 0)
@@ -428,25 +498,107 @@ public class AccessoryAddonItem: AccessoryItem {
 		} else
 			saveFileDialog.FileName = LoadedFilename;
 		if (saveFileDialog.ShowDialog() == true) {
-			AccAddonHistory.Default.DEDLocation = new DirectoryInfo(saveFileDialog.FileName).Parent!.FullName;
+			SaveDedLocation(saveFileDialog.FileName);
 			AccAppIO.SaveAccAddon(this, saveFileDialog.FileName);
 			MessageBox.Show(Util.GetString("MessageSaveDED"));
 		}
 	}
 
 	public void LoadDED() {
+		PopupAddTruckOpen = false;
 		OpenFileDialog openFileDialog = new() {
 			Title = Util.GetString("LoadDED"),
 			Multiselect = false,
 			AddExtension = true,
-			InitialDirectory = AccAddonHistory.Default.DEDLocation,
+			DefaultDirectory = Paths.DefaultDEDDir(),
+			InitialDirectory = GetDEDInitDir(),
 			DefaultExt = "ded",
 			Filter = Util.GetFilter("DialogFilterDED"),
 		};
 		if (openFileDialog.ShowDialog() == true) {
-			AccAddonHistory.Default.DEDLocation = new DirectoryInfo(openFileDialog.FileName).Parent!.FullName;
+			SaveDedLocation(openFileDialog.FileName);
 			LoadedFilename = openFileDialog.SafeFileName;
 			AccAppIO.LoadAccAddon(this, openFileDialog.FileName);
+		}
+	}
+
+	private static string GetDEDInitDir () {
+		var dedPath = AccAddonHistory.Default.DEDLocation;
+		if (dedPath.Length == 0) {
+			dedPath = Paths.DefaultDEDDir();
+			Directory.CreateDirectory(dedPath);
+		}
+		return dedPath;
+	}
+
+	private static void SaveDedLocation(string filename) {
+		var dir = new DirectoryInfo(filename).Parent!.FullName;
+		if (dir == Paths.DefaultDEDDir()) {
+			AccAddonHistory.Default.DEDLocation = "";
+		} else {
+			AccAddonHistory.Default.DEDLocation = dir;
+		}
+		AccAddonHistory.Default.Save();
+	}
+
+	private string mAddTruckID = string.Empty;
+	public string AddTruckID {
+		get => mAddTruckID;
+		set {
+			mAddTruckID = value;
+			InvokeChange(nameof(AddTruckID));
+		}
+	}
+	private string mAddTruckIngameName = string.Empty;
+	public string AddTruckIngameName {
+		get => mAddTruckIngameName;
+		set {
+			mAddTruckIngameName = value;
+			InvokeChange(nameof(AddTruckIngameName));
+		}
+	}
+	private string mAddTruckDescription = string.Empty;
+	public string AddTruckDescription {
+		get => mAddTruckDescription;
+		set {
+			mAddTruckDescription = value;
+			InvokeChange(nameof(AddTruckDescription));
+		}
+	}
+
+	public void AddNewTruck(bool isETS2) {
+		try {
+			ObservableCollection<Truck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
+			if (AddTruckID.Length == 0 || AddTruckIngameName.Length == 0)
+				throw new(Util.GetString("MessageAddErrNotFilled"));
+			if (AddTruckID[0] <= 'm') {
+				for (int i = 0; i < Trucks.Count; i++) {
+					var cResult = string.Compare(AddTruckID, Trucks[i].TruckID);
+					if (cResult == 0) {
+						throw new(Util.GetString("MessageAddErrSameID"));
+					} else if (cResult < 0) {
+						Trucks.Insert(i, new(AddTruckID, AddTruckIngameName, AddTruckDescription, false));
+						break;
+					}
+				}
+			} else {
+				for (int i = Trucks.Count - 1; i >= 0; i--) {
+					var cResult = string.Compare(AddTruckID, Trucks[i].TruckID);
+					if (cResult == 0) {
+						throw new(Util.GetString("MessageAddErrSameID"));
+					} else if (cResult > 0) {
+						Trucks.Insert(i + 1, new(AddTruckID, AddTruckIngameName, AddTruckDescription, false));
+						break;
+					}
+				}
+			}
+			if (isETS2)
+				AccAddonHistory.Default.TruckHistoryETS2 = Truck.JoinTruck(Trucks);
+			else
+				AccAddonHistory.Default.TruckHistoryATS = Truck.JoinTruck(Trucks);
+			AccAddonHistory.Default.Save();
+		} catch (Exception ex) {
+			MessageBox.Show(ex.Message, Util.GetString("MessageTitleErr"));
 		}
 	}
 }

@@ -6,7 +6,6 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;

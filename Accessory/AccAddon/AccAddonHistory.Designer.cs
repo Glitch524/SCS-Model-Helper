@@ -241,10 +241,10 @@ namespace SCS_Mod_Helper.Accessory.AccAddon {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string HideIn {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint HideIn {
             get {
-                return ((string)(this["HideIn"]));
+                return ((uint)(this["HideIn"]));
             }
             set {
                 this["HideIn"] = value;

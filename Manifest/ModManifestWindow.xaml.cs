@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory;
 using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.CreatedSii;
 using SCS_Mod_Helper.Accessory.AccHookup;
 using SCS_Mod_Helper.Accessory.PhysicsToy;
 using SCS_Mod_Helper.Base;
@@ -143,11 +144,12 @@ public partial class ModManifestWindow: BaseWindow {
 
 	private void ButtonColorClick(object sender, RoutedEventArgs e) {
 		if (sender is Button button) {
-			string insert = (string)button.Content;
+			string insert = (string)button.Tag;
 			var sStart = TextDescription.SelectionStart;
 			DescContent = DescContent.Insert(sStart, insert);
 			sStart += insert.Length;
 			TextDescription.SelectionStart = sStart;
+			TextDescription.Focus();
 		}
 	}
 
@@ -219,7 +221,7 @@ public partial class ModManifestWindow: BaseWindow {
 		} else if (sender == ButtonPhysics) {
 			window = new PhysicsToyWindow();
 		} else if (sender == ButtonCleanSii) {
-			window = new CleanSiiWindow();
+			window = new CreatedModelWindow();
 		} else if (sender == ButtonCreateHookup) {
 			window = new HookupsWindow();
 		} else if (sender == ButtonLocalization) {

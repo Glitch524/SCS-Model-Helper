@@ -12,7 +12,6 @@ namespace SCS_Mod_Helper.Accessory.AccHookup;
 
 public class AccessoryHookupItem(string modelName): AccessoryItem(modelName, "", null, null, "", "unknown", "", "default", "default") {
 	public AccessoryHookupItem() : this("") {
-
 	}
 
 	private string mModelPath = "";

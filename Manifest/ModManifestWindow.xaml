@@ -124,7 +124,9 @@
 					HorizontalAlignment="Left"
 					Click="ChooseProjectLocation"
 					Width="{Binding ActualHeight, ElementName=TextProjectLocation, Mode=OneWay}"
-					Height="{Binding ActualHeight, ElementName=TextProjectLocation, Mode=OneWay}">
+					Height="{Binding ActualHeight, ElementName=TextProjectLocation, Mode=OneWay}"
+					BorderBrush="#FFABADB3"
+					BorderThickness="0,1,1,1">
 					<Image Source="/Images/Folder.png" />
 				</Button>
 			</Grid>
@@ -274,7 +276,9 @@
 						x:Name="ButtonChooseIcon"
 						Grid.Column="1"
 						Click="ImageButtonClick"
-						VerticalAlignment="Top">
+						VerticalAlignment="Top"
+						BorderBrush="#FFABADB3"
+						BorderThickness="0,1,1,1">
 						<Image Source="/Images/Folder.png" />
 					</Button>
 				</Grid>
@@ -346,121 +350,93 @@
 					<CheckBox
 						x:Name="Check_truck"
 						Content="truck"
-						IsChecked="{Binding CategoryTruck}"/>
+						IsChecked="{Binding CategoryTruck}" />
 					<CheckBox
 						x:Name="Check_trailer"
 						Content="trailer"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryTrailer}"/>
+						IsChecked="{Binding CategoryTrailer}" />
 					<CheckBox
 						x:Name="Check_interior"
 						Content="interior"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryInterior}"/>
+						IsChecked="{Binding CategoryInterior}" />
 					<CheckBox
 						x:Name="Check_tuning_parts"
 						Content="tuning__parts"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryTuningParts}"/>
+						IsChecked="{Binding CategoryTuningParts}" />
 					<CheckBox
 						x:Name="Check_ai_traffic"
 						Content="ai__traffic"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryAiTraffic}"/>
+						IsChecked="{Binding CategoryAiTraffic}" />
 					<CheckBox
 						x:Name="Check_sound"
 						Content="sound"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategorySound}"/>
+						IsChecked="{Binding CategorySound}" />
 					<CheckBox
 						x:Name="Check_paint_job"
 						Content="paint__job"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryPaintJob}"/>
+						IsChecked="{Binding CategoryPaintJob}" />
 					<CheckBox
 						x:Name="Check_cargo_pack"
 						Content="cargo__pack"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryCargoPack}"/>
+						IsChecked="{Binding CategoryCargoPack}" />
 					<CheckBox
 						x:Name="Check_map"
 						Content="map"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryMap}"/>
+						IsChecked="{Binding CategoryMap}" />
 					<CheckBox
 						x:Name="Check_ui"
 						Content="ui"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryUI}"/>
+						IsChecked="{Binding CategoryUI}" />
 					<CheckBox
 						x:Name="Check_weather_setup"
 						Content="weather__setup"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryWeatherSetup}"/>
+						IsChecked="{Binding CategoryWeatherSetup}" />
 					<CheckBox
 						x:Name="Check_physics"
 						Content="physics"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryPhysics}"/>
+						IsChecked="{Binding CategoryPhysics}" />
 					<CheckBox
 						x:Name="Check_graphics"
 						Content="graphics"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryGraphics}"/>
+						IsChecked="{Binding CategoryGraphics}" />
 					<CheckBox
 						x:Name="Check_model"
 						Content="models"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryModel}"/>
+						IsChecked="{Binding CategoryModel}" />
 					<CheckBox
 						x:Name="Check_movers"
 						Content="movers"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryMovers}"/>
+						IsChecked="{Binding CategoryMovers}" />
 					<CheckBox
 						x:Name="Check_walkers"
 						Content="walkers"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryWalkers}"/>
+						IsChecked="{Binding CategoryWalkers}" />
 					<CheckBox
 						x:Name="Check_prefabs"
 						Content="prefabs"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryPrefabs}"/>
+						IsChecked="{Binding CategoryPrefabs}" />
 					<CheckBox
 						x:Name="Check_other"
 						Content="other"
 						Margin="0,2,0,0"
-						IsChecked="{Binding CategoryOther}"/>
+						IsChecked="{Binding CategoryOther}" />
 				</StackPanel>
-				<DataGrid
-					x:Name="TableCategory"
-					Grid.Row="3"
-					HeadersVisibility="None"
-					VerticalAlignment="Top"
-					d:VerticalAlignment="Stretch"
-					Background="#00000000"
-					AutoGenerateColumns="False"
-					HorizontalContentAlignment="Stretch"
-					VerticalContentAlignment="Stretch"
-					Visibility="Collapsed"
-					Margin="0,5,0,0">
-					<DataGrid.Columns>
-						<DataGridTemplateColumn>
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<CheckBox
-										HorizontalAlignment="Center"
-										IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}" />
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTextColumn
-							IsReadOnly="True"
-							Binding="{Binding Category}"
-							Width="*" />
-					</DataGrid.Columns>
-				</DataGrid>
 			</Grid>
 		</Grid>
 
@@ -681,7 +657,7 @@
 						Margin="0,5,0,0"
 						Grid.Row="1"
 						TextWrapping="Wrap"
-						Text="{Binding DescContent, UpdateSourceTrigger=PropertyChanged}"
+						Text="{Binding CurrentLocale.DescContent, UpdateSourceTrigger=PropertyChanged}"
 						VerticalScrollBarVisibility="Auto" />
 				</Grid>
 			</Grid>
@@ -767,16 +743,16 @@
 				VerticalAlignment="Top"
 				Click="ButtonWindowsClick" />
 			<Button
-				x:Name="ButtonCleanSii"
-				Content="{DynamicResource TitleCleanSii}"
+				x:Name="ButtonCreateHookup"
+				Content="{DynamicResource TitleCreateHookupSii}"
 				Grid.Row="3"
 				Margin="0,5,0,0"
 				Padding="0,3,0,3"
 				VerticalAlignment="Top"
 				Click="ButtonWindowsClick" />
 			<Button
-				x:Name="ButtonCreateHookup"
-				Content="{DynamicResource TitleCreateHookupSii}"
+				x:Name="ButtonCleanSii"
+				Content="{DynamicResource TitleCreatedSii}"
 				Grid.Row="4"
 				Margin="0,5,0,0"
 				Padding="0,3,0,3"

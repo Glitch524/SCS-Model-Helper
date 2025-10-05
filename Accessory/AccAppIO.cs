@@ -88,8 +88,12 @@ namespace SCS_Mod_Helper.Accessory;
 	public static void SavePhysicsList() {
 		if (PhysicsItems == null)
 			return;
-		TabCount = 0;
 		var physFile = Paths.SavedPhysicsFile();
+		if (PhysicsItems.Count == 0) {
+			File.Delete(physFile);
+			return;
+		}
+		TabCount = 0;
 		using StreamWriter sw = new(physFile);
 		WriteFileHeader(sw, ":Physics");
 		foreach (var phys in PhysicsItems) {
@@ -297,7 +301,7 @@ namespace SCS_Mod_Helper.Accessory;
 		WriteLine(sw, NameModelType, accAddonItem.ModelType);
 		WriteLine(sw, NameLook, accAddonItem.Look);
 		WriteLine(sw, NameVariant, accAddonItem.Variant);
-		if (accAddonItem.HideIn.Length > 0 && accAddonItem.HideIn != "0x0")
+		if (accAddonItem.HideIn != 0)
 			WriteLine(sw, NameHideIn, accAddonItem.HideIn);
 
 		var setOtherHeader = true;
@@ -353,7 +357,7 @@ namespace SCS_Mod_Helper.Accessory;
 		string modelType = "";
 		string look = "";
 		string variant = "";
-		string hideIn = "0x0";
+		uint hideIn = 0;
 		string[]? otherHeader = null;
 		List<string> otherStrings = [];
 		string[]? trucksHeader = null;
@@ -417,7 +421,7 @@ namespace SCS_Mod_Helper.Accessory;
 					variant = read[1];
 					break;
 				case NameHideIn:
-					hideIn = read[1];
+					hideIn = UIntParse(read[1]) ?? 0;
 					break;
 				case NameOthersHeader:
 					otherHeader = read[1].Split(DefaultData.ItemSplit);

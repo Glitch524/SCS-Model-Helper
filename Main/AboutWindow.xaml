@@ -23,7 +23,8 @@
 			<Run
 				Text="Bilibili:" />
 			<Hyperlink
-				RequestNavigate="HyperlinkClick">tba</Hyperlink>
+				NavigateUri="https://space.bilibili.com/1970055"
+				RequestNavigate="HyperlinkClick">Glitch524</Hyperlink>
 			<LineBreak />
 			<Run
 				Text="{DynamicResource Desc1}" />

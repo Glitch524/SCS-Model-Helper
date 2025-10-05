@@ -42,7 +42,7 @@ public class ModLocale: Locale {
 		foreach (var locale in SupportedLocales) {
 			ModLocale m = new(locale[0], locale[1]);
 			l.Add(m);
-			if (locale[0] == Locale.LocaleValueUni)
+			if (locale[0] == LocaleValueUni)
 				uni = m;
 		}
 		universal = uni!;

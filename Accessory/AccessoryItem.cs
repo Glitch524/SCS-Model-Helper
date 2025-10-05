@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 
 namespace SCS_Mod_Helper.Accessory {
     public abstract class AccessoryItem(
@@ -27,8 +28,11 @@ namespace SCS_Mod_Helper.Accessory {
 			set {
 				mDisplayName = value;
 				InvokeChange(nameof(DisplayName));
+				 InvokeChange(nameof(CheckResVisibility));
 			}
 		}
+
+		public Visibility CheckResVisibility => DisplayName.Contains("@@") ? Visibility.Visible : Visibility.Collapsed;
 
 		protected long? mPrice = price;
 		public long? Price {

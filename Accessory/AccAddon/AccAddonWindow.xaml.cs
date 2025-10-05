@@ -27,7 +27,7 @@ public partial class AccAddonWindow: BaseWindow {
 		get => AddonItem.TruckExpandedATS; set => AddonItem.TruckExpandedATS = value;
 	}
 
-	private ObservableCollection<AccessoryInfo> AccessoryType => AddonItem.AccessoryType;
+	private ObservableCollection<ModelTypeInfo> AccessoryType => AddonItem.ModelTypes;
 	private ObservableCollection<OthersItem> OthersList => AddonItem.OthersList;
 	private ObservableCollection<Truck> TrucksETS2 => AddonItem.TrucksETS2;
 	private ObservableCollection<Truck> TrucksATS => AddonItem.TrucksATS;
@@ -99,6 +99,8 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
 
+	private void CheckStringRes(object sender, RoutedEventArgs e) => AddonItem.CheckNameStringRes();
+
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
 		ContextMenu cm = (ContextMenu)item.Parent;
@@ -112,7 +114,12 @@ public partial class AccAddonWindow: BaseWindow {
 					SetupStringResMenu();
 			} else {
 				var start = TextDisplayName.SelectionStart;
-				AddonItem.DisplayName = AddonItem.DisplayName.Insert(start, $"@@{item.Name}@@");
+				TextDisplayName.SelectedText = "";
+				var insert = $"@@{item.Name}@@";
+				AddonItem.DisplayName = AddonItem.DisplayName.Insert(start, insert);
+				start += insert.Length;
+				TextDisplayName.SelectionStart = start;
+				TextDisplayName.Focus();
 			}
 		} else if (cm == MenuOthers) {
 			OthersItem o = (OthersItem)item.DataContext;
@@ -164,6 +171,43 @@ public partial class AccAddonWindow: BaseWindow {
 			AddonItem.ChooseModel(type);
 		} catch(Exception ex) {
 			MessageBox.Show(this, ex.Message);
+		}
+	}
+
+	private void ButtonHideIn(object sender, RoutedEventArgs e) {
+		PopupHideIn.IsOpen = true;
+	}
+
+	private uint GetNumber(CheckBox checkBox) {
+		if (checkBox == CheckMainView) {
+			return 0x7;
+		} else if (checkBox == CheckReflectionCube) {
+			return 0x1F8;
+		} else if (checkBox == CheckCloseMirror) {
+			return 0x600;
+		} else if (checkBox == CheckFarMirror) {
+			return 0x1800;
+		} else if (checkBox == CheckSideMirror) {
+			return 0x2000;
+		} else if (checkBox == CheckFrontMirror) {
+			return 0x4000;
+		} else if (checkBox == CheckShadows) {
+			return 0x1FFE0000;
+		} else if (checkBox == CheckRainReflection) {
+			return 0xE0000000;
+		} else
+			return 0;
+	}
+
+	private void HideInChecked(object sender, RoutedEventArgs e) {
+		if (sender is CheckBox cb) {
+			AddonItem.HideIn += GetNumber(cb);
+		}
+	}
+
+	private void HideInUnchecked(object sender, RoutedEventArgs e) {
+		if (sender is CheckBox cb) {
+			AddonItem.HideIn -= GetNumber(cb);
 		}
 	}
 
@@ -223,6 +267,7 @@ public partial class AccAddonWindow: BaseWindow {
 	private partial Regex RegexNumber();
 
 	private void ButtonTruckInitialize(object sender, RoutedEventArgs e) {
+		AddonItem.PopupAddTruckOpen = false;
 		AccAddonHistory.Default.TruckHistoryETS2 = "init";
 		AccAddonHistory.Default.TruckHistoryATS = "init";
 		AccAddonHistory.Default.Save();
@@ -230,11 +275,19 @@ public partial class AccAddonWindow: BaseWindow {
 	}
 
 	private void ButtonAddTruckClick(object sender, RoutedEventArgs e) {
-		var isETS2 = sender == ButtonAddTruckETS2;
-		NewTruckWindow addTruck = new(isETS2, isETS2 ? TrucksETS2 : TrucksATS) {
-			Owner = this
-		};
-		addTruck.ShowDialog();
+		PopupAddTruck.PlacementTarget = (Button)sender;
+		AddonItem.AddTruckID = string.Empty;
+		AddonItem.AddTruckIngameName = string.Empty;
+		AddonItem.AddTruckDescription = string.Empty;
+		PopupAddTruck.IsOpen = true;
+	}
+
+	private void ButtonAddTruckResultClick(object sender, RoutedEventArgs e) {
+		if (sender == ButtonAddTruckOK) {
+			var isETS2 = PopupAddTruck.PlacementTarget == ButtonAddTruckETS2;
+			AddonItem.AddNewTruck(isETS2);
+		}
+		PopupAddTruck.IsOpen = false;
 	}
 
 	private void ButtonDeleteTruckClick(object sender, RoutedEventArgs e) {
@@ -279,22 +332,13 @@ public partial class AccAddonWindow: BaseWindow {
 			}
 		}
 		if (sender == ButtonCoverModelType) {
-			var acc = (AccessoryInfo)TextModelType.SelectedItem!;
+			var acc = (ModelTypeInfo)TextModelType.SelectedItem!;
 			ForeachValue((t) => t.ModelType = TextModelType.Text, acc.ForETS2, acc.ForATS);
 		} else if (sender == ButtonCoverLook) {
 			ForeachValue((t) => t.Look = TextLook.Text);
 		} else if (sender == ButtonCoverVariant) {
 			ForeachValue((t) => t.Variant = TextVariant.Text);
 		}
-	}
-
-	private void ButtonHideIn(object sender, RoutedEventArgs e) {
-		AccHideInWindow hideIn = new() {
-			Owner = this
-		};
-		var result = hideIn.ShowDialog();
-		if (result == true) 
-			AddonItem.HideIn = hideIn.HideInResult!;
 	}
 
 	private void TruckCheckBoxClick(object sender, RoutedEventArgs e) {

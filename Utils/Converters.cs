@@ -86,6 +86,19 @@ namespace SCS_Mod_Helper.Utils {
 			}
 		}
 	}
+	public class HideInConverter: IValueConverter {
+		public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture) {
+			if (value is uint hideIn) {
+				return "0x" + System.Convert.ToInt64(hideIn).ToString("X");
+			}
+			return "0x0";
+		}
+
+		public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			return 0;
+		}
+	}
+
 	public class UIntConverter: IValueConverter {
 		public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture) {
 			if (value is uint i) {

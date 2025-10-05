@@ -2,14 +2,14 @@
 using System.ComponentModel;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon; 
-public class AccessoryInfo(string accessory, string name, bool forEts2, bool forAts): INotifyPropertyChanged {
+public class ModelTypeInfo(string accessory, string name, bool forEts2, bool forAts): INotifyPropertyChanged {
 	private string MAccessory = accessory;
 	private string MName = name;
 	private bool MForETS2 = forEts2;
 	private bool MForATS = forAts;
 
-	public AccessoryInfo(string accessory, bool forEts2, bool forAts) : this(accessory, Util.GetString($"Acc.{accessory}"), forEts2, forAts) { }
-	public AccessoryInfo() : this("", "", false, false) { }
+	public ModelTypeInfo(string accessory, bool forEts2, bool forAts) : this(accessory, Util.GetString($"Acc.{accessory}"), forEts2, forAts) { }
+	public ModelTypeInfo() : this("", "", false, false) { }
 
 	public string Accessory {
 		get => MAccessory;

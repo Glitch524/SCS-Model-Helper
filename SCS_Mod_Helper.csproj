@@ -9,6 +9,7 @@
     <UseWPF>true</UseWPF>
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <ApplicationManifest>app.manifest</ApplicationManifest>
+	  <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -36,10 +37,15 @@
     <None Remove="Images\IconPlaceholder.png" />
     <None Remove="Images\ListBox.png" />
     <None Remove="Images\Paste.png" />
+    <None Remove="Images\Search.png" />
     <None Remove="Images\Settings.png" />
     <None Remove="Images\Up.png" />
     <None Remove="Images\Web.png" />
     <None Remove="Images\WebReferenceFolder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\AppIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,6 +72,7 @@
     <Resource Include="Images\IconPlaceholder.png" />
     <Resource Include="Images\ListBox.png" />
     <Resource Include="Images\Paste.png" />
+    <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
     <Resource Include="Images\Up.png" />
     <Resource Include="Images\Web.png" />
