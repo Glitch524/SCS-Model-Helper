@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Utils;
+using System.ComponentModel;
 using System.Windows;
 
 namespace SCS_Mod_Helper.Accessory {
-    public abstract class AccessoryItem(
+    public abstract class AccessoryData(
 			string modelName,
 			string displayName,
 			long? price,
@@ -28,7 +30,7 @@ namespace SCS_Mod_Helper.Accessory {
 			set {
 				mDisplayName = value;
 				InvokeChange(nameof(DisplayName));
-				 InvokeChange(nameof(CheckResVisibility));
+				InvokeChange(nameof(CheckResVisibility));
 			}
 		}
 
@@ -70,15 +72,11 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-
-		private bool mUseCollPath = false;
-		public bool UseCollPath {
-			get => mUseCollPath;
-			set {
-				mUseCollPath = value;
-				InvokeChange(nameof(UseCollPath));
-			}
-		}
+		public readonly static List<PartTypeItem> PartTypes = [
+			new("unknown", Util.GetString("PartTypeUnknown")),
+			new("aftermarket", Util.GetString("PartTypeAftermarket")),
+			new("factory", Util.GetString("PartTypeFactory")),
+			new("licensed", Util.GetString("PartTypeLicensed"))];
 
 		protected string mModelColl = modelColl;
 		public string CollPath {

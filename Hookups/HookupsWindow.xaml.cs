@@ -70,9 +70,12 @@ public partial class HookupsWindow: BaseWindow {
 					ModelLocation = path + ".pmd";
 				if (pmaExist)
 					AnimationLocation = path + ".pma";
-				if (ChooseModel || pmdExist || HookupName.Length == 0) {
-					HookupName = fileDialog.SafeFileName;
-					HookupName = HookupName[..HookupName.LastIndexOf('.')];
+				if (HookupName.Length == 0 && (ChooseModel || pmdExist)) {
+					var filename = fileDialog.SafeFileName;
+					filename = filename[..filename.LastIndexOf('.')];
+					if (filename.EndsWith("_o"))
+						filename = filename[..^2];
+					HookupName = filename;
 				}
 			} catch (Exception ex) {
 				MessageBox.Show(this, ex.Message);
@@ -99,8 +102,8 @@ public partial class HookupsWindow: BaseWindow {
 			sw.WriteLine("}");
 
 			MessageBox.Show(this, GetString("MessageCreateSuccess"));
-		} else if (sender == ButtonCancel)
-			Close();
+		}
+		Close();
 	}
 }
 

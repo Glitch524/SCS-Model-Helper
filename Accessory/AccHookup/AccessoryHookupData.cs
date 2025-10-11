@@ -1,5 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory;
-using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-public class AccessoryHookupItem(string modelName): AccessoryItem(modelName, "", null, null, "", "unknown", "", "default", "default") {
-	public AccessoryHookupItem() : this("") {
+public class AccessoryHookupData(string modelName): AccessoryData(modelName, "", null, null, "", "unknown", "", "default", "default") {
+	public AccessoryHookupData() : this("") {
 	}
 
 	private string mModelPath = "";

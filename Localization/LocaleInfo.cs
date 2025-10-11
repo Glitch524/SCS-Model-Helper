@@ -131,9 +131,8 @@ public class LocaleInfo: INotifyPropertyChanged {
 			if (locale == CurrentLocale)
 				continue;
 			var dict = locale.Dictionary;
-			var dMin = 0;
 			for (int c = 0; c < currentKeys.Count; c++) {
-				for (int d = dMin; d < dict.Count; d++) {
+				for (int d = c; d < dict.Count; d++) {
 					var foundPair = dict[d];
 					if (currentKeys[c].Equals(foundPair.Key)) {
 						if (c != d) {

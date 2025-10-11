@@ -8,7 +8,7 @@
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:phystoy="clr-namespace:SCS_Mod_Helper.Accessory.PhysicsToy"
-	d:DataContext="{d:DesignInstance Type=local:AccHookupViewModel}"
+	d:DataContext="{d:DesignInstance Type=local:AccHookupBinding}"
 	mc:Ignorable="d"
 	WindowStartupLocation="CenterOwner"
 	Title="{DynamicResource TitleAccessoryHookup}"
@@ -265,7 +265,7 @@
 		<GridSplitter
 			Width="1"
 			Grid.Row="1"
-			Grid.RowSpan="4"
+			Grid.RowSpan="3"
 			Grid.Column="1"
 			Margin="4,0,4,0"
 			ResizeBehavior="PreviousAndNext"
@@ -485,37 +485,67 @@
 						Height="Auto" />
 				</Grid.RowDefinitions>
 
-				<Grid
-					Grid.ColumnSpan="3">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="3*" />
-						<ColumnDefinition
-							Width="5" />
-						<ColumnDefinition
-							Width="5*" />
-					</Grid.ColumnDefinitions>
-					<StackPanel>
-						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								x:Name="TitleModelName"
-								TextWrapping="Wrap"
-								Text="{DynamicResource ModelName}" />
-							<Border
-								ToolTip="{DynamicResource ModelNameTip}"
-								Width="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}">
-								<Image
-									Source="/Images/ExclamationPoint.png" />
-							</Border>
-						</StackPanel>
-						<TextBox
-							x:Name="TextModelName"
-							Padding="3,3,3,3"
+				<StackPanel>
+					<StackPanel
+						Orientation="Horizontal">
+						<TextBlock
+							x:Name="TitleModelName"
 							TextWrapping="Wrap"
+							Text="{DynamicResource ModelName}" />
+						<Border
+							ToolTip="{DynamicResource ModelNameTip}"
+							Width="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}"
+							Height="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}">
+							<Image
+								Source="/Images/ExclamationPoint.png" />
+						</Border>
+					</StackPanel>
+					<TextBox
+						x:Name="TextModelName"
+						Padding="3,3,3,3"
+						TextWrapping="Wrap"
+						MaxLines="1"
+						Text="{Binding CurrentHookupItem.ModelName, UpdateSourceTrigger=PropertyChanged}"
+						VerticalAlignment="Top">
+						<TextBox.Style>
+							<Style
+								TargetType="TextBox">
+								<Style.Triggers>
+									<Trigger
+										Property="Text"
+										Value="">
+										<Setter
+											Property="Background"
+											Value="Yellow" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</TextBox.Style>
+					</TextBox>
+				</StackPanel>
+				<StackPanel
+					Grid.Column="2"
+					Grid.ColumnSpan="3">
+					<TextBlock
+						TextWrapping="Wrap"
+						VerticalAlignment="Top"
+						Text="{DynamicResource ModelDisplayName}" />
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBox
+							x:Name="TextDisplayName"
+							Padding="3,3,3,3"
+							Text="{Binding CurrentHookupItem.DisplayName, UpdateSourceTrigger=PropertyChanged}"
 							MaxLines="1"
-							Text="{Binding CurrentHookupItem.ModelName, UpdateSourceTrigger=PropertyChanged}"
+							TextWrapping="Wrap"
+							BorderThickness="1,1,0,1"
 							VerticalAlignment="Top">
 							<TextBox.Style>
 								<Style
@@ -532,60 +562,72 @@
 								</Style>
 							</TextBox.Style>
 						</TextBox>
-					</StackPanel>
-					<StackPanel
-						Grid.Column="2">
-						<TextBlock
-							TextWrapping="Wrap"
+						<Button
+							x:Name="ButtonCheckRes"
+							Grid.Column="1"
+							Click="CheckStringRes"
+							Visibility="{Binding CurrentHookupItem.CheckResVisibility}"
 							VerticalAlignment="Top"
-							Text="{DynamicResource ModelDisplayName}" />
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBox
-								x:Name="TextDisplayName"
-								Padding="3,3,3,3"
-								Text="{Binding CurrentHookupItem.DisplayName}"
-								MaxLines="1"
-								TextWrapping="Wrap"
-								BorderThickness="1,1,0,1"
-								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox">
-										<Style.Triggers>
-											<Trigger
-												Property="Text"
-												Value="">
-												<Setter
-													Property="Background"
-													Value="Yellow" />
-											</Trigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-							<Button
-								x:Name="ButtonChooseRes"
-								Grid.Column="1"
-								Click="ChooseStringRes"
-								HorizontalAlignment="Left"
-								Padding="3,3,3,3"
-								Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-								BorderBrush="#FFABADB3">
-								<Image
-									Source="/Images/Web.png" />
-							</Button>
-						</Grid>
-					</StackPanel>
-				</Grid>
+							HorizontalAlignment="Left"
+							Padding="3,3,3,3"
+							BorderThickness="0,1,1,1"
+							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
+							BorderBrush="#FFABADB3">
+							<Image
+								Source="/Images/Search.png" />
+						</Button>
+						<Popup
+							x:Name="PopupCheckRes"
+							PlacementTarget="{Binding ElementName=ButtonCheckRes}"
+							PopupAnimation="Slide"
+							AllowsTransparency="True"
+							IsOpen="{Binding PopupCheckOpen}"
+							StaysOpen="False">
+							<Grid
+								Background="White">
+								<Border
+									BorderBrush="Gray"
+									BorderThickness="1" />
+								<StackPanel
+									Margin="10">
+									<TextBlock>
+											<Run
+											Text="{DynamicResource CheckResResult}" />
+									</TextBlock>
+									<Border
+										Margin="0,10,0,10"
+										Background="Gray"
+										Height="1" />
+									<TextBlock
+										Text="{Binding CheckResResult}" />
+									<Border
+										Margin="0,10,0,10"
+										Background="Gray"
+										Height="1" />
+									<TextBlock>
+											<Run
+											Text="{DynamicResource CheckResResultTips}" />
+									</TextBlock>
+								</StackPanel>
+							</Grid>
+						</Popup>
+						<Button
+							x:Name="ButtonChooseRes"
+							Grid.Column="2"
+							Click="ChooseStringRes"
+							HorizontalAlignment="Left"
+							Padding="3,3,3,3"
+							Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+							Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
+							BorderBrush="#FFABADB3">
+							<Image
+								Source="/Images/Web.png" />
+						</Button>
+					</Grid>
+				</StackPanel>
 				<StackPanel
-					Grid.Column="4">
+					Grid.Row="2">
 					<StackPanel
 						Orientation="Horizontal">
 						<TextBlock
@@ -670,7 +712,8 @@
 					</Grid>
 				</StackPanel>
 				<StackPanel
-					Grid.Column="6">
+					Grid.Row="2"
+					Grid.Column="2">
 
 					<StackPanel
 						Orientation="Horizontal">
@@ -697,7 +740,8 @@
 				</StackPanel>
 
 				<StackPanel
-					Grid.Row="2">
+					Grid.Row="2"
+					Grid.Column="4">
 					<TextBlock
 						VerticalAlignment="Top"
 						Text="{DynamicResource ModelPrice}"
@@ -738,7 +782,7 @@
 				</StackPanel>
 				<StackPanel
 					Grid.Row="2"
-					Grid.Column="2">
+					Grid.Column="6">
 					<TextBlock
 						TextWrapping="Wrap"
 						VerticalAlignment="Top">

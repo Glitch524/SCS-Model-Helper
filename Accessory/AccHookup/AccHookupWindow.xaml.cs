@@ -1,4 +1,4 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon;
+﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Accessory.PhysicsToy;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
@@ -14,22 +14,22 @@ namespace SCS_Mod_Helper.Accessory.AccHookup;
 /// AddonHookup.xaml 的交互逻辑
 /// </summary>
 public partial class AccHookupWindow: BaseWindow {
-	private readonly AccHookupViewModel ViewModel = new();
+	private readonly AccHookupBinding Binding = new();
 
-	public ObservableCollection<OthersItem>? OthersList => ViewModel.OthersList;
+	public ObservableCollection<OthersItem>? OthersList => Binding.OthersList;
 
 	private readonly ContextMenu MenuOthers;
 
 	public AccHookupWindow() {
 		InitializeComponent();
 
-		GridMain.DataContext = ViewModel;
+		GridMain.DataContext = Binding;
 
 		MenuOthers = (ContextMenu)Resources["MenuOthers"];
 
-		ViewModel.SuiChanged += OnSuiChanged;
+		Binding.SuiChanged += OnSuiChanged;
 
-		ViewModel.LoadFiles();
+		Binding.LoadFiles();
 
 		SetupStringResMenu();
 	}
@@ -39,49 +39,31 @@ public partial class AccHookupWindow: BaseWindow {
 	private void ButtonAddRowClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSuiAdd) {
 			SuiItem newItem = new("new_sui");
-			ViewModel.SuiItems.Add(newItem);
-			ViewModel.CurrentSuiItem = newItem;
+			Binding.SuiItems.Add(newItem);
+			Binding.CurrentSuiItem = newItem;
 		} else if (sender == ButtonToyAdd) {
-			AccessoryHookupItem newItem = new();
-			ViewModel.Hookups?.Add(newItem);
-			ViewModel.CurrentHookupItem = newItem;
+			AccessoryHookupData newItem = new();
+			Binding.Hookups?.Add(newItem);
+			Binding.CurrentHookupItem = newItem;
 		}
 	}
 
 	private void ButtonDeleteRowClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSuiRemove) {
-			if (ViewModel.CurrentSuiItem != null)
-				ViewModel.SuiItems.Remove(ViewModel.CurrentSuiItem);
+			if (Binding.CurrentSuiItem != null)
+				Binding.SuiItems.Remove(Binding.CurrentSuiItem);
 		} else if (sender == ButtonToyRemove) {
-			if (ViewModel.CurrentHookupItem != null)
-				ViewModel.Hookups?.Remove(ViewModel.CurrentHookupItem);
+			if (Binding.CurrentHookupItem != null)
+				Binding.Hookups?.Remove(Binding.CurrentHookupItem);
 		}
 	}
 
 	private void SortButtonClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSuiUp || sender == ButtonSuiDown) {
-			MoveItem(sender == ButtonSuiUp, TableSui, ViewModel.SuiItems);
+			DataGridUtil.MoveItems(sender == ButtonSuiUp, TableSui, Binding.SuiItems);
 		} else if (sender == ButtonToyUp || sender == ButtonToyDown) {
-			MoveItem(sender == ButtonToyUp, TableToyDatas, ViewModel.Hookups!);
+			DataGridUtil.MoveItems(sender == ButtonToyUp, TableToyDatas, Binding.Hookups!);
 		}
-	}
-
-	private static void MoveItem<T>(bool up, DataGrid table, ObservableCollection<T> list) {
-		if (table.SelectedIndex == -1)
-			return;
-		var index = table.SelectedIndex;
-		var selected = (T)table.SelectedItem;
-		list.RemoveAt(index);
-		int target = index;
-		if (up) {
-			if (target > 0) 
-				target--;
-		} else {
-			if (target < list.Count)
-				target++;
-		}
-		list.Insert(target, selected);
-		table.SelectedIndex = target;
 	}
 
 	private readonly ContextMenu MenuStringRes = new();
@@ -91,6 +73,8 @@ public partial class AccHookupWindow: BaseWindow {
 	}
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
+
+	private void CheckStringRes(object sender, RoutedEventArgs e) => Binding.CheckNameStringRes();
 
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
@@ -105,7 +89,7 @@ public partial class AccHookupWindow: BaseWindow {
 					SetupStringResMenu();
 			} else {
 				var start = TextDisplayName.SelectionStart;
-				ViewModel.DisplayName = ViewModel.DisplayName.Insert(start, $"@@{item.Name}@@");
+				Binding.DisplayName = Binding.DisplayName.Insert(start, $"@@{item.Name}@@");
 			}
 		} else if (cm == MenuOthers) {
 			OthersItem o = (OthersItem)item.DataContext;
@@ -115,17 +99,17 @@ public partial class AccHookupWindow: BaseWindow {
 		}
 	}
 
-	private void ButtonChooseIcon(object sender, RoutedEventArgs e) => ViewModel.ChooseIcon(this);
+	private void ButtonChooseIcon(object sender, RoutedEventArgs e) => Binding.ChooseIcon(this);
 
-	private void ButtonChooseModelClick(object sender, RoutedEventArgs e) => ViewModel.ChooseModel(sender == ButtonChooseColl);
+	private void ButtonChooseModelClick(object sender, RoutedEventArgs e) => Binding.ChooseModel(sender == ButtonChooseColl);
 
 	private void ButtonClearClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonIconNameClear) {
-			ViewModel.IconName = "";
+			Binding.IconName = "";
 		} else if (sender == ButtonModelPathClear) {
-			ViewModel.ModelPath = "";
+			Binding.ModelPath = "";
 		} else if (sender == ButtonCollPathClear) {
-			ViewModel.CollPath = "";
+			Binding.CollPath = "";
 		} else
 			return;
 	}
@@ -163,9 +147,9 @@ public partial class AccHookupWindow: BaseWindow {
 		if (sender == ButtonCancel) {
 			Close();
 		} else if (sender == ButtonSave) {
-			ViewModel.SaveFiles();
+			Binding.SaveFiles();
 		}
 	}
 
-	private void AddToOthersClick(object sender, RoutedEventArgs e) => ViewModel.AddPhysToOthersList(UCPhysics.CurrentPhysicsItem);
+	private void AddToOthersClick(object sender, RoutedEventArgs e) => Binding.AddPhysToOthersList(UCPhysics.CurrentPhysicsItem);
 }

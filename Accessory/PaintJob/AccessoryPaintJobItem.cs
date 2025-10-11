@@ -1,6 +1,6 @@
 ﻿namespace SCS_Mod_Helper.Accessory.PaintJob
 {
-    public class AccessoryPaintJobItem() : AccessoryItem("", "", null, null, "", "unknown", "", "", "")
+    public class AccessoryPaintJobItem() : AccessoryData("", "", null, null, "", "unknown", "", "", "")
     {
 		//      private new readonly string? CollPath;
 		//private new readonly string? Look;

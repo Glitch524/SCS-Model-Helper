@@ -1,7 +1,7 @@
 ﻿using SCS_Mod_Helper.Utils;
 using System.ComponentModel;
 
-namespace SCS_Mod_Helper.Accessory.AccAddon; 
+namespace SCS_Mod_Helper.Accessory.AccAddon.Items; 
 public class ModelTypeInfo(string accessory, string name, bool forEts2, bool forAts): INotifyPropertyChanged {
 	private string MAccessory = accessory;
 	private string MName = name;

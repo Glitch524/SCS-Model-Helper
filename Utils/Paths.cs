@@ -38,4 +38,6 @@ class Paths {
 	public static string LanguageDir() => Path.Combine(Environment.CurrentDirectory, "Language");
 	public static string SavedPhysicsFile() => Path.Combine(Environment.CurrentDirectory, "Physics.DEP");
 	public static string DefaultDEDDir() => Path.Combine(Environment.CurrentDirectory, "Def Files");
+
+	public static string ExcpPath() => Path.Combine(Environment.CurrentDirectory, $"Excp_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt");
 }

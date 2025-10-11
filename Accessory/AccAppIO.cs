@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Accessory.PhysicsToy;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
@@ -282,31 +283,31 @@ namespace SCS_Mod_Helper.Accessory;
 	private const string NameTrucksETS2 = "TrucksETS2";
 	private const string NameTrucksATS = "TrucksATS";
 
-	public static void SaveAccAddon(AccessoryAddonItem accAddonItem, string dedFile) {
+	public static void SaveAccAddon(AccAddonBinding binding, string dedFile) {
 		TabCount = 0;
 		using StreamWriter sw = new(dedFile);
 		WriteFileHeader(sw);
 		BraceIn(sw);
-		WriteLine(sw, NameProjectLocation, accAddonItem.ProjectLocation);
-		WriteLine(sw, NameModelName, accAddonItem.ModelName);
+		WriteLine(sw, NameProjectLocation, binding.ProjectLocation);
+		WriteLine(sw, NameModelName, binding.ModelName);
 
-		WriteLine(sw, NameDisplayName, accAddonItem.DisplayName);
-		WriteLine(sw, NamePrice, accAddonItem.Price);
-		WriteLine(sw, NameUnlockLevel, accAddonItem.UnlockLevel);
-		WriteLine(sw, NameIconName, accAddonItem.IconName);
-		WriteLine(sw, NamePartType, accAddonItem.PartType);
-		WriteLine(sw, NameModelPath, accAddonItem.ModelPath);
-		WriteLine(sw, NameModelPathUK, accAddonItem.ModelPathUK);
-		WriteLine(sw, NameModelColl, accAddonItem.CollPath);
-		WriteLine(sw, NameModelType, accAddonItem.ModelType);
-		WriteLine(sw, NameLook, accAddonItem.Look);
-		WriteLine(sw, NameVariant, accAddonItem.Variant);
-		if (accAddonItem.HideIn != 0)
-			WriteLine(sw, NameHideIn, accAddonItem.HideIn);
+		WriteLine(sw, NameDisplayName, binding.DisplayName);
+		WriteLine(sw, NamePrice, binding.Price);
+		WriteLine(sw, NameUnlockLevel, binding.UnlockLevel);
+		WriteLine(sw, NameIconName, binding.IconName);
+		WriteLine(sw, NamePartType, binding.PartType);
+		WriteLine(sw, NameModelPath, binding.ModelPath);
+		WriteLine(sw, NameModelPathUK, binding.ModelPathUK);
+		WriteLine(sw, NameModelColl, binding.CollPath);
+		WriteLine(sw, NameModelType, binding.ModelType);
+		WriteLine(sw, NameLook, binding.Look);
+		WriteLine(sw, NameVariant, binding.Variant);
+		if (binding.HideIn != 0)
+			WriteLine(sw, NameHideIn, binding.HideIn);
 
 		var setOtherHeader = true;
-		if (accAddonItem.OthersList.Count > 0) {
-			foreach (var other in accAddonItem.OthersList) {
+		if (binding.OthersList.Count > 0) {
+			foreach (var other in binding.OthersList) {
 				if (other.OthersName.Length > 0 || other.OthersValue.Length > 0) {
 					if (setOtherHeader) {
 						WriteLine(sw, NameOthersHeader, OthersItem.GetHeaderLine());
@@ -317,8 +318,8 @@ namespace SCS_Mod_Helper.Accessory;
 			}
 		}
 		var setTruckHeader = true;
-		if (accAddonItem.TrucksETS2.Count > 0 || accAddonItem.TrucksATS.Count > 0) {
-			foreach (var truck in accAddonItem.TrucksETS2) {
+		if (binding.TrucksETS2.Count > 0 || binding.TrucksATS.Count > 0) {
+			foreach (var truck in binding.TrucksETS2) {
 				if (truck.Check && (truck.ModelType.Length != 0 || truck.Look.Length != 0 || truck.Variant.Length != 0)) {
 					if (setTruckHeader) {
 						WriteLine(sw, NameTrucksHeader, Truck.DEDHeader());
@@ -327,7 +328,7 @@ namespace SCS_Mod_Helper.Accessory;
 					WriteLine(sw, NameTrucksETS2, truck.ToDEDLine());
 				}
 			}
-			foreach (var truck in accAddonItem.TrucksATS) {
+			foreach (var truck in binding.TrucksATS) {
 				if (truck.Check && (truck.ModelType.Length != 0 || truck.Look.Length != 0 || truck.Variant.Length != 0)) {
 					if (setTruckHeader) {
 						WriteLine(sw, NameTrucksHeader, Truck.DEDHeader());
@@ -340,7 +341,7 @@ namespace SCS_Mod_Helper.Accessory;
 		BraceOut(sw);
 	}
 
-	public static void LoadAccAddon(AccessoryAddonItem accAddonItem, string dedFile) {
+	public static void LoadAccAddon(AccAddonBinding binding, string dedFile) {
 		using StreamReader sr = new(dedFile);
 		string? line = sr.ReadLine();
 		if (line == null || !line.StartsWith($"{FileHeader}"))
@@ -440,21 +441,21 @@ namespace SCS_Mod_Helper.Accessory;
 					break;
 			}
 		}
-		accAddonItem.ModelName = modelName;
-		accAddonItem.DisplayName = displayName;
-		accAddonItem.Price = price;
-		accAddonItem.UnlockLevel = unlockLevel;
-		accAddonItem.IconName = iconName;
-		accAddonItem.PartType = partType;
-		accAddonItem.ModelPath = modelPath;
-		accAddonItem.ModelPathUK = modelPathUK;
-		accAddonItem.CollPath = collPath;
-		accAddonItem.ModelType = modelType;
-		accAddonItem.Look = look;
-		accAddonItem.Variant = variant;
-		accAddonItem.HideIn = hideIn;
+		binding.ModelName = modelName;
+		binding.DisplayName = displayName;
+		binding.Price = price;
+		binding.UnlockLevel = unlockLevel;
+		binding.IconName = iconName;
+		binding.PartType = partType;
+		binding.ModelPath = modelPath;
+		binding.ModelPathUK = modelPathUK;
+		binding.CollPath = collPath;
+		binding.ModelType = modelType;
+		binding.Look = look;
+		binding.Variant = variant;
+		binding.HideIn = hideIn;
 
-		accAddonItem.OthersList.Clear();
+		binding.OthersList.Clear();
 		if (otherHeader != null && otherStrings.Count == 0) {
 			var indexesOfOthers = new int[otherHeader.Length];
 			for (int i = 0; i < otherHeader!.Length; i++) {
@@ -476,8 +477,8 @@ namespace SCS_Mod_Helper.Accessory;
 			}
 		}
 
-		accAddonItem.SelectAllETS2 = false;
-		accAddonItem.SelectAllATS = false;
+		binding.SelectAllETS2 = false;
+		binding.SelectAllATS = false;
 		if (trucksHeader != null && trucksETS2Strings.Count + trucksATSStrings.Count > 0) {
 			var indexesOfTrucks = new int[trucksHeader!.Length];
 			for (int i = 0; i < trucksHeader!.Length; i++) {
@@ -497,8 +498,8 @@ namespace SCS_Mod_Helper.Accessory;
 						break;
 				}
 			}
-			SetSelected(indexesOfTrucks, trucksETS2Strings, accAddonItem.TrucksETS2);
-			SetSelected(indexesOfTrucks, trucksATSStrings, accAddonItem.TrucksATS);
+			SetSelected(indexesOfTrucks, trucksETS2Strings, binding.TrucksETS2);
+			SetSelected(indexesOfTrucks, trucksATSStrings, binding.TrucksATS);
 		}
 	}
 

@@ -68,6 +68,41 @@ public static class AccessoryDataUtil {
 		MenuStringRes.Items.Add(openLocalization);
 	}
 
+	public static string GetStringResResults(string displayName) {
+		var localeDict = Instances.LocaleDict;
+		int localeCount = localeDict.First().Value.Count;
+		bool hasKey = false;
+		string[] values;
+		if (localeCount == 0) {
+			values = [displayName.Replace("@@", "")];
+		} else {
+			values = new string[localeCount];
+			var split = displayName.Split("@@");
+			for (int i = 0; i < split.Length; i++) {
+				if (i % 2 == 1) {
+					var list = localeDict.GetValueOrDefault(split[i]);
+					if (list != null) {
+						hasKey = true;
+						for (int j = 0; j < values.Length; j++) {
+							values[j] += list[j];
+						}
+						continue;
+					}
+				}
+				if (split[i] != "") {
+					for (int j = 0; j < values.Length; j++) {
+						values[j] += split[i];
+					}
+				}
+			}
+		}
+		string result;
+		if (hasKey)
+			result = string.Join('\n', values);
+		else
+			result = values[0];
+		return result;
+	}
 	public static string GetInitialPath(params string[] paths) {
 		string? currentPath = null;
 		foreach (var path in paths) {
@@ -157,9 +192,9 @@ public static class AccessoryDataUtil {
 
 		string siiIconLocation;
 		if (iconLocationExist)
-			siiIconLocation = iconParent + '\\' + tobjName;
+			siiIconLocation = iconParent + '\\' + matName;
 		else if (accExist)
-			siiIconLocation = pathAcc + '\\' + tobjName;
+			siiIconLocation = pathAcc + '\\' + matName;
 		else {
 			var accessoryLocation = Paths.AccessoryDir(projectLocation);
 			var notInAcc = !iconFile.FullName.StartsWith(accessoryLocation);

@@ -119,43 +119,11 @@ public partial class ModLocalizationWindow : BaseWindow
 
 	private void OperateButtonClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonAdd) {
-			if (TableDict.SelectedIndex == -1) {
-				CurrentDict.Add(new("", ""));
-			} else
-				CurrentDict.Insert(TableDict.SelectedIndex, new("",""));
+			DataGridUtil.AddItem(TableDict, CurrentDict, new("",""));
 		} else if (sender == ButtonDelete) {
-			if (TableDict.SelectedIndex == -1) 
-				return;
-			while (TableDict.SelectedItem != null) {
-				CurrentDict.Remove((LocalePair)TableDict.SelectedItem);
-			}
+			DataGridUtil.RemoveItem(TableDict, CurrentDict);
 		} else if (sender == ButtonUp || sender == ButtonDown) {
-			MoveItem(sender == ButtonUp);
-		}
-	}
-
-	private void MoveItem(bool up) {
-		if (TableDict.SelectedIndex == -1)
-			return;
-		int target = TableDict.SelectedIndex;
-		List<LocalePair> l = [];
-		while (TableDict.SelectedIndex != -1) {
-			if (TableDict.SelectedIndex < target) {
-				target--;
-			}
-			l.Add(CurrentDict[TableDict.SelectedIndex]);
-			CurrentDict.RemoveAt(TableDict.SelectedIndex);
-		}
-		if (up) {
-			if (target > 0)
-				target--;
-		} else if (target < CurrentDict.Count)
-			target++;
-		var IList = TableDict.SelectedItems;
-		foreach (LocalePair pair in l) {
-			CurrentDict.Insert(target, pair);
-			IList.Add(pair);
-			target++;
+			DataGridUtil.MoveItems(sender == ButtonUp, TableDict, CurrentDict);
 		}
 	}
 

@@ -6,7 +6,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.PhysicsToy"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
-	d:DataContext="{d:DesignInstance Type=local:PhysicsToyViewModel}"
+	d:DataContext="{d:DesignInstance Type=local:PhysicsToyBinding}"
 	mc:Ignorable="d"
 	d:Background="White"
 	Width="Auto"

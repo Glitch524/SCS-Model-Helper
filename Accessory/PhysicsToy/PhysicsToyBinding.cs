@@ -10,7 +10,7 @@ using SCS_Mod_Helper.Manifest;
 
 namespace SCS_Mod_Helper.Accessory.PhysicsToy;
 
-class PhysicsToyViewModel: INotifyPropertyChanged {
+class PhysicsToyBinding: INotifyPropertyChanged {
 	private readonly ModProject ModelProject = Instances.ModelProject;
 	public string ProjectLocation => ModelProject.ProjectLocation;
 

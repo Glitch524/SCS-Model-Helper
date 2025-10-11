@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using SCS_Mod_Helper.Localization;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -97,6 +99,60 @@ namespace SCS_Mod_Helper.Utils {
 				}
 			}
 			return sb.ToString();
+		}
+	}
+
+	static class DataGridUtil {
+
+		public static void AddItem<T>(DataGrid table, ObservableCollection<T> list, T newItem) {
+			int selectedIndex = table.SelectedIndex;
+			if (selectedIndex == -1) {
+				selectedIndex = list.Count;
+				list.Add(newItem);
+			} else
+				list.Insert(selectedIndex, newItem);
+			table.SelectedIndex = selectedIndex;
+			table.Focus();
+		}
+
+		public static void RemoveItem<T>(DataGrid table, ObservableCollection<T> list) {
+			if (table.SelectedIndex == -1)
+				return;
+			while (table.SelectedItem != null) {
+				list.Remove((T)table.SelectedItem);
+			}
+		}
+
+		public static void MoveItems<T>(bool up, DataGrid table, ObservableCollection<T> list) {
+			if (table.SelectedIndex == -1)
+				return;
+			int target = table.SelectedIndex;
+			List<T> l = [];
+			while (table.SelectedIndex != -1) {
+				if (table.SelectedIndex < target) {
+					target--;
+				}
+				l.Add(list[table.SelectedIndex]);
+				list.RemoveAt(table.SelectedIndex);
+			}
+			if (up) {
+				if (target > 0)
+					target--;
+			} else if (target < list.Count)
+				target++;
+
+			if (table.SelectionMode == DataGridSelectionMode.Extended) {
+				var IList = table.SelectedItems;
+				foreach (T pair in l) {
+					list.Insert(target, pair);
+					IList.Add(pair);
+					target++;
+				}
+			} else {
+				list.Insert(target, l.First());
+				table.SelectedIndex = target;
+			}
+			table.Focus();
 		}
 	}
 }

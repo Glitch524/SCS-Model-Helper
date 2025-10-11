@@ -185,6 +185,8 @@ public partial class ModManifestWindow: BaseWindow {
 		if (sender == ButtonSave) {
 			AccDataIO.SaveManifest(ModProject);
 		} else if (sender == ButtonAbout) {
+			string? a = null;
+			a!.ToString();
 			var window = new AboutWindow {
 				Owner = this
 			};

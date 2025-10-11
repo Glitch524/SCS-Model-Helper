@@ -10,15 +10,7 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy {
 	/// PhysicsToyUC.xaml 的交互逻辑
 	/// </summary>
 	public partial class PhysicsToyUC: UserControl {
-		private readonly PhysicsToyViewModel ViewModel = new();
-
-		private Window? mWindow;
-		private Window Window {
-			get {
-				mWindow ??= Window.GetWindow(this);
-				return mWindow;
-			}
-		}
+		private readonly PhysicsToyBinding Binding = new();
 
 		private static readonly DependencyProperty CurrentPhysicsItemProperty = DependencyProperty.Register(
 			"CurrentPhysicsItem",
@@ -49,41 +41,41 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy {
 		}
 
 		public SuiItem? CurrentSuiItem {
-			get => ViewModel.CurrentSuiItem; set => ViewModel.CurrentSuiItem = value;
+			get => Binding.CurrentSuiItem; set => Binding.CurrentSuiItem = value;
 		}
 
 		public string RopeMaterial {
-			get => ViewModel.RopeMaterial; set => ViewModel.RopeMaterial = value;
+			get => Binding.RopeMaterial; set => Binding.RopeMaterial = value;
 		}
 
 		public PhysicsToyUC() {
 			InitializeComponent();
 			//SetupInstanceOffsetMenu();
 
-			GridMain.DataContext = ViewModel;
+			GridMain.DataContext = Binding;
 
-			ViewModel.physicsCallback += PhysicsCallback;
+			Binding.physicsCallback += PhysicsCallback;
 			Loaded += OnLoaded;
 		}
 
 		private void OnLoaded(object sender, RoutedEventArgs e) {
-			ViewModel.AllVisible = LocalPhysics;
+			Binding.AllVisible = LocalPhysics;
 			if (LocalPhysics) {
-				ViewModel.CurrentPhysicsItem = ViewModel.PhysicsItems.FirstOrDefault();
+				Binding.CurrentPhysicsItem = Binding.PhysicsItems.FirstOrDefault();
 				PanelSaveButton.Visibility = Visibility.Collapsed;
 			}
 		}
 
 		public void PhysicsCallback(PhysicsToyData? physics) => CurrentPhysicsItem = physics;
 
-		public void PhysicsListAdd(PhysicsToyData physics) => ViewModel.PhysicsListAdd(physics);
+		public void PhysicsListAdd(PhysicsToyData physics) => Binding.PhysicsListAdd(physics);
 
 		private void ButtonPhysicsClick(object sender, RoutedEventArgs e) {
 			if (sender == ButtonAddToOthers) {
 				RoutedEventArgs args = new(AddToOthersClickEvent);
 				RaiseEvent(args);
 			} else if (sender == ButtonSaveToPhysList) {
-				var physics = ViewModel.CurrentPhysicsItem;
+				var physics = Binding.CurrentPhysicsItem;
 				if (physics == null)
 					return;
 				AccAppIO.AddPhysicsToList(physics);
@@ -91,39 +83,21 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy {
 			}
 		}
 
-		public static void SavePhysicsList() => PhysicsToyViewModel.SavePhysicsList();
+		public static void SavePhysicsList() => PhysicsToyBinding.SavePhysicsList();
 
-		private void ButtonAddRowClick(object sender, RoutedEventArgs e) => ViewModel.PhysicsItems?.Add(new());
+		private void ButtonAddRowClick(object sender, RoutedEventArgs e) => Binding.PhysicsItems?.Add(new());
 
 		private void ButtonDeleteRowClick(object sender, RoutedEventArgs e) {
-			if (ViewModel.CurrentPhysicsItem != null)
-				ViewModel.PhysicsItems?.Remove(ViewModel.CurrentPhysicsItem);
+			if (Binding.CurrentPhysicsItem != null)
+				Binding.PhysicsItems?.Remove(Binding.CurrentPhysicsItem);
 		}
 		private void SortButtonClick(object sender, RoutedEventArgs e) {
-			MoveItem(sender == ButtonPhysicUp, TablePhysicDatas, ViewModel.PhysicsItems!);
-		}
-
-		private static void MoveItem<T>(bool up, DataGrid table, ObservableCollection<T> list) {
-			if (table.SelectedIndex == -1)
-				return;
-			var index = table.SelectedIndex;
-			var selected = (T)table.SelectedItem;
-			list.RemoveAt(index);
-			int target = index;
-			if (up) {
-				if (target > 0)
-					target--;
-			} else {
-				if (target < list.Count)
-					target++;
-			}
-			list.Insert(target, selected);
-			table.SelectedIndex = target;
+			DataGridUtil.MoveItems(sender == ButtonPhysicUp, TablePhysicDatas, Binding.PhysicsItems!);
 		}
 
 		private void ButtonChooseModelClick(object sender, RoutedEventArgs e) {
 			try {
-				ViewModel.ChooseModel(sender == ButtonChoosePhysicsColl);
+				Binding.ChooseModel(sender == ButtonChoosePhysicsColl);
 			} catch (Exception ex) {
 				MessageBox.Show(ex.Message);
 			}
@@ -131,11 +105,11 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy {
 
 		private void ButtonClearClick(object sender, RoutedEventArgs e) {
 			if (sender == ButtonPhysicsModelPathClear) {
-				ViewModel.ModelPath = "";
+				Binding.ModelPath = "";
 			} else if (sender == ButtonPhysicsCollPathClear) {
-				ViewModel.CollPath = "";
+				Binding.CollPath = "";
 			} else if (sender == ButtonRopeMaterialClear) {
-				ViewModel.RopeMaterial = "";
+				Binding.RopeMaterial = "";
 			} else
 				return;
 		}

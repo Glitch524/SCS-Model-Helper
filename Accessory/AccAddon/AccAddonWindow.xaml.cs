@@ -1,4 +1,5 @@
-﻿using SCS_Mod_Helper.Accessory.PhysicsToy;
+﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Accessory.PhysicsToy;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Manifest;
@@ -6,7 +7,6 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,26 +18,26 @@ namespace SCS_Mod_Helper.Accessory.AccAddon;
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class AccAddonWindow: BaseWindow {
-	private readonly AccessoryAddonItem AddonItem = new();
+	private readonly AccAddonBinding binding = new();
 	private readonly ModProject ModelProject = Instances.ModelProject;
 	private bool TruckExpandedETS2 {
-		get => AddonItem.TruckExpandedETS2; set => AddonItem.TruckExpandedETS2 = value;
+		get => binding.TruckExpandedETS2; set => binding.TruckExpandedETS2 = value;
 	}
 	private bool TruckExpandedATS {
-		get => AddonItem.TruckExpandedATS; set => AddonItem.TruckExpandedATS = value;
+		get => binding.TruckExpandedATS; set => binding.TruckExpandedATS = value;
 	}
 
-	private ObservableCollection<ModelTypeInfo> AccessoryType => AddonItem.ModelTypes;
-	private ObservableCollection<OthersItem> OthersList => AddonItem.OthersList;
-	private ObservableCollection<Truck> TrucksETS2 => AddonItem.TrucksETS2;
-	private ObservableCollection<Truck> TrucksATS => AddonItem.TrucksATS;
+	private ObservableCollection<ModelTypeInfo> AccessoryType => binding.ModelTypes;
+	private ObservableCollection<OthersItem> OthersList => binding.OthersList;
+	private ObservableCollection<Truck> TrucksETS2 => binding.TrucksETS2;
+	private ObservableCollection<Truck> TrucksATS => binding.TrucksATS;
 
 	private readonly ContextMenu MenuModelType, MenuLook, MenuVariant, MenuOthers;
 
 	public AccAddonWindow() {
 		InitializeComponent();
 
-		GridMain.DataContext = AddonItem;
+		GridMain.DataContext = binding;
 		TextProjectLocation.DataContext = ModelProject;
 
 		MenuModelType = (ContextMenu)Resources["MenuModelType"];
@@ -47,13 +47,13 @@ public partial class AccAddonWindow: BaseWindow {
 
 		SetupModelTypeMenu();
 
-		AddonItem.LookList.CollectionChanged += (sender, e) => OnLVListChanged(MenuLook, e);
-		AddonItem.VariantList.CollectionChanged += (sender, e) => OnLVListChanged(MenuVariant, e);
-		AddonItem.LoadLooksAndVariants();
+		binding.LookList.CollectionChanged += (sender, e) => OnLVListChanged(MenuLook, e);
+		binding.VariantList.CollectionChanged += (sender, e) => OnLVListChanged(MenuVariant, e);
+		binding.LoadLooksAndVariants();
 
-		OthersItem.ReadLines(AddonItem.OthersList, AccAddonHistory.Default.Others);
+		OthersItem.ReadLines(binding.OthersList, AccAddonHistory.Default.Others);
 
-		AddonItem.LoadTrucks();
+		binding.LoadTrucks();
 
 		SetupStringResMenu();
 	}
@@ -99,7 +99,7 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
 
-	private void CheckStringRes(object sender, RoutedEventArgs e) => AddonItem.CheckNameStringRes();
+	private void CheckStringRes(object sender, RoutedEventArgs e) => binding.CheckNameStringRes();
 
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
@@ -116,7 +116,7 @@ public partial class AccAddonWindow: BaseWindow {
 				var start = TextDisplayName.SelectionStart;
 				TextDisplayName.SelectedText = "";
 				var insert = $"@@{item.Name}@@";
-				AddonItem.DisplayName = AddonItem.DisplayName.Insert(start, insert);
+				binding.DisplayName = binding.DisplayName.Insert(start, insert);
 				start += insert.Length;
 				TextDisplayName.SelectionStart = start;
 				TextDisplayName.Focus();
@@ -140,43 +140,41 @@ public partial class AccAddonWindow: BaseWindow {
 		//TextBox caller = cm.PlacementTarget;
 	}
 
-	private void SaveOnClosing(object? sender, CancelEventArgs e) => AddonItem.SaveHistory();
+	private void SaveOnClosing(object? sender, CancelEventArgs e) => binding.SaveHistory();
 
 	private void ButtonClearClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonIconNameClear)
-			AddonItem.IconName = "";
+			binding.IconName = "";
 		else if (sender == ButtonChooseModelClear)
-			AddonItem.ModelPath = "";
+			binding.ModelPath = "";
 		else if (sender == ButtonChooseModelUKClear)
-			AddonItem.ModelPathUK = "";
+			binding.ModelPathUK = "";
 		else if (sender == ButtonChooseCollClear)
-			AddonItem.CollPath = "";
+			binding.CollPath = "";
 		else
 			return;
 	}
 
-	private void ButtonChooseIcon(object sender, RoutedEventArgs e) => AddonItem.ChooseIcon(this);
+	private void ButtonChooseIcon(object sender, RoutedEventArgs e) => binding.ChooseIcon(this);
 
 	private void ButtonChooseModelClick(object sender, RoutedEventArgs e) {
 		try {
 			int type;
 			if (sender == ButtonChooseModel)
-				type = AccessoryAddonItem.MODEL;
+				type = AccAddonBinding.MODEL;
 			else if (sender == ButtonChooseModelUK)
-				type = AccessoryAddonItem.MODEL_UK;
+				type = AccAddonBinding.MODEL_UK;
 			else if (sender == ButtonChooseColl)
-				type = AccessoryAddonItem.MODEL_COLL;
+				type = AccAddonBinding.MODEL_COLL;
 			else
 				return;
-			AddonItem.ChooseModel(type);
+			binding.ChooseModel(this, type);
 		} catch(Exception ex) {
 			MessageBox.Show(this, ex.Message);
 		}
 	}
 
-	private void ButtonHideIn(object sender, RoutedEventArgs e) {
-		PopupHideIn.IsOpen = true;
-	}
+	private void ButtonHideIn(object sender, RoutedEventArgs e) => PopupHideIn.IsOpen = true;
 
 	private uint GetNumber(CheckBox checkBox) {
 		if (checkBox == CheckMainView) {
@@ -201,13 +199,13 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void HideInChecked(object sender, RoutedEventArgs e) {
 		if (sender is CheckBox cb) {
-			AddonItem.HideIn += GetNumber(cb);
+			binding.HideIn += GetNumber(cb);
 		}
 	}
 
 	private void HideInUnchecked(object sender, RoutedEventArgs e) {
 		if (sender is CheckBox cb) {
-			AddonItem.HideIn -= GetNumber(cb);
+			binding.HideIn -= GetNumber(cb);
 		}
 	}
 
@@ -236,26 +234,26 @@ public partial class AccAddonWindow: BaseWindow {
 				physName += AccDataIO.NamePTSuffix;
 			others.OthersValue = physName;
 			int i = 0;
-			while (i < AddonItem.PhysicsList.Count) {
-				var p = AddonItem.PhysicsList[i];
+			while (i < binding.PhysicsList.Count) {
+				var p = binding.PhysicsList[i];
 				if (p.PhysicsName == selected.PhysicsName) {
-					AddonItem.PhysicsList.Remove(p);
+					binding.PhysicsList.Remove(p);
 					continue;
 				}
 				i++;
 			}
-			AddonItem.PhysicsList.Add(selected);
+			binding.PhysicsList.Add(selected);
 		}
 	}
 
-	private void ButtonStartClick(object sender, RoutedEventArgs e) => AddonItem.StartCreateSii();
+	private void ButtonStartClick(object sender, RoutedEventArgs e) => binding.StartCreateSii();
 
-	private void ButtonSaveClick(object sender, RoutedEventArgs e) => AddonItem.SaveDED();
+	private void ButtonSaveClick(object sender, RoutedEventArgs e) => binding.SaveDED();
 
 	private void ButtonLoadClick(object sender, RoutedEventArgs e) {
 		try {
-			AddonItem.LoadDED();
-			AddonItem.LoadLooksAndVariants();
+			binding.LoadDED();
+			binding.LoadLooksAndVariants();
 		} catch (Exception ex) {
 			MessageBox.Show(this, GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
 		}
@@ -267,25 +265,25 @@ public partial class AccAddonWindow: BaseWindow {
 	private partial Regex RegexNumber();
 
 	private void ButtonTruckInitialize(object sender, RoutedEventArgs e) {
-		AddonItem.PopupAddTruckOpen = false;
+		binding.PopupAddTruckOpen = false;
 		AccAddonHistory.Default.TruckHistoryETS2 = "init";
 		AccAddonHistory.Default.TruckHistoryATS = "init";
 		AccAddonHistory.Default.Save();
-		AddonItem.LoadTrucks();
+		binding.LoadTrucks();
 	}
 
 	private void ButtonAddTruckClick(object sender, RoutedEventArgs e) {
 		PopupAddTruck.PlacementTarget = (Button)sender;
-		AddonItem.AddTruckID = string.Empty;
-		AddonItem.AddTruckIngameName = string.Empty;
-		AddonItem.AddTruckDescription = string.Empty;
+		binding.AddTruckID = string.Empty;
+		binding.AddTruckIngameName = string.Empty;
+		binding.AddTruckDescription = string.Empty;
 		PopupAddTruck.IsOpen = true;
 	}
 
 	private void ButtonAddTruckResultClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonAddTruckOK) {
 			var isETS2 = PopupAddTruck.PlacementTarget == ButtonAddTruckETS2;
-			AddonItem.AddNewTruck(isETS2);
+			binding.AddNewTruck(isETS2);
 		}
 		PopupAddTruck.IsOpen = false;
 	}
@@ -344,6 +342,6 @@ public partial class AccAddonWindow: BaseWindow {
 	private void TruckCheckBoxClick(object sender, RoutedEventArgs e) {
 		CheckBox box = (CheckBox)sender;
 		Truck selected = (Truck)box.DataContext;
-		AddonItem.OverwriteEmpty(selected, selected.Check);
+		binding.OverwriteEmpty(selected, selected.Check);
 	}
 }

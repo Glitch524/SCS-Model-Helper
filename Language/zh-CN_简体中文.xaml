@@ -167,6 +167,17 @@
 		<!--隐藏代码页-->
 	<s:String x:Key="TitleHideIn">勾选下列内容让物品在选中的视角中隐藏</s:String>
 	
+		<!--自动识别页-->
+	<s:String x:Key="TitleAutoRecognize">自动识别</s:String>
+	<s:String x:Key="MessageAR">通过模型文件识别到部分可能需要的内容，请选择需要的内容</s:String>
+	<s:String x:Key="CheckHeadModelName">模型名称：</s:String>
+	<s:String x:Key="CheckHeadModelType">模型类型：</s:String>
+	<s:String x:Key="CheckHeadModelPath">模型路径：</s:String>
+	<s:String x:Key="CheckHeadModelPathUK">模型路径（UK）：</s:String>
+	<s:String x:Key="CheckHeadCollPath">模型碰撞路径：</s:String>
+	
+	
+	
 	
 
 	<!--套件模型定义页-->
@@ -349,7 +360,7 @@
 	<x:Static x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.scania.streamline">停产</s:String>
 	<s:String x:Key="TruckDesc.volvo.fh16">停产</s:String>
-	<s:String x:Key="TruckDesc.volvo.fh16_2012">停产，UK副驾驶向左转了大概45度</s:String>
+	<s:String x:Key="TruckDesc.volvo.fh16_2012">停产，UK副驾驶向左转了大概50度</s:String>
 	<x:Static x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.volvo.fh_2024">toybed有个小桌子，可能会挡住</s:String>
 	

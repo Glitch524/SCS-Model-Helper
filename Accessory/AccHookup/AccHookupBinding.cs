@@ -7,15 +7,14 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using SCS_Mod_Helper.Manifest;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-class AccHookupViewModel: INotifyPropertyChanged {
+class AccHookupBinding: INotifyPropertyChanged {
 	private readonly ModProject ModelProject = Instances.ModelProject;
 
-	public AccHookupViewModel() {
-
-	}
+	public AccHookupBinding() { }
 	public string ProjectLocation => ModelProject.ProjectLocation;
 
 	private string mStorageName = "";
@@ -48,10 +47,10 @@ class AccHookupViewModel: INotifyPropertyChanged {
 	public delegate void OnSuiItemChanged(SuiItem? suiItem);
 	public OnSuiItemChanged? SuiChanged = null;
 
-	public ObservableCollection<AccessoryHookupItem>? Hookups => CurrentSuiItem?.HookupItems;
+	public ObservableCollection<AccessoryHookupData>? Hookups => CurrentSuiItem?.HookupItems;
 
-	private AccessoryHookupItem? mCurrentHookupItem;
-	public AccessoryHookupItem? CurrentHookupItem {
+	private AccessoryHookupData? mCurrentHookupItem;
+	public AccessoryHookupData? CurrentHookupItem {
 		get => mCurrentHookupItem;
 		set {
 			mCurrentHookupItem = value;
@@ -76,6 +75,31 @@ class AccHookupViewModel: INotifyPropertyChanged {
 			}
 		}
 	}
+
+
+	private string mCheckResResult = "";
+	public string CheckResResult {
+		get => mCheckResResult;
+		set {
+			mCheckResResult = value;
+			InvokeChange(nameof(CheckResResult));
+		}
+	}
+
+	private bool mPopupCheckOpen = false;
+	public bool PopupCheckOpen {
+		get => mPopupCheckOpen;
+		set {
+			mPopupCheckOpen = value;
+			InvokeChange(nameof(PopupCheckOpen));
+		}
+	}
+
+	public void CheckNameStringRes() {
+		CheckResResult = AccessoryDataUtil.GetStringResResults(DisplayName);
+		PopupCheckOpen = true;
+	}
+
 	public string IconName {
 		get => CurrentHookupItem?.IconName ?? "";
 		set {
@@ -86,17 +110,8 @@ class AccHookupViewModel: INotifyPropertyChanged {
 		}
 	}
 
-	private List<PartTypeItem>? mPartTypes = null;
-	public List<PartTypeItem> PartTypes {
-		get {
-			mPartTypes ??= [
-			new("unknown", Util.GetString("PartTypeUnknown")),
-			new("aftermarket", Util.GetString("PartTypeAftermarket")),
-			new("factory", Util.GetString("PartTypeFactory")),
-			new("licensed", Util.GetString("PartTypeLicensed"))];
-			return mPartTypes;
-		}
-	}
+	public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
+
 	public string ModelPath {
 		get => CurrentHookupItem?.ModelPath ?? "";
 		set {
@@ -118,9 +133,7 @@ class AccHookupViewModel: INotifyPropertyChanged {
 
 	public ObservableCollection<OthersItem>? OthersList => CurrentHookupItem?.OthersList;
 
-
 	public void LoadFiles() => AccDataIO.LoadAddonHookup(this);
-
 	public void SaveFiles() => AccDataIO.SaveAddonHookup(this);
 
 	//模型、碰撞体

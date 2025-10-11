@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Accessory.AccHookup;
 using SCS_Mod_Helper.Accessory.PhysicsToy;
 using SCS_Mod_Helper.Localization;
@@ -81,6 +82,8 @@ class AccDataIO {
 	}
 	private static void BraceOut(StreamWriter sw) {
 		TabCount--;
+		if (TabCount < 0)
+			TabCount = 0;
 		sw.Write(new string('\t', TabCount));
 		sw.WriteLine('}');
 	}
@@ -349,23 +352,23 @@ class AccDataIO {
 	private const string NameAHSPreffix = "addon_hookup_storage";
 
 
-	public static int CreateAccAddonSii(AccessoryAddonItem accAddonItem) {
+	public static int CreateAccAddonSii(AccAddonBinding binding) {
 		var created = 0;
-		if (accAddonItem.TruckExpandedETS2)
-			created += CreateSii(accAddonItem, true);
-		if (accAddonItem.TruckExpandedATS)
-			created += CreateSii(accAddonItem, false);
+		if (binding.TruckExpandedETS2)
+			created += CreateSii(binding, true);
+		if (binding.TruckExpandedATS)
+			created += CreateSii(binding, false);
 		return created;
 	}
-	private static int CreateSii(AccessoryAddonItem accAddonItem, bool isETS2) {
+	private static int CreateSii(AccAddonBinding binding, bool isETS2) {
 		int numberCreated = 0;
-		foreach (var truck in isETS2 ? accAddonItem.TrucksETS2 : accAddonItem.TrucksATS) {
-			var siiFile = Paths.SiiFile(Instances.ProjectLocation, truck.TruckID, truck.ModelType, accAddonItem.ModelName);
+		foreach (var truck in isETS2 ? binding.TrucksETS2 : binding.TrucksATS) {
+			var siiFile = Paths.SiiFile(Instances.ProjectLocation, truck.TruckID, truck.ModelType, binding.ModelName);
 			if (truck.Check) {
 				if (truck.ModelType.Length == 0 || truck.TruckID.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)
 					continue;
 			} else {
-				if (accAddonItem.DeleteUnchecked && File.Exists(siiFile))
+				if (binding.DeleteUnchecked && File.Exists(siiFile))
 					File.Delete(siiFile);
 				continue;
 			}
@@ -373,7 +376,7 @@ class AccDataIO {
 			if (!sii.Parent!.Exists)
 				sii.Parent!.Create();
 			var othersList = new List<OthersItem>();
-			othersList.AddRange(accAddonItem.OthersList);
+			othersList.AddRange(binding.OthersList);
 			string? exterior = null, exteriorUK = null;
 			for (int i = 0; i < othersList.Count; i++) {
 				OthersItem? other = othersList[i];
@@ -393,34 +396,34 @@ class AccDataIO {
 			using StreamWriter sw = new(siiFile);
 			WriteFileHeader(sw);
 			BraceIn(sw);
-			WriteAAHeader(sw, accAddonItem.ModelName, truck.TruckID, truck.ModelType);
+			WriteAAHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);
 			BraceIn(sw);
-			WriteLine(sw, NameDisplayName, accAddonItem.DisplayName);
-			WriteLine(sw, NamePrice, accAddonItem.Price);
-			WriteLine(sw, NameUnlock, accAddonItem.UnlockLevel);
-			if (accAddonItem.PartType != "unknown")
-				WriteLine(sw, NamePartType, accAddonItem.PartType);
-			WriteLine(sw, NameIconName, accAddonItem.IconName);
-			WriteLine(sw, NameAAExtModel, exterior ?? accAddonItem.ModelPath);
-			WriteLine(sw, NameAAIntModel, accAddonItem.ModelPath);
-			if (isETS2 && accAddonItem.ModelPathUK.Length > 0) {
-				WriteLine(sw, NameAAExtModelUK, exteriorUK ?? accAddonItem.ModelPathUK);
-				WriteLine(sw, NameAAIntModelUK, accAddonItem.ModelPathUK);
+			WriteLine(sw, NameDisplayName, binding.DisplayName);
+			WriteLine(sw, NamePrice, binding.Price);
+			WriteLine(sw, NameUnlock, binding.UnlockLevel);
+			if (binding.PartType != "unknown")
+				WriteLine(sw, NamePartType, binding.PartType);
+			WriteLine(sw, NameIconName, binding.IconName);
+			WriteLine(sw, NameAAExtModel, exterior ?? binding.ModelPath);
+			WriteLine(sw, NameAAIntModel, binding.ModelPath);
+			if (isETS2 && !string.IsNullOrEmpty(binding.ModelPathUK)) {
+				WriteLine(sw, NameAAExtModelUK, exteriorUK ?? binding.ModelPathUK);
+				WriteLine(sw, NameAAIntModelUK, binding.ModelPathUK);
 			}
-			WriteLine(sw, NameCollPath, accAddonItem.CollPath);
+			WriteLine(sw, NameCollPath, binding.CollPath);
 			if (truck.Look != "default")
 				WriteLine(sw, NameLook, truck.Look);
 			if (truck.Variant != "default")
 				WriteLine(sw, NameVariant, truck.Variant);
-			if (accAddonItem.HideIn != 0)
-				WriteLine(sw, NameAAHideIn, accAddonItem.HideIn);
+			if (binding.HideIn != 0)
+				WriteLine(sw, NameAAHideIn, binding.HideIn);
 
 			List<string> physName = [];
 			WriteOthers(sw, othersList, physName);
 			BraceOut(sw);
 
 			foreach (var pn in physName) {
-				var physicsList = accAddonItem.PhysicsList;
+				var physicsList = binding.PhysicsList;
 				for (int i = 0; i < physicsList.Count; i++) {
 					var phys = physicsList[i];
 					if (pn == phys.PhysicsName) {
@@ -495,7 +498,7 @@ class AccDataIO {
 	}
 
 	private readonly static string exportPath = Instances.ProjectLocation;//"D:\\test";
-	public static void SaveAddonHookup(AccHookupViewModel viewModel) {
+	public static void SaveAddonHookup(AccHookupBinding viewModel) {
 		MessageBox.Show(Util.GetString("MessageSaveBeforeStart"));
 		if (viewModel.StorageName.Length == 0) {
 			MessageBox.Show(Util.GetString("MessageSaveNoName"));
@@ -510,6 +513,7 @@ class AccDataIO {
 		var storageFilename = $"{NameAHSPreffix}.{viewModel.StorageName}.sii";
 		var storageFile = Path.Combine(StorageDir, storageFilename);
 		{
+			TabCount = 0;
 			using StreamWriter sw = new(storageFile);
 			WriteFileHeader(sw);
 			BraceIn(sw);
@@ -521,31 +525,24 @@ class AccDataIO {
 	}
 
 	private static void WriteStorageTips(StreamWriter sw) {
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("# For modders: Please do not modify this file if you want to add a new entry. Create in");
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("# this directory a new file \"<base_name>.<idofyourmod>.sii\" where <base_name> is name of");
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("# base file without the extension (e.g. \"city\" for \"/def/city.sii\") and <idofyourmod> is");
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("# some string which is unlikely to conflict with other mod.");
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("#");
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("# Warning: Even if the units are specified in more than one source file, they share the");
-		sw.Write(new string('\t', TabCount));
 		sw.WriteLine("# same namespace so suffixes or prefixes should be used to avoid conflicts.");
 		sw.WriteLine("");
 	}
-	private static void WriteInclude(StreamWriter sw, AccHookupViewModel viewModel) {
+	private static void WriteInclude(StreamWriter sw, AccHookupBinding viewModel) {
 		string includeFormat = "@include \"addon_hookups/{0}.sui\"";
 		foreach (var sui in viewModel.SuiItems) {
 			if (sui.SuiFilename.Length == 0 || (sui.HookupItems.Count == 0 && sui.PhysicsItems.Count == 0))
 				continue;
-			sw.Write(new string('\t', TabCount));
 			sw.WriteLine(string.Format(includeFormat, sui.SuiFilename));
 
 			var cTab = TabCount;
+			TabCount = 0;
 			CreateAddonHookupSui(sui);
 			TabCount = cTab;
 		}
@@ -629,7 +626,7 @@ class AccDataIO {
 		BraceOut(sw);
 	}
 
-	public static void LoadAddonHookup(AccHookupViewModel viewModel) {
+	public static void LoadAddonHookup(AccHookupBinding viewModel) {
 		DirectoryInfo accHookupDir = new(Paths.HookupStorageDir(Instances.ModelProject.ProjectLocation));
 		FileInfo? storageFile = null;
 		bool skip = true;
@@ -678,7 +675,7 @@ class AccDataIO {
 			if (line.StartsWith("accessory_hookup")) {
 				var name = line.Split(":")[1].Trim();
 				name = name[..name.LastIndexOf('.')];
-				AccessoryHookupItem item = new(name);
+				AccessoryHookupData item = new(name);
 				ReadAccHookup(sr, item);
 				sui.HookupItems.Add(item);
 			} else if (line.StartsWith(NamePTHeader)) {
@@ -691,7 +688,7 @@ class AccDataIO {
 		}
 	}
 
-	private static void ReadAccHookup(StreamReader sr, AccessoryHookupItem item) {
+	private static void ReadAccHookup(StreamReader sr, AccessoryHookupData item) {
 		string? line;
 		while ((line = sr.ReadLine()?.Trim()) != null) {
 			if (line == "}")
@@ -964,8 +961,7 @@ class AccDataIO {
 										valueDict = [];
 										localeDict.Add(stringKey, valueDict);
 									}
-									if (!valueDict.Contains(stringValue))
-										valueDict.Add(stringValue);
+									valueDict.Add(stringValue);
 									stringKey = null;
 								}
 							}

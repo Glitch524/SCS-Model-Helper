@@ -1,4 +1,4 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon;
+﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Language;
 using System.Collections.ObjectModel;
 

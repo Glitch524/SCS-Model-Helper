@@ -18,7 +18,7 @@ namespace SCS_Mod_Helper.Accessory.AccHookup {
 			}
 		}
 
-		public readonly ObservableCollection<AccessoryHookupItem> HookupItems = [];
+		public readonly ObservableCollection<AccessoryHookupData> HookupItems = [];
 
 		public readonly ObservableCollection<PhysicsToyData> PhysicsItems = [];
 

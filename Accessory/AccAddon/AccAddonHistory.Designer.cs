@@ -262,5 +262,17 @@ namespace SCS_Mod_Helper.Accessory.AccAddon {
                 this["Others"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoFillSelectAll {
+            get {
+                return ((bool)(this["AutoFillSelectAll"]));
+            }
+            set {
+                this["AutoFillSelectAll"] = value;
+            }
+        }
     }
 }

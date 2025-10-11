@@ -166,6 +166,15 @@
 		<!--Hide In-->
 	<s:String x:Key="TitleHideIn">Tick the following content will let content hide in the ticked Perspective</s:String>
 	
+		<!--自动识别页-->
+	<s:String x:Key="TitleAutoRecognize">Auto Recognize</s:String>
+	<s:String x:Key="MessageAR">Some content was recognized by reading model file, please choose some content that needed</s:String>
+	<s:String x:Key="CheckHeadModelName">Model Name:</s:String>
+	<s:String x:Key="CheckHeadModelType">Model Type:</s:String>
+	<s:String x:Key="CheckHeadModelPath">Model Path:</s:String>
+	<s:String x:Key="CheckHeadModelPathUK">Model Path(UK):</s:String>
+	<s:String x:Key="CheckHeadCollPath">Model Collision Path:</s:String>
+	
 	
 	
 	
@@ -398,7 +407,7 @@
 	<s:String
 		x:Key="TruckDesc.volvo.fh16">EOL</s:String>
 	<s:String
-		x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 45°</s:String>
+		x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
 	<x:Static
 		x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
 	<s:String
