@@ -5,7 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon"
-	xmlns:manifest="clr-namespace:SCS_Mod_Helper.Manifest"
+	xmlns:main="clr-namespace:SCS_Mod_Helper.Main"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	d:DataContext="{d:DesignInstance Type=local:AccAddonBinding}"
@@ -22,6 +22,8 @@
 			x:Key="HideInConverter" />
 		<utils:MultiNullCheckConverter
 			x:Key="MultiNullCheck" />
+		<utils:ClearVisibilityConverter
+			x:Key="ClearVisibility" />
 		<ContextMenu
 			x:Key="MenuModelType" />
 		<ContextMenu
@@ -63,6 +65,41 @@
 				Click="OnMenuClicked"
 				Tag="require" />
 		</ContextMenu>
+		<Style
+			x:Key="ButtonStyle"
+			TargetType="Button">
+			<Setter
+				Property="Width"
+				Value="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}" />
+			<Setter
+				Property="Height"
+				Value="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}" />
+			<Setter
+				Property="Padding"
+				Value="3" />
+			<Setter
+				Property="BorderThickness"
+				Value="0,1,1,1" />
+			<Setter
+				Property="BorderBrush"
+				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+		</Style>
+		<Style
+			x:Key="ClearStyle"
+			TargetType="Button">
+			<Setter
+				Property="Content"
+				Value=" × " />
+			<Setter
+				Property="BorderThickness"
+				Value="0,1,1,1" />
+			<Setter
+				Property="Background"
+				Value="Transparent" />
+			<Setter
+				Property="BorderBrush"
+				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+		</Style>
 	</base:BaseWindow.Resources>
 	<Grid
 		x:Name="GridMain"
@@ -103,8 +140,7 @@
 						TextWrapping="Wrap"
 						VerticalAlignment="Top"
 						MaxLines="1"
-						d:DataContext="{d:DesignInstance Type=manifest:ModProject}"
-						Text="{Binding ProjectLocation}">
+						Text="{Binding ProjectLocation, Mode=OneWay}">
 						<TextBox.Style>
 							<Style
 								TargetType="TextBox">
@@ -194,13 +230,7 @@
 								Grid.Column="1"
 								Click="CheckStringRes"
 								Visibility="{Binding CheckResVisibility}"
-								VerticalAlignment="Top"
-								HorizontalAlignment="Left"
-								Padding="3,3,3,3"
-								BorderThickness="0,1,1,1"
-								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								BorderBrush="#FFABADB3">
+								Style="{StaticResource ButtonStyle}">
 								<Image
 									Source="/Images/Search.png" />
 							</Button>
@@ -243,13 +273,7 @@
 								x:Name="ButtonChooseRes"
 								Grid.Column="2"
 								Click="ChooseStringRes"
-								VerticalAlignment="Top"
-								HorizontalAlignment="Left"
-								Padding="3,3,3,3"
-								BorderThickness="0,1,1,1"
-								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								BorderBrush="#FFABADB3">
+								Style="{StaticResource ButtonStyle}">
 								<Image
 									Source="/Images/Web.png" />
 							</Button>
@@ -278,7 +302,8 @@
 							Padding="3,3,3,3"
 							TextWrapping="Wrap"
 							MaxLines="1"
-							Text="{Binding ModelName}"
+							Text="{Binding ModelName, UpdateSourceTrigger=PropertyChanged}"
+							Foreground="{Binding ModelNameForeground}"
 							VerticalAlignment="Top">
 							<TextBox.Style>
 								<Style
@@ -374,7 +399,7 @@
 						<TextBlock
 							TextWrapping="Wrap"
 							VerticalAlignment="Top">
-						<Run
+							<Run
 								Language="zh-cn"
 								Text="{DynamicResource ModelUnlockLevel}" />
 						</TextBlock>
@@ -456,36 +481,14 @@
 							<Button
 								x:Name="ButtonIconNameClear"
 								Grid.Column="1"
-								Content=" × "
 								Click="ButtonClearClick"
-								BorderThickness="0,1,1,1"
-								Background="Transparent"
-								BorderBrush="#FFABADB3">
-								<Button.Style>
-									<Style
-										TargetType="Button">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding Text, ElementName=TextIconName}"
-												Value="">
-												<Setter
-													Property="Visibility"
-													Value="Collapsed" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</Button.Style>
-							</Button>
+								Style="{StaticResource ClearStyle}"
+								Visibility="{Binding IconName, Converter={StaticResource ClearVisibility}}"/>
 							<Button
 								x:Name="ButtonIconName"
 								Grid.Column="2"
-								Padding="3,3,3,3"
-								BorderThickness="0,1,1,1"
 								Click="ButtonChooseIcon"
-								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								VerticalAlignment="Top"
-								BorderBrush="#FFABADB3">
+								Style="{StaticResource ButtonStyle}">
 								<Image
 									Source="/Images/Folder.png" />
 							</Button>
@@ -544,37 +547,14 @@
 						<Button
 							x:Name="ButtonChooseModelClear"
 							Grid.Column="1"
-							Content=" × "
 							Click="ButtonClearClick"
-							BorderThickness="0,1,1,1"
-							Background="Transparent"
-							BorderBrush="#FFABADB3">
-							<Button.Style>
-								<Style
-									TargetType="Button">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding Text, ElementName=TextModelPath}"
-											Value="">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</Button.Style>
-						</Button>
+							Style="{StaticResource ClearStyle}"
+							Visibility="{Binding ModelPath, Converter={StaticResource ClearVisibility}}" />
 						<Button
 							x:Name="ButtonChooseModel"
 							Grid.Column="2"
-							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
 							Click="ButtonChooseModelClick"
-							VerticalAlignment="Top"
-							BorderThickness="0,1,1,1"
-							BorderBrush="#FFABADB3"
-							Grid.ColumnSpan="2">
+							Style="{StaticResource ButtonStyle}">
 							<Image
 								Source="/Images/Folder.png" />
 						</Button>
@@ -620,36 +600,14 @@
 						<Button
 							x:Name="ButtonChooseModelUKClear"
 							Grid.Column="1"
-							Content=" × "
 							Click="ButtonClearClick"
-							BorderThickness="0,1,1,1"
-							Background="Transparent"
-							BorderBrush="#FFABADB3">
-							<Button.Style>
-								<Style
-									TargetType="Button">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding Text, ElementName=TextModelPathUK}"
-											Value="">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</Button.Style>
-						</Button>
+							Style="{StaticResource ClearStyle}"
+							Visibility="{Binding ModelPathUK, Converter={StaticResource ClearVisibility}}" />
 						<Button
 							x:Name="ButtonChooseModelUK"
 							Grid.Column="2"
-							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
 							Click="ButtonChooseModelClick"
-							VerticalAlignment="Top"
-							BorderThickness="0,1,1,1"
-							BorderBrush="#FFABADB3">
+							Style="{StaticResource ButtonStyle}">
 							<Image
 								Source="/Images/Folder.png" />
 						</Button>
@@ -666,6 +624,7 @@
 							Grid.Column="0"
 							Grid.ColumnSpan="3"
 							VerticalAlignment="Top"
+							d:IsChecked="True"
 							IsChecked="{Binding UseCollPath}"
 							Content="{DynamicResource ModelCollPath}" />
 					</StackPanel>
@@ -704,36 +663,15 @@
 						<Button
 							x:Name="ButtonChooseCollClear"
 							Grid.Column="1"
-							Content=" × "
 							Click="ButtonClearClick"
-							BorderThickness="0,1,1,1"
-							Background="Transparent"
-							BorderBrush="#FFABADB3">
-							<Button.Style>
-								<Style
-									TargetType="Button">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding Text, ElementName=TextCollPath}"
-											Value="">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</Button.Style>
-						</Button>
+							Style="{StaticResource ClearStyle}"
+							Visibility="{Binding CollPath, Converter={StaticResource ClearVisibility}}" />
+
 						<Button
 							x:Name="ButtonChooseColl"
 							Grid.Column="2"
-							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextDisplayName, Mode=OneWay}"
 							Click="ButtonChooseModelClick"
-							VerticalAlignment="Top"
-							BorderThickness="0,1,1,1"
-							BorderBrush="#FFABADB3">
+							Style="{StaticResource ButtonStyle}" >
 							<Image
 								Source="/Images/Folder.png" />
 						</Button>
@@ -761,24 +699,20 @@
 						</Grid.ColumnDefinitions>
 						<ComboBox
 							x:Name="TextModelType"
-							Padding="3,3,3,3"
 							Text="{Binding ModelType}"
 							DisplayMemberPath="Accessory"
 							IsEditable="True"
 							IsTextSearchEnabled="True"
 							ItemsSource="{Binding ModelTypes}"
-							SelectedValue="{Binding CurrentModelType, Mode=TwoWay}">
+							SelectedValue="{Binding CurrentModelType, Mode=TwoWay}"
+							VerticalContentAlignment="Center">
 						</ComboBox>
 						<Button
 							x:Name="ButtonCoverModelType"
 							Grid.Column="1"
-							Padding="3,3,3,3"
-							Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-							BorderThickness="0,1,0,1"
-							VerticalAlignment="Top"
 							Click="ButtonCoverValue"
-							BorderBrush="#FFABADB3">
+							BorderThickness="0,1,0,1"
+							Style="{StaticResource ButtonStyle}">
 							<Image
 								Source="/Images/Paste.png" />
 						</Button>
@@ -826,18 +760,14 @@
 						Text="{Binding Look}"
 						ItemsSource="{Binding LookList}"
 						IsEditable="True"
-						IsTextSearchEnabled="True" />
+						IsTextSearchEnabled="True"
+						VerticalContentAlignment="Center" />
 					<Button
 						x:Name="ButtonCoverLook"
 						Grid.Row="1"
 						Grid.Column="1"
-						Padding="3,3,3,3"
-						Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-						Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-						BorderThickness="0,1,1,1"
-						VerticalAlignment="Top"
 						Click="ButtonCoverValue"
-						BorderBrush="#FFABADB3">
+						Style="{StaticResource ButtonStyle}">
 						<Image
 							Source="/Images/Paste.png" />
 					</Button>
@@ -855,18 +785,14 @@
 						Text="{Binding Variant}"
 						ItemsSource="{Binding VariantList}"
 						IsEditable="True"
-						IsTextSearchEnabled="True" />
+						IsTextSearchEnabled="True"
+						VerticalContentAlignment="Center" />
 					<Button
 						x:Name="ButtonCoverVariant"
 						Grid.Row="1"
 						Grid.Column="4"
-						Padding="3,3,3,3"
-						Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-						Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-						BorderThickness="0,1,1,1"
-						VerticalAlignment="Top"
 						Click="ButtonCoverValue"
-						BorderBrush="#FFABADB3">
+						Style="{StaticResource ButtonStyle}">
 						<Image
 							Source="/Images/Paste.png" />
 					</Button>
@@ -894,25 +820,20 @@
 						<Grid>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition
-									Width="1*" />
+									Width="*" />
 								<ColumnDefinition
 									Width="Auto" />
 							</Grid.ColumnDefinitions>
 							<TextBox
 								x:Name="TextHideIn"
-								Padding="3,3,3,3"
 								IsReadOnly="True"
-								Text="{Binding HideIn, Converter={StaticResource HideInConverter}}" />
+								Text="{Binding HideIn, Converter={StaticResource HideInConverter}}"
+								VerticalContentAlignment="Center" />
 							<Button
 								x:Name="ButtonSetHideIn"
 								Grid.Column="1"
-								Padding="3,3,3,3"
-								Width="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}"
-								BorderThickness="0,1,1,1"
-								VerticalAlignment="Top"
 								Click="ButtonHideIn"
-								BorderBrush="#FFABADB3">
+								Style="{StaticResource ButtonStyle}">
 								<Image
 									Source="/Images/Add.png" />
 							</Button>

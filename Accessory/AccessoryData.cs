@@ -2,6 +2,7 @@
 using SCS_Mod_Helper.Utils;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory {
     public abstract class AccessoryData(
@@ -21,8 +22,12 @@ namespace SCS_Mod_Helper.Accessory {
 			set {
 				mModelName = value;
 				InvokeChange(nameof(ModelName));
+
+				InvokeChange(nameof(ModelNameForeground));
 			}
 		}
+
+		public SolidColorBrush ModelNameForeground => new(ModelName.Length > 12 ? Colors.Red : Colors.Black);
 
 		protected string mDisplayName = displayName;
 		public string DisplayName {

@@ -1,18 +1,19 @@
 ﻿using SCS_Mod_Helper.Accessory;
+using SCS_Mod_Helper.Main;
 using SCS_Mod_Helper.Manifest;
 
 namespace SCS_Mod_Helper.Utils {
 	public static class Instances {
-		private static ModProject? modelProject;
-		public static ModProject ModelProject {
+		private static BasicInfo? mBasicInfo;
+		public static BasicInfo BasicInfo {
 			get {
-				modelProject ??= new ModProject();
-				return modelProject;
+				mBasicInfo ??= new();
+				return mBasicInfo;
 			}
 		}
 
 		public static string ProjectLocation {
-			get => ModelProject.ProjectLocation; set => ModelProject.ProjectLocation = value;
+			get => BasicInfo.ProjectLocation; set => BasicInfo.ProjectLocation = value;
 		}
 
 		private static string projectLocationOfDict = "";
@@ -20,8 +21,8 @@ namespace SCS_Mod_Helper.Utils {
 		private static Dictionary<string, List<string>>? mLocaleDict = null;
 		public static Dictionary<string, List<string>> LocaleDict {
 			get {
-				if (mLocaleDict == null || ModelProject.ProjectLocation != projectLocationOfDict) {
-					var projectLocation = ModelProject.ProjectLocation;
+				if (mLocaleDict == null || ProjectLocation != projectLocationOfDict) {
+					var projectLocation = ProjectLocation;
 					if (mLocaleDict == null)
 						mLocaleDict = [];
 					else

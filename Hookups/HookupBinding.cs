@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Hookups;
 
@@ -46,8 +47,11 @@ public class HookupBinding: INotifyPropertyChanged {
 			InvokeChange(nameof(HookupName));
 
 			InvokeChange(nameof(StartClickable));
+			InvokeChange(nameof(HookupNameForeground));
 		}
 	}
+
+	public SolidColorBrush HookupNameForeground => new(HookupName.Length > 12 ? Colors.Red : Colors.Black);
 
 	private string mModelLocation = "";
 	public string ModelLocation {

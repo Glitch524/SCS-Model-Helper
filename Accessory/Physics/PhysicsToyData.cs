@@ -1,20 +1,11 @@
 ﻿using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SCS_Mod_Helper.Accessory.PhysicsToy
+namespace SCS_Mod_Helper.Accessory.Physics
 {
-	public class PhysicsToyData(string physicsName = ""): INotifyPropertyChanged {
-		private string mPhysicsName = physicsName;
-		public string PhysicsName {
-			get => mPhysicsName;
-			set {
-				mPhysicsName = value;
-				InvokeChange(nameof(PhysicsName));
-			}
-		}
+	public class PhysicsToyData(string physicsName = ""): PhysicsData(physicsName) {
 
 		private string mModelPath = "";
 		public string ModelPath {
@@ -81,9 +72,9 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy
 				mVariantList = [];
 			else
 				mVariantList.Clear();
-			if (mModelPath.Length == 0)
-				return;
 			var path = mModelPath;
+			if (path.Length < 5 || path.EndsWith('.'))
+				return;
 
 			path = path.Replace('/', '\\');
 			path = path[..^4] + ".pit";
@@ -108,8 +99,15 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy
 			set {
 				mToyType = value;
 				InvokeChange(nameof(ToyType));
+
+				InvokeChange(nameof(AngularVisibility));
+				InvokeChange(nameof(RopeDataVisibility));
 			}
 		}
+		public Visibility AngularVisibility =>
+			ToyType == "TT_joint" || ToyType == "TT_joint_free" ? Visibility.Visible : Visibility.Collapsed;
+		public Visibility RopeDataVisibility =>
+			ToyType == "TT_rope" || ToyType == "TT_double_rope" ? Visibility.Visible : Visibility.Hidden;
 
 		private float? mMass = null;
 		public float? Mass {
@@ -507,11 +505,5 @@ namespace SCS_Mod_Helper.Accessory.PhysicsToy
 				InvokeChange(nameof(mNodeDamping));
 			}
 		}
-
-
-
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-		public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 	}
 }

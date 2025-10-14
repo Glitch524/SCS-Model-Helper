@@ -1,7 +1,7 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Accessory.AccHookup;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
@@ -22,18 +22,6 @@ class AccDataIO {
 	private static void WriteMFHeader(StreamWriter sw) {
 		sw.Write(new string('\t', TabCount));
 		sw.WriteLine(NameMFHeader);
-	}
-	private static void WriteAAHeader(StreamWriter sw, string modelName, string truckID, string modelType) {
-		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NameAAHeader} : {modelName}.{truckID}.{modelType}");
-	}
-	private static void WriteAHHeader(StreamWriter sw, string hookupName) {
-		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NameAHHeader} : {hookupName + NameAHSuffix}");
-	}
-	private static void WritePTHeader(StreamWriter sw, string physicsName) {
-		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NamePTHeader} : {physicsName + NamePTSuffix}");
 	}
 
 	private static void WriteLine(StreamWriter sw, string name, object? valueObj) => WriteLine(sw, name, valueObj, IsArray(name), HasQuote(name));
@@ -122,6 +110,7 @@ class AccDataIO {
 		NamePTColl or
 		NamePTToyType or
 		NamePTRopeMaterial or
+		NamePPMaterial or
 		NameKey or
 		NameValue => true,
 		_ => false,
@@ -135,47 +124,47 @@ class AccDataIO {
 	private const string NameMFIcon = "icon";
 	private const string NameMFDescriptionFile = "description_file";
 	private const string NameMFMPOptional = "mp_mod_optional";
-	public static void SaveManifest(ModProject modProject) {
-		if (Util.IsEmpty(modProject.ProjectLocation, modProject.ModDisplayName, modProject.DescriptionName)) {
+	public static void SaveManifest(ManifestBinding binding) {
+		if (Util.IsEmpty(binding.ProjectLocation, binding.ModDisplayName, binding.DescriptionName)) {
 			MessageBox.Show(Util.GetString("MessageManifestNotFilled"));
 			return;
 		}
 
 
-		var saveLocation = modProject.ProjectLocation;
-		if (!modProject.IconName.EndsWith(".jpg"))
-			modProject.IconName += ".jpg";
+		var saveLocation = binding.ProjectLocation;
+		if (!binding.IconName.EndsWith(".jpg"))
+			binding.IconName += ".jpg";
 
-		if (modProject.OldIconName != null) {
-			var oldIconFile = Path.Combine(modProject.ProjectLocation, modProject.OldIconName);
+		if (binding.OldIconName != null) {
+			var oldIconFile = Path.Combine(binding.ProjectLocation, binding.OldIconName);
 			if (File.Exists(oldIconFile))
 				File.Delete(oldIconFile);
 		}
-		if (modProject.ModIcon == null) {
-			modProject.ModIcon = new BitmapImage(new("pack://application:,,,/Images/IconPlaceholder.png"));
-			modProject.NewIcon = true;
+		if (binding.ModIcon == null) {
+			binding.ModIcon = new BitmapImage(new("pack://application:,,,/Images/IconPlaceholder.png"));
+			binding.NewIcon = true;
 		}
-		var iconFile = Path.Combine(saveLocation, modProject.IconName);
-		if (modProject.NewIcon || !File.Exists(iconFile)) {
+		var iconFile = Path.Combine(saveLocation, binding.IconName);
+		if (binding.NewIcon || !File.Exists(iconFile)) {
 			JpegBitmapEncoder encoder = new();
-			encoder.Frames.Add(BitmapFrame.Create(modProject.ModIcon));
+			encoder.Frames.Add(BitmapFrame.Create(binding.ModIcon));
 			if (File.Exists(iconFile))
 				File.Delete(iconFile);
 			using FileStream fs = new(iconFile, FileMode.CreateNew, FileAccess.ReadWrite);
 			encoder.Save(fs);
 		}
 
-		if (modProject.OldDescriptionName != null && modProject.DescriptionName != modProject.OldDescriptionName) {
-			var descDeExt = modProject.OldDescriptionName[..^4];
-			foreach (var file in new DirectoryInfo(modProject.ProjectLocation).GetFiles()) {
+		if (binding.OldDescriptionName != null && binding.DescriptionName != binding.OldDescriptionName) {
+			var descDeExt = binding.OldDescriptionName[..^4];
+			foreach (var file in new DirectoryInfo(binding.ProjectLocation).GetFiles()) {
 				var name = file.Name;
 				if (name.StartsWith(descDeExt) && name.EndsWith(".txt")) {
 					file.Delete();
 				}
 			}
 		}
-		var deExt = modProject.DescriptionName[..^4];
-		foreach (var locale in modProject.Locales) {
+		var deExt = binding.DescriptionName[..^4];
+		foreach (var locale in binding.Locales) {
 			if (locale.HasDesc) {
 				var isUniversal = locale.LocaleValue.Equals(Locale.LocaleValueUni);
 				var dFile = Path.Combine(saveLocation, deExt);
@@ -194,22 +183,22 @@ class AccDataIO {
 		BraceIn(sw);
 		WriteMFHeader(sw);
 		BraceIn(sw);
-		WriteLine(sw, NameMFPackageVersion, modProject.Version);
-		WriteLine(sw, NameMFDisplayName, modProject.ModDisplayName);
-		WriteLine(sw, NameMFAuthor, modProject.Author);
+		WriteLine(sw, NameMFPackageVersion, binding.Version);
+		WriteLine(sw, NameMFDisplayName, binding.ModDisplayName);
+		WriteLine(sw, NameMFAuthor, binding.Author);
 
-		foreach (var cat in modProject.CategoryList) {
+		foreach (var cat in binding.CategoryList) {
 			WriteLine(sw, NameMFCategory, cat);
 		}
-		WriteLine(sw, NameMFIcon, modProject.IconName);
-		WriteLine(sw, NameMFDescriptionFile, modProject.DescriptionName);
-		WriteLine(sw, NameMFMPOptional, modProject.MPOptional.ToString().ToLower());
+		WriteLine(sw, NameMFIcon, binding.IconName);
+		WriteLine(sw, NameMFDescriptionFile, binding.DescriptionName);
+		WriteLine(sw, NameMFMPOptional, binding.MPOptional.ToString().ToLower());
 		BraceOut(sw);
 		BraceOut(sw);
 	}
 
-	public static void LoadManifest(ModProject modProject) {
-		var manifest = Paths.ManifestFile(modProject.ProjectLocation);
+	public static void LoadManifest(ManifestBinding binding) {
+		var manifest = Paths.ManifestFile(binding.ProjectLocation);
 		if (!File.Exists(manifest)) 
 			return;
 		try {
@@ -227,46 +216,47 @@ class AccDataIO {
 				var value = ClipValue(line[(colonIndex + 1)..]);
 				switch (name) {
 					case NameMFPackageVersion:
-						modProject.Version = value;
+						binding.Version = value;
 						break;
 					case NameMFDisplayName:
-						modProject.ModDisplayName = value;
+						binding.ModDisplayName = value;
 						break;
 					case NameMFAuthor:
-						modProject.Author = value;
+						binding.Author = value;
 						break;
 					case NameMFCategory:
-						modProject.CategoryList.Add(value);
+						binding.CategoryList.Add(value);
 						break;
 					case NameMFIcon:
-						modProject.IconName = value;
-						modProject.OldIconName = value;
-						var iconFile = Path.Combine(modProject.ProjectLocation, modProject.IconName);
+						binding.IconName = value;
+						binding.OldIconName = value;
+						var iconFile = Path.Combine(binding.ProjectLocation, binding.IconName);
 						if (File.Exists(iconFile)) {
-							modProject.ModIcon = Util.LoadIcon(iconFile);
+							binding.ModIcon = Util.LoadIcon(iconFile);
 						}
 
 						break;
 					case NameMFDescriptionFile:
-						modProject.DescriptionName = value;
-						modProject.OldDescriptionName = value;
-						LoadDescription(modProject);
+						binding.DescriptionName = value;
+						binding.OldDescriptionName = value;
+						LoadDescription(binding);
 						break;
 					case NameMFMPOptional:
-						modProject.MPOptional = bool.Parse(value);
+						binding.MPOptional = bool.Parse(value);
 						break;
 				}
 			}
+			binding.RefreshCategory();
 		} catch (Exception ex) {
 			MessageBox.Show(Util.GetString("MessageLoadManifestErrFail") + "\n" + ex.Message);
 		}
 	}
 
-	private static void LoadDescription(ModProject modProject) {
-		var descriptionFile = new FileInfo(Path.Combine(modProject.ProjectLocation, modProject.DescriptionName));
+	private static void LoadDescription(ManifestBinding binding) {
+		var descriptionFile = new FileInfo(Path.Combine(binding.ProjectLocation, binding.DescriptionName));
 		var ext = descriptionFile.Extension;
-		var deExt = modProject.DescriptionName[..^(ext.Length - 1)];
-		DirectoryInfo project = new(modProject.ProjectLocation);
+		var deExt = binding.DescriptionName[..^(ext.Length - 1)];
+		DirectoryInfo project = new(binding.ProjectLocation);
 		foreach (var file in project.GetFiles()) {
 			var filename = file.Name;
 			var fileExt = file.Extension;
@@ -283,11 +273,11 @@ class AccDataIO {
 					locale = Locale.LocaleValueUni;
 				else
 					locale = filename[deExt.Length..^fileExt.Length];
-				var descLocale = modProject.LocaleDict[locale];
+				var descLocale = binding.LocaleDict[locale];
 				descLocale.DescContent = sb.ToString();
 			}
 		}
-		modProject.CurrentLocale = modProject.LocaleDict[Locale.LocaleValueUni];
+		binding.CurrentLocale = binding.LocaleDict[Locale.LocaleValueUni];
 	}
 
 
@@ -307,10 +297,18 @@ class AccDataIO {
 	private const string NameAAExtModelUK = "exterior_model_uk";
 	private const string NameAAIntModelUK = "interior_model_uk";
 	private const string NameAAHideIn = "hide_in";
+	private static void WriteAAHeader(StreamWriter sw, string modelName, string truckID, string modelType) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NameAAHeader} : {modelName}.{truckID}.{modelType}");
+	}
 	//accessory hookup
 	private const string NameAHHeader = "accessory_hookup_int_data";
 	private const string NameAHSuffix = ".addon_hookup";
 	private const string NameAHModel = "model";
+	private static void WriteAHHeader(StreamWriter sw, string hookupName) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NameAHHeader} : {hookupName + NameAHSuffix}");
+	}
 
 	//others
 	public const string NameData = "data";
@@ -319,9 +317,11 @@ class AccDataIO {
 	public const string NameDefaults = "defaults";
 	public const string NameOverrides = "overrides";
 	public const string NameRequire = "require";
+
+	//physics data
+	public const string NamePSuffix = ".phys_data";
 	//physics toy data
 	private const string NamePTHeader = "physics_toy_data";
-	public const string NamePTSuffix = ".phys_data";
 	public const string NamePTModel = "phys_model";
 	public const string NamePTColl = "phys_model_coll";
 	public const string NamePTLook = "phys_model_look";
@@ -347,6 +347,31 @@ class AccDataIO {
 	public const string NamePTRopeLinearDensity = "rope_linear_density";
 	public const string NamePTPositionIterations = "position_iterations";
 	public const string NamePTRopeMaterial = "rope_material";
+	private static void WritePTHeader(StreamWriter sw, string physicsName) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NamePTHeader} : {physicsName + NamePSuffix}");
+	}
+
+	//physics patch data
+	private const string NamePPHeader = "physics_patch_data";
+	public const string NamePPMaterial = "material";
+	public const string NamePPAreaDensity = "area_density";
+	public const string NamePPAeroModelType = "aero_model_type";
+	public const string NamePPTCMinFirst = "tc_min_first";
+	public const string NamePPTCMaxFirst = "tc_max_first";
+	public const string NamePPTCMinSecond = "tc_min_second";
+	public const string NamePPTCMaxSecond = "tc_max_second";
+	public const string NamePPXRes = "x_res";
+	public const string NamePPYRes = "y_res";
+	public const string NamePPXSize = "x_size";
+	public const string NamePPYSize = "y_size";
+	public const string NamePPLinearStiffness = "linear_stiffness";
+	public const string NamePPDragCoefficient = "drag_coefficient";
+	public const string NamePPLiftCoefficient = "lift_coefficient";
+	private static void WritePPHeader(StreamWriter sw, string physicsName) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NamePPHeader} : {physicsName + NamePSuffix}");
+	}
 
 	//addon hookup storage
 	private const string NameAHSPreffix = "addon_hookup_storage";
@@ -423,11 +448,12 @@ class AccDataIO {
 			BraceOut(sw);
 
 			foreach (var pn in physName) {
-				var physicsList = binding.PhysicsList;
+				var physicsList = new List<PhysicsData>();
+				physicsList.AddRange(binding.PhysicsList);
 				for (int i = 0; i < physicsList.Count; i++) {
 					var phys = physicsList[i];
 					if (pn == phys.PhysicsName) {
-						WritePhysicsToyData(sw, phys);
+						WritePhysicsData(sw, phys);
 						physicsList.RemoveAt(i);
 						break;
 					}
@@ -463,11 +489,11 @@ class AccDataIO {
 					j++;
 				}
 				if (name == NameData) {
-					if (value.EndsWith(NamePTSuffix)) {
-						physName.Add(value[..^NamePTSuffix.Length]);
+					if (value.EndsWith(NamePSuffix)) {
+						physName.Add(value[..^NamePSuffix.Length]);
 					} else {
 						physName.Add(value);
-						value += NamePTSuffix;
+						value += NamePSuffix;
 					}
 				}
 				WriteLine(sw, name, value, other.IsArray, other.UseQuoteMark);
@@ -550,7 +576,7 @@ class AccDataIO {
 
 	public static void CreateAddonHookupSui(SuiItem sui) {
 		var suiPath = Paths.AddonHookupsDir(exportPath, sui.SuiFilename);
-		var physicsDatas = new List<PhysicsToyData>();
+		var physicsDatas = new List<PhysicsData>();
 		physicsDatas.AddRange(sui.PhysicsItems);
 		using StreamWriter sw = new(suiPath);
 		foreach (var hookup in sui.HookupItems) {
@@ -579,7 +605,8 @@ class AccDataIO {
 				for (int i = 0; i < physicsDatas.Count; i++) {
 					var phys = physicsDatas[i];
 					if (pn == phys.PhysicsName) {
-						WritePhysicsToyData(sw, phys);
+
+						WritePhysicsData(sw, phys);
 						physicsDatas.RemoveAt(i);
 						break;
 					}
@@ -588,46 +615,73 @@ class AccDataIO {
 		}
 	}
 
-	private static void WritePhysicsToyData(StreamWriter sw, PhysicsToyData phys) {
-		if (phys.ModelPath == null)
-			return;
-		WritePTHeader(sw, phys.PhysicsName);
-		BraceIn(sw);
-		WriteLine(sw, NamePTModel, phys.ModelPath);
-		WriteLine(sw, NamePTColl, phys.CollPath);
-		WriteLine(sw, NamePTLook, phys.Look);
-		WriteLine(sw, NamePTVariant, phys.Variant);
-		WriteEmptyLine(sw);
-		WriteLine(sw, NamePTToyType, phys.ToyType);
-		WriteLine(sw, NamePTMass, phys.Mass);
-		WriteLine(sw, NamePTCogOffset, phys.CogOffset);
-		WriteLine(sw, NamePTLinearStiffness, phys.LinearStiffness);
-		WriteLine(sw, NamePTLinearDamping, phys.LinearDamping);
-		WriteLine(sw, NamePTLocatorHookOffset, phys.LocatorHookOffset);
-		WriteLine(sw, NamePTRestPositionOffset, phys.RestPositionOffset);
-		WriteLine(sw, NamePTRestRotationOffset, phys.RestRotationOffset);
-		foreach (var offset in phys.InstanceOffsetList) {
-			WriteLine(sw, NamePTInstanceOffset, offset);
+	private static void WritePhysicsData(StreamWriter sw, PhysicsData phys) {
+		if (phys is PhysicsToyData toyData) {
+			if (toyData.ModelPath == null)
+				return;
+			WritePTHeader(sw, toyData.PhysicsName);
+			BraceIn(sw);
+			WriteLine(sw, NamePTModel, toyData.ModelPath);
+			WriteLine(sw, NamePTColl, toyData.CollPath);
+			WriteLine(sw, NamePTLook, toyData.Look);
+			WriteLine(sw, NamePTVariant, toyData.Variant);
+			WriteEmptyLine(sw);
+			WriteLine(sw, NamePTToyType, toyData.ToyType);
+			WriteLine(sw, NamePTMass, toyData.Mass);
+			WriteLine(sw, NamePTCogOffset, toyData.CogOffset);
+			WriteLine(sw, NamePTLinearStiffness, toyData.LinearStiffness);
+			WriteLine(sw, NamePTLinearDamping, toyData.LinearDamping);
+			WriteLine(sw, NamePTLocatorHookOffset, toyData.LocatorHookOffset);
+			WriteLine(sw, NamePTRestPositionOffset, toyData.RestPositionOffset);
+			WriteLine(sw, NamePTRestRotationOffset, toyData.RestRotationOffset);
+			foreach (var offset in toyData.InstanceOffsetList) {
+				WriteLine(sw, NamePTInstanceOffset, offset);
+			}
+			WriteEmptyLine(sw);
+			WriteLine(sw, NamePTAngularStiffness, toyData.AngularStiffness);
+			WriteLine(sw, NamePTAngularDamping, toyData.AngularDamping);
+			WriteLine(sw, NamePTAngularAmplitude, toyData.AngularAmplitude);
+			WriteEmptyLine(sw);
+			WriteLine(sw, NamePTRopeMaterial, toyData.RopeMaterial);
+			WriteLine(sw, NamePTRopeWidth, toyData.RopeWidth);
+			WriteLine(sw, NamePTRopeLength, toyData.RopeLength);
+			WriteLine(sw, NamePTRopeHookOffset, toyData.RopeHookOffset);
+			WriteLine(sw, NamePTRopeToyOffset, toyData.RopeToyOffset);
+			WriteLine(sw, NamePTRopeResolution, toyData.RopeResolution);
+			WriteLine(sw, NamePTRopeLinearDensity, toyData.RopeLinearDensity);
+			WriteLine(sw, NamePTPositionIterations, toyData.PositionIterations);
+			WriteLine(sw, NamePTNodeDamping, toyData.NodeDamping);
+			BraceOut(sw);
+		} else if (phys is PhysicsPatchData patchData) {
+			if (patchData.Material.Length == 0 || patchData.PhysicsName.Length == 0)
+				return;
+			WritePPHeader(sw, patchData.PhysicsName);
+			BraceIn(sw);
+			WriteLine(sw, NamePPMaterial, patchData.Material);
+
+			WriteLine(sw, NamePPAreaDensity, patchData.AreaDensity);
+			if (patchData.AeroModelType != PhysicsPatchData.ATTwoSideLiftDrag)
+				WriteLine(sw, NamePPAeroModelType, patchData.AeroModelType);
+
+			WriteLine(sw, NamePPLinearStiffness, patchData.LinearStiffness);
+			WriteLine(sw, NamePPDragCoefficient, patchData.DragCoefficient);
+			WriteLine(sw, NamePPLiftCoefficient, patchData.LiftCoefficient);
+
+			WriteLine(sw, NamePPTCMinFirst, patchData.TCMinFirst);
+			WriteLine(sw, NamePPTCMaxFirst, patchData.TCMaxFirst);
+			WriteLine(sw, NamePPTCMinSecond, patchData.TCMinSecond);
+			WriteLine(sw, NamePPTCMaxSecond, patchData.TCMaxSecond);
+
+			WriteLine(sw, NamePPXRes, patchData.XRes);
+			WriteLine(sw, NamePPYRes, patchData.YRes);
+			WriteLine(sw, NamePPXSize, patchData.XSize);
+			WriteLine(sw, NamePPYSize, patchData.YSize);
+			BraceOut(sw);
 		}
-		WriteEmptyLine(sw);
-		WriteLine(sw, NamePTAngularStiffness, phys.AngularStiffness);
-		WriteLine(sw, NamePTAngularDamping, phys.AngularDamping);
-		WriteLine(sw, NamePTAngularAmplitude, phys.AngularAmplitude);
-		WriteEmptyLine(sw);
-		WriteLine(sw, NamePTRopeMaterial, phys.RopeMaterial);
-		WriteLine(sw, NamePTRopeWidth, phys.RopeWidth);
-		WriteLine(sw, NamePTRopeLength, phys.RopeLength);
-		WriteLine(sw, NamePTRopeHookOffset, phys.RopeHookOffset);
-		WriteLine(sw, NamePTRopeToyOffset, phys.RopeToyOffset);
-		WriteLine(sw, NamePTRopeResolution, phys.RopeResolution);
-		WriteLine(sw, NamePTRopeLinearDensity, phys.RopeLinearDensity);
-		WriteLine(sw, NamePTPositionIterations, phys.PositionIterations);
-		WriteLine(sw, NamePTNodeDamping, phys.NodeDamping);
-		BraceOut(sw);
 	}
 
 	public static void LoadAddonHookup(AccHookupBinding viewModel) {
-		DirectoryInfo accHookupDir = new(Paths.HookupStorageDir(Instances.ModelProject.ProjectLocation));
+		DirectoryInfo accHookupDir = new(Paths.HookupStorageDir(Instances.ProjectLocation));
 		FileInfo? storageFile = null;
 		bool skip = true;
 		foreach (var file in accHookupDir.GetFiles()) {
@@ -681,9 +735,16 @@ class AccDataIO {
 			} else if (line.StartsWith(NamePTHeader)) {
 				var name = line.Split(":")[1].Trim();
 				name = name[..name.LastIndexOf('.')];
-				PhysicsToyData data = new(name);
-				ReadPhysData(sr, data);
-				sui.PhysicsItems.Add(data);
+				PhysicsToyData toyData = new(name);
+				ReadPhysToyData(sr, toyData);
+				sui.PhysicsItems.Add(toyData);
+			} else if (line.StartsWith(NamePPHeader)) {
+				var name = line.Split(":")[1].Trim();
+				name = name[..name.LastIndexOf('.')];
+				PhysicsPatchData patchData = new(name);
+				ReadPhysPatchData(sr, patchData);
+				sui.PhysicsItems.Add(patchData);
+
 			}
 		}
 	}
@@ -735,7 +796,7 @@ class AccDataIO {
 		}
 	}
 
-	private static void ReadPhysData(StreamReader sr, PhysicsToyData data) {
+	private static void ReadPhysToyData(StreamReader sr, PhysicsToyData data) {
 		string? line;
 		while ((line = sr.ReadLine()?.Trim()) != null) {
 			if (line == "}")
@@ -822,6 +883,63 @@ class AccDataIO {
 					break;
 				case NamePTRopeMaterial:
 					data.RopeMaterial = value;
+					break;
+			}
+		}
+	}
+
+	private static void ReadPhysPatchData(StreamReader sr, PhysicsPatchData data) {
+		string? line;
+		while ((line = sr.ReadLine()?.Trim()) != null) {
+			if (line == "}")
+				break;
+			if (line == "{" || line.Length == 0 || line.StartsWith('#'))
+				continue;
+			int colonIndex = line.IndexOf(':');
+			var name = line[..colonIndex].Trim();
+			var value = ClipValue(line[(colonIndex + 1)..]);
+			switch (name) {
+				case NamePPMaterial:
+					data.Material = value;
+					break;
+				case NamePPAreaDensity:
+					data.AreaDensity = float.Parse(value);
+					break;
+				case NamePPAeroModelType:
+					data.AeroModelType = value;
+					break;
+				case NamePPLinearStiffness:
+					data.LinearStiffness = float.Parse(value);
+					break;
+				case NamePPDragCoefficient:
+					data.DragCoefficient = float.Parse(value);
+					break;
+				case NamePPLiftCoefficient:
+					data.LiftCoefficient = float.Parse(value);
+					break;
+				case NamePPTCMinFirst:
+					FloatParse(value, (i, v) => data.TCMinFirst[i] = v);
+					break;
+				case NamePPTCMaxFirst:
+					FloatParse(value, (i, v) => data.TCMaxFirst[i] = v);
+					break;
+				case NamePPTCMinSecond:
+					FloatParse(value, (i, v) => data.TCMinSecond[i] = v);
+					break;
+				case NamePPTCMaxSecond:
+					FloatParse(value, (i, v) => data.TCMaxSecond[i] = v);
+					break;
+				case NamePPXRes:
+					data.XRes = uint.Parse(value);
+					break;
+				case NamePPYRes:
+					data.YRes = uint.Parse(value);
+					break;
+				case NamePPXSize:
+					data.XSize = float.Parse(value);
+					break;
+				case NamePPYSize:
+					data.YSize = float.Parse(value);
 					break;
 			}
 		}

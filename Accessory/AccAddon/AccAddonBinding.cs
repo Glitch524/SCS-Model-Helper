@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
@@ -9,15 +9,16 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
 class AccAddonBinding: INotifyPropertyChanged {
-	private readonly ModProject ModelProject = Instances.ModelProject;
 	private readonly AccessoryAddonData AddonItem = new();
 
 	public void SaveHistory() => AddonItem.SaveHistory();
 
-	public string ProjectLocation => ModelProject.ProjectLocation;
+	public static string ProjectLocation => Instances.ProjectLocation;
+	public bool ProjectExist => Directory.Exists(ProjectLocation);
 
 	public string DisplayName {
 		get => AddonItem.DisplayName;
@@ -58,8 +59,12 @@ class AccAddonBinding: INotifyPropertyChanged {
 		set {
 			AddonItem.ModelName = value; 
 			InvokeChange();
+
+			InvokeChange(nameof(ModelNameForeground));
 		}
 	}
+
+	public SolidColorBrush ModelNameForeground => new(AddonItem.ModelName.Length > 12 ? Colors.Red : Colors.Black);
 
 	public string PartType {
 		get => AddonItem.PartType;
@@ -152,7 +157,18 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 	private ModelTypeInfo? mCurrentModelType = null;
 	public ModelTypeInfo? CurrentModelType {
-		get => mCurrentModelType ?? emptyAcc;
+		get {
+			if (mCurrentModelType == null) {
+				foreach (var type in ModelTypes) {
+					if (type.Accessory == ModelType) {
+						mCurrentModelType = type;
+						return mCurrentModelType;
+					}
+				}
+				return emptyAcc;
+			}
+			return mCurrentModelType;
+		}
 		set {
 			mCurrentModelType = value ?? emptyAcc;
 			InvokeChange();
@@ -185,7 +201,7 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 	public ObservableCollection<OthersItem> OthersList => AddonItem.OthersList;
 
-	public List<PhysicsToyData> PhysicsList => AddonItem.PhysicsList;
+	public List<PhysicsData> PhysicsList => AddonItem.PhysicsList;
 
 	public void LoadLooksAndVariants(string? path = null) {
 		string oldLook = Look, oldVariant = Variant;

@@ -1,4 +1,5 @@
-﻿using SCS_Mod_Helper.Utils;
+﻿using SCS_Mod_Helper.Accessory.Physics;
+using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -7,13 +8,11 @@ namespace SCS_Mod_Helper.Accessory.AccAddon.Items;
 
 public class OthersItem: INotifyPropertyChanged {
 
-	public OthersItem(string othersName, string othersValue, string othersNameTip = "") {
+	public OthersItem(string othersName, string othersValue) {
 		mOthersName = othersName;
 		mOthersValue = othersValue;
-		mOthersNameTip = othersNameTip;
-		if (othersNameTip.Length == 0) {
-			SetData(othersName);
-		}
+		mOthersNameTip = "";
+		SetData(othersName);
 	}
 
 	private void SetData(string othersName) {
@@ -135,14 +134,18 @@ public class OthersItem: INotifyPropertyChanged {
 		}
 	}
 
-	public static void ReadLines(ObservableCollection<OthersItem> othersList, string lines) {
+	public static void ReadLines(ObservableCollection<OthersItem> othersList, string lines, Action<string> data) {
 		var lineList = lines.Trim().Split(DefaultData.LineSplit);
 		try {
 			foreach (string line in lineList) {
-				if (line.Length == 0) continue;
+				if (line.Length == 0) 
+					continue;
 				OthersItem? o = LineParse(line);
-				if (o != null)
+				if (o != null) {
 					othersList.Add(o);
+					if (o.OthersName == AccDataIO.NameData)
+						data.Invoke(o.OthersValue);
+				}
 			}
 		} catch (Exception) {
 			MessageBox.Show(Util.GetString("MessageLoadOtherskErr"));
@@ -151,16 +154,16 @@ public class OthersItem: INotifyPropertyChanged {
 
 	public static OthersItem? LineParse(string line) {
 		var items = line.Trim().Split(DefaultData.ItemSplit);
-		if (items.Length < 3)
+		if (items.Length < 2)
 			return null;
-		return new OthersItem(items[0], items[1], items[2]);
+		return new OthersItem(items[0], items[1]);
 	}
 
 	public const int IndexOthersName = 0;
 	public const int IndexOthersValue = 1;
 	public static string GetHeaderLine() => string.Join(DefaultData.ItemSplit, [nameof(OthersName), nameof(OthersValue)]);
 
-	public string ToLine() => $"{mOthersName}{DefaultData.ItemSplit}{mOthersValue}{DefaultData.ItemSplit}{mOthersNameTip}";
+	public string ToLine() => $"{mOthersName}{DefaultData.ItemSplit}{mOthersValue}";
 
 
 	public static string JoinOthers(ObservableCollection<OthersItem> othersList) {

@@ -6,23 +6,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using SCS_Mod_Helper.Manifest;
 
-namespace SCS_Mod_Helper.Accessory.PhysicsToy;
+namespace SCS_Mod_Helper.Accessory.Physics;
 
-class PhysicsToyBinding: INotifyPropertyChanged {
-	private readonly ModProject ModelProject = Instances.ModelProject;
-	public string ProjectLocation => ModelProject.ProjectLocation;
-
-	private bool mAllVisible = false;
-	public bool AllVisible {
-		get => mAllVisible;
-		set {
-			mAllVisible = value;
-			InvokeChange(nameof(AngularVisibility));
-			InvokeChange(nameof(RopeDataVisibility));
-		}
-	}
+class PhysicsBinding: INotifyPropertyChanged {
+	public static string ProjectLocation => Instances.ProjectLocation;
 
 	private bool mChooseMode = false;
 	public bool ChooseMode {
@@ -46,71 +34,117 @@ class PhysicsToyBinding: INotifyPropertyChanged {
 		}
 	}
 
-	public ObservableCollection<PhysicsToyData> PhysicsItems => 
+	public ObservableCollection<PhysicsData> PhysicsItems => 
 		CurrentSuiItem != null ? CurrentSuiItem.PhysicsItems : AccAppIO.PhysicsItems;
 
-	public delegate void CurrentPhysicsCallback(PhysicsToyData? physics);
+	public delegate void CurrentPhysicsCallback(PhysicsData? physics);
 	public CurrentPhysicsCallback? physicsCallback = null;
 
-	private PhysicsToyData? mCurrentPhysicsItem;
-	public PhysicsToyData? CurrentPhysicsItem {
+	private PhysicsData? mCurrentPhysicsItem;
+	public PhysicsData? CurrentPhysicsItem {
 		get => mCurrentPhysicsItem;
 		set {
 			mCurrentPhysicsItem = value;
 			InvokeChange(nameof(CurrentPhysicsItem));
 			physicsCallback?.Invoke(value);
+			InvokeChange(nameof(CurrentToyData));
+			InvokeChange(nameof(CurrentPatchData));
+
+			InvokeChange(nameof(PhysicsType));
+			InvokeChange(nameof(ToyVisibility));
+			InvokeChange(nameof(PatchVisibility));
 		}
 	}
 
-	public void PhysicsListAdd(PhysicsToyData physics) {
+	public const string PhysicsTypeToy = "physics_toy_data";
+	public const string PhysicsTypePatch = "physics_patch_data";
+
+	public string PhysicsType {
+		get {
+			if (CurrentPhysicsItem is PhysicsToyData)
+				return PhysicsTypeToy;
+			else if (CurrentPhysicsItem is PhysicsPatchData)
+				return PhysicsTypePatch;
+			return "";
+		}
+	}
+
+	public Visibility ToyVisibility => CurrentPhysicsItem is PhysicsToyData ? Visibility.Visible : Visibility.Hidden;
+	public Visibility PatchVisibility => CurrentPhysicsItem is PhysicsPatchData ? Visibility.Visible : Visibility.Hidden;
+
+	public PhysicsToyData? CurrentToyData { 
+		get => CurrentPhysicsItem is PhysicsToyData toyData ? toyData : null;
+		set => CurrentPhysicsItem = value;
+	}
+
+	public void PhysicsListAdd(PhysicsData physics) {
 		PhysicsItems.Add(physics);
 		CurrentPhysicsItem = physics;
 	}
 
 	public string ModelPath {
-		get => CurrentPhysicsItem?.ModelPath ?? "";
+		get => CurrentToyData?.ModelPath ?? "";
 		set {
-			if (CurrentPhysicsItem != null) {
-				CurrentPhysicsItem.ModelPath = value;
+			if (CurrentToyData != null) {
+				CurrentToyData.ModelPath = value;
 				InvokeChange(nameof(ModelPath));
 			}
 		}
 	}
 
 	public string CollPath {
-		get => CurrentPhysicsItem?.CollPath ?? "";
+		get => CurrentToyData?.CollPath ?? "";
 		set {
-			if (CurrentPhysicsItem != null) {
-				CurrentPhysicsItem.CollPath = value;
+			if (CurrentToyData != null) {
+				CurrentToyData.CollPath = value;
 				InvokeChange(nameof(CollPath));
 			}
 		}
 	}
 	public string ToyType {
-		get => CurrentPhysicsItem?.ToyType ?? "";
+		get => CurrentToyData?.ToyType ?? "";
 		set {
-			if (CurrentPhysicsItem != null) {
-				CurrentPhysicsItem.ToyType = value;
+			if (CurrentToyData != null) {
+				CurrentToyData.ToyType = value;
 				InvokeChange(nameof(ToyType));
 			}
 		}
 	}
 
 	public string RopeMaterial {
-		get => CurrentPhysicsItem?.RopeMaterial ?? "";
+		get => CurrentToyData?.RopeMaterial ?? "";
 		set {
-			if (CurrentPhysicsItem != null) {
-				CurrentPhysicsItem.RopeMaterial = value;
+			if (CurrentToyData != null) {
+				CurrentToyData.RopeMaterial = value;
 				InvokeChange(nameof(RopeMaterial));
 			}
 		}
 	}
-	public Visibility AngularVisibility =>
-		AllVisible || ToyType == "TT_joint" || ToyType == "TT_joint_free" ? Visibility.Visible : Visibility.Collapsed;
-	public Visibility RopeDataVisibility =>
-		AllVisible || ToyType == "TT_rope" || ToyType == "TT_double_rope" ? Visibility.Visible : Visibility.Hidden;
 
-	public static void SavePhysicsList() => AccAppIO.SavePhysicsList();
+	public PhysicsPatchData? CurrentPatchData {
+		get => CurrentPhysicsItem is PhysicsPatchData patchData ? patchData : null;
+		set => CurrentPhysicsItem = value;
+	}
+
+	public string PatchMaterial {
+		get => CurrentPatchData?.Material ?? "";
+		set {
+			if (CurrentPatchData != null) {
+				CurrentPatchData.Material = value;
+				InvokeChange(nameof(PatchMaterial));
+			}
+		}
+	}
+	public string[] AeroModelTypes { get; } = [
+		PhysicsPatchData.ATFaceOneSide,
+		PhysicsPatchData.ATFaceTwoSide,
+		PhysicsPatchData.ATFaceTwoSideLiftDrag,
+		PhysicsPatchData.ATOneSide,
+		PhysicsPatchData.ATPoint,
+		PhysicsPatchData.ATTwoSide,
+		PhysicsPatchData.ATTwoSideLiftDrag
+		];
+
 
 	//模型、碰撞体
 	public void ChooseModel(bool isColl) {

@@ -75,10 +75,9 @@ namespace SCS_Mod_Helper.Utils {
 			}
 		}
 
-
 		public const string TypeCupHolder = "cup_holder";
 		public const string TypeCurtainF = "curtain_f";
-		public const string TypeDrvPlate = "drvplate";
+		public const string TypeDrvPlate = "drv_plate";
 		public const string TypeCoDrvPlate = "codrv_plate";
 		public const string TypeFlagL = "flag_l";
 		public const string TypeFlagR = "flag_r";

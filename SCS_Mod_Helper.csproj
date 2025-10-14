@@ -36,6 +36,7 @@
     <None Remove="Images\Folder.png" />
     <None Remove="Images\IconPlaceholder.png" />
     <None Remove="Images\ListBox.png" />
+    <None Remove="Images\modelIconPlaceholder.png" />
     <None Remove="Images\Paste.png" />
     <None Remove="Images\Search.png" />
     <None Remove="Images\Settings.png" />
@@ -53,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Pfim" Version="0.11.3" />
     <PackageReference Include="System.Drawing.Common" Version="10.0.0-rc.1.25451.107" />
   </ItemGroup>
 
@@ -71,6 +73,7 @@
     <Resource Include="Images\Folder.png" />
     <Resource Include="Images\IconPlaceholder.png" />
     <Resource Include="Images\ListBox.png" />
+    <Resource Include="Images\modelIconPlaceholder.png" />
     <Resource Include="Images\Paste.png" />
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Settings.png" />
@@ -80,7 +83,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Manifest\ModBasic.Designer.cs">
+    <Compile Update="Main\ModBasic.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>ModBasic.settings</DependentUpon>
@@ -104,7 +107,7 @@
     <None Update="Language\example.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Manifest\ModBasic.settings">
+    <None Update="Main\ModBasic.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ModBasic.Designer.cs</LastGenOutput>
     </None>

@@ -1,11 +1,12 @@
 ﻿<Application
 	x:Class="SCS_Mod_Helper.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SCS_Mod_Helper"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:SCS_Mod_Helper"
 	StartupUri="Manifest/ModManifestWindow.xaml"
-			 DispatcherUnhandledException="UnhandledException">
-    <Application.Resources>
+	DispatcherUnhandledException="UnhandledException"
+	Exit="OnExit">
+	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary

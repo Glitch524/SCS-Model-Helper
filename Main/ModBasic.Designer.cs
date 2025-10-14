@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCS_Mod_Helper.Manifest {
+namespace SCS_Mod_Helper.Main {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

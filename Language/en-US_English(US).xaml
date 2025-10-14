@@ -166,7 +166,7 @@
 		<!--Hide In-->
 	<s:String x:Key="TitleHideIn">Tick the following content will let content hide in the ticked Perspective</s:String>
 	
-		<!--自动识别页-->
+		<!--Auto Recognition-->
 	<s:String x:Key="TitleAutoRecognize">Auto Recognize</s:String>
 	<s:String x:Key="MessageAR">Some content was recognized by reading model file, please choose some content that needed</s:String>
 	<s:String x:Key="CheckHeadModelName">Model Name:</s:String>
@@ -195,9 +195,15 @@
 	
 	<!--Physics Model Page-->
 	<s:String x:Key="TitlePhysicsToyData">Physics Toy Data</s:String>
+	<s:String x:Key="MsgPhysics1">Define physics models, and add it in model's data to add physics model</s:String>
+	<s:String x:Key="MsgPhysics2">Choose a physics data to add to the model definition</s:String>
+	
 	<s:String x:Key="HeaderPhysicsName">Physics</s:String>
 	<s:String x:Key="ButtonAddToOthers">Add to Others</s:String>
 	<s:String x:Key="ButtonSaveToPhysicList">Save to physics list</s:String>
+	<s:String x:Key="TitlePhysicsType">Physics Type</s:String>
+	
+	<s:String x:Key="PhysicsTypeToy">Toy Physics</s:String>
 	<s:String x:Key="TitlePhysicsName">Physics Name</s:String>
 	<s:String x:Key="TitleToyType">Toy Type</s:String>
 	<s:String x:Key="TitleToyMass">Mass</s:String>
@@ -235,11 +241,27 @@
 	<s:String x:Key="TitleNodeDamping">Node Damping</s:String>
 	<s:String x:Key="TipNodeDamping">Rope node velocity damping</s:String>
 	
-	<!--物理模型定义页.cs-->
+	<s:String x:Key="PhysicsTypePatch">Patch Physics</s:String>
+	<s:String x:Key="TitlePatchMaterial">Patch Material</s:String>
+	<s:String x:Key="TitleAreaDensity">Area Density</s:String>
+	<s:String x:Key="TitleAeroModelType">Aero Model Type</s:String>
+	<s:String x:Key="TitleTCMinFirst">TC Min First</s:String>
+	<s:String x:Key="TitleTCMaxFirst">TC Max First</s:String>
+	<s:String x:Key="TitleTCMinSecond">TC Min Second</s:String>
+	<s:String x:Key="TitleTCMaxSecond">TC Max Second</s:String>
+	<s:String x:Key="TitleXRes">X Res</s:String>
+	<s:String x:Key="TitleYRes">Y Res</s:String>
+	<s:String x:Key="TitleXSize">X Size</s:String>
+	<s:String x:Key="TitleYSize">Y Size</s:String>
+	<s:String x:Key="TitleDragCoefficient">Drag Coefficient</s:String>
+	<s:String x:Key="TitleLiftCoefficient">Lift Coefficient</s:String>
+	
+	<!--PhysicsUC.cs-->
 	<s:String x:Key="MessageResultPhysSaved">Physics definition saved.</s:String>
 	<s:String x:Key="DialogTitleChooseRope">Choose Rope Material File(mat file or its image file)</s:String>
-	<s:String x:Key="DialogFilterChooseRope">Rope Material File|*.mat|Rope Image File|*.tga;*.dds</s:String>
-	<s:String x:Key="MessageErrorChooseRope">Chosen file must be mat file or its image file</s:String>
+	<s:String x:Key="DialogTitleChoosePatch">Choose Patch Material File(mat file or its image file)</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">Rope Material File|*.mat|Rope Image File|*.tga;*.dds</s:String>
+	<s:String x:Key="MessageErrorChooseMaterial">Chosen file must be mat file or its image file</s:String>
 	
 	
 	
@@ -471,7 +493,7 @@
 	<s:String
 		x:Key="Acc.curtain_f">Curtains(ETS2)</s:String>
 	<s:String
-		x:Key="Acc.drvplate">Driver's Plate</s:String>
+		x:Key="Acc.drv_plate">Driver's Plate</s:String>
 	<s:String
 		x:Key="Acc.codrv_plate">Co-Driver's Plate</s:String>
 	<s:String

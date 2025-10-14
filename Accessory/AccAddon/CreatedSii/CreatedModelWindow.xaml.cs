@@ -16,7 +16,7 @@ public partial class CreatedModelWindow : BaseWindow
 {
 	private readonly CreatedModelBinding Binding = new();
 
-	readonly string ProjectLocation = Instances.ModelProject.ProjectLocation;
+	readonly string ProjectLocation = Instances.ProjectLocation;
 
 	public ObservableCollection<CreatedModel> CreatedModelList {
 		get => Binding.CreatedModelList; set => Binding.CreatedModelList = value;
@@ -42,7 +42,7 @@ public partial class CreatedModelWindow : BaseWindow
 		LoadCreatedSii();
 	}
 
-	private readonly DirectoryInfo defDir = new(Paths.DefTruckDir(Instances.ModelProject.ProjectLocation));
+	private readonly DirectoryInfo defDir = new(Paths.DefTruckDir(Instances.ProjectLocation));
 	readonly Dictionary<string, CreatedModel> ModelPair = [];
 	private void LoadCreatedSii() {
 		ModelPair.Clear();

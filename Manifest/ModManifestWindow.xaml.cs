@@ -3,7 +3,7 @@ using SCS_Mod_Helper.Accessory;
 using SCS_Mod_Helper.Accessory.AccAddon;
 using SCS_Mod_Helper.Accessory.AccAddon.CreatedSii;
 using SCS_Mod_Helper.Accessory.AccHookup;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Hookups;
 using SCS_Mod_Helper.Language;
@@ -24,30 +24,27 @@ namespace SCS_Mod_Helper.Manifest;
 /// ProjectPrepare.xaml 的交互逻辑
 /// </summary>
 public partial class ModManifestWindow: BaseWindow {
-	private readonly ModProject ModProject = Instances.ModelProject;
+	private readonly ManifestBinding binding = new();
 
 	string ProjectLocation {
-		get => ModProject.ProjectLocation; set => ModProject.ProjectLocation = value;
-	}
-	string Author {
-		get => ModProject.Author; set => ModProject.Author = value;
+		get => binding.ProjectLocation; set => binding.ProjectLocation = value;
 	}
 	string IconName {
-		get => ModProject.IconName; set => ModProject.IconName = value;
+		get => binding.IconName; set => binding.IconName = value;
 	}
 	string DescriptionName {
-		get => ModProject.DescriptionName; set => ModProject.DescriptionName = value;
+		get => binding.DescriptionName; set => binding.DescriptionName = value;
 	}
 
 	DescLocale CurrentLocale {
-		get => ModProject.CurrentLocale; set => ModProject.CurrentLocale = value;
+		get => binding.CurrentLocale; set => binding.CurrentLocale = value;
 	}
 	string DescContent {
-		get => ModProject.DescContent; set => ModProject.DescContent = value;
+		get => binding.DescContent; set => binding.DescContent = value;
 	}
 
-	ObservableCollection<LanguageItem> Languages => ModProject.Languages;
-	Dictionary<string, DescLocale> LocaleDict => ModProject.LocaleDict;
+	ObservableCollection<LanguageItem> Languages => binding.Languages;
+	Dictionary<string, DescLocale> LocaleDict => binding.LocaleDict;
 
 	public ModManifestWindow() {
 		InitializeComponent();
@@ -56,23 +53,15 @@ public partial class ModManifestWindow: BaseWindow {
 
 		LoadFiles();
 
-		GridMain.DataContext = ModProject;
-	}
-
-	private void SaveOnClosing(object? sender, CancelEventArgs e) {
-		ModBasic.Default.ProjectLocation = ProjectLocation;
-		ModBasic.Default.Author = Author;
-		ModBasic.Default.Save();
-
-		AccAppIO.SavePhysicsList();
+		GridMain.DataContext = binding;
 	}
 
 	private void LoadFiles() {
-		ModProject.InitData();
+		binding.InitData();
 		var manifest = Paths.ManifestFile(ProjectLocation);
 		if (!File.Exists(manifest)) 
 			return;
-		AccDataIO.LoadManifest(ModProject);
+		AccDataIO.LoadManifest(binding);
 	}
 
 	private void LoadLanguage() {
@@ -86,7 +75,7 @@ public partial class ModManifestWindow: BaseWindow {
 		var folderDialog = new OpenFolderDialog {
 			Multiselect = false
 		};
-		var history = ModProject.ProjectLocation;
+		var history = binding.ProjectLocation;
 		if (history.Length > 0) {
 			do {
 				history = new DirectoryInfo(history).Parent!.FullName;
@@ -99,8 +88,6 @@ public partial class ModManifestWindow: BaseWindow {
 		if (folderDialog.ShowDialog() == true) {
 			if (Directory.Exists(folderDialog.FolderName)) {
 				void ExecuteLoad() {
-					ModBasic.Default.ProjectLocation = folderDialog.FolderName;
-					ModBasic.Default.Save();
 					ProjectLocation = folderDialog.FolderName;
 					LoadFiles();
 				}
@@ -128,8 +115,8 @@ public partial class ModManifestWindow: BaseWindow {
 			try {
 				Bitmap bitmap = new(ofd.FileName);
 				if (bitmap.Width == 276 && bitmap.Height == 162) {
-					ModProject.ModIcon = Util.LoadIcon(ofd.FileName);
-					ModProject.NewIcon = true;
+					binding.ModIcon = Util.LoadIcon(ofd.FileName);
+					binding.NewIcon = true;
 				} else {
 					var result = MessageBox.Show(this, GetString("MessageIconErrWrongSize"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 					if (result == MessageBoxResult.Yes)
@@ -183,7 +170,7 @@ public partial class ModManifestWindow: BaseWindow {
 
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSave) {
-			AccDataIO.SaveManifest(ModProject);
+			AccDataIO.SaveManifest(binding);
 		} else if (sender == ButtonAbout) {
 			string? a = null;
 			a!.ToString();
@@ -221,7 +208,7 @@ public partial class ModManifestWindow: BaseWindow {
 		} else if (sender == ButtonAccHookup) {
 			window = new AccHookupWindow();
 		} else if (sender == ButtonPhysics) {
-			window = new PhysicsToyWindow();
+			window = new PhysicsWindow();
 		} else if (sender == ButtonCleanSii) {
 			window = new CreatedModelWindow();
 		} else if (sender == ButtonCreateHookup) {

@@ -1,4 +1,6 @@
 ﻿using SCS_Mod_Helper.Language;
+using SCS_Mod_Helper.Main;
+using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -6,11 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Manifest {
-	public class ModProject: INotifyPropertyChanged {
-		public ModProject() {
-			mProjectLocation = ModBasic.Default.ProjectLocation;
-			mAuthor = ModBasic.Default.Author;
-
+	public class ManifestBinding: INotifyPropertyChanged {
+		public ManifestBinding() {
 			mLocales = DescLocale.GetLocales(out Dictionary<string, DescLocale> localeDict);
 			LocaleDict = localeDict;
 			LanguageUtil.ChangeLanguage += ChangeLocales;
@@ -43,13 +42,15 @@ namespace SCS_Mod_Helper.Manifest {
 			}
 		}
 
-		private string mProjectLocation;
 		public string ProjectLocation {
-			get => mProjectLocation;
+			get => Instances.BasicInfo.ProjectLocation;
 			set {
-				mProjectLocation = value;
+				Instances.BasicInfo.ProjectLocation = value;
 				InvokeChange();
 				InvokeChange(nameof(ProjectExist));
+
+				ModBasic.Default.ProjectLocation = value;
+				ModBasic.Default.Save();
 			}
 		}
 		public bool ProjectExist => Directory.Exists(ProjectLocation);
@@ -72,12 +73,10 @@ namespace SCS_Mod_Helper.Manifest {
 			}
 		}
 
-		private string mAuthor;
-
 		public string Author {
-			get => mAuthor;
+			get => Instances.BasicInfo.Author;
 			set {
-				mAuthor = value;
+				Instances.BasicInfo.Author = value;
 				InvokeChange();
 			}
 		}
@@ -116,6 +115,27 @@ namespace SCS_Mod_Helper.Manifest {
 
 		private readonly ObservableCollection<string> mCategoryList = [];
 		public ObservableCollection<string> CategoryList => mCategoryList;
+
+		public void RefreshCategory() {
+			InvokeChange(nameof(CategoryTruck));
+			InvokeChange(nameof(CategoryTrailer));
+			InvokeChange(nameof(CategoryInterior));
+			InvokeChange(nameof(CategoryTuningParts));
+			InvokeChange(nameof(CategoryAiTraffic));
+			InvokeChange(nameof(CategorySound));
+			InvokeChange(nameof(CategoryPaintJob));
+			InvokeChange(nameof(CategoryCargoPack));
+			InvokeChange(nameof(CategoryMap));
+			InvokeChange(nameof(CategoryUI));
+			InvokeChange(nameof(CategoryWeatherSetup));
+			InvokeChange(nameof(CategoryPhysics));
+			InvokeChange(nameof(CategoryGraphics));
+			InvokeChange(nameof(CategoryModel));
+			InvokeChange(nameof(CategoryMovers));
+			InvokeChange(nameof(CategoryWalkers));
+			InvokeChange(nameof(CategoryPrefabs));
+			InvokeChange(nameof(CategoryOther));
+		}
 
 		public bool CategoryTruck { get => GetCategory("truck"); set => SetCategory(value, "truck"); }
 		public bool CategoryTrailer { get => GetCategory("trailer"); set => SetCategory(value, "trailer"); }

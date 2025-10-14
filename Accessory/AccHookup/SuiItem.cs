@@ -1,4 +1,4 @@
-﻿using SCS_Mod_Helper.Accessory.PhysicsToy;
+﻿using SCS_Mod_Helper.Accessory.Physics;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -20,7 +20,7 @@ namespace SCS_Mod_Helper.Accessory.AccHookup {
 
 		public readonly ObservableCollection<AccessoryHookupData> HookupItems = [];
 
-		public readonly ObservableCollection<PhysicsToyData> PhysicsItems = [];
+		public readonly ObservableCollection<PhysicsData> PhysicsItems = [];
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 		private void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));

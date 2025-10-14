@@ -1,6 +1,6 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -10,7 +10,6 @@ namespace SCS_Mod_Helper.Accessory;
     class AccAppIO {
 
 	private const string FileHeader = "SCS Model Helper";
-	private const string NamePhysName = "phys_name";
 	private const string EqualMark = "|=|";
 
 	private static int TabCount = 0;
@@ -19,10 +18,17 @@ namespace SCS_Mod_Helper.Accessory;
 		sw.WriteLine(extra);
 	}
 
-	private static void WritePhysHeader(StreamWriter sw, string physName) {
+	private const string NamePhysToyName = "phys_toy_name";
+	private static void WritePhysToyHeader(StreamWriter sw, string physName) {
 		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NamePhysName}:{physName}");
+		sw.WriteLine($"{NamePhysToyName}:{physName}");
 	}
+	private const string NamePhysPatchName = "phys_patch_name";
+	private static void WritePhysPatchHeader(StreamWriter sw, string physName) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NamePhysPatchName}:{physName}");
+	}
+
 	private static void WriteLine(StreamWriter sw, string name, object? valueObj) {
 		if (valueObj == null)
 			return;
@@ -97,50 +103,71 @@ namespace SCS_Mod_Helper.Accessory;
 		TabCount = 0;
 		using StreamWriter sw = new(physFile);
 		WriteFileHeader(sw, ":Physics");
-		foreach (var phys in PhysicsItems) {
-			WritePhysHeader(sw, phys.PhysicsName);
-			BraceIn(sw);
-			WriteLine(sw, AccDataIO.NamePTModel, phys.ModelPath);
-			WriteLine(sw, AccDataIO.NamePTColl, phys.CollPath);
-			WriteLine(sw, AccDataIO.NamePTLook, phys.Look);
-			WriteLine(sw, AccDataIO.NamePTVariant, phys.Variant);
+		foreach (var phys in PhysicsItems) {//todo 读写physics patch data
+			if (phys is PhysicsToyData toyData) {
+				WritePhysToyHeader(sw, toyData.PhysicsName);
+				BraceIn(sw);
+				WriteLine(sw, AccDataIO.NamePTModel, toyData.ModelPath);
+				WriteLine(sw, AccDataIO.NamePTColl, toyData.CollPath);
+				WriteLine(sw, AccDataIO.NamePTLook, toyData.Look);
+				WriteLine(sw, AccDataIO.NamePTVariant, toyData.Variant);
 
-			WriteLine(sw, AccDataIO.NamePTToyType, phys.ToyType);
-			WriteLine(sw, AccDataIO.NamePTMass, phys.Mass);
-			WriteLine(sw, AccDataIO.NamePTCogOffset, phys.CogOffset);
-			WriteLine(sw, AccDataIO.NamePTLinearStiffness, phys.LinearStiffness);
-			WriteLine(sw, AccDataIO.NamePTLinearDamping, phys.LinearDamping);
-			WriteLine(sw, AccDataIO.NamePTLocatorHookOffset, phys.LocatorHookOffset);
-			WriteLine(sw, AccDataIO.NamePTRestPositionOffset, phys.RestPositionOffset);
-			WriteLine(sw, AccDataIO.NamePTRestRotationOffset, phys.RestRotationOffset);
-			foreach (var offset in phys.InstanceOffsetList) {
-				WriteLine(sw, AccDataIO.NamePTInstanceOffset, offset);
+				WriteLine(sw, AccDataIO.NamePTToyType, toyData.ToyType);
+				WriteLine(sw, AccDataIO.NamePTMass, toyData.Mass);
+				WriteLine(sw, AccDataIO.NamePTCogOffset, toyData.CogOffset);
+				WriteLine(sw, AccDataIO.NamePTLinearStiffness, toyData.LinearStiffness);
+				WriteLine(sw, AccDataIO.NamePTLinearDamping, toyData.LinearDamping);
+				WriteLine(sw, AccDataIO.NamePTLocatorHookOffset, toyData.LocatorHookOffset);
+				WriteLine(sw, AccDataIO.NamePTRestPositionOffset, toyData.RestPositionOffset);
+				WriteLine(sw, AccDataIO.NamePTRestRotationOffset, toyData.RestRotationOffset);
+				foreach (var offset in toyData.InstanceOffsetList) {
+					WriteLine(sw, AccDataIO.NamePTInstanceOffset, offset);
+				}
+				WriteLine(sw, AccDataIO.NamePTRopeMaterial, toyData.RopeMaterial);
+
+				WriteLine(sw, AccDataIO.NamePTAngularStiffness, toyData.AngularStiffness);
+				WriteLine(sw, AccDataIO.NamePTAngularDamping, toyData.AngularDamping);
+				WriteLine(sw, AccDataIO.NamePTAngularAmplitude, toyData.AngularAmplitude);
+
+				WriteLine(sw, AccDataIO.NamePTRopeWidth, toyData.RopeWidth);
+				WriteLine(sw, AccDataIO.NamePTRopeLength, toyData.RopeLength);
+				WriteLine(sw, AccDataIO.NamePTRopeHookOffset, toyData.RopeHookOffset);
+				WriteLine(sw, AccDataIO.NamePTRopeToyOffset, toyData.RopeToyOffset);
+				WriteLine(sw, AccDataIO.NamePTRopeResolution, toyData.RopeResolution);
+				WriteLine(sw, AccDataIO.NamePTPositionIterations, toyData.PositionIterations);
+				WriteLine(sw, AccDataIO.NamePTRopeLinearDensity, toyData.RopeLinearDensity);
+				WriteLine(sw, AccDataIO.NamePTNodeDamping, toyData.NodeDamping);
+				BraceOut(sw);
+			} else if (phys is PhysicsPatchData patchData) {
+				WritePhysPatchHeader(sw, patchData.PhysicsName);
+				BraceIn(sw);
+				WriteLine(sw, AccDataIO.NamePPMaterial, patchData.Material);
+				WriteLine(sw, AccDataIO.NamePPAreaDensity, patchData.AreaDensity);
+				WriteLine(sw, AccDataIO.NamePPAeroModelType, patchData.AeroModelType);
+				WriteLine(sw, AccDataIO.NamePPTCMinFirst, patchData.TCMinFirst);
+				WriteLine(sw, AccDataIO.NamePPTCMaxFirst, patchData.TCMaxFirst);
+				WriteLine(sw, AccDataIO.NamePPTCMinSecond, patchData.TCMinSecond);
+				WriteLine(sw, AccDataIO.NamePPTCMaxSecond, patchData.TCMaxSecond);
+				WriteLine(sw, AccDataIO.NamePPXRes, patchData.XRes);
+				WriteLine(sw, AccDataIO.NamePPYRes, patchData.YRes);
+				WriteLine(sw, AccDataIO.NamePPXSize, patchData.XSize);
+				WriteLine(sw, AccDataIO.NamePPYSize, patchData.YSize);
+				WriteLine(sw, AccDataIO.NamePPLinearStiffness, patchData.LinearStiffness);
+				WriteLine(sw, AccDataIO.NamePPDragCoefficient, patchData.DragCoefficient);
+				WriteLine(sw, AccDataIO.NamePPLiftCoefficient, patchData.LiftCoefficient);
+				BraceOut(sw);
 			}
-			WriteLine(sw, AccDataIO.NamePTRopeMaterial, phys.RopeMaterial);
-
-			WriteLine(sw, AccDataIO.NamePTAngularStiffness, phys.AngularStiffness);
-			WriteLine(sw, AccDataIO.NamePTAngularDamping, phys.AngularDamping);
-			WriteLine(sw, AccDataIO.NamePTAngularAmplitude, phys.AngularAmplitude);
-
-			WriteLine(sw, AccDataIO.NamePTRopeWidth, phys.RopeWidth);
-			WriteLine(sw, AccDataIO.NamePTRopeLength, phys.RopeLength);
-			WriteLine(sw, AccDataIO.NamePTRopeHookOffset, phys.RopeHookOffset);
-			WriteLine(sw, AccDataIO.NamePTRopeToyOffset, phys.RopeToyOffset);
-			WriteLine(sw, AccDataIO.NamePTRopeResolution, phys.RopeResolution);
-			WriteLine(sw, AccDataIO.NamePTPositionIterations, phys.PositionIterations);
-			WriteLine(sw, AccDataIO.NamePTRopeLinearDensity, phys.RopeLinearDensity);
-			WriteLine(sw, AccDataIO.NamePTNodeDamping, phys.NodeDamping);
-			BraceOut(sw);
 		}
 	}
 
-	public static void AddPhysicsToList(PhysicsToyData? physics) {
-		if (physics == null) return;
+	public static void AddPhysicsToList(PhysicsData? physics) {
+		if (physics == null) 
+			return;
 		PhysicsItems.Add(physics);
 	}
 
-	private static ObservableCollection<PhysicsToyData>? mPhysicsItems;
-	public static ObservableCollection<PhysicsToyData> PhysicsItems {
+	private static ObservableCollection<PhysicsData>? mPhysicsItems;
+	public static ObservableCollection<PhysicsData> PhysicsItems {
 		get {
 			if (mPhysicsItems == null)
 				LoadPhysicsList();
@@ -164,8 +191,8 @@ namespace SCS_Mod_Helper.Accessory;
 				if (line == "}")
 					break;
 				var name = line.Split(":");
-				if (name[0] == NamePhysName) {
-					PhysicsToyData phys = new(name[1].Trim());
+				if (name[0] == NamePhysToyName) {
+					PhysicsToyData toyData = new(name[1].Trim());
 					while ((line = sr.ReadLine()?.Trim()) != null) {
 						if (line.Length == 0 || line == "{")
 							continue;
@@ -179,84 +206,143 @@ namespace SCS_Mod_Helper.Accessory;
 						read[1] = read[1].Trim();
 						switch (read[0].Trim()) {
 							case AccDataIO.NamePTModel:
-								phys.ModelPath = read[1];
+								toyData.ModelPath = read[1];
 								break;
 							case AccDataIO.NamePTColl:
-								phys.CollPath = read[1];
+								toyData.CollPath = read[1];
 								break;
 							case AccDataIO.NamePTLook:
-								phys.Look = read[1];
+								toyData.Look = read[1];
 								break;
 							case AccDataIO.NamePTVariant:
-								phys.Variant = read[1];
+								toyData.Variant = read[1];
 								break;
 							case AccDataIO.NamePTToyType:
-								phys.ToyType = read[1];
+								toyData.ToyType = read[1];
 								break;
 							case AccDataIO.NamePTMass:
-								phys.Mass = FloatParse(read[1]);
+								toyData.Mass = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTCogOffset:
-								phys.CogOffset = FloatsParse(read[1]);
+								toyData.CogOffset = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTLinearStiffness:
-								phys.LinearStiffness = FloatParse(read[1]);
+								toyData.LinearStiffness = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTLinearDamping:
-								phys.LinearDamping = FloatParse(read[1]);
+								toyData.LinearDamping = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTLocatorHookOffset:
-								phys.LocatorHookOffset = FloatsParse(read[1]);
+								toyData.LocatorHookOffset = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTRestPositionOffset:
-								phys.RestPositionOffset = FloatsParse(read[1]);
+								toyData.RestPositionOffset = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTRestRotationOffset:
-								phys.RestRotationOffset = FloatsParse(read[1]);
+								toyData.RestRotationOffset = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTInstanceOffset:
 								var offset = FloatsParseNonNull(read[1]);
-								phys.InstanceOffsetList.Add(offset);
+								toyData.InstanceOffsetList.Add(offset);
 								break;
 							case AccDataIO.NamePTRopeMaterial:
-								phys.RopeMaterial = read[1];
+								toyData.RopeMaterial = read[1];
 								break;
 							case AccDataIO.NamePTAngularStiffness:
-								phys.AngularStiffness = FloatsParse(read[1]);
+								toyData.AngularStiffness = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTAngularDamping:
-								phys.AngularDamping = FloatsParse(read[1]);
+								toyData.AngularDamping = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTAngularAmplitude:
-								phys.AngularAmplitude = FloatsParse(read[1]);
+								toyData.AngularAmplitude = FloatsParse(read[1]);
 								break;
 							case AccDataIO.NamePTRopeWidth:
-								phys.RopeWidth = FloatParse(read[1]);
+								toyData.RopeWidth = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTRopeLength:
-								phys.RopeLength = FloatParse(read[1]);
+								toyData.RopeLength = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTRopeHookOffset:
-								phys.RopeHookOffset = FloatParse(read[1]);
+								toyData.RopeHookOffset = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTRopeToyOffset:
-								phys.RopeToyOffset = FloatParse(read[1]);
+								toyData.RopeToyOffset = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTRopeResolution:
-								phys.RopeResolution = UIntParse(read[1]);
+								toyData.RopeResolution = UIntParse(read[1]);
 								break;
 							case AccDataIO.NamePTPositionIterations:
-								phys.PositionIterations = UIntParse(read[1]);
+								toyData.PositionIterations = UIntParse(read[1]);
 								break;
 							case AccDataIO.NamePTRopeLinearDensity:
-								phys.RopeLinearDensity = FloatParse(read[1]);
+								toyData.RopeLinearDensity = FloatParse(read[1]);
 								break;
 							case AccDataIO.NamePTNodeDamping:
-								phys.NodeDamping = FloatParse(read[1]);
+								toyData.NodeDamping = FloatParse(read[1]);
 								break;
 						}
 					}
-					mPhysicsItems.Add(phys);
+					mPhysicsItems.Add(toyData);
+				} else if (name[0] == NamePhysPatchName) {
+					PhysicsPatchData patchData = new(name[1].Trim());
+					while ((line = sr.ReadLine()?.Trim()) != null) {
+						if (line.Length == 0 || line == "{")
+							continue;
+						if (line == "}")
+							break;
+						var read = line.Split(EqualMark);
+						if (read.Length == 1)
+							continue;
+						if (read.Length > 2)
+							read[1] = string.Join(EqualMark, read, 1, read.Length - 1);
+						read[1] = read[1].Trim();
+						switch (read[0].Trim()) {
+							case AccDataIO.NamePPMaterial:
+								patchData.Material = read[1];
+								break;
+							case AccDataIO.NamePPAreaDensity:
+								patchData.AreaDensity = FloatParse(read[1]);
+								break;
+							case AccDataIO.NamePPAeroModelType:
+								patchData.AeroModelType = read[1];
+								break;
+							case AccDataIO.NamePPTCMinFirst:
+								patchData.TCMinFirst = FloatsParse(read[1]);
+								break;
+							case AccDataIO.NamePPTCMaxFirst:
+								patchData.TCMaxFirst = FloatsParse(read[1]);
+								break;
+							case AccDataIO.NamePPTCMinSecond:
+								patchData.TCMinSecond = FloatsParse(read[1]);
+								break;
+							case AccDataIO.NamePPTCMaxSecond:
+								patchData.TCMaxSecond = FloatsParse(read[1]);
+								break;
+							case AccDataIO.NamePPXRes:
+								patchData.XRes = UIntParse(read[1]);
+								break;
+							case AccDataIO.NamePPYRes:
+								patchData.YRes = UIntParse(read[1]);
+								break;
+							case AccDataIO.NamePPXSize:
+								patchData.XSize = FloatParse(read[1]);
+								break;
+							case AccDataIO.NamePPYSize:
+								patchData.YSize = FloatParse(read[1]);
+								break;
+							case AccDataIO.NamePPLinearStiffness:
+								patchData.LinearStiffness = FloatParse(read[1]);
+								break;
+							case AccDataIO.NamePPDragCoefficient:
+								patchData.DragCoefficient = FloatParse(read[1]);
+								break;
+							case AccDataIO.NamePPLiftCoefficient:
+								patchData.LiftCoefficient = FloatParse(read[1]);
+								break;
+						}
+					}
+					mPhysicsItems.Add(patchData);
 				}
 			}
 		}
@@ -288,7 +374,7 @@ namespace SCS_Mod_Helper.Accessory;
 		using StreamWriter sw = new(dedFile);
 		WriteFileHeader(sw);
 		BraceIn(sw);
-		WriteLine(sw, NameProjectLocation, binding.ProjectLocation);
+		WriteLine(sw, NameProjectLocation, AccAddonBinding.ProjectLocation);
 		WriteLine(sw, NameModelName, binding.ModelName);
 
 		WriteLine(sw, NameDisplayName, binding.DisplayName);
@@ -377,7 +463,7 @@ namespace SCS_Mod_Helper.Accessory;
 			read[1] = read[1].Trim();
 			switch (read[0].Trim()) {
 				case NameProjectLocation:
-					var currentProjectLocation = Instances.ModelProject.ProjectLocation;
+					var currentProjectLocation = Instances.ProjectLocation;
 					if (currentProjectLocation != read[1]) {
 						var message = Util.GetString("MessageLoadDEDDifferentProject", read[1], currentProjectLocation);
 						var result = MessageBox.Show(message, Util.GetString("MessageTitleNotice"), MessageBoxButton.YesNo);

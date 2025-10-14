@@ -1,5 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Manifest;
@@ -19,7 +19,6 @@ namespace SCS_Mod_Helper.Accessory.AccAddon;
 /// </summary>
 public partial class AccAddonWindow: BaseWindow {
 	private readonly AccAddonBinding binding = new();
-	private readonly ModProject ModelProject = Instances.ModelProject;
 	private bool TruckExpandedETS2 {
 		get => binding.TruckExpandedETS2; set => binding.TruckExpandedETS2 = value;
 	}
@@ -38,7 +37,6 @@ public partial class AccAddonWindow: BaseWindow {
 		InitializeComponent();
 
 		GridMain.DataContext = binding;
-		TextProjectLocation.DataContext = ModelProject;
 
 		MenuModelType = (ContextMenu)Resources["MenuModelType"];
 		MenuLook = (ContextMenu)Resources["MenuLook"];
@@ -51,7 +49,16 @@ public partial class AccAddonWindow: BaseWindow {
 		binding.VariantList.CollectionChanged += (sender, e) => OnLVListChanged(MenuVariant, e);
 		binding.LoadLooksAndVariants();
 
-		OthersItem.ReadLines(binding.OthersList, AccAddonHistory.Default.Others);
+		OthersItem.ReadLines(binding.OthersList, AccAddonHistory.Default.Others, (dataName) => {
+			if (dataName.EndsWith(AccDataIO.NamePSuffix)) {
+				dataName = dataName[..^AccDataIO.NamePSuffix.Length];
+			}
+			foreach (var physItem in AccAppIO.PhysicsItems) {
+				if (physItem.PhysicsName == dataName) {
+					binding.PhysicsList.Add(physItem);
+				}
+			}
+		});
 
 		binding.LoadTrucks();
 
@@ -106,26 +113,12 @@ public partial class AccAddonWindow: BaseWindow {
 		ContextMenu cm = (ContextMenu)item.Parent;
 		if (cm == MenuStringRes) {
 			if (item.Name.Equals("openLocalization")) {
-				var modLocalization = new ModLocalizationWindow() {
-					Owner = this
-				};
-				modLocalization.ShowDialog();
-				if (modLocalization.HasChanges)
-					SetupStringResMenu();
+				AccessoryDataUtil.OpenLocalization(this, SetupStringResMenu);
 			} else {
-				var start = TextDisplayName.SelectionStart;
-				TextDisplayName.SelectedText = "";
-				var insert = $"@@{item.Name}@@";
-				binding.DisplayName = binding.DisplayName.Insert(start, insert);
-				start += insert.Length;
-				TextDisplayName.SelectionStart = start;
-				TextDisplayName.Focus();
+				AccessoryDataUtil.ApplyStringRes(TextDisplayName, item.Name);
 			}
 		} else if (cm == MenuOthers) {
-			OthersItem o = (OthersItem)item.DataContext;
-			var name = (string)item.Tag;
-			o.OthersName = name;
-			o.OthersNameTip = (string)item.Header;
+			AccessoryDataUtil.SetOtherItem(item);
 		} else {
 			Truck truck = (Truck)item.DataContext;
 			if (cm == MenuModelType) {
@@ -221,7 +214,7 @@ public partial class AccAddonWindow: BaseWindow {
 	}
 
 	private void ButtonPhysicsClick(object sender, RoutedEventArgs e) {
-		PhysicsToyWindow physicsWindow = new() {
+		PhysicsWindow physicsWindow = new() {
 			Owner = this,
 			ChooseMode = true,
 		};
@@ -230,8 +223,8 @@ public partial class AccAddonWindow: BaseWindow {
 			var selected = physicsWindow.SelectedPhysicsData;
 			OthersItem others = (OthersItem)((Button)sender).DataContext;
 			var physName = selected.PhysicsName;
-			if (!physName.EndsWith(AccDataIO.NamePTSuffix))
-				physName += AccDataIO.NamePTSuffix;
+			if (!physName.EndsWith(AccDataIO.NamePSuffix))
+				physName += AccDataIO.NamePSuffix;
 			others.OthersValue = physName;
 			int i = 0;
 			while (i < binding.PhysicsList.Count) {
@@ -315,14 +308,14 @@ public partial class AccAddonWindow: BaseWindow {
 	}
 
 	private void ButtonCoverValue(object sender, RoutedEventArgs e) {
-		void ForeachValue(Action<Truck> value, bool extraETS2 = true, bool extraATS = true) {
-			if (TruckExpandedETS2 && extraETS2) {
+		void ForeachValue(Action<Truck> value, bool? extraETS2 = true, bool? extraATS = true) {
+			if (TruckExpandedETS2 && (extraETS2 ?? true)) {
 				foreach (Truck t in TrucksETS2) {
 					if (t.Check)
 						value(t);
 				}
 			}
-			if (TruckExpandedATS && extraATS) {
+			if (TruckExpandedATS && (extraATS ?? true)) {
 				foreach (Truck t in TrucksATS) {
 					if (t.Check)
 						value(t);
@@ -330,8 +323,8 @@ public partial class AccAddonWindow: BaseWindow {
 			}
 		}
 		if (sender == ButtonCoverModelType) {
-			var acc = (ModelTypeInfo)TextModelType.SelectedItem!;
-			ForeachValue((t) => t.ModelType = TextModelType.Text, acc.ForETS2, acc.ForATS);
+			var acc = binding.CurrentModelType;
+			ForeachValue((t) => t.ModelType = binding.ModelType, acc?.ForETS2, acc?.ForATS);
 		} else if (sender == ButtonCoverLook) {
 			ForeachValue((t) => t.Look = TextLook.Text);
 		} else if (sender == ButtonCoverVariant) {

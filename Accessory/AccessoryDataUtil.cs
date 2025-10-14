@@ -1,11 +1,14 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory;
@@ -103,6 +106,34 @@ public static class AccessoryDataUtil {
 			result = values[0];
 		return result;
 	}
+
+	public static void OpenLocalization(Window window, Action setup) {
+		var modLocalization = new ModLocalizationWindow() {
+			Owner = window
+		};
+		modLocalization.ShowDialog();
+		if (modLocalization.HasChanges)
+			setup();
+	}
+
+	public static void ApplyStringRes(TextBox TextDisplayName, string resId) {
+
+		var start = TextDisplayName.SelectionStart;
+		TextDisplayName.SelectedText = "";
+		var insert = $"@@{resId}@@";
+		TextDisplayName.Text = TextDisplayName.Text.Insert(start, insert);
+		start += insert.Length;
+		TextDisplayName.SelectionStart = start;
+		TextDisplayName.Focus();
+	}
+
+	public static void SetOtherItem(MenuItem item) {
+		OthersItem o = (OthersItem)item.DataContext;
+		var name = (string)item.Tag;
+		o.OthersName = name;
+		o.OthersNameTip = (string)item.Header;
+	}
+
 	public static string GetInitialPath(params string[] paths) {
 		string? currentPath = null;
 		foreach (var path in paths) {
@@ -111,7 +142,7 @@ public static class AccessoryDataUtil {
 				break;
 			}
 		}
-		var projectLocation = Instances.ModelProject.ProjectLocation;
+		var projectLocation = Instances.ProjectLocation;
 		if (currentPath != null) {
 			currentPath = currentPath.Replace('/', '\\');
 			currentPath = projectLocation + currentPath;
@@ -135,7 +166,7 @@ public static class AccessoryDataUtil {
 	//图标
 	public static string? ChooseIcon(Window window) {
 		try {
-			string projectLocation = Instances.ModelProject.ProjectLocation;
+			string projectLocation = Instances.ProjectLocation;
 			if (projectLocation.Length == 0)
 				throw new(Util.GetString("MessageProjectLocationFirst"));
 			var pathAcc = Paths.AccessoryDir(projectLocation);
@@ -179,7 +210,7 @@ public static class AccessoryDataUtil {
 	/// 输出：mat文件的绝对路径
 	/// </summary>
 	public static string? CheckIconFileExistence(Window window, string pathAcc, DirectoryInfo iconFile) {//如果图标不在accessory文件夹内，就只能选择accessory文件夹生成
-		string projectLocation = Instances.ModelProject.ProjectLocation;
+		string projectLocation = Instances.ProjectLocation;
 
 		var iconParent = iconFile.Parent!.FullName;
 
@@ -237,16 +268,19 @@ public static class AccessoryDataUtil {
 		return siiIconLocation;
 	}
 
-	public static string? ChooseRope() {
-		string projectLocation = Instances.ModelProject.ProjectLocation;
+	public static string? ChooseRope() => ChooseMaterial(Util.GetString("DialogTitleChooseRope"));
+	public static string? ChoosePatch() => ChooseMaterial(Util.GetString("DialogTitleChoosePatch"));
+
+	private static string? ChooseMaterial(string title) {
+		string projectLocation = Instances.ProjectLocation;
 		if (projectLocation.Length == 0)
 			throw new(Util.GetString("MessageProjectLocationFirst"));
 		var fileDialog = new OpenFileDialog {
 			Multiselect = false,
 			DefaultDirectory = projectLocation,
 			DefaultExt = "mat",
-			Title = Util.GetString("DialogTitleChooseRope"),
-			Filter = Util.GetFilter("DialogFilterChooseRope"),
+			Title = title,
+			Filter = Util.GetFilter("DialogFilterChooseMaterial"),
 		};
 		if (!fileDialog.InitialDirectory.StartsWith(projectLocation))
 			fileDialog.InitialDirectory = projectLocation;
@@ -270,11 +304,11 @@ public static class AccessoryDataUtil {
 			string inProjectPath = path.Replace(projectLocation, "");
 			return inProjectPath.Replace('\\', '/');
 		} else
-			throw new(Util.GetString("MessageErrorChooseRope"));
+			throw new(Util.GetString("MessageErrorChooseMaterial"));
 	}
 
 	private static string? CheckRopeMatExistence(DirectoryInfo iconFile) {
-		string projectLocation = Instances.ModelProject.ProjectLocation;
+		string projectLocation = Instances.ProjectLocation;
 
 		var deExt = iconFile.FullName[..^4];
 		var matPath = deExt + ".mat";

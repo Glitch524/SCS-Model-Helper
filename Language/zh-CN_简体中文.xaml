@@ -197,9 +197,15 @@
 	
 	<!--物理模型定义页-->
 	<s:String x:Key="TitlePhysicsToyData">设置物理模型</s:String>
+	<s:String x:Key="MsgPhysics1">定义物理模型，在主体模型定义添加data并指定即可添加物理模型</s:String>
+	<s:String x:Key="MsgPhysics2">选择一个物理定义插入到模型定义中</s:String>
+	
 	<s:String x:Key="HeaderPhysicsName">物理定义</s:String>
 	<s:String x:Key="ButtonAddToOthers">添加到“其他参数”</s:String>
 	<s:String x:Key="ButtonSaveToPhysicList">保存到软件的物理列表</s:String>
+	<s:String x:Key="TitlePhysicsType">物理类型</s:String>
+	
+	<s:String x:Key="PhysicsTypeToy">玩具物理定义 (physics_toy_data)</s:String>
 	<s:String x:Key="TitlePhysicsName">物理定义名称</s:String>
 	<s:String x:Key="TitleToyType">玩具类型</s:String>
 	<s:String x:Key="TitleToyMass">重量</s:String>
@@ -237,11 +243,28 @@
 	<s:String x:Key="TitleNodeDamping">节点阻尼</s:String>
 	<s:String x:Key="TipNodeDamping">绳子节点的速度阻尼</s:String>
 	
+	<s:String x:Key="PhysicsTypePatch">布片物理定义 (physics_patch_data)</s:String>
+	<s:String x:Key="TitlePatchMaterial">布片材质</s:String>
+	<s:String x:Key="TitleAreaDensity">面积密度</s:String>
+	<s:String x:Key="TitleAeroModelType">空气动力模型类型</s:String>
+	<s:String x:Key="TitleTCMinFirst">TC Min First</s:String>
+	<s:String x:Key="TitleTCMaxFirst">TC Max First</s:String>
+	<s:String x:Key="TitleTCMinSecond">TC Min Second</s:String>
+	<s:String x:Key="TitleTCMaxSecond">TC Max Second</s:String>
+	<s:String x:Key="TitleXRes">X Res</s:String>
+	<s:String x:Key="TitleYRes">Y Res</s:String>
+	<s:String x:Key="TitleXSize">X Size</s:String>
+	<s:String x:Key="TitleYSize">Y Size</s:String>
+	<s:String x:Key="TitleDragCoefficient">阻力系数</s:String>
+	<s:String x:Key="TitleLiftCoefficient">升力系数</s:String>
+	
+	
 	<!--物理模型定义页.cs-->
 	<s:String x:Key="MessageResultPhysSaved">物理定义已保存</s:String>
 	<s:String x:Key="DialogTitleChooseRope">选择绳子材质文件（mat文件或贴图文件）</s:String>
-	<s:String x:Key="DialogFilterChooseRope">绳子材质文件|*.mat|绳子贴图文件|*.tga;*.dds</s:String>
-	<s:String x:Key="MessageErrorChooseRope">选择的文件必须是mat文件或其贴图，否则这么写也没用的哦</s:String>
+	<s:String x:Key="DialogTitleChoosePatch">选择布料材质文件（mat文件或贴图文件）</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">材质文件|*.mat|绳子贴图文件|*.tga;*.dds</s:String>
+	<s:String x:Key="MessageErrorChooseMaterial">选择的文件必须是mat文件或其贴图，否则这么写也没用的哦</s:String>
 	
 	
 	
@@ -395,7 +418,7 @@
 	<!--饰品位置-->
 	<s:String x:Key="Acc.cup_holder">杯架套件</s:String>
 	<s:String x:Key="Acc.curtain_f">窗帘（欧卡）</s:String>
-	<s:String x:Key="Acc.drvplate">驾驶员铭牌</s:String>
+	<s:String x:Key="Acc.drv_plate">驾驶员铭牌</s:String>
 	<s:String x:Key="Acc.codrv_plate">副驾驶铭牌</s:String>
 	<s:String x:Key="Acc.flag_l">左侧车窗旗帜（欧卡）</s:String>
 	<s:String x:Key="Acc.flag_r">右侧车窗旗帜（欧卡）</s:String>

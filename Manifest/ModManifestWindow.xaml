@@ -7,7 +7,7 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Manifest"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
-	d:DataContext="{d:DesignInstance Type=local:ModProject}"
+	d:DataContext="{d:DesignInstance Type=local:ManifestBinding}"
 	mc:Ignorable="d"
 	Title="{DynamicResource TitleModManifest}"
 	WindowStartupLocation="CenterOwner"
@@ -15,8 +15,7 @@
 	Width="1100"
 	SizeToContent="Height"
 	Padding="0,0,10,0"
-	VerticalAlignment="Top"
-	Closing="SaveOnClosing">
+	VerticalAlignment="Top">
 	<base:BaseWindow.Resources>
 		<utils:BooleanVisibilityConverter
 			x:Key="BooleanVisibilityConverter" />
@@ -89,7 +88,6 @@
 					IsReadOnly="True"
 					TextWrapping="Wrap"
 					VerticalAlignment="Top"
-					d:DataContext="{d:DesignInstance Type=local:ModProject}"
 					Text="{Binding ProjectLocation}">
 					<TextBox.Style>
 						<Style

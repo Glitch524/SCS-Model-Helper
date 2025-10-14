@@ -31,7 +31,7 @@ public partial class HookupsWindow: BaseWindow {
 
 	public HookupsWindow() {
 		InitializeComponent();
-		ProjectLocation = Instances.ModelProject.ProjectLocation;
+		ProjectLocation = Instances.ProjectLocation;
 		PanelMain.DataContext = HookupInfo;
 	}
 

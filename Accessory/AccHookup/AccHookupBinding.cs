@@ -1,5 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Utils;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
@@ -12,10 +12,9 @@ using SCS_Mod_Helper.Accessory.AccAddon.Items;
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
 class AccHookupBinding: INotifyPropertyChanged {
-	private readonly ModProject ModelProject = Instances.ModelProject;
 
 	public AccHookupBinding() { }
-	public string ProjectLocation => ModelProject.ProjectLocation;
+	public static string ProjectLocation => Instances.ProjectLocation;
 
 	private string mStorageName = "";
 	public string StorageName {
@@ -205,10 +204,10 @@ class AccHookupBinding: INotifyPropertyChanged {
 			IconName = icon;
 	}
 
-	public void AddPhysToOthersList(PhysicsToyData? physicsToy) {
-		if (CurrentHookupItem == null || physicsToy == null)
+	public void AddPhysToOthersList(PhysicsData? physics) {
+		if (CurrentHookupItem == null || physics == null)
 			return;
-		var physName = physicsToy.PhysicsName;
+		var physName = physics.PhysicsName;
 		physName += ".phys_data";
 		var othersList = CurrentHookupItem.OthersList;
 		othersList.Add(new("data", physName));

@@ -7,7 +7,7 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.AccHookup"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
-	xmlns:phystoy="clr-namespace:SCS_Mod_Helper.Accessory.PhysicsToy"
+	xmlns:phystoy="clr-namespace:SCS_Mod_Helper.Accessory.Physics"
 	d:DataContext="{d:DesignInstance Type=local:AccHookupBinding}"
 	mc:Ignorable="d"
 	WindowStartupLocation="CenterOwner"
@@ -506,6 +506,7 @@
 						TextWrapping="Wrap"
 						MaxLines="1"
 						Text="{Binding CurrentHookupItem.ModelName, UpdateSourceTrigger=PropertyChanged}"
+						Foreground="{Binding CurrentHookupItem.ModelNameForeground}"
 						VerticalAlignment="Top">
 						<TextBox.Style>
 							<Style
@@ -1232,7 +1233,7 @@
 			HorizontalAlignment="Stretch"
 			VerticalAlignment="Center" />
 
-		<phystoy:PhysicsToyUC
+		<phystoy:PhysicsUC
 			x:Name="UCPhysics"
 			d:Height="412"
 			Grid.Row="3"

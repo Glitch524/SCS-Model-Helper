@@ -54,6 +54,7 @@
 			x:Name="TextName"
 			TextWrapping="Wrap"
 			Text="{Binding HookupName, UpdateSourceTrigger=PropertyChanged}"
+			Foreground="{Binding HookupNameForeground}"
 			Height="{Binding ActualHeight, ElementName=TextModel, Mode=OneWay}" />
 		<TextBlock
 			Margin="0,10,0,0"

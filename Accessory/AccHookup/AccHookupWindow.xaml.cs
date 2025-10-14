@@ -1,5 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
@@ -81,21 +81,12 @@ public partial class AccHookupWindow: BaseWindow {
 		ContextMenu cm = (ContextMenu)item.Parent;
 		if (cm == MenuStringRes) {
 			if (item.Name.Equals("openLocalization")) {
-				var modLocalization = new ModLocalizationWindow() {
-					Owner = this
-				};
-				modLocalization.ShowDialog();
-				if (modLocalization.HasChanges)
-					SetupStringResMenu();
+				AccessoryDataUtil.OpenLocalization(this, SetupStringResMenu);
 			} else {
-				var start = TextDisplayName.SelectionStart;
-				Binding.DisplayName = Binding.DisplayName.Insert(start, $"@@{item.Name}@@");
+				AccessoryDataUtil.ApplyStringRes(TextDisplayName, item.Name);
 			}
 		} else if (cm == MenuOthers) {
-			OthersItem o = (OthersItem)item.DataContext;
-			var name = (string)item.Tag;
-			o.OthersName = name;
-			o.OthersNameTip = (string)item.Header;
+			AccessoryDataUtil.SetOtherItem(item);
 		}
 	}
 
@@ -127,7 +118,7 @@ public partial class AccHookupWindow: BaseWindow {
 	}
 
 	private void ButtonPhysDataClick(object sender, RoutedEventArgs e) {
-		PhysicsToyWindow physicsWindow = new() {
+		PhysicsWindow physicsWindow = new() {
 			Owner = this,
 			ChooseMode = true,
 		};
@@ -136,8 +127,8 @@ public partial class AccHookupWindow: BaseWindow {
 			var selected = physicsWindow.SelectedPhysicsData;
 			OthersItem others = (OthersItem)((Button)sender).DataContext;
 			var physName = selected.PhysicsName;
-			if (!physName.EndsWith(AccDataIO.NamePTSuffix))
-				physName += AccDataIO.NamePTSuffix;
+			if (!physName.EndsWith(AccDataIO.NamePSuffix))
+				physName += AccDataIO.NamePSuffix;
 			others.OthersValue = physName;
 			UCPhysics.PhysicsListAdd(selected);
 		}

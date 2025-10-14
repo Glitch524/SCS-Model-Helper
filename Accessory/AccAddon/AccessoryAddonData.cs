@@ -1,12 +1,10 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.PhysicsToy;
-using SCS_Mod_Helper.Manifest;
+using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
 public class AccessoryAddonData: AccessoryData {
-	private readonly ModProject ModelProject = Instances.ModelProject;
 	public AccessoryAddonData() : base(
 		AccAddonHistory.Default.ModelName,
 		AccAddonHistory.Default.DisplayName,
@@ -24,8 +22,6 @@ public class AccessoryAddonData: AccessoryData {
 	}
 
 	public void SaveHistory() {
-		ModBasic.Default.ProjectLocation = ProjectLocation;
-		ModBasic.Default.Save();
 		AccAddonHistory.Default.ModelName = ModelName;
 		AccAddonHistory.Default.DisplayName = DisplayName;
 		try {
@@ -49,7 +45,7 @@ public class AccessoryAddonData: AccessoryData {
 		AccAddonHistory.Default.Save();
 	}
 
-	public string ProjectLocation => ModelProject.ProjectLocation;
+	public static string ProjectLocation => Instances.ProjectLocation;
 
 	private string mModelPath;
 	public string ModelPath {
@@ -87,7 +83,7 @@ public class AccessoryAddonData: AccessoryData {
 		}
 	}
 
-	public List<PhysicsToyData> PhysicsList = [];
+	public List<PhysicsData> PhysicsList = [];
 
 		
 
