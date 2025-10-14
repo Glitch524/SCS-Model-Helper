@@ -268,10 +268,12 @@ public static class AccessoryDataUtil {
 		return siiIconLocation;
 	}
 
-	public static string? ChooseRope() => ChooseMaterial(Util.GetString("DialogTitleChooseRope"));
-	public static string? ChoosePatch() => ChooseMaterial(Util.GetString("DialogTitleChoosePatch"));
+	public static string? ChooseRope() => ChooseMaterial(MatTypeRope, Util.GetString("DialogTitleChooseRope"));
+	public static string? ChoosePatch() => ChooseMaterial(MatTypePatch, Util.GetString("DialogTitleChoosePatch"));
 
-	private static string? ChooseMaterial(string title) {
+	private const int MatTypeRope = 1;
+	private const int MatTypePatch = 2;
+	private static string? ChooseMaterial(int type, string title) {
 		string projectLocation = Instances.ProjectLocation;
 		if (projectLocation.Length == 0)
 			throw new(Util.GetString("MessageProjectLocationFirst"));
@@ -295,7 +297,7 @@ public static class AccessoryDataUtil {
 			pathCheck = pathCheck.Replace(projectLocation, "");
 			if (pathCheck.Split(' ', '(', ')').Length > 1) //路径或文件名不能有空格或括号
 				throw new(Util.GetString("MessageIconInvalidChar"));
-			var matLocation = CheckRopeMatExistence(iconFile);
+			var matLocation = CheckRopeMatExistence(type, iconFile);
 			if (matLocation == null)
 				return null;
 			matLocation = matLocation.Replace(projectLocation, "");
@@ -307,7 +309,7 @@ public static class AccessoryDataUtil {
 			throw new(Util.GetString("MessageErrorChooseMaterial"));
 	}
 
-	private static string? CheckRopeMatExistence(DirectoryInfo iconFile) {
+	private static string? CheckRopeMatExistence(int type, DirectoryInfo iconFile) {
 		string projectLocation = Instances.ProjectLocation;
 
 		var deExt = iconFile.FullName[..^4];
@@ -326,14 +328,20 @@ public static class AccessoryDataUtil {
 				sw.WriteLine("addr");
 				sw.WriteLine("    clamp_to_edge");
 				sw.WriteLine("    clamp_to_edge");
-				sw.WriteLine("nocompress");
 			}
+			tobjPath = new FileInfo(tobjPath).Name;
 			{
 				using StreamWriter sw = new(matPath);
-				sw.WriteLine("material: \"ui\"");
+				if (type == MatTypeRope)
+					sw.WriteLine("material: \"eut2.dif.spec.shadow\"");
+				else
+					sw.WriteLine("material: \"ui\"");
 				sw.WriteLine("{");
 				sw.WriteLine($"\ttexture: \"{tobjPath}\"");
-				sw.WriteLine($"\ttexture_name: \"texture_base\"");
+				if (type == MatTypeRope)
+					sw.WriteLine($"\ttexture_name: \"texture_base\"");
+				else
+					sw.WriteLine($"\ttexture_name: \"texture\"");
 				sw.WriteLine("}");
 			}
 		}
