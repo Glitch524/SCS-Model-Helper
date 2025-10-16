@@ -169,30 +169,6 @@ namespace SCS_Mod_Helper.Accessory.AccAddon {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("init")]
-        public string TruckHistoryETS2 {
-            get {
-                return ((string)(this["TruckHistoryETS2"]));
-            }
-            set {
-                this["TruckHistoryETS2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("init")]
-        public string TruckHistoryATS {
-            get {
-                return ((string)(this["TruckHistoryATS"]));
-            }
-            set {
-                this["TruckHistoryATS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool DeleteUnchecked {
             get {

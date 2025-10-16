@@ -5,6 +5,8 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Shapes;
 
 namespace SCS_Mod_Helper.Accessory; 
     class AccAppIO {
@@ -571,16 +573,16 @@ namespace SCS_Mod_Helper.Accessory;
 				string? header = trucksHeader[i];
 				switch (header) {
 					case nameof(Truck.TruckID):
-						indexesOfTrucks[Truck.IndexTruckID] = i;
+						indexesOfTrucks[Truck.IndexDTruckID] = i;
 						break;
 					case nameof(Truck.ModelType):
-						indexesOfTrucks[Truck.IndexModelType] = i;
+						indexesOfTrucks[Truck.IndexDModelType] = i;
 						break;
 					case nameof(Truck.Look):
-						indexesOfTrucks[Truck.IndexLook] = i;
+						indexesOfTrucks[Truck.IndexDLook] = i;
 						break;
 					case nameof(Truck.Variant):
-						indexesOfTrucks[Truck.IndexVariant] = i;
+						indexesOfTrucks[Truck.IndexDVariant] = i;
 						break;
 				}
 			}
@@ -599,15 +601,176 @@ namespace SCS_Mod_Helper.Accessory;
 			while (i < lines.Count) {
 				string? line = lines[i];
 				var s = line.Split(DefaultData.ItemSplit);
-				if (truck.TruckID.Equals(s[Truck.IndexTruckID])) {
+				if (truck.TruckID.Equals(s[indexes[Truck.IndexDTruckID]])) {
 					truck.Check = true;
-					truck.ModelType = s[indexes[Truck.IndexModelType]];
-					truck.Look = s[indexes[Truck.IndexLook]];
-					truck.Variant = s[indexes[Truck.IndexVariant]];
+					truck.ModelType = s[indexes[Truck.IndexDModelType]];
+					truck.Look = s[indexes[Truck.IndexDLook]];
+					truck.Variant = s[indexes[Truck.IndexDVariant]];
 					lines.RemoveAt(i);
 				} else
 					i++;
 			}
 		}
+	}
+
+
+	private const string NameTruckVersion = "TruckVersion";
+	public static void SaveTruckList(bool ets2, ObservableCollection<Truck> trucks) {
+		var truckFile = ets2 ? Paths.TrucksETS2Path() : Paths.TrucksATSPath();
+		trucks.ToList();
+		if (trucks.Count == 0) {
+			File.Delete(truckFile);
+			return;
+		}
+		using StreamWriter sw = new(truckFile);
+		WriteFileHeader(sw);
+		BraceIn(sw);
+		WriteLine(sw, NameTruckVersion, DefaultData.TruckVersion);
+		WriteLine(sw, NameTrucksHeader, Truck.TruckHeader());
+		foreach (var truck in trucks) {
+			WriteLine(sw, ets2 ? NameTrucksETS2 : NameTrucksATS, truck.ToTruckLine());
+		}
+		BraceOut(sw);
+	}
+
+	public static void ClearTruckList() {
+		var ePath = Paths.TrucksETS2Path();
+		File.Delete(ePath);
+		var aPath = Paths.TrucksATSPath();
+		File.Delete(aPath);
+	}
+
+	public static void LoadTruckList(bool ets2, ObservableCollection<Truck> trucks) {
+		var truckFile = ets2 ? Paths.TrucksETS2Path() : Paths.TrucksATSPath();
+		List<Truck> loadedTrucks = [];
+		bool updateTruckName = false;
+		if (File.Exists(truckFile)) {
+			using StreamReader sr = new(truckFile);
+			string? line = sr.ReadLine();
+			if (line != null && line.StartsWith($"{FileHeader}")) {
+				string[]? trucksHeader = null;
+				List<string> trucksStrings = [];
+				while ((line = sr.ReadLine()?.Trim()) != null) {
+					if (line.Length == 0 || line == "{")
+						continue;
+					if (line == "}")
+						break;
+					var read = line.Split(EqualMark);
+					if (read.Length == 1)
+						continue;
+					if (read.Length > 2)
+						read[1] = string.Join(EqualMark, read, 1, read.Length - 1);
+					read[1] = read[1].Trim();
+					switch (read[0].Trim()) {
+						case NameTrucksHeader:
+							trucksHeader = read[1].Split(DefaultData.ItemSplit);
+							break;
+						case NameTruckVersion:
+							updateTruckName = read[1] != DefaultData.TruckVersion;
+							break;
+						case NameTrucksETS2:
+							if (ets2)
+								trucksStrings.Add(read[1]);
+							break;
+						case NameTrucksATS:
+							if (!ets2)
+								trucksStrings.Add(read[1]);
+							break;
+					}
+				}
+				if (trucksHeader != null && trucksStrings.Count > 0) {
+					int[] indexes = Truck.Indexes;
+					for (int i = 0; i < trucksHeader!.Length; i++) {
+						string? header = trucksHeader[i];
+						switch (header) {
+							case nameof(Truck.TruckID):
+								indexes[Truck.IndexTTruckID] = i;
+								break;
+							case nameof(Truck.ProductionYear):
+								indexes[Truck.IndexTProductionYear] = i;
+								break;
+							case nameof(Truck.IngameName):
+								indexes[Truck.IndexTIngameName] = i;
+								break;
+							case nameof(Truck.Description):
+								indexes[Truck.IndexTDescription] = i;
+								break;
+							case nameof(Truck.Check):
+								indexes[Truck.IndexTCheck] = i;
+								break;
+							case nameof(Truck.ModelType):
+								indexes[Truck.IndexTModelType] = i;
+								break;
+							case nameof(Truck.Look):
+								indexes[Truck.IndexTLook] = i;
+								break;
+							case nameof(Truck.Variant):
+								indexes[Truck.IndexTVariant] = i;
+								break;
+						}
+					}
+					foreach (var tString in trucksStrings) {
+						var s = tString.Split(DefaultData.ItemSplit);
+						var truckID = s[indexes[Truck.IndexTTruckID]];
+						int productionYear = DateTime.Now.Year;
+						if (indexes[Truck.IndexTProductionYear] != -1)
+							productionYear = int.Parse(s[indexes[Truck.IndexTProductionYear]]);
+						string ingameName = s[indexes[Truck.IndexTIngameName]];
+						string description = "";
+						if (indexes[Truck.IndexTDescription] != -1)
+							description = s[indexes[Truck.IndexTDescription]];
+						bool check = false;
+						if (indexes[Truck.IndexTCheck] != -1)
+							check = bool.Parse(s[indexes[Truck.IndexTCheck]]);
+						string modelType = "";
+						if (indexes[Truck.IndexTModelType] != -1)
+							modelType = s[indexes[Truck.IndexTModelType]];
+						string look = "";
+						if (indexes[Truck.IndexTLook] != -1)
+							look = s[indexes[Truck.IndexTLook]];
+						string variant = "";
+						if (indexes[Truck.IndexTVariant] != -1)
+							variant = s[indexes[Truck.IndexTVariant]];
+						Truck t = new(truckID, productionYear, ingameName, description, check, modelType, look, variant);
+						loadedTrucks.Add(t);
+					}
+				}
+				loadedTrucks.Sort();
+				if (updateTruckName) {
+					List<Truck> defaultTrucks = LoadDefaultTrucks(ets2);
+					foreach (var truck in loadedTrucks) {
+						int i = 0;
+						while (i < defaultTrucks.Count) {
+							if (truck.TruckID == defaultTrucks[i].TruckID) {
+								truck.IngameName = defaultTrucks[i].IngameName;
+								defaultTrucks.RemoveAt(i);
+								break;
+							}
+							i++;
+						}
+						trucks.Add(truck);
+					}
+					SaveTruckList(ets2, trucks);
+				} else {
+					foreach (var truck in loadedTrucks) {
+						trucks.Add(truck);
+					}
+				}
+				return;
+			} else
+				loadedTrucks = LoadDefaultTrucks(ets2);
+		} else
+			loadedTrucks = LoadDefaultTrucks(ets2);
+		foreach (var truck in loadedTrucks) {
+			trucks.Add(truck);
+		}
+		SaveTruckList(ets2, trucks);
+	}
+
+	public static List<Truck> LoadDefaultTrucks(bool ets2) {
+		if (ets2)
+			return DefaultData.GetDefaultTrucksETS2();
+		else
+			return DefaultData.GetDefaultTrucksATS();
 	}
 }

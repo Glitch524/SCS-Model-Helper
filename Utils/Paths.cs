@@ -40,4 +40,6 @@ class Paths {
 	public static string DefaultDEDDir() => Path.Combine(Environment.CurrentDirectory, "Def Files");
 
 	public static string ExcpPath() => Path.Combine(Environment.CurrentDirectory, $"Excp_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt");
+	public static string TrucksETS2Path() => Path.Combine(Environment.CurrentDirectory, "TrucksETS2.DET");
+	public static string TrucksATSPath() => Path.Combine(Environment.CurrentDirectory, "TrucksATS.DET");
 }

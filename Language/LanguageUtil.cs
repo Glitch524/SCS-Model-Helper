@@ -36,7 +36,7 @@ namespace SCS_Mod_Helper.Language {
 							var dict = new ResourceDictionary {
 								Source = new Uri(file.FullName)
 							};
-							langs.Add(s[0], new(s[1], dict));
+							langs.Add("ext_" + s[0], new("Ext:" + s[1], dict));
 						}
 					}
 				}

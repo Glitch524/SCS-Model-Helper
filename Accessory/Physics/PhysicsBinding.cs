@@ -135,6 +135,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 			}
 		}
 	}
+
 	public string[] AeroModelTypes { get; } = [
 		PhysicsPatchData.ATFaceOneSide,
 		PhysicsPatchData.ATFaceTwoSide,

@@ -428,6 +428,7 @@
 			<Grid
 				x:Name="PanelPTD"
 				Grid.Row="2"
+				d:Visibility="Hidden"
 				Visibility="{Binding ToyVisibility}">
 				<Grid.RowDefinitions>
 					<RowDefinition
@@ -1456,7 +1457,6 @@
 			<StackPanel
 				x:Name="PanelPPD"
 				Grid.Row="2"
-				d:Visibility="Collapsed"
 				Visibility="{Binding PatchVisibility}">
 				<Grid>
 					<Grid.RowDefinitions>
@@ -1523,7 +1523,7 @@
 					<Grid
 						Grid.Row="0"
 						Grid.Column="2"
-						Grid.ColumnSpan="3">
+						Grid.ColumnSpan="5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
 								Width="*" />
@@ -1608,7 +1608,7 @@
 							IsReadOnly="True"
 							Padding="3,3,3,3"
 							Text="{Binding CurrentPatchData.AeroModelType}"
-							SelectedValuePath="{Binding AeroModelTypes}">
+							ItemsSource="{Binding AeroModelTypes}">
 						</ComboBox>
 					</StackPanel>
 

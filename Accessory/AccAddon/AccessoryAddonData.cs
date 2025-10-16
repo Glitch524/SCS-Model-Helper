@@ -39,10 +39,10 @@ public class AccessoryAddonData: AccessoryData {
 
 		AccAddonHistory.Default.Others = OthersItem.JoinOthers(OthersList);
 
-		AccAddonHistory.Default.TruckHistoryETS2 = Truck.JoinTruck(TrucksETS2);
-		AccAddonHistory.Default.TruckHistoryATS = Truck.JoinTruck(TrucksATS);
-
 		AccAddonHistory.Default.Save();
+
+		AccAppIO.SaveTruckList(true, TrucksETS2);
+		AccAppIO.SaveTruckList(false, TrucksATS);
 	}
 
 	public static string ProjectLocation => Instances.ProjectLocation;

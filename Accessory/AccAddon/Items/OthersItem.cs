@@ -166,9 +166,7 @@ public class OthersItem: INotifyPropertyChanged {
 	public string ToLine() => $"{mOthersName}{DefaultData.ItemSplit}{mOthersValue}";
 
 
-	public static string JoinOthers(ObservableCollection<OthersItem> othersList) {
-		return Util.Join(othersList, (t) => true, (t) => t.ToLine());
-	}
+	public static string JoinOthers(ObservableCollection<OthersItem> othersList) => Util.Join(othersList, (t) => t.ToLine());
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 	private void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));

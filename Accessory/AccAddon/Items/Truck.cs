@@ -1,101 +1,148 @@
 ﻿using SCS_Mod_Helper.Utils;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.Items; 
 
-public class Truck(string truckID, string ingameName, string description, bool check = false, string modelType = "", string look = "", string variant = ""): INotifyPropertyChanged {
-	public event PropertyChangedEventHandler? PropertyChanged;
-	private string MTruckID = truckID;
-	private bool MCheck = check;
-	private string MIngameName = ingameName;
-	private string MDescription = description;
-	private string MModelType = modelType;
-	private string MLook = look;
-	private string MVariant = variant;
+public class Truck(
+	string truckID,
+	int productionYear,
+	string ingameName,
+	string description,
+	bool check = false,
+	string modelType = "",
+	string look = "",
+	string variant = ""): INotifyPropertyChanged, IComparable {
 
-	public Truck(string truckID, string ingameName) : this(truckID, ingameName, Util.GetString("TruckDesc." + truckID)) {
+	public event PropertyChangedEventHandler? PropertyChanged;
+
+	public Truck(string truckID, int releaseDate, string ingameName) : this(truckID, releaseDate, ingameName, Util.GetString("TruckDesc." + truckID)) {
 		//给默认列表使用，备注在字典里
 	}
 
 	public static Truck? LineParse(string line) {
 		var items = line.Trim().Split(DefaultData.ItemSplit);
-		if (items.Length < 7)
+		if (items.Length < 8)
 			return null;
-		return new Truck(items[0], items[1], items[2], bool.Parse(items[3]), items[4], items[5], items[6]);
+		return new Truck(items[0], int.Parse(items[1]), items[2], items[3], bool.Parse(items[4]), items[5], items[6], items[7]);
 	}
 
-	public const int IndexTruckID = 0;
-	public const int IndexModelType = 1;
-	public const int IndexLook = 2;
-	public const int IndexVariant = 3;
-	public static string DEDHeader() => string.Join(DefaultData.ItemSplit, [nameof(TruckID), nameof(ModelType), nameof(Look), nameof(Variant)]);
-
-	public string ToDEDLine() => string.Join(DefaultData.ItemSplit, [TruckID, ModelType, Look, Variant]);
-
-	public string ToTruckLine() => string.Join(DefaultData.ItemSplit, [TruckID, IngameName, Description, Check, ModelType, MLook, Variant]);
-	public static string JoinDED(ObservableCollection<Truck> trucks) {
-		return Util.Join(trucks, (t) => t.Check && (t.ModelType.Length > 0 || t.Look.Length > 0 || t.Variant.Length > 0), (t) => t.ToDEDLine());
-	}
-
-	public static string JoinTruck(ObservableCollection<Truck> trucks) {
-		return Util.Join(trucks, (t) => true, (t) => t.ToTruckLine());
-	}
-
+	private string mTruckID = truckID;
 	public string TruckID {
-		get => MTruckID;
+		get => mTruckID;
 		set {
-			MTruckID = value;
+			mTruckID = value;
 			InvokeChange(nameof(TruckID));
 		}
 	}
+
+	public string Manifaturer = truckID[..truckID.IndexOf('.')];
+	public string TruckName = truckID[(truckID.IndexOf(',') + 1)..];
+
+	public int ProductionYear = productionYear;
+
+	private bool mCheck = check;
 	public bool Check {
-		get => MCheck;
+		get => mCheck;
 		set {
-			MCheck = value;
+			mCheck = value;
 			InvokeChange(nameof(Check));
 		}
 	}
+	private string mIngameName = ingameName;
 	public string IngameName {
-		get => MIngameName;
+		get => mIngameName;
 		set {
-			MIngameName = value;
+			mIngameName = value;
 			InvokeChange(nameof(IngameName));
 		}
 	}
+	private string mDescription = description;
 	public string Description {
-		get => MDescription;
+		get => mDescription;
 		set {
-			MDescription = value;
+			mDescription = value;
 			InvokeChange(nameof(Description));
 		}
 	}
+	private string mModelType = modelType;
 	public string ModelType {
-		get => MModelType;
+		get => mModelType;
 		set {
-			MModelType = value;
+			mModelType = value;
 			InvokeChange(nameof(ModelType));
 		}
 	}
 
+	private string mLook = look;
 	public string Look {
-		get => MLook;
+		get => mLook;
 		set {
-			MLook = value;
+			mLook = value;
 			InvokeChange(nameof(Look));
 		}
 	}
 
+	private string mVariant = variant;
 	public string Variant {
-		get => MVariant;
+		get => mVariant;
 		set {
-			MVariant = value;
+			mVariant = value;
 			InvokeChange(nameof(Variant));
 		}
 	}
 
-	public void InvokeChange(string name) {
-		PropertyChanged?.Invoke(this, new(name));
-	}
+	public const int IndexDTruckID = 0;
+	public const int IndexDModelType = 1;
+	public const int IndexDLook = 2;
+	public const int IndexDVariant = 3;
+	public static string DEDHeader() => string.Join(DefaultData.ItemSplit, [nameof(TruckID), nameof(ModelType), nameof(Look), nameof(Variant)]);
 
+	public string ToDEDLine() => string.Join(DefaultData.ItemSplit, [TruckID, ModelType, Look, Variant]);
+
+	public const int IndexTTruckID = 0;
+	public const int IndexTProductionYear = 1;
+	public const int IndexTIngameName = 2;
+	public const int IndexTDescription = 3;
+	public const int IndexTCheck = 4;
+	public const int IndexTModelType = 5;
+	public const int IndexTLook = 6;
+	public const int IndexTVariant = 7;
+	public static int[] Indexes => [-1, -1, -1, -1, -1, -1, -1, -1];
+	public static string TruckHeader() => string.Join(DefaultData.ItemSplit, [
+		nameof(TruckID),
+		nameof(ProductionYear),
+		nameof(IngameName),
+		nameof(Description),
+		nameof(Check),
+		nameof(ModelType), 
+		nameof(Look), 
+		nameof(Variant)
+		]);
+
+	public string ToTruckLine() => string.Join(DefaultData.ItemSplit, [
+		TruckID,
+		ProductionYear,
+		IngameName,
+		Description,
+		Check,
+		ModelType,
+		Look,
+		Variant
+		]);
+
+	public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
+
+	public int CompareTo(object? obj) {
+		if (obj is Truck other) {
+			var c = Manifaturer.CompareTo(other.Manifaturer);
+			if (c == 0) {
+				c = ProductionYear.CompareTo(other.ProductionYear);
+				if (c == 0) 
+					c = TruckName.CompareTo(other.TruckName);
+			}
+			return c;
+		} else {
+			throw new ArgumentException("Object is not a Truck");
+		}
+	}
 }

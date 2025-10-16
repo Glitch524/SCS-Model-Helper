@@ -499,10 +499,9 @@
 					</StackPanel>
 				</Grid>
 
-				<GridSplitter
+				<Border
 					Height="1"
 					Margin="0,7,0,7"
-					ResizeBehavior="PreviousAndCurrent"
 					VerticalAlignment="Center"
 					Background="#FF4C4B4B"
 					HorizontalAlignment="Stretch" />
@@ -1690,7 +1689,7 @@
 			AllowsTransparency="True"
 			IsOpen="{Binding PopupAddTruckOpen}">
 			<Grid
-				Width="400">
+				Width="450">
 				<Border
 					Background="White"
 					BorderThickness="1"
@@ -1716,6 +1715,10 @@
 							Width="10" />
 						<ColumnDefinition
 							Width="*" />
+						<ColumnDefinition
+							Width="10" />
+						<ColumnDefinition
+							Width="*" />
 					</Grid.ColumnDefinitions>
 					<TextBlock
 						Grid.Row="0"
@@ -1735,12 +1738,26 @@
 						Grid.Row="0"
 						Grid.Column="2">
 						<Run
+							Text="{DynamicResource TruckProdYear}" />
+					</TextBlock>
+					<TextBox
+						x:Name="TextNewTruckProdYear"
+						Grid.Row="1"
+						Grid.Column="2"
+						Padding="3,3,3,3"
+						Text="{Binding AddTruckProdYear}"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top" />
+					<TextBlock
+						Grid.Row="0"
+						Grid.Column="4">
+						<Run
 							Text="{DynamicResource TruckName}" />
 					</TextBlock>
 					<TextBox
 						x:Name="TextNewIngameName"
 						Grid.Row="1"
-						Grid.Column="2"
+						Grid.Column="4"
 						Padding="3,3,3,3"
 						Text="{Binding AddTruckIngameName}"
 						TextWrapping="Wrap"
@@ -1748,7 +1765,7 @@
 					<TextBlock
 						Grid.Row="2"
 						Grid.Column="0"
-						Grid.ColumnSpan="3"
+						Grid.ColumnSpan="5"
 						Margin="0,5,0,0">
 						<Run
 							Text="{DynamicResource TruckDescription}" />
@@ -1757,38 +1774,51 @@
 						x:Name="TextNewDescription"
 						Grid.Row="3"
 						Grid.Column="0"
-						Grid.ColumnSpan="3"
+						Grid.ColumnSpan="5"
 						Padding="3,3,3,3"
 						Text="{Binding AddTruckDescription}"
 						TextWrapping="Wrap"
 						VerticalAlignment="Top" />
-					<Button
-						x:Name="ButtonAddTruckOK"
-						Content="{DynamicResource ButtonOK}"
-						Margin="0,10,0,0"
+					<Grid
 						Grid.Row="4"
-						Grid.Column="0"
-						Click="ButtonAddTruckResultClick">
-						<Button.IsEnabled>
-							<MultiBinding
-								Converter="{StaticResource MultiNullCheck}"
-								ConverterParameter="AND,Nonull">
-								<Binding
-									ElementName="TextNewTruckID"
-									Path="Text" />
-								<Binding
-									ElementName="TextNewIngameName"
-									Path="Text" />
-							</MultiBinding>
-						</Button.IsEnabled>
-					</Button>
-					<Button
-						x:Name="ButtonAddTruckCancel"
-						Content="{DynamicResource ButtonCancel}"
-						Margin="0,10,0,0"
-						Grid.Row="4"
-						Grid.Column="2"
-						Click="ButtonAddTruckResultClick" />
+						Grid.ColumnSpan="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="10" />
+							<ColumnDefinition
+								Width="*" />
+						</Grid.ColumnDefinitions>
+						<Button
+							x:Name="ButtonAddTruckOK"
+							Content="{DynamicResource ButtonOK}"
+							Margin="0,10,0,0"
+							Grid.Column="0"
+							Click="ButtonAddTruckResultClick">
+							<Button.IsEnabled>
+								<MultiBinding
+									Converter="{StaticResource MultiNullCheck}"
+									ConverterParameter="AND,Nonull">
+									<Binding
+										ElementName="TextNewTruckID"
+										Path="Text" />
+									<Binding
+										ElementName="TextNewTruckProdYear"
+										Path="Text" />
+									<Binding
+										ElementName="TextNewIngameName"
+										Path="Text" />
+								</MultiBinding>
+							</Button.IsEnabled>
+						</Button>
+						<Button
+							x:Name="ButtonAddTruckCancel"
+							Content="{DynamicResource ButtonCancel}"
+							Margin="0,10,0,0"
+							Grid.Column="2"
+							Click="ButtonAddTruckResultClick" />
+					</Grid>
 				</Grid>
 			</Grid>
 		</Popup>

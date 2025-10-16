@@ -10,6 +10,7 @@
 	  <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	  <ApplicationManifest>app.manifest</ApplicationManifest>
 	  <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
+	  <AssemblyName>SCS Mod Helper</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

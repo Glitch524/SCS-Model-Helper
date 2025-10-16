@@ -105,6 +105,7 @@
 	<s:String x:Key="ExpanderETS2">Euro Truck Simulator 2(Expand to apply/export to ETS2)</s:String>
 	<s:String x:Key="ExpanderATS">American Truck Simulator(Expand to apply/export to ATS)</s:String>
 	<s:String x:Key="TruckID">Truck ID</s:String>
+	<s:String x:Key="TruckProdYear">Production Year</s:String>
 	<s:String x:Key="TruckName">Truck Name</s:String>
 	<s:String x:Key="TruckDescription">Truck Description</s:String>
 		<!--Side Button-->
@@ -260,7 +261,7 @@
 	<s:String x:Key="MessageResultPhysSaved">Physics definition saved.</s:String>
 	<s:String x:Key="DialogTitleChooseRope">Choose Rope Material File(mat file or its image file)</s:String>
 	<s:String x:Key="DialogTitleChoosePatch">Choose Patch Material File(mat file or its image file)</s:String>
-	<s:String x:Key="DialogFilterChooseMaterial">Rope Material File|*.mat|Rope Image File|*.tga;*.dds</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">Rope Material or Rope Image File|*.tga;*.dds;*.mat</s:String>
 	<s:String x:Key="MessageErrorChooseMaterial">Chosen file must be mat file or its image file</s:String>
 	
 	
@@ -384,107 +385,60 @@
 		x:Key="FilterAllFiles">All Files|*.*</s:String>
 
 	<!--Truck Description ETS2-->
-	<x:Static
-		x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
-	<s:String
-		x:Key="TruckDesc.daf.xf">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.iveco.hiway">EOL</s:String>
-	<s:String
-		x:Key="TruckDesc.iveco.stralis">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.man.tgx">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.mercedes.actros">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.renault.etech_t">Currently no accessory locator</s:String>
-	<s:String
-		x:Key="TruckDesc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
-	<s:String
-		x:Key="TruckDesc.renault.premium">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.scania.r">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.scania.streamline">EOL</s:String>
-	<s:String
-		x:Key="TruckDesc.volvo.fh16">EOL</s:String>
-	<s:String
-		x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
-	<x:Static
-		x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.volvo.fh_2024">Toybed has a small table, clipping may happen when sitting</s:String>
+	<x:Static x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
+	<s:String x:Key="TruckDesc.daf.xf">EOL</s:String>
+	<x:Static x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.daf.xf_electric">Currently no accessory locator</s:String>
+	<s:String x:Key="TruckDesc.iveco.hiway">EOL</s:String>
+	<s:String x:Key="TruckDesc.iveco.stralis">EOL</s:String>
+	<x:Static x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.man.tgx">EOL</s:String>
+	<x:Static x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.mercedes.actros">EOL</s:String>
+	<x:Static x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.renault.etech_t">Currently no accessory locator</s:String>
+	<s:String x:Key="TruckDesc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
+	<s:String x:Key="TruckDesc.renault.premium">EOL</s:String>
+	<x:Static x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.scania.r">EOL</s:String>
+	<x:Static x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.scania.streamline">EOL</s:String>
+	<s:String x:Key="TruckDesc.volvo.fh16">EOL</s:String>
+	<s:String x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
+	<x:Static x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.volvo.fh_2024">Toybed has a small table, clipping may happen when sitting</s:String>
 
 
 	<!--Truck Description ATS-->
-	<s:String
-		x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
-	<x:Static
-		x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.freightliner.ecascadia">WIP</s:String>
-	<s:String
-		x:Key="TruckDesc.intnational.9900i">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.intnational.lt">Toybed is just as same as LoneStar</s:String>
-	<x:Static
-		x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<s:String
-		x:Key="TruckDesc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<s:String
-		x:Key="TruckDesc.kenworth.w990">WIP</s:String>
-	<x:Static
-		x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.mack.pioneer">WIP</s:String>
-	<x:Static
-		x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.peterbilt.579_2022">WIP</s:String>
-	<x:Static
-		x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.volvo.vnl2024">WIP</s:String>
-	<s:String
-		x:Key="TruckDesc.volvo.vnr_electric">WIP</s:String>
-	<s:String
-		x:Key="TruckDesc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<x:Static
-		x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.westernstar.4900">WIP</s:String>
+	<s:String x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
+	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.freightliner.ecascadia">TBA</s:String>
+	<s:String x:Key="TruckDesc.intnational.9900i">EOL</s:String>
+	<x:Static x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.intnational.lt">Toybed is just as same as LoneStar</s:String>
+	<x:Static x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<s:String x:Key="TruckDesc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<s:String x:Key="TruckDesc.kenworth.w990">TBA</s:String>
+	<x:Static x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.mack.anthem2026" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.mack.pioneer">TBA</s:String>
+	<x:Static x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.peterbilt.579_2022">TBA</s:String>
+	<x:Static x:Key="TruckDesc.peterbilt.589" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.volvo.vnl2024">TBA</s:String>
+	<s:String x:Key="TruckDesc.volvo.vnr_electric">TBA</s:String>
+	<s:String x:Key="TruckDesc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<x:Static x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
 
 
 	<!--accessory-->

@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory;

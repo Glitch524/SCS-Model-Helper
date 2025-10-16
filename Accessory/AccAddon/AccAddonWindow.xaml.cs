@@ -259,15 +259,13 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void ButtonTruckInitialize(object sender, RoutedEventArgs e) {
 		binding.PopupAddTruckOpen = false;
-		AccAddonHistory.Default.TruckHistoryETS2 = "init";
-		AccAddonHistory.Default.TruckHistoryATS = "init";
-		AccAddonHistory.Default.Save();
-		binding.LoadTrucks();
+		binding.ReinitTruckList();
 	}
 
 	private void ButtonAddTruckClick(object sender, RoutedEventArgs e) {
 		PopupAddTruck.PlacementTarget = (Button)sender;
 		binding.AddTruckID = string.Empty;
+		binding.AddTruckProdYear = null;
 		binding.AddTruckIngameName = string.Empty;
 		binding.AddTruckDescription = string.Empty;
 		PopupAddTruck.IsOpen = true;
@@ -284,27 +282,11 @@ public partial class AccAddonWindow: BaseWindow {
 	private void ButtonDeleteTruckClick(object sender, RoutedEventArgs e) {
 		if (TableTrucksETS2.SelectedIndex == -1 && TableTrucksATS.SelectedIndex == -1)
 			return;
-		var changed = false;
 		if (sender == ButtonDeleteTruckETS2) {
-			while (TableTrucksETS2.SelectedIndex != -1) {
-				changed = true;
-				var selected = TrucksETS2[TableTrucksETS2.SelectedIndex];
-				TrucksETS2.Remove(selected);
-			}
-			TableTrucksETS2.UnselectAll();
-			if (changed)
-				AccAddonHistory.Default.TruckHistoryETS2 = Truck.JoinTruck(TrucksETS2);
+			AccAddonBinding.DeleteTruck(true, TrucksETS2, TableTrucksETS2);
 		} else if (sender == ButtonDeleteTruckATS) {
-			while (TableTrucksATS.SelectedIndex != -1) {
-				changed = true;
-				var selected = TrucksATS[TableTrucksATS.SelectedIndex];
-				TrucksATS.Remove(selected);
-			}
-			TableTrucksATS.UnselectAll();
-			if (changed)
-				AccAddonHistory.Default.TruckHistoryETS2 = Truck.JoinTruck(TrucksATS);
+			AccAddonBinding.DeleteTruck(false, TrucksATS, TableTrucksATS);
 		}
-		AccAddonHistory.Default.Save();
 	}
 
 	private void ButtonCoverValue(object sender, RoutedEventArgs e) {

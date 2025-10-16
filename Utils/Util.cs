@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -89,10 +88,10 @@ namespace SCS_Mod_Helper.Utils {
 			return image;
 		}
 
-		public static string Join<T>(ObservableCollection<T> trucks, Func<T, bool> condition, Func<T, string> toLine) {
+		public static string Join<T>(ObservableCollection<T> trucks, Func<T, string> toLine, Func<T, bool>? condition = null) {
 			StringBuilder sb = new();
 			foreach (var truck in trucks) {
-				if (condition(truck)) {
+				if (condition?.Invoke(truck) ?? true) {
 					if (sb.Length > 0)
 						sb.Append(DefaultData.LineSplit);
 					sb.Append(toLine(truck));

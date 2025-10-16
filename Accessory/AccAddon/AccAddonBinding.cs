@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Accessory.Physics;
-using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,7 +17,7 @@ class AccAddonBinding: INotifyPropertyChanged {
 	public void SaveHistory() => AddonItem.SaveHistory();
 
 	public static string ProjectLocation => Instances.ProjectLocation;
-	public bool ProjectExist => Directory.Exists(ProjectLocation);
+	public static bool ProjectExist => Directory.Exists(ProjectLocation);
 
 	public string DisplayName {
 		get => AddonItem.DisplayName;
@@ -213,9 +212,13 @@ class AccAddonBinding: INotifyPropertyChanged {
 			else
 				return;
 			path = path.Replace('/', '\\');
+			if (path.Length < 4)
+				return;
 			path = path[..^4] + ".pit";
 			path = ProjectLocation + path;
 		} else if (path.EndsWith(".pim")) {
+			if (path.Length < 4)
+				return;
 			path = path[..^4] + ".pit";
 		}
 		LookList.Clear();
@@ -325,31 +328,13 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 
 	public void LoadTrucks() {
-		ForeachList(AccAddonHistory.Default.TruckHistoryETS2, TrucksETS2);
-		ForeachList(AccAddonHistory.Default.TruckHistoryATS, TrucksATS);
+		AccAppIO.LoadTruckList(true, TrucksETS2);
+		AccAppIO.LoadTruckList(false, TrucksATS);
 	}
 
-	void ForeachList(string truckList, ObservableCollection<Truck> target) {
-		target.Clear();
-		if (truckList.Length == 0 || truckList.Equals("init") || !truckList.Contains(DefaultData.ItemSplit)) {
-			foreach (Truck t in DefaultData.GetDefaultTrucks(target == TrucksETS2)) {
-				target.Add(t);
-			}
-			return;
-		}
-		var lines = truckList.Split(DefaultData.LineSplit);
-		try {
-			foreach (string line in lines) {
-				if (line.Length == 0)
-					continue;
-				Truck? t = Truck.LineParse(line);
-				if (t != null)
-					target.Add(t);
-			}
-		} catch (Exception) {
-			MessageBox.Show(Util.GetString("MessageLoadTruckErr"));
-			ForeachList("init", target);
-		}
+	public void ReinitTruckList() {
+		AccAppIO.ClearTruckList();
+		LoadTrucks();
 	}
 
 	string? LoadedFilename = null;
@@ -420,6 +405,15 @@ class AccAddonBinding: INotifyPropertyChanged {
 			InvokeChange(nameof(AddTruckID));
 		}
 	}
+
+	private int? mAddTruckProdYear = null;
+	public int? AddTruckProdYear {
+		get => mAddTruckProdYear;
+		set {
+			mAddTruckProdYear = value;
+			InvokeChange(nameof(AddTruckProdYear));
+		}
+	}
 	private string mAddTruckIngameName = string.Empty;
 	public string AddTruckIngameName {
 		get => mAddTruckIngameName;
@@ -442,37 +436,48 @@ class AccAddonBinding: INotifyPropertyChanged {
 			ObservableCollection<Truck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
 			if (AddTruckID.Length == 0 || AddTruckIngameName.Length == 0)
 				throw new(Util.GetString("MessageAddErrNotFilled"));
+			var newTruck = new Truck(AddTruckID, AddTruckProdYear ?? DateTime.Now.Year, AddTruckIngameName!, AddTruckDescription);
+
 			if (AddTruckID[0] <= 'm') {
 				for (int i = 0; i < Trucks.Count; i++) {
-					var cResult = string.Compare(AddTruckID, Trucks[i].TruckID);
+					var cTruck = Trucks[i];
+					var cResult = newTruck.CompareTo(cTruck);
 					if (cResult == 0) {
 						throw new(Util.GetString("MessageAddErrSameID"));
 					} else if (cResult < 0) {
-						Trucks.Insert(i, new(AddTruckID, AddTruckIngameName, AddTruckDescription, false));
+						Trucks.Insert(i, new(AddTruckID, AddTruckProdYear ?? DateTime.Now.Year, AddTruckIngameName, AddTruckDescription, false));
 						break;
 					}
 				}
 			} else {
 				for (int i = Trucks.Count - 1; i >= 0; i--) {
-					var cResult = string.Compare(AddTruckID, Trucks[i].TruckID);
+					var cTruck = Trucks[i];
+					var cResult = newTruck.CompareTo(cTruck);
 					if (cResult == 0) {
 						throw new(Util.GetString("MessageAddErrSameID"));
 					} else if (cResult > 0) {
-						Trucks.Insert(i + 1, new(AddTruckID, AddTruckIngameName, AddTruckDescription, false));
+						Trucks.Insert(i + 1, new(AddTruckID, AddTruckProdYear ?? DateTime.Now.Year, AddTruckIngameName!, AddTruckDescription, false));
 						break;
 					}
 				}
 			}
-			if (isETS2)
-				AccAddonHistory.Default.TruckHistoryETS2 = Truck.JoinTruck(Trucks);
-			else
-				AccAddonHistory.Default.TruckHistoryATS = Truck.JoinTruck(Trucks);
-			AccAddonHistory.Default.Save();
+			AccAppIO.SaveTruckList(isETS2, Trucks);
 		} catch (Exception ex) {
 			MessageBox.Show(ex.Message, Util.GetString("MessageTitleErr"));
 		}
 	}
 
+	public static void DeleteTruck(bool ets2, ObservableCollection<Truck> Trucks, DataGrid Table) {
+		var changed = false;
+		while (Table.SelectedIndex != -1) {
+			changed = true;
+			var selected = Trucks[Table.SelectedIndex];
+			Trucks.Remove(selected);
+		}
+		Table.UnselectAll();
+		if (changed) 
+			AccAppIO.SaveTruckList(ets2, Trucks);
+	}
 
 
 	private bool mDeleteUnchecked;

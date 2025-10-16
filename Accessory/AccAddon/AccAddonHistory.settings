@@ -38,12 +38,6 @@
     <Setting Name="PartType" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="TruckHistoryETS2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">init</Value>
-    </Setting>
-    <Setting Name="TruckHistoryATS" Type="System.String" Scope="User">
-      <Value Profile="(Default)">init</Value>
-    </Setting>
     <Setting Name="DeleteUnchecked" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

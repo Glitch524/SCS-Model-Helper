@@ -104,6 +104,7 @@
 	<s:String x:Key="ExpanderETS2">欧洲卡车模拟2 （展开以输出/应用至欧卡2）</s:String>
 	<s:String x:Key="ExpanderATS">美洲卡车模拟（展开以输出/应用至美卡）</s:String>
 	<s:String x:Key="TruckID">卡车ID</s:String>
+	<s:String x:Key="TruckProdYear">生产年份</s:String>
 	<s:String x:Key="TruckName">卡车名称</s:String>
 	<s:String x:Key="TruckDescription">卡车备注</s:String>
 		<!--侧边按钮-->
@@ -263,7 +264,7 @@
 	<s:String x:Key="MessageResultPhysSaved">物理定义已保存</s:String>
 	<s:String x:Key="DialogTitleChooseRope">选择绳子材质文件（mat文件或贴图文件）</s:String>
 	<s:String x:Key="DialogTitleChoosePatch">选择布料材质文件（mat文件或贴图文件）</s:String>
-	<s:String x:Key="DialogFilterChooseMaterial">材质文件|*.mat|绳子贴图文件|*.tga;*.dds</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">材质文件或绳子贴图文件|*.tga;*.dds;*.mat</s:String>
 	<s:String x:Key="MessageErrorChooseMaterial">选择的文件必须是mat文件或其贴图，否则这么写也没用的哦</s:String>
 	
 	
@@ -365,6 +366,7 @@
 	<s:String x:Key="TruckDesc.daf.xd">床铺高，toybed坐姿头顶可能会穿模</s:String>
 	<s:String x:Key="TruckDesc.daf.xf">停产</s:String>
 	<x:Static x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.daf.xf_electric">目前没有装饰位</s:String>
 	<s:String x:Key="TruckDesc.iveco.hiway">停产</s:String>
 	<s:String x:Key="TruckDesc.iveco.stralis">停产</s:String>
 	<x:Static x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
@@ -391,28 +393,29 @@
 	<!--卡车备注 ATS-->
 	<s:String x:Key="TruckDesc.freightliner.cascadia2019">没有toybed</s:String>
 	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.freightliner.ecascadia">饼</s:String>
+	<s:String x:Key="TruckDesc.freightliner.ecascadia">未推出</s:String>
 	<s:String x:Key="TruckDesc.intnational.9900i">停产</s:String>
 	<x:Static x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.intnational.lt">toybed与LoneStar一样</s:String>
 	<x:Static x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.kenworth.t680_2022">toybed太后，一般坐姿可能会穿模</s:String>
 	<s:String x:Key="TruckDesc.kenworth.w900">toybed太后，一般坐姿可能会穿模</s:String>
-	<s:String x:Key="TruckDesc.kenworth.w990">饼</s:String>
+	<s:String x:Key="TruckDesc.kenworth.w990">未推出</s:String>
 	<x:Static x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.mack.pioneer">饼</s:String>
+	<x:Static x:Key="TruckDesc.mack.anthem2026" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.mack.pioneer">未推出</s:String>
 	<x:Static x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.peterbilt.579_2022">饼</s:String>
+	<s:String x:Key="TruckDesc.peterbilt.579_2022">未推出</s:String>
+	<s:String x:Key="TruckDesc.peterbilt.589">未推出</s:String>
 	<x:Static x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.volvo.vnl2024">饼</s:String>
-	<s:String x:Key="TruckDesc.volvo.vnr_electric">饼</s:String>
+	<s:String x:Key="TruckDesc.volvo.vnl2024">未推出</s:String>
+	<s:String x:Key="TruckDesc.volvo.vnr_electric">未推出</s:String>
 	<s:String x:Key="TruckDesc.westernstar.5700xe">停产，toybed太后，一般坐姿可能会穿模</s:String>
 	<x:Static x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.westernstar.4900">饼</s:String>
 	
 	
 	<!--饰品位置-->
