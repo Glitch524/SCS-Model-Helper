@@ -1,18 +1,40 @@
-﻿using SCS_Mod_Helper.Language;
-using SCS_Mod_Helper.Main;
+﻿using SCS_Mod_Helper.Accessory;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Wpf.Ui.Input;
 
 namespace SCS_Mod_Helper.Manifest {
 	public class ManifestBinding: INotifyPropertyChanged {
+		private static ManifestBinding? mBinding = null;
+		public static ManifestBinding Instance {
+			get {
+				if (mBinding == null) {
+					mBinding = new();
+					mBinding.LoadFiles();
+				} else if (mBinding.CurrentProjectLocation != Instances.ProjectLocation)
+					mBinding.LoadFiles();
+				return mBinding;
+			}
+		}
+
+		public ICommand ColorCommand { get; }
+
+		public delegate void IInsertColor(string? color);
+
+		public IInsertColor? InsertColor = null;
+
 		public ManifestBinding() {
 			mLocales = DescLocale.GetLocales(out Dictionary<string, DescLocale> localeDict);
 			LocaleDict = localeDict;
-			LanguageUtil.ChangeLanguage += ChangeLocales;
+			DictionaryUtil.ChangeLanguage += ChangeLocales;
+
+			ColorCommand = new RelayCommand<string>((color) => InsertColor?.Invoke(color));
 		}
 
 		public void InitData() {
@@ -22,35 +44,32 @@ namespace SCS_Mod_Helper.Manifest {
 			MPOptional = false;
 			IconName = "";
 			ModIcon = null;
-			CategoryList.Clear();
+			SelectedCategories.Clear();
 			DescriptionName = "";
 			foreach (var l in Locales) {
 				l.DescContent = "";
 			}
 		}
 
-		private readonly ObservableCollection<LanguageItem> mLanguages = [];
-		public ObservableCollection<LanguageItem> Languages => mLanguages;
-
-		private string mCurrentLanguage = LanguageUtil.CurrentLanguage;
-		public string CurrentLanguage {
-			get => mCurrentLanguage;
-			set {
-				mCurrentLanguage = value;
-				InvokeChange();
-				LanguageUtil.SwitchLanguage(value);
-			}
+		public void LoadFiles() {
+			InitData();
+			var manifest = Paths.ManifestFile(ProjectLocation);
+			if (!File.Exists(manifest))
+				return;
+			AccDataIO.LoadManifest(this);
 		}
 
+		private string? CurrentProjectLocation = null;
 		public string ProjectLocation {
-			get => Instances.BasicInfo.ProjectLocation;
+			get {
+				CurrentProjectLocation ??= Instances.ProjectLocation;
+				return CurrentProjectLocation;
+			}
 			set {
-				Instances.BasicInfo.ProjectLocation = value;
+				CurrentProjectLocation = value;
+				Instances.ProjectLocation = value;
 				InvokeChange();
 				InvokeChange(nameof(ProjectExist));
-
-				ModBasic.Default.ProjectLocation = value;
-				ModBasic.Default.Save();
 			}
 		}
 		public bool ProjectExist => Directory.Exists(ProjectLocation);
@@ -73,10 +92,11 @@ namespace SCS_Mod_Helper.Manifest {
 			}
 		}
 
+		private string mAuthor = "";
 		public string Author {
-			get => Instances.BasicInfo.Author;
+			get => mAuthor;
 			set {
-				Instances.BasicInfo.Author = value;
+				mAuthor = value;
 				InvokeChange();
 			}
 		}
@@ -113,59 +133,57 @@ namespace SCS_Mod_Helper.Manifest {
 		}
 		public bool NewIcon = false;
 
-		private readonly ObservableCollection<string> mCategoryList = [];
-		public ObservableCollection<string> CategoryList => mCategoryList;
-
-		public void RefreshCategory() {
-			InvokeChange(nameof(CategoryTruck));
-			InvokeChange(nameof(CategoryTrailer));
-			InvokeChange(nameof(CategoryInterior));
-			InvokeChange(nameof(CategoryTuningParts));
-			InvokeChange(nameof(CategoryAiTraffic));
-			InvokeChange(nameof(CategorySound));
-			InvokeChange(nameof(CategoryPaintJob));
-			InvokeChange(nameof(CategoryCargoPack));
-			InvokeChange(nameof(CategoryMap));
-			InvokeChange(nameof(CategoryUI));
-			InvokeChange(nameof(CategoryWeatherSetup));
-			InvokeChange(nameof(CategoryPhysics));
-			InvokeChange(nameof(CategoryGraphics));
-			InvokeChange(nameof(CategoryModel));
-			InvokeChange(nameof(CategoryMovers));
-			InvokeChange(nameof(CategoryWalkers));
-			InvokeChange(nameof(CategoryPrefabs));
-			InvokeChange(nameof(CategoryOther));
-		}
-
-		public bool CategoryTruck { get => GetCategory("truck"); set => SetCategory(value, "truck"); }
-		public bool CategoryTrailer { get => GetCategory("trailer"); set => SetCategory(value, "trailer"); }
-		public bool CategoryInterior { get => GetCategory("interior"); set => SetCategory(value, "interior"); }
-		public bool CategoryTuningParts { get => GetCategory("tuning_parts"); set => SetCategory(value, "tuning_parts"); }
-		public bool CategoryAiTraffic { get => GetCategory("ai_traffic"); set => SetCategory(value, "ai_traffic"); }
-		public bool CategorySound { get => GetCategory("sound"); set => SetCategory(value, "sound"); }
-		public bool CategoryPaintJob { get => GetCategory("paint_job"); set => SetCategory(value, "paint_job"); }
-		public bool CategoryCargoPack { get => GetCategory("cargo_pack"); set => SetCategory(value, "cargo_pack"); }
-		public bool CategoryMap { get => GetCategory("map"); set => SetCategory(value, "map"); }
-		public bool CategoryUI { get => GetCategory("ui"); set => SetCategory(value, "ui"); }
-		public bool CategoryWeatherSetup { get => GetCategory("weather_setup"); set => SetCategory(value, "weather_setup"); }
-		public bool CategoryPhysics { get => GetCategory("physics"); set => SetCategory(value, "physics"); }
-		public bool CategoryGraphics { get => GetCategory("graphics"); set => SetCategory(value, "graphics"); }
-		public bool CategoryModel { get => GetCategory("models"); set => SetCategory(value, "models"); }
-		public bool CategoryMovers { get => GetCategory("movers"); set => SetCategory(value, "movers"); }
-		public bool CategoryWalkers { get => GetCategory("walkers"); set => SetCategory(value, "walkers"); }
-		public bool CategoryPrefabs { get => GetCategory("prefabs"); set => SetCategory(value, "prefabs"); }
-		public bool CategoryOther { get => GetCategory("other"); set => SetCategory(value, "other"); }
-
-		private bool GetCategory(string cate) => CategoryList.Contains(cate);
-		private void SetCategory(bool value, string cate, [CallerMemberName] string name = "") {
+		public ObservableCollection<string> SelectedCategories = [];
+		public bool GetCategory(string cate) => SelectedCategories.Contains(cate);
+		private void SetCategory(bool value, string cate, [CallerMemberName] string caller = "") {
 			if (value) {
-				CategoryList.Add(cate);
-				if (CategoryList.Count > 2)
-					CategoryList.RemoveAt(0);
-			} else
-				CategoryList.Remove(cate);
-			InvokeChange(name);
+				SelectedCategories.Add(cate);
+				if(SelectedCategories.Count > 2) {
+					var last = SelectedCategories[0];
+					SelectedCategories.RemoveAt(0);
+					InvokeChange($"Check_{last}");
+				}
+			} else {
+				SelectedCategories.Remove(cate);
+			}
+			InvokeChange(caller);
 		}
+
+		public bool Check_truck { get => GetCategory("truck"); set => SetCategory(value, "truck"); }
+		
+		public bool Check_trailer { get => GetCategory("trailer"); set => SetCategory(value, "trailer"); }
+		
+		public bool Check_interior { get => GetCategory("interior"); set => SetCategory(value, "interior"); }
+		
+		public bool Check_tuning_parts { get => GetCategory("tuning_parts"); set => SetCategory(value, "tuning_parts"); }
+		
+		public bool Check_ai_traffic { get => GetCategory("ai_traffic"); set => SetCategory(value, "ai_traffic"); }
+		
+		public bool Check_sound { get => GetCategory("sound"); set => SetCategory(value, "sound"); }
+		
+		public bool Check_paint_job { get => GetCategory("paint_job"); set => SetCategory(value, "paint_job"); }
+		
+		public bool Check_cargo_pack { get => GetCategory("cargo_pack"); set => SetCategory(value, "cargo_pack"); }
+		
+		public bool Check_map { get => GetCategory("map"); set => SetCategory(value, "map"); }
+		
+		public bool Check_ui { get => GetCategory("ui"); set => SetCategory(value, "ui"); }
+		
+		public bool Check_weather_setup { get => GetCategory("weather_setup"); set => SetCategory(value, "weather_setup"); }
+		
+		public bool Check_physics { get => GetCategory("physics"); set => SetCategory(value, "physics"); }
+		
+		public bool Check_graphics { get => GetCategory("graphics"); set => SetCategory(value, "graphics"); }
+		
+		public bool Check_models { get => GetCategory("models"); set => SetCategory(value, "models"); }
+		
+		public bool Check_movers { get => GetCategory("movers"); set => SetCategory(value, "movers"); }
+		
+		public bool Check_walkers { get => GetCategory("walkers"); set => SetCategory(value, "walkers"); }
+		
+		public bool Check_prefabs { get => GetCategory("prefabs"); set => SetCategory(value, "prefabs"); }
+		
+		public bool Check_other { get => GetCategory("other"); set => SetCategory(value, "other"); }
 
 		public string? OldDescriptionName = null;
 		private string mDescriptionName = "";
@@ -177,7 +195,7 @@ namespace SCS_Mod_Helper.Manifest {
 			}
 		}
 
-		public ObservableCollection<DescLocale> mLocales;
+		private readonly ObservableCollection<DescLocale> mLocales;
 		public ObservableCollection<DescLocale> Locales => mLocales;
 		public Dictionary<string, DescLocale> LocaleDict {
 			get;
@@ -195,14 +213,18 @@ namespace SCS_Mod_Helper.Manifest {
 				InvokeChange();
 
 				InvokeChange(nameof(DescContent));
+				InvokeChange(nameof(CopyFronUniversalVisibility));
 			}
+		}
+
+		public Visibility CopyFronUniversalVisibility {
+			get => CurrentLocale.LocaleValue == "universal" ? Visibility.Hidden : Visibility.Visible;
 		}
 
 		public string DescContent {
 			get => CurrentLocale.DescContent;
 			set => CurrentLocale.DescContent = value;
 		}
-
 
 		public void ChangeLocales() {
 			foreach (var locale in Locales) {

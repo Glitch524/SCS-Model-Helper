@@ -1,47 +1,49 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory;
 public static class AccessoryDataUtil {
-	public static void SetupStringResMenu(ContextMenu MenuStringRes, Action<MenuItem> action) {
-		MenuStringRes.Placement = PlacementMode.Top;
-		MenuStringRes.Items.Clear();
+	private static readonly ObservableCollection<StringResItem> mStringResList = [];
+	public static ObservableCollection<StringResItem> StringResList {
+		get {
+			if (mStringResList.Count == 0) 
+				SetupStringResList();
+			return mStringResList;
+		}
+	}
 
-		var res = Instances.LocaleDict;
-		MenuItem head = new() {
-			Name = "head",
-			Header = Util.GetString("MenuResTip"),
-			IsEnabled = false
-		};
-		MenuStringRes.Items.Add(head);
-		MenuItem separator = new() {
-			Height = 3,
-			Background = new SolidColorBrush(Colors.LightGray),
-			IsEnabled = false
-		};
-		MenuStringRes.Items.Add(separator);
-		if (res.Count == 0) {
-			MenuItem empty = new() {
-				Name = "empty",
-				Header = Util.GetString("StatusEmpty"),
-				IsEnabled = false
-			};
-			MenuStringRes.Items.Add(empty);
+	private static void SetupStringResList() {
+		StringResItem head, separator;
+		StringResItem separator2, openLocalization;
+		if (mStringResList.Count == 0) {
+			head = StringResItem.Head();
+			separator = StringResItem.Separator();
+			separator2 = StringResItem.Separator();
+			openLocalization = StringResItem.OpenLocalization();
 		} else {
-			foreach (var pair in res) {
-				MenuItem item = new() {
-					Name = pair.Key,
-					Header = pair.Key.Replace("_", "__")
-				};
+			head = mStringResList.First();
+			separator = mStringResList[1];
+			separator2 = mStringResList[^2];
+			openLocalization = mStringResList.Last();
+			mStringResList.Clear();
+		}
+		mStringResList.Add(head);
+		mStringResList.Add(separator);
+		var dict = Instances.LocaleDict;
+		if (dict.Count == 0) {
+			mStringResList.Add(StringResItem.Empty());
+		} else {
+			foreach (var pair in dict) {
 				StringBuilder tips = new();
 				tips.AppendLine(Util.GetString("ResourceValueHeader"));
 				for (int i = 0; i < pair.Value.Count; i++) {
@@ -50,24 +52,13 @@ public static class AccessoryDataUtil {
 					if (i < pair.Value.Count - 1)
 						tips.Append('\n');
 				}
-				item.ToolTip = tips.ToString();
-				ToolTipService.SetInitialShowDelay(item, 500);
-				action(item);
-				MenuStringRes.Items.Add(item);
+				StringResItem item = new(pair.Key, pair.Key, tips.ToString());
+				StringResList.Add(item);
 			}
 		}
-		MenuItem separator2 = new() {
-			Height = 3,
-			Background = new SolidColorBrush(Colors.LightGray),
-			IsEnabled = false
-		};
-		MenuStringRes.Items.Add(separator2);
-		MenuItem openLocalization = new() {
-			Name = "openLocalization",
-			Header = Util.GetString("MenuResOption")
-		};
-		action(openLocalization);
-		MenuStringRes.Items.Add(openLocalization);
+		
+		mStringResList.Add(separator2);
+		mStringResList.Add(openLocalization);
 	}
 
 	public static string GetStringResResults(string displayName) {
@@ -106,17 +97,17 @@ public static class AccessoryDataUtil {
 		return result;
 	}
 
-	public static void OpenLocalization(Window window, Action setup) {
+	public static void OpenLocalization(Window window) {
 		var modLocalization = new ModLocalizationWindow() {
 			Owner = window
 		};
 		modLocalization.ShowDialog();
-		if (modLocalization.HasChanges)
-			setup();
+		if (modLocalization.HasChanges) {
+			SetupStringResList();
+		}
 	}
 
 	public static void ApplyStringRes(TextBox TextDisplayName, string resId) {
-
 		var start = TextDisplayName.SelectionStart;
 		TextDisplayName.SelectedText = "";
 		var insert = $"@@{resId}@@";
@@ -163,7 +154,8 @@ public static class AccessoryDataUtil {
 	}
 
 	//图标
-	public static string? ChooseIcon(Window window) {
+	public static string? ChooseIcon(Window window, out string? iconPath) {
+		iconPath = null;
 		try {
 			string projectLocation = Instances.ProjectLocation;
 			if (projectLocation.Length == 0)
@@ -195,7 +187,8 @@ public static class AccessoryDataUtil {
 				return null;
 			siiIconLocation = siiIconLocation.Replace(pathAcc, "");
 			siiIconLocation = siiIconLocation.Replace('\\', '/');
-			siiIconLocation = siiIconLocation[1..^4];
+			siiIconLocation = siiIconLocation[..^4];
+			iconPath = iconFile.FullName;
 			return siiIconLocation;
 		} catch (Exception ex) {
 			MessageBox.Show(window, ex.Message);
@@ -267,12 +260,49 @@ public static class AccessoryDataUtil {
 		return siiIconLocation;
 	}
 
-	public static string? ChooseRope() => ChooseMaterial(MatTypeRope, Util.GetString("DialogTitleChooseRope"));
-	public static string? ChoosePatch() => ChooseMaterial(MatTypePatch, Util.GetString("DialogTitleChoosePatch"));
+	public static BitmapSource? LoadModelIconByIconName(string iconName) {
+		if (iconName.Length == 0)
+			return null;
+		var projectLocation = Instances.ProjectLocation;
+		iconName = iconName.Replace('/', '\\');
+		var iconPath = Paths.AccessoryDir(projectLocation, iconName);
+		var iconFile = iconPath + ".tga";
+		if (File.Exists(iconFile)) 
+			return LoadModelIcon(iconFile);
+		iconFile = iconPath + ".dds";
+		if (File.Exists(iconFile))
+			return LoadModelIcon(iconFile);
+		iconFile = iconPath + ".tobj";
+		if (File.Exists(iconFile)) {
+			using StreamReader sr = new(iconFile);
+			string? line;
+			while ((line = sr.ReadLine()?.Trim()) != null) {
+				int start = line.IndexOf("/mate");
+				if (start != -1) {
+					int end = line.IndexOf(".tga");
+					if (end == -1)
+						end = line.IndexOf(".dds");
+					end += 4;
+					iconFile = line[start..end];
+					iconFile = iconFile.Replace('/', '\\');
+					iconFile = projectLocation + iconFile;
+					return LoadModelIcon(iconFile);
+				}
+			}
+		}
+		return null;
+	}
 
-	private const int MatTypeRope = 1;
-	private const int MatTypePatch = 2;
-	private static string? ChooseMaterial(int type, string title) {
+	public static BitmapSource? LoadModelIcon(string? iconPath) {
+		if (iconPath == null || !File.Exists(iconPath))
+			return null;
+		return Util.LoadPfimIcon(iconPath);
+	}
+
+
+	public static string? ChooseRope() => ChooseMaterial(Util.GetString("DialogTitleChooseRope"));
+	public static string? ChoosePatch() => ChooseMaterial(Util.GetString("DialogTitleChoosePatch"));
+	private static string? ChooseMaterial(string title) {
 		string projectLocation = Instances.ProjectLocation;
 		if (projectLocation.Length == 0)
 			throw new(Util.GetString("MessageProjectLocationFirst"));
@@ -296,7 +326,7 @@ public static class AccessoryDataUtil {
 			pathCheck = pathCheck.Replace(projectLocation, "");
 			if (pathCheck.Split(' ', '(', ')').Length > 1) //路径或文件名不能有空格或括号
 				throw new(Util.GetString("MessageIconInvalidChar"));
-			var matLocation = CheckRopeMatExistence(type, iconFile);
+			var matLocation = CheckRopeMatExistence(iconFile);
 			if (matLocation == null)
 				return null;
 			matLocation = matLocation.Replace(projectLocation, "");
@@ -308,7 +338,7 @@ public static class AccessoryDataUtil {
 			throw new(Util.GetString("MessageErrorChooseMaterial"));
 	}
 
-	private static string? CheckRopeMatExistence(int type, DirectoryInfo iconFile) {
+	private static string? CheckRopeMatExistence(DirectoryInfo iconFile) {
 		string projectLocation = Instances.ProjectLocation;
 
 		var deExt = iconFile.FullName[..^4];
@@ -319,32 +349,94 @@ public static class AccessoryDataUtil {
 			return matPath;
 		else {
 			{
-				string iconLocation = iconFile.FullName.Replace(projectLocation, "");
-				iconLocation = iconLocation.Replace('\\', '/');
 				using StreamWriter sw = new(tobjPath);
-				sw.WriteLine("map 2d");
-				sw.WriteLine($"    {iconLocation}");
-				sw.WriteLine("addr");
-				sw.WriteLine("    clamp_to_edge");
-				sw.WriteLine("    clamp_to_edge");
+				sw.WriteLine($"map	2d	{iconFile.Name}");
+				sw.WriteLine("addr	clamp_to_edge	clamp_to_edge");
 			}
 			tobjPath = new FileInfo(tobjPath).Name;
 			{
 				using StreamWriter sw = new(matPath);
-				if (type == MatTypeRope)
-					sw.WriteLine("material: \"eut2.dif.spec.shadow\"");
-				else
-					sw.WriteLine("material: \"ui\"");
+				sw.WriteLine("material: \"eut2.dif.spec.shadow\"");
 				sw.WriteLine("{");
 				sw.WriteLine($"\ttexture: \"{tobjPath}\"");
-				if (type == MatTypeRope)
-					sw.WriteLine($"\ttexture_name: \"texture_base\"");
-				else
-					sw.WriteLine($"\ttexture_name: \"texture\"");
+				sw.WriteLine($"\ttexture_name: \"texture_base\"");
 				sw.WriteLine("}");
 			}
 		}
 		return matPath;
 
+	}
+}
+
+public class StringResItem: BaseBinding {
+
+	public StringResItem(string header, string tag, string? tooltip = null) {
+		IsSeparator = false;
+		mHeader = header;
+		mTag = tag;
+		mTooltip = tooltip;
+	}
+
+	public static StringResItem Head() => new(Util.GetString("MenuResTip"), "head") { IsEnabled = false };
+
+	public static StringResItem Separator() {
+		return new();
+	}
+
+	public static StringResItem Empty() {
+		return new(Util.GetString("StatusEmpty"), "empty") { IsEnabled = false };
+	}
+
+	public static StringResItem OpenLocalization() {
+		return new(Util.GetString("MenuResOption"), "openLocalization");
+	}
+
+	private StringResItem() {
+		IsSeparator = true;
+		mHeader = "";
+		mTag = "";
+	}
+
+	private readonly bool IsSeparator;
+
+	public Visibility TextBlockVisibility => IsSeparator ? Visibility.Collapsed : Visibility.Visible;
+	public Visibility SeparatorVisibility => IsSeparator ? Visibility.Visible : Visibility.Collapsed;
+
+	private bool mIsEnabled = true;
+	public bool IsEnabled {
+		get => mIsEnabled;
+		set {
+			mIsEnabled = value;
+			InvokeChange();
+		}
+	}
+
+	private string mHeader;
+
+	public string Header {
+		get => mHeader;
+		set {
+			mHeader = value;
+			InvokeChange();
+		}
+	}
+
+	private string mTag;
+	public string Tag {
+		get => mTag;
+		set {
+			mTag = value;
+			InvokeChange();
+		}
+	}
+
+	private string? mTooltip;
+
+	public string? Tooltip {
+		get => mTooltip;
+		set {
+			mTooltip = value;
+			InvokeChange();
+		}
 	}
 }

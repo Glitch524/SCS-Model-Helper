@@ -8,11 +8,12 @@
 	xmlns:main="clr-namespace:SCS_Mod_Helper.Main"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:AccAddonBinding}"
 	mc:Ignorable="d"
 	Title="{DynamicResource TitleAccessoryAddon}"
 	Width="1220"
-	Height="700"
+	Height="800"
 	WindowStartupLocation="CenterOwner"
 	Closing="SaveOnClosing">
 	<base:BaseWindow.Resources>
@@ -24,12 +25,198 @@
 			x:Key="MultiNullCheck" />
 		<utils:ClearVisibilityConverter
 			x:Key="ClearVisibility" />
+
+		<Style
+			x:Key="CMStyle"
+			TargetType="MenuItem"
+			BasedOn="{StaticResource {x:Type MenuItem}}">
+			<Setter
+				Property="ContextMenu"
+				Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=.}" />
+			<Setter
+				Property="Tag"
+				Value="{Binding Path=.}" />
+			<EventSetter
+				Event="Click"
+				Handler="OnMenuClicked" />
+		</Style>
+		<DataTemplate
+			x:Key="CMTemplate">
+			<TextBlock
+				Text="{Binding Path=.}" />
+		</DataTemplate>
+
+
 		<ContextMenu
-			x:Key="MenuModelType" />
+			x:Key="MenuStringRes"
+			Placement="Top"
+			ItemsSource="{Binding StringResList}">
+			<ContextMenu.ItemContainerStyle>
+				<Style
+					TargetType="MenuItem"
+					BasedOn="{StaticResource CMStyle}">
+					<Setter
+						Property="ToolTip"
+						Value="{Binding Tooltip}" />
+					<Setter
+						Property="ToolTipService.InitialShowDelay"
+						Value="100" />
+					<Setter
+						Property="Tag"
+						Value="{Binding Tag}" />
+					<Setter
+						Property="IsEnabled"
+						Value="{Binding IsEnabled}" />
+				</Style>
+			</ContextMenu.ItemContainerStyle>
+			<ContextMenu.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<TextBlock
+							Text="{Binding Header}"
+							Visibility="{Binding TextBlockVisibility}" />
+						<Separator
+							Height="1"
+							Visibility="{Binding SeparatorVisibility}" />
+					</Grid>
+				</DataTemplate>
+			</ContextMenu.ItemTemplate>
+		</ContextMenu>
+		
 		<ContextMenu
-			x:Key="MenuLook" />
+			x:Key="MenuModelType">
+			<MenuItem
+				Header="{DynamicResource MenuItem.cup_holder}"
+				Click="OnMenuClicked"
+				Tag="cup_holder">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.curtain_f}"
+				Click="OnMenuClicked"
+				Tag="curtain_f">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.drv_plate}"
+				Click="OnMenuClicked"
+				Tag="drv_plate">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.codrv_plate}"
+				Click="OnMenuClicked"
+				Tag="codrv_plate">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.flag_l}"
+				Click="OnMenuClicked"
+				Tag="flag_l/flag_f_l">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.flag_r}"
+				Click="OnMenuClicked"
+				Tag="flag_r/flag_f_r">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.back_wall}"
+				Click="OnMenuClicked"
+				Tag="inlight_bck/bckpanel">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.l_pillow}"
+				Click="OnMenuClicked"
+				Tag="l_pillow">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.set_cabinet}"
+				Click="OnMenuClicked"
+				Tag="set_cabinet">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.set_glass}"
+				Click="OnMenuClicked"
+				Tag="set_glass">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.set_lglass}"
+				Click="OnMenuClicked"
+				Tag="set_lglass">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.sterring_w}"
+				Click="OnMenuClicked"
+				Tag="sterring_w">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toyhang}"
+				Click="OnMenuClicked"
+				Tag="toyhang">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toyac}"
+				Click="OnMenuClicked"
+				Tag="toyac">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toystand}"
+				Click="OnMenuClicked"
+				Tag="toystand">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toyseat}"
+				Click="OnMenuClicked"
+				Tag="toyseat">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toybed}"
+				Click="OnMenuClicked"
+				Tag="toybed">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toybig}"
+				Click="OnMenuClicked"
+				Tag="toybig">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toyback}"
+				Click="OnMenuClicked"
+				Tag="toyback">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toysofa}"
+				Click="OnMenuClicked"
+				Tag="toysofa">
+			</MenuItem>
+			<MenuItem
+				Header="{DynamicResource MenuItem.toytable}"
+				Click="OnMenuClicked"
+				Tag="toytable">
+			</MenuItem>
+
+		</ContextMenu>
 		<ContextMenu
-			x:Key="MenuVariant" />
+			x:Key="MenuLook"
+			Opened="ContextMenu_Opened"
+			ItemContainerStyle="{StaticResource CMStyle}"
+			ItemTemplate="{StaticResource CMTemplate}">
+			<ContextMenu.Resources>
+				<Style
+					TargetType="MenuItem">
+					<Setter
+						Property="Template">
+						<Setter.Value>
+							<ControlTemplate
+								TargetType="MenuItem">
+								<Separator />
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</ContextMenu.Resources>
+		</ContextMenu>
+		<ContextMenu
+			x:Key="MenuVariant"
+			ItemContainerStyle="{StaticResource CMStyle}"
+			ItemTemplate="{StaticResource CMTemplate}" />
+		
 		<ContextMenu
 			x:Key="MenuOthers">
 			<MenuItem
@@ -65,1723 +252,1629 @@
 				Click="OnMenuClicked"
 				Tag="require" />
 		</ContextMenu>
+
 		<Style
-			x:Key="ButtonStyle"
-			TargetType="Button">
-			<Setter
-				Property="Width"
-				Value="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}" />
-			<Setter
-				Property="Height"
-				Value="{Binding ActualHeight, ElementName=TextModelName, Mode=OneWay}" />
+			x:Key="TruckTableTextBoxStyle"
+			TargetType="TextBox"
+			BasedOn="{StaticResource TableTextBoxStyle}">
+			<Style.Triggers>
+				<MultiDataTrigger>
+					<MultiDataTrigger.Conditions>
+						<Condition
+							Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}"
+							Value="" />
+						<Condition
+							Binding="{Binding Check}"
+							Value="True" />
+					</MultiDataTrigger.Conditions>
+					<MultiDataTrigger.Setters>
+						<Setter
+							Property="Background"
+							Value="Yellow" />
+					</MultiDataTrigger.Setters>
+				</MultiDataTrigger>
+			</Style.Triggers>
+		</Style>
+		
+		<Style
+			x:Key="TextBoxBorderless"
+			TargetType="TextBox"
+			BasedOn="{StaticResource {x:Type TextBox}}">
 			<Setter
 				Property="Padding"
-				Value="3" />
+				Value="5,3,5,3" />
 			<Setter
 				Property="BorderThickness"
-				Value="0,1,1,1" />
+				Value="0" />
 			<Setter
-				Property="BorderBrush"
-				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+				Property="VerticalContentAlignment"
+				Value="Center" />
+		</Style>
+		<Style
+			x:Key="ComboBoxBorderless"
+			TargetType="ComboBox"
+			BasedOn="{StaticResource {x:Type ComboBox}}">
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
+			<Setter
+				Property="VerticalContentAlignment"
+				Value="Center" />
+		</Style>
+		<Style
+			x:Key="ButtonBorderless"
+			TargetType="Button"
+			BasedOn="{StaticResource {x:Type Button}}">
+			<Setter
+				Property="Padding"
+				Value="2" />
 			<Setter
 				Property="VerticalAlignment"
 				Value="Top" />
-		</Style>
-		<Style
-			x:Key="ClearStyle"
-			TargetType="Button">
-			<Setter
-				Property="Content"
-				Value=" × " />
 			<Setter
 				Property="BorderThickness"
-				Value="0,1,1,1" />
+				Value="0" />
 			<Setter
-				Property="Background"
-				Value="Transparent" />
+				Property="Width"
+				Value="{Binding ActualHeight, ElementName=TextModelName}" />
 			<Setter
-				Property="BorderBrush"
-				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+				Property="Height"
+				Value="{Binding ActualHeight, ElementName=TextModelName}" />
 		</Style>
 	</base:BaseWindow.Resources>
-	<Grid
-		x:Name="GridMain"
-		Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition
-				Width="*" />
-			<ColumnDefinition
-				Width="2*" />
-		</Grid.ColumnDefinitions>
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
 				Height="*" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
 		</Grid.RowDefinitions>
-		<Grid>
+		<ui:TitleBar
+			Title="{DynamicResource TitleAccessoryAddon}" />
+		<Grid
+			x:Name="GridMain"
+			Grid.Row="1"
+			Margin="10,0,10,10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="2*" />
+			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="*" />
 				<RowDefinition
 					Height="Auto" />
 				<RowDefinition
-					Height="*" />
+					Height="Auto" />
 			</Grid.RowDefinitions>
-			<StackPanel>
-				<StackPanel>
-					<TextBlock
-						x:Name="TitleProjectLocation"
-						Grid.ColumnSpan="2"
-						TextWrapping="Wrap"
-						VerticalAlignment="Center"
-						Text="{DynamicResource SCSProjectLocation}" />
-					<TextBox
-						x:Name="TextProjectLocation"
-						Padding="3,3,3,3"
-						IsReadOnly="True"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top"
-						MaxLines="1"
-						Text="{Binding ProjectLocation, Mode=OneWay}">
-						<TextBox.Style>
-							<Style
-								TargetType="TextBox">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding ProjectExist}"
-										Value="false">
-										<Setter
-											Property="Foreground"
-											Value="Red" />
-										<Setter
-											Property="ToolTip"
-											Value="{DynamicResource SCSProjectLocationTipNotExist}" />
-									</DataTrigger>
-									<Trigger
-										Property="Text"
-										Value="">
-										<Setter
-											Property="Background"
-											Value="Yellow" />
-									</Trigger>
-								</Style.Triggers>
-							</Style>
-						</TextBox.Style>
-					</TextBox>
-				</StackPanel>
-				<Grid
-					Margin="0,5,0,0">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="5" />
-						<ColumnDefinition
-							Width="*" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="*" />
-						<RowDefinition
-							Height="*" />
-						<RowDefinition
-							Height="*" />
-						<RowDefinition
-							Height="*" />
-					</Grid.RowDefinitions>
-
-					<StackPanel
-						Grid.ColumnSpan="3">
-						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelDisplayName}" />
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBox
-								x:Name="TextDisplayName"
-								Padding="3,3,3,3"
-								Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-								TextWrapping="Wrap"
-								BorderThickness="1,1,1,1"
-								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox">
-										<Style.Triggers>
-											<Trigger
-												Property="Text"
-												Value="">
-												<Setter
-													Property="Background"
-													Value="Yellow" />
-											</Trigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-							<Button
-								x:Name="ButtonCheckRes"
-								Grid.Column="1"
-								Click="CheckStringRes"
-								Visibility="{Binding CheckResVisibility}"
-								Style="{StaticResource ButtonStyle}">
-								<Image
-									Source="/Images/Search.png" />
-							</Button>
-							<Popup
-								x:Name="PopupCheckRes"
-								PlacementTarget="{Binding ElementName=ButtonCheckRes}"
-								PopupAnimation="Slide"
-								AllowsTransparency="True"
-								IsOpen="{Binding PopupCheckOpen}"
-								StaysOpen="False">
-								<Grid
-									Background="White">
-									<Border
-										BorderBrush="Gray"
-										BorderThickness="1" />
-									<StackPanel
-										Margin="10">
-										<TextBlock>
-											<Run
-												Text="{DynamicResource CheckResResult}" />
-										</TextBlock>
-										<Border
-											Margin="0,10,0,10"
-											Background="Gray"
-											Height="1" />
-										<TextBlock
-											Text="{Binding CheckResResult}" />
-										<Border
-											Margin="0,10,0,10"
-											Background="Gray"
-											Height="1" />
-										<TextBlock>
-											<Run
-												Text="{DynamicResource CheckResResultTips}" />
-										</TextBlock>
-									</StackPanel>
-								</Grid>
-							</Popup>
-							<Button
-								x:Name="ButtonChooseRes"
-								Grid.Column="2"
-								Click="ChooseStringRes"
-								Style="{StaticResource ButtonStyle}">
-								<Image
-									Source="/Images/Web.png" />
-							</Button>
-						</Grid>
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="1"
-						Margin="0,5,0,0">
-						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								x:Name="TitleModelName"
-								TextWrapping="Wrap"
-								Text="{DynamicResource ModelName}" />
-							<Border
-								ToolTip="{DynamicResource ModelNameTip}"
-								Width="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}"
-								Height="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}">
-								<Image
-									Source="/Images/ExclamationPoint.png" />
-							</Border>
-						</StackPanel>
-						<TextBox
-							x:Name="TextModelName"
-							Padding="3,3,3,3"
-							TextWrapping="Wrap"
-							MaxLines="1"
-							Text="{Binding ModelName, UpdateSourceTrigger=PropertyChanged}"
-							Foreground="{Binding ModelNameForeground}"
-							VerticalAlignment="Top">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="1"
-						Grid.Column="2"
-						Margin="0,5,0,0">
-						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								TextWrapping="Wrap"
-								VerticalAlignment="Top"
-								Text="{DynamicResource PartType}" />
-							<Border
-								ToolTip="{DynamicResource PartTypeTip}"
-								Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
-								<Image
-									Source="/Images/ExclamationPoint.png" />
-							</Border>
-						</StackPanel>
-						<ComboBox
-							x:Name="TextPartType"
-							Padding="3,3,3,3"
-							DisplayMemberPath="PartTypeDisplay"
-							SelectedValuePath="PartTypeValue"
-							SelectedValue="{Binding PartType}"
-							ItemsSource="{Binding PartTypes}"
-							IsEditable="True"
-							IsReadOnly="true" />
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="2"
-						Margin="0,5,0,0">
-						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelPrice}" />
-						<TextBox
-							x:Name="TextPrice"
-							Padding="3,3,3,3"
-							Text="{Binding Price}"
-							MaxLines="1"
-							PreviewTextInput="NumberOnly"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-										<Trigger
-											Property="Text"
-											Value="0">
-											<Setter
-												Property="Background"
-												Value="Red" />
-											<Setter
-												Property="ToolTip"
-												Value="{DynamicResource ModelPriceErrNot0}" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="2"
-						Grid.Column="2"
-						Margin="0,5,0,0">
-						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top">
-							<Run
-								Language="zh-cn"
-								Text="{DynamicResource ModelUnlockLevel}" />
-						</TextBlock>
-						<TextBox
-							x:Name="TextUnlockLevel"
-							Padding="3,3,3,3"
-							Text="{Binding UnlockLevel}"
-							MaxLines="1"
-							PreviewTextInput="NumberOnly"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="3"
-						Margin="0,5,0,0">
-						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								x:Name="TitleIconName"
-								TextWrapping="Wrap"
-								VerticalAlignment="Top"
-								Text="{DynamicResource ModelIcon}" />
-							<Border
-								ToolTip="{DynamicResource ModelIconTip}"
-								Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
-								<Image
-									Source="/Images/ExclamationPoint.png" />
-							</Border>
-						</StackPanel>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBox
-								x:Name="TextIconName"
-								Grid.Column="0"
-								Padding="3,3,3,3"
-								Text="{Binding IconName}"
-								MaxLines="1"
-								TextWrapping="Wrap"
-								VerticalAlignment="Top"
-								BorderThickness="1,1,0,1">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox">
-										<Style.Triggers>
-											<Trigger
-												Property="Text"
-												Value="">
-												<Setter
-													Property="Background"
-													Value="Yellow" />
-											</Trigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-							<Button
-								x:Name="ButtonIconNameClear"
-								Grid.Column="1"
-								Click="ButtonClearClick"
-								Style="{StaticResource ClearStyle}"
-								Visibility="{Binding IconName, Converter={StaticResource ClearVisibility}}"/>
-							<Button
-								x:Name="ButtonIconName"
-								Grid.Column="2"
-								Click="ButtonChooseIcon"
-								Style="{StaticResource ButtonStyle}">
-								<Image
-									Source="/Images/Folder.png" />
-							</Button>
-						</Grid>
-					</StackPanel>
-				</Grid>
-
-				<Border
-					Height="1"
-					Margin="0,7,0,7"
-					VerticalAlignment="Center"
-					Background="#FF4C4B4B"
-					HorizontalAlignment="Stretch" />
-
-				<StackPanel
-					Margin="0,0,0,0">
-					<TextBlock
-						Grid.ColumnSpan="3"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top"
-						Text="{DynamicResource ModelFilePath}" />
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<TextBox
-							x:Name="TextModelPath"
-							Grid.Column="0"
-							Padding="3,3,3,3"
-							Text="{Binding ModelPath}"
-							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
-							MaxLines="2"
-							VerticalAlignment="Center">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-						<Button
-							x:Name="ButtonChooseModelClear"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ClearStyle}"
-							Visibility="{Binding ModelPath, Converter={StaticResource ClearVisibility}}" />
-						<Button
-							x:Name="ButtonChooseModel"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonStyle}">
-							<Image
-								Source="/Images/Folder.png" />
-						</Button>
-					</Grid>
-				</StackPanel>
-
-				<StackPanel
-					Margin="0,2,0,0">
-					<StackPanel
-						Orientation="Horizontal">
-						<TextBlock
-							x:Name="TitleModelPathUK"
-							Grid.Row="0"
-							Grid.Column="0"
-							Grid.ColumnSpan="3"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelFilePathUK}" />
-						<Border
-							ToolTip="{DynamicResource ModelFilePathUKTip}">
-							<Image
-								Source="/Images/ExclamationPoint.png" />
-						</Border>
-					</StackPanel>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<TextBox
-							x:Name="TextModelPathUK"
-							Grid.Column="0"
-							Padding="3,3,3,3"
-							Text="{Binding ModelPathUK}"
-							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
-							MaxLines="2"
-							VerticalAlignment="Center" />
-						<Button
-							x:Name="ButtonChooseModelUKClear"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ClearStyle}"
-							Visibility="{Binding ModelPathUK, Converter={StaticResource ClearVisibility}}" />
-						<Button
-							x:Name="ButtonChooseModelUK"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonStyle}">
-							<Image
-								Source="/Images/Folder.png" />
-						</Button>
-					</Grid>
-				</StackPanel>
-
-				<StackPanel
-					Margin="0,2,0,0">
-					<StackPanel
-						Orientation="Horizontal">
-						<CheckBox
-							x:Name="CheckUseCollPath"
-							Grid.Row="0"
-							Grid.Column="0"
-							Grid.ColumnSpan="3"
-							VerticalAlignment="Top"
-							d:IsChecked="True"
-							IsChecked="{Binding UseCollPath}"
-							Content="{DynamicResource ModelCollPath}" />
-					</StackPanel>
-					<Grid>
-						<Grid.Style>
-							<Style
-								TargetType="Grid">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding IsChecked, ElementName=CheckUseCollPath}"
-										Value="False">
-										<Setter
-											Property="Visibility"
-											Value="Collapsed" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Grid.Style>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<TextBox
-							x:Name="TextCollPath"
-							Grid.Column="0"
-							Padding="3,3,3,3"
-							Text="{Binding CollPath}"
-							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
-							MaxLines="2"
-							VerticalAlignment="Center" />
-						<Button
-							x:Name="ButtonChooseCollClear"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ClearStyle}"
-							Visibility="{Binding CollPath, Converter={StaticResource ClearVisibility}}" />
-
-						<Button
-							x:Name="ButtonChooseColl"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonStyle}" >
-							<Image
-								Source="/Images/Folder.png" />
-						</Button>
-					</Grid>
-				</StackPanel>
-
-				<StackPanel
-					Margin="0,2,0,0">
-					<TextBlock
-						TextWrapping="Wrap"
-						VerticalAlignment="Top">
-					<Run
-							Text="{DynamicResource ModelType}" />
-					<Run
-							Text="{DynamicResource ModelTypeTip}" />
-					</TextBlock>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="1*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="2*" />
-						</Grid.ColumnDefinitions>
-						<ComboBox
-							x:Name="TextModelType"
-							Text="{Binding ModelType}"
-							DisplayMemberPath="Accessory"
-							IsEditable="True"
-							IsTextSearchEnabled="True"
-							ItemsSource="{Binding ModelTypes}"
-							SelectedValue="{Binding CurrentModelType, Mode=TwoWay}"
-							VerticalContentAlignment="Center">
-						</ComboBox>
-						<Button
-							x:Name="ButtonCoverModelType"
-							Grid.Column="1"
-							Click="ButtonCoverValue"
-							BorderThickness="0,1,0,1"
-							Style="{StaticResource ButtonStyle}">
-							<Image
-								Source="/Images/Paste.png" />
-						</Button>
-						<TextBox
-							x:Name="TextAccName"
-							Text="{Binding CurrentModelType.Name}"
-							Grid.Column="2"
-							Padding="3,3,3,3"
-							TextWrapping="Wrap"
-							IsReadOnly="True"
-							VerticalContentAlignment="Center"
-							ToolTip="{Binding CurrentModelType.Name}" />
-					</Grid>
-				</StackPanel>
-
-				<Grid
-					Margin="0,2,0,0">
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="*" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="5" />
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="Auto" />
-					</Grid.ColumnDefinitions>
-					<TextBlock
-						Grid.Row="0"
-						Grid.ColumnSpan="2"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top"
-						Text="{DynamicResource ModelLook}" />
-					<ComboBox
-						x:Name="TextLook"
-						Grid.Row="1"
-						Text="{Binding Look}"
-						ItemsSource="{Binding LookList}"
-						IsEditable="True"
-						IsTextSearchEnabled="True"
-						VerticalContentAlignment="Center" />
-					<Button
-						x:Name="ButtonCoverLook"
-						Grid.Row="1"
-						Grid.Column="1"
-						Click="ButtonCoverValue"
-						Style="{StaticResource ButtonStyle}">
-						<Image
-							Source="/Images/Paste.png" />
-					</Button>
-					<TextBlock
-						Grid.Row="0"
-						Grid.Column="3"
-						Grid.ColumnSpan="2"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top"
-						Text="{DynamicResource ModelVariant}" />
-					<ComboBox
-						x:Name="TextVariant"
-						Grid.Row="1"
-						Grid.Column="3"
-						Text="{Binding Variant}"
-						ItemsSource="{Binding VariantList}"
-						IsEditable="True"
-						IsTextSearchEnabled="True"
-						VerticalContentAlignment="Center" />
-					<Button
-						x:Name="ButtonCoverVariant"
-						Grid.Row="1"
-						Grid.Column="4"
-						Click="ButtonCoverValue"
-						Style="{StaticResource ButtonStyle}">
-						<Image
-							Source="/Images/Paste.png" />
-					</Button>
-				</Grid>
-
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="5" />
-						<ColumnDefinition
-							Width="*" />
-					</Grid.ColumnDefinitions>
-					<StackPanel
-						Grid.Column="0"
-						Margin="0,2,0,0">
-						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top">
-							<Run
-								Text="{DynamicResource HideIn}" />
-
-						</TextBlock>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBox
-								x:Name="TextHideIn"
-								IsReadOnly="True"
-								Text="{Binding HideIn, Converter={StaticResource HideInConverter}}"
-								VerticalContentAlignment="Center" />
-							<Button
-								x:Name="ButtonSetHideIn"
-								Grid.Column="1"
-								Click="ButtonHideIn"
-								Style="{StaticResource ButtonStyle}">
-								<Image
-									Source="/Images/Add.png" />
-							</Button>
-							<Popup
-								x:Name="PopupHideIn"
-								PlacementTarget="{Binding ElementName=ButtonSetHideIn}"
-								PopupAnimation="Slide"
-								AllowsTransparency="True"
-								StaysOpen="False"
-								Placement="Top">
-								<Grid>
-									<Border
-										Background="White"
-										BorderThickness="1"
-										BorderBrush="Gray" />
-									<StackPanel
-										Margin="10">
-										<TextBlock
-											Text="{DynamicResource TitleHideIn}"
-											TextWrapping="Wrap" />
-										<CheckBox
-											x:Name="CheckMainView"
-											Content="Main View"
-											Margin="0,5,0,0"
-											Tag="0x7"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckReflectionCube"
-											Content="Reflection Cube"
-											Margin="0,5,0,0"
-											Tag="0x1F8"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckCloseMirror"
-											Content="Close Mirror"
-											Margin="0,5,0,0"
-											Tag="0x600"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckFarMirror"
-											Content="Far Mirror"
-											Margin="0,5,0,0"
-											Tag="0x1800"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckSideMirror"
-											Content="Side Mirror"
-											Margin="0,5,0,0"
-											Tag="0x2000"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckFrontMirror"
-											Content="Front Mirror"
-											Margin="0,5,0,0"
-											Tag="0x4000"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckShadows"
-											Content="Shadows"
-											Margin="0,5,0,0"
-											Tag="0x1FFE0000"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-										<CheckBox
-											x:Name="CheckRainReflection"
-											Content="Rain reflection"
-											Margin="0,5,0,0"
-											Tag="0xE0000000"
-											Checked="HideInChecked"
-											Unchecked="HideInUnchecked" />
-									</StackPanel>
-								</Grid>
-							</Popup>
-						</Grid>
-					</StackPanel>
-				</Grid>
-			</StackPanel>
-
-			<Grid
-				Grid.Row="1"
-				Margin="0,2,0,0">
+			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition
 						Height="Auto" />
 					<RowDefinition
 						Height="*" />
 				</Grid.RowDefinitions>
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="Auto" />
-					</Grid.ColumnDefinitions>
-					<TextBlock
-						TextWrapping="Wrap"
-						Text="{DynamicResource Others}"
-						VerticalAlignment="Bottom" />
-					<Border
-						Grid.Column="1"
-						ToolTip="{DynamicResource OthersTip}">
-						<Image
-							Source="/Images/ExclamationPoint.png" />
-					</Border>
-					<Button
-						x:Name="ButtonOthersAdd"
-						Grid.Column="3"
-						Click="ButtonOthersClick">
-						<Image
-							Source="/Images/AddRow.png" />
-					</Button>
-					<Button
-						x:Name="ButtonOthersRemove"
-						Grid.Column="4"
-						Click="ButtonOthersClick">
-						<Image
-							Source="/Images/DeleteRow.png" />
-						<Button.Style>
-							<Style
-								TargetType="Button">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding SelectedIndex, ElementName=TableOthers}"
-										Value="-1">
-										<Setter
-											Property="IsEnabled"
-											Value="False" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Button.Style>
-					</Button>
-				</Grid>
-				<DataGrid
-					x:Name="TableOthers"
-					RowHeaderWidth="0"
-					Grid.Row="1"
-					GridLinesVisibility="Horizontal"
-					CanUserSortColumns="False"
-					CanUserAddRows="False"
-					d:ItemsSource="{d:SampleData ItemCount=2}"
-					ItemsSource="{Binding OthersList}"
-					AutoGenerateColumns="False"
-					Grid.RowSpan="2">
-					<DataGrid.HorizontalGridLinesBrush>
-						<LinearGradientBrush
-							EndPoint="0.5,1"
-							StartPoint="0.5,0">
-							<GradientStop
-								Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
-								Offset="1" />
-						</LinearGradientBrush>
-					</DataGrid.HorizontalGridLinesBrush>
-					<DataGrid.Columns>
-						<DataGridTemplateColumn
-							Header="{DynamicResource HeaderOthersName}"
-							Width="*">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<TextBox
-										BorderThickness="0,0,0,0"
-										Text="{Binding OthersName, UpdateSourceTrigger=PropertyChanged}"
-										ToolTip="{Binding OthersNameTip}"
-										ContextMenu="{DynamicResource MenuOthers}">
-										<TextBox.Style>
-											<Style
-												TargetType="TextBox">
-												<Style.Triggers>
-													<DataTrigger
-														Binding="{Binding OthersName}"
-														Value="">
-														<Setter
-															Property="Background"
-															Value="Yellow" />
-													</DataTrigger>
-												</Style.Triggers>
-											</Style>
-										</TextBox.Style>
-									</TextBox>
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTemplateColumn
-							Header="{DynamicResource HeaderIsArray}"
-							Width="Auto">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<CheckBox
-										IsChecked="{Binding IsArray, UpdateSourceTrigger=PropertyChanged}"
-										IsEnabled="{Binding CheckBoxEnabled}"
-										HorizontalAlignment="Center" />
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTemplateColumn
-							Header="{DynamicResource HeaderUseQuote}"
-							Width="Auto">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<CheckBox
-										IsChecked="{Binding UseQuoteMark, UpdateSourceTrigger=PropertyChanged}"
-										IsEnabled="{Binding CheckBoxEnabled}"
-										HorizontalAlignment="Center" />
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTemplateColumn
-							Header="{DynamicResource HeaderOthersValue}"
-							Width="*">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<TextBox
-										BorderThickness="0,0,0,0"
-										Text="{Binding OthersValue, UpdateSourceTrigger=PropertyChanged}">
-										<TextBox.Style>
-											<Style
-												TargetType="TextBox">
-												<Style.Triggers>
-													<DataTrigger
-														Binding="{Binding OthersValue}"
-														Value="">
-														<Setter
-															Property="Background"
-															Value="Yellow" />
-													</DataTrigger>
-												</Style.Triggers>
-											</Style>
-										</TextBox.Style>
-									</TextBox>
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTemplateColumn
-							Width="Auto">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<Button
-										Padding="0,0,0,0"
-										Click="ButtonPhysicsClick">
-										<Image
-											Source="/Images/Settings.png" />
-										<Button.Style>
-											<Style
-												TargetType="Button">
-												<Style.Triggers>
-													<DataTrigger
-														Binding="{Binding IsData}"
-														Value="False">
-														<Setter
-															Property="Visibility"
-															Value="Hidden" />
-													</DataTrigger>
-												</Style.Triggers>
-											</Style>
-										</Button.Style>
-									</Button>
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-					</DataGrid.Columns>
-				</DataGrid>
-			</Grid>
-		</Grid>
-
-		<Grid
-			x:Name="GridTrucks"
-			Grid.Column="1"
-			Margin="15,0,0,0">
-			<Grid.RowDefinitions>
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition>
-					<RowDefinition.Style>
-						<Style
-							TargetType="RowDefinition">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding Path=IsExpanded, ElementName=ExpanderETS2}"
-									Value="False">
-									<Setter
-										Property="Height"
-										Value="Auto" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</RowDefinition.Style>
-				</RowDefinition>
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition>
-					<RowDefinition.Style>
-						<Style
-							TargetType="RowDefinition">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding Path=IsExpanded, ElementName=ExpanderATS}"
-									Value="False">
-									<Setter
-										Property="Height"
-										Value="Auto" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</RowDefinition.Style>
-				</RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid
-				Grid.Row="0"
-				Grid.Column="0"
-				Cursor="">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition
-						Width="*" />
-					<ColumnDefinition
-						Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<TextBlock>
-					<Run
-						Text="{DynamicResource ModelTruckTip}" />
-				</TextBlock>
-
-				<Button
-					x:Name="ButtonInitialize"
-					Grid.Column="1"
-					Content="{DynamicResource ButtonInitializeTrucks}"
-					Padding="20,5,20,5"
-					FontSize="14"
-					Click="ButtonTruckInitialize"
-					VerticalAlignment="Bottom" />
-			</Grid>
-			<Expander
-				x:Name="ExpanderETS2"
-				Header="{DynamicResource ExpanderETS2}"
-				Grid.Row="1"
-				Margin="0,5,0,0"
-				IsExpanded="{Binding TruckExpandedETS2}"
-				d:IsExpanded="True"
-				Padding="0,2,0,0"
-				BorderBrush="Gray">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="123*" />
-						<ColumnDefinition
-							Width="328*" />
-						<ColumnDefinition
-							Width="207*" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="Auto" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="*" />
-					</Grid.RowDefinitions>
-					<CheckBox
-						x:Name="SelectAllETS2"
-						Grid.Row="0"
-						Grid.Column="0"
-						Content="{DynamicResource CheckBoxSelectAll}"
-						IsChecked="{Binding SelectAllETS2}"
-						VerticalContentAlignment="Bottom"
-						VerticalAlignment="Top"
-						Grid.ColumnSpan="3"
-						Margin="0,8,0,0" />
-					<Button
-						x:Name="ButtonAddTruckETS2"
-						Content="{DynamicResource TitleAddTruck}"
-						Grid.Column="3"
-						Padding="5,3,5,3"
-						Click="ButtonAddTruckClick"
-						VerticalAlignment="Center" />
-					<Button
-						x:Name="ButtonDeleteTruckETS2"
-						Content="{DynamicResource ButtonDeleteTruck}"
-						Grid.Column="4"
-						Margin="5,0,0,0"
-						Padding="5,3,5,3"
-						Click="ButtonDeleteTruckClick"
-						VerticalAlignment="Center">
-						<Button.Style>
-							<Style
-								TargetType="Button">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding SelectedIndex, ElementName=TableTrucksETS2}"
-										Value="-1">
-										<Setter
-											Property="IsEnabled"
-											Value="False" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Button.Style>
-					</Button>
-					<DataGrid
-						x:Name="TableTrucksETS2"
-						RowHeaderWidth="0"
-						BorderThickness="0,1,0,0"
-						Grid.Column="0"
-						Grid.ColumnSpan="5"
-						GridLinesVisibility="Horizontal"
-						CanUserSortColumns="False"
-						ItemsSource="{Binding TrucksETS2}"
-						d:ItemsSource="{d:SampleData ItemCount=2}"
-						AutoGenerateColumns="False"
-						Margin="0,23,0,0"
-						Grid.RowSpan="2">
-						<DataGrid.HorizontalGridLinesBrush>
-							<LinearGradientBrush
-								EndPoint="0.5,1"
-								StartPoint="0.5,0">
-								<GradientStop
-									Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
-									Offset="1" />
-							</LinearGradientBrush>
-						</DataGrid.HorizontalGridLinesBrush>
-						<DataGrid.Columns>
-							<DataGridTemplateColumn
-								Width="Auto">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<CheckBox
-											HorizontalAlignment="Center"
-											Click="TruckCheckBoxClick"
-											IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}" />
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTextColumn
-								Header="{DynamicResource TruckID}"
-								Width="6*"
-								Binding="{Binding TruckID}">
-								<DataGridTextColumn.CellStyle>
-									<Style
-										TargetType="DataGridCell">
-										<Setter
-											Property="ToolTip"
-											Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-									</Style>
-								</DataGridTextColumn.CellStyle>
-							</DataGridTextColumn>
-							<DataGridTextColumn
-								Header="{DynamicResource TruckName}"
-								Width="6*"
-								Binding="{Binding IngameName}">
-								<DataGridTextColumn.CellStyle>
-									<Style
-										TargetType="DataGridCell">
-										<Setter
-											Property="ToolTip"
-											Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-									</Style>
-								</DataGridTextColumn.CellStyle>
-							</DataGridTextColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource ModelType}"
-								Width="3*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0,0,0,0"
-											Text="{Binding ModelType, UpdateSourceTrigger=PropertyChanged}"
-											ContextMenu="{DynamicResource MenuModelType}">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox">
-													<Style.Triggers>
-														<MultiDataTrigger>
-															<MultiDataTrigger.Conditions>
-																<Condition
-																	Binding="{Binding ModelType}"
-																	Value="" />
-																<Condition
-																	Binding="{Binding Check}"
-																	Value="True" />
-															</MultiDataTrigger.Conditions>
-															<MultiDataTrigger.Setters>
-																<Setter
-																	Property="Background"
-																	Value="Yellow" />
-															</MultiDataTrigger.Setters>
-														</MultiDataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource ModelLook}"
-								Width="3*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0,0,0,0"
-											Text="{Binding Look, UpdateSourceTrigger=PropertyChanged}"
-											ContextMenu="{DynamicResource MenuLook}">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox">
-													<Style.Triggers>
-														<MultiDataTrigger>
-															<MultiDataTrigger.Conditions>
-																<Condition
-																	Binding="{Binding Look}"
-																	Value="" />
-																<Condition
-																	Binding="{Binding Check}"
-																	Value="True" />
-															</MultiDataTrigger.Conditions>
-															<MultiDataTrigger.Setters>
-																<Setter
-																	Property="Background"
-																	Value="Yellow" />
-															</MultiDataTrigger.Setters>
-														</MultiDataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource ModelVariant}"
-								Width="3*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0,0,0,0"
-											Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
-											ContextMenu="{DynamicResource MenuVariant}">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox">
-													<Style.Triggers>
-														<MultiDataTrigger>
-															<MultiDataTrigger.Conditions>
-																<Condition
-																	Binding="{Binding Variant}"
-																	Value="" />
-																<Condition
-																	Binding="{Binding Check}"
-																	Value="True" />
-															</MultiDataTrigger.Conditions>
-															<MultiDataTrigger.Setters>
-																<Setter
-																	Property="Background"
-																	Value="Yellow" />
-															</MultiDataTrigger.Setters>
-														</MultiDataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTextColumn
-								Header="{DynamicResource TruckDescription}"
-								Width="8*"
-								Binding="{Binding Description}">
-								<DataGridTextColumn.CellStyle>
-									<Style
-										TargetType="DataGridCell">
-										<Setter
-											Property="ToolTip"
-											Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-									</Style>
-								</DataGridTextColumn.CellStyle>
-							</DataGridTextColumn>
-
-						</DataGrid.Columns>
-					</DataGrid>
-				</Grid>
-			</Expander>
-
-			<GridSplitter
-				Margin="0,5,0,5"
-				Height="1"
-				Grid.Row="2"
-				ResizeBehavior="PreviousAndCurrent"
-				VerticalAlignment="Center"
-				Background="#FF4C4B4B"
-				HorizontalAlignment="Stretch" />
-
-			<Expander
-				x:Name="ExpanderATS"
-				Header="{DynamicResource ExpanderATS}"
-				Grid.Row="3"
-				IsExpanded="{Binding TruckExpandedATS}"
-				d:IsExpanded="True"
-				Padding="0,2,0,0"
-				BorderBrush="Gray">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="Auto" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="*" />
-					</Grid.RowDefinitions>
-					<CheckBox
-						x:Name="SelectAllATS"
-						Grid.Row="0"
-						Grid.Column="0"
-						Content="{DynamicResource CheckBoxSelectAll}"
-						IsChecked="{Binding SelectAllATS}"
-						VerticalAlignment="Bottom" />
-					<Button
-						x:Name="ButtonAddTruckATS"
-						Content="{DynamicResource TitleAddTruck}"
-						Grid.Row="0"
-						Grid.Column="1"
-						Padding="5,3,5,3"
-						Click="ButtonAddTruckClick" />
-					<Button
-						x:Name="ButtonDeleteTruckATS"
-						Content="{DynamicResource ButtonDeleteTruck}"
-						Grid.Row="0"
-						Grid.Column="2"
-						Margin="5,0,0,0"
-						Padding="5,3,5,3"
-						Click="ButtonDeleteTruckClick"
-						VerticalAlignment="Bottom">
-						<Button.Style>
-							<Style
-								TargetType="Button">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding SelectedIndex, ElementName=TableTrucksATS}"
-										Value="-1">
-										<Setter
-											Property="IsEnabled"
-											Value="False" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Button.Style>
-					</Button>
-					<DataGrid
-						x:Name="TableTrucksATS"
-						BorderThickness="0,1,0,0"
-						RowHeaderWidth="0"
-						Grid.Row="1"
-						Grid.Column="0"
-						Grid.ColumnSpan="3"
-						GridLinesVisibility="Horizontal"
-						CanUserSortColumns="False"
-						ItemsSource="{Binding TrucksATS}"
-						d:ItemsSource="{d:SampleData ItemCount=2}"
-						AutoGenerateColumns="False">
-						<DataGrid.HorizontalGridLinesBrush>
-							<LinearGradientBrush
-								EndPoint="0.5,1"
-								StartPoint="0.5,0">
-								<GradientStop
-									Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
-									Offset="1" />
-							</LinearGradientBrush>
-						</DataGrid.HorizontalGridLinesBrush>
-						<DataGrid.Columns>
-							<DataGridTemplateColumn
-								Width="Auto">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<CheckBox
-											HorizontalAlignment="Center"
-											Click="TruckCheckBoxClick"
-											IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}" />
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTextColumn
-								Header="{DynamicResource TruckID}"
-								Width="6*"
-								Binding="{Binding TruckID}">
-								<DataGridTextColumn.CellStyle>
-									<Style
-										TargetType="DataGridCell">
-										<Setter
-											Property="ToolTip"
-											Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-									</Style>
-								</DataGridTextColumn.CellStyle>
-							</DataGridTextColumn>
-							<DataGridTextColumn
-								Header="{DynamicResource TruckName}"
-								Width="6*"
-								Binding="{Binding IngameName}">
-								<DataGridTextColumn.CellStyle>
-									<Style
-										TargetType="DataGridCell">
-										<Setter
-											Property="ToolTip"
-											Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-									</Style>
-								</DataGridTextColumn.CellStyle>
-							</DataGridTextColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource ModelType}"
-								Width="3*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0,0,0,0"
-											Text="{Binding ModelType, UpdateSourceTrigger=PropertyChanged}"
-											ContextMenu="{DynamicResource MenuModelType}">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox">
-													<Style.Triggers>
-														<MultiDataTrigger>
-															<MultiDataTrigger.Conditions>
-																<Condition
-																	Binding="{Binding ModelType}"
-																	Value="" />
-																<Condition
-																	Binding="{Binding Check}"
-																	Value="True" />
-															</MultiDataTrigger.Conditions>
-															<MultiDataTrigger.Setters>
-																<Setter
-																	Property="Background"
-																	Value="Yellow" />
-															</MultiDataTrigger.Setters>
-														</MultiDataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource ModelLook}"
-								Width="3*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0,0,0,0"
-											Text="{Binding Look, UpdateSourceTrigger=PropertyChanged}"
-											ContextMenu="{DynamicResource MenuLook}">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox">
-													<Style.Triggers>
-														<MultiDataTrigger>
-															<MultiDataTrigger.Conditions>
-																<Condition
-																	Binding="{Binding Look}"
-																	Value="" />
-																<Condition
-																	Binding="{Binding Check}"
-																	Value="True" />
-															</MultiDataTrigger.Conditions>
-															<MultiDataTrigger.Setters>
-																<Setter
-																	Property="Background"
-																	Value="Yellow" />
-															</MultiDataTrigger.Setters>
-														</MultiDataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource ModelVariant}"
-								Width="3*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0,0,0,0"
-											Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
-											ContextMenu="{DynamicResource MenuVariant}">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox">
-													<Style.Triggers>
-														<MultiDataTrigger>
-															<MultiDataTrigger.Conditions>
-																<Condition
-																	Binding="{Binding Variant}"
-																	Value="" />
-																<Condition
-																	Binding="{Binding Check}"
-																	Value="True" />
-															</MultiDataTrigger.Conditions>
-															<MultiDataTrigger.Setters>
-																<Setter
-																	Property="Background"
-																	Value="Yellow" />
-															</MultiDataTrigger.Setters>
-														</MultiDataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTextColumn
-								Header="{DynamicResource TruckDescription}"
-								Width="8*"
-								Binding="{Binding Description}">
-								<DataGridTextColumn.CellStyle>
-									<Style
-										TargetType="DataGridCell">
-										<Setter
-											Property="ToolTip"
-											Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-									</Style>
-								</DataGridTextColumn.CellStyle>
-							</DataGridTextColumn>
-						</DataGrid.Columns>
-					</DataGrid>
-				</Grid>
-			</Expander>
-		</Grid>
-
-		<Popup
-			x:Name="PopupAddTruck"
-			PopupAnimation="Slide"
-			AllowsTransparency="True"
-			IsOpen="{Binding PopupAddTruckOpen}">
-			<Grid
-				Width="450">
-				<Border
-					Background="White"
-					BorderThickness="1"
-					BorderBrush="Gray" />
-				<Grid
-					Margin="10">
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="Auto" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="10" />
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="10" />
-						<ColumnDefinition
-							Width="*" />
-					</Grid.ColumnDefinitions>
-					<TextBlock
-						Grid.Row="0"
-						Grid.Column="0">
-						<Run
-							Text="{DynamicResource TruckID}" />
-					</TextBlock>
-					<TextBox
-						x:Name="TextNewTruckID"
-						Grid.Row="1"
-						Grid.Column="0"
-						Padding="3,3,3,3"
-						Text="{Binding AddTruckID}"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top" />
-					<TextBlock
-						Grid.Row="0"
-						Grid.Column="2">
-						<Run
-							Text="{DynamicResource TruckProdYear}" />
-					</TextBlock>
-					<TextBox
-						x:Name="TextNewTruckProdYear"
-						Grid.Row="1"
-						Grid.Column="2"
-						Padding="3,3,3,3"
-						Text="{Binding AddTruckProdYear}"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top" />
-					<TextBlock
-						Grid.Row="0"
-						Grid.Column="4">
-						<Run
-							Text="{DynamicResource TruckName}" />
-					</TextBlock>
-					<TextBox
-						x:Name="TextNewIngameName"
-						Grid.Row="1"
-						Grid.Column="4"
-						Padding="3,3,3,3"
-						Text="{Binding AddTruckIngameName}"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top" />
-					<TextBlock
-						Grid.Row="2"
-						Grid.Column="0"
-						Grid.ColumnSpan="5"
-						Margin="0,5,0,0">
-						<Run
-							Text="{DynamicResource TruckDescription}" />
-					</TextBlock>
-					<TextBox
-						x:Name="TextNewDescription"
-						Grid.Row="3"
-						Grid.Column="0"
-						Grid.ColumnSpan="5"
-						Padding="3,3,3,3"
-						Text="{Binding AddTruckDescription}"
-						TextWrapping="Wrap"
-						VerticalAlignment="Top" />
+				<StackPanel>
+					<StackPanel>
+						<TextBlock
+							x:Name="TitleProjectLocation"
+							Grid.ColumnSpan="2"
+							TextWrapping="Wrap"
+							VerticalAlignment="Center"
+							Text="{DynamicResource SCSProjectLocation}" />
+						<TextBox
+							x:Name="TextProjectLocation"
+							IsReadOnly="True"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							MaxLines="1"
+							Text="{Binding ProjectLocation, Mode=OneWay}">
+							<TextBox.Style>
+								<Style
+									TargetType="TextBox"
+									BasedOn="{StaticResource {x:Type TextBox}}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding ProjectExist}"
+											Value="false">
+											<Setter
+												Property="Foreground"
+												Value="Red" />
+											<Setter
+												Property="ToolTip"
+												Value="{DynamicResource SCSProjectLocationTipNotExist}" />
+										</DataTrigger>
+										<Trigger
+											Property="Text"
+											Value="">
+											<Setter
+												Property="Background"
+												Value="Yellow" />
+										</Trigger>
+									</Style.Triggers>
+								</Style>
+							</TextBox.Style>
+						</TextBox>
+					</StackPanel>
 					<Grid
-						Grid.Row="4"
-						Grid.ColumnSpan="5">
+						Margin="0,5,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="*" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="*" />
+							<RowDefinition
+								Height="*" />
+							<RowDefinition
+								Height="*" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+
+						<StackPanel
+							Grid.ColumnSpan="3">
+							<TextBlock
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelDisplayName}" />
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Border
+									Grid.ColumnSpan="3"
+									Style="{DynamicResource MultiControlBorder}"/>
+								<TextBox
+									x:Name="TextDisplayName"
+									Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
+									TextWrapping="Wrap">
+									<TextBox.Style>
+										<Style
+											TargetType="TextBox"
+											BasedOn="{StaticResource TextBoxBorderless}">
+											<Style.Triggers>
+												<Trigger
+													Property="Text"
+													Value="">
+													<Setter
+														Property="Background"
+														Value="Yellow" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</TextBox.Style>
+								</TextBox>
+								<Button
+									x:Name="ButtonCheckRes"
+									Grid.Column="1"
+									Click="CheckStringRes"
+									Visibility="{Binding CheckResVisibility}"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Search16" />
+									</Viewbox>
+								</Button>
+								<Popup
+									x:Name="PopupCheckRes"
+									PlacementTarget="{Binding ElementName=ButtonCheckRes}"
+									PopupAnimation="Slide"
+									AllowsTransparency="True"
+									IsOpen="{Binding PopupCheckOpen}"
+									StaysOpen="False">
+									<Grid>
+										<Border
+											Style="{DynamicResource PopupBorder}"/>
+										<StackPanel
+											Margin="10">
+											<TextBlock>
+												<Run
+													Text="{DynamicResource CheckResResult}" />
+											</TextBlock>
+											<Border
+												Margin="0,10,0,10"
+												Style="{DynamicResource SpliterBorder}"/>
+											<TextBlock
+												Text="{Binding CheckResResult}" />
+											<Border
+												Margin="0,10,0,10"
+												Style="{DynamicResource SpliterBorder}" />
+											<TextBlock>
+											<Run
+													Text="{DynamicResource CheckResResultTips}" />
+											</TextBlock>
+										</StackPanel>
+									</Grid>
+								</Popup>
+								<Button
+									x:Name="ButtonChooseRes"
+									Grid.Column="2"
+									Click="ChooseStringRes"
+									Style="{StaticResource ButtonBorderless}"
+									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Translate16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+						</StackPanel>
+
+						<StackPanel
+							Grid.Row="1"
+							Margin="0,5,0,0">
+							<StackPanel
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleModelName"
+									TextWrapping="Wrap"
+									Text="{DynamicResource ModelName}" />
+								<Border
+									ToolTip="{DynamicResource ModelNameTip}"
+									Width="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}"
+									Height="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Chat16" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<TextBox
+								x:Name="TextModelName"
+								TextWrapping="Wrap"
+								MaxLines="1"
+								Text="{Binding ModelName, UpdateSourceTrigger=PropertyChanged}"
+								VerticalAlignment="Top">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource {x:Type TextBox}}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding NameOver12}"
+												Value="True">
+												<Setter
+													Property="Foreground"
+													Value="Red" />
+											</DataTrigger>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</StackPanel>
+
+						<StackPanel
+							Grid.Row="1"
+							Grid.Column="2"
+							Margin="0,5,0,0">
+							<StackPanel
+								Orientation="Horizontal">
+								<TextBlock
+									TextWrapping="Wrap"
+									VerticalAlignment="Top"
+									Text="{DynamicResource PartType}" />
+								<Border
+									ToolTip="{DynamicResource PartTypeTip}"
+									Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Chat16" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<ComboBox
+								x:Name="TextPartType"
+								DisplayMemberPath="PartTypeDisplay"
+								SelectedValuePath="PartTypeValue"
+								SelectedValue="{Binding PartType}"
+								ItemsSource="{Binding PartTypes}"
+								IsEditable="True"
+								IsReadOnly="true" />
+						</StackPanel>
+
+						<StackPanel
+							Grid.Row="2"
+							Margin="0,5,0,0">
+							<TextBlock
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelPrice}" />
+							<TextBox
+								x:Name="TextPrice"
+								Text="{Binding Price}"
+								MaxLines="1"
+								PreviewTextInput="NumberOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource {x:Type TextBox}}">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+											<Trigger
+												Property="Text"
+												Value="0">
+												<Setter
+													Property="Background"
+													Value="Red" />
+												<Setter
+													Property="ToolTip"
+													Value="{DynamicResource ModelPriceErrNot0}" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</StackPanel>
+
+						<StackPanel
+							Grid.Row="2"
+							Grid.Column="2"
+							Margin="0,5,0,0">
+							<TextBlock
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+							<Run
+									Language="zh-cn"
+									Text="{DynamicResource ModelUnlockLevel}" />
+							</TextBlock>
+							<TextBox
+								x:Name="TextUnlockLevel"
+								Text="{Binding UnlockLevel}"
+								MaxLines="1"
+								PreviewTextInput="NumberOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource {x:Type TextBox}}">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</StackPanel>
+
+						<StackPanel
+							x:Name="PanelIconName"
+							Grid.Row="3"
+							Margin="0,5,0,0">
+							<StackPanel
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleIconName"
+									TextWrapping="Wrap"
+									VerticalAlignment="Top"
+									Text="{DynamicResource ModelIcon}" />
+								<Border
+									ToolTip="{DynamicResource ModelIconTip}"
+									Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Chat16" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Border
+									Grid.ColumnSpan="3"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBox
+									x:Name="TextIconName"
+									Text="{Binding IconName}"
+									MaxLines="1"
+									TextWrapping="Wrap">
+									<TextBox.Style>
+										<Style
+											TargetType="TextBox"
+											BasedOn="{StaticResource TextBoxBorderless}">
+											<Style.Triggers>
+												<Trigger
+													Property="Text"
+													Value="">
+													<Setter
+														Property="Background"
+														Value="Yellow" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</TextBox.Style>
+								</TextBox>
+								<Button
+									x:Name="ButtonIconNameClear"
+									Grid.Column="1"
+									Click="ButtonClearClick"
+									Style="{StaticResource ButtonBorderless}"
+									Visibility="{Binding IconName, Converter={StaticResource ClearVisibility}}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Dismiss16" />
+									</Viewbox>
+								</Button>
+								<Button
+									x:Name="ButtonIconName"
+									Grid.Column="2"
+									Click="ButtonChooseIcon"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Folder16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+						</StackPanel>
+
+						<Border
+							Grid.Row="3"
+							Grid.Column="2"
+							Margin="0,5,0,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Center"
+							Height="{Binding ActualHeight, ElementName=PanelIconName, Mode=OneWay}">
+							<Border.Style>
+								<Style
+									TargetType="Border"
+									BasedOn="{StaticResource MultiControlBorder}">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ModelIcon}" Value="{x:Null}">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Border.Style>
+							<Viewbox
+								StretchDirection="DownOnly">
+								<Image
+									Stretch="Uniform"
+									Source="{Binding ModelIcon}"
+									d:Source="/Images/ModelIconPlaceholder.png" />
+							</Viewbox>
+						</Border>
+					</Grid>
+
+					<Border
+						Height="1"
+						Margin="0,7,0,7"
+						VerticalAlignment="Center"
+						Background="#FF4C4B4B"
+						HorizontalAlignment="Stretch" />
+
+					<StackPanel
+						Margin="0,0,0,0">
+						<TextBlock
+							Grid.ColumnSpan="3"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							Text="{DynamicResource ModelFilePath}" />
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextModelPath"
+								Text="{Binding ModelPath}"
+								TextWrapping="Wrap"
+								MaxLines="2">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource TextBoxBorderless}">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+							<Button
+								x:Name="ButtonChooseModelClear"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding ModelPath, Converter={StaticResource ClearVisibility}}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseModel"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+					</StackPanel>
+
+					<StackPanel
+						Margin="0,2,0,0">
+						<StackPanel
+							Orientation="Horizontal">
+							<TextBlock
+								x:Name="TitleModelPathUK"
+								Grid.Row="0"
+								Grid.Column="0"
+								Grid.ColumnSpan="3"
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource ModelFilePathUK}" />
+							<Border
+								ToolTip="{DynamicResource ModelFilePathUKTip}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Chat16" />
+								</Viewbox>
+							</Border>
+						</StackPanel>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextModelPathUK"
+								Grid.Column="0"
+								Text="{Binding ModelPathUK}"
+								TextWrapping="Wrap"
+								MaxLines="2"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonChooseModelUKClear"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding ModelPathUK, Converter={StaticResource ClearVisibility}}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseModelUK"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+					</StackPanel>
+
+					<StackPanel
+						Margin="0,5,0,0">
+						<StackPanel
+							Orientation="Horizontal">
+							<ui:ToggleSwitch
+								x:Name="CheckUseCollPath"
+								Grid.Row="0"
+								Grid.Column="0"
+								Grid.ColumnSpan="3"
+								VerticalAlignment="Bottom"
+								d:IsChecked="True"
+								IsChecked="{Binding UseCollPath}"
+								Content="{DynamicResource ModelCollPath}"
+								Padding="0,0,11,0"
+								MinHeight="0"
+								VerticalContentAlignment="Center"
+								Cursor="" />
+						</StackPanel>
+						<Grid>
+							<Grid.Style>
+								<Style
+									TargetType="Grid">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding IsChecked, ElementName=CheckUseCollPath}"
+											Value="False">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextCollPath"
+								Grid.Column="0"
+								Text="{Binding CollPath}"
+								TextWrapping="Wrap"
+								MaxLines="2"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonChooseCollClear"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding CollPath, Converter={StaticResource ClearVisibility}}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseColl"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+					</StackPanel>
+
+					<Grid
+						Margin="0,2,0,0">
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+							<RowDefinition
+								Height="2" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+							<RowDefinition
+								Height="2" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<TextBlock
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							Grid.ColumnSpan="5">
+						<Run
+								Text="{DynamicResource ModelType}" />
+						<Run
+								Text="{DynamicResource ModelTypeTip}" />
+						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
+						<ComboBox
+							x:Name="TextModelType"
+							Grid.Row="1"
+							Text="{Binding ModelType}"
+							DisplayMemberPath="Accessory"
+							IsEditable="True"
+							IsTextSearchEnabled="True"
+							FontSize="12"
+							ItemsSource="{Binding ModelTypes}"
+							SelectedValue="{Binding CurrentModelType, Mode=TwoWay}"
+							Style="{StaticResource ComboBoxBorderless}">
+						</ComboBox>
+						<Button
+							x:Name="ButtonCoverModelType"
+							Grid.Row="1"
+							Grid.Column="1"
+							Click="ButtonCoverValue"
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="ClipboardPaste16" />
+							</Viewbox>
+						</Button>
+						<TextBox
+							x:Name="TextAccName"
+							Text="{Binding CurrentModelType.Name}"
+							Grid.Row="1"
+							Grid.Column="2"
+							Grid.ColumnSpan="3"
+							TextWrapping="Wrap"
+							IsReadOnly="True"
+							VerticalContentAlignment="Center"
+							ToolTip="{Binding CurrentModelType.Name}"
+							Style="{StaticResource TextBoxBorderless}" />
+
+						<TextBlock
+							Grid.Row="3"
+							Grid.ColumnSpan="2"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							Text="{DynamicResource ModelLook}" />
+						<Border
+							Grid.Row="4"
+							Grid.ColumnSpan="2"
+							Style="{DynamicResource MultiControlBorder}" />
+						<ComboBox
+							x:Name="TextLook"
+							Grid.Row="4"
+							Text="{Binding Look}"
+							ItemsSource="{Binding LookList}"
+							Style="{StaticResource ComboBoxBorderless}"
+							IsEditable="True"
+							IsTextSearchEnabled="True" />
+						<Button
+							x:Name="ButtonCoverLook"
+							Grid.Row="4"
+							Grid.Column="1"
+							Click="ButtonCoverValue"
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="ClipboardPaste16" />
+							</Viewbox>
+						</Button>
+						<TextBlock
+							Grid.Row="3"
+							Grid.Column="3"
+							Grid.ColumnSpan="2"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							Text="{DynamicResource ModelVariant}" />
+						<Border
+							Grid.Row="4"
+							Grid.Column="3"
+							Grid.ColumnSpan="2"
+							Style="{DynamicResource MultiControlBorder}" />
+						<ComboBox
+							x:Name="TextVariant"
+							Grid.Row="4"
+							Grid.Column="3"
+							Text="{Binding Variant}"
+							ItemsSource="{Binding VariantList}"
+							IsEditable="True"
+							IsTextSearchEnabled="True"
+							Style="{StaticResource ComboBoxBorderless}" />
+						<Button
+							x:Name="ButtonCoverVariant"
+							Grid.Row="4"
+							Grid.Column="4"
+							Click="ButtonCoverValue"
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="ClipboardPaste16" />
+							</Viewbox>
+						</Button>
+
+						<TextBlock
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							Grid.Row="6"
+							Grid.ColumnSpan="3">
+						<Run
+								Text="{DynamicResource HideIn}" />
+						</TextBlock>
+						<Border
+							Grid.Row="7"
+							Grid.ColumnSpan="2"
+							Style="{DynamicResource MultiControlBorder}" />
+						<TextBox
+							x:Name="TextHideIn"
+							Grid.Row="7"
+							IsReadOnly="True"
+							Text="{Binding HideIn, Converter={StaticResource HideInConverter}}"
+							Style="{StaticResource TextBoxBorderless}" />
+						<Button
+							x:Name="ButtonSetHideIn"
+							Grid.Row="7"
+							Grid.Column="1"
+							Click="ButtonHideIn"
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Add16" />
+							</Viewbox>
+						</Button>
+						<Popup
+							x:Name="PopupHideIn"
+							PlacementTarget="{Binding ElementName=ButtonSetHideIn}"
+							PopupAnimation="Slide"
+							AllowsTransparency="True"
+							StaysOpen="False"
+							Placement="Top">
+							<Grid>
+								<Border Style="{DynamicResource PopupBorder}"/>
+								<StackPanel
+									Margin="10">
+									<TextBlock
+										Text="{DynamicResource TitleHideIn}"
+										TextWrapping="Wrap" />
+									<CheckBox
+										x:Name="CheckMainView"
+										Content="Main View"
+										Margin="0,2,0,0"
+										Tag="0x7"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckReflectionCube"
+										Content="Reflection Cube"
+										Margin="0,2,0,0"
+										Tag="0x1F8"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckCloseMirror"
+										Content="Close Mirror"
+										Margin="0,2,0,0"
+										Tag="0x600"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckFarMirror"
+										Content="Far Mirror"
+										Margin="0,2,0,0"
+										Tag="0x1800"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckSideMirror"
+										Content="Side Mirror"
+										Margin="0,2,0,0"
+										Tag="0x2000"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckFrontMirror"
+										Content="Front Mirror"
+										Margin="0,2,0,0"
+										Tag="0x4000"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckShadows"
+										Content="Shadows"
+										Margin="0,2,0,0"
+										Tag="0x1FFE0000"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+									<CheckBox
+										x:Name="CheckRainReflection"
+										Content="Rain reflection"
+										Margin="0,2,0,0"
+										Tag="0xE0000000"
+										Checked="HideInChecked"
+										Unchecked="HideInUnchecked" />
+								</StackPanel>
+							</Grid>
+						</Popup>
+					</Grid>
+				</StackPanel>
+
+				<Grid
+					Grid.Row="2"
+					Margin="0,2,0,0">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="*" />
+					</Grid.RowDefinitions>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBlock
+							TextWrapping="Wrap"
+							Text="{DynamicResource Others}"
+							VerticalAlignment="Bottom" />
+						<Border
+							Grid.Column="1"
+							ToolTip="{DynamicResource OthersTip}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Chat16" />
+							</Viewbox>
+						</Border>
+						<Border
+							Grid.Column="3"
+							Grid.ColumnSpan="2"
+							Style="{DynamicResource MultiControlBorder}" />
+						<Button
+							x:Name="ButtonOthersAdd"
+							Grid.Column="3"
+							Click="ButtonOthersClick"
+							Padding="2"
+							Width="20"
+							Height="20"
+							VerticalAlignment="Stretch">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Add16" />
+							</Viewbox>
+						</Button>
+						<Button
+							x:Name="ButtonOthersRemove"
+							Grid.Column="4"
+							Click="ButtonOthersClick"
+							Padding="2"
+							Width="20"
+							Height="20"
+							VerticalAlignment="Stretch">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource {x:Type Button}}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=TableOthers}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+					</Grid>
+					<DataGrid
+						x:Name="TableOthers"
+						Grid.Row="1"
+						GridLinesVisibility="Horizontal"
+						CanUserSortColumns="False"
+						CanUserAddRows="False"
+						d:ItemsSource="{d:SampleData ItemCount=2}"
+						ItemsSource="{Binding OthersList}"
+						AutoGenerateColumns="False"
+						Grid.RowSpan="2"
+						BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+						BorderThickness="1"
+						ColumnHeaderStyle="{StaticResource DataGridHeader}"
+						DataGrid.CellStyle="{StaticResource CompatCellStyle}"
+						VirtualizingPanel.IsContainerVirtualizable="True"
+						VirtualizingPanel.IsVirtualizing="True"
+						VirtualizingPanel.VirtualizationMode="Recycling">
+						<DataGrid.HorizontalGridLinesBrush>
+							<LinearGradientBrush
+								EndPoint="0.5,1"
+								StartPoint="0.5,0">
+								<GradientStop
+									Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
+									Offset="1" />
+							</LinearGradientBrush>
+						</DataGrid.HorizontalGridLinesBrush>
+						<DataGrid.Columns>
+							<DataGridTemplateColumn
+								Header="{DynamicResource HeaderOthersName}"
+								Width="*">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<TextBox
+											BorderThickness="0"
+											Text="{Binding OthersName, UpdateSourceTrigger=PropertyChanged}"
+											ToolTip="{Binding OthersNameTip}"
+											ContextMenu="{DynamicResource MenuOthers}"
+											VerticalContentAlignment="Center">
+											<TextBox.Style>
+												<Style
+													TargetType="TextBox"
+													BasedOn="{StaticResource TableTextBoxStyle}">
+													<Style.Triggers>
+														<DataTrigger
+															Binding="{Binding OthersName}"
+															Value="">
+															<Setter
+																Property="Background"
+																Value="Yellow" />
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBox.Style>
+										</TextBox>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn
+								Header="{DynamicResource HeaderIsArray}"
+								Width="Auto"
+								CanUserResize="False">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<CheckBox
+											IsChecked="{Binding IsArray, UpdateSourceTrigger=PropertyChanged}"
+											IsEnabled="{Binding CheckBoxEnabled}"
+											HorizontalAlignment="Center"
+											Padding="0"
+											VerticalAlignment="Center"
+											MinWidth="20"
+											MinHeight="20" />
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn
+								Header="{DynamicResource HeaderUseQuote}"
+								Width="Auto"
+								CanUserResize="False">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<CheckBox
+											IsChecked="{Binding UseQuoteMark, UpdateSourceTrigger=PropertyChanged}"
+											IsEnabled="{Binding CheckBoxEnabled}"
+											HorizontalAlignment="Center"
+											Padding="0"
+											VerticalAlignment="Center"
+											MinWidth="20"
+											MinHeight="20" />
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn
+								Header="{DynamicResource HeaderOthersValue}"
+								Width="*">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<TextBox
+											BorderThickness="0,0,0,0"
+											Text="{Binding OthersValue, UpdateSourceTrigger=PropertyChanged}"
+											VerticalContentAlignment="Center">
+											<TextBox.Style>
+												<Style
+													TargetType="TextBox"
+													BasedOn="{StaticResource TableTextBoxStyle}">
+													<Style.Triggers>
+														<DataTrigger
+															Binding="{Binding OthersValue}"
+															Value="">
+															<Setter
+																Property="Background"
+																Value="Yellow" />
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBox.Style>
+										</TextBox>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn
+								Width="25"
+								CanUserResize="False">
+								<DataGridTemplateColumn.CellTemplate>
+									<DataTemplate>
+										<Button
+											Padding="0"
+											Click="ButtonPhysicsClick"
+											Visibility="{Binding ShowOptionVisibility}"
+											HorizontalAlignment="Stretch"
+											VerticalAlignment="Stretch">
+											<Viewbox>
+												<ui:SymbolIcon
+													Symbol="Settings16" />
+											</Viewbox>
+										</Button>
+									</DataTemplate>
+								</DataGridTemplateColumn.CellTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
+			</Grid>
+
+			<Grid
+				x:Name="GridTrucks"
+				Grid.Column="1"
+				Margin="15,0,0,0">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition>
+						<RowDefinition.Style>
+							<Style
+								TargetType="RowDefinition">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Path=IsExpanded, ElementName=ExpanderETS2}"
+										Value="False">
+										<Setter
+											Property="Height"
+											Value="Auto" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</RowDefinition.Style>
+					</RowDefinition>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition>
+						<RowDefinition.Style>
+							<Style
+								TargetType="RowDefinition">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Path=IsExpanded, ElementName=ExpanderATS}"
+										Value="False">
+										<Setter
+											Property="Height"
+											Value="Auto" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</RowDefinition.Style>
+					</RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid
+					Grid.Row="0"
+					Grid.Column="0"
+					Cursor="">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock>
+					<Run
+							Text="{DynamicResource ModelTruckTip}" />
+					</TextBlock>
+
+					<Button
+						x:Name="ButtonInitialize"
+						Grid.Column="1"
+						Content="{DynamicResource ButtonInitializeTrucks}"
+						Padding="20,5,20,5"
+						FontSize="14"
+						Click="ButtonTruckInitialize"
+						VerticalAlignment="Bottom" />
+				</Grid>
+				<Expander
+					x:Name="ExpanderETS2"
+					Header="{DynamicResource ExpanderETS2}"
+					Grid.Row="1"
+					Margin="0,5,0,0"
+					IsExpanded="{Binding TruckExpandedETS2}"
+					d:IsExpanded="True"
+					Padding="0,2,0,0"
+					VerticalAlignment="Stretch"
+					VerticalContentAlignment="Stretch">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+						<CheckBox
+							x:Name="SelectAllETS2"
+							Grid.Row="0"
+							Grid.Column="0"
+							Margin="10,0,0,0"
+							Content="{DynamicResource CheckBoxSelectAll}"
+							IsChecked="{Binding SelectAllETS2}"
+							VerticalContentAlignment="Center"
+							VerticalAlignment="Bottom"
+							HorizontalAlignment="Stretch"
+							FontSize="14" />
+						<Button
+							x:Name="ButtonAddTruckETS2"
+							Content="{DynamicResource TitleAddTruck}"
+							Grid.Column="1"
+							Padding="5,3,5,3"
+							Click="ButtonAddTruckClick"
+							VerticalAlignment="Bottom" />
+						<Button
+							x:Name="ButtonDeleteTruckETS2"
+							Content="{DynamicResource ButtonDeleteTruck}"
+							Grid.Column="2"
+							Margin="5,0,0,0"
+							Padding="5,3,5,3"
+							Click="ButtonDeleteTruckClick"
+							VerticalAlignment="Bottom">
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource {x:Type Button}}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=TableTrucksETS2}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<DataGrid
+							x:Name="TableTrucksETS2"
+							BorderThickness="0,1,0,0"
+							Grid.Row="1"
+							Grid.Column="0"
+							Grid.ColumnSpan="3"
+							GridLinesVisibility="Horizontal"
+							CanUserSortColumns="False"
+							AutoGenerateColumns="False"
+							ItemsSource="{Binding TrucksETS2}"
+							d:ItemsSource="{d:SampleData ItemCount=2}"
+							ColumnHeaderStyle="{StaticResource DataGridHeader}"
+							DataGrid.CellStyle="{StaticResource CompatCellStyle}"
+							VirtualizingPanel.IsContainerVirtualizable="True"
+							VirtualizingPanel.IsVirtualizing="True"
+							VirtualizingPanel.VirtualizationMode="Recycling">
+							<DataGrid.Columns>
+								<DataGridTemplateColumn
+									Width="Auto">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<CheckBox
+												HorizontalAlignment="Center"
+												Click="TruckCheckBoxClick"
+												IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}"
+												VerticalContentAlignment="Center"
+												MinWidth="22"
+												MinHeight="22" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTextColumn
+									Header="{DynamicResource TruckID}"
+									Width="6*"
+									Binding="{Binding TruckID}"
+									FontSize="12"
+									ElementStyle="{DynamicResource DataGridElementStyle}"
+									CellStyle="{DynamicResource DataGridCellToolTip}" />
+								<DataGridTextColumn
+									Header="{DynamicResource TruckName}"
+									Width="6*"
+									Binding="{Binding IngameName}"
+									FontSize="12"
+									ElementStyle="{DynamicResource DataGridElementStyle}"
+									CellStyle="{DynamicResource DataGridCellToolTip}" />
+								<DataGridTemplateColumn
+									Header="{DynamicResource ModelType}"
+									Width="3*">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBox
+												Text="{Binding ModelType, UpdateSourceTrigger=PropertyChanged}"
+												ContextMenu="{StaticResource MenuModelType}"
+												Style="{StaticResource TruckTableTextBoxStyle}" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTemplateColumn
+									Header="{DynamicResource ModelLook}"
+									Width="3*">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBox
+												Text="{Binding Look, UpdateSourceTrigger=PropertyChanged}"
+												ContextMenu="{StaticResource MenuLook}"
+												Style="{StaticResource TruckTableTextBoxStyle}"
+												Cursor="IBeam" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTemplateColumn
+									Header="{DynamicResource ModelVariant}"
+									Width="3*">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBox
+												Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
+												ContextMenu="{StaticResource MenuVariant}"
+												Style="{StaticResource TruckTableTextBoxStyle}" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTextColumn
+									Header="{DynamicResource TruckDescription}"
+									Width="8*"
+									Binding="{Binding Description}"
+									FontSize="12"
+									ElementStyle="{DynamicResource DataGridElementStyle}"
+									CellStyle="{DynamicResource DataGridCellToolTip}" />
+							</DataGrid.Columns>
+						</DataGrid>
+					</Grid>
+				</Expander>
+
+				<GridSplitter
+					Margin="0,5,0,5"
+					Height="1"
+					Grid.Row="2"
+					ResizeBehavior="PreviousAndCurrent"
+					VerticalAlignment="Center"
+					Background="#FF4C4B4B"
+					HorizontalAlignment="Stretch" />
+
+				<Expander
+					x:Name="ExpanderATS"
+					Header="{DynamicResource ExpanderATS}"
+					Grid.Row="3"
+					IsExpanded="{Binding TruckExpandedATS}"
+					d:IsExpanded="True"
+					Padding="0,2,0,0"
+					VerticalAlignment="Stretch"
+					VerticalContentAlignment="Stretch">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+						<CheckBox
+							x:Name="SelectAllATS"
+							Grid.Row="0"
+							Grid.Column="0"
+							Margin="10,0,0,0"
+							Content="{DynamicResource CheckBoxSelectAll}"
+							IsChecked="{Binding SelectAllATS}"
+							VerticalAlignment="Bottom"
+							HorizontalAlignment="Stretch" />
+						<Button
+							x:Name="ButtonAddTruckATS"
+							Content="{DynamicResource TitleAddTruck}"
+							Grid.Row="0"
+							Grid.Column="1"
+							Padding="5,3,5,3"
+							Click="ButtonAddTruckClick"
+							VerticalAlignment="Bottom" />
+						<Button
+							x:Name="ButtonDeleteTruckATS"
+							Content="{DynamicResource ButtonDeleteTruck}"
+							Grid.Row="0"
+							Grid.Column="2"
+							Margin="5,0,0,0"
+							Padding="5,3,5,3"
+							Click="ButtonDeleteTruckClick"
+							VerticalAlignment="Bottom">
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource {x:Type Button}}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=TableTrucksATS}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<DataGrid
+							x:Name="TableTrucksATS"
+							BorderThickness="0,1,0,0"
+							Grid.Row="1"
+							Grid.Column="0"
+							Grid.ColumnSpan="3"
+							GridLinesVisibility="Horizontal"
+							CanUserSortColumns="False"
+							AutoGenerateColumns="False"
+							ItemsSource="{Binding TrucksATS}"
+							d:ItemsSource="{d:SampleData ItemCount=2}"
+							ColumnHeaderStyle="{StaticResource DataGridHeader}"
+							DataGrid.CellStyle="{StaticResource CompatCellStyle}"
+							VirtualizingPanel.IsContainerVirtualizable="True"
+							VirtualizingPanel.IsVirtualizing="True"
+							VirtualizingPanel.VirtualizationMode="Recycling"
+							Cursor="">
+							<DataGrid.Columns>
+								<DataGridTemplateColumn
+									Width="Auto">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<CheckBox
+												HorizontalAlignment="Center"
+												Click="TruckCheckBoxClick"
+												IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}"
+												MinWidth="22"
+												MinHeight="22" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTextColumn
+									Header="{DynamicResource TruckID}"
+									Width="6*"
+									Binding="{Binding TruckID}"
+									FontSize="12"
+									ElementStyle="{DynamicResource DataGridElementStyle}"
+									CellStyle="{DynamicResource DataGridCellToolTip}" />
+								<DataGridTextColumn
+									Header="{DynamicResource TruckName}"
+									Width="6*"
+									Binding="{Binding IngameName}"
+									FontSize="12"
+									ElementStyle="{DynamicResource DataGridElementStyle}"
+									CellStyle="{DynamicResource DataGridCellToolTip}" />
+								<DataGridTemplateColumn
+									Header="{DynamicResource ModelType}"
+									Width="3*">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBox
+												Text="{Binding ModelType, UpdateSourceTrigger=PropertyChanged}"
+												ContextMenu="{DynamicResource MenuModelType}"
+												Style="{StaticResource TruckTableTextBoxStyle}" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTemplateColumn
+									Header="{DynamicResource ModelLook}"
+									Width="3*">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBox
+												Text="{Binding Look, UpdateSourceTrigger=PropertyChanged}"
+												ContextMenu="{DynamicResource MenuLook}"
+												Style="{StaticResource TruckTableTextBoxStyle}" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTemplateColumn
+									Header="{DynamicResource ModelVariant}"
+									Width="3*">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBox
+												Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
+												ContextMenu="{DynamicResource MenuVariant}"
+												Style="{StaticResource TruckTableTextBoxStyle}" />
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTextColumn
+									Header="{DynamicResource TruckDescription}"
+									Width="8*"
+									Binding="{Binding Description}"
+									FontSize="12"
+									ElementStyle="{DynamicResource DataGridElementStyle}"
+									CellStyle="{DynamicResource DataGridCellToolTip}" />
+							</DataGrid.Columns>
+						</DataGrid>
+					</Grid>
+				</Expander>
+			</Grid>
+
+			<Popup
+				x:Name="PopupAddTruck"
+				PopupAnimation="Slide"
+				AllowsTransparency="True"
+				IsOpen="{Binding PopupAddTruckOpen}">
+				<Grid
+					Width="450">
+					<Border Style="{DynamicResource PopupBorder}" />
+					<Grid
+						Margin="10">
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
 								Width="*" />
@@ -1789,97 +1882,174 @@
 								Width="10" />
 							<ColumnDefinition
 								Width="*" />
+							<ColumnDefinition
+								Width="10" />
+							<ColumnDefinition
+								Width="*" />
 						</Grid.ColumnDefinitions>
-						<Button
-							x:Name="ButtonAddTruckOK"
-							Content="{DynamicResource ButtonOK}"
-							Margin="0,10,0,0"
+						<TextBlock
+							Grid.Row="0"
+							Grid.Column="0">
+						<Run
+								Text="{DynamicResource TruckID}" />
+						</TextBlock>
+						<TextBox
+							x:Name="TextNewTruckID"
+							Grid.Row="1"
 							Grid.Column="0"
-							Click="ButtonAddTruckResultClick">
-							<Button.IsEnabled>
-								<MultiBinding
-									Converter="{StaticResource MultiNullCheck}"
-									ConverterParameter="AND,Nonull">
-									<Binding
-										ElementName="TextNewTruckID"
-										Path="Text" />
-									<Binding
-										ElementName="TextNewTruckProdYear"
-										Path="Text" />
-									<Binding
-										ElementName="TextNewIngameName"
-										Path="Text" />
-								</MultiBinding>
-							</Button.IsEnabled>
-						</Button>
-						<Button
-							x:Name="ButtonAddTruckCancel"
-							Content="{DynamicResource ButtonCancel}"
-							Margin="0,10,0,0"
+							Padding="3,3,3,3"
+							Text="{Binding AddTruckID}"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top" />
+						<TextBlock
+							Grid.Row="0"
+							Grid.Column="2">
+						<Run
+								Text="{DynamicResource TruckProdYear}" />
+						</TextBlock>
+						<TextBox
+							x:Name="TextNewTruckProdYear"
+							Grid.Row="1"
 							Grid.Column="2"
-							Click="ButtonAddTruckResultClick" />
+							Padding="3,3,3,3"
+							Text="{Binding AddTruckProdYear}"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top"
+							PreviewTextInput="NumberOnly" />
+						<TextBlock
+							Grid.Row="0"
+							Grid.Column="4">
+						<Run
+								Text="{DynamicResource TruckName}" />
+						</TextBlock>
+						<TextBox
+							x:Name="TextNewIngameName"
+							Grid.Row="1"
+							Grid.Column="4"
+							Padding="3,3,3,3"
+							Text="{Binding AddTruckIngameName}"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top" />
+						<TextBlock
+							Grid.Row="2"
+							Grid.Column="0"
+							Grid.ColumnSpan="5"
+							Margin="0,5,0,0">
+						<Run
+								Text="{DynamicResource TruckDescription}" />
+						</TextBlock>
+						<TextBox
+							x:Name="TextNewDescription"
+							Grid.Row="3"
+							Grid.Column="0"
+							Grid.ColumnSpan="5"
+							Padding="3,3,3,3"
+							Text="{Binding AddTruckDescription}"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top" />
+						<Grid
+							Grid.Row="4"
+							Grid.ColumnSpan="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="10" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<Button
+								x:Name="ButtonAddTruckOK"
+								Content="{DynamicResource ButtonOK}"
+								Margin="0,10,0,0"
+								Grid.Column="0"
+								Click="ButtonAddTruckResultClick"
+								HorizontalAlignment="Stretch">
+								<Button.IsEnabled>
+									<MultiBinding
+										Converter="{StaticResource MultiNullCheck}"
+										ConverterParameter="AND,Nonull">
+										<Binding
+											ElementName="TextNewTruckID"
+											Path="Text" />
+										<Binding
+											ElementName="TextNewTruckProdYear"
+											Path="Text" />
+										<Binding
+											ElementName="TextNewIngameName"
+											Path="Text" />
+									</MultiBinding>
+								</Button.IsEnabled>
+							</Button>
+							<Button
+								x:Name="ButtonAddTruckCancel"
+								Content="{DynamicResource ButtonCancel}"
+								Margin="0,10,0,0"
+								Grid.Column="2"
+								Click="ButtonAddTruckResultClick"
+								HorizontalAlignment="Stretch" />
+						</Grid>
 					</Grid>
 				</Grid>
-			</Grid>
-		</Popup>
+			</Popup>
 
-		<GridSplitter
-			Grid.Row="1"
-			Grid.ColumnSpan="2"
-			Height="1"
-			Margin="0,7,0,7"
-			ResizeBehavior="PreviousAndCurrent"
-			VerticalAlignment="Center"
-			Background="#FF4C4B4B"
-			HorizontalAlignment="Stretch" />
+			<Border
+				Grid.Row="1"
+				Grid.ColumnSpan="2"
+				Height="1"
+				Margin="0,7,0,7"
+				VerticalAlignment="Center"
+				Background="#FF4C4B4B"
+				HorizontalAlignment="Stretch" />
 
-		<Grid
-			Grid.Row="2"
-			Grid.Column="0"
-			Grid.ColumnSpan="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="*" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<Button
-				x:Name="ButtonSave"
-				Content="{DynamicResource SaveDED}"
+			<Grid
+				Grid.Row="2"
 				Grid.Column="0"
-				Padding="40,3,40,3"
-				Click="ButtonSaveClick" />
-			<Button
-				x:Name="ButtonLoad"
-				Content="{DynamicResource LoadDED}"
-				Grid.Column="1"
-				Margin="5,0,0,0"
-				Padding="40,3,40,3"
-				Click="ButtonLoadClick" />
-			<CheckBox
-				x:Name="CheckDeleteUnchecked"
-				Grid.Column="3"
-				IsChecked="{Binding DeleteUnchecked}"
-				VerticalContentAlignment="Center"
-				VerticalAlignment="Top">
-				<TextBlock
-					TextWrapping="Wrap"
-					Text="{DynamicResource CheckBoxDeleteUnchecked}" />
-			</CheckBox>
-			<Button
-				x:Name="ButtonStart"
-				Grid.Column="4"
-				Content="{DynamicResource ButtonStart}"
-				Margin="5,0,0,0"
-				Padding="40,5,40,5"
-				FontSize="15"
-				Click="ButtonStartClick" />
+				Grid.ColumnSpan="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Button
+					x:Name="ButtonSave"
+					Content="{DynamicResource SaveDED}"
+					Grid.Column="0"
+					Padding="40,3,40,3"
+					Click="ButtonSaveClick" />
+				<Button
+					x:Name="ButtonLoad"
+					Content="{DynamicResource LoadDED}"
+					Grid.Column="1"
+					Margin="5,0,0,0"
+					Padding="40,3,40,3"
+					Click="ButtonLoadClick" />
+				<CheckBox
+					x:Name="CheckDeleteUnchecked"
+					Grid.Column="3"
+					IsChecked="{Binding DeleteUnchecked}"
+					VerticalContentAlignment="Center"
+					VerticalAlignment="Top">
+					<TextBlock
+						TextWrapping="Wrap"
+						Text="{DynamicResource CheckBoxDeleteUnchecked}" />
+				</CheckBox>
+				<Button
+					x:Name="ButtonStart"
+					Grid.Column="4"
+					Content="{DynamicResource ButtonStart}"
+					Margin="5,0,0,0"
+					Padding="40,5,40,5"
+					FontSize="15"
+					Click="ButtonStartClick" />
+			</Grid>
 		</Grid>
 	</Grid>
 </base:BaseWindow>

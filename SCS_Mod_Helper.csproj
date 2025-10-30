@@ -23,27 +23,8 @@
 
   <ItemGroup>
     <None Remove="App.config" />
-    <None Remove="Images\Add.png" />
-    <None Remove="Images\AddFile.png" />
-    <None Remove="Images\AddRow.png" />
-    <None Remove="Images\Copy.png" />
-    <None Remove="Images\Delete.png" />
-    <None Remove="Images\DeleteFile.png" />
-    <None Remove="Images\DeleteRow.png" />
-    <None Remove="Images\DeleteTranslation.png" />
-    <None Remove="Images\Down.png" />
-    <None Remove="Images\ExclamationPoint.png" />
-    <None Remove="Images\ExpandDown.png" />
-    <None Remove="Images\Folder.png" />
     <None Remove="Images\IconPlaceholder.png" />
-    <None Remove="Images\ListBox.png" />
-    <None Remove="Images\modelIconPlaceholder.png" />
-    <None Remove="Images\Paste.png" />
-    <None Remove="Images\Search.png" />
-    <None Remove="Images\Settings.png" />
-    <None Remove="Images\Up.png" />
-    <None Remove="Images\Web.png" />
-    <None Remove="Images\WebReferenceFolder.png" />
+    <None Remove="Images\ModelIconPlaceholder.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,40 +37,18 @@
 
   <ItemGroup>
     <PackageReference Include="Pfim" Version="0.11.3" />
-    <PackageReference Include="System.Drawing.Common" Version="10.0.0-rc.1.25451.107" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.0-rc.2.25502.107" />
+    <PackageReference Include="WPF-UI" Version="4.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Add.png" />
-    <Resource Include="Images\AddFile.png" />
-    <Resource Include="Images\AddRow.png" />
-    <Resource Include="Images\Copy.png" />
-    <Resource Include="Images\Delete.png" />
-    <Resource Include="Images\DeleteFile.png" />
-    <Resource Include="Images\DeleteRow.png" />
-    <Resource Include="Images\DeleteTranslation.png" />
-    <Resource Include="Images\Down.png" />
-    <Resource Include="Images\ExclamationPoint.png" />
-    <Resource Include="Images\ExpandDown.png" />
-    <Resource Include="Images\Folder.png" />
     <Resource Include="Images\IconPlaceholder.png" />
-    <Resource Include="Images\ListBox.png" />
-    <Resource Include="Images\modelIconPlaceholder.png" />
-    <Resource Include="Images\Paste.png" />
-    <Resource Include="Images\Search.png" />
-    <Resource Include="Images\Settings.png" />
-    <Resource Include="Images\Up.png" />
-    <Resource Include="Images\Web.png" />
-    <Resource Include="Images\WebReferenceFolder.png" />
+    <Resource Include="Images\ModelIconPlaceholder.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Main\ModBasic.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ModBasic.settings</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
+    <Compile Update="Main\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -102,17 +61,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Language\en-US_English%28US%29.txt">
+    <None Update="Language\en-US_English(US).txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Language\example.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Main\ModBasic.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>ModBasic.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Properties\Settings.settings">
+    <None Update="Main\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>

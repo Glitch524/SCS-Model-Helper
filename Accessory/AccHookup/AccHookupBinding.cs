@@ -6,8 +6,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
@@ -24,6 +24,8 @@ class AccHookupBinding: INotifyPropertyChanged {
 			InvokeChange(nameof(StorageName));
 		}
 	}
+
+	public static ObservableCollection<StringResItem> StringResList => AccessoryDataUtil.StringResList;
 
 	public readonly ObservableCollection<SuiItem> mSuiItems = [];
 	public ObservableCollection<SuiItem> SuiItems => mSuiItems;
@@ -53,6 +55,9 @@ class AccHookupBinding: INotifyPropertyChanged {
 		get => mCurrentHookupItem;
 		set {
 			mCurrentHookupItem = value;
+			if (value != null && ModelIcon == null) {
+				value.ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(value.IconName);
+			}
 			InvokeChange(nameof(CurrentHookupItem));
 		}
 	}
@@ -108,6 +113,17 @@ class AccHookupBinding: INotifyPropertyChanged {
 			}
 		}
 	}
+
+	public BitmapSource? ModelIcon {
+		get => CurrentHookupItem?.ModelIcon;
+		set {
+			if (CurrentHookupItem != null) {
+				CurrentHookupItem.ModelIcon = value;
+				InvokeChange(nameof(ModelIcon));
+			}
+		}
+	}
+
 
 	public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
 
@@ -199,9 +215,11 @@ class AccHookupBinding: INotifyPropertyChanged {
 	}
 
 	public void ChooseIcon(Window window) {
-		var icon = AccessoryDataUtil.ChooseIcon(window);
-		if (icon != null)
+		var icon = AccessoryDataUtil.ChooseIcon(window, out string? iconPath);
+		if (icon != null) {
+			ModelIcon = AccessoryDataUtil.LoadModelIcon(iconPath);
 			IconName = icon;
+		}
 	}
 
 	public void AddPhysToOthersList(PhysicsData? physics) {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SCS_Mod_Helper.Base;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -7,7 +8,7 @@ namespace SCS_Mod_Helper.Accessory.AccAddon;
 /// <summary>
 /// AutoFillSelectionWindow.xaml 的交互逻辑
 /// </summary>
-public partial class AutoFillSelectionWindow: Window {
+public partial class AutoFillSelectionWindow: BaseWindow {
 	private readonly AutoFillBinding binding;
 	public bool CheckModelName {
 		get => binding.CheckModelName; set => binding.CheckModelName = value;
@@ -33,6 +34,18 @@ public partial class AutoFillSelectionWindow: Window {
 		string? collPath) {
 		InitializeComponent();
 		binding = new(type, modelName, modelType, modelPath, modelPathUK, collPath);
+		int selectCount = 0;
+		if (modelName != null)
+			selectCount++;
+		if (modelType != null)
+			selectCount++;
+		if (modelPath != null)
+			selectCount++;
+		if (modelPathUK != null)
+			selectCount++;
+		if (collPath != null)
+			selectCount++;
+		binding.SelectCount = selectCount;
 		StackMain.DataContext = binding;
 	}
 
@@ -77,6 +90,15 @@ public class AutoFillBinding(
 			CheckModelPath = value;
 			CheckModelPathUK = value;
 			CheckCollPath = value;
+		}
+	}
+
+	private int mSelectCount = 0;
+	public int SelectCount {
+		get => mSelectCount;
+		set {
+			mSelectCount = value; 
+			InvokeChange();
 		}
 	}
 

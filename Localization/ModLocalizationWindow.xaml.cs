@@ -78,7 +78,7 @@ public partial class ModLocalizationWindow : BaseWindow
 
 	private MenuItem NewModuleItem(LocaleModule module) {
 		MenuItem item = new() {
-			Header = module.ModuleName,
+			Header = module.ModuleName.Replace("_", "__"),
 			DataContext = module,
 		};
 		item.Click += OnModuleChanged;
@@ -110,7 +110,7 @@ public partial class ModLocalizationWindow : BaseWindow
 		}
 	}
 
-	private void DeleteLocalClick(object sender, RoutedEventArgs e) {
+	private void DeleteLocaleClick(object sender, RoutedEventArgs e) {
 		if (sender is Button button) {
 			ModLocale locale = (ModLocale)button.DataContext;
 			locale.Dictionary.Clear();
@@ -119,11 +119,11 @@ public partial class ModLocalizationWindow : BaseWindow
 
 	private void OperateButtonClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonAdd) {
-			DataGridUtil.AddItem(TableDict, CurrentDict, new("",""));
+			CollectionUtil.AddItem(TableDict, CurrentDict, new("",""));
 		} else if (sender == ButtonDelete) {
-			DataGridUtil.RemoveItem(TableDict, CurrentDict);
+			CollectionUtil.RemoveItem(TableDict, CurrentDict);
 		} else if (sender == ButtonUp || sender == ButtonDown) {
-			DataGridUtil.MoveItems(sender == ButtonUp, TableDict, CurrentDict);
+			CollectionUtil.MoveDataGridItems(sender == ButtonUp, TableDict, CurrentDict);
 		}
 	}
 

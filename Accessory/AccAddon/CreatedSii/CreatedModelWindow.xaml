@@ -6,241 +6,258 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon.CreatedSii"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:CreatedModelBinding}"
 	mc:Ignorable="d"
 	WindowStartupLocation="CenterOwner"
 	Title="{DynamicResource TitleCreatedSii}"
-	Height="450"
+	ExtendsContentIntoTitleBar="True"
+	Height="600"
 	Width="1000">
-	<Grid
-		x:Name="GridMain"
-		Margin="10,10,10,10">
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
 				Height="Auto" />
 			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
 				Height="*" />
-			<RowDefinition
-				Height="Auto" />
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition
-				Width="*" />
-			<ColumnDefinition
-				Width="10" />
-			<ColumnDefinition
-				Width="6*" />
-		</Grid.ColumnDefinitions>
-		<TextBlock
-			x:Name="TextProjectLocation"
-			Margin="0,0,0,5"
+		<ui:TitleBar
+			Title="{DynamicResource TitleCreatedSii}"
 			Grid.ColumnSpan="3"
-			TextWrapping="Wrap"
-			VerticalAlignment="Top"
-			Text="{Binding CurrentProjectLocation}"
-			d:Text="{DynamicResource TextProjectLocation}" />
-
-		<CheckBox
-			x:Name="CheckBoxSelectAll"
-			Grid.Row="1"
-			Grid.Column="2"
-			Margin="5,5,0,0"
-			Content="{DynamicResource CheckBoxSelectAll}"
-			IsChecked="{Binding SelectAll}" />
-		<DataGrid
-			x:Name="TableModelName"
-			RowHeaderWidth="0"
-			Grid.Row="2"
-			SelectionMode="Single"
-			Grid.Column="0"
-			Margin="0,5,5,0"
-			GridLinesVisibility="Horizontal"
-			CanUserSortColumns="False"
-			d:ItemsSource="{d:SampleData ItemCount=2}"
-			ItemsSource="{Binding CreatedModelList}"
-			SelectedItem="{Binding CurrentModel}"
-			AutoGenerateColumns="False">
-			<DataGrid.HorizontalGridLinesBrush>
-				<LinearGradientBrush
-					EndPoint="0.5,1"
-					StartPoint="0.5,0">
-					<GradientStop
-						Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
-						Offset="1" />
-				</LinearGradientBrush>
-			</DataGrid.HorizontalGridLinesBrush>
-			<DataGrid.Columns>
-				<DataGridTextColumn
-					Header="{DynamicResource ModelName}"
-					IsReadOnly="True"
-					Width="3*"
-					Binding="{Binding Path=ModelName}">
-					<DataGridTextColumn.CellStyle>
-						<Style
-							TargetType="DataGridCell">
-							<Setter
-								Property="ToolTip"
-								Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-						</Style>
-					</DataGridTextColumn.CellStyle>
-				</DataGridTextColumn>
-			</DataGrid.Columns>
-		</DataGrid>
-
-		<GridSplitter
-			Width="2"
-			Grid.Row="2"
-			Grid.Column="1"
-			Margin="4,0,4,0"
-			ResizeBehavior="PreviousAndNext"
-			HorizontalAlignment="Center"
-			Background="#FF4C4B4B" />
-
-		<DataGrid
-			x:Name="TableCreatedSii"
-			Grid.Row="2"
-			Grid.Column="2"
-			SelectionMode="Single"
-			RowHeaderWidth="0"
-			Margin="5,5,0,0"
-			GridLinesVisibility="Horizontal"
-			CanUserSortColumns="False"
-			d:ItemsSource="{d:SampleData ItemCount=2}"
-			ItemsSource="{Binding CurrentModelItems}"
-			AutoGenerateColumns="False">
-			<DataGrid.HorizontalGridLinesBrush>
-				<LinearGradientBrush
-					EndPoint="0.5,1"
-					StartPoint="0.5,0">
-					<GradientStop
-						Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
-						Offset="1" />
-				</LinearGradientBrush>
-			</DataGrid.HorizontalGridLinesBrush>
-			<DataGrid.Columns>
-				<DataGridTemplateColumn
-					Width="Auto">
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<CheckBox
-								HorizontalAlignment="Center"
-								Click="CheckBoxClick"
-								IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}" />
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTextColumn
-					Header="{DynamicResource HeadPath}"
-					IsReadOnly="True"
-					Width="10*"
-					Binding="{Binding PathShort}">
-					<DataGridTextColumn.CellStyle>
-						<Style
-							TargetType="DataGridCell">
-							<Setter
-								Property="ToolTip"
-								Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-						</Style>
-					</DataGridTextColumn.CellStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn
-					Header="{DynamicResource TruckID}"
-					IsReadOnly="True"
-					Width="6*"
-					Binding="{Binding TruckID}">
-					<DataGridTextColumn.CellStyle>
-						<Style
-							TargetType="DataGridCell">
-							<Setter
-								Property="ToolTip"
-								Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-						</Style>
-					</DataGridTextColumn.CellStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn
-					Header="{DynamicResource ModelType}"
-					IsReadOnly="True"
-					Width="5*"
-					Binding="{Binding ModelType}">
-				</DataGridTextColumn>
-				<DataGridTextColumn
-					Header="{DynamicResource ModelDisplayName}"
-					IsReadOnly="True"
-					Width="5*"
-					Visibility="Collapsed"
-					Binding="{Binding IngameName}">
-					<DataGridTextColumn.CellStyle>
-						<Style
-							TargetType="DataGridCell">
-							<Setter
-								Property="ToolTip"
-								Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-						</Style>
-					</DataGridTextColumn.CellStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn
-					Header="{DynamicResource ModelLook}"
-					IsReadOnly="True"
-					Width="5*"
-					Visibility="Collapsed"
-					Binding="{Binding Look}">
-				</DataGridTextColumn>
-				<DataGridTextColumn
-					Header="{DynamicResource ModelVariant}"
-					IsReadOnly="True"
-					Width="5*"
-					Visibility="Collapsed"
-					Binding="{Binding Variant}">
-				</DataGridTextColumn>
-			</DataGrid.Columns>
-		</DataGrid>
+			Padding="16,4,14,4" />
 		<Grid
-			Grid.Row="3"
-			Grid.ColumnSpan="3"
-			Margin="0,10,0,0">
+			x:Name="GridMain"
+			Grid.Row="1"
+			Margin="10,0,10,10">
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="*" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition
-					Width="3*" />
-				<ColumnDefinition
-					Width="10" />
-				<ColumnDefinition
 					Width="*" />
 				<ColumnDefinition
 					Width="10" />
 				<ColumnDefinition
-					Width="*" />
+					Width="6*" />
 			</Grid.ColumnDefinitions>
-			<Button
-				x:Name="ButtonDelete"
-				Content="{DynamicResource ButtonDelete}"
-				Click="ButtonClick" />
-			<Button
-				x:Name="ButtonOpen"
+			<TextBlock
+				x:Name="TextProjectLocation"
+				Margin="0,0,0,5"
+				Grid.ColumnSpan="3"
+				TextWrapping="Wrap"
+				VerticalAlignment="Top"
+				Text="{Binding CurrentProjectLocation}"
+				d:Text="{DynamicResource TextProjectLocation}" />
+
+			<CheckBox
+				x:Name="CheckBoxSelectAll"
+				Grid.Row="1"
 				Grid.Column="2"
-				Content="{DynamicResource ButtonOpenFile}"
-				Click="ButtonClick">
-				<Button.Style>
-					<Style
-						TargetType="Button">
-						<Style.Triggers>
-							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TableCreatedSii}"
-								Value="-1">
+				Margin="5,5,0,0"
+				Content="{DynamicResource CheckBoxSelectAll}"
+				IsChecked="{Binding SelectAll}" />
+			<DataGrid
+				x:Name="TableModelName"
+				Grid.Row="2"
+				SelectionMode="Single"
+				Grid.Column="0"
+				Margin="0,5,5,0"
+				GridLinesVisibility="Horizontal"
+				CanUserSortColumns="False"
+				d:ItemsSource="{d:SampleData ItemCount=2}"
+				ItemsSource="{Binding CreatedModelList}"
+				SelectedItem="{Binding CurrentModel}"
+				AutoGenerateColumns="False"
+				BorderThickness="1"
+				BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+				CellStyle="{StaticResource CompatCellStyle}">
+				<DataGrid.Columns>
+					<DataGridTextColumn
+						Header="{DynamicResource ModelName}"
+						IsReadOnly="True"
+						Width="3*"
+						Binding="{Binding Path=ModelName}">
+						<DataGridTextColumn.CellStyle>
+							<Style
+								TargetType="DataGridCell"
+								BasedOn="{StaticResource {x:Type DataGridCell}}">
 								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
-			<Button
-				x:Name="ButtonClose"
-				Grid.Column="4"
-				Content="{DynamicResource ButtonClose}"
-				Click="ButtonClick" />
+									Property="ToolTip"
+									Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
+							</Style>
+						</DataGridTextColumn.CellStyle>
+					</DataGridTextColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+
+			<GridSplitter
+				Width="2"
+				Grid.Row="2"
+				Grid.Column="1"
+				Margin="4,0,4,0"
+				ResizeBehavior="PreviousAndNext"
+				HorizontalAlignment="Center"
+				Background="#FF4C4B4B" />
+
+			<DataGrid
+				x:Name="TableCreatedSii"
+				Grid.Row="2"
+				Grid.Column="2"
+				SelectionMode="Single"
+				Margin="5,5,0,0"
+				GridLinesVisibility="Horizontal"
+				CanUserSortColumns="False"
+				d:ItemsSource="{d:SampleData ItemCount=2}"
+				ItemsSource="{Binding CurrentModelItems}"
+				AutoGenerateColumns="False"
+				BorderThickness="1"
+				BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+				ColumnHeaderStyle="{StaticResource DataGridHeader}"
+				CellStyle="{StaticResource CompatCellStyle}">
+				<DataGrid.HorizontalGridLinesBrush>
+					<LinearGradientBrush
+						EndPoint="0.5,1"
+						StartPoint="0.5,0">
+						<GradientStop
+							Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
+							Offset="1" />
+					</LinearGradientBrush>
+				</DataGrid.HorizontalGridLinesBrush>
+				<DataGrid.Columns>
+					<DataGridTemplateColumn
+						Width="Auto">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<CheckBox
+									HorizontalAlignment="Center"
+									Click="CheckBoxClick"
+									IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}" />
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTextColumn
+						Header="{DynamicResource HeadPath}"
+						IsReadOnly="True"
+						Width="10*"
+						Binding="{Binding PathShort}">
+						<DataGridTextColumn.CellStyle>
+							<Style
+								TargetType="DataGridCell">
+								<Setter
+									Property="ToolTip"
+									Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
+							</Style>
+						</DataGridTextColumn.CellStyle>
+					</DataGridTextColumn>
+					<DataGridTextColumn
+						Header="{DynamicResource TruckID}"
+						IsReadOnly="True"
+						Width="6*"
+						Binding="{Binding TruckID}">
+						<DataGridTextColumn.CellStyle>
+							<Style
+								TargetType="DataGridCell">
+								<Setter
+									Property="ToolTip"
+									Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
+							</Style>
+						</DataGridTextColumn.CellStyle>
+					</DataGridTextColumn>
+					<DataGridTextColumn
+						Header="{DynamicResource ModelType}"
+						IsReadOnly="True"
+						Width="5*"
+						Binding="{Binding ModelType}">
+					</DataGridTextColumn>
+					<DataGridTextColumn
+						Header="{DynamicResource ModelDisplayName}"
+						IsReadOnly="True"
+						Width="5*"
+						Visibility="Collapsed"
+						Binding="{Binding IngameName}">
+						<DataGridTextColumn.CellStyle>
+							<Style
+								TargetType="DataGridCell">
+								<Setter
+									Property="ToolTip"
+									Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
+							</Style>
+						</DataGridTextColumn.CellStyle>
+					</DataGridTextColumn>
+					<DataGridTextColumn
+						Header="{DynamicResource ModelLook}"
+						IsReadOnly="True"
+						Width="5*"
+						Visibility="Collapsed"
+						Binding="{Binding Look}">
+					</DataGridTextColumn>
+					<DataGridTextColumn
+						Header="{DynamicResource ModelVariant}"
+						IsReadOnly="True"
+						Width="5*"
+						Visibility="Collapsed"
+						Binding="{Binding Variant}">
+					</DataGridTextColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+			<Grid
+				Grid.Row="3"
+				Grid.ColumnSpan="3"
+				Margin="0,10,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="3*" />
+					<ColumnDefinition
+						Width="10" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="10" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<Button
+					x:Name="ButtonDelete"
+					Content="{DynamicResource ButtonDelete}"
+					Click="ButtonClick"
+					VerticalAlignment="Stretch"
+					HorizontalAlignment="Stretch" />
+				<Button
+					x:Name="ButtonOpen"
+					Grid.Column="2"
+					Content="{DynamicResource ButtonOpenFile}"
+					Click="ButtonClick"
+					HorizontalAlignment="Stretch">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=TableCreatedSii}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button
+					x:Name="ButtonClose"
+					Grid.Column="4"
+					Content="{DynamicResource ButtonClose}"
+					Click="ButtonClick"
+					HorizontalAlignment="Stretch" />
+			</Grid>
 		</Grid>
 	</Grid>
 </base:BaseWindow>

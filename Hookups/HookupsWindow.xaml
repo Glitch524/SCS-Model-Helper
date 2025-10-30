@@ -7,147 +7,159 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Hookups"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:HookupBinding}"
+	ExtendsContentIntoTitleBar="True"
 	mc:Ignorable="d"
-	Title="{DynamicResource TitleCreateHookupSii}"
 	WindowStartupLocation="CenterOwner"
 	Height="Auto"
 	Width="500"
 	SizeToContent="Height">
-	<StackPanel
-		x:Name="PanelMain"
-		Margin="10,10,10,10">
-		<TextBlock
-			x:Name="TextProjectLocation"
-			Margin="0,0,0,0"
-			TextWrapping="Wrap"
-			Text="{Binding ProjectLocationShow}"
-			VerticalAlignment="Top"
-			d:Text="{DynamicResource TextProjectLocation}" />
-		<Grid
-			Margin="0,5,0,0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="*" />
-				<ColumnDefinition
-					Width="5" />
-				<ColumnDefinition
-					Width="*" />
-			</Grid.ColumnDefinitions>
-			<RadioButton
-				x:Name="RadioAnimationHookup"
-				GroupName="HookupTypeGroup"
-				IsChecked="{Binding IsAnimHookup}"
-				Content="{DynamicResource RadioAnimHookup}" />
-			<RadioButton
-				Grid.Column="2"
-				x:Name="RadioCompassHookup"
-				GroupName="HookupTypeGroup"
-				Content="{DynamicResource RadioCompassHookup}" />
-		</Grid>
-		<TextBlock
-			Margin="0,5,0,0"
-			TextWrapping="Wrap"
-			Text="{DynamicResource TextHookupName}"
-			VerticalAlignment="Top" />
-		<TextBox
-			x:Name="TextName"
-			TextWrapping="Wrap"
-			Text="{Binding HookupName, UpdateSourceTrigger=PropertyChanged}"
-			Foreground="{Binding HookupNameForeground}"
-			Height="{Binding ActualHeight, ElementName=TextModel, Mode=OneWay}" />
-		<TextBlock
-			Margin="0,10,0,0"
-			TextWrapping="Wrap"
-			Text="{DynamicResource TextModelPath}"
-			VerticalAlignment="Top" />
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-				Width="*" />
-			<ColumnDefinition
-				Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<TextBox
-				x:Name="TextModel"
-				Grid.Column="0"
-				TextWrapping="Wrap"
-				BorderThickness="1,1,0,1"
-				Text="{Binding ModelLocation, UpdateSourceTrigger=PropertyChanged}" />
-			<Button
-				x:Name="ButtonChooseModel"
-				Padding="3,3,3,3"
-				Grid.Column="1"
-				HorizontalAlignment="Left"
-				VerticalAlignment="Top"
-				Click="ButtonChooseFile"
-				BorderBrush="#FFABADB3">
-				<Image Source="/Images/Folder.png" />
-			</Button>
-		</Grid>
-		<Grid
-			Visibility="{Binding AnimVisibility}">
-			<Grid.RowDefinitions>
-				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
-					Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="*" />
-				<ColumnDefinition
-					Width="Auto" />
-			</Grid.ColumnDefinitions>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+		</Grid.RowDefinitions>
+		<ui:TitleBar
+			Title="{DynamicResource TitleCreateHookupSii}" />
+		<StackPanel
+			x:Name="PanelMain"
+			Grid.Row="1"
+			Margin="10,0,10,10">
 			<TextBlock
-				Margin="0,10,0,0"
-				Grid.ColumnSpan="2"
+				x:Name="TextProjectLocation"
+				Margin="0,0,0,0"
 				TextWrapping="Wrap"
-				Text="{DynamicResource TextAnimPath}"
+				Text="{Binding ProjectLocationShow}"
+				VerticalAlignment="Top"
+				d:Text="{DynamicResource TextProjectLocation}" />
+			<Grid
+				Margin="0,5,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="5" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<RadioButton
+					x:Name="RadioAnimationHookup"
+					GroupName="HookupTypeGroup"
+					IsChecked="{Binding IsAnimHookup}"
+					Content="{DynamicResource RadioAnimHookup}" />
+				<RadioButton
+					Grid.Column="2"
+					x:Name="RadioCompassHookup"
+					GroupName="HookupTypeGroup"
+					Content="{DynamicResource RadioCompassHookup}" />
+			</Grid>
+			<TextBlock
+				Margin="0,5,0,0"
+				TextWrapping="Wrap"
+				Text="{DynamicResource TextHookupName}"
 				VerticalAlignment="Top" />
 			<TextBox
-				x:Name="TextAnimation"
-				Grid.Column="0"
-				Grid.Row="1"
+				x:Name="TextName"
 				TextWrapping="Wrap"
-				BorderThickness="1,1,0,1"
-				Text="{Binding AnimationLocation, UpdateSourceTrigger=PropertyChanged}" />
-			<Button
-				x:Name="ButtonChooseAnimation"
-				Padding="3,3,3,3"
-				Grid.Column="1"
-				Grid.Row="1"
-				HorizontalAlignment="Left"
-				VerticalAlignment="Top"
-				Click="ButtonChooseFile"
-				BorderBrush="#FFABADB3">
-				<Image Source="/Images/Folder.png" />
-			</Button>
-		</Grid>
-		<Grid
-			Margin="0,10,0,0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="*" />
-				<ColumnDefinition
-					Width="10" />
-				<ColumnDefinition
-					Width="*" />
-			</Grid.ColumnDefinitions>
-			<Button
-				x:Name="ButtonOK"
-				Content="{DynamicResource ButtonOK}"
-				Grid.Column="0"
-				VerticalAlignment="Top"
-				Click="ButtonResult"
-				IsEnabled="{Binding StartClickable}">
-			</Button>
-			<Button
-				x:Name="ButtonCancel"
-				Content="{DynamicResource ButtonCancel}"
-				Grid.Column="2"
-				VerticalAlignment="Top"
-				Click="ButtonResult" />
-		</Grid>
-	</StackPanel>
+				Text="{Binding HookupName, UpdateSourceTrigger=PropertyChanged}"
+				Foreground="{Binding HookupNameForeground}"
+				Height="{Binding ActualHeight, ElementName=TextModel, Mode=OneWay}" />
+			<TextBlock
+				Margin="0,10,0,0"
+				TextWrapping="Wrap"
+				Text="{DynamicResource TextModelPath}"
+				VerticalAlignment="Top" />
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBox
+					x:Name="TextModel"
+					Grid.Column="0"
+					TextWrapping="Wrap"
+					BorderThickness="1,1,0,1"
+					Text="{Binding ModelLocation, UpdateSourceTrigger=PropertyChanged}" />
+				<Button
+					x:Name="ButtonChooseModel"
+					Grid.Column="1"
+					Click="ButtonChooseFile"
+					Height="{Binding ActualHeight, ElementName=TextModel, Mode=OneWay}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Folder16" />
+					</Viewbox>
+				</Button>
+			</Grid>
+			<Grid
+				Visibility="{Binding AnimVisibility}">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					Margin="0,10,0,0"
+					Grid.ColumnSpan="2"
+					TextWrapping="Wrap"
+					Text="{DynamicResource TextAnimPath}"
+					VerticalAlignment="Top" />
+				<TextBox
+					x:Name="TextAnimation"
+					Grid.Column="0"
+					Grid.Row="1"
+					TextWrapping="Wrap"
+					BorderThickness="1,1,0,1"
+					Text="{Binding AnimationLocation, UpdateSourceTrigger=PropertyChanged}" />
+				<Button
+					x:Name="ButtonChooseAnimation"
+					Grid.Column="1"
+					Grid.Row="1"
+					Click="ButtonChooseFile"
+					Height="{Binding ActualHeight, ElementName=TextAnimation, Mode=OneWay}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Folder16" />
+					</Viewbox>
+				</Button>
+			</Grid>
+			<Grid
+				Margin="0,10,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="10" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<Button
+					x:Name="ButtonOK"
+					Content="{DynamicResource ButtonOK}"
+					Grid.Column="0"
+					Click="ButtonResult"
+					HorizontalAlignment="Stretch"
+					IsEnabled="{Binding StartClickable}">
+				</Button>
+				<Button
+					x:Name="ButtonCancel"
+					Content="{DynamicResource ButtonCancel}"
+					Grid.Column="2"
+					Click="ButtonResult"
+					HorizontalAlignment="Stretch" />
+			</Grid>
+		</StackPanel>
+	</Grid>
 </base:BaseWindow>

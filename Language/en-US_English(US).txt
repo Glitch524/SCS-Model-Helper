@@ -42,7 +42,7 @@
 	<s:String x:Key="ColorGreen">Green</s:String>
 	<s:String x:Key="ColorBlue">Blue</s:String>
 	<s:String x:Key="ColorWhite">White</s:String>
-	<s:String x:Key="ColorOrange">Orang</s:String>
+	<s:String x:Key="ColorOrange">Orange</s:String>
 
 		<!--Mod manifest.CS-->
 	<s:String x:Key="MessageLoadManifestErrNotManifest">Looks like this file is not manifest file</s:String>
@@ -105,6 +105,7 @@
 	<s:String x:Key="ExpanderETS2">Euro Truck Simulator 2(Expand to apply/export to ETS2)</s:String>
 	<s:String x:Key="ExpanderATS">American Truck Simulator(Expand to apply/export to ATS)</s:String>
 	<s:String x:Key="TruckID">Truck ID</s:String>
+	<s:String x:Key="TruckProdYear">Production Year</s:String>
 	<s:String x:Key="TruckName">Truck Name</s:String>
 	<s:String x:Key="TruckDescription">Truck Description</s:String>
 		<!--Side Button-->
@@ -166,7 +167,7 @@
 		<!--Hide In-->
 	<s:String x:Key="TitleHideIn">Tick the following content will let content hide in the ticked Perspective</s:String>
 	
-		<!--自动识别页-->
+		<!--Auto Recognition-->
 	<s:String x:Key="TitleAutoRecognize">Auto Recognize</s:String>
 	<s:String x:Key="MessageAR">Some content was recognized by reading model file, please choose some content that needed</s:String>
 	<s:String x:Key="CheckHeadModelName">Model Name:</s:String>
@@ -184,6 +185,12 @@
 	<s:String x:Key="TitleAddonStorageStorage">Hookup Storage Name</s:String>
 	<s:String x:Key="HeaderHookupName">Hookup File</s:String>
 	<s:String x:Key="HeaderAccessoryName">Acc. Name</s:String>
+	<!--Suitable For-->
+	<s:String x:Key="SuitableForSetDashbrd">Dashboard Sets（set__dashbrd）</s:String>
+	<s:String x:Key="SuitableForSetGlass">Windshield Sets（set__glass）</s:String>
+	<s:String x:Key="SuitableForSetCabinet">Cabinet Sets（set__cabinet）</s:String>
+	<s:String x:Key="SuitableForSetCuphold">Cup Holder Sets（set__cuphold）</s:String>
+	<s:String x:Key="SuitableForSteeringW">Steering Wheel（steering__w）</s:String>
 	<!--SaveAddonHookup-->
 	<s:String x:Key="MessageSaveBeforeStart">Please make sure the required data like storage name, hookup file name, hookup model name, physics name was filled, or it will cause skipping or stop saving.</s:String>
 	<s:String x:Key="MessageSaveNoName">Please fill in the storage name first</s:String>
@@ -195,9 +202,15 @@
 	
 	<!--Physics Model Page-->
 	<s:String x:Key="TitlePhysicsToyData">Physics Toy Data</s:String>
+	<s:String x:Key="MsgPhysics1">Define physics models, and add it in model's data to add physics model</s:String>
+	<s:String x:Key="MsgPhysics2">Choose a physics data to add to the model definition</s:String>
+	
 	<s:String x:Key="HeaderPhysicsName">Physics</s:String>
 	<s:String x:Key="ButtonAddToOthers">Add to Others</s:String>
 	<s:String x:Key="ButtonSaveToPhysicList">Save to physics list</s:String>
+	<s:String x:Key="TitlePhysicsType">Physics Type</s:String>
+	
+	<s:String x:Key="PhysicsTypeToy">Toy Physics</s:String>
 	<s:String x:Key="TitlePhysicsName">Physics Name</s:String>
 	<s:String x:Key="TitleToyType">Toy Type</s:String>
 	<s:String x:Key="TitleToyMass">Mass</s:String>
@@ -235,11 +248,27 @@
 	<s:String x:Key="TitleNodeDamping">Node Damping</s:String>
 	<s:String x:Key="TipNodeDamping">Rope node velocity damping</s:String>
 	
-	<!--物理模型定义页.cs-->
+	<s:String x:Key="PhysicsTypePatch">Patch Physics</s:String>
+	<s:String x:Key="TitlePatchMaterial">Patch Material</s:String>
+	<s:String x:Key="TitleAreaDensity">Area Density</s:String>
+	<s:String x:Key="TitleAeroModelType">Aero Model Type</s:String>
+	<s:String x:Key="TitleTCMinFirst">TC Min First</s:String>
+	<s:String x:Key="TitleTCMaxFirst">TC Max First</s:String>
+	<s:String x:Key="TitleTCMinSecond">TC Min Second</s:String>
+	<s:String x:Key="TitleTCMaxSecond">TC Max Second</s:String>
+	<s:String x:Key="TitleXRes">X Res</s:String>
+	<s:String x:Key="TitleYRes">Y Res</s:String>
+	<s:String x:Key="TitleXSize">X Size</s:String>
+	<s:String x:Key="TitleYSize">Y Size</s:String>
+	<s:String x:Key="TitleDragCoefficient">Drag Coefficient</s:String>
+	<s:String x:Key="TitleLiftCoefficient">Lift Coefficient</s:String>
+	
+	<!--PhysicsUC.cs-->
 	<s:String x:Key="MessageResultPhysSaved">Physics definition saved.</s:String>
 	<s:String x:Key="DialogTitleChooseRope">Choose Rope Material File(mat file or its image file)</s:String>
-	<s:String x:Key="DialogFilterChooseRope">Rope Material File|*.mat|Rope Image File|*.tga;*.dds</s:String>
-	<s:String x:Key="MessageErrorChooseRope">Chosen file must be mat file or its image file</s:String>
+	<s:String x:Key="DialogTitleChoosePatch">Choose Patch Material File(mat file or its image file)</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">Rope Material or Rope Image File|*.tga;*.dds;*.mat;*.tobj</s:String>
+	<s:String x:Key="MessageErrorChooseMaterial">Chosen file must be mat file or its image file</s:String>
 	
 	
 	
@@ -330,192 +359,104 @@
 
 
 
-	<s:String
-		x:Key="MessageTitleNotice">Notice</s:String>
-	<s:String
-		x:Key="MessageTitleErr">Error</s:String>
-	<s:String
-		x:Key="StatusEmpty">Empty</s:String>
-	<s:String
-		x:Key="ButtonOK">OK</s:String>
-	<s:String
-		x:Key="ButtonCancel">Cancel</s:String>
-	<s:String
-		x:Key="ButtonYes">Yes</s:String>
-	<s:String
-		x:Key="ButtonNo">No</s:String>
-	<s:String
-		x:Key="ButtonSave">Save</s:String>
-	<s:String
-		x:Key="ButtonClose">Close</s:String>
-	<s:String
-		x:Key="ButtonStart">Start</s:String>
-	<s:String
-		x:Key="ButtonDelete">Delete</s:String>
-	<s:String
-		x:Key="ButtonOpenFile">Open File</s:String>
+	<s:String x:Key="MessageTitleNotice">Notice</s:String>
+	<s:String x:Key="MessageTitleErr">Error</s:String>
+	<s:String x:Key="StatusEmpty">Empty</s:String>
+	<s:String x:Key="ButtonOK">OK</s:String>
+	<s:String x:Key="ButtonCancel">Cancel</s:String>
+	<s:String x:Key="ButtonYes">Yes</s:String>
+	<s:String x:Key="ButtonNo">No</s:String>
+	<s:String x:Key="ButtonSave">Save</s:String>
+	<s:String x:Key="ButtonClose">Close</s:String>
+	<s:String x:Key="ButtonStart">Start</s:String>
+	<s:String x:Key="ButtonDelete">Delete</s:String>
+	<s:String x:Key="ButtonOpenFile">Open File</s:String>
 	<s:String x:Key="ButtonSelect">Select</s:String>
-	<s:String
-		x:Key="CheckBoxSelectAll">Select All</s:String>
+	<s:String x:Key="CheckBoxSelectAll">Select All</s:String>
 
-	<s:String
-		x:Key="FilterAllFiles">All Files|*.*</s:String>
+	<s:String x:Key="FilterAllFiles">All Files|*.*</s:String>
 
 	<!--Truck Description ETS2-->
-	<x:Static
-		x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
-	<s:String
-		x:Key="TruckDesc.daf.xf">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.iveco.hiway">EOL</s:String>
-	<s:String
-		x:Key="TruckDesc.iveco.stralis">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.man.tgx">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.mercedes.actros">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.renault.etech_t">Currently no accessory locator</s:String>
-	<s:String
-		x:Key="TruckDesc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
-	<s:String
-		x:Key="TruckDesc.renault.premium">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.scania.r">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.scania.streamline">EOL</s:String>
-	<s:String
-		x:Key="TruckDesc.volvo.fh16">EOL</s:String>
-	<s:String
-		x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
-	<x:Static
-		x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.volvo.fh_2024">Toybed has a small table, clipping may happen when sitting</s:String>
+	<x:Static x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
+	<s:String x:Key="TruckDesc.daf.xf">EOL</s:String>
+	<x:Static x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.daf.xf_electric">Currently no accessory locator</s:String>
+	<s:String x:Key="TruckDesc.iveco.hiway">EOL</s:String>
+	<s:String x:Key="TruckDesc.iveco.stralis">EOL</s:String>
+	<x:Static x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.man.tgx">EOL</s:String>
+	<x:Static x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.mercedes.actros">EOL</s:String>
+	<x:Static x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.renault.etech_t">Currently no accessory locator</s:String>
+	<s:String x:Key="TruckDesc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
+	<s:String x:Key="TruckDesc.renault.premium">EOL</s:String>
+	<x:Static x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.scania.r">EOL</s:String>
+	<x:Static x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.scania.streamline">EOL</s:String>
+	<s:String x:Key="TruckDesc.volvo.fh16">EOL</s:String>
+	<s:String x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
+	<x:Static x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.volvo.fh_2024">Toybed has a small table, clipping may happen when sitting</s:String>
 
 
 	<!--Truck Description ATS-->
-	<s:String
-		x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
-	<x:Static
-		x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.freightliner.ecascadia">WIP</s:String>
-	<s:String
-		x:Key="TruckDesc.intnational.9900i">EOL</s:String>
-	<x:Static
-		x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.intnational.lt">Toybed is just as same as LoneStar</s:String>
-	<x:Static
-		x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<s:String
-		x:Key="TruckDesc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<s:String
-		x:Key="TruckDesc.kenworth.w990">WIP</s:String>
-	<x:Static
-		x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.mack.pioneer">WIP</s:String>
-	<x:Static
-		x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.peterbilt.579_2022">WIP</s:String>
-	<x:Static
-		x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.volvo.vnl2024">WIP</s:String>
-	<s:String
-		x:Key="TruckDesc.volvo.vnr_electric">WIP</s:String>
-	<s:String
-		x:Key="TruckDesc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<x:Static
-		x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
-	<x:Static
-		x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
-	<s:String
-		x:Key="TruckDesc.westernstar.4900">WIP</s:String>
+	<s:String x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
+	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.freightliner.ecascadia">TBA</s:String>
+	<s:String x:Key="TruckDesc.intnational.9900i">EOL</s:String>
+	<x:Static x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.intnational.lt">Toybed is just as same as LoneStar</s:String>
+	<x:Static x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<s:String x:Key="TruckDesc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<s:String x:Key="TruckDesc.kenworth.w990">TBA</s:String>
+	<x:Static x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.mack.anthem2026" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.mack.pioneer">TBA</s:String>
+	<x:Static x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.peterbilt.579_2022">TBA</s:String>
+	<x:Static x:Key="TruckDesc.peterbilt.589" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
+	<s:String x:Key="TruckDesc.volvo.vnl2024">TBA</s:String>
+	<s:String x:Key="TruckDesc.volvo.vnr_electric">TBA</s:String>
+	<s:String x:Key="TruckDesc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<x:Static x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
 
 
 	<!--accessory-->
-	<s:String
-		x:Key="Acc.cup_holder">Cup Holder</s:String>
-	<s:String
-		x:Key="Acc.curtain_f">Curtains(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.drvplate">Driver's Plate</s:String>
-	<s:String
-		x:Key="Acc.codrv_plate">Co-Driver's Plate</s:String>
-	<s:String
-		x:Key="Acc.flag_l">Left Window Flag(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.flag_r">Right Window Flag(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.flag_f_l">Front Flags(left)(ATS)</s:String>
-	<s:String
-		x:Key="Acc.flag_f_r">Front Flags(right)(ATS)</s:String>
-	<s:String
-		x:Key="Acc.inlight_bck">Light Board(Back wall)(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.bckpanel">Back Panel Items(Back wall)(ATS)</s:String>
-	<s:String
-		x:Key="Acc.l_pillow">Pillow Items</s:String>
-	<s:String
-		x:Key="Acc.set_cabinet">Cabinet Sets(ATS)</s:String>
-	<s:String
-		x:Key="Acc.set_glass">Windshield Sets</s:String>
-	<s:String
-		x:Key="Acc.set_lglass">Windshield Corner</s:String>
-	<s:String
-		x:Key="Acc.sterring_w">Steering Wheel</s:String>
-	<s:String
-		x:Key="Acc.toyhang">Hanging Items</s:String>
-	<s:String
-		x:Key="Acc.toyac">Air Conditioner Items</s:String>
-	<s:String
-		x:Key="Acc.toystand">Console Items</s:String>
-	<s:String
-		x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
-	<s:String
-		x:Key="Acc.toybed">Bed Items</s:String>
-	<s:String
-		x:Key="Acc.toybig">Center Floor Items</s:String>
-	<s:String
-		x:Key="Acc.toyback">Sleeper Floor Items(ATS)</s:String>
-	<s:String
-		x:Key="Acc.toysofa">Sofa Items(ATS)</s:String>
-	<s:String
-		x:Key="Acc.toytable">Table Items(ATS)</s:String>
+	<s:String x:Key="Acc.cup_holder">Cup Holder</s:String>
+	<s:String x:Key="Acc.curtain_f">Curtains(ETS2)</s:String>
+	<s:String x:Key="Acc.drv_plate">Driver's Plate</s:String>
+	<s:String x:Key="Acc.codrv_plate">Co-Driver's Plate</s:String>
+	<s:String x:Key="Acc.flag_l">Truck Flag (Left)</s:String>
+	<s:String x:Key="Acc.flag_r">Truck Flag (Right)</s:String>
+	<s:String x:Key="Acc.back_wall">Back Wall Items</s:String>
+	<s:String x:Key="Acc.l_pillow">Pillow Items</s:String>
+	<s:String x:Key="Acc.set_cabinet">Cabinet Sets(ATS)</s:String>
+	<s:String x:Key="Acc.set_glass">Windshield Sets</s:String>
+	<s:String x:Key="Acc.set_lglass">Windshield Corner</s:String>
+	<s:String x:Key="Acc.sterring_w">Steering Wheel</s:String>
+	<s:String x:Key="Acc.toyhang">Hanging Items</s:String>
+	<s:String x:Key="Acc.toyac">Air Conditioner Items</s:String>
+	<s:String x:Key="Acc.toystand">Console Items</s:String>
+	<s:String x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
+	<s:String x:Key="Acc.toybed">Bed Items</s:String>
+	<s:String x:Key="Acc.toybig">Center Floor Items</s:String>
+	<s:String x:Key="Acc.toyback">Sleeper Floor Items(ATS)</s:String>
+	<s:String x:Key="Acc.toysofa">Sofa Items(ATS)</s:String>
+	<s:String x:Key="Acc.toytable">Table Items(ATS)</s:String>
 
-	<!--locale中文名-->
+	<!--locale Names-->
 	<s:String
 		x:Key="locale.universal">Universal</s:String>
 	<s:String

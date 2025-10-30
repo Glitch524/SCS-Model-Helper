@@ -2,57 +2,230 @@
 {
     public class AccessoryPaintJobItem() : AccessoryData("", "", null, null, "", "unknown", "", "", "")
     {
-		//      private new readonly string? CollPath;
-		//private new readonly string? Look;
-		//private new readonly string? Variant;
+		private new readonly string? CollPath, Look, Variant;//屏蔽accdata原本没有的变量（主要是addon和hookup都有就放在里面了）
+
+		//name 从accessoryData继承的变量
+		//icon
+		//price
+		//unlock
+		//part_type
+
+		private bool mAirbrush = false;
+		public bool Airbrush {
+			get => mAirbrush;
+			set {
+				mAirbrush = value;
+				InvokeChange();
+			}
+		}
+		private string? mPaintJobMask;
+		public string? PaintJobMask {
+			get => mPaintJobMask;
+			set {
+				mPaintJobMask = value; 
+				InvokeChange();
+			}
+		}
+		private string? mBaseTextureOverride;
+		public string? BaseTextureOverride {
+			get => mBaseTextureOverride;
+			set {
+				mBaseTextureOverride = value;
+				InvokeChange();
+			}
+		}
+
+		private int?[] mBaseColor = [null, null, null];
+		public int?[] BaseColor {//6位hex 基本颜色
+			get => mBaseColor;
+			set {
+				mBaseColor = value;
+				InvokeChange();
+			}
+		}
+		private bool mBaseColorLocked = true;
+		public bool BaseColorLocked {//固定基本颜色
+			get => mBaseColorLocked;
+			set {
+				mBaseColorLocked = value;
+				InvokeChange();
+			}
+		}
+
+		private bool mAlternateUVSet = false;
+		public bool AlternateUVSet {//交替UV集？
+			get => mAlternateUVSet;
+			set {
+				mAlternateUVSet = value;
+				InvokeChange();
+			}
+		}
+
+		private bool mStock = false;
+		public bool Stock { //应该不需要显示因为默认必须false
+			get => mStock;
+			set {
+				mStock = value; 
+				InvokeChange();
+			}
+		}
 
 
-		//private float?[] mBaseColor = [null, null, null];
-		//private bool mBaseColorLocked = true;
-		//private bool mAlternateUVset = false;
-		//private bool mStock = false;
-		//private string mPaintJobMask = "";
-		//private string mBaseTextureOverride = "";
-		//private bool mAirbrush = false;
+
+		private int?[] mMaskRColor = [null, null, null];
+		public int?[] MaskRColor {//6位hex 遮罩颜色（红）
+			get => mMaskRColor;
+			set {
+				mMaskRColor = value;
+				InvokeChange();
+			}
+		}
+		private bool mMaskRLocked = true;
+		public bool MaskRLocked {//固定遮罩颜色（红）
+			get => mMaskRLocked;
+			set {
+				mMaskRLocked = value;
+				InvokeChange();
+			}
+		}
+		private int?[] mMaskGColor = [null, null, null];
+		public int?[] MaskGColor {//6位hex 遮罩颜色（绿）
+			get => mMaskGColor;
+			set {
+				mMaskGColor = value;
+				InvokeChange();
+			}
+		}
+		private bool mMaskGLocked = true;
+		public bool MaskGLocked {//固定遮罩颜色（绿）
+			get => mMaskGLocked;
+			set {
+				mMaskGLocked = value;
+				InvokeChange();
+			}
+		}
+		private int?[] mMaskBColor = [null, null, null];
+		public int?[] MaskBColor {//6位hex 遮罩颜色（蓝）
+			get => mMaskBColor;
+			set {
+				mMaskBColor = value;
+				InvokeChange();
+			}
+		}
+		private bool mMaskBLocked = true;
+		public bool MaskBLocked {//固定遮罩颜色（蓝）
+			get => mMaskBLocked;
+			set {
+				mMaskBLocked = value;
+				InvokeChange();
+			}
+		}
 
 
-		//private float?[] mMaskRColor = [null, null, null];
-		//private float?[] mMaskGColor = [null, null, null];
-		//private float?[] mMaskBColor = [null, null, null];
-		//private bool mMaskRLocked = true;
-		//private bool mMaskGLocked = true;
-		//private bool mMaskBLocked = true;
+
+		private bool mFlipflake = false;
+		public bool Flipflake { //金属/珠光
+			get => mFlipflake;
+			set {
+				mFlipflake = value;
+				InvokeChange();
+			}
+		}
+
+		private int?[] mFlipColor = [null, null, null];
+		public int?[] FlipColor {//金属漆颜色
+			get => mFlipColor;
+			set {
+				mFlipColor = value;
+				InvokeChange();
+			}
+		}
+		private bool mFlipColorLocked = true;
+		public bool FlipColorLocked {//固定金属漆颜色
+			get => mFlipColorLocked;
+			set {
+				mFlipColorLocked = value;
+				InvokeChange();
+			}
+		}
+		private float? mFlipStrength;
+		public float? FlipStrength {//金属漆效果强度
+			get => mFlipStrength;
+			set {
+				mFlipStrength = value;
+				InvokeChange();
+			}
+		}
 
 
-		//private bool mFlipflake = false;
-		//private float?[] mFlipColor = [null, null, null];
-		//private bool mFlipColorLocked = true;变色龙漆 金属漆
-		//private float? mFlipStrength = null;
-
-		//private float?[] mFlakeColor = [null, null, null];
-		//private bool mFlakeColorLocked = true;珠光漆
-		//private float? mFlakeUVScale = null;
-		//private float? mFlakeDensity = null;
-		//private float? mFlakeShininess = null;
-		//private float? mFlakeClearcoatRolloff = null;
-		//private string mFlakeNoise = "";
+		private int?[] mFlakeColor = [null, null, null];
+		public int?[] FlakeColor {//珠光漆颜色
+			get => mFlakeColor;
+			set {
+				mFlakeColor = value;
+				InvokeChange();
+			}
+		}
+		private bool mFlakeColorLocked = true;
+		public bool FlakeColorLocked {//固定珠光漆颜色
+			get => mFlakeColorLocked;
+			set {
+				mFlakeColorLocked = value;
+				InvokeChange();
+			}
+		}
+		private float? mFlakeUVScale;
+		public float? FlakeUVScale {//UV缩放
+			get => mFlakeUVScale;
+			set {
+				mFlakeUVScale = value;
+				InvokeChange();
+			}
+		}
+		private float? mFlakeDensity;
+		public float? FlakeDensity {//珠光密度
+			get => mFlakeDensity;
+			set {
+				mFlakeDensity = value;
+				InvokeChange();
+			}
+		}
+		private float? mFlakeShininess;
+		public float? FlakeShininess {//光泽度
+			get => mFlakeShininess;
+			set {
+				mFlakeShininess = value;
+				InvokeChange();
+			}
+		}
+		private float? mFlakeClearcoatRolloff = null;
+		public float? FlakeClearcoatRolloff {//透明图层滚降		调整透明涂层镜面反射高光的锐度。值越高，边缘越清晰。
+			get => mFlakeClearcoatRolloff;
+			set {
+				mFlakeClearcoatRolloff = value;
+				InvokeChange();
+			}
+		}
+		//private readonly string FlakeNoiseDefault = "/material/custom/flake_noise.tobj";
+		private string mFlakeNoise = "/material/custom/flake_noise.tobj";
+		public string FlakeNoise {//珠光噪声图
+			get => mFlakeNoise;
+			set {
+				mFlakeNoise = value;
+				InvokeChange();
+			}
+		}
 
 
 		//private List<string> mSuitableFor = [];//不同车架
 
 
-		//private bool mAlternateFlipflakeUVset = false;
-		//private List<float[]> mColorVariant = [];
+		//simple_paint_job_data : .ovr0+
 
-
-
-
-
-		//simple_paint_job_data
-		//private float? mFlakeVRatio = null;
-
-
-
+		//paint_job_mask:""
+		//flake_uvscale
+		//flake_vratio
+		//acc_list[]: ""
 	}
 
 	//all

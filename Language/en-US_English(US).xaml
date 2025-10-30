@@ -13,6 +13,11 @@
 	<s:String x:Key="ATS">American Truck Simulator</s:String>
 	<s:String x:Key="ETS2Short">ETS2</s:String>
 	<s:String x:Key="ATSShort">ATS</s:String>
+	
+	<s:String x:Key="ThemeFollowSystem">Follow System</s:String>
+	<s:String x:Key="ThemeLight">Light</s:String>
+	<s:String x:Key="ThemeDark">Dark</s:String>
+	
 	<!--MOD Manifest-->
 	<s:String x:Key="TitleModManifest">MOD Manifest</s:String>
 	<s:String x:Key="BasicInfo">Basic Info</s:String>
@@ -23,8 +28,6 @@
 	<s:String x:Key="Author">Author: </s:String>
 	<s:String x:Key="CheckBoxMP">MP Mod Optional</s:String>
 	<s:String x:Key="CheckBoxMPTip">Specifies whether players can join a multiplayer game with this mod installed, even if the server or other players do not have this mod. Such mod must not affect gameplay in a way that would require all participants to have it installed.</s:String>
-	<s:String x:Key="TextAppLanguage">App Language: </s:String>
-	<s:String x:Key="TipsCustomLanguage">Find the Language directory in the app's location, place a translated xaml file and rename in the specific format, then you can find the new language here.</s:String>
 		<!--Icon-->
 	<s:String x:Key="TitleModIcon">MOD Icon（JPG 276x162）</s:String>
 	<s:String x:Key="IconName">Icon Filename: </s:String>
@@ -42,7 +45,7 @@
 	<s:String x:Key="ColorGreen">Green</s:String>
 	<s:String x:Key="ColorBlue">Blue</s:String>
 	<s:String x:Key="ColorWhite">White</s:String>
-	<s:String x:Key="ColorOrange">Orang</s:String>
+	<s:String x:Key="ColorOrange">Orange</s:String>
 
 		<!--Mod manifest.CS-->
 	<s:String x:Key="MessageLoadManifestErrNotManifest">Looks like this file is not manifest file</s:String>
@@ -99,6 +102,7 @@
 	<s:String x:Key="MenuOthersDefaults">Defaults</s:String>
 	<s:String x:Key="MenuOthersOverrides">Overrides</s:String>
 	<s:String x:Key="MenuOtherRequire">Require</s:String>
+	
 		<!--Truck List-->
 	<s:String x:Key="ModelTruckTip">If theres new trucks that cannot find in here, press "New Truck" to and new trucks&#10;"Delete Truck" will delete selected trucks(not checked trucks)&#10;Model type, look and variant can be separatly set in the following list.</s:String>
 	<s:String x:Key="ButtonInitializeTrucks">Initialize Trucks</s:String>
@@ -111,6 +115,7 @@
 		<!--Side Button-->
 	<s:String x:Key="ButtonDeleteTruck">Delete Truck</s:String>
 	<s:String x:Key="CheckBoxDeleteUnchecked">Delete Existing Unchecked Sii</s:String>
+	
 		<!--Localization Menu-->
 	<s:String x:Key="MenuResTip">Hovering items to show values</s:String>
 	<s:String x:Key="ResourceValueHeader">All values of the key:</s:String>
@@ -141,6 +146,7 @@
 	<s:String x:Key="MessageInvalidExt">The extension of the file should be pim or pmd</s:String>
 	<s:String x:Key="MessageInvalidExtColl">The extension of the collision file should be pic or pmc</s:String>
 	<s:String x:Key="MessageModelOutsideProject">Model Files should be in the project</s:String>
+	<s:String x:Key="MessageModelTypeFlag">Use ingame flag model?</s:String>
 		<!--Create SII-->
 	<s:String x:Key="MessageCreateSiiNoExpanded">Please at least expand a game list</s:String>
 	<s:String x:Key="MessageCreateSiiNotFilled">Please fill in all necessary content&#10;The background of the unfilled necessary content is yellow</s:String>
@@ -159,6 +165,7 @@
 	<s:String x:Key="TextIconNoMatTobj">Icon's mat and(or) tobj is not exist, would you like to create these files?</s:String>
 	<s:String x:Key="CheckBoxCreateAtAcc">Create on accessory directory</s:String>
 	<s:String x:Key="TextIconNotInAcc">The icon file is not in accessory directory, you can only create files on accessory</s:String>
+	
 		<!--Add Truck-->
 	<s:String x:Key="TitleAddTruck">New Truck</s:String>
 	<s:String x:Key="MessageAddErrNotFilled">Please at least fill in the TruckID and Truck name</s:String>
@@ -176,6 +183,7 @@
 	<s:String x:Key="CheckHeadModelPathUK">Model Path(UK):</s:String>
 	<s:String x:Key="CheckHeadCollPath">Model Collision Path:</s:String>
 	
+
 	
 	
 	
@@ -185,6 +193,12 @@
 	<s:String x:Key="TitleAddonStorageStorage">Hookup Storage Name</s:String>
 	<s:String x:Key="HeaderHookupName">Hookup File</s:String>
 	<s:String x:Key="HeaderAccessoryName">Acc. Name</s:String>
+	<!--Suitable For-->
+	<s:String x:Key="SuitableForSetDashbrd">Dashboard Sets（set__dashbrd）</s:String>
+	<s:String x:Key="SuitableForSetGlass">Windshield Sets（set__glass）</s:String>
+	<s:String x:Key="SuitableForSetCabinet">Cabinet Sets（set__cabinet）</s:String>
+	<s:String x:Key="SuitableForSetCuphold">Cup Holder Sets（set__cuphold）</s:String>
+	<s:String x:Key="SuitableForSteeringW">Steering Wheel（steering__w）</s:String>
 	<!--SaveAddonHookup-->
 	<s:String x:Key="MessageSaveBeforeStart">Please make sure the required data like storage name, hookup file name, hookup model name, physics name was filled, or it will cause skipping or stop saving.</s:String>
 	<s:String x:Key="MessageSaveNoName">Please fill in the storage name first</s:String>
@@ -257,11 +271,12 @@
 	<s:String x:Key="TitleDragCoefficient">Drag Coefficient</s:String>
 	<s:String x:Key="TitleLiftCoefficient">Lift Coefficient</s:String>
 	
+	
 	<!--PhysicsUC.cs-->
 	<s:String x:Key="MessageResultPhysSaved">Physics definition saved.</s:String>
 	<s:String x:Key="DialogTitleChooseRope">Choose Rope Material File(mat file or its image file)</s:String>
 	<s:String x:Key="DialogTitleChoosePatch">Choose Patch Material File(mat file or its image file)</s:String>
-	<s:String x:Key="DialogFilterChooseMaterial">Rope Material or Rope Image File|*.tga;*.dds;*.mat</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">Rope Material or Rope Image File|*.tga;*.dds;*.mat;*.tobj</s:String>
 	<s:String x:Key="MessageErrorChooseMaterial">Chosen file must be mat file or its image file</s:String>
 	
 	
@@ -280,10 +295,12 @@
 	<s:String x:Key="MessageOpenErrNotExist">File is not exist</s:String>
 	<s:String x:Key="UnknownFile">Unknown File</s:String>
 
-
-
+	
+	
 	<!--Create Hookup Sii File-->
 	<s:String x:Key="TitleCreateHookupSii">Create Hookup Sii File</s:String>
+	<s:String x:Key="RadioAnimHookup">Animation Hookup</s:String>
+	<s:String x:Key="RadioCompassHookup">Compass Hookup</s:String>
 	<s:String x:Key="TextHookupName">Hookup Name(No more than 12 characters)</s:String>
 	<s:String x:Key="TextModelPath">Model File Path</s:String>
 	<s:String x:Key="TextAnimPath">Animation File Path</s:String>
@@ -302,88 +319,73 @@
 
 
 	<!--Localization-->
-	<s:String
-		x:Key="TitleSetupLocalization">Localization</s:String>
-	<s:String
-		x:Key="TextUsageTips">Key-Value pair defined in here can be use by inputing "@@key@@", and the localized value will be shown in game&#10;Universal list will be the default value of all unset language(English will be set as the first priority default language)</s:String>
-	<s:String
-		x:Key="TextLocaleName">Localization Filename(normally will use mod name):</s:String>
-	<s:String
-		x:Key="ButtonCleanUpSame">Cleanup same language as Uni.</s:String>
-	<s:String
-		x:Key="ButtonCleanUpSameTip">Because it will only work properly when creating localization files for each language</s:String>
-	<s:String
-		x:Key="ButtonSyncWithUni">Sync with Universal</s:String>
-	<s:String
-		x:Key="ButtonSyncOrder">Sync Order(with all language)</s:String>
-	<s:String
-		x:Key="HeaderKey">Key</s:String>
-	<s:String
-		x:Key="HeaderValue">Value</s:String>
+	<s:String x:Key="TitleSetupLocalization">Localization</s:String>
+	<s:String x:Key="TextUsageTips">Key-Value pair defined in here can be use by inputing "@@key@@", and the localized value will be shown in game&#10;Universal list will be the default value of all unset language(English will be set as the first priority default language)</s:String>
+	<s:String x:Key="TextLocaleName">Localization Filename(normally will use mod name):</s:String>
+	<s:String x:Key="ButtonCleanUpSame">Cleanup same language as Uni.</s:String>
+	<s:String x:Key="ButtonCleanUpSameTip">Because it will only work properly when creating localization files for each language</s:String>
+	<s:String x:Key="ButtonSyncWithUni">Sync with Universal</s:String>
+	<s:String x:Key="ButtonSyncOrder">Sync Order(with all language)</s:String>
+	<s:String x:Key="HeaderKey">Key</s:String>
+	<s:String x:Key="HeaderValue">Value</s:String>
 	<!--Localization.cs-->
-	<s:String
-		x:Key="MessageLoadErrNotLocale">Looks like this file is not a localization file</s:String>
-	<s:String
-		x:Key="MessageLoadErr">Error occurs when loading localization file</s:String>
-	<s:String
-		x:Key="MessageSyncResultZero">There's nothing needs to sync</s:String>
-	<s:String
-		x:Key="MessageSyncResultTo">{0} key(s) synced to Universal</s:String>
-	<s:String
-		x:Key="MessageSyncResultFrom">{0} key(s) synced from Universal</s:String>
-	<s:String
-		x:Key="MessageTitleSyncResult">Syncing Complete</s:String>
-	<s:String
-		x:Key="MessageSaveErrNoName">There is (are) some unnamed Translation file(s)</s:String>
-	<s:String
-		x:Key="MessageSaveSuccess">File saved</s:String>
+	<s:String x:Key="MessageLoadErrNotLocale">Looks like this file is not a localization file</s:String>
+	<s:String x:Key="MessageLoadErr">Error occurs when loading localization file</s:String>
+	<s:String x:Key="MessageSyncResultZero">There's nothing needs to sync</s:String>
+	<s:String x:Key="MessageSyncResultTo">{0} key(s) synced to Universal</s:String>
+	<s:String x:Key="MessageSyncResultFrom">{0} key(s) synced from Universal</s:String>
+	<s:String x:Key="MessageTitleSyncResult">Syncing Complete</s:String>
+	<s:String x:Key="MessageSaveErrNoName">There is (are) some unnamed Translation file(s)</s:String>
+	<s:String x:Key="MessageSaveSuccess">File saved</s:String>
 	<s:String x:Key="MessageDeleteLocale">Are you sure to delete this translation file?</s:String>
 	<s:String x:Key="MessageUniEmpty">Universal translation is empty, the language without definition will not show translation properly, anre you sure to continue?</s:String>
+	
+	
+	<!--paint job-->
+	<s:String x:Key="TitleSetupPaintJob">添加喷漆</s:String>
 
 	
 	
 	<!--About-->
 	<s:String x:Key="TitleAbout">About</s:String>
-	<s:String x:Key="Desc1">Exporting Koikatsu card to Blender→Adjust model in Blender→Making SCS Mod→Making this app.</s:String>
-	<s:String x:Key="Desc2">I don't even know what I will do next.</s:String>
-	<s:String x:Key="Desc3">I'm planning to make paint job definition, update might happen if someone cares</s:String>
+	<s:String x:Key="HeaderVersion">Version: </s:String>
+	<s:String x:Key="HeaderPersonalHomepage">Personal Homepage: </s:String>
+	<s:String x:Key="HeaderSupport">Support: </s:String>
+	<s:String x:Key="Desc">I'm planning to make paint job definition and something aboout ConverterPIX&#10;update might happen if someone cares</s:String>
+
+
+	<!--Settings-->
+	<s:String x:Key="AppLanguage">App Language</s:String>
+	<s:String x:Key="TipsCustomLanguage">Find the Language directory in the app's location, place a translated xaml file and rename in the specific format, then you can find the new language here.</s:String>
+	<s:String x:Key="ButtonLanguageDir">Language folder</s:String>
+	<s:String x:Key="ColorMode">Color Mode</s:String>
+	<s:String x:Key="ConverterPixPath"> Path</s:String>
+	<s:String x:Key="FilterCPix">App|converter_pix.exe</s:String>
+	<s:String x:Key="MessageErrNotCPix">Selected file is not ConverterPix.exe</s:String>
+	<s:String x:Key="MessageErrDifferentStructure">Selected file's directory seems different, continue?</s:String>
 
 
 
 
-
-
-	<s:String
-		x:Key="MessageTitleNotice">Notice</s:String>
-	<s:String
-		x:Key="MessageTitleErr">Error</s:String>
-	<s:String
-		x:Key="StatusEmpty">Empty</s:String>
-	<s:String
-		x:Key="ButtonOK">OK</s:String>
-	<s:String
-		x:Key="ButtonCancel">Cancel</s:String>
-	<s:String
-		x:Key="ButtonYes">Yes</s:String>
-	<s:String
-		x:Key="ButtonNo">No</s:String>
-	<s:String
-		x:Key="ButtonSave">Save</s:String>
-	<s:String
-		x:Key="ButtonClose">Close</s:String>
-	<s:String
-		x:Key="ButtonStart">Start</s:String>
-	<s:String
-		x:Key="ButtonDelete">Delete</s:String>
-	<s:String
-		x:Key="ButtonOpenFile">Open File</s:String>
+	<s:String x:Key="MessageTitleNotice">Notice</s:String>
+	<s:String x:Key="MessageTitleErr">Error</s:String>
+	<s:String x:Key="StatusEmpty">Empty</s:String>
+	<s:String x:Key="ButtonOK">OK</s:String>
+	<s:String x:Key="ButtonCancel">Cancel</s:String>
+	<s:String x:Key="ButtonYes">Yes</s:String>
+	<s:String x:Key="ButtonNo">No</s:String>
+	<s:String x:Key="ButtonSave">Save</s:String>
+	<s:String x:Key="ButtonClose">Close</s:String>
+	<s:String x:Key="ButtonStart">Start</s:String>
+	<s:String x:Key="ButtonDelete">Delete</s:String>
+	<s:String x:Key="ButtonOpenFile">Open File</s:String>
 	<s:String x:Key="ButtonSelect">Select</s:String>
-	<s:String
-		x:Key="CheckBoxSelectAll">Select All</s:String>
+	<s:String x:Key="ButtonBrowse">Browse</s:String>
+	<s:String x:Key="CheckBoxSelectAll">Select All</s:String>
 
-	<s:String
-		x:Key="FilterAllFiles">All Files|*.*</s:String>
+	<s:String x:Key="FilterAllFiles">All Files|*.*</s:String>
 
+	
 	<!--Truck Description ETS2-->
 	<x:Static x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
@@ -442,140 +444,92 @@
 
 
 	<!--accessory-->
-	<s:String
-		x:Key="Acc.cup_holder">Cup Holder</s:String>
-	<s:String
-		x:Key="Acc.curtain_f">Curtains(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.drv_plate">Driver's Plate</s:String>
-	<s:String
-		x:Key="Acc.codrv_plate">Co-Driver's Plate</s:String>
-	<s:String
-		x:Key="Acc.flag_l">Left Window Flag(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.flag_r">Right Window Flag(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.flag_f_l">Front Flags(left)(ATS)</s:String>
-	<s:String
-		x:Key="Acc.flag_f_r">Front Flags(right)(ATS)</s:String>
-	<s:String
-		x:Key="Acc.inlight_bck">Light Board(Back wall)(ETS2)</s:String>
-	<s:String
-		x:Key="Acc.bckpanel">Back Panel Items(Back wall)(ATS)</s:String>
-	<s:String
-		x:Key="Acc.l_pillow">Pillow Items</s:String>
-	<s:String
-		x:Key="Acc.set_cabinet">Cabinet Sets(ATS)</s:String>
-	<s:String
-		x:Key="Acc.set_glass">Windshield Sets</s:String>
-	<s:String
-		x:Key="Acc.set_lglass">Windshield Corner</s:String>
-	<s:String
-		x:Key="Acc.sterring_w">Steering Wheel</s:String>
-	<s:String
-		x:Key="Acc.toyhang">Hanging Items</s:String>
-	<s:String
-		x:Key="Acc.toyac">Air Conditioner Items</s:String>
-	<s:String
-		x:Key="Acc.toystand">Console Items</s:String>
-	<s:String
-		x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
-	<s:String
-		x:Key="Acc.toybed">Bed Items</s:String>
-	<s:String
-		x:Key="Acc.toybig">Center Floor Items</s:String>
-	<s:String
-		x:Key="Acc.toyback">Sleeper Floor Items(ATS)</s:String>
-	<s:String
-		x:Key="Acc.toysofa">Sofa Items(ATS)</s:String>
-	<s:String
-		x:Key="Acc.toytable">Table Items(ATS)</s:String>
+	<s:String x:Key="Acc.cup_holder">Cup Holder</s:String>
+	<s:String x:Key="Acc.curtain_f">Curtains(ETS2)</s:String>
+	<s:String x:Key="Acc.drv_plate">Driver's Plate</s:String>
+	<s:String x:Key="Acc.codrv_plate">Co-Driver's Plate</s:String>
+	<s:String x:Key="Acc.flag_l">Truck Flag (Left)</s:String>
+	<s:String x:Key="Acc.flag_r">Truck Flag (Right)</s:String>
+	<s:String x:Key="Acc.back_wall">Back Wall Items</s:String>
+	<s:String x:Key="Acc.l_pillow">Pillow Items</s:String>
+	<s:String x:Key="Acc.set_cabinet">Cabinet Sets(ATS)</s:String>
+	<s:String x:Key="Acc.set_glass">Windshield Sets</s:String>
+	<s:String x:Key="Acc.set_lglass">Windshield Corner</s:String>
+	<s:String x:Key="Acc.sterring_w">Steering Wheel</s:String>
+	<s:String x:Key="Acc.toyhang">Hanging Items</s:String>
+	<s:String x:Key="Acc.toyac">Air Conditioner Items</s:String>
+	<s:String x:Key="Acc.toystand">Console Items</s:String>
+	<s:String x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
+	<s:String x:Key="Acc.toybed">Bed Items</s:String>
+	<s:String x:Key="Acc.toybig">Center Floor Items</s:String>
+	<s:String x:Key="Acc.toyback">Sleeper Floor Items(ATS)</s:String>
+	<s:String x:Key="Acc.toysofa">Sofa Items(ATS)</s:String>
+	<s:String x:Key="Acc.toytable">Table Items(ATS)</s:String>
+	
+	<s:String x:Key="MenuItem.cup_holder">cup_holder→Cup Holder</s:String>
+	<s:String x:Key="MenuItem.curtain_f">curtain_f→Curtains(ETS2)</s:String>
+	<s:String x:Key="MenuItem.drv_plate">drv_plate→Driver's Plate</s:String>
+	<s:String x:Key="MenuItem.codrv_plate">codrv_plate→Co-Driver's Plate</s:String>
+	<s:String x:Key="MenuItem.flag_l">flag_l/flag_f_l→Truck Flag (Left)</s:String>
+	<s:String x:Key="MenuItem.flag_r">flag_r/flag_f_r→Truck Flag (Right)</s:String>
+	<s:String x:Key="MenuItem.back_wall">inlight_bck/bckpanel→Back Wall Items</s:String>
+	<s:String x:Key="MenuItem.l_pillow">l_pillow→Pillow Items</s:String>
+	<s:String x:Key="MenuItem.set_cabinet">set_cabinet→Cabinet Sets(ATS)</s:String>
+	<s:String x:Key="MenuItem.set_glass">set_glass→Windshield Sets</s:String>
+	<s:String x:Key="MenuItem.set_lglass">set_lglass→Windshield Corner</s:String>
+	<s:String x:Key="MenuItem.sterring_w">sterring_w→Steering Wheel</s:String>
+	<s:String x:Key="MenuItem.toyhang">toyhang→Hanging Items</s:String>
+	<s:String x:Key="MenuItem.toyac">toyac→Air Conditioner Items</s:String>
+	<s:String x:Key="MenuItem.toystand">toystand→Console Items</s:String>
+	<s:String x:Key="MenuItem.toyseat">toyseat→Seat Items(Co-Driver's Seat)</s:String>
+	<s:String x:Key="MenuItem.toybed">toybed→Bed Items</s:String>
+	<s:String x:Key="MenuItem.toybig">toybig→Center Floor Items</s:String>
+	<s:String x:Key="MenuItem.toyback">toyback→Sleeper Floor Items(ATS)</s:String>
+	<s:String x:Key="MenuItem.toysofa">toysofa→Sofa Items(ATS)</s:String>
+	<s:String x:Key="MenuItem.toytable">toytable→Table Items(ATS)</s:String>
 
-	<!--locale中文名-->
-	<s:String
-		x:Key="locale.universal">Universal</s:String>
-	<s:String
-		x:Key="locale.en_gb">English-UK</s:String>
-	<s:String
-		x:Key="locale.en_us">English-US</s:String>
-	<s:String
-		x:Key="locale.zh_cn">Simplified Chinese</s:String>
-	<s:String
-		x:Key="locale.zh_tw">Traditional Chinese</s:String>
-	<s:String
-		x:Key="locale.ja_jp">Japanese</s:String>
-	<s:String
-		x:Key="locale.bg_bg">Bulgarian</s:String>
-	<s:String
-		x:Key="locale.ca_es">Catalan-Spain</s:String>
-	<s:String
-		x:Key="locale.cs_cz">Czech-Czech Republic</s:String>
-	<s:String
-		x:Key="locale.da_dk">Danish</s:String>
-	<s:String
-		x:Key="locale.de_de">German</s:String>
-	<s:String
-		x:Key="locale.el_gr">Greek</s:String>
-	<s:String
-		x:Key="locale.es_es">Spanish</s:String>
-	<s:String
-		x:Key="locale.es_la">Latino Spanish</s:String>
-	<s:String
-		x:Key="locale.et_ee">Estonian</s:String>
-	<s:String
-		x:Key="locale.eu_es">Basque-Spain</s:String>
-	<s:String
-		x:Key="locale.fi_fi">Finnish</s:String>
-	<s:String
-		x:Key="locale.fr_fr">French</s:String>
-	<s:String
-		x:Key="locale.gl_es">Galician</s:String>
-	<s:String
-		x:Key="locale.hr_hr">Croatian</s:String>
-	<s:String
-		x:Key="locale.hu_hu">Hungarian</s:String>
-	<s:String
-		x:Key="locale.it_it">Italian</s:String>
-	<s:String
-		x:Key="locale.ka_ge">Georgian</s:String>
-	<s:String
-		x:Key="locale.ko_kr">Korean-South Korea</s:String>
-	<s:String
-		x:Key="locale.lt_lt">Lithuanian</s:String>
-	<s:String
-		x:Key="locale.lv_lv">Latvian</s:String>
-	<s:String
-		x:Key="locale.mk_mk">Macedonian</s:String>
-	<s:String
-		x:Key="locale.nl_nl">Dutch</s:String>
-	<s:String
-		x:Key="locale.no_no">Norwegian</s:String>
-	<s:String
-		x:Key="locale.pl_pl">Polish</s:String>
-	<s:String
-		x:Key="locale.pl_si">Polish-?</s:String>
-	<s:String
-		x:Key="locale.pt_br">Portuguese-Brazil</s:String>
-	<s:String
-		x:Key="locale.pt_pt">Portuguese-Portugal</s:String>
-	<s:String
-		x:Key="locale.ro_ro">Romanian</s:String>
-	<s:String
-		x:Key="locale.ru_ru">Russian</s:String>
-	<s:String
-		x:Key="locale.sk_sk">Slovak</s:String>
-	<s:String
-		x:Key="locale.sl_sl">Slovenian</s:String>
-	<s:String
-		x:Key="locale.sr_sp">Serbian -Cyrillic</s:String>
-	<s:String
-		x:Key="locale.sr_sr">Serbian-?</s:String>
-	<s:String
-		x:Key="locale.sv_se">Swedish</s:String>
-	<s:String
-		x:Key="locale.tr_tr">Turkish</s:String>
-	<s:String
-		x:Key="locale.uk_uk">Ukrainian</s:String>
-	<s:String
-		x:Key="locale.vi_vn">Vietnamese</s:String>
+	<!--locale Names-->
+	<s:String x:Key="locale.universal">Universal</s:String>
+	<s:String x:Key="locale.en_gb">English-UK</s:String>
+	<s:String x:Key="locale.en_us">English-US</s:String>
+	<s:String x:Key="locale.zh_cn">Simplified Chinese</s:String>
+	<s:String x:Key="locale.zh_tw">Traditional Chinese</s:String>
+	<s:String x:Key="locale.ja_jp">Japanese</s:String>
+	<s:String x:Key="locale.bg_bg">Bulgarian</s:String>
+	<s:String x:Key="locale.ca_es">Catalan-Spain</s:String>
+	<s:String x:Key="locale.cs_cz">Czech-Czech Republic</s:String>
+	<s:String x:Key="locale.da_dk">Danish</s:String>
+	<s:String x:Key="locale.de_de">German</s:String>
+	<s:String x:Key="locale.el_gr">Greek</s:String>
+	<s:String x:Key="locale.es_es">Spanish</s:String>
+	<s:String x:Key="locale.es_la">Latino Spanish</s:String>
+	<s:String x:Key="locale.et_ee">Estonian</s:String>
+	<s:String x:Key="locale.eu_es">Basque-Spain</s:String>
+	<s:String x:Key="locale.fi_fi">Finnish</s:String>
+	<s:String x:Key="locale.fr_fr">French</s:String>
+	<s:String x:Key="locale.gl_es">Galician</s:String>
+	<s:String x:Key="locale.hr_hr">Croatian</s:String>
+	<s:String x:Key="locale.hu_hu">Hungarian</s:String>
+	<s:String x:Key="locale.it_it">Italian</s:String>
+	<s:String x:Key="locale.ka_ge">Georgian</s:String>
+	<s:String x:Key="locale.ko_kr">Korean-South Korea</s:String>
+	<s:String x:Key="locale.lt_lt">Lithuanian</s:String>
+	<s:String x:Key="locale.lv_lv">Latvian</s:String>
+	<s:String x:Key="locale.mk_mk">Macedonian</s:String>
+	<s:String x:Key="locale.nl_nl">Dutch</s:String>
+	<s:String x:Key="locale.no_no">Norwegian</s:String>
+	<s:String x:Key="locale.pl_pl">Polish</s:String>
+	<s:String x:Key="locale.pl_si">Polish-?</s:String>
+	<s:String x:Key="locale.pt_br">Portuguese-Brazil</s:String>
+	<s:String x:Key="locale.pt_pt">Portuguese-Portugal</s:String>
+	<s:String x:Key="locale.ro_ro">Romanian</s:String>
+	<s:String x:Key="locale.ru_ru">Russian</s:String>
+	<s:String x:Key="locale.sk_sk">Slovak</s:String>
+	<s:String x:Key="locale.sl_sl">Slovenian</s:String>
+	<s:String x:Key="locale.sr_sp">Serbian -Cyrillic</s:String>
+	<s:String x:Key="locale.sr_sr">Serbian-?</s:String>
+	<s:String x:Key="locale.sv_se">Swedish</s:String>
+	<s:String x:Key="locale.tr_tr">Turkish</s:String>
+	<s:String x:Key="locale.uk_uk">Ukrainian</s:String>
+	<s:String x:Key="locale.vi_vn">Vietnamese</s:String>
 </ResourceDictionary>

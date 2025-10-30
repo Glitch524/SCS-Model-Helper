@@ -1,5 +1,6 @@
 ﻿using SCS_Mod_Helper.Utils;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.Items; 
 
@@ -11,11 +12,21 @@ public class Truck(
 	bool check = false,
 	string modelType = "",
 	string look = "",
-	string variant = ""): INotifyPropertyChanged, IComparable {
+	string variant = "",
+	bool ets2 = false): INotifyPropertyChanged, IComparable {
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 
-	public Truck(string truckID, int releaseDate, string ingameName) : this(truckID, releaseDate, ingameName, Util.GetString("TruckDesc." + truckID)) {
+	public Truck(
+		string truckID,
+		int releaseDate,
+		string ingameName,
+		[CallerMemberName] string caller = "") : this(
+			truckID,
+			releaseDate,
+			ingameName,
+			Util.GetString("TruckDesc." + truckID),
+			caller.EndsWith("ETS2")) {
 		//给默认列表使用，备注在字典里
 	}
 
@@ -90,6 +101,8 @@ public class Truck(
 			InvokeChange(nameof(Variant));
 		}
 	}
+
+	public bool IsETS2 = ets2;
 
 	public const int IndexDTruckID = 0;
 	public const int IndexDModelType = 1;

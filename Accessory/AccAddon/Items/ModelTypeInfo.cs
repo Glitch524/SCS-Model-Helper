@@ -2,47 +2,87 @@
 using System.ComponentModel;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.Items; 
-public class ModelTypeInfo(string accessory, string name, bool forEts2, bool forAts): INotifyPropertyChanged {
-	private string MAccessory = accessory;
-	private string MName = name;
-	private bool MForETS2 = forEts2;
-	private bool MForATS = forAts;
+public class ModelTypeInfo: INotifyPropertyChanged {
 
-	public ModelTypeInfo(string accessory, bool forEts2, bool forAts) : this(accessory, Util.GetString($"Acc.{accessory}"), forEts2, forAts) { }
-	public ModelTypeInfo() : this("", "", false, false) { }
+	public ModelTypeInfo(
+		string accETS2,
+		string accATS,
+		string name) {
+		mAccessoryETS2 = accETS2;
+		mAccessoryATS = accATS;
+		if (name == "")
+			mName = "";
+		else
+			mName = Util.GetString(name);
+	}
 
-	public string Accessory {
-		get => MAccessory;
+	public ModelTypeInfo(
+		string acc,
+		bool? gameType = null) {
+		mAccessoryETS2 = acc;
+		mGameType = gameType;
+		if (gameType == null) {
+			mAccessoryETS2 = acc;
+			mAccessoryATS = acc;
+		} else if (gameType == true) {
+			mAccessoryETS2 = acc;
+		} else {
+			mAccessoryATS = acc;
+		}
+		mName = Util.GetString($"Acc.{acc}");
+	}
+
+	public ModelTypeInfo() : this("", "", "") { }
+
+	private string? mAccessoryETS2;
+	public string? AccessoryETS2 {
+		get => mAccessoryETS2;
 		set {
-			MAccessory = value;
-			InvokeChange(nameof(Accessory));
+			mAccessoryETS2 = value;
+			InvokeChange(nameof(AccessoryETS2));
 		}
 	}
 
-	public string Name {
-		get => MName;
+	private string? mAccessoryATS;
+	public string? AccessoryATS {
+		get => mAccessoryATS;
 		set {
-			MName = value;
+			mAccessoryATS = value;
+			InvokeChange(nameof(AccessoryATS));
+		}
+	}
+	public string Accessory {
+		get {
+			if (mGameType == null) {
+				if (mAccessoryETS2 == mAccessoryATS)
+					return mAccessoryETS2!;
+				else
+					return $"{mAccessoryETS2}/{mAccessoryATS}";
+			} else if (mGameType == true)
+				return mAccessoryETS2!;
+			else
+				return mAccessoryATS!;
+		}
+	}
+
+	private string mName;
+	public string Name {
+		get => mName;
+		set {
+			mName = value;
 			InvokeChange(nameof(Name));
 		}
 	}
-	public void RefreshName() => Name = Util.GetString($"Acc.{Accessory}");
-
-	public bool ForETS2 {
-		get => MForETS2;
-		set {
-			MForETS2 = value;
-			InvokeChange(nameof(ForETS2));
-		}
+	public void RefreshName() {
+		if (Accessory.Length == 0)
+			return;
+		Name = Util.GetString($"Acc.{Accessory}");
 	}
+	private readonly bool? mGameType;
+	public bool? GameType => mGameType;
 
-	public bool ForATS {
-		get => MForATS;
-		set {
-			MForATS = value;
-			InvokeChange(nameof(ForATS));
-		}
-	}
+	public bool ForETS2 => mGameType == null || mGameType == true;
+	public bool ForATS => mGameType == null || mGameType == false;
 
 	public event PropertyChangedEventHandler? PropertyChanged;
 	public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));

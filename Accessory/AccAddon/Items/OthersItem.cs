@@ -19,43 +19,49 @@ public class OthersItem: INotifyPropertyChanged {
 		switch (othersName) {
 			case AccDataIO.NameData:
 				OthersNameTip = Util.GetString("MenuOthersData");
-				IsData = true;
+				ShowOption = true;
 				IsArray = true;
 				UseQuoteMark = false;
 				CheckBoxEnabled = false;
 				break;
 			case AccDataIO.NameSuitableFor:
 				OthersNameTip = Util.GetString("MenuOthersSuitableFor");
+				ShowOption = true;
 				IsArray = true;
 				UseQuoteMark = true;
 				CheckBoxEnabled = false;
 				break;
 			case AccDataIO.NameConflictWith:
 				OthersNameTip = Util.GetString("MenuOthersConflictWith");
+				ShowOption = false;
 				IsArray = true;
 				UseQuoteMark = true;
 				CheckBoxEnabled = false;
 				break;
 			case AccDataIO.NameDefaults:
 				OthersNameTip = Util.GetString("MenuOthersDefaults");
+				ShowOption = false;
 				IsArray = true;
 				UseQuoteMark = true;
 				CheckBoxEnabled = false;
 				break;
 			case AccDataIO.NameOverrides:
 				OthersNameTip = Util.GetString("MenuOthersOverrides");
+				ShowOption = false;
 				IsArray = true;
 				UseQuoteMark = true;
 				CheckBoxEnabled = false;
 				break;
 			case AccDataIO.NameRequire:
 				OthersNameTip = Util.GetString("MenuOtherRequire");
+				ShowOption = false;
 				IsArray = true;
 				UseQuoteMark = true;
 				CheckBoxEnabled = false;
 				break;
 			default:
 				OthersNameTip = "";
+				ShowOption = false;
 				IsArray = false;
 				UseQuoteMark = false;
 				CheckBoxEnabled = true;
@@ -76,13 +82,17 @@ public class OthersItem: INotifyPropertyChanged {
 	}
 
 
-	private bool mIsData = false;
-	public bool IsData {
-		get => mIsData;
+	private Visibility mShowOptionVisibility = Visibility.Hidden;
+	public Visibility ShowOptionVisibility {
+		get => mShowOptionVisibility;
 		set {
-			mIsData = value;
-			InvokeChange(nameof(IsData));
+			mShowOptionVisibility = value;
+			InvokeChange(nameof(ShowOptionVisibility));
 		}
+	}
+
+	private bool ShowOption { 
+		set => ShowOptionVisibility = value ? Visibility.Visible : Visibility.Hidden;
 	}
 
 	private string mOthersNameTip;
@@ -161,6 +171,7 @@ public class OthersItem: INotifyPropertyChanged {
 
 	public const int IndexOthersName = 0;
 	public const int IndexOthersValue = 1;
+	public static int[] Indexes => [-1, -1];
 	public static string GetHeaderLine() => string.Join(DefaultData.ItemSplit, [nameof(OthersName), nameof(OthersValue)]);
 
 	public string ToLine() => $"{mOthersName}{DefaultData.ItemSplit}{mOthersValue}";

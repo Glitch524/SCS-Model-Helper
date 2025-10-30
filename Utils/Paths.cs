@@ -19,8 +19,13 @@ class Paths {
 			Directory.CreateDirectory(dir);
 		return Path.Combine(dir, $"local_module.{moduleName}.sii");
 	}
-	public static string AccessoryDir(string projectLocation) =>
-		$@"{projectLocation}\material\ui\accessory";
+	public static string AccessoryDir(string projectLocation, string sub = "") {
+		var p =  $@"{projectLocation}\material\ui\accessory";
+		if (p.Length > 0)
+			p += $"\\{sub}";
+		return p;
+	}
+
 	public static string IntDecorsDir(string projectLocation) =>
 		$@"{projectLocation}\vehicle\truck\upgrade\interior_decors";
 	public static string HookupFile(string projectLocation, string hookupName) {

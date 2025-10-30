@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCS_Mod_Helper.Properties {
+namespace SCS_Mod_Helper.Main {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -32,6 +32,42 @@ namespace SCS_Mod_Helper.Properties {
             }
             set {
                 this["Language"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Light")]
+        public string Theme {
+            get {
+                return ((string)(this["Theme"]));
+            }
+            set {
+                this["Theme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConverterPixPath {
+            get {
+                return ((string)(this["ConverterPixPath"]));
+            }
+            set {
+                this["ConverterPixPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProjectLocation {
+            get {
+                return ((string)(this["ProjectLocation"]));
+            }
+            set {
+                this["ProjectLocation"] = value;
             }
         }
     }

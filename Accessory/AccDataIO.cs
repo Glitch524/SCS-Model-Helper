@@ -187,7 +187,7 @@ class AccDataIO {
 		WriteLine(sw, NameMFDisplayName, binding.ModDisplayName);
 		WriteLine(sw, NameMFAuthor, binding.Author);
 
-		foreach (var cat in binding.CategoryList) {
+		foreach (var cat in binding.SelectedCategories) {
 			WriteLine(sw, NameMFCategory, cat);
 		}
 		WriteLine(sw, NameMFIcon, binding.IconName);
@@ -225,16 +225,14 @@ class AccDataIO {
 						binding.Author = value;
 						break;
 					case NameMFCategory:
-						binding.CategoryList.Add(value);
+						binding.SelectedCategories.Add(value);
 						break;
 					case NameMFIcon:
 						binding.IconName = value;
 						binding.OldIconName = value;
 						var iconFile = Path.Combine(binding.ProjectLocation, binding.IconName);
-						if (File.Exists(iconFile)) {
+						if (File.Exists(iconFile)) 
 							binding.ModIcon = Util.LoadIcon(iconFile);
-						}
-
 						break;
 					case NameMFDescriptionFile:
 						binding.DescriptionName = value;
@@ -246,7 +244,6 @@ class AccDataIO {
 						break;
 				}
 			}
-			binding.RefreshCategory();
 		} catch (Exception ex) {
 			MessageBox.Show(Util.GetString("MessageLoadManifestErrFail") + "\n" + ex.Message);
 		}
@@ -291,15 +288,20 @@ class AccDataIO {
 	private const string NameLook = "look";
 	private const string NameVariant = "variant";
 	//accessory addon
-	private const string NameAAHeader = "accessory_addon_int_data";
+	private const string NameAAIHeader = "accessory_addon_int_data";
+	private const string NameAAPHeader = "accessory_addon_patch_data";
 	private const string NameAAExtModel = "exterior_model";
 	private const string NameAAIntModel = "interior_model";
 	private const string NameAAExtModelUK = "exterior_model_uk";
 	private const string NameAAIntModelUK = "interior_model_uk";
 	private const string NameAAHideIn = "hide_in";
-	private static void WriteAAHeader(StreamWriter sw, string modelName, string truckID, string modelType) {
+	private static void WriteAAIHeader(StreamWriter sw, string modelName, string truckID, string modelType) {
 		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NameAAHeader} : {modelName}.{truckID}.{modelType}");
+		sw.WriteLine($"{NameAAIHeader} : {modelName}.{truckID}.{modelType}");
+	}
+	private static void WriteAAPHeader(StreamWriter sw, string modelName, string truckID, string modelType) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NameAAPHeader} : {modelName}.{truckID}.{modelType}");
 	}
 	//accessory hookup
 	private const string NameAHHeader = "accessory_hookup_int_data";
@@ -317,64 +319,6 @@ class AccDataIO {
 	public const string NameDefaults = "defaults";
 	public const string NameOverrides = "overrides";
 	public const string NameRequire = "require";
-
-	//physics data
-	public const string NamePSuffix = ".phys_data";
-	//physics toy data
-	private const string NamePTHeader = "physics_toy_data";
-	public const string NamePTModel = "phys_model";
-	public const string NamePTColl = "phys_model_coll";
-	public const string NamePTLook = "phys_model_look";
-	public const string NamePTVariant = "phys_model_variant";
-	public const string NamePTToyType = "toy_type";
-	public const string NamePTMass = "toy_mass";
-	public const string NamePTCogOffset = "toy_cog_offset";
-	public const string NamePTLinearStiffness = "linear_stiffness";
-	public const string NamePTLinearDamping = "linear_damping";
-	public const string NamePTAngularStiffness = "angular_stiffness";
-	public const string NamePTAngularDamping = "angular_damping";
-	public const string NamePTAngularAmplitude = "angular_amplitude";
-	public const string NamePTNodeDamping = "node_damping";
-	public const string NamePTLocatorHookOffset = "locator_hook_offset";
-	public const string NamePTRestPositionOffset = "rest_position_offset";
-	public const string NamePTRestRotationOffset = "rest_rotation_offset";
-	public const string NamePTInstanceOffset = "instance_offset";
-	public const string NamePTRopeWidth = "rope_width";
-	public const string NamePTRopeLength = "rope_length";
-	public const string NamePTRopeHookOffset = "rope_hook_offset";
-	public const string NamePTRopeToyOffset = "rope_toy_offset";
-	public const string NamePTRopeResolution = "rope_resolution";
-	public const string NamePTRopeLinearDensity = "rope_linear_density";
-	public const string NamePTPositionIterations = "position_iterations";
-	public const string NamePTRopeMaterial = "rope_material";
-	private static void WritePTHeader(StreamWriter sw, string physicsName) {
-		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NamePTHeader} : {physicsName + NamePSuffix}");
-	}
-
-	//physics patch data
-	private const string NamePPHeader = "physics_patch_data";
-	public const string NamePPMaterial = "material";
-	public const string NamePPAreaDensity = "area_density";
-	public const string NamePPAeroModelType = "aero_model_type";
-	public const string NamePPTCMinFirst = "tc_min_first";
-	public const string NamePPTCMaxFirst = "tc_max_first";
-	public const string NamePPTCMinSecond = "tc_min_second";
-	public const string NamePPTCMaxSecond = "tc_max_second";
-	public const string NamePPXRes = "x_res";
-	public const string NamePPYRes = "y_res";
-	public const string NamePPXSize = "x_size";
-	public const string NamePPYSize = "y_size";
-	public const string NamePPLinearStiffness = "linear_stiffness";
-	public const string NamePPDragCoefficient = "drag_coefficient";
-	public const string NamePPLiftCoefficient = "lift_coefficient";
-	private static void WritePPHeader(StreamWriter sw, string physicsName) {
-		sw.Write(new string('\t', TabCount));
-		sw.WriteLine($"{NamePPHeader} : {physicsName + NamePSuffix}");
-	}
-
-	//addon hookup storage
-	private const string NameAHSPreffix = "addon_hookup_storage";
 
 
 	public static int CreateAccAddonSii(AccAddonBinding binding) {
@@ -418,10 +362,21 @@ class AccDataIO {
 				}
 			}
 			TabCount = 0;
+			bool isPatch = truck.ModelType switch {
+				"flag_l" or
+				"flag_r" or
+				"flag_f_l" or
+				"flag_f_r" => true,
+				_ => false,
+			};
 			using StreamWriter sw = new(siiFile);
 			WriteFileHeader(sw);
 			BraceIn(sw);
-			WriteAAHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);
+			if (isPatch) {
+				WriteAAPHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);
+			} else {
+				WriteAAIHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);
+			}
 			BraceIn(sw);
 			WriteLine(sw, NameDisplayName, binding.DisplayName);
 			WriteLine(sw, NamePrice, binding.Price);
@@ -444,7 +399,7 @@ class AccDataIO {
 				WriteLine(sw, NameAAHideIn, binding.HideIn);
 
 			List<string> physName = [];
-			WriteOthers(sw, othersList, physName);
+			WriteOthers(sw, othersList, physName, isPatch);
 			BraceOut(sw);
 
 			foreach (var pn in physName) {
@@ -466,7 +421,7 @@ class AccDataIO {
 		return numberCreated;
 	}
 
-	private static void WriteOthers(StreamWriter sw, List<OthersItem> othersList, List<string> physName) {
+	private static void WriteOthers(StreamWriter sw, List<OthersItem> othersList, List<string> physName, bool isPatch = false) {
 		if (othersList.Count > 0) {
 			int i = 0;
 			while (i < othersList.Count) {
@@ -495,6 +450,8 @@ class AccDataIO {
 						physName.Add(value);
 						value += NamePSuffix;
 					}
+					if (isPatch)
+						other.IsArray = false;
 				}
 				WriteLine(sw, name, value, other.IsArray, other.UseQuoteMark);
 				i++;
@@ -574,6 +531,10 @@ class AccDataIO {
 		}
 	}
 
+
+	//addon hookup storage
+	private const string NameAHSPreffix = "addon_hookup_storage";
+
 	public static void CreateAddonHookupSui(SuiItem sui) {
 		var suiPath = Paths.AddonHookupsDir(exportPath, sui.SuiFilename);
 		var physicsDatas = new List<PhysicsData>();
@@ -613,6 +574,61 @@ class AccDataIO {
 				}
 			}
 		}
+	}
+
+	//physics data
+	public const string NamePSuffix = ".phys_data";
+	//physics toy data
+	private const string NamePTHeader = "physics_toy_data";
+	public const string NamePTModel = "phys_model";
+	public const string NamePTColl = "phys_model_coll";
+	public const string NamePTLook = "phys_model_look";
+	public const string NamePTVariant = "phys_model_variant";
+	public const string NamePTToyType = "toy_type";
+	public const string NamePTMass = "toy_mass";
+	public const string NamePTCogOffset = "toy_cog_offset";
+	public const string NamePTLinearStiffness = "linear_stiffness";
+	public const string NamePTLinearDamping = "linear_damping";
+	public const string NamePTAngularStiffness = "angular_stiffness";
+	public const string NamePTAngularDamping = "angular_damping";
+	public const string NamePTAngularAmplitude = "angular_amplitude";
+	public const string NamePTNodeDamping = "node_damping";
+	public const string NamePTLocatorHookOffset = "locator_hook_offset";
+	public const string NamePTRestPositionOffset = "rest_position_offset";
+	public const string NamePTRestRotationOffset = "rest_rotation_offset";
+	public const string NamePTInstanceOffset = "instance_offset";
+	public const string NamePTRopeWidth = "rope_width";
+	public const string NamePTRopeLength = "rope_length";
+	public const string NamePTRopeHookOffset = "rope_hook_offset";
+	public const string NamePTRopeToyOffset = "rope_toy_offset";
+	public const string NamePTRopeResolution = "rope_resolution";
+	public const string NamePTRopeLinearDensity = "rope_linear_density";
+	public const string NamePTPositionIterations = "position_iterations";
+	public const string NamePTRopeMaterial = "rope_material";
+	private static void WritePTHeader(StreamWriter sw, string physicsName) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NamePTHeader} : {physicsName + NamePSuffix}");
+	}
+
+	//physics patch data
+	private const string NamePPHeader = "physics_patch_data";
+	public const string NamePPMaterial = "material";
+	public const string NamePPAreaDensity = "area_density";
+	public const string NamePPAeroModelType = "aero_model_type";
+	public const string NamePPTCMinFirst = "tc_min_first";
+	public const string NamePPTCMaxFirst = "tc_max_first";
+	public const string NamePPTCMinSecond = "tc_min_second";
+	public const string NamePPTCMaxSecond = "tc_max_second";
+	public const string NamePPXRes = "x_res";
+	public const string NamePPYRes = "y_res";
+	public const string NamePPXSize = "x_size";
+	public const string NamePPYSize = "y_size";
+	public const string NamePPLinearStiffness = "linear_stiffness";
+	public const string NamePPDragCoefficient = "drag_coefficient";
+	public const string NamePPLiftCoefficient = "lift_coefficient";
+	private static void WritePPHeader(StreamWriter sw, string physicsName) {
+		sw.Write(new string('\t', TabCount));
+		sw.WriteLine($"{NamePPHeader} : {physicsName + NamePSuffix}");
 	}
 
 	private static void WritePhysicsData(StreamWriter sw, PhysicsData phys) {
@@ -726,21 +742,17 @@ class AccDataIO {
 		string? line = null;
 		while ((line = sr.ReadLine()?.Trim()) != null) {
 			if (line.Length == 0) continue;
+			var name = line.Split(":")[1].Trim();
+			name = name[..name.LastIndexOf('.')];
 			if (line.StartsWith("accessory_hookup")) {
-				var name = line.Split(":")[1].Trim();
-				name = name[..name.LastIndexOf('.')];
 				AccessoryHookupData item = new(name);
 				ReadAccHookup(sr, item);
 				sui.HookupItems.Add(item);
 			} else if (line.StartsWith(NamePTHeader)) {
-				var name = line.Split(":")[1].Trim();
-				name = name[..name.LastIndexOf('.')];
 				PhysicsToyData toyData = new(name);
 				ReadPhysToyData(sr, toyData);
 				sui.PhysicsItems.Add(toyData);
 			} else if (line.StartsWith(NamePPHeader)) {
-				var name = line.Split(":")[1].Trim();
-				name = name[..name.LastIndexOf('.')];
 				PhysicsPatchData patchData = new(name);
 				ReadPhysPatchData(sr, patchData);
 				sui.PhysicsItems.Add(patchData);
@@ -969,12 +981,13 @@ class AccDataIO {
 		return value;
 	}
 
+
+
 	private const string NameLocHeader = "localization_db : .localization";
 	private const string DictPreffix = "local_module";
 	private const string NameKey = "key";
 	private const string NameValue = "val";
 	private const string KeyGenerated = "Generated";
-
 
 	public static void ReadLocaleDict(Window window, ObservableCollection<LocaleModule> moduleList) {
 		var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));

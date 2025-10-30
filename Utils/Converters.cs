@@ -5,37 +5,16 @@ using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Utils {
 
-	public class OptionWarningConverter: IMultiValueConverter {
-
-		public object? Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
-			if (values.Length == 0)
-				return null;
-			if (values[0] is not string s)
-				return null;
-			bool check;
-			if (values.Length > 1 || values[1] is bool)
-				check = (bool)values[1];
-			else
-				check = true;
-			if (check) {
-				if (s.Length == 0) {
-					SolidColorBrush brush = new(Colors.Yellow);
-					if (parameter != null) {
-						string param = (string)parameter;
-						if (param.Equals("red", StringComparison.OrdinalIgnoreCase))
-							brush = new(Colors.Red);
-					}
-					return brush;
-				} else
-					return new SolidColorBrush();
-			}
-			return null;
+	public class NameLengthConverter: IValueConverter {
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+			return value is string s && s.Length > 12;
 		}
 
-		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) {
-			throw new NotImplementedException();
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			return DependencyProperty.UnsetValue;
 		}
 	}
+
 	public class BooleanVisibilityConverter: IValueConverter {
 		public object? Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 			if (value is bool b) {
@@ -48,7 +27,7 @@ namespace SCS_Mod_Helper.Utils {
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-			throw new NotImplementedException();
+			return DependencyProperty.UnsetValue;
 		}
 	}
 	public class ClearVisibilityConverter: IValueConverter {
@@ -157,7 +136,7 @@ namespace SCS_Mod_Helper.Utils {
 		}
 
 		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) {
-			throw new NotImplementedException();
+			return (object[])DependencyProperty.UnsetValue;
 		}
 	}
 
@@ -200,7 +179,7 @@ namespace SCS_Mod_Helper.Utils {
 		}
 
 		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) {
-			throw new NotImplementedException();
+			return (object[])DependencyProperty.UnsetValue;
 		}
 	}
 }

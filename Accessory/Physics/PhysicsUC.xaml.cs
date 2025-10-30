@@ -121,7 +121,7 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 				Binding.PhysicsItems?.Remove(Binding.CurrentPhysicsItem);
 		}
 		private void SortButtonClick(object sender, RoutedEventArgs e) {
-			DataGridUtil.MoveItems(sender == ButtonPhysicUp, TablePhysicDatas, Binding.PhysicsItems!);
+			CollectionUtil.MoveListBoxItems(sender == ButtonPhysicUp, ListBoxPhysics, Binding.PhysicsItems!);
 		}
 
 		private void ButtonChooseModelClick(object sender, RoutedEventArgs e) {

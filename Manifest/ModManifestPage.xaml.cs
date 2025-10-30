@@ -1,34 +1,21 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory;
-using SCS_Mod_Helper.Accessory.AccAddon;
-using SCS_Mod_Helper.Accessory.AccAddon.CreatedSii;
-using SCS_Mod_Helper.Accessory.AccHookup;
-using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Hookups;
-using SCS_Mod_Helper.Language;
 using SCS_Mod_Helper.Localization;
-using SCS_Mod_Helper.Main;
 using SCS_Mod_Helper.Utils;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SCS_Mod_Helper.Manifest;
-
+namespace SCS_Mod_Helper.Manifest; 
 /// <summary>
-/// ProjectPrepare.xaml 的交互逻辑
+/// ModManifestPage.xaml 的交互逻辑
 /// </summary>
-public partial class ModManifestWindow: BaseWindow {
-	private readonly ManifestBinding binding = new();
+public partial class ModManifestPage : BasePage {
+	private readonly ManifestBinding binding;
 
-	string ProjectLocation {
-		get => binding.ProjectLocation; set => binding.ProjectLocation = value;
-	}
 	string IconName {
 		get => binding.IconName; set => binding.IconName = value;
 	}
@@ -43,32 +30,20 @@ public partial class ModManifestWindow: BaseWindow {
 		get => binding.DescContent; set => binding.DescContent = value;
 	}
 
-	ObservableCollection<LanguageItem> Languages => binding.Languages;
 	Dictionary<string, DescLocale> LocaleDict => binding.LocaleDict;
 
-	public ModManifestWindow() {
-		InitializeComponent();
+	public ModManifestPage()
+    {
+        InitializeComponent();
 
-		LoadLanguage();
-
-		LoadFiles();
+		binding = ManifestBinding.Instance;
 
 		GridMain.DataContext = binding;
+
+		binding.InsertColor = InsertColor;
 	}
 
-	private void LoadFiles() {
-		binding.InitData();
-		var manifest = Paths.ManifestFile(ProjectLocation);
-		if (!File.Exists(manifest)) 
-			return;
-		AccDataIO.LoadManifest(binding);
-	}
-
-	private void LoadLanguage() {
-		LanguageUtil.InitLanguage();
-		foreach (var l in LanguageUtil.langs) {
-			Languages.Add(new(l.Key, l.Value.First, l.Value.Second));
-		}
+	private void OnLoaded(object sender, RoutedEventArgs e) {
 	}
 
 	private void ChooseProjectLocation(object sender, RoutedEventArgs e) {
@@ -88,14 +63,14 @@ public partial class ModManifestWindow: BaseWindow {
 		if (folderDialog.ShowDialog() == true) {
 			if (Directory.Exists(folderDialog.FolderName)) {
 				void ExecuteLoad() {
-					ProjectLocation = folderDialog.FolderName;
-					LoadFiles();
+					binding.ProjectLocation = folderDialog.FolderName;
+					binding.LoadFiles();
 				}
 				if (File.Exists(Paths.ManifestFile(folderDialog.FolderName))) {
 					ExecuteLoad();
 					return;
 				}
-				var result = MessageBox.Show(this, GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				var result = MessageBox.Show(GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.Yes) {
 					ExecuteLoad();
 				}
@@ -118,36 +93,35 @@ public partial class ModManifestWindow: BaseWindow {
 					binding.ModIcon = Util.LoadIcon(ofd.FileName);
 					binding.NewIcon = true;
 				} else {
-					var result = MessageBox.Show(this, GetString("MessageIconErrWrongSize"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+					var result = MessageBox.Show(GetString("MessageIconErrWrongSize"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 					if (result == MessageBoxResult.Yes)
 						Process.Start("explorer.exe", "/select," + ofd.FileName);
 				}
 			} catch (Exception ex) {
 				if (ex.Message.Equals("Parameter is not valid."))
-					MessageBox.Show(this, GetString("MessageIconErrNotValidImage"));
+					MessageBox.Show(GetString("MessageIconErrNotValidImage"));
 			}
 		}
 	}
 
-	private void ButtonColorClick(object sender, RoutedEventArgs e) {
-		if (sender is Button button) {
-			string insert = (string)button.Tag;
-			var sStart = TextDescription.SelectionStart;
-			DescContent = DescContent.Insert(sStart, insert);
-			sStart += insert.Length;
-			TextDescription.SelectionStart = sStart;
-			TextDescription.Focus();
-		}
+	private void InsertColor(string? color) {
+		if (color == null)
+			return;
+		var sStart = TextDescription.SelectionStart;
+		DescContent = DescContent.Insert(sStart, color);
+		sStart += color.Length;
+		TextDescription.SelectionStart = sStart;
+		TextDescription.Focus();
 	}
 
 	private void DeleteLocaleClick(object sender, RoutedEventArgs e) {
 		if (sender is Button button) {
 			DescLocale locale = (DescLocale)button.DataContext;
 			if (locale.LocaleValue.Equals(Locale.LocaleValueUni)) {
-				MessageBox.Show(this, GetString("MessageDeleteLocaleErrUni"));
+				MessageBox.Show(GetString("MessageDeleteLocaleErrUni"));
 				return;
 			} else {
-				var result = MessageBox.Show(this, GetString("MessageDeleteLocaleDoubleCheck"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				var result = MessageBox.Show(GetString("MessageDeleteLocaleDoubleCheck"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.Yes) {
 					locale.DescContent = "";
 				}
@@ -171,13 +145,6 @@ public partial class ModManifestWindow: BaseWindow {
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSave) {
 			AccDataIO.SaveManifest(binding);
-		} else if (sender == ButtonAbout) {
-			string? a = null;
-			a!.ToString();
-			var window = new AboutWindow {
-				Owner = this
-			};
-			window.ShowDialog();
 		}
 	}
 
@@ -195,31 +162,5 @@ public partial class ModManifestWindow: BaseWindow {
 			DescriptionName += ".txt";
 			TextDescriptionName.SelectionStart = ss;
 		}
-	}
-
-	private void ButtonWindowsClick(object sender, RoutedEventArgs e) {
-		if (ProjectLocation.Length == 0) {
-			MessageBox.Show(GetString("MessageProjectLocationFirst"));
-			return;
-		}
-		Window window;
-		if (sender == ButtonAccAddon) {
-			window = new AccAddonWindow();
-		} else if (sender == ButtonAccHookup) {
-			window = new AccHookupWindow();
-		} else if (sender == ButtonPhysics) {
-			window = new PhysicsWindow();
-		} else if (sender == ButtonCleanSii) {
-			window = new CreatedModelWindow();
-		} else if (sender == ButtonCreateHookup) {
-			window = new HookupsWindow();
-		} else if (sender == ButtonLocalization) {
-			window = new ModLocalizationWindow();
-		} else if (sender == ButtonAbout) {
-			window = new AboutWindow();
-		} else
-			return;
-		window.Owner = this;
-		window.ShowDialog();
 	}
 }

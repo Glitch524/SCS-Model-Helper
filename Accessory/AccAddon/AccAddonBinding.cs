@@ -8,13 +8,20 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
 class AccAddonBinding: INotifyPropertyChanged {
 	private readonly AccessoryAddonData AddonItem = new();
 
 	public void SaveHistory() => AddonItem.SaveHistory();
+
+
+	public AccAddonBinding() {
+		ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(AddonItem.IconName);
+
+		UseCollPath = CollPath.Length > 0;
+	}
 
 	public static string ProjectLocation => Instances.ProjectLocation;
 	public static bool ProjectExist => Directory.Exists(ProjectLocation);
@@ -59,11 +66,11 @@ class AccAddonBinding: INotifyPropertyChanged {
 			AddonItem.ModelName = value; 
 			InvokeChange();
 
-			InvokeChange(nameof(ModelNameForeground));
+			InvokeChange(nameof(NameOver12));
 		}
 	}
 
-	public SolidColorBrush ModelNameForeground => new(AddonItem.ModelName.Length > 12 ? Colors.Red : Colors.Black);
+	public bool NameOver12 => ModelName.Length > 12;
 
 	public string PartType {
 		get => AddonItem.PartType;
@@ -99,6 +106,15 @@ class AccAddonBinding: INotifyPropertyChanged {
 		}
 	}
 
+
+	public BitmapSource? ModelIcon {
+		get => AddonItem.ModelIcon;
+		set {
+			AddonItem.ModelIcon = value;
+			InvokeChange();
+		}
+	}
+
 	public string ModelPath {
 		get => AddonItem.ModelPath;
 		set {
@@ -120,6 +136,8 @@ class AccAddonBinding: INotifyPropertyChanged {
 		set {
 			AddonItem.CollPath = value;
 			InvokeChange();
+
+			UseCollPath = value.Length > 0;
 		}
 	}
 
@@ -137,9 +155,28 @@ class AccAddonBinding: INotifyPropertyChanged {
 		set {
 			AddonItem.ModelType = value;
 			if (CurrentModelType != null && value != CurrentModelType.Accessory) {
-				CurrentModelType = null;
+				mCurrentModelType = null;
 			}
 			InvokeChange();
+
+			bool? flag = null;
+			if (value == $"{DefaultData.TypeFlagL}/{DefaultData.TypeFlagFL}") {
+				flag = true;
+			} else if (value == $"{DefaultData.TypeFlagR}/{DefaultData.TypeFlagFR}") {
+				flag = false;
+			}
+			if (flag != null) {
+				var result = MessageBox.Show(Util.GetString("MessageModelTypeFlag"), Util.GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				if (result == MessageBoxResult.Yes) {
+					if (flag == true) {
+						ModelPath = "/vehicle/truck/upgrade/flag/flag_left.pmd";
+						CollPath = "/vehicle/truck/upgrade/flag/flag_left.pmc";
+					} else if (flag == false) {
+						ModelPath = "/vehicle/truck/upgrade/flag/flag_right.pmd";
+						CollPath = "/vehicle/truck/upgrade/flag/flag_right.pmc";
+					}
+				}
+			}
 		}
 	}
 
@@ -154,12 +191,12 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 	private readonly ModelTypeInfo emptyAcc = new();
 
-	private ModelTypeInfo? mCurrentModelType = null;
-	public ModelTypeInfo? CurrentModelType {
+	public ModelTypeInfo? mCurrentModelType = null;
+	public ModelTypeInfo CurrentModelType {
 		get {
 			if (mCurrentModelType == null) {
 				foreach (var type in ModelTypes) {
-					if (type.Accessory == ModelType) {
+					if (ModelType == type.Accessory) {
 						mCurrentModelType = type;
 						return mCurrentModelType;
 					}
@@ -173,6 +210,8 @@ class AccAddonBinding: INotifyPropertyChanged {
 			InvokeChange();
 		}
 	}
+
+	public static ObservableCollection<StringResItem> StringResList => AccessoryDataUtil.StringResList;
 
 	public ObservableCollection<string> LookList => AddonItem.LookList;
 	public ObservableCollection<string> VariantList => AddonItem.VariantList;
@@ -236,23 +275,6 @@ class AccAddonBinding: INotifyPropertyChanged {
 		}
 		setValue(LookList, oldLook, (set) => Look = set);
 		setValue(VariantList, oldVariant, (set) => Variant = set);
-	}
-
-	public void SetupLookAndVariantMenu(Action<MenuItem> actionLook, Action<MenuItem> actionVariant) {
-		foreach (var look in LookList) {
-			MenuItem item = new() {
-				Name = look,
-				Header = look.Replace("_", "__")
-			};
-			actionLook(item);
-		}
-		foreach (var variant in VariantList) {
-			MenuItem item = new() {
-				Name = variant,
-				Header = variant.Replace("_", "__")
-			};
-			actionVariant(item);
-		}
 	}
 
 	private bool mTruckExpandedETS2 = true;
@@ -334,6 +356,8 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 	public void ReinitTruckList() {
 		AccAppIO.ClearTruckList();
+		TrucksETS2.Clear();
+		TrucksATS.Clear();
 		LoadTrucks();
 	}
 
@@ -517,9 +541,11 @@ class AccAddonBinding: INotifyPropertyChanged {
 	}
 
 	public void ChooseIcon(Window window) {
-		var icon = AccessoryDataUtil.ChooseIcon(window);
-		if (icon != null)
+		var icon = AccessoryDataUtil.ChooseIcon(window, out string? iconPath);
+		if (icon != null) {
+			ModelIcon = AccessoryDataUtil.LoadModelIcon(iconPath);
 			IconName = icon;
+		}
 	}
 
 	public const int MODEL = 0;
@@ -578,7 +604,7 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 		for (int i = s.Length - 2; i > 0; i--) {
 			foreach (ModelTypeInfo info in ModelTypes) {//根据路径猜测模型的类型
-				if (info.Accessory.Equals(s[i]))
+				if (s[i] == info.AccessoryETS2 || s[i] == info.AccessoryATS)
 					modelType = info.Accessory;
 			}
 		}
@@ -654,8 +680,10 @@ class AccAddonBinding: INotifyPropertyChanged {
 			if (result == true) {
 				if (arWindow.CheckModelName)
 					ModelName = modelName!;
-				if (arWindow.CheckModelType)
+				if (arWindow.CheckModelType) {
+					mCurrentModelType = null;
 					ModelType = modelType!;
+				}
 				if (arWindow.CheckModelPath)
 					ModelPath = modelPath!;
 				if (arWindow.CheckModelPathUK)

@@ -5,8 +5,6 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Shapes;
 
 namespace SCS_Mod_Helper.Accessory; 
     class AccAppIO {
@@ -538,30 +536,33 @@ namespace SCS_Mod_Helper.Accessory;
 		binding.ModelPath = modelPath;
 		binding.ModelPathUK = modelPathUK;
 		binding.CollPath = collPath;
+		binding.UseCollPath = collPath.Length > 0;
+		binding.mCurrentModelType = null;
 		binding.ModelType = modelType;
 		binding.Look = look;
 		binding.Variant = variant;
 		binding.HideIn = hideIn;
 
 		binding.OthersList.Clear();
-		if (otherHeader != null && otherStrings.Count == 0) {
-			var indexesOfOthers = new int[otherHeader.Length];
+		if (otherHeader != null && otherStrings.Count > 0) {
+			var indexes = OthersItem.Indexes;
 			for (int i = 0; i < otherHeader!.Length; i++) {
 				string? header = otherHeader[i];
 				switch (header) {
 					case nameof(OthersItem.OthersName):
-						indexesOfOthers[OthersItem.IndexOthersName] = i;
+						indexes[OthersItem.IndexOthersName] = i;
 						break;
 					case nameof(OthersItem.OthersValue):
-						indexesOfOthers[OthersItem.IndexOthersValue] = i;
+						indexes[OthersItem.IndexOthersValue] = i;
 						break;
 				}
 			}
 			foreach (var oString in otherStrings) {
 				OthersItem others = new();
 				var oSplit = oString.Split(DefaultData.ItemSplit);
-				others.OthersName = oSplit[indexesOfOthers[OthersItem.IndexOthersName]];
-				others.OthersValue = oSplit[indexesOfOthers[OthersItem.IndexOthersValue]];
+				others.OthersName = oSplit[indexes[OthersItem.IndexOthersName]];
+				others.OthersValue = oSplit[indexes[OthersItem.IndexOthersValue]];
+				binding.OthersList.Add(others);
 			}
 		}
 
@@ -617,7 +618,6 @@ namespace SCS_Mod_Helper.Accessory;
 	private const string NameTruckVersion = "TruckVersion";
 	public static void SaveTruckList(bool ets2, ObservableCollection<Truck> trucks) {
 		var truckFile = ets2 ? Paths.TrucksETS2Path() : Paths.TrucksATSPath();
-		trucks.ToList();
 		if (trucks.Count == 0) {
 			File.Delete(truckFile);
 			return;
@@ -731,7 +731,7 @@ namespace SCS_Mod_Helper.Accessory;
 						string variant = "";
 						if (indexes[Truck.IndexTVariant] != -1)
 							variant = s[indexes[Truck.IndexTVariant]];
-						Truck t = new(truckID, productionYear, ingameName, description, check, modelType, look, variant);
+						Truck t = new(truckID, productionYear, ingameName, description, check, modelType, look, variant, ets2);
 						loadedTrucks.Add(t);
 					}
 				}
@@ -769,8 +769,8 @@ namespace SCS_Mod_Helper.Accessory;
 
 	public static List<Truck> LoadDefaultTrucks(bool ets2) {
 		if (ets2)
-			return DefaultData.GetDefaultTrucksETS2();
+			return DefaultData.DefaultTrucksETS2;
 		else
-			return DefaultData.GetDefaultTrucksATS();
+			return DefaultData.DefaultTrucksATS;
 	}
 }

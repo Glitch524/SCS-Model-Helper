@@ -1,8 +1,8 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory {
     public abstract class AccessoryData(
@@ -14,27 +14,28 @@ namespace SCS_Mod_Helper.Accessory {
 			string partType,
 			string modelColl,
 			string look,
-			string variant): INotifyPropertyChanged {
+			string variant): BaseBinding {
 
 		protected string mModelName = modelName;
 		public string ModelName {
 			get => mModelName;
 			set {
 				mModelName = value;
-				InvokeChange(nameof(ModelName));
+				InvokeChange();
 
-				InvokeChange(nameof(ModelNameForeground));
+				InvokeChange(nameof(NameOver12));
 			}
 		}
 
-		public SolidColorBrush ModelNameForeground => new(ModelName.Length > 12 ? Colors.Red : Colors.Black);
+		public bool NameOver12 => ModelName.Length > 12;
 
 		protected string mDisplayName = displayName;
 		public string DisplayName {
 			get => mDisplayName;
 			set {
 				mDisplayName = value;
-				InvokeChange(nameof(DisplayName));
+				InvokeChange();
+
 				InvokeChange(nameof(CheckResVisibility));
 			}
 		}
@@ -46,7 +47,7 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mPrice;
 			set {
 				mPrice = value;
-				InvokeChange(nameof(Price));
+				InvokeChange();
 			}
 		}
 
@@ -55,7 +56,7 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mUnlockLevel;
 			set {
 				mUnlockLevel = value;
-				InvokeChange(nameof(UnlockLevel));
+				InvokeChange();
 			}
 		}
 
@@ -64,7 +65,17 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mIconName;
 			set {
 				mIconName = value;
-				InvokeChange(nameof(IconName));
+				InvokeChange();
+			}
+		}
+
+		protected BitmapSource? mModelIcon = null;
+		public BitmapSource? ModelIcon {
+			get => mModelIcon;
+			set {
+				mModelIcon?.Freeze();
+				mModelIcon = value;
+				InvokeChange();
 			}
 		}
 
@@ -73,7 +84,7 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mPartType;
 			set {
 				mPartType = value;
-				InvokeChange(nameof(PartType));
+				InvokeChange();
 			}
 		}
 
@@ -88,7 +99,7 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mModelColl;
 			set {
 				mModelColl = value;
-				InvokeChange(nameof(CollPath));
+				InvokeChange();
 			}
 		}
 
@@ -97,7 +108,7 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mLook;
 			set {
 				mLook = value;
-				InvokeChange(nameof(Look));
+				InvokeChange();
 			}
 		}
 
@@ -106,12 +117,8 @@ namespace SCS_Mod_Helper.Accessory {
 			get => mVariant;
 			set {
 				mVariant = value;
-				InvokeChange(nameof(Variant));
+				InvokeChange();
 			}
 		}
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-
-		public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 	}
 }

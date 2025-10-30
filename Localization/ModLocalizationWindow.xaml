@@ -7,387 +7,502 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Localization"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:LocaleInfo}"
 	mc:Ignorable="d"
-	Title="{DynamicResource TitleSetupLocalization}"
-	Height="500"
-	Width="800"
+	ExtendsContentIntoTitleBar="True"
+	Height="600"
+	Width="900"
 	WindowStartupLocation="CenterOwner">
 	<base:BaseWindow.Resources>
 		<utils:BooleanVisibilityConverter
 			x:Key="BooleanVisibilityConverter" />
 	</base:BaseWindow.Resources>
-	<Grid
-		x:Name="GridMain"
-		Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition
-				Width="*" />
-			<ColumnDefinition
-				Width="5" />
-			<ColumnDefinition
-				Width="3*" />
-		</Grid.ColumnDefinitions>
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
 				Height="Auto" />
 			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="Auto" />
-			<RowDefinition
-				Height="5" />
-			<RowDefinition
 				Height="*" />
-			<RowDefinition
-				Height="Auto" />
 		</Grid.RowDefinitions>
-		<TextBlock
-			Grid.ColumnSpan="3"
-			Padding="0,0,0,5">
-			<Run
-				Text="{DynamicResource TextUsageTips}" />
-		</TextBlock>
+		<ui:TitleBar
+			Title="{DynamicResource TitleSetupLocalization}" />
 		<Grid
+			x:Name="GridMain"
 			Grid.Row="1"
-			Grid.ColumnSpan="3"
-			Margin="0,0,0,10">
+			Margin="10,0,10,10">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="Auto" />
 				<ColumnDefinition
 					Width="*" />
 				<ColumnDefinition
-					Width="Auto" />
+					Width="5" />
 				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
+					Width="5*" />
 			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="5" />
+				<RowDefinition
+					Height="*" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
 			<TextBlock
-				Text="{DynamicResource TextLocaleName}" />
-			<TextBox
-				x:Name="TextLocaleName"
-				Grid.Column="1"
-				BorderThickness="1,1,0,1"
-				IsEnabled="{Binding ModuleNotNull}"
-				Text="{Binding CurrentModuleName}">
-				<TextBox.Style>
-					<Style
-						TargetType="TextBox">
-						<Style.Triggers>
-							<Trigger
-								Property="Text"
-								Value="">
-								<Setter
-									Property="Background"
-									Value="Yellow" />
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</TextBox.Style>
-			</TextBox>
-			<Button
-				x:Name="ButtonChooseModule"
-				Grid.Column="2"
-				Margin="0,0,5,0"
-				Background="Transparent"
-				BorderBrush="#FFABADB3"
-				BorderThickness="0,1,1,1"
-				Click="ButtonModuleClick">
-				<Image
-					Source="/Images/ExpandDown.png" />
-
-			</Button>
-			<Button
-				x:Name="ButtonAddModule"
-				Grid.Column="3"
-				Click="ButtonModuleClick">
-				<Image
-					Source="/Images/AddFile.png" />
-
-			</Button>
-			<Button
-				x:Name="ButtonDeleteModule"
-				Grid.Column="4"
-				IsEnabled="{Binding ModuleNotNull}"
-				Click="ButtonModuleClick">
-				<Image
-					Source="/Images/DeleteFile.png" />
-
-			</Button>
-		</Grid>
-		<Button
-			x:Name="ButtonClean"
-			Grid.Row="2"
-			Content="{DynamicResource ButtonCleanUpSame}"
-			ToolTip="{DynamicResource ButtonCleanUpSameTip}"
-			IsEnabled="{Binding ModuleNotNull}"
-			Click="ButtonCleanClick" />
-		<DataGrid
-			x:Name="TableLocale"
-			Grid.Row="4"
-			Margin="0,5,0,0"
-			RowHeaderWidth="0"
-			IsReadOnly="True"
-			AutoGenerateColumns="false"
-			CanUserSortColumns="False"
-			GridLinesVisibility="Horizontal"
-			d:ItemsSource="{d:SampleData ItemCount=2}"
-			ItemsSource="{Binding CurrentLocaleList}"
-			SelectedItem="{Binding CurrentLocale, Mode=TwoWay}"
-			SelectionMode="Single">
-			<DataGrid.Columns>
-				<DataGridTextColumn
-					Header="{DynamicResource HeaderLocale}"
-					Width="*"
-					Binding="{Binding LocaleValue}">
-					<DataGridTextColumn.CellStyle>
+				Grid.ColumnSpan="3"
+				Padding="0,0,0,5">
+			<Run
+					Text="{DynamicResource TextUsageTips}" />
+			</TextBlock>
+			<Grid
+				Grid.Row="1"
+				Grid.ColumnSpan="3"
+				Margin="0,0,0,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					Text="{DynamicResource TextLocaleName}"
+					VerticalAlignment="Center" />
+				<TextBox
+					x:Name="TextLocaleName"
+					Grid.Column="1"
+					BorderThickness="1,1,0,1"
+					IsEnabled="{Binding ModuleNotNull}"
+					Text="{Binding CurrentModuleName}">
+					<TextBox.Style>
 						<Style
-							TargetType="DataGridCell">
-							<Setter
-								Property="ToolTip"
-								Value="{Binding LocaleDisplay}" />
+							TargetType="TextBox"
+							BasedOn="{StaticResource {x:Type TextBox}}">
+							<Style.Triggers>
+								<Trigger
+									Property="Text"
+									Value="">
+									<Setter
+										Property="Background"
+										Value="Yellow" />
+								</Trigger>
+							</Style.Triggers>
 						</Style>
-					</DataGridTextColumn.CellStyle>
-				</DataGridTextColumn>
-				<DataGridTemplateColumn>
-					<DataGridTemplateColumn.CellTemplate>
+					</TextBox.Style>
+				</TextBox>
+				<Button
+					x:Name="ButtonChooseModule"
+					Grid.Column="2"
+					Margin="0,0,5,0"
+					Click="ButtonModuleClick"
+					VerticalAlignment="Stretch"
+					Width="25">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="ChevronDown16" />
+					</Viewbox>
+
+				</Button>
+				<Button
+					x:Name="ButtonAddModule"
+					Grid.Column="3"
+					Click="ButtonModuleClick"
+					VerticalAlignment="Stretch"
+					Width="25">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Add16" />
+					</Viewbox>
+
+				</Button>
+				<Button
+					x:Name="ButtonDeleteModule"
+					Grid.Column="4"
+					IsEnabled="{Binding ModuleNotNull}"
+					Click="ButtonModuleClick"
+					VerticalAlignment="Stretch"
+					Width="25">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Dismiss16" />
+					</Viewbox>
+
+				</Button>
+			</Grid>
+			<Button
+				x:Name="ButtonClean"
+				Grid.Row="2"
+				IsEnabled="{Binding ModuleNotNull}"
+				Click="ButtonCleanClick"
+				Padding="3"
+				HorizontalAlignment="Stretch">
+				<TextBlock
+					Text="{DynamicResource ButtonCleanUpSame}"
+					ToolTip="{DynamicResource ButtonCleanUpSameTip}"
+					TextWrapping="Wrap" />
+			</Button>
+
+			<Grid
+				Grid.Row="4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="*" />
+				</Grid.RowDefinitions>
+				<Border
+					Grid.ColumnSpan="2"
+					Grid.RowSpan="2"
+					BorderThickness="1"
+					BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+					CornerRadius="5"/>
+				<TextBlock
+					Text="{DynamicResource HeaderLocale}"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom"
+					FontSize="14" />
+				<TextBlock
+					Grid.Column="1"
+					Text="{DynamicResource ButtonDelete}"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom"
+					FontSize="10"
+					Margin="0,0,10,0" />
+				<ListBox
+					Grid.Row="2"
+					Grid.ColumnSpan="2"
+					d:ItemsSource="{d:SampleData ItemCount=2}"
+					ItemsSource="{Binding CurrentLocaleList}"
+					SelectedItem="{Binding CurrentLocale, Mode=TwoWay}"
+					SelectedIndex="0"
+					SelectionMode="Single">
+					<ListBox.ItemContainerStyle>
+						<Style
+							TargetType="ListBoxItem"
+							BasedOn="{StaticResource {x:Type ListBoxItem}}">
+							<Setter
+								Property="Padding"
+								Value="5" />
+						</Style>
+					</ListBox.ItemContainerStyle>
+					<ListBox.ItemTemplate>
 						<DataTemplate>
-							<Button
-								BorderThickness="0"
-								Visibility="{Binding Path=HasLocale, Converter={StaticResource BooleanVisibilityConverter},Mode=OneWay}"
-								VerticalAlignment="Top"
-								Click="DeleteLocalClick">
-								<Image
-									Source="/Images/DeleteTranslation.png" />
-							</Button>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									Text="{Binding LocaleValue}"
+									ToolTip="{Binding LocaleDisplay}"
+									FontSize="13">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource {x:Type TextBlock}}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+													Value="True">
+													<Setter
+														Property="Foreground"
+														Value="White" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<Button
+									Grid.Column="1"
+									Padding="0"
+									Margin="5,0"
+									BorderThickness="0"
+									Visibility="{Binding Path=HasLocale, Converter={StaticResource BooleanVisibilityConverter},Mode=OneWay}"
+									VerticalAlignment="Top"
+									Click="DeleteLocaleClick"
+									Style="{DynamicResource GridButton}">
+									<ui:SymbolIcon
+										Symbol="GlobeProhibited20" />
+								</Button>
+							</Grid>
 						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-			</DataGrid.Columns>
-		</DataGrid>
-		<Grid
-			Grid.Row="2"
-			Grid.Column="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="*" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<Button
-				x:Name="ButtonSyncWithUni"
-				Grid.Column="0"
-				Content="{DynamicResource ButtonSyncWithUni}"
-				HorizontalAlignment="Left"
-				IsEnabled="{Binding ModuleNotNull}"
-				Click="ButtonSyncingClick">
-				<Button.Style>
-					<Style
-						TargetType="Button">
-						<Style.Triggers>
-							<DataTrigger
-								Binding="{Binding Path=CurrentLocale.LocaleValue}"
-								Value="universal">
-								<Setter
-									Property="Visibility"
-									Value="Collapsed" />
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
-			<Button
-				x:Name="ButtonSyncOrder"
-				Grid.Column="1"
-				Margin="5,0,0,0"
-				Content="{DynamicResource ButtonSyncOrder}"
-				HorizontalAlignment="Left"
-				IsEnabled="{Binding ModuleNotNull}"
-				Click="ButtonSyncingClick" />
-			<Button
-				x:Name="ButtonAdd"
-				Grid.Column="3"
-				Margin="5,0,0,0"
-				HorizontalAlignment="Left"
-				IsEnabled="{Binding ModuleNotNull}"
-				Click="OperateButtonClick">
-				<Image
-					Source="/Images/AddRow.png" />
-			</Button>
-			<Button
-				x:Name="ButtonUp"
-				Grid.Column="4"
-				Margin="5,0,0,0"
-				HorizontalAlignment="Left"
-				Click="OperateButtonClick">
-				<Image
-					Source="/Images/Up.png" />
-				<Button.Style>
-					<Style
-						TargetType="Button">
-						<Style.Triggers>
-							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TableDict}"
-								Value="-1">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding Items.Count, ElementName=TableDict}"
-								Value="1">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
-			<Button
-				x:Name="ButtonDown"
-				Grid.Column="5"
-				Margin="5,0,0,0"
-				HorizontalAlignment="Left"
-				Click="OperateButtonClick">
-				<Image
-					Source="/Images/Down.png" />
-				<Button.Style>
-					<Style
-						TargetType="Button">
-						<Style.Triggers>
-							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TableDict}"
-								Value="-1">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
-			<Button
-				x:Name="ButtonDelete"
-				Grid.Column="6"
-				Margin="5,0,0,0"
-				HorizontalAlignment="Left"
-				Click="OperateButtonClick">
-				<Image
-					Source="/Images/DeleteRow.png" />
-				<Button.Style>
-					<Style
-						TargetType="Button">
-						<Style.Triggers>
-							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TableDict}"
-								Value="-1">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Grid>
+			<Grid
+				Grid.Row="2"
+				Grid.Column="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Button
+					x:Name="ButtonSyncWithUni"
+					Grid.Column="0"
+					Content="{DynamicResource ButtonSyncWithUni}"
+					HorizontalAlignment="Left"
+					IsEnabled="{Binding ModuleNotNull}"
+					Padding="3"
+					Click="ButtonSyncingClick"
+					VerticalAlignment="Bottom">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding Path=CurrentLocale.LocaleValue}"
+									Value="universal">
+									<Setter
+										Property="Visibility"
+										Value="Collapsed" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button
+					x:Name="ButtonSyncOrder"
+					Grid.Column="1"
+					Margin="5,0,0,0"
+					Content="{DynamicResource ButtonSyncOrder}"
+					HorizontalAlignment="Left"
+					IsEnabled="{Binding ModuleNotNull}"
+					Padding="3"
+					VerticalAlignment="Bottom"
+					Click="ButtonSyncingClick" />
+				
+				<Button
+					x:Name="ButtonAdd"
+					Grid.Column="3"
+					Margin="5,0,0,0"
+					HorizontalAlignment="Left"
+					IsEnabled="{Binding ModuleNotNull}"
+					Click="OperateButtonClick"
+					VerticalAlignment="Bottom"
+					Height="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}"
+					Width="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Add16" />
+					</Viewbox>
+				</Button>
+				<Button
+					x:Name="ButtonUp"
+					Grid.Column="4"
+					Margin="5,0,0,0"
+					HorizontalAlignment="Left"
+					Click="OperateButtonClick"
+					VerticalAlignment="Bottom"
+					Height="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}"
+					Width="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="ArrowUp16" />
+					</Viewbox>
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=TableDict}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+								<DataTrigger
+									Binding="{Binding Items.Count, ElementName=TableDict}"
+									Value="1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button
+					x:Name="ButtonDown"
+					Grid.Column="5"
+					Margin="5,0,0,0"
+					HorizontalAlignment="Left"
+					Click="OperateButtonClick"
+					VerticalAlignment="Bottom"
+					Height="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}"
+					Width="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="ArrowDown16" />
+					</Viewbox>
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=TableDict}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button
+					x:Name="ButtonDelete"
+					Grid.Column="6"
+					Margin="5,0,0,0"
+					HorizontalAlignment="Left"
+					Click="OperateButtonClick"
+					VerticalAlignment="Bottom"
+					Height="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}"
+					Width="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Dismiss16" />
+					</Viewbox>
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=TableDict}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</Grid>
+			<DataGrid
+				x:Name="TableDict"
+				Grid.Row="4"
+				Grid.Column="2"
+				CanUserAddRows="True"
+				AutoGenerateColumns="false"
+				CanUserSortColumns="False"
+				GridLinesVisibility="Horizontal"
+				d:ItemsSource="{d:SampleData ItemCount=2}"
+				ItemsSource="{Binding CurrentDict}"
+				BorderThickness="1"
+				BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+				ColumnHeaderStyle="{StaticResource DataGridHeader}"
+				CellStyle="{StaticResource CompatCellStyle}">
+				<DataGrid.Columns>
+					<DataGridTemplateColumn
+						Header="{DynamicResource HeaderKey}"
+						Width="*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<TextBox
+									BorderThickness="0"
+									Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}">
+									<TextBox.Style>
+										<Style
+											TargetType="TextBox"
+											BasedOn="{StaticResource TableTextBoxStyle}">
+											<Style.Triggers>
+												<Trigger
+													Property="Text"
+													Value="">
+													<Setter
+														Property="Background"
+														Value="Yellow" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</TextBox.Style>
+								</TextBox>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn
+						Header="{DynamicResource HeaderValue}"
+						Width="2*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<TextBox
+									BorderThickness="0"
+									Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+									<TextBox.Style>
+										<Style
+											TargetType="TextBox"
+											BasedOn="{StaticResource TableTextBoxStyle}">
+											<Style.Triggers>
+												<Trigger
+													Property="Text"
+													Value="">
+													<Setter
+														Property="Background"
+														Value="Yellow" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</TextBox.Style>
+								</TextBox>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+			<StackPanel
+				Grid.Row="5"
+				Grid.ColumnSpan="3"
+				Margin="0,10,0,0"
+				Orientation="Horizontal"
+				FlowDirection="RightToLeft">
+				<Button
+					x:Name="ButtonSave"
+					Content="{DynamicResource ButtonSave}"
+					Padding="50,5,50,5"
+					FontSize="14"
+					Click="ButtonCloseClick" />
+				<Button
+					x:Name="ButtonCancel"
+					Content="{DynamicResource ButtonCancel}"
+					Padding="50,5,50,5"
+					Margin="10,0,0,0"
+					FontSize="14"
+					Click="ButtonCloseClick" />
+			</StackPanel>
 		</Grid>
-		<DataGrid
-			x:Name="TableDict"
-			Grid.Row="4"
-			Grid.Column="2"
-			Margin="0,5,0,0"
-			CanUserAddRows="True"
-			AutoGenerateColumns="false"
-			CanUserSortColumns="False"
-			GridLinesVisibility="Horizontal"
-			d:ItemsSource="{d:SampleData ItemCount=2}"
-			ItemsSource="{Binding CurrentDict}">
-			<DataGrid.Columns>
-				<DataGridTemplateColumn
-					Header="{DynamicResource HeaderKey}"
-					Width="*">
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBox
-								BorderThickness="0"
-								Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox">
-										<Style.Triggers>
-											<Trigger
-												Property="Text"
-												Value="">
-												<Setter
-													Property="Background"
-													Value="Red" />
-											</Trigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTemplateColumn
-					Header="{DynamicResource HeaderValue}"
-					Width="*">
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<TextBox
-								BorderThickness="0"
-								Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox">
-										<Style.Triggers>
-											<Trigger
-												Property="Text"
-												Value="">
-												<Setter
-													Property="Background"
-													Value="Red" />
-											</Trigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-			</DataGrid.Columns>
-		</DataGrid>
-		<StackPanel
-			Grid.Row="5"
-			Grid.ColumnSpan="3"
-			Margin="0,15,0,0"
-			Orientation="Horizontal"
-			FlowDirection="RightToLeft">
-			<Button
-				x:Name="ButtonSave"
-				Content="{DynamicResource ButtonSave}"
-				Padding="50,5,50,5"
-				FontSize="14"
-				Click="ButtonCloseClick" />
-			<Button
-				x:Name="ButtonCancel"
-				Content="{DynamicResource ButtonCancel}"
-				Padding="50,5,50,5"
-				Margin="10,0,0,0"
-				FontSize="14"
-				Click="ButtonCloseClick" />
-		</StackPanel>
 	</Grid>
 </base:BaseWindow>

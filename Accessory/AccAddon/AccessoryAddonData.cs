@@ -32,6 +32,7 @@ public class AccessoryAddonData: AccessoryData {
 		AccAddonHistory.Default.PartType = PartType;
 		AccAddonHistory.Default.ModelPath = ModelPath;
 		AccAddonHistory.Default.ModelPathUK = ModelPathUK;
+		AccAddonHistory.Default.CollisionPath = CollPath;
 		AccAddonHistory.Default.ModelType = ModelType;
 		AccAddonHistory.Default.Look = Look;
 		AccAddonHistory.Default.Variant = Variant;

@@ -1,11 +1,7 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Localization;
-using SCS_Mod_Helper.Manifest;
-using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -26,27 +22,27 @@ public partial class AccAddonWindow: BaseWindow {
 		get => binding.TruckExpandedATS; set => binding.TruckExpandedATS = value;
 	}
 
-	private ObservableCollection<ModelTypeInfo> AccessoryType => binding.ModelTypes;
 	private ObservableCollection<OthersItem> OthersList => binding.OthersList;
 	private ObservableCollection<Truck> TrucksETS2 => binding.TrucksETS2;
 	private ObservableCollection<Truck> TrucksATS => binding.TrucksATS;
 
-	private readonly ContextMenu MenuModelType, MenuLook, MenuVariant, MenuOthers;
+	private readonly ContextMenu MenuStringRes, MenuModelType, MenuLook, MenuVariant, MenuOthers;
 
 	public AccAddonWindow() {
 		InitializeComponent();
 
 		GridMain.DataContext = binding;
 
+		MenuStringRes = (ContextMenu)Resources["MenuStringRes"];
+		MenuStringRes.PlacementTarget = ButtonChooseRes;
+		MenuStringRes.DataContext = binding;
 		MenuModelType = (ContextMenu)Resources["MenuModelType"];
 		MenuLook = (ContextMenu)Resources["MenuLook"];
+		MenuLook.ItemsSource = binding.LookList;
 		MenuVariant = (ContextMenu)Resources["MenuVariant"];
+		MenuVariant.ItemsSource = binding.VariantList;
 		MenuOthers = (ContextMenu)Resources["MenuOthers"];
 
-		SetupModelTypeMenu();
-
-		binding.LookList.CollectionChanged += (sender, e) => OnLVListChanged(MenuLook, e);
-		binding.VariantList.CollectionChanged += (sender, e) => OnLVListChanged(MenuVariant, e);
 		binding.LoadLooksAndVariants();
 
 		OthersItem.ReadLines(binding.OthersList, AccAddonHistory.Default.Others, (dataName) => {
@@ -54,54 +50,12 @@ public partial class AccAddonWindow: BaseWindow {
 				dataName = dataName[..^AccDataIO.NamePSuffix.Length];
 			}
 			foreach (var physItem in AccAppIO.PhysicsItems) {
-				if (physItem.PhysicsName == dataName) {
+				if (physItem.PhysicsName == dataName) 
 					binding.PhysicsList.Add(physItem);
-				}
 			}
 		});
 
 		binding.LoadTrucks();
-
-		SetupStringResMenu();
-	}
-
-	private void SetupModelTypeMenu() {
-		MenuModelType.Items.Clear();
-		foreach (var acc in AccessoryType) {
-			MenuItem item = new() {
-				Name = acc.Accessory,
-				Header = $"{acc.Accessory.Replace("_", "__")}→{acc.Name}"
-			};
-			item.Click += OnMenuClicked;
-			MenuModelType.Items.Add(item);
-		}
-	}
-
-	private void OnLVListChanged(ContextMenu contextMenu, NotifyCollectionChangedEventArgs e) {
-		switch (e.Action) {
-			case NotifyCollectionChangedAction.Add:
-				var nis = (string)e.NewItems![0]!;
-				MenuItem item = new() {
-					Name = nis,
-					Header = nis.Replace("_", "__"),
-				};
-				item.Click += OnMenuClicked;
-				contextMenu.Items.Insert(e.NewStartingIndex, item);
-				break;
-			case NotifyCollectionChangedAction.Reset:
-				for (int i = contextMenu.Items.Count - 1; i >= 0; i--) {
-					object? iItem = contextMenu.Items[i];
-					((MenuItem)iItem).Click -= OnMenuClicked;
-					contextMenu.Items.RemoveAt(i);
-				}
-				break;
-		}
-	}
-
-	private readonly ContextMenu MenuStringRes = new();
-	private void SetupStringResMenu() {
-		MenuStringRes.PlacementTarget = ButtonChooseRes;
-		AccessoryDataUtil.SetupStringResMenu(MenuStringRes, (item) => item.Click += OnMenuClicked);
 	}
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
@@ -110,35 +64,43 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
-		ContextMenu cm = (ContextMenu)item.Parent;
+		ContextMenu cm = (ContextMenu)item.Parent ?? item.ContextMenu;
 		if (cm == MenuStringRes) {
-			if (item.Name.Equals("openLocalization")) {
-				AccessoryDataUtil.OpenLocalization(this, SetupStringResMenu);
+			var tag = (string)item.Tag;
+			if (tag.Equals("openLocalization")) {
+				AccessoryDataUtil.OpenLocalization(this);
 			} else {
-				AccessoryDataUtil.ApplyStringRes(TextDisplayName, item.Name);
+				AccessoryDataUtil.ApplyStringRes(TextDisplayName, tag);
 			}
 		} else if (cm == MenuOthers) {
 			AccessoryDataUtil.SetOtherItem(item);
 		} else {
-			Truck truck = (Truck)item.DataContext;
+			Truck truck = (Truck)cm.DataContext;
 			if (cm == MenuModelType) {
-				truck.ModelType = item.Name;
+				var type = (string)item.Tag;
+				int i;
+				if ((i = type.IndexOf('/')) == -1) 
+					truck.ModelType = (string)item.Tag;
+				else if (truck.IsETS2)
+					truck.ModelType = type[..i];
+				else
+					truck.ModelType = type[(i + 1)..];
 			} else if (cm == MenuLook) {
-				truck.Look = item.Name;
+				truck.Look = (string)item.DataContext;
 			} else if (cm == MenuVariant) {
-				truck.Variant = item.Name;
+				truck.Variant = (string)item.DataContext;
 			} else
 				return;
 		}
-		//TextBox caller = cm.PlacementTarget;
 	}
 
 	private void SaveOnClosing(object? sender, CancelEventArgs e) => binding.SaveHistory();
 
 	private void ButtonClearClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonIconNameClear)
+		if (sender == ButtonIconNameClear) {
 			binding.IconName = "";
-		else if (sender == ButtonChooseModelClear)
+			binding.ModelIcon = null;
+		} else if (sender == ButtonChooseModelClear)
 			binding.ModelPath = "";
 		else if (sender == ButtonChooseModelUKClear)
 			binding.ModelPathUK = "";
@@ -279,6 +241,10 @@ public partial class AccAddonWindow: BaseWindow {
 		PopupAddTruck.IsOpen = false;
 	}
 
+	private void ContextMenu_Opened(object sender, RoutedEventArgs e) {
+		return;
+	}
+
 	private void ButtonDeleteTruckClick(object sender, RoutedEventArgs e) {
 		if (TableTrucksETS2.SelectedIndex == -1 && TableTrucksATS.SelectedIndex == -1)
 			return;
@@ -290,23 +256,34 @@ public partial class AccAddonWindow: BaseWindow {
 	}
 
 	private void ButtonCoverValue(object sender, RoutedEventArgs e) {
-		void ForeachValue(Action<Truck> value, bool? extraETS2 = true, bool? extraATS = true) {
-			if (TruckExpandedETS2 && (extraETS2 ?? true)) {
+		void ForeachValue(Action<Truck> value, Action<Truck>? valueATS = null) {
+			if (TruckExpandedETS2) {
 				foreach (Truck t in TrucksETS2) {
 					if (t.Check)
 						value(t);
 				}
 			}
-			if (TruckExpandedATS && (extraATS ?? true)) {
+			if (TruckExpandedATS) {
 				foreach (Truck t in TrucksATS) {
-					if (t.Check)
-						value(t);
+					if (t.Check) {
+						if (valueATS != null) {
+							valueATS(t);
+						} else {
+							value(t);
+						}
+					}
 				}
 			}
 		}
 		if (sender == ButtonCoverModelType) {
 			var acc = binding.CurrentModelType;
-			ForeachValue((t) => t.ModelType = binding.ModelType, acc?.ForETS2, acc?.ForATS);
+			ForeachValue((t) => {
+				if (acc.ForETS2)
+					t.ModelType = acc.AccessoryETS2!;
+			}, (t) => {
+				if (acc.ForATS)
+					t.ModelType = acc.AccessoryATS!;
+			});
 		} else if (sender == ButtonCoverLook) {
 			ForeachValue((t) => t.Look = TextLook.Text);
 		} else if (sender == ButtonCoverVariant) {

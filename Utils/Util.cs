@@ -1,11 +1,14 @@
-﻿using SCS_Mod_Helper.Localization;
+﻿using Pfim;
+using SCS_Mod_Helper.Localization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Utils {
@@ -88,6 +91,37 @@ namespace SCS_Mod_Helper.Utils {
 			return image;
 		}
 
+		public static BitmapSource LoadPfimIcon(string filename) {
+			var image = Pfimage.FromFile(filename);
+			var pixelFormat = PfimGetPixelFormat(image);
+			var handle = GCHandle.Alloc(image.Data, GCHandleType.Pinned);
+			try {
+				var data = Marshal.UnsafeAddrOfPinnedArrayElement(image.Data, 0);
+				return BitmapSource.Create(image.Width, image.Height, 96, 96, pixelFormat, null, data, image.DataLen, image.Stride);
+			} finally {
+				handle.Free();
+			}
+		}
+
+
+		public static PixelFormat PfimGetPixelFormat(IImage image) {
+			switch (image.Format) {
+				case ImageFormat.Rgb24:
+					return PixelFormats.Bgr24;
+				case ImageFormat.Rgba32:
+					return PixelFormats.Bgra32;
+				case ImageFormat.Rgb8:
+					return PixelFormats.Gray8;
+				case ImageFormat.R5g5b5a1:
+				case ImageFormat.R5g5b5:
+					return PixelFormats.Bgr555;
+				case ImageFormat.R5g6b5:
+					return PixelFormats.Bgr565;
+				default:
+					throw new Exception($"Unable to convert {image.Format} to WPF PixelFormat");
+			}
+		}
+
 		public static string Join<T>(ObservableCollection<T> trucks, Func<T, string> toLine, Func<T, bool>? condition = null) {
 			StringBuilder sb = new();
 			foreach (var truck in trucks) {
@@ -101,7 +135,7 @@ namespace SCS_Mod_Helper.Utils {
 		}
 	}
 
-	static class DataGridUtil {
+	static class CollectionUtil {
 
 		public static void AddItem<T>(DataGrid table, ObservableCollection<T> list, T newItem) {
 			int selectedIndex = table.SelectedIndex;
@@ -122,7 +156,7 @@ namespace SCS_Mod_Helper.Utils {
 			}
 		}
 
-		public static void MoveItems<T>(bool up, DataGrid table, ObservableCollection<T> list) {
+		public static void MoveDataGridItems<T>(bool up, DataGrid table, ObservableCollection<T> list) {
 			if (table.SelectedIndex == -1)
 				return;
 			int target = table.SelectedIndex;
@@ -152,6 +186,38 @@ namespace SCS_Mod_Helper.Utils {
 				table.SelectedIndex = target;
 			}
 			table.Focus();
+		}
+
+		public static void MoveListBoxItems<T>(bool up, ListBox listBox, ObservableCollection<T> list) {
+			if (listBox.SelectedIndex == -1)
+				return;
+			int target = listBox.SelectedIndex;
+			List<T> l = [];
+			while (listBox.SelectedIndex != -1) {
+				if (listBox.SelectedIndex < target) {
+					target--;
+				}
+				l.Add(list[listBox.SelectedIndex]);
+				list.RemoveAt(listBox.SelectedIndex);
+			}
+			if (up) {
+				if (target > 0)
+					target--;
+			} else if (target < list.Count)
+				target++;
+
+			if (listBox.SelectionMode == SelectionMode.Extended) {
+				var IList = listBox.SelectedItems;
+				foreach (T pair in l) {
+					list.Insert(target, pair);
+					IList.Add(pair);
+					target++;
+				}
+			} else {
+				list.Insert(target, l.First());
+				listBox.SelectedIndex = target;
+			}
+			listBox.Focus();
 		}
 	}
 }

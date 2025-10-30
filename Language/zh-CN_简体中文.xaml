@@ -13,18 +13,21 @@
 	<s:String x:Key="ATS">美洲卡车模拟</s:String>
 	<s:String x:Key="ETS2Short">欧卡2</s:String>
 	<s:String x:Key="ATSShort">美卡</s:String>
+	
+	<s:String x:Key="ThemeFollowSystem">跟随系统</s:String>
+	<s:String x:Key="ThemeLight">浅色</s:String>
+	<s:String x:Key="ThemeDark">深色</s:String>
+	
 	<!--MOD基本内容页-->
 	<s:String x:Key="TitleModManifest">MOD基本内容</s:String>
 	<s:String x:Key="BasicInfo">基本信息</s:String>
 	<s:String x:Key="ModVersion">MOD版本：</s:String>
 	<s:String x:Key="ProjectName">项目名称：</s:String>
-	<s:String x:Key="ProjectDisplayName">项目游戏内名称：</s:String>
+	<s:String x:Key="ProjectDisplayName">游戏内名称：</s:String>
 	<s:String x:Key="ProjectDisplayNameTip">如果是发布在Steam创意工坊其实没有必要填</s:String>
 	<s:String x:Key="Author">作者：</s:String>
 	<s:String x:Key="CheckBoxMP">多人模式非必须mod</s:String>
 	<s:String x:Key="CheckBoxMPTip">指能否启用此mod进入多人模式，即使他人没有安装此mod。要求mod不能涉及影响游戏玩法的内容</s:String>
-	<s:String x:Key="TextAppLanguage">软件语言：</s:String>
-	<s:String x:Key="TipsCustomLanguage">在软件的文件夹找到Language文件夹，在里面放好翻译好且按照格式重命名的xaml即可识别使用</s:String>
 		<!--图标-->
 	<s:String x:Key="TitleModIcon">MOD图标（JPG 276x162）</s:String>
 	<s:String x:Key="IconName">图标文件名：</s:String>
@@ -43,6 +46,7 @@
 	<s:String x:Key="ColorBlue">蓝色</s:String>
 	<s:String x:Key="ColorWhite">白色</s:String>
 	<s:String x:Key="ColorOrange">橙色</s:String>
+	
 		<!--Mod基本内容页.CS-->
 	<s:String x:Key="MessageLoadManifestErrNotManifest">这个文件似乎不是Manifest文件</s:String>
 	<s:String x:Key="MessageLoadManifestErrFail">读取manifest文件出现错误</s:String>
@@ -54,6 +58,7 @@
 	<s:String x:Key="MessageCopyDescNotEmpty">当前的描述内容不为空，是否覆盖这些内容？</s:String>
 	<s:String x:Key="MessageManifestNotFilled">请填好必填内容</s:String>
 
+	
 
 	<!--摆件模型定义页-->
 	<s:String x:Key="TitleAccessoryAddon">生成摆件模型定义文件&#10;(Accessory Addon)</s:String>
@@ -141,6 +146,7 @@
 	<s:String x:Key="MessageInvalidExt">Model文件必须是pim或pmd，否则这么写也没用的哦</s:String>
 	<s:String x:Key="MessageInvalidExtColl">碰撞文件必须是pic或pmc，否则这么写也没用的哦</s:String>
 	<s:String x:Key="MessageModelOutsideProject">Model文件需要在Mod项目之中，否则这么写也没用的哦</s:String>
+	<s:String x:Key="MessageModelTypeFlag">是否使用游戏自带的旗帜模型？</s:String>
 		<!--创建SII-->
 	<s:String x:Key="MessageCreateSiiNoExpanded">请至少展开一个列表</s:String>
 	<s:String x:Key="MessageCreateSiiNotFilled">请填好必填内容&#10;必填内容未填时为黄色</s:String>
@@ -187,6 +193,12 @@
 	<s:String x:Key="TitleAddonStorageStorage">套件档案名（addon_hookup_storage）</s:String>
 	<s:String x:Key="HeaderHookupName">定义文件</s:String>
 	<s:String x:Key="HeaderAccessoryName">摆件名称</s:String>
+	<!--适用-->
+	<s:String x:Key="SuitableForSetDashbrd">配件-仪表盘套件（set__dashbrd）</s:String>
+	<s:String x:Key="SuitableForSetGlass">配件-挡风玻璃套件（set__glass）</s:String>
+	<s:String x:Key="SuitableForSetCabinet">配件-柜子组件（set__cabinet）</s:String>
+	<s:String x:Key="SuitableForSetCuphold">配件-杯架套件（set__cuphold）</s:String>
+	<s:String x:Key="SuitableForSteeringW">配件-方向盘（steering__w）</s:String>
 	<!--保存套件定义-->
 	<s:String x:Key="MessageSaveBeforeStart">请确保档案名、定义文件名、套件模型名称、物理模型名称的等必填内容填写好，否则会跳过或停止保存。</s:String>
 	<s:String x:Key="MessageSaveNoName">请先输入档案名</s:String>
@@ -264,9 +276,8 @@
 	<s:String x:Key="MessageResultPhysSaved">物理定义已保存</s:String>
 	<s:String x:Key="DialogTitleChooseRope">选择绳子材质文件（mat文件或贴图文件）</s:String>
 	<s:String x:Key="DialogTitleChoosePatch">选择布料材质文件（mat文件或贴图文件）</s:String>
-	<s:String x:Key="DialogFilterChooseMaterial">材质文件或绳子贴图文件|*.tga;*.dds;*.mat</s:String>
+	<s:String x:Key="DialogFilterChooseMaterial">材质文件或绳子贴图文件|*.tga;*.dds;*.mat;*.tobj</s:String>
 	<s:String x:Key="MessageErrorChooseMaterial">选择的文件必须是mat文件或其贴图，否则这么写也没用的哦</s:String>
-	
 	
 	
 	
@@ -330,15 +341,28 @@
 	<s:String x:Key="MessageUniEmpty">通用翻译为空,没有定义翻译的语言可能无法正常显示，是否继续？</s:String>
 	
 	
+	<!--设置喷漆页-->
+	<s:String x:Key="TitleSetupPaintJob">添加喷漆</s:String>
+	
 	
 	
 	<!--关于-->
 	<s:String x:Key="TitleAbout">关于</s:String>
-	<s:String x:Key="Desc1">恋活卡片导出→Blender→做SCS的Mod→Making this app.</s:String>
-	<s:String x:Key="Desc2">我自己也不知道我接着会做什么</s:String>
-	<s:String x:Key="Desc3">目前计划做喷漆的定义功能，如果有人在意的话会更新</s:String>
+	<s:String x:Key="HeaderVersion">版本号：</s:String>
+	<s:String x:Key="HeaderPersonalHomepage">个人主页：</s:String>
+	<s:String x:Key="HeaderSupport">赞助：</s:String>
+	<s:String x:Key="Desc">目前计划做喷漆的定义功能以及ConverterPIX相关功能&#10;如果有人在意的话会更新</s:String>
 	
 	
+	<!--设置-->
+	<s:String x:Key="AppLanguage">软件语言</s:String>
+	<s:String x:Key="TipsCustomLanguage">在软件的文件夹找到Language文件夹，在里面放好翻译好且按照格式重命名的xaml即可识别使用</s:String>
+	<s:String x:Key="ButtonLanguageDir">Language文件夹</s:String>
+	<s:String x:Key="ColorMode">颜色模式</s:String>
+	<s:String x:Key="ConverterPixPath">路径</s:String>
+	<s:String x:Key="FilterCPix">应用程序|converter_pix.exe</s:String>
+	<s:String x:Key="MessageErrNotCPix">选择的文件不是ConverterPix.exe</s:String>
+	<s:String x:Key="MessageErrDifferentStructure">选择的文件路径结构似乎有所不同，是否继续使用？</s:String>
 	
 	
 	
@@ -356,6 +380,7 @@
 	<s:String x:Key="ButtonDelete">删除</s:String>
 	<s:String x:Key="ButtonOpenFile">打开文件</s:String>
 	<s:String x:Key="ButtonSelect">选定</s:String>
+	<s:String x:Key="ButtonBrowse">浏览</s:String>
 	<s:String x:Key="CheckBoxSelectAll">全选</s:String>
 
 	<s:String x:Key="FilterAllFiles">所有文件|*.*</s:String>
@@ -423,12 +448,9 @@
 	<s:String x:Key="Acc.curtain_f">窗帘（欧卡）</s:String>
 	<s:String x:Key="Acc.drv_plate">驾驶员铭牌</s:String>
 	<s:String x:Key="Acc.codrv_plate">副驾驶铭牌</s:String>
-	<s:String x:Key="Acc.flag_l">左侧车窗旗帜（欧卡）</s:String>
-	<s:String x:Key="Acc.flag_r">右侧车窗旗帜（欧卡）</s:String>
-	<s:String x:Key="Acc.flag_f_l">前左方旗帜（美卡）</s:String>
-	<s:String x:Key="Acc.flag_f_r">前右方旗帜（美卡）</s:String>
-	<s:String x:Key="Acc.inlight_bck">灯板（后墙）（欧卡）</s:String>
-	<s:String x:Key="Acc.bckpanel">墙面物品（后墙）（美卡）</s:String>
+	<s:String x:Key="Acc.flag_l">左侧旗帜</s:String>
+	<s:String x:Key="Acc.flag_r">右侧旗帜</s:String>
+	<s:String x:Key="Acc.back_wall">后墙物品</s:String>
 	<s:String x:Key="Acc.l_pillow">枕头</s:String>
 	<s:String x:Key="Acc.set_cabinet">柜子组件（美卡）</s:String>
 	<s:String x:Key="Acc.set_glass">挡风玻璃套件</s:String>
@@ -443,6 +465,28 @@
 	<s:String x:Key="Acc.toyback">卧铺地板物品（美卡）</s:String>
 	<s:String x:Key="Acc.toysofa">后座的沙发（美卡）</s:String>
 	<s:String x:Key="Acc.toytable">卧铺桌面物品（美卡）</s:String>
+	
+	<s:String x:Key="MenuItem.cup_holder">cup_holder→杯架套件</s:String>
+	<s:String x:Key="MenuItem.curtain_f">curtain_f→窗帘（欧卡）</s:String>
+	<s:String x:Key="MenuItem.drv_plate">drv_plate→驾驶员铭牌</s:String>
+	<s:String x:Key="MenuItem.codrv_plate">codrv_plate→副驾驶铭牌</s:String>
+	<s:String x:Key="MenuItem.flag_l">flag_l/flag_f_l→左侧旗帜</s:String>
+	<s:String x:Key="MenuItem.flag_r">flag_r/flag_f_r→右侧旗帜</s:String>
+	<s:String x:Key="MenuItem.back_wall">inlight_bck/bckpanel→后墙物品</s:String>
+	<s:String x:Key="MenuItem.l_pillow">l_pillow→枕头</s:String>
+	<s:String x:Key="MenuItem.set_cabinet">set_cabinet→柜子组件（美卡）</s:String>
+	<s:String x:Key="MenuItem.set_glass">set_glass→挡风玻璃套件</s:String>
+	<s:String x:Key="MenuItem.set_lglass">set_lglass→挡风玻璃边角</s:String>
+	<s:String x:Key="MenuItem.sterring_w">sterring_w→方向盘</s:String>
+	<s:String x:Key="MenuItem.toyhang">toyhang→挂件</s:String>
+	<s:String x:Key="MenuItem.toyac">toyac→空调出风口</s:String>
+	<s:String x:Key="MenuItem.toystand">toystand→中控台物品</s:String>
+	<s:String x:Key="MenuItem.toyseat">toyseat→座椅物品（副驾驶）</s:String>
+	<s:String x:Key="MenuItem.toybed">toybed→卧铺物品</s:String>
+	<s:String x:Key="MenuItem.toybig">toybig→地板物品</s:String>
+	<s:String x:Key="MenuItem.toyback">toyback→卧铺地板物品（美卡）</s:String>
+	<s:String x:Key="MenuItem.toysofa">toysofa→后座的沙发（美卡）</s:String>
+	<s:String x:Key="MenuItem.toytable">toytable→卧铺桌面物品（美卡）</s:String>
 	
 	<!--locale中文名-->
 	<s:String x:Key="locale.universal">通用</s:String>

@@ -6,6 +6,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.Physics"
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:PhysicsBinding}"
 	mc:Ignorable="d"
 	d:Background="White"
@@ -31,12 +32,14 @@
 				Header="{DynamicResource PhysicsTypePatch}"
 				Click="AddPhysicDataClick" />
 		</ContextMenu>
+
 		<Style
 			x:Key="FloatCommaToy"
-			TargetType="Label">
+			TargetType="Label"
+			BasedOn="{StaticResource {x:Type Label}}">
 			<Setter
 				Property="BorderThickness"
-				Value="0,1,0,1" />
+				Value="0" />
 			<Setter
 				Property="BorderBrush"
 				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
@@ -44,23 +47,36 @@
 				Property="Padding"
 				Value="0" />
 			<Setter
+				Property="VerticalContentAlignment"
+				Value="Bottom" />
+			<Setter
 				Property="Content"
 				Value="," />
+			<Setter
+				Property="Background"
+				Value="{DynamicResource TextControlBackground}" />
+			<Setter
+				Property="Foreground"
+				Value="#E4000000" />
 		</Style>
 		<Style
 			x:Key="FloatBase"
-			TargetType="TextBox">
+			TargetType="TextBox"
+			BasedOn="{StaticResource {x:Type TextBox}}">
 			<Setter
 				Property="VerticalContentAlignment"
 				Value="Center" />
+			<Setter
+				Property="Padding"
+				Value="0" />
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
 		</Style>
 		<Style
 			x:Key="Float0"
 			TargetType="TextBox"
 			BasedOn="{StaticResource FloatBase}">
-			<Setter
-				Property="BorderThickness"
-				Value="1,1,0,1" />
 			<Setter
 				Property="HorizontalContentAlignment"
 				Value="Right" />
@@ -70,9 +86,6 @@
 			TargetType="TextBox"
 			BasedOn="{StaticResource FloatBase}">
 			<Setter
-				Property="BorderThickness"
-				Value="0,1,0,1" />
-			<Setter
 				Property="HorizontalContentAlignment"
 				Value="Center" />
 		</Style>
@@ -80,9 +93,6 @@
 			x:Key="Float2"
 			TargetType="TextBox"
 			BasedOn="{StaticResource FloatBase}">
-			<Setter
-				Property="BorderThickness"
-				Value="0,1,1,1" />
 		</Style>
 		<Style
 			x:Key="Float0_11"
@@ -140,34 +150,40 @@
 				Property="Padding"
 				Value="0,3,3,3" />
 		</Style>
+
 		<Style
-			x:Key="ButtonClear"
-			TargetType="Button">
+			x:Key="TextBoxBorderless"
+			TargetType="TextBox"
+			BasedOn="{StaticResource {x:Type TextBox}}">
 			<Setter
-				Property="Content"
-				Value=" × " />
+				Property="VerticalAlignment"
+				Value="Stretch" />
 			<Setter
 				Property="BorderThickness"
-				Value="0,1,1,1" />
-			<Setter
-				Property="Background"
-				Value="Transparent" />
-			<Setter
-				Property="BorderBrush"
-				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+				Value="0" />
 		</Style>
-		<Style 
-			x:Key="ButtonChoose"
-			TargetType="Button">
+		<Style
+			x:Key="ButtonBorderless"
+			TargetType="Button"
+			BasedOn="{StaticResource {x:Type Button}}">
+			<Setter
+				Property="VerticalAlignment"
+				Value="Stretch" />
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
 			<Setter
 				Property="Padding"
-				Value="3" />
+				Value="2" />
 			<Setter
-				Property="BorderThickness"
-				Value="0,1,1,1" />
+				Property="Background"
+				Value="{x:Null}" />
 			<Setter
-				Property="BorderBrush"
-				Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+				Property="Width"
+				Value="{Binding ActualHeight, ElementName=TextPhysicsName}" />
+			<Setter
+				Property="Height"
+				Value="{Binding ActualHeight, ElementName=TextPhysicsName}" />
 		</Style>
 	</UserControl.Resources>
 	<Grid
@@ -180,7 +196,7 @@
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition
-				Width="100" />
+				Width="110" />
 			<ColumnDefinition
 				Width="15" />
 			<ColumnDefinition
@@ -206,35 +222,53 @@
 				<RowDefinition
 					Height="Auto" />
 				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
 					Height="*" />
 			</Grid.RowDefinitions>
+			<Border
+				Grid.Column="1"
+				Grid.ColumnSpan="4"
+				Style="{DynamicResource MultiControlBorder}" />
 			<Button
 				x:Name="ButtonPhysicAdd"
 				Grid.Column="1"
-				Click="ButtonAddRowClick">
-				<Image
-					Source="/Images/AddRow.png" />
+				Click="ButtonAddRowClick"
+				Width="20"
+				Height="20"
+				Padding="2"
+				VerticalAlignment="Stretch">
+				<Viewbox>
+					<ui:SymbolIcon
+						Symbol="Add16" />
+				</Viewbox>
 			</Button>
 			<Button
 				x:Name="ButtonPhysicUp"
 				Grid.Column="2"
-				HorizontalAlignment="Left"
-				Click="SortButtonClick">
-				<Image
-					Source="/Images/Up.png" />
+				Click="SortButtonClick"
+				Width="20"
+				Height="20"
+				Padding="2"
+				VerticalAlignment="Stretch">
+				<Viewbox>
+					<ui:SymbolIcon
+						Symbol="ArrowUp16" />
+				</Viewbox>
 				<Button.Style>
 					<Style
-						TargetType="Button">
+						TargetType="Button"
+						BasedOn="{StaticResource {x:Type Button}}">
 						<Style.Triggers>
 							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+								Binding="{Binding SelectedIndex, ElementName=ListBoxPhysics}"
 								Value="-1">
 								<Setter
 									Property="IsEnabled"
 									Value="False" />
 							</DataTrigger>
 							<DataTrigger
-								Binding="{Binding ItemsSource.Count, ElementName=TablePhysicDatas}"
+								Binding="{Binding ItemsSource.Count, ElementName=ListBoxPhysics}"
 								Value="1">
 								<Setter
 									Property="IsEnabled"
@@ -247,23 +281,29 @@
 			<Button
 				x:Name="ButtonPhysicDown"
 				Grid.Column="3"
-				HorizontalAlignment="Left"
-				Click="SortButtonClick">
-				<Image
-					Source="/Images/Down.png" />
+				Click="SortButtonClick"
+				Width="20"
+				Height="20"
+				Padding="2"
+				VerticalAlignment="Stretch">
+				<Viewbox>
+					<ui:SymbolIcon
+						Symbol="ArrowDown16" />
+				</Viewbox>
 				<Button.Style>
 					<Style
-						TargetType="Button">
+						TargetType="Button"
+						BasedOn="{StaticResource {x:Type Button}}">
 						<Style.Triggers>
 							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+								Binding="{Binding SelectedIndex, ElementName=ListBoxPhysics}"
 								Value="-1">
 								<Setter
 									Property="IsEnabled"
 									Value="False" />
 							</DataTrigger>
 							<DataTrigger
-								Binding="{Binding ItemsSource.Count, ElementName=TablePhysicDatas}"
+								Binding="{Binding ItemsSource.Count, ElementName=ListBoxPhysics}"
 								Value="1">
 								<Setter
 									Property="IsEnabled"
@@ -276,15 +316,22 @@
 			<Button
 				x:Name="ButtonPhysicRemove"
 				Grid.Column="4"
-				Click="ButtonDeleteRowClick">
-				<Image
-					Source="/Images/DeleteRow.png" />
+				Click="ButtonDeleteRowClick"
+				Width="20"
+				Height="20"
+				Padding="2"
+				VerticalAlignment="Stretch">
+				<Viewbox>
+					<ui:SymbolIcon
+						Symbol="Dismiss16" />
+				</Viewbox>
 				<Button.Style>
 					<Style
-						TargetType="Button">
+						TargetType="Button"
+						BasedOn="{StaticResource {x:Type Button}}">
 						<Style.Triggers>
 							<DataTrigger
-								Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+								Binding="{Binding SelectedIndex, ElementName=ListBoxPhysics}"
 								Value="-1">
 								<Setter
 									Property="IsEnabled"
@@ -294,35 +341,56 @@
 					</Style>
 				</Button.Style>
 			</Button>
-			<DataGrid
-				x:Name="TablePhysicDatas"
+			<Border
+				Grid.Row="1"
+				Grid.RowSpan="2"
+				Grid.ColumnSpan="5"
+				BorderThickness="1"
+				BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+				CornerRadius="5" />
+			<TextBlock
+				Text="{DynamicResource HeaderPhysicsName}"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Bottom"
 				Grid.Row="1"
 				Grid.ColumnSpan="5"
-				CanUserAddRows="False"
-				RowHeaderWidth="0"
-				CanUserSortColumns="False"
-				VerticalGridLinesBrush="Transparent"
-				SelectionMode="Single"
-				Background="Transparent"
+				Padding="0,5,0,5"
+				FontWeight="Bold"
+				Margin="10,0,0,0" />
+			<ListBox
+                x:Name="ListBoxPhysics"
+                Grid.Row="2"
+				Grid.ColumnSpan="5"
+				d:ItemsSource="{d:SampleData ItemCount=2}"
 				ItemsSource="{Binding PhysicsItems}"
 				SelectedItem="{Binding CurrentPhysicsItem}"
-				AutoGenerateColumns="False">
-				<DataGrid.Columns>
-					<DataGridTextColumn
-						Header="{DynamicResource HeaderPhysicsName}"
-						Width="*"
-						Binding="{Binding PhysicsName, UpdateSourceTrigger=PropertyChanged}">
-						<DataGridTextColumn.CellStyle>
-							<Style
-								TargetType="DataGridCell">
-								<Setter
-									Property="ToolTip"
-									Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-							</Style>
-						</DataGridTextColumn.CellStyle>
-					</DataGridTextColumn>
-				</DataGrid.Columns>
-			</DataGrid>
+				SelectedIndex="0"
+				SelectionMode="Single">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock
+							Text="{Binding PhysicsName}"
+							ToolTip="{Binding PhysicsName}"
+							FontSize="13">
+							<TextBlock.Style>
+								<Style
+									TargetType="TextBlock"
+									BasedOn="{StaticResource {x:Type TextBlock}}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+											Value="True">
+											<Setter
+												Property="Foreground"
+												Value="White" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</TextBlock.Style>
+						</TextBlock>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</Grid>
 
 		<GridSplitter
@@ -344,7 +412,7 @@
 					TargetType="Grid">
 					<Style.Triggers>
 						<DataTrigger
-							Binding="{Binding ItemsSource.Count, ElementName=TablePhysicDatas, Mode=OneWay}"
+							Binding="{Binding ItemsSource.Count, ElementName=ListBoxPhysics, Mode=OneWay}"
 							Value="0">
 							<Setter
 								Property="Visibility"
@@ -368,13 +436,15 @@
 				<Button
 					x:Name="ButtonAddToOthers"
 					Content="{DynamicResource ButtonAddToOthers}"
+					Padding="5,2"
 					Click="ButtonPhysicsClick">
 					<Button.Style>
 						<Style
-							TargetType="Button">
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
 							<Style.Triggers>
 								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+									Binding="{Binding SelectedIndex, ElementName=ListBoxPhysics}"
 									Value="-1">
 									<Setter
 										Property="IsEnabled"
@@ -388,13 +458,15 @@
 					x:Name="ButtonSaveToPhysList"
 					Margin="5,0,0,0"
 					Content="{DynamicResource ButtonSaveToPhysicList}"
+					Padding="5,2"
 					Click="ButtonPhysicsClick">
 					<Button.Style>
 						<Style
-							TargetType="Button">
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
 							<Style.Triggers>
 								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=TablePhysicDatas}"
+									Binding="{Binding SelectedIndex, ElementName=ListBoxPhysics}"
 									Value="-1">
 									<Setter
 										Property="IsEnabled"
@@ -414,13 +486,16 @@
 					<ColumnDefinition
 						Width="*" />
 				</Grid.ColumnDefinitions>
-				<Label>
+				<TextBlock
+                    VerticalAlignment="Center"
+                    Padding="0,0,0,0">
 					<Run
 						Text="{DynamicResource TitlePhysicsType}" />
-				</Label>
+				</TextBlock>
 				<TextBlock
 					x:Name="ComboPhysicsType"
 					Grid.Column="1"
+					Margin="5,0,0,0"
 					Text="{Binding PhysicsType}"
 					VerticalAlignment="Center" />
 			</Grid>
@@ -440,10 +515,6 @@
 				</Grid.RowDefinitions>
 				<Grid>
 					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="10" />
 						<RowDefinition
 							Height="Auto" />
 						<RowDefinition
@@ -485,11 +556,12 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextPhysicsName"
-							Padding="3,3,3,3"
+							Padding="3"
 							Text="{Binding CurrentToyData.PhysicsName, UpdateSourceTrigger=PropertyChanged}">
 							<TextBox.Style>
 								<Style
-									TargetType="TextBox">
+									TargetType="TextBox"
+									BasedOn="{StaticResource {x:Type TextBox}}">
 									<Style.Triggers>
 										<Trigger
 											Property="Text"
@@ -527,14 +599,13 @@
 						</ComboBox>
 					</StackPanel>
 					<Grid
-						Margin="0,0,0,0"
 						Grid.Column="4"
 						Grid.ColumnSpan="3">
 						<Grid.RowDefinitions>
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
@@ -549,18 +620,22 @@
 							TextWrapping="Wrap"
 							VerticalAlignment="Top"
 							Text="{DynamicResource ModelFilePath}" />
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextPhysicsModelPath"
 							Grid.Row="1"
+							Padding="3"
 							Grid.Column="0"
-							Padding="3,3,3,3"
 							Text="{Binding CurrentToyData.ModelPath, UpdateSourceTrigger=PropertyChanged}"
 							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
 							MaxLines="2">
 							<TextBox.Style>
 								<Style
-									TargetType="TextBox">
+									TargetType="TextBox"
+									BasedOn="{StaticResource TextBoxBorderless}">
 									<Style.Triggers>
 										<Trigger
 											Property="Text"
@@ -578,16 +653,23 @@
 							Grid.Row="1"
 							Grid.Column="1"
 							Click="ButtonClearClick"
-							Style="{StaticResource ButtonClear}"
-							Visibility="{Binding CurrentToyData.ModelPath, Converter={StaticResource ClearVisibility}}" />
+							Style="{StaticResource ButtonBorderless}"
+							Visibility="{Binding CurrentToyData.ModelPath, Converter={StaticResource ClearVisibility}}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+						</Button>
 						<Button
 							x:Name="ButtonChoosePhysicsModel"
 							Grid.Row="1"
 							Grid.Column="2"
 							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonChoose}">
-							<Image
-								Source="/Images/Folder.png" />
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Folder16" />
+							</Viewbox>
 						</Button>
 					</Grid>
 
@@ -634,7 +716,7 @@
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
@@ -644,6 +726,10 @@
 							<ColumnDefinition
 								Width="Auto" />
 						</Grid.ColumnDefinitions>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBlock
 							x:Name="CheckUsePhysicsCollPath"
 							Grid.Row="0"
@@ -658,28 +744,35 @@
 							Padding="3,3,3,3"
 							Text="{Binding CurrentToyData.CollPath, UpdateSourceTrigger=PropertyChanged}"
 							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
-							MaxLines="2" />
+							MaxLines="2" 
+							Style="{StaticResource TextBoxBorderless}"/>
 						<Button
 							x:Name="ButtonPhysicsCollPathClear"
 							Grid.Row="1"
 							Grid.Column="1"
 							Click="ButtonClearClick"
-							Style="{StaticResource ButtonClear}"
-							Visibility="{Binding CurrentToyData.CollPath, Converter={StaticResource ClearVisibility}}" />
+							Style="{StaticResource ButtonBorderless}"
+							Visibility="{Binding CurrentToyData.CollPath, Converter={StaticResource ClearVisibility}}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+						</Button>
 						<Button
 							x:Name="ButtonChoosePhysicsColl"
 							Grid.Row="1"
 							Grid.Column="2"
 							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonChoose}">
-							<Image
-								Source="/Images/Folder.png" />
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Folder16" />
+							</Viewbox>
 						</Button>
 					</Grid>
 
 					<StackPanel
-						Grid.Row="6">
+						Grid.Row="4">
 						<TextBlock>
 						<Run
 								Text="{DynamicResource TitleToyMass}" />
@@ -690,13 +783,13 @@
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<Grid
-						Grid.Row="6"
+						Grid.Row="4"
 						Grid.Column="2">
 						<Grid.RowDefinitions>
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
@@ -715,6 +808,10 @@
 							<Run
 								Text="{DynamicResource TitleCogOffset}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextCogOffset0"
 							Grid.Row="1"
@@ -749,7 +846,7 @@
 							Style="{StaticResource Float2_11}" />
 					</Grid>
 					<StackPanel
-						Grid.Row="6"
+						Grid.Row="4"
 						Grid.Column="4">
 						<TextBlock
 							ToolTip="{DynamicResource TipLinearStiffness}">
@@ -762,7 +859,7 @@
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
-						Grid.Row="6"
+						Grid.Row="4"
 						Grid.Column="6">
 						<TextBlock
 							ToolTip="{DynamicResource TitleLinearDamping}">
@@ -776,13 +873,13 @@
 					</StackPanel>
 
 					<Grid
-						Grid.Row="8"
+						Grid.Row="6"
 						Grid.Column="0">
 						<Grid.RowDefinitions>
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
@@ -802,6 +899,10 @@
 						<Run
 								Text="{DynamicResource TitleLocatorHookOffset}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextLocatorHookOffset0"
 							Grid.Row="1"
@@ -835,13 +936,13 @@
 							Style="{StaticResource Float2_11}" />
 					</Grid>
 					<Grid
-						Grid.Row="8"
+						Grid.Row="6"
 						Grid.Column="2">
 						<Grid.RowDefinitions>
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
@@ -860,6 +961,10 @@
 						<Run
 								Text="{DynamicResource TitleRestPositionOffset}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextRestPositionOffset0"
 							Grid.Row="1"
@@ -893,13 +998,13 @@
 							Style="{StaticResource Float2_11}" />
 					</Grid>
 					<Grid
-						Grid.Row="8"
+						Grid.Row="6"
 						Grid.Column="4">
 						<Grid.RowDefinitions>
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
@@ -918,6 +1023,10 @@
 						<Run
 								Text="{DynamicResource TitleRestRotationOffset}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextRestRotationOffset0"
 							Grid.Row="1"
@@ -951,7 +1060,7 @@
 							Style="{StaticResource Float2_11}" />
 					</Grid>
 					<Grid
-						Grid.Row="8"
+						Grid.Row="6"
 						Grid.Column="6">
 						<Grid.RowDefinitions>
 							<RowDefinition
@@ -981,8 +1090,8 @@
 							Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
 							Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
 							Click="ButtonInstanceOffsetClicked">
-							<Image
-								Source="/Images/Add.png" />
+							<ui:SymbolIcon
+								Symbol="Add16" />
 						</Button>
 						<Button
 							x:Name="ButtonInstanceOffsetRemove"
@@ -990,9 +1099,9 @@
 							Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
 							Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
 							Click="ButtonInstanceOffsetClicked"
-							Margin="5,0,5,0">
-							<Image
-								Source="/Images/Delete.png" />
+							Margin="3,0,3,0">
+							<ui:SymbolIcon
+								Symbol="dismiss16" />
 						</Button>
 						<Button
 							x:Name="ButtonInstanceOffsetList"
@@ -1000,8 +1109,8 @@
 							Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
 							Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
 							Click="ButtonInstanceOffsetClicked">
-							<Image
-								Source="/Images/ListBox.png" />
+							<ui:SymbolIcon
+								Symbol="AppsList20" />
 						</Button>
 						<Grid
 							Grid.Row="1"
@@ -1018,33 +1127,30 @@
 								<ColumnDefinition
 									Width="*" />
 							</Grid.ColumnDefinitions>
-
+							<Border
+								Grid.ColumnSpan="5"
+								Style="{DynamicResource MultiControlBorder}" />
 							<TextBox
 								x:Name="TextInstanceOffset0"
-								Grid.Row="1"
 								Text="{Binding CurrentToyData.InstanceOffset0, Converter={StaticResource FloatConverter}}"
 								d:Text="0.000000"
 								PreviewTextInput="FloatOnly"
 								Style="{StaticResource Float0_11}" />
 							<Label
-								Grid.Row="1"
 								Grid.Column="1"
 								Style="{StaticResource FloatCommaToy}" />
 							<TextBox
 								x:Name="TextInstanceOffset1"
-								Grid.Row="1"
 								Grid.Column="2"
 								Text="{Binding CurrentToyData.InstanceOffset1, Converter={StaticResource FloatConverter}}"
 								d:Text="0.000000"
 								PreviewTextInput="FloatOnly"
 								Style="{StaticResource Float1_11}" />
 							<Label
-								Grid.Row="1"
 								Grid.Column="3"
 								Style="{StaticResource FloatCommaToy}" />
 							<TextBox
 								x:Name="TextInstanceOffset2"
-								Grid.Row="1"
 								Grid.Column="4"
 								Text="{Binding CurrentToyData.InstanceOffset2, Converter={StaticResource FloatConverter}}"
 								d:Text="0.000000"
@@ -1052,10 +1158,17 @@
 								Style="{StaticResource Float2_11}" />
 						</Grid>
 					</Grid>
+					
 					<Grid
-						Grid.Row="10"
+						Grid.Row="8"
 						Grid.Column="0"
 						Grid.ColumnSpan="3">
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
 								Width="*" />
@@ -1064,41 +1177,45 @@
 							<ColumnDefinition
 								Width="Auto" />
 						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="Auto" />
-						</Grid.RowDefinitions>
 						<TextBlock
 							Grid.ColumnSpan="3">
 						<Run
 								Text="{DynamicResource TitleRopeMaterial}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextRopeMaterial"
 							Grid.Row="1"
 							Grid.Column="0"
-							Padding="3,3,3,3"
 							Text="{Binding CurrentToyData.RopeMaterial, UpdateSourceTrigger=PropertyChanged}"
 							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
-							MaxLines="2" />
+							MaxLines="2" 
+							Style="{StaticResource TextBoxBorderless}"/>
 						<Button
 							x:Name="ButtonRopeMaterialClear"
 							Grid.Row="1"
 							Grid.Column="1"
 							Click="ButtonClearClick"
-							Style="{StaticResource ButtonClear}"
-							Visibility="{Binding CurrentToyData.RopeMaterial, Converter={StaticResource ClearVisibility}}" />
+							Style="{StaticResource ButtonBorderless}"
+							Visibility="{Binding CurrentToyData.RopeMaterial, Converter={StaticResource ClearVisibility}}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+						</Button>
 						<Button
 							x:Name="ButtonChooseRopeMaterial"
 							Grid.Row="1"
 							Grid.Column="2"
 							Click="ButtonChooseMaterialClick"
-							Style="{StaticResource ButtonChoose}">
-							<Image
-								Source="/Images/Folder.png" />
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Folder16" />
+							</Viewbox>
 						</Button>
 					</Grid>
 				</Grid>
@@ -1178,6 +1295,10 @@
 						<Run
 								Text="{DynamicResource TitleAngularStiffness}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextAngularStiffness0"
 							Grid.Row="1"
@@ -1221,6 +1342,10 @@
 						<Run
 								Text="{DynamicResource TitleAngularDamping}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextAngularDamping0"
 							Grid.Row="1"
@@ -1268,6 +1393,10 @@
 						<Run
 								Text="{DynamicResource TitleAngularAmplitude}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextAngularAmplitude0"
 							Grid.Row="1"
@@ -1506,7 +1635,8 @@
 							Text="{Binding CurrentPatchData.PhysicsName, UpdateSourceTrigger=PropertyChanged}">
 							<TextBox.Style>
 								<Style
-									TargetType="TextBox">
+									TargetType="TextBox"
+									BasedOn="{StaticResource {x:Type TextBox}}">
 									<Style.Triggers>
 										<Trigger
 											Property="Text"
@@ -1536,25 +1666,28 @@
 							<RowDefinition
 								Height="Auto" />
 							<RowDefinition
-								Height="Auto" />
+								Height="*" />
 						</Grid.RowDefinitions>
 						<TextBlock
 							Grid.ColumnSpan="3">
-						<Run
+							<Run
 								Text="{DynamicResource TitlePatchMaterial}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextPatchMaterial"
 							Grid.Row="1"
 							Grid.Column="0"
-							Padding="3,3,3,3"
 							Text="{Binding CurrentPatchData.Material}"
 							TextWrapping="Wrap"
-							BorderThickness="1,1,0,1"
 							MaxLines="2">
 							<TextBox.Style>
 								<Style
-									TargetType="TextBox">
+									TargetType="TextBox"
+									BasedOn="{StaticResource TextBoxBorderless}">
 									<Style.Triggers>
 										<Trigger
 											Property="Text"
@@ -1572,16 +1705,23 @@
 							Grid.Row="1"
 							Grid.Column="1"
 							Click="ButtonClearClick"
-							Style="{StaticResource ButtonClear}"
-							Visibility="{Binding CurrentPatchData.Material, Converter={StaticResource ClearVisibility}}" />
+							Style="{StaticResource ButtonBorderless}"
+							Visibility="{Binding CurrentPatchData.Material, Converter={StaticResource ClearVisibility}}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+						</Button>
 						<Button
 							x:Name="ButtonChoosePatchMaterial"
 							Grid.Row="1"
 							Grid.Column="2"
 							Click="ButtonChooseMaterialClick"
-							Style="{StaticResource ButtonChoose}">
-							<Image
-								Source="/Images/Folder.png" />
+							Style="{StaticResource ButtonBorderless}">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Folder16" />
+							</Viewbox>
 						</Button>
 					</Grid>
 
@@ -1669,6 +1809,10 @@
 						<TextBlock Grid.ColumnSpan="3"><Run
 								Text="{DynamicResource TitleTCMinFirst}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextTCMinFirst0"
 							Grid.Row="1"
@@ -1708,6 +1852,10 @@
 							Grid.ColumnSpan="3"><Run
 								Text="{DynamicResource TitleTCMaxFirst}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextTCMaxFirst0"
 							Grid.Row="1"
@@ -1748,6 +1896,10 @@
 							Grid.ColumnSpan="3"><Run
 								Text="{DynamicResource TitleTCMinSecond}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextTCMinSecond0"
 							Grid.Row="1"
@@ -1787,6 +1939,10 @@
 							Grid.ColumnSpan="3"><Run
 								Text="{DynamicResource TitleTCMaxSecond}" />
 						</TextBlock>
+						<Border
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
 						<TextBox
 							x:Name="TextTCMaxSecond0"
 							Grid.Row="1"
