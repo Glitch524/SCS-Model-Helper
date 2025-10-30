@@ -1,19 +1,42 @@
 # SCS Model Maker
-### °üº¬µÄ¹¦ÄÜ£º
-- ManifestÎÄ¼şµÄ´´½¨ÓëĞŞ¸Ä
-- ModÃèÊöÎÄ¼şµÄ´´½¨ÒÔ¼°¶àÓïÑÔÖ§³Ö
-- ³µÄÚÄ£ĞÍµÄ¶¨Òå£º
-	- ¸÷³µĞÍµÄ³µÄÚÄ£ĞÍ¶¨ÒåsiiÎÄ¼şµÄÉú³É£¬Ö§³ÖÑ¡Ôñ³µĞÍÉú³É
-	- Ì×¼şÄ£ĞÍµÄ¶¨ÒåÓëÉú³É
-	- ÎïÀíÄ£ĞÍµÄ¶¨ÒåÓëÉú³É
-	- ÒÑÉú³ÉsiiÎÄ¼şµÄ²é¿´ºÍÇåÀí
-- Ä£ĞÍ¶¯»­°ó¶¨ÎÄ¼şµÄÉú³É
-- ÎÄ×ÖµÄ¶àÓïÑÔ¶¨ÒåµÄÉèÖÃÓëÎÄ¼şÉú³É
 
-### ´ó¸Å»á¸üĞÂµÄ¹¦ÄÜ£º
-- ³µÁ¾Í¿×°µÄ¶¨ÒåÓëÉú³É
+### Functionï¼š
+- App Function
+	- Creation and Editing for Manifest file
+	- Creation of Mod description file and localization
+	- Interior model definition:
+		- Interior model sii file for selected trucks
+		- Accessory Hookup model
+		- Physics model
+		- Search and clean created sii files
+	- Model Hookup files for model animation or compass
+	- Localization for item names
+- System settings
+	- App Localization: English, Simplified Chinese (Follow System by default, English if no corresponding language)
+	- Themes: Light, Dark, Follow System
+
+### Probably updatesï¼š
+- Paint job creation
+- List or export files by ConverterPIX
+
+---
+
+### åŒ…å«çš„åŠŸèƒ½ï¼š
+- Manifestæ–‡ä»¶çš„åˆ›å»ºä¸ä¿®æ”¹
+- Modæè¿°æ–‡ä»¶çš„åˆ›å»ºä»¥åŠå¤šè¯­è¨€æ”¯æŒ
+- è½¦å†…æ¨¡å‹çš„å®šä¹‰ï¼š
+	- å„è½¦å‹çš„è½¦å†…æ¨¡å‹å®šä¹‰siiæ–‡ä»¶çš„ç”Ÿæˆï¼Œæ”¯æŒé€‰æ‹©è½¦å‹ç”Ÿæˆ
+	- å¥—ä»¶æ¨¡å‹çš„å®šä¹‰ä¸ç”Ÿæˆ
+	- ç‰©ç†æ¨¡å‹çš„å®šä¹‰ä¸ç”Ÿæˆ
+	- å·²ç”Ÿæˆsiiæ–‡ä»¶çš„æŸ¥çœ‹å’Œæ¸…ç†
+- æ¨¡å‹åŠ¨ç”»ç»‘å®šæ–‡ä»¶çš„ç”Ÿæˆ
+- æ–‡å­—çš„å¤šè¯­è¨€å®šä¹‰çš„è®¾ç½®ä¸æ–‡ä»¶ç”Ÿæˆ
+
+### å¤§æ¦‚ä¼šæ›´æ–°çš„åŠŸèƒ½ï¼š
+- è½¦è¾†æ¶‚è£…çš„å®šä¹‰ä¸ç”Ÿæˆ
+- ä½¿ç”¨ConverterPIXæµè§ˆã€å¯¼å‡ºæ–‡ä»¶
 
   
-### ¹ØÓÚ³µÄÚÄ£ĞÍ°Ú¼şµÄÖÆ×÷¿ÉÒÔ¿´Õâ¸ö
-£¨Ö÷ÒªÊÇÊ¹ÓÃÁµ»î½ÇÉ«ÖÆ×÷µÄmod£©  
-[ÓÎÏ·ModÖÆ×÷ Å·¿¨2/ÃÀ¿¨modÖÆ×÷ Ä£ĞÍËØ²Ä×¼±¸](https://www.bilibili.com/video/BV1LEtEzcEbv)
+### å…³äºè½¦å†…æ¨¡å‹æ‘†ä»¶çš„åˆ¶ä½œå¯ä»¥çœ‹è¿™ä¸ª
+ï¼ˆä¸»è¦æ˜¯ä½¿ç”¨æ‹æ´»è§’è‰²åˆ¶ä½œçš„modï¼‰  
+[æ¸¸æˆModåˆ¶ä½œ æ¬§å¡2/ç¾å¡modåˆ¶ä½œ æ¨¡å‹ç´ æå‡†å¤‡](https://www.bilibili.com/video/BV1LEtEzcEbv)
