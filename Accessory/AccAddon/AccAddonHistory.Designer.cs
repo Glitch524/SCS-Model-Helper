@@ -157,7 +157,7 @@ namespace SCS_Mod_Helper.Accessory.AccAddon {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("unknown")]
         public string PartType {
             get {
                 return ((string)(this["PartType"]));
@@ -248,6 +248,114 @@ namespace SCS_Mod_Helper.Accessory.AccAddon {
             }
             set {
                 this["AutoFillSelectAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExtModelPath {
+            get {
+                return ((string)(this["ExtModelPath"]));
+            }
+            set {
+                this["ExtModelPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExtModelPathUK {
+            get {
+                return ((string)(this["ExtModelPathUK"]));
+            }
+            set {
+                this["ExtModelPathUK"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("vehicle")]
+        public string ElectricType {
+            get {
+                return ((string)(this["ElectricType"]));
+            }
+            set {
+                this["ElectricType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Data {
+            get {
+                return ((string)(this["Data"]));
+            }
+            set {
+                this["Data"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SuitableFor {
+            get {
+                return ((string)(this["SuitableFor"]));
+            }
+            set {
+                this["SuitableFor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConflictWith {
+            get {
+                return ((string)(this["ConflictWith"]));
+            }
+            set {
+                this["ConflictWith"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Defaults {
+            get {
+                return ((string)(this["Defaults"]));
+            }
+            set {
+                this["Defaults"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Overrides {
+            get {
+                return ((string)(this["Overrides"]));
+            }
+            set {
+                this["Overrides"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Require {
+            get {
+                return ((string)(this["Require"]));
+            }
+            set {
+                this["Require"] = value;
             }
         }
     }

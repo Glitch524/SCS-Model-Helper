@@ -78,7 +78,10 @@
 	<s:String x:Key="ModelFilePath">Model Path(.pim will be transformed to .pmd)</s:String>
 	<s:String x:Key="ModelFilePathUK">Model Path for UK</s:String>
 	<s:String x:Key="ModelFilePathUKTip">File with _uk suffix will be auto filled</s:String>
+	<s:String x:Key="ExtModelFilePath">Exterior Model Path</s:String>
+	<s:String x:Key="ExtModelFilePathUK">Exterior Model Path for UK</s:String>
 	<s:String x:Key="ModelCollPath">Model Collision File Path</s:String>
+	<s:String x:Key="ModelSetExterior">Set Exterior Model</s:String>
 	<s:String x:Key="ModelNameTip">Might be invisible when over 12 characters</s:String>
 	<s:String x:Key="ModelIconTip">Recommend location: material\ui\accessory\</s:String>
 	<s:String x:Key="ModelType">Model Type </s:String>
@@ -86,22 +89,17 @@
 	<s:String x:Key="ModelLook">Look</s:String>
 	<s:String x:Key="ModelVariant">Variant</s:String>
 	<s:String x:Key="HideIn">Hide in</s:String>
+	<s:String x:Key="ElectricType">Electric Type</s:String>
 	<s:String x:Key="Others">Others</s:String>
 	<s:String x:Key="OthersTip">You can add other contents that does not show above&#10;Right click to show recomended items&#10;Duplicate items will only use the item at front</s:String>
-		<!--Others List-->
-	<s:String x:Key="HeaderOthersName">Name</s:String>
-	<s:String x:Key="HeaderIsArray">Array</s:String>
-	<s:String x:Key="HeaderUseQuote">Quote Mark</s:String>
-	<s:String x:Key="HeaderOthersValue">Value</s:String>
 		<!--others-->
-	<s:String x:Key="MenuOthersExteriorModel">Exterior Model</s:String>
-	<s:String x:Key="MenuOthersExteriorModelUK">Exterior Model(UK)</s:String>
-	<s:String x:Key="MenuOthersData">Physics toy data</s:String>
-	<s:String x:Key="MenuOthersSuitableFor">Suitable for</s:String>
-	<s:String x:Key="MenuOthersConflictWith">Conflict with</s:String>
-	<s:String x:Key="MenuOthersDefaults">Defaults</s:String>
-	<s:String x:Key="MenuOthersOverrides">Overrides</s:String>
-	<s:String x:Key="MenuOtherRequire">Require</s:String>
+	<s:String x:Key="Data">Physics toy data</s:String>
+	<s:String x:Key="SuitableFor">Suitable for</s:String>
+	<s:String x:Key="ConflictWith">Conflict with</s:String>
+	<s:String x:Key="Defaults">Defaults</s:String>
+	<s:String x:Key="Overrides">Overrides</s:String>
+	<s:String x:Key="Require">Require</s:String>
+	<s:String x:Key="ListCount">Counts:</s:String>
 	
 		<!--Truck List-->
 	<s:String x:Key="ModelTruckTip">If theres new trucks that cannot find in here, press "New Truck" to and new trucks&#10;"Delete Truck" will delete selected trucks(not checked trucks)&#10;Model type, look and variant can be separatly set in the following list.</s:String>
@@ -214,7 +212,7 @@
 	<s:String x:Key="MsgPhysics2">Choose a physics data to add to the model definition</s:String>
 	
 	<s:String x:Key="HeaderPhysicsName">Physics</s:String>
-	<s:String x:Key="ButtonAddToOthers">Add to Others</s:String>
+	<s:String x:Key="ButtonAddToData">Add to Data</s:String>
 	<s:String x:Key="ButtonSaveToPhysicList">Save to physics list</s:String>
 	<s:String x:Key="TitlePhysicsType">Physics Type</s:String>
 	

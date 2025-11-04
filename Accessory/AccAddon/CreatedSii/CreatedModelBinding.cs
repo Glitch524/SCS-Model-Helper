@@ -1,21 +1,42 @@
-﻿using SCS_Mod_Helper.Utils;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.CreatedSii {
-	internal class CreatedModelBinding: INotifyPropertyChanged {
+	internal class CreatedModelBinding: BaseBinding {
 		private string mCurrentProjectLocation = "";
 		public string CurrentProjectLocation {
 			get => mCurrentProjectLocation;
 			set {
 				mCurrentProjectLocation = Util.GetString("TextProjectLocation") + value;
 				InvokeChange();
+			}
+		}
+
+		private Visibility mProgressRingVisibility = Visibility.Visible;
+		public Visibility ProgressRingVisibility {
+			get => mProgressRingVisibility;
+			set {
+				mProgressRingVisibility = value;
+				InvokeChange();
+			}
+		}
+		public bool ProgressRingVisible {
+			get => mProgressRingVisibility == Visibility.Visible;
+			set {
+				mProgressRingVisibility = value ? Visibility.Visible : Visibility.Collapsed;
+				InvokeChange(nameof(ProgressRingVisibility));
 			}
 		}
 
@@ -54,8 +75,5 @@ namespace SCS_Mod_Helper.Accessory.AccAddon.CreatedSii {
 		}
 
 		public ObservableCollection<CreatedModelItem>? CurrentModelItems => CurrentModel?.CreatedModelItems;
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-		private void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
 	}
 }

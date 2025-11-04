@@ -19,11 +19,11 @@ public class Truck(
 
 	public Truck(
 		string truckID,
-		int releaseDate,
+		int productionYear,
 		string ingameName,
 		[CallerMemberName] string caller = "") : this(
 			truckID,
-			releaseDate,
+			productionYear,
 			ingameName,
 			Util.GetString("TruckDesc." + truckID),
 			caller.EndsWith("ETS2")) {
@@ -46,8 +46,28 @@ public class Truck(
 		}
 	}
 
-	public string Manifaturer = truckID[..truckID.IndexOf('.')];
-	public string TruckName = truckID[(truckID.IndexOf(',') + 1)..];
+	private string? mManifaturer = null;
+	public string Manifaturer {
+		get {
+			if (mManifaturer == null) {
+				var truckIDDot = TruckID.IndexOf('.');
+				mManifaturer = truckIDDot == -1 ? "" : TruckID[..truckIDDot];
+				mTruckName = truckIDDot == -1 ? TruckID : TruckID[(truckIDDot + 1)..];
+			}
+			return mManifaturer;
+		}
+	}
+	private string? mTruckName = null;
+	public string TruckName {
+		get {
+			if (mTruckName == null) {
+				var truckIDDot = TruckID.IndexOf('.');
+				mManifaturer = truckIDDot == -1 ? "" : TruckID[..truckIDDot];
+				mTruckName = truckIDDot == -1 ? TruckID : TruckID[(truckIDDot + 1)..];
+			}
+			return mTruckName;
+		}
+	}
 
 	public int ProductionYear = productionYear;
 
@@ -102,7 +122,14 @@ public class Truck(
 		}
 	}
 
-	public bool IsETS2 = ets2;
+	private bool mIsETS2 = ets2;
+	public bool IsETS2 {
+		get => mIsETS2;
+		set {
+			mIsETS2 = value;
+			InvokeChange(nameof(IsETS2));
+		}
+	}
 
 	public const int IndexDTruckID = 0;
 	public const int IndexDModelType = 1;

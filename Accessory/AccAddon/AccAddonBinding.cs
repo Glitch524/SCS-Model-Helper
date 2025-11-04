@@ -1,18 +1,20 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Accessory.AccAddon.Popup;
 using SCS_Mod_Helper.Accessory.Physics;
+using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
-class AccAddonBinding: INotifyPropertyChanged {
-	private readonly AccessoryAddonData AddonItem = new();
+public class AccAddonBinding: BaseBinding {
+	private readonly AccessoryAddonData mAddonItem = new();
+	public AccessoryAddonData AddonItem => mAddonItem;
 
 	public void SaveHistory() => AddonItem.SaveHistory();
 
@@ -103,8 +105,11 @@ class AccAddonBinding: INotifyPropertyChanged {
 		set {
 			AddonItem.IconName = value;
 			InvokeChange();
+
+			InvokeChange(nameof(IconNameClearVisibility));
 		}
 	}
+	public Visibility IconNameClearVisibility => IconName.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
 
 
 	public BitmapSource? ModelIcon {
@@ -120,16 +125,57 @@ class AccAddonBinding: INotifyPropertyChanged {
 		set {
 			AddonItem.ModelPath = value;
 			InvokeChange();
+
+			InvokeChange(nameof(ModelPathClearVisibility));
 		}
 	}
+	public Visibility ModelPathClearVisibility => ModelPath.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
 
 	public string ModelPathUK {
 		get => AddonItem.ModelPathUK;
 		set {
 			AddonItem.ModelPathUK = value;
 			InvokeChange();
+			InvokeChange(nameof(ModelPathUKClearVisibility));
 		}
 	}
+	public Visibility ModelPathUKClearVisibility => ModelPathUK.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+	private bool? mExteriorPath = null;
+	public bool EnableExterior {
+		get {
+			mExteriorPath ??= ExtModelPath.Length > 0 || ExtModelPathUK.Length > 0;
+			return (bool)mExteriorPath;
+		}
+		set {
+			mExteriorPath = value;
+			InvokeChange();
+		}
+	}
+
+	public string ExtModelPath {
+		get => AddonItem.ExtModelPath;
+		set {
+		AddonItem.ExtModelPath = value;
+			InvokeChange();
+
+			InvokeChange(nameof(EnableExterior));
+			InvokeChange(nameof(ExtModelPathClearVisibility));
+		}
+	}
+	public Visibility ExtModelPathClearVisibility => ExtModelPath.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+	public string ExtModelPathUK {
+		get => AddonItem.ExtModelPathUK;
+		set {
+			AddonItem.ExtModelPathUK = value;
+			InvokeChange();
+
+			InvokeChange(nameof(EnableExterior));
+			InvokeChange(nameof(ExtModelPathUKClearVisibility));
+		}
+	}
+	public Visibility ExtModelPathUKClearVisibility => ExtModelPathUK.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
 
 	public string CollPath {
 		get => AddonItem.CollPath;
@@ -138,15 +184,18 @@ class AccAddonBinding: INotifyPropertyChanged {
 			InvokeChange();
 
 			UseCollPath = value.Length > 0;
+
+			InvokeChange(nameof(CollPathClearVisibility));
 		}
 	}
+	public Visibility CollPathClearVisibility => CollPath.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
 
 	private bool mUseCollPath = false;
 	public bool UseCollPath {
 		get => mUseCollPath;
 		set {
 			mUseCollPath = value;
-			InvokeChange(nameof(UseCollPath));
+			InvokeChange();
 		}
 	}
 
@@ -229,6 +278,51 @@ class AccAddonBinding: INotifyPropertyChanged {
 			InvokeChange();
 		}
 	}
+
+	public List<PhysicsData> PhysicsList => AddonItem.PhysicsList;
+
+	public void LoadLooksAndVariants(string? path = null) {
+		try {
+			string oldLook = Look, oldVariant = Variant;
+			if (path == null) {
+				if (ModelPath.Length > 0)
+					path = ModelPath;
+				else if (ModelPathUK.Length > 0)
+					path = ModelPathUK;
+				else
+					return;
+				path = path.Replace('/', '\\');
+				if (path.Length < 4)
+					return;
+				path = path[..^4] + ".pit";
+				path = ProjectLocation + path;
+			} else if (path.EndsWith(".pim")) {
+				if (path.Length < 4)
+					return;
+				path = path[..^4] + ".pit";
+			}
+			Application.Current.Dispatcher.Invoke(() => {
+				LookList.Clear();
+				VariantList.Clear();
+			}, DispatcherPriority.DataBind);
+
+			AccDataIO.ReadLookAndVariant(path, LookList, VariantList);
+
+			static void setValue(ObservableCollection<string> list, string oldValue, Action<string> set) {
+				if (list.Count > 0) {
+					if (list.Contains(oldValue)) {
+						set(oldValue);
+					} else
+						set(list[0]);
+				}
+			}
+			setValue(LookList, oldLook, (set) => Look = set);
+			setValue(VariantList, oldVariant, (set) => Variant = set);
+		} catch (Exception ex) {
+			MessageBox.Show(Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
+		}
+	}
+
 	public uint HideIn {
 		get => AddonItem.HideIn;
 		set {
@@ -237,52 +331,134 @@ class AccAddonBinding: INotifyPropertyChanged {
 		}
 	}
 
-	public ObservableCollection<OthersItem> OthersList => AddonItem.OthersList;
-
-	public List<PhysicsData> PhysicsList => AddonItem.PhysicsList;
-
-	public void LoadLooksAndVariants(string? path = null) {
-		string oldLook = Look, oldVariant = Variant;
-		if (path == null) {
-			if (ModelPath.Length > 0)
-				path = ModelPath;
-			else if (ModelPathUK.Length > 0)
-				path = ModelPathUK;
-			else
-				return;
-			path = path.Replace('/', '\\');
-			if (path.Length < 4)
-				return;
-			path = path[..^4] + ".pit";
-			path = ProjectLocation + path;
-		} else if (path.EndsWith(".pim")) {
-			if (path.Length < 4)
-				return;
-			path = path[..^4] + ".pit";
+	public HideInUC? HideInUC = null;
+	public string ElectricType {
+		get => AddonItem.ElectricType;
+		set {
+			AddonItem.ElectricType = value;
+			InvokeChange();
 		}
-		LookList.Clear();
-		VariantList.Clear();
-
-		AccDataIO.ReadLookAndVariant(path, LookList, VariantList);
-
-		static void setValue(ObservableCollection<string> list, string oldValue, Action<string> set) {
-			if (list.Count > 0) {
-				if (list.Contains(oldValue)) {
-					set(oldValue);
-				} else
-					set(list[0]);
-			}
-		}
-		setValue(LookList, oldLook, (set) => Look = set);
-		setValue(VariantList, oldVariant, (set) => Variant = set);
 	}
+
+	public ObservableCollection<string> Data => AddonItem.Data;
+	public ObservableCollection<string> SuitableFor => AddonItem.SuitableFor;
+	public ObservableCollection<string> ConflictWith => AddonItem.ConflictWith;
+	public ObservableCollection<string> Defaults => AddonItem.Defaults;
+	public ObservableCollection<string> Overrides => AddonItem.Overrides;
+	public ObservableCollection<string> Require => AddonItem.Require;
+
+	private string mNewData = "";
+	public string NewData {
+		get {
+			return mNewData;
+		}
+		set {
+			mNewData = value;
+			InvokeChange();
+		}
+	}
+	private string mNewSuitableFor = "";
+	public string NewSuitableFor {
+		get => mNewSuitableFor;
+		set {
+			mNewSuitableFor = value;
+			InvokeChange();
+		}
+	}
+	private string mNewConflictWith = "";
+	public string NewConflictWith {
+		get => mNewConflictWith;
+		set {
+			mNewConflictWith = value;
+			InvokeChange();
+		}
+	}
+	private string mNewDefaults = "";
+	public string NewDefaults {
+		get => mNewDefaults;
+		set {
+			mNewDefaults = value; 
+			InvokeChange();
+		}
+	}
+	private string mNewOverrides = "";
+	public string NewOverrides {
+		get => mNewOverrides;
+		set {
+			mNewOverrides = value;
+			InvokeChange();
+		}
+	}
+	private string mNewRequire = "";
+	public string NewRequire {
+		get => mNewRequire;
+		set {
+			mNewRequire = value;
+			InvokeChange();
+		}
+	}
+	public void AddNewData(string? data = null) {
+		AddListItem(Data, data ?? NewData);
+		if (data != null)
+			NewData = string.Empty;
+	}
+
+	public void AddNewSuitableFor() {
+		AddListItem(SuitableFor, NewSuitableFor);
+		NewSuitableFor = string.Empty;
+	}
+
+	public void AddNewConflictWith() {
+		AddListItem(ConflictWith, NewConflictWith);
+		NewConflictWith = string.Empty;
+	}
+
+	public void AddNewDefaults() {
+		AddListItem(Defaults, NewDefaults);
+		NewDefaults = string.Empty;
+	}
+
+	public void AddNewOverrides() {
+		AddListItem(Overrides, NewOverrides);
+		NewOverrides = string.Empty;
+	}
+
+	public void AddNewRequire() {
+		AddListItem(Require, NewRequire);
+		NewRequire = string.Empty;
+	}
+
+	public static void AddListItem(ObservableCollection<string> list,string newItem) {
+		if (newItem.Length == 0 || list.Contains(newItem))
+			return;
+		list.Add(newItem);
+	}
+	public string DataListContent => AddonItem.DataListContent;
+	public string SuitableForListContent => AddonItem.SuitableForListContent;
+	public string ConflictWithListContent => AddonItem.ConflictWithListContent;
+	public string DefaultsListContent => AddonItem.DefaultsListContent;
+	public string OverridesListContent => AddonItem.OverridesListContent;
+	public string RequireListContent => AddonItem.RequireListContent;
+
+	public string? OpeningList {
+		get => AddonItem.OpeningList;
+		set {
+			AddonItem.OpeningList = value;
+			InvokeChange(nameof(PopupCollection));
+		}
+	}
+
+	public ObservableCollection<string>? PopupCollection => AddonItem.PopupCollection;
+
+	public ListDataUC? ListDataUC = null;
+
 
 	private bool mTruckExpandedETS2 = true;
 	public bool TruckExpandedETS2 {
 		get => mTruckExpandedETS2;
 		set {
 			mTruckExpandedETS2 = value;
-			InvokeChange(nameof(TruckExpandedETS2));
+			InvokeChange();
 
 			PopupAddTruckOpen = false;
 		}
@@ -292,7 +468,7 @@ class AccAddonBinding: INotifyPropertyChanged {
 		get => mTruckExpandedATS;
 		set {
 			mTruckExpandedATS = value;
-			InvokeChange(nameof(TruckExpandedATS));
+			InvokeChange();
 
 			PopupAddTruckOpen = false;
 		}
@@ -303,27 +479,81 @@ class AccAddonBinding: INotifyPropertyChanged {
 		get => mPopupAddTruckOpen;
 		set {
 			mPopupAddTruckOpen = value;
-			InvokeChange(nameof(PopupAddTruckOpen));
+			InvokeChange();
 		}
 	}
 
-	private bool mSelectAllETS2 = false;
-	public bool SelectAllETS2 {
-		get => mSelectAllETS2;
+	public bool? SelectAllETS2 {
+		get {
+			if (SelectedCountETS2 == 0)
+				return false;
+			else if (SelectedCountETS2 == TrucksETS2.Count)
+				return true;
+			else
+				return null;
+		}
 		set {
-			mSelectAllETS2 = value;
+			if (value == true)
+				SelectedCountETS2 = TrucksETS2.Count;
+			else if (value == false)
+				SelectedCountETS2 = 0;
+			InvokeChange();
+			if (value != null)
+				SelectAllTruck(TrucksETS2, (bool)value);
+		}
+	}
+	private int mSelectedCountETS2 = 0;
+	public int SelectedCountETS2 {
+		get => mSelectedCountETS2;
+		set {
+			mSelectedCountETS2 = value;
+
 			InvokeChange(nameof(SelectAllETS2));
-			SelectAllTruck(TrucksETS2, value);
 		}
 	}
 
-	private bool mSelectAllATS = false;
-	public bool SelectAllATS {
-		get => mSelectAllATS;
+	public bool? SelectAllATS {
+		get {
+			if (SelectedCountATS == 0)
+				return false;
+			else if (SelectedCountATS == TrucksATS.Count)
+				return true;
+			else
+				return null;
+		}
 		set {
-			mSelectAllATS = value;
+			if (value == true)
+				SelectedCountATS = TrucksATS.Count;
+			else if (value == false)
+				SelectedCountATS = 0;
+			InvokeChange();
+			if (value != null)
+				SelectAllTruck(TrucksATS, (bool)value);
+		}
+	}
+
+	private int mSelectedCountATS = 0;
+	public int SelectedCountATS {
+		get => mSelectedCountATS;
+		set {
+			mSelectedCountATS = value;
+
 			InvokeChange(nameof(SelectAllATS));
-			SelectAllTruck(TrucksATS, value);
+		}
+	}
+
+	public void SetSelected(Truck truck) {
+		bool check = truck.Check;
+		if (truck.IsETS2) {
+			if (check)
+				SelectedCountETS2++;
+			else
+				SelectedCountETS2--;
+		} else {
+			if (check)
+				SelectedCountATS++;
+			else
+				SelectedCountATS--;
 		}
 	}
 
@@ -348,10 +578,9 @@ class AccAddonBinding: INotifyPropertyChanged {
 	public ObservableCollection<Truck> TrucksETS2 => AddonItem.TrucksETS2;
 	public ObservableCollection<Truck> TrucksATS => AddonItem.TrucksATS;
 
-
 	public void LoadTrucks() {
-		AccAppIO.LoadTruckList(true, TrucksETS2);
-		AccAppIO.LoadTruckList(false, TrucksATS);
+		SelectedCountETS2 = AccAppIO.LoadTruckList(true, TrucksETS2);
+		SelectedCountATS = AccAppIO.LoadTruckList(false, TrucksATS);
 	}
 
 	public void ReinitTruckList() {
@@ -385,20 +614,24 @@ class AccAddonBinding: INotifyPropertyChanged {
 	}
 
 	public void LoadDED() {
-		PopupAddTruckOpen = false;
-		OpenFileDialog openFileDialog = new() {
-			Title = Util.GetString("LoadDED"),
-			Multiselect = false,
-			AddExtension = true,
-			DefaultDirectory = Paths.DefaultDEDDir(),
-			InitialDirectory = GetDEDInitDir(),
-			DefaultExt = "ded",
-			Filter = Util.GetFilter("DialogFilterDED"),
-		};
-		if (openFileDialog.ShowDialog() == true) {
-			SaveDedLocation(openFileDialog.FileName);
-			LoadedFilename = openFileDialog.SafeFileName;
-			AccAppIO.LoadAccAddon(this, openFileDialog.FileName);
+		try {
+			PopupAddTruckOpen = false;
+			OpenFileDialog openFileDialog = new() {
+				Title = Util.GetString("LoadDED"),
+				Multiselect = false,
+				AddExtension = true,
+				DefaultDirectory = Paths.DefaultDEDDir(),
+				InitialDirectory = GetDEDInitDir(),
+				DefaultExt = "ded",
+				Filter = Util.GetFilter("DialogFilterDED"),
+			};
+			if (openFileDialog.ShowDialog() == true) {
+				SaveDedLocation(openFileDialog.FileName);
+				LoadedFilename = openFileDialog.SafeFileName;
+				AccAppIO.LoadAccAddon(this, openFileDialog.FileName);
+			}
+		} catch (Exception ex) {
+			MessageBox.Show(Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
 		}
 	}
 
@@ -421,69 +654,37 @@ class AccAddonBinding: INotifyPropertyChanged {
 		AccAddonHistory.Default.Save();
 	}
 
-	private string mAddTruckID = string.Empty;
-	public string AddTruckID {
-		get => mAddTruckID;
-		set {
-			mAddTruckID = value;
-			InvokeChange(nameof(AddTruckID));
-		}
-	}
+	public AddTruckUC? AddTruckUC;
 
-	private int? mAddTruckProdYear = null;
-	public int? AddTruckProdYear {
-		get => mAddTruckProdYear;
-		set {
-			mAddTruckProdYear = value;
-			InvokeChange(nameof(AddTruckProdYear));
-		}
-	}
-	private string mAddTruckIngameName = string.Empty;
-	public string AddTruckIngameName {
-		get => mAddTruckIngameName;
-		set {
-			mAddTruckIngameName = value;
-			InvokeChange(nameof(AddTruckIngameName));
-		}
-	}
-	private string mAddTruckDescription = string.Empty;
-	public string AddTruckDescription {
-		get => mAddTruckDescription;
-		set {
-			mAddTruckDescription = value;
-			InvokeChange(nameof(AddTruckDescription));
-		}
-	}
-
-	public void AddNewTruck(bool isETS2) {
+	public void AddNewTruck(Truck newTruck) {
 		try {
+			bool isETS2 = newTruck.IsETS2;
 			ObservableCollection<Truck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
-			if (AddTruckID.Length == 0 || AddTruckIngameName.Length == 0)
-				throw new(Util.GetString("MessageAddErrNotFilled"));
-			var newTruck = new Truck(AddTruckID, AddTruckProdYear ?? DateTime.Now.Year, AddTruckIngameName!, AddTruckDescription);
-
-			if (AddTruckID[0] <= 'm') {
+			if (newTruck.TruckID[0] <= 'm') {
 				for (int i = 0; i < Trucks.Count; i++) {
 					var cTruck = Trucks[i];
 					var cResult = newTruck.CompareTo(cTruck);
 					if (cResult == 0) {
 						throw new(Util.GetString("MessageAddErrSameID"));
 					} else if (cResult < 0) {
-						Trucks.Insert(i, new(AddTruckID, AddTruckProdYear ?? DateTime.Now.Year, AddTruckIngameName, AddTruckDescription, false));
+						Trucks.Insert(i, newTruck);
 						break;
-					}
+					} else if (i == Trucks.Count - 1)
+						Trucks.Add(newTruck);
 				}
 			} else {
 				for (int i = Trucks.Count - 1; i >= 0; i--) {
 					var cTruck = Trucks[i];
-					var cResult = newTruck.CompareTo(cTruck);
+					var cResult = newTruck.TruckID.CompareTo(cTruck.TruckID);
 					if (cResult == 0) {
 						throw new(Util.GetString("MessageAddErrSameID"));
 					} else if (cResult > 0) {
-						Trucks.Insert(i + 1, new(AddTruckID, AddTruckProdYear ?? DateTime.Now.Year, AddTruckIngameName!, AddTruckDescription, false));
+						Trucks.Insert(i + 1, newTruck);
 						break;
-					}
+					} else if (i == 0)
+						Trucks.Insert(0, newTruck);
 				}
+				Trucks.Insert(0, newTruck);
 			}
 			AccAppIO.SaveTruckList(isETS2, Trucks);
 		} catch (Exception ex) {
@@ -550,17 +751,19 @@ class AccAddonBinding: INotifyPropertyChanged {
 
 	public const int MODEL = 0;
 	public const int MODEL_UK = 1;
-	public const int MODEL_COLL = 2;
+	public const int EXT_MODEL = 2;
+	public const int EXT_MODEL_UK = 3;
+	public const int MODEL_COLL = 4;
 	//模型、模型UK、碰撞体
 	public void ChooseModel(Window window, int type) {
 		if (ProjectLocation.Length == 0)
 			throw new(Util.GetString("MessageProjectLocationFirst"));
 		string title, fileter, defaultExt;
-		if (type == MODEL) {
+		if (type == MODEL || type == EXT_MODEL) {
 			title = Util.GetString("DialogTitleChooseModel");
 			fileter = Util.GetFilter("DialogFilterChooseModel");
 			defaultExt = "pmd";
-		} else if (type == MODEL_UK) {
+		} else if (type == MODEL_UK || type == EXT_MODEL_UK) {
 			title = Util.GetString("DialogTitleChooseModelUK");
 			fileter = Util.GetFilter("DialogFilterChooseModel");
 			defaultExt = "pmd";
@@ -608,7 +811,7 @@ class AccAddonBinding: INotifyPropertyChanged {
 					modelType = info.Accessory;
 			}
 		}
-		if (type == MODEL) {
+		if (type == MODEL || type == EXT_MODEL) {
 			modelPath = inProjectPath.Replace('\\', '/');
 			modelPath = modelPath[..^4];
 			modelName = modelPath[(modelPath.LastIndexOf('/') + 1)..];
@@ -617,7 +820,7 @@ class AccAddonBinding: INotifyPropertyChanged {
 			if (File.Exists(path[..^4] + ".pic") || File.Exists(path[..^4] + ".pmc"))
 				collPath = modelPath + ".pmc";
 			modelPath += ".pmd";
-		} else if (type == MODEL_UK) {
+		} else if (type == MODEL_UK || type == EXT_MODEL_UK) {
 			modelPathUK = inProjectPath.Replace('\\', '/');
 			modelPathUK = modelPathUK[..^4];
 			if (modelPathUK.EndsWith("_uk")) {
@@ -639,34 +842,46 @@ class AccAddonBinding: INotifyPropertyChanged {
 			collPath += ".pmc";
 		}
 		bool showAR;
-		if (type == MODEL) {
-			ModelPath = modelPath!;
+
+
 			if (ModelName == modelName)
 				modelName = null;
 			if (ModelType == modelType)
 				modelType = null;
+		if (type == MODEL) {
+			ModelPath = modelPath!;
 			if (ModelPathUK == modelPathUK)
 				modelPathUK = null;
+
 			if (CollPath == collPath)
 				collPath = null;
 			showAR = modelName != null || modelType != null || modelPathUK != null || collPath != null;
+		} else if (type == EXT_MODEL) {
+			ExtModelPath = modelPath!;
+			if (ExtModelPathUK == modelPathUK)
+				modelPathUK = null;
+
+			if (CollPath == collPath)
+			collPath = null;
+			showAR = modelName != null || modelType != null || modelPathUK != null || collPath != null;
 		} else if (type == MODEL_UK) {
 			ModelPathUK = modelPathUK!;
-			if (ModelName == modelName)
-				modelName = null;
-			if (ModelType == modelType)
-				modelType = null;
 			if (ModelPath == modelPath)
 				modelPath = null;
+
+			if (CollPath == collPath)
+				collPath = null;
+			showAR = modelName != null || modelType != null || modelPath != null || collPath != null;
+		} else if (type == EXT_MODEL_UK) {
+			ExtModelPathUK = modelPathUK!;
+			if (ExtModelPath == modelPath)
+				modelPath = null;
+
 			if (CollPath == collPath)
 				collPath = null;
 			showAR = modelName != null || modelType != null || modelPath != null || collPath != null;
 		} else if (type == MODEL_COLL) {
 			CollPath = collPath!;
-			if (ModelName == modelName)
-				modelName = null;
-			if (ModelType == modelType)
-				modelType = null;
 			if (ModelPath == modelPath)
 				modelPath = null;
 			if (ModelPathUK == modelPathUK)
@@ -684,16 +899,21 @@ class AccAddonBinding: INotifyPropertyChanged {
 					mCurrentModelType = null;
 					ModelType = modelType!;
 				}
-				if (arWindow.CheckModelPath)
-					ModelPath = modelPath!;
-				if (arWindow.CheckModelPathUK)
-					ModelPathUK = modelPathUK!;
+				if (arWindow.CheckModelPath) {
+					if (type == EXT_MODEL || type == EXT_MODEL_UK)
+						ExtModelPath = modelPath!;
+					else
+						ModelPath = modelPath!;
+				}
+				if (arWindow.CheckModelPathUK) {
+					if (type == EXT_MODEL || type == EXT_MODEL_UK)
+						ExtModelPathUK = modelPathUK!;
+					else
+						ModelPathUK = modelPathUK!;
+				}
 				if (arWindow.CheckCollPath)
 					CollPath = collPath!;
 			}
 		}
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	private void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
 }

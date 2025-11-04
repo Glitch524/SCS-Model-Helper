@@ -8,7 +8,7 @@
 	xmlns:utils="clr-namespace:SCS_Mod_Helper.Utils"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-	d:DataContext="{d:DesignInstance Type=local:LocaleInfo}"
+	d:DataContext="{d:DesignInstance Type=local:LocaleBinding}"
 	mc:Ignorable="d"
 	ExtendsContentIntoTitleBar="True"
 	Height="600"
@@ -82,13 +82,19 @@
 					x:Name="TextLocaleName"
 					Grid.Column="1"
 					BorderThickness="1,1,0,1"
-					IsEnabled="{Binding ModuleNotNull}"
 					Text="{Binding CurrentModuleName}">
 					<TextBox.Style>
 						<Style
 							TargetType="TextBox"
 							BasedOn="{StaticResource {x:Type TextBox}}">
 							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding CurrentModule}"
+									Value="{x:Null}">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
 								<Trigger
 									Property="Text"
 									Value="">
@@ -492,13 +498,13 @@
 				<Button
 					x:Name="ButtonSave"
 					Content="{DynamicResource ButtonSave}"
-					Padding="50,5,50,5"
+					Padding="50,5"
 					FontSize="14"
 					Click="ButtonCloseClick" />
 				<Button
 					x:Name="ButtonCancel"
 					Content="{DynamicResource ButtonCancel}"
-					Padding="50,5,50,5"
+					Padding="50,5"
 					Margin="10,0,0,0"
 					FontSize="14"
 					Click="ButtonCloseClick" />

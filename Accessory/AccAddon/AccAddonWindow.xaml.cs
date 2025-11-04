@@ -22,11 +22,10 @@ public partial class AccAddonWindow: BaseWindow {
 		get => binding.TruckExpandedATS; set => binding.TruckExpandedATS = value;
 	}
 
-	private ObservableCollection<OthersItem> OthersList => binding.OthersList;
 	private ObservableCollection<Truck> TrucksETS2 => binding.TrucksETS2;
 	private ObservableCollection<Truck> TrucksATS => binding.TrucksATS;
 
-	private readonly ContextMenu MenuStringRes, MenuModelType, MenuLook, MenuVariant, MenuOthers;
+	private readonly ContextMenu MenuStringRes, MenuModelType, MenuLook, MenuVariant;
 
 	public AccAddonWindow() {
 		InitializeComponent();
@@ -41,21 +40,15 @@ public partial class AccAddonWindow: BaseWindow {
 		MenuLook.ItemsSource = binding.LookList;
 		MenuVariant = (ContextMenu)Resources["MenuVariant"];
 		MenuVariant.ItemsSource = binding.VariantList;
-		MenuOthers = (ContextMenu)Resources["MenuOthers"];
 
-		binding.LoadLooksAndVariants();
+		Loaded += OnLoaded;
+	}
 
-		OthersItem.ReadLines(binding.OthersList, AccAddonHistory.Default.Others, (dataName) => {
-			if (dataName.EndsWith(AccDataIO.NamePSuffix)) {
-				dataName = dataName[..^AccDataIO.NamePSuffix.Length];
-			}
-			foreach (var physItem in AccAppIO.PhysicsItems) {
-				if (physItem.PhysicsName == dataName) 
-					binding.PhysicsList.Add(physItem);
-			}
+	private void OnLoaded(object sender, RoutedEventArgs e) {
+		Task.Run(() => {
+			binding.LoadTrucks();
+			binding.LoadLooksAndVariants();
 		});
-
-		binding.LoadTrucks();
 	}
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
@@ -72,8 +65,6 @@ public partial class AccAddonWindow: BaseWindow {
 			} else {
 				AccessoryDataUtil.ApplyStringRes(TextDisplayName, tag);
 			}
-		} else if (cm == MenuOthers) {
-			AccessoryDataUtil.SetOtherItem(item);
 		} else {
 			Truck truck = (Truck)cm.DataContext;
 			if (cm == MenuModelType) {
@@ -104,6 +95,10 @@ public partial class AccAddonWindow: BaseWindow {
 			binding.ModelPath = "";
 		else if (sender == ButtonChooseModelUKClear)
 			binding.ModelPathUK = "";
+		else if (sender == ButtonChooseExtModelClear)
+			binding.ExtModelPath = "";
+		else if (sender == ButtonChooseExtModelUKClear)
+			binding.ExtModelPathUK = "";
 		else if (sender == ButtonChooseCollClear)
 			binding.CollPath = "";
 		else
@@ -119,6 +114,10 @@ public partial class AccAddonWindow: BaseWindow {
 				type = AccAddonBinding.MODEL;
 			else if (sender == ButtonChooseModelUK)
 				type = AccAddonBinding.MODEL_UK;
+			else if (sender == ButtonChooseExtModel)
+				type = AccAddonBinding.EXT_MODEL;
+			else if (sender == ButtonChooseExtModelUK)
+				type = AccAddonBinding.EXT_MODEL_UK;
 			else if (sender == ButtonChooseColl)
 				type = AccAddonBinding.MODEL_COLL;
 			else
@@ -129,50 +128,45 @@ public partial class AccAddonWindow: BaseWindow {
 		}
 	}
 
-	private void ButtonHideIn(object sender, RoutedEventArgs e) => PopupHideIn.IsOpen = true;
+	private void ButtonHideIn(object sender, RoutedEventArgs e) {
+		if (binding.HideInUC == null) {
+			binding.HideInUC = new(binding);
+			PopupHideIn.Child = binding.HideInUC;
+		}
+		PopupHideIn.IsOpen = true;
+	}
 
-	private uint GetNumber(CheckBox checkBox) {
-		if (checkBox == CheckMainView) {
-			return 0x7;
-		} else if (checkBox == CheckReflectionCube) {
-			return 0x1F8;
-		} else if (checkBox == CheckCloseMirror) {
-			return 0x600;
-		} else if (checkBox == CheckFarMirror) {
-			return 0x1800;
-		} else if (checkBox == CheckSideMirror) {
-			return 0x2000;
-		} else if (checkBox == CheckFrontMirror) {
-			return 0x4000;
-		} else if (checkBox == CheckShadows) {
-			return 0x1FFE0000;
-		} else if (checkBox == CheckRainReflection) {
-			return 0xE0000000;
+	private void ButtonListClick(object sender, RoutedEventArgs e) {
+		TextBox target;
+		if (sender == ButtonAddData) {
+			target = TextData;
+			binding.AddNewData();
+		} else if (sender == ButtonAddSuitableFor) {
+			target = TextSuitableFor;
+			binding.AddNewSuitableFor();
+		} else if (sender == ButtonAddConflictWith) {
+			target = TextConflictWith;
+			binding.AddNewConflictWith();
+		} else if (sender == ButtonAddDefaults) {
+			target = TextDefaults;
+			binding.AddNewDefaults();
+		} else if (sender == ButtonAddOverrides) {
+			target = TextOverrides;
+			binding.AddNewOverrides();
+		} else if (sender == ButtonAddRequire) {
+			target = TextRequire;
+			binding.AddNewRequire();
 		} else
-			return 0;
+			return;
+		target.Focus();
 	}
 
-	private void HideInChecked(object sender, RoutedEventArgs e) {
-		if (sender is CheckBox cb) {
-			binding.HideIn += GetNumber(cb);
-		}
+	private void ListDataGotFocus(object sender, RoutedEventArgs e) {
+		ShowPopupListData((TextBox)sender);
 	}
 
-	private void HideInUnchecked(object sender, RoutedEventArgs e) {
-		if (sender is CheckBox cb) {
-			binding.HideIn -= GetNumber(cb);
-		}
-	}
-
-	private void ButtonOthersClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonOthersAdd) {
-			OthersList.Add(new());
-		} else if (sender == ButtonOthersRemove) {
-			OthersItem? othersItem;
-			while ((othersItem = TableOthers.SelectedItem as OthersItem)!= null) {
-				OthersList.Remove(othersItem);
-			}
-		}
+	private void ListDataLostFocus(object sender, RoutedEventArgs e) {
+		PopupListData.IsOpen = false;
 	}
 
 	private void ButtonPhysicsClick(object sender, RoutedEventArgs e) {
@@ -183,11 +177,12 @@ public partial class AccAddonWindow: BaseWindow {
 		var result = physicsWindow.ShowDialog();
 		if (result == true) {
 			var selected = physicsWindow.SelectedPhysicsData;
-			OthersItem others = (OthersItem)((Button)sender).DataContext;
 			var physName = selected.PhysicsName;
 			if (!physName.EndsWith(AccDataIO.NamePSuffix))
 				physName += AccDataIO.NamePSuffix;
-			others.OthersValue = physName;
+			binding.AddNewData(physName);
+			TextData.Focus();
+
 			int i = 0;
 			while (i < binding.PhysicsList.Count) {
 				var p = binding.PhysicsList[i];
@@ -201,17 +196,23 @@ public partial class AccAddonWindow: BaseWindow {
 		}
 	}
 
+	private void ShowPopupListData(TextBox target) {
+		if (binding.ListDataUC == null) {
+			binding.ListDataUC = new();
+			PopupListData.Child = binding.ListDataUC;
+		}
+		binding.OpeningList = target.Name;
+		PopupListData.PlacementTarget = target;
+		PopupListData.IsOpen = true;
+	}
+
 	private void ButtonStartClick(object sender, RoutedEventArgs e) => binding.StartCreateSii();
 
 	private void ButtonSaveClick(object sender, RoutedEventArgs e) => binding.SaveDED();
 
 	private void ButtonLoadClick(object sender, RoutedEventArgs e) {
-		try {
-			binding.LoadDED();
-			binding.LoadLooksAndVariants();
-		} catch (Exception ex) {
-			MessageBox.Show(this, GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
-		}
+		binding.LoadDED();
+		binding.LoadLooksAndVariants();
 	}
 
 	private void NumberOnly(object sender, TextCompositionEventArgs e) => e.Handled = RegexNumber().IsMatch(e.Text);
@@ -226,23 +227,20 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void ButtonAddTruckClick(object sender, RoutedEventArgs e) {
 		PopupAddTruck.PlacementTarget = (Button)sender;
-		binding.AddTruckID = string.Empty;
-		binding.AddTruckProdYear = null;
-		binding.AddTruckIngameName = string.Empty;
-		binding.AddTruckDescription = string.Empty;
+		if (binding.AddTruckUC == null) {
+			binding.AddTruckUC = new(sender == ButtonAddTruckETS2, AddTruckResult);
+			PopupAddTruck.Child = binding.AddTruckUC;
+		}
+		binding.AddTruckUC.Clean();
 		PopupAddTruck.IsOpen = true;
 	}
 
-	private void ButtonAddTruckResultClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonAddTruckOK) {
-			var isETS2 = PopupAddTruck.PlacementTarget == ButtonAddTruckETS2;
-			binding.AddNewTruck(isETS2);
+	private void AddTruckResult(bool OK) {
+		if (OK) {
+			Truck newTruck = binding.AddTruckUC?.NewTruck!;
+			binding.AddNewTruck(newTruck);
 		}
 		PopupAddTruck.IsOpen = false;
-	}
-
-	private void ContextMenu_Opened(object sender, RoutedEventArgs e) {
-		return;
 	}
 
 	private void ButtonDeleteTruckClick(object sender, RoutedEventArgs e) {
@@ -294,6 +292,7 @@ public partial class AccAddonWindow: BaseWindow {
 	private void TruckCheckBoxClick(object sender, RoutedEventArgs e) {
 		CheckBox box = (CheckBox)sender;
 		Truck selected = (Truck)box.DataContext;
+		binding.SetSelected(selected);
 		binding.OverwriteEmpty(selected, selected.Check);
 	}
 }

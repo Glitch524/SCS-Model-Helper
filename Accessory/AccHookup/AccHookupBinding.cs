@@ -1,17 +1,20 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon;
+﻿using Microsoft.Win32;
+using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Accessory.AccAddon.Popup;
 using SCS_Mod_Helper.Accessory.Physics;
+using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
-using Microsoft.Win32;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-class AccHookupBinding: INotifyPropertyChanged {
+class AccHookupBinding: BaseBinding {
 
 	public AccHookupBinding() { }
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -21,7 +24,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		get => mStorageName;
 		set {
 			mStorageName = value;
-			InvokeChange(nameof(StorageName));
+			InvokeChange();
 		}
 	}
 
@@ -35,7 +38,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		get => mCurrentSuiItem;
 		set {
 			mCurrentSuiItem = value;
-			InvokeChange(nameof(CurrentSuiItem));
+			InvokeChange();
 
 			InvokeChange(nameof(Hookups));
 			if (Hookups != null && Hookups.Count > 0)
@@ -58,7 +61,9 @@ class AccHookupBinding: INotifyPropertyChanged {
 			if (value != null && ModelIcon == null) {
 				value.ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(value.IconName);
 			}
-			InvokeChange(nameof(CurrentHookupItem));
+			InvokeChange();
+
+			InvokeChange(nameof(PopupCollection));
 		}
 	}
 	public string ModelName {
@@ -66,7 +71,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentHookupItem != null) {
 				CurrentHookupItem.ModelName = value;
-				InvokeChange(nameof(ModelName));
+				InvokeChange();
 			}
 		}
 	}
@@ -75,7 +80,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentHookupItem != null) {
 				CurrentHookupItem.DisplayName = value;
-				InvokeChange(nameof(DisplayName));
+				InvokeChange();
 			}
 		}
 	}
@@ -86,7 +91,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		get => mCheckResResult;
 		set {
 			mCheckResResult = value;
-			InvokeChange(nameof(CheckResResult));
+			InvokeChange();
 		}
 	}
 
@@ -95,7 +100,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		get => mPopupCheckOpen;
 		set {
 			mPopupCheckOpen = value;
-			InvokeChange(nameof(PopupCheckOpen));
+			InvokeChange();
 		}
 	}
 
@@ -109,7 +114,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentHookupItem != null) {
 				CurrentHookupItem.IconName = value;
-				InvokeChange(nameof(IconName));
+				InvokeChange();
 			}
 		}
 	}
@@ -119,7 +124,7 @@ class AccHookupBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentHookupItem != null) {
 				CurrentHookupItem.ModelIcon = value;
-				InvokeChange(nameof(ModelIcon));
+				InvokeChange();
 			}
 		}
 	}
@@ -141,12 +146,131 @@ class AccHookupBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentHookupItem != null) {
 				CurrentHookupItem.CollPath = value;
-				InvokeChange(nameof(CollPath));
+				InvokeChange();
 			}
 		}
 	}
 
-	public ObservableCollection<OthersItem>? OthersList => CurrentHookupItem?.OthersList;
+	public ObservableCollection<string>? Data => CurrentHookupItem?.Data;
+	public ObservableCollection<string>? SuitableFor => CurrentHookupItem?.SuitableFor;
+	public ObservableCollection<string>? ConflictWith => CurrentHookupItem?.ConflictWith;
+	public ObservableCollection<string>? Defaults => CurrentHookupItem?.Defaults;
+	public ObservableCollection<string>? Overrides => CurrentHookupItem?.Overrides;
+	public ObservableCollection<string>? Require => CurrentHookupItem?.Require;
+
+	private string mNewData = "";
+	public string NewData {
+		get {
+			return mNewData;
+		}
+		set {
+			mNewData = value;
+			InvokeChange();
+		}
+	}
+	private string mNewSuitableFor = "";
+	public string NewSuitableFor {
+		get => mNewSuitableFor;
+		set {
+			mNewSuitableFor = value;
+			InvokeChange();
+		}
+	}
+	private string mNewConflictWith = "";
+	public string NewConflictWith {
+		get => mNewConflictWith;
+		set {
+			mNewConflictWith = value;
+			InvokeChange();
+		}
+	}
+	private string mNewDefaults = "";
+	public string NewDefaults {
+		get => mNewDefaults;
+		set {
+			mNewDefaults = value;
+			InvokeChange();
+		}
+	}
+	private string mNewOverrides = "";
+	public string NewOverrides {
+		get => mNewOverrides;
+		set {
+			mNewOverrides = value;
+			InvokeChange();
+		}
+	}
+	private string mNewRequire = "";
+	public string NewRequire {
+		get => mNewRequire;
+		set {
+			mNewRequire = value;
+			InvokeChange();
+		}
+	}
+	public void AddNewData(string? data = null) {
+		AddListItem(Data, data ?? NewData);
+		if (data != null)
+			NewData = string.Empty;
+	}
+
+	public void AddNewData(PhysicsData? physicsData) {
+		if (physicsData == null)
+			return;
+		var physName = physicsData.PhysicsName;
+		if (!physName.EndsWith(AccDataIO.NamePSuffix))
+			physName += AccDataIO.NamePSuffix;
+		AddNewData(physName);
+	}
+
+	public void AddNewSuitableFor() {
+		AddListItem(SuitableFor, NewSuitableFor);
+		NewSuitableFor = string.Empty;
+	}
+
+	public void AddNewConflictWith() {
+		AddListItem(ConflictWith, NewConflictWith);
+		NewConflictWith = string.Empty;
+	}
+
+	public void AddNewDefaults() {
+		AddListItem(Defaults, NewDefaults);
+		NewDefaults = string.Empty;
+	}
+
+	public void AddNewOverrides() {
+		AddListItem(Overrides, NewOverrides);
+		NewOverrides = string.Empty;
+	}
+
+	public void AddNewRequire() {
+		AddListItem(Require, NewRequire);
+		NewRequire = string.Empty;
+	}
+	public string DataListContent => CurrentHookupItem?.DataListContent ?? "";
+	public string SuitableForListContent => CurrentHookupItem?.SuitableForListContent ?? "";
+	public string ConflictWithListContent => CurrentHookupItem?.ConflictWithListContent ?? "";
+	public string DefaultsListContent => CurrentHookupItem?.DefaultsListContent ?? "";
+	public string OverridesListContent => CurrentHookupItem?.OverridesListContent ?? "";
+	public string RequireListContent => CurrentHookupItem?.RequireListContent ?? "";
+
+	public string? OpeningList {
+		get => CurrentHookupItem?.OpeningList;
+		set {
+			if (CurrentHookupItem != null)
+				CurrentHookupItem.OpeningList = value;
+			InvokeChange(nameof(PopupCollection));
+		}
+	}
+	public ObservableCollection<string>? PopupCollection => CurrentHookupItem?.PopupCollection;
+
+	public static void AddListItem(ObservableCollection<string>? list, string newItem) {
+		if (list == null || newItem.Length == 0 || list.Contains(newItem))
+			return;
+		list.Add(newItem);
+	}
+
+	public ListDataUC? ListDataUC = null;
 
 	public void LoadFiles() => AccDataIO.LoadAddonHookup(this);
 	public void SaveFiles() => AccDataIO.SaveAddonHookup(this);
@@ -221,16 +345,4 @@ class AccHookupBinding: INotifyPropertyChanged {
 			IconName = icon;
 		}
 	}
-
-	public void AddPhysToOthersList(PhysicsData? physics) {
-		if (CurrentHookupItem == null || physics == null)
-			return;
-		var physName = physics.PhysicsName;
-		physName += ".phys_data";
-		var othersList = CurrentHookupItem.OthersList;
-		othersList.Add(new("data", physName));
-	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 }

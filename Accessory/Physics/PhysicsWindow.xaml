@@ -47,11 +47,13 @@
 				</TextBlock>
 			</StackPanel>
 
-			<local:PhysicsUC
-				x:Name="UCPhysics"
-				LocalPhysics="True"
-				d:Height="433"
-				Grid.Row="1" />
+			<ScrollViewer
+				Grid.Row="1">
+				<local:PhysicsUC
+					x:Name="UCPhysics"
+					LocalPhysics="True"
+					d:Height="433" />
+			</ScrollViewer>
 
 			<StackPanel
 				x:Name="PanelSelection"
@@ -67,7 +69,8 @@
 					Click="ButtonResultClick">
 					<Button.Style>
 						<Style
-							TargetType="Button">
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
 							<Style.Triggers>
 								<DataTrigger
 									Binding="{Binding CurrentPhysicsItem, ElementName=UCPhysics}"

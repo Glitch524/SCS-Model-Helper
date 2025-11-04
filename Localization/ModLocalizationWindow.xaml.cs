@@ -13,38 +13,40 @@ namespace SCS_Mod_Helper.Localization;
 public partial class ModLocalizationWindow : BaseWindow
 {
 
-	private readonly LocaleInfo LocaleInfo = new();
+	private readonly LocaleBinding binding = new();
 
 	public static string ProjectLocation => Instances.ProjectLocation;
 
-	private ObservableCollection<LocaleModule> Modules => LocaleInfo.LocaleModules;
-	private ObservableCollection<LocaleModule> DeletedModules => LocaleInfo.DeletedModules;
+	private ObservableCollection<LocaleModule> Modules => binding.LocaleModules;
+	private ObservableCollection<LocaleModule> DeletedModules => binding.DeletedModules;
 
 	private LocaleModule CurrentModule {
-		get => LocaleInfo.CurrentModule!; set => LocaleInfo.CurrentModule = value;
+		get => binding.CurrentModule!; set => binding.CurrentModule = value;
 	}
 
-	public ObservableCollection<LocalePair> CurrentDict => LocaleInfo.CurrentDict!;
-	public ObservableCollection<LocalePair> UniversalDict => LocaleInfo.UniversalDict!;
+	public ObservableCollection<LocalePair> CurrentDict => binding.CurrentDict!;
+	public ObservableCollection<LocalePair> UniversalDict => binding.UniversalDict!;
 
 	public bool HasChanges = false;
 	public ModLocalizationWindow()
     {
         InitializeComponent();
-		LoadLocale();
+		GridMain.DataContext = binding;
 
-		GridMain.DataContext = LocaleInfo;
-		SetupMenuModule();
+		Loaded += OnLoaded;
     }
 
-	private void LoadLocale() => AccDataIO.ReadLocaleDict(this, Modules);
-
-	private readonly ContextMenu MenuModule = new();
-	private void SetupMenuModule() {
+	private void OnLoaded(object sender, RoutedEventArgs e) {
+		AccDataIO.ReadLocaleDict(this, Modules);
 		Modules.CollectionChanged += ModulesCollectionChanged;
 		foreach (var module in Modules) {
 			MenuModule.Items.Add(NewModuleItem(module));
 		}
+	}
+
+
+	private readonly ContextMenu MenuModule = new();
+	private void SetupMenuModule() {
 	}
 
 	private void OnModuleChanged(object sender, RoutedEventArgs e) {
@@ -97,16 +99,16 @@ public partial class ModLocalizationWindow : BaseWindow
 			if (result == MessageBoxResult.Yes) {
 				DeletedModules.Add(CurrentModule);
 				Modules.Remove(CurrentModule);
-				LocaleInfo.SetModuleNull();
+				binding.SetModuleNull();
 			}
 		}
 	}
 
 	private void ButtonSyncingClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSyncWithUni) {
-			LocaleInfo.SyncWithUniversal(this);
+			binding.SyncWithUniversal(this);
 		} else if (sender == ButtonSyncOrder) {
-			LocaleInfo.SyncOrder();
+			binding.SyncOrder();
 		}
 	}
 
@@ -148,6 +150,6 @@ public partial class ModLocalizationWindow : BaseWindow
 
 
 	private void ButtonCleanClick(object sender, RoutedEventArgs e) {
-		LocaleInfo.CleanSameDict();
+		binding.CleanSameDict();
 	}
 }

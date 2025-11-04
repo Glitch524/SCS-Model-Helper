@@ -5,6 +5,7 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory; 
     class AccAppIO {
@@ -358,13 +359,20 @@ namespace SCS_Mod_Helper.Accessory;
 	private const string NamePartType = "PartType";
 	private const string NameModelPath = "ModelPath";
 	private const string NameModelPathUK = "ModelPathUK";
+	private const string NameExtModelPath = "ExtModelPath";
+	private const string NameExtModelPathUK = "ExtModelPathUK";
 	private const string NameModelColl = "ModelColl";
 	private const string NameModelType = "ModelType";
 	private const string NameLook = "Look";
 	private const string NameVariant = "Variant";
 	private const string NameHideIn = "HideIn";
-	private const string NameOthersHeader = "OthersHeader";
-	private const string NameOthers = "Others";
+	private const string NameElectricType = "ElectricType";
+	private const string NameData = "Data";
+	private const string NameSuitableFor = "SuitableFor";
+	private const string NameConflictWith = "ConflictWith";
+	private const string NameDefaults = "Defaults";
+	private const string NameOverrides = "Overrides";
+	private const string NameRequire = "Require";
 	private const string NameTrucksHeader = "TrucksHeader";
 	private const string NameTrucksETS2 = "TrucksETS2";
 	private const string NameTrucksATS = "TrucksATS";
@@ -384,25 +392,28 @@ namespace SCS_Mod_Helper.Accessory;
 		WriteLine(sw, NamePartType, binding.PartType);
 		WriteLine(sw, NameModelPath, binding.ModelPath);
 		WriteLine(sw, NameModelPathUK, binding.ModelPathUK);
+		WriteLine(sw, NameExtModelPath, binding.ExtModelPath);
+		WriteLine(sw, NameExtModelPathUK, binding.ExtModelPathUK);
 		WriteLine(sw, NameModelColl, binding.CollPath);
 		WriteLine(sw, NameModelType, binding.ModelType);
 		WriteLine(sw, NameLook, binding.Look);
 		WriteLine(sw, NameVariant, binding.Variant);
 		if (binding.HideIn != 0)
 			WriteLine(sw, NameHideIn, binding.HideIn);
+		if (binding.ElectricType != "vehicle")
+			WriteLine(sw, NameElectricType, binding.ElectricType);
 
-		var setOtherHeader = true;
-		if (binding.OthersList.Count > 0) {
-			foreach (var other in binding.OthersList) {
-				if (other.OthersName.Length > 0 || other.OthersValue.Length > 0) {
-					if (setOtherHeader) {
-						WriteLine(sw, NameOthersHeader, OthersItem.GetHeaderLine());
-						setOtherHeader = false;
-					}
-					WriteLine(sw, NameOthers, other.ToLine());
-				}
-			}
+		void WriteLists(string name, ObservableCollection<string> list) {
+			if (list.Count > 0)
+				WriteLine(sw, name, string.Join(DefaultData.ItemSplit, list));
 		}
+		WriteLists(NameData, binding.Data);
+		WriteLists(NameSuitableFor, binding.SuitableFor);
+		WriteLists(NameConflictWith, binding.ConflictWith);
+		WriteLists(NameDefaults, binding.Defaults);
+		WriteLists(NameOverrides, binding.Overrides);
+		WriteLists(NameRequire, binding.Require);
+
 		var setTruckHeader = true;
 		if (binding.TrucksETS2.Count > 0 || binding.TrucksATS.Count > 0) {
 			foreach (var truck in binding.TrucksETS2) {
@@ -440,13 +451,20 @@ namespace SCS_Mod_Helper.Accessory;
 		string partType = "unknown";
 		string modelPath = "";
 		string modelPathUK = "";
+		string extModelPath = "";
+		string extModelPathUK = "";
 		string collPath = "";
 		string modelType = "";
 		string look = "";
 		string variant = "";
 		uint hideIn = 0;
-		string[]? otherHeader = null;
-		List<string> otherStrings = [];
+		string electricType = "vehicle";
+		string dataList = "";
+		string suitableForList = "";
+		string conflictWithList = "";
+		string defaultsList = "";
+		string overridesList = "";
+		string requireList = "";
 		string[]? trucksHeader = null;
 		List<string> trucksETS2Strings = [];
 		List<string> trucksATSStrings = [];
@@ -495,6 +513,12 @@ namespace SCS_Mod_Helper.Accessory;
 				case NameModelPathUK:
 					modelPathUK = read[1];
 					break;
+				case NameExtModelPath:
+					extModelPath = read[1];
+					break;
+				case NameExtModelPathUK:
+					extModelPathUK = read[1];
+					break;
 				case NameModelColl:
 					collPath = read[1];
 					break;
@@ -510,11 +534,26 @@ namespace SCS_Mod_Helper.Accessory;
 				case NameHideIn:
 					hideIn = UIntParse(read[1]) ?? 0;
 					break;
-				case NameOthersHeader:
-					otherHeader = read[1].Split(DefaultData.ItemSplit);
+				case NameElectricType:
+					electricType = read[1];
 					break;
-				case NameOthers:
-					otherStrings.Add(read[1]);
+				case NameData:
+					dataList = read[1];
+					break;
+				case NameSuitableFor:
+					suitableForList = read[1];
+					break;
+				case NameConflictWith:
+					conflictWithList = read[1];
+					break;
+				case NameDefaults:
+					defaultsList = read[1];
+					break;
+				case NameOverrides:
+					overridesList = read[1];
+					break;
+				case NameRequire:
+					requireList = read[1];
 					break;
 				case NameTrucksHeader:
 					trucksHeader = read[1].Split(DefaultData.ItemSplit);
@@ -535,6 +574,8 @@ namespace SCS_Mod_Helper.Accessory;
 		binding.PartType = partType;
 		binding.ModelPath = modelPath;
 		binding.ModelPathUK = modelPathUK;
+		binding.ExtModelPath = extModelPath;
+		binding.ExtModelPathUK = extModelPathUK;
 		binding.CollPath = collPath;
 		binding.UseCollPath = collPath.Length > 0;
 		binding.mCurrentModelType = null;
@@ -542,29 +583,22 @@ namespace SCS_Mod_Helper.Accessory;
 		binding.Look = look;
 		binding.Variant = variant;
 		binding.HideIn = hideIn;
+		binding.ElectricType = electricType;
 
-		binding.OthersList.Clear();
-		if (otherHeader != null && otherStrings.Count > 0) {
-			var indexes = OthersItem.Indexes;
-			for (int i = 0; i < otherHeader!.Length; i++) {
-				string? header = otherHeader[i];
-				switch (header) {
-					case nameof(OthersItem.OthersName):
-						indexes[OthersItem.IndexOthersName] = i;
-						break;
-					case nameof(OthersItem.OthersValue):
-						indexes[OthersItem.IndexOthersValue] = i;
-						break;
-				}
-			}
-			foreach (var oString in otherStrings) {
-				OthersItem others = new();
-				var oSplit = oString.Split(DefaultData.ItemSplit);
-				others.OthersName = oSplit[indexes[OthersItem.IndexOthersName]];
-				others.OthersValue = oSplit[indexes[OthersItem.IndexOthersValue]];
-				binding.OthersList.Add(others);
+		static void ReadLists(ObservableCollection<string> list, string reads) {
+			list.Clear();
+			if (reads.Length == 0)
+				return;
+			foreach (var i in reads.Split(DefaultData.ItemSplit)) {
+				list.Add(i);
 			}
 		}
+		ReadLists(binding.Data, dataList);
+		ReadLists(binding.SuitableFor, suitableForList);
+		ReadLists(binding.ConflictWith, conflictWithList);
+		ReadLists(binding.Defaults, defaultsList);
+		ReadLists(binding.Overrides, overridesList);
+		ReadLists(binding.Require, requireList);
 
 		binding.SelectAllETS2 = false;
 		binding.SelectAllATS = false;
@@ -587,12 +621,20 @@ namespace SCS_Mod_Helper.Accessory;
 						break;
 				}
 			}
-			SetSelected(indexesOfTrucks, trucksETS2Strings, binding.TrucksETS2);
-			SetSelected(indexesOfTrucks, trucksATSStrings, binding.TrucksATS);
+			SetSelected(indexesOfTrucks, trucksETS2Strings, true, binding);
+			SetSelected(indexesOfTrucks, trucksATSStrings, false, binding);
 		}
 	}
 
-	private static void SetSelected(int[] indexes, List<string> lines, ObservableCollection<Truck> truckList) {
+	private static void SetSelected(int[] indexes, List<string> lines, bool isETS2, AccAddonBinding binding) {
+		ObservableCollection<Truck>? truckList;
+		if (isETS2) {
+			binding.SelectedCountETS2 = 0;
+			truckList = binding.TrucksETS2;
+		} else {
+			binding.SelectedCountATS = 0;
+			truckList = binding.TrucksATS;
+		}
 		foreach (var truck in truckList) {
 			truck.Check = false;
 			truck.ModelType = "";
@@ -604,6 +646,10 @@ namespace SCS_Mod_Helper.Accessory;
 				var s = line.Split(DefaultData.ItemSplit);
 				if (truck.TruckID.Equals(s[indexes[Truck.IndexDTruckID]])) {
 					truck.Check = true;
+					if (isETS2)
+						binding.SelectedCountETS2++;
+					else
+						binding.SelectedCountATS++;
 					truck.ModelType = s[indexes[Truck.IndexDModelType]];
 					truck.Look = s[indexes[Truck.IndexDLook]];
 					truck.Variant = s[indexes[Truck.IndexDVariant]];
@@ -640,7 +686,7 @@ namespace SCS_Mod_Helper.Accessory;
 		File.Delete(aPath);
 	}
 
-	public static void LoadTruckList(bool ets2, ObservableCollection<Truck> trucks) {
+	public static int LoadTruckList(bool ets2, ObservableCollection<Truck> trucks) {
 		var truckFile = ets2 ? Paths.TrucksETS2Path() : Paths.TrucksATSPath();
 		List<Truck> loadedTrucks = [];
 		bool updateTruckName = false;
@@ -648,6 +694,7 @@ namespace SCS_Mod_Helper.Accessory;
 			using StreamReader sr = new(truckFile);
 			string? line = sr.ReadLine();
 			if (line != null && line.StartsWith($"{FileHeader}")) {
+				int selectedCount = 0;
 				string[]? trucksHeader = null;
 				List<string> trucksStrings = [];
 				while ((line = sr.ReadLine()?.Trim()) != null) {
@@ -720,8 +767,11 @@ namespace SCS_Mod_Helper.Accessory;
 						if (indexes[Truck.IndexTDescription] != -1)
 							description = s[indexes[Truck.IndexTDescription]];
 						bool check = false;
-						if (indexes[Truck.IndexTCheck] != -1)
+						if (indexes[Truck.IndexTCheck] != -1) {
 							check = bool.Parse(s[indexes[Truck.IndexTCheck]]);
+							if (check)
+								selectedCount++;
+						}
 						string modelType = "";
 						if (indexes[Truck.IndexTModelType] != -1)
 							modelType = s[indexes[Truck.IndexTModelType]];
@@ -738,33 +788,41 @@ namespace SCS_Mod_Helper.Accessory;
 				loadedTrucks.Sort();
 				if (updateTruckName) {
 					List<Truck> defaultTrucks = LoadDefaultTrucks(ets2);
-					foreach (var truck in loadedTrucks) {
-						int i = 0;
-						while (i < defaultTrucks.Count) {
-							if (truck.TruckID == defaultTrucks[i].TruckID) {
-								truck.IngameName = defaultTrucks[i].IngameName;
-								defaultTrucks.RemoveAt(i);
-								break;
+
+					Application.Current.Dispatcher.Invoke(new(() => {
+						foreach (var truck in loadedTrucks) {
+							int i = 0;
+							while (i < defaultTrucks.Count) {
+								if (truck.TruckID == defaultTrucks[i].TruckID) {
+									truck.IngameName = defaultTrucks[i].IngameName;
+									defaultTrucks.RemoveAt(i);
+									break;
+								}
+								i++;
 							}
-							i++;
+							trucks.Add(truck);
 						}
-						trucks.Add(truck);
-					}
+					}), DispatcherPriority.DataBind);
 					SaveTruckList(ets2, trucks);
 				} else {
-					foreach (var truck in loadedTrucks) {
-						trucks.Add(truck);
-					}
+					Application.Current.Dispatcher.Invoke(new(() => {
+						foreach (var truck in loadedTrucks) {
+							trucks.Add(truck);
+						}
+					}), DispatcherPriority.DataBind);
 				}
-				return;
+				return selectedCount;
 			} else
 				loadedTrucks = LoadDefaultTrucks(ets2);
 		} else
 			loadedTrucks = LoadDefaultTrucks(ets2);
-		foreach (var truck in loadedTrucks) {
-			trucks.Add(truck);
-		}
+		Application.Current.Dispatcher.Invoke(new(() => {
+			foreach (var truck in loadedTrucks) {
+				trucks.Add(truck);
+			}
+		}), DispatcherPriority.DataBind);
 		SaveTruckList(ets2, trucks);
+		return ets2 ? loadedTrucks.Count : 0;
 	}
 
 	public static List<Truck> LoadDefaultTrucks(bool ets2) {

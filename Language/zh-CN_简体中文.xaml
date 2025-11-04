@@ -78,7 +78,10 @@
 	<s:String x:Key="ModelFilePath">模型路径（选择pim会自动改成pmd）</s:String>
 	<s:String x:Key="ModelFilePathUK">模型路径(UK)</s:String>
 	<s:String x:Key="ModelFilePathUKTip">非必须 如果文件后缀是_uk会自动匹配</s:String>
+	<s:String x:Key="ExtModelFilePath">车外视角模型路径</s:String>
+	<s:String x:Key="ExtModelFilePathUK">车外视角模型路径(UK)</s:String>
 	<s:String x:Key="ModelCollPath">模型碰撞文件路径</s:String>
+	<s:String x:Key="ModelSetExterior">设定车外视角模型</s:String>
 	<s:String x:Key="ModelNameTip">超过12个字符可能会不显示</s:String>
 	<s:String x:Key="ModelIconTip">建议放在material\ui\accessory\内</s:String>
 	<s:String x:Key="ModelType">模型类型</s:String>
@@ -86,22 +89,18 @@
 	<s:String x:Key="ModelLook">外观(Look)</s:String>
 	<s:String x:Key="ModelVariant">变体(Variant)</s:String>
 	<s:String x:Key="HideIn">隐藏</s:String>
+	<s:String x:Key="ElectricType">Electric Type</s:String>
 	<s:String x:Key="Others">其他参数</s:String>
-	<s:String x:Key="OthersTip">上述没有的内容可以在下面添加&#10;右键会显示推荐项&#10;重复项只会使用最前的值</s:String>
-		<!--Others列表-->
-	<s:String x:Key="HeaderOthersName">内容</s:String>
-	<s:String x:Key="HeaderIsArray">数组</s:String>
-	<s:String x:Key="HeaderUseQuote">引号</s:String>
-	<s:String x:Key="HeaderOthersValue">值</s:String>
+	<s:String
+		x:Key="OthersTip">上述没有的内容可以在下面添加&#10;右键会显示推荐项&#10;重复项只会使用最前的值</s:String>
 		<!--其他内容-->
-	<s:String x:Key="MenuOthersExteriorModel">车外模型</s:String>
-	<s:String x:Key="MenuOthersExteriorModelUK">车外模型（UK）</s:String>
-	<s:String x:Key="MenuOthersData">物理模型(data)</s:String>
-	<s:String x:Key="MenuOthersSuitableFor">适用于...(suitable__for)</s:String>
-	<s:String x:Key="MenuOthersConflictWith">与...冲突(conflict__with)</s:String>
-	<s:String x:Key="MenuOthersDefaults">默认套件(defaults)</s:String>
-	<s:String x:Key="MenuOthersOverrides">覆盖(overrides)</s:String>
-	<s:String x:Key="MenuOtherRequire">需要(require)</s:String>
+	<s:String x:Key="Data">物理模型(data)</s:String>
+	<s:String x:Key="SuitableFor">适用于...(suitable_for)</s:String>
+	<s:String x:Key="ConflictWith">与...冲突(conflict_with)</s:String>
+	<s:String x:Key="Defaults">默认套件(defaults)</s:String>
+	<s:String x:Key="Overrides">覆盖(overrides)</s:String>
+	<s:String x:Key="Require">需要(require)</s:String>
+	<s:String x:Key="ListCount">数量：</s:String>
 	
 		<!--卡车列表-->
 	<s:String x:Key="ModelTruckTip">如有这里没有的新车型，点击新增添加&#10;删除按钮会删除选中的车型（不是打勾，而是左键选中）&#10;Model类型、外观和变体可以在下面分别设置</s:String>
@@ -214,7 +213,7 @@
 	<s:String x:Key="MsgPhysics2">选择一个物理定义插入到模型定义中</s:String>
 	
 	<s:String x:Key="HeaderPhysicsName">物理定义</s:String>
-	<s:String x:Key="ButtonAddToOthers">添加到“其他参数”</s:String>
+	<s:String x:Key="ButtonAddToData">添加到“物理模型”</s:String>
 	<s:String x:Key="ButtonSaveToPhysicList">保存到软件的物理列表</s:String>
 	<s:String x:Key="TitlePhysicsType">物理类型</s:String>
 	

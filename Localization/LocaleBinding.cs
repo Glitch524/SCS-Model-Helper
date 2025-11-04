@@ -1,11 +1,11 @@
-﻿using SCS_Mod_Helper.Utils;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Text;
 using System.Windows;
 
 namespace SCS_Mod_Helper.Localization; 
-public class LocaleInfo: INotifyPropertyChanged {
+public class LocaleBinding: BaseBinding {
 	public readonly ObservableCollection<LocaleModule> LocaleModules = [];
 	public readonly ObservableCollection<LocaleModule> DeletedModules = [];
 
@@ -17,9 +17,8 @@ public class LocaleInfo: INotifyPropertyChanged {
 		}
 		set {
 			mCurrentModule = value ?? LocaleModules.FirstOrDefault();
-			InvokeChange(nameof(CurrentModule));
+			InvokeChange();
 
-			InvokeChange(nameof(ModuleNotNull));
 			InvokeChange(nameof(CurrentModuleName));
 			InvokeChange(nameof(CurrentLocaleList));
 		}
@@ -29,13 +28,8 @@ public class LocaleInfo: INotifyPropertyChanged {
 		mCurrentModule = LocaleModules.FirstOrDefault();
 		InvokeChange(nameof(CurrentModule));
 
-		InvokeChange(nameof(ModuleNotNull));
 		InvokeChange(nameof(CurrentModuleName));
 		InvokeChange(nameof(CurrentLocaleList));
-	}
-
-	public bool ModuleNotNull {
-		get => CurrentModule != null;
 	}
 
 	public string CurrentModuleName {
@@ -43,14 +37,12 @@ public class LocaleInfo: INotifyPropertyChanged {
 		set {
 			if (CurrentModule != null) {
 				CurrentModule.ModuleName = value;
-				InvokeChange(nameof(CurrentModuleName));
+				InvokeChange();
 			}
 		}
 	}
 
-	public ObservableCollection<ModLocale>? CurrentLocaleList {
-		get => CurrentModule?.LocaleList;
-	}
+	public ObservableCollection<ModLocale>? CurrentLocaleList => CurrentModule?.LocaleList;
 
 	private ModLocale? mCurrentLocale = null;
 	public ModLocale? CurrentLocale {
@@ -60,7 +52,7 @@ public class LocaleInfo: INotifyPropertyChanged {
 		}
 		set {
 			mCurrentLocale = value ?? CurrentLocaleList?.FirstOrDefault();
-			InvokeChange(nameof(CurrentLocale));
+			InvokeChange();
 
 			InvokeChange(nameof(CurrentDict));
 		}
@@ -167,7 +159,4 @@ public class LocaleInfo: INotifyPropertyChanged {
 				dict.Clear();
 		}
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	private void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 }

@@ -13,8 +13,8 @@
 	ExtendsContentIntoTitleBar="True"
 	mc:Ignorable="d"
 	WindowStartupLocation="CenterOwner"
-	Height="1000"
-	Width="1000">
+	Width="1000"
+	SizeToContent="Height">
 	<base:BaseWindow.Resources>
 		<utils:Float3Converter
 			x:Key="Float3" />
@@ -24,6 +24,8 @@
 			x:Key="UIntConverter" />
 		<utils:LongConverter
 			x:Key="LongConverter" />
+		<utils:StringNotEmptyConverter
+			x:Key="StringNotEmpty" />
 
 		<ContextMenu
 			x:Key="MenuStringRes"
@@ -68,33 +70,6 @@
 		</ContextMenu>
 
 		<ContextMenu
-			x:Key="MenuOthers">
-			<MenuItem
-				Header="{DynamicResource MenuOthersData}"
-				Click="OnMenuClicked"
-				Tag="data" />
-			<MenuItem
-				Header="{DynamicResource MenuOthersSuitableFor}"
-				Click="OnMenuClicked"
-				Tag="suitable_for" />
-			<MenuItem
-				Header="{DynamicResource MenuOthersConflictWith}"
-				Click="OnMenuClicked"
-				Tag="conflict_with" />
-			<MenuItem
-				Header="{DynamicResource MenuOthersDefaults}"
-				Click="OnMenuClicked"
-				Tag="defaults" />
-			<MenuItem
-				Header="{DynamicResource MenuOthersOverrides}"
-				Click="OnMenuClicked"
-				Tag="overrides" />
-			<MenuItem
-				Header="{DynamicResource MenuOtherRequire}"
-				Click="OnMenuClicked"
-				Tag="require" />
-		</ContextMenu>
-		<ContextMenu
 			x:Key="MenuSuitableFor">
 			<MenuItem
 				Header="{DynamicResource SuitableForSetDashbrd}"
@@ -126,6 +101,9 @@
 				Property="Padding"
 				Value="5,3,5,3" />
 			<Setter
+				Property="Background"
+				Value="{x:Null}" />
+			<Setter
 				Property="BorderThickness"
 				Value="0" />
 			<Setter
@@ -152,6 +130,33 @@
 				Property="Height"
 				Value="{Binding ActualHeight, ElementName=TextModelName}" />
 		</Style>
+
+		<Style
+			x:Key="ListHint"
+			TargetType="TextBlock"
+			BasedOn="{StaticResource {x:Type TextBlock}}">
+			<EventSetter
+				Event="GotFocus"
+				Handler="ListDataGotFocus" />
+			<EventSetter
+				Event="LostFocus"
+				Handler="ListDataLostFocus" />
+			<Setter
+				Property="VerticalAlignment"
+				Value="Center" />
+			<Setter
+				Property="IsHitTestVisible"
+				Value="False" />
+			<Setter
+				Property="TextWrapping"
+				Value="Wrap" />
+			<Setter
+				Property="Margin"
+				Value="7,0,0,0" />
+			<Setter
+				Property="FontSize"
+				Value="14" />
+		</Style>
 	</base:BaseWindow.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -164,17 +169,13 @@
 			Title="{DynamicResource TitleAccessoryHookup}" />
 		<Grid
 			x:Name="GridMain"
-			Margin="10,0,10,10"
+			Margin="10,0,0,10"
 			Grid.Row="1">
 			<Grid.RowDefinitions>
 				<RowDefinition
 					Height="Auto" />
 				<RowDefinition
 					Height="*" />
-				<RowDefinition
-					Height="15" />
-				<RowDefinition
-					Height="Auto" />
 				<RowDefinition
 					Height="Auto" />
 			</Grid.RowDefinitions>
@@ -185,15 +186,10 @@
 				<ColumnDefinition
 					Width="10" />
 				<ColumnDefinition
-					MinWidth="100"
-					Width="110" />
-				<ColumnDefinition
-					Width="15" />
-				<ColumnDefinition
 					Width="*" />
 			</Grid.ColumnDefinitions>
 			<Grid
-				Grid.ColumnSpan="9"
+				Grid.ColumnSpan="5"
 				Margin="0,0,0,5">
 				<Grid.RowDefinitions>
 					<RowDefinition
@@ -211,14 +207,14 @@
 				<TextBlock
 					Grid.ColumnSpan="2"
 					Margin="0,0,0,5">
-				<Run
+					<Run
 						Text="{DynamicResource DescAccessoryHookup}" />
 				</TextBlock>
 				<TextBlock
 					Grid.Row="1"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Center">
-				<Run
+					<Run
 						Text="{DynamicResource TitleAddonStorageStorage}" />
 				</TextBlock>
 				<TextBox
@@ -230,7 +226,7 @@
 			</Grid>
 			<Grid
 				Grid.Row="1"
-				Grid.RowSpan="3">
+				Height="{Binding ActualHeight, ElementName=ViewSuiContent, Mode=OneWay}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition
 						Width="*" />
@@ -284,7 +280,7 @@
 										Value="False" />
 								</DataTrigger>
 								<DataTrigger
-									Binding="{Binding ItemsSource.Count, ElementName=TableSui}"
+									Binding="{Binding Items.Count, ElementName=TableSui}"
 									Value="1">
 									<Setter
 										Property="IsEnabled"
@@ -315,7 +311,7 @@
 										Value="False" />
 								</DataTrigger>
 								<DataTrigger
-									Binding="{Binding ItemsSource.Count, ElementName=TableSui}"
+									Binding="{Binding Items.Count, ElementName=TableSui}"
 									Value="1">
 									<Setter
 										Property="IsEnabled"
@@ -383,349 +379,312 @@
 			<GridSplitter
 				Width="1"
 				Grid.Row="1"
-				Grid.RowSpan="3"
 				Grid.Column="1"
-				Margin="4,0,4,0"
+				Margin="4,0"
 				ResizeBehavior="PreviousAndNext"
 				HorizontalAlignment="Center"
 				Background="#FF4C4B4B" />
 
-			<Grid
-				Grid.Row="1"
-				Grid.Column="2">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition
-						Width="*" />
-					<ColumnDefinition
-						Width="Auto" />
-					<ColumnDefinition
-						Width="Auto" />
-					<ColumnDefinition
-						Width="Auto" />
-					<ColumnDefinition
-						Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition
-						Height="Auto" />
-					<RowDefinition
-						Height="*" />
-				</Grid.RowDefinitions>
-				<Border
-					Grid.Column="1"
-					Grid.ColumnSpan="4"
-					Style="{DynamicResource MultiControlBorder}" />
-				<Button
-					x:Name="ButtonToyAdd"
-					Grid.Column="1"
-					Click="ButtonAddRowClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="Add16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=TableSui}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Button
-					x:Name="ButtonToyUp"
-					Grid.Column="2"
-					HorizontalAlignment="Left"
-					Click="SortButtonClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="ArrowUp16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=ListBoxHookup}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-								<DataTrigger
-									Binding="{Binding ItemsSource.Count, ElementName=ListBoxHookup}"
-									Value="1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Button
-					x:Name="ButtonToyDown"
-					Grid.Column="3"
-					HorizontalAlignment="Left"
-					Click="SortButtonClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="ArrowDown16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=ListBoxHookup}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-								<DataTrigger
-									Binding="{Binding ItemsSource.Count, ElementName=ListBoxHookup}"
-									Value="1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Button
-					x:Name="ButtonToyRemove"
-					Width="{Binding ActualHeight, ElementName=ButtonOthersAdd, Mode=OneWay}"
-					Height="{Binding ActualHeight, ElementName=ButtonOthersAdd, Mode=OneWay}"
-					Grid.Column="4"
-					Click="ButtonDeleteRowClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="Dismiss16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=ListBoxHookup}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Grid
-					Grid.Row="1"
-					Grid.ColumnSpan="5">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="58*" />
-						<ColumnDefinition
-							Width="53*" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="117*" />
-						<RowDefinition
-							Height="250*" />
-					</Grid.RowDefinitions>
-					<Border
-						Grid.ColumnSpan="2"
-						Grid.RowSpan="3"
-						BorderThickness="1"
-						BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
-						CornerRadius="5" />
-					<TextBlock
-						Text="{DynamicResource HeaderAccessoryName}"
-						HorizontalAlignment="Left"
-						VerticalAlignment="Center"
-						Padding="0,5,0,5"
-						FontWeight="Bold"
-						Margin="10,0,0,0"
-						Grid.ColumnSpan="2" />
-					<ListBox
-						x:Name="ListBoxHookup"
-						Grid.ColumnSpan="2"
-						d:ItemsSource="{d:SampleData ItemCount=2}"
-						ItemsSource="{Binding Hookups}"
-						SelectedItem="{Binding CurrentHookupItem, Mode=TwoWay}"
-						SelectedIndex="0"
-						SelectionMode="Single"
-						Margin="0,25,0,0"
-						Grid.RowSpan="3">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<TextBlock
-									Text="{Binding ModelName}"
-									ToolTip="{Binding ModelName}"
-									FontSize="13">
-									<TextBlock.Style>
-										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
-													Value="True">
-													<Setter
-														Property="Foreground"
-														Value="White" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</Grid>
-			</Grid>
-
-			<GridSplitter
-				Width="3"
+			<ScrollViewer
+				x:Name="ViewSuiContent"
 				Grid.Row="1"
 				Grid.Column="3"
-				Margin="4,0,4,0"
-				ResizeBehavior="PreviousAndNext"
-				HorizontalAlignment="Center"
-				Background="#FF4C4B4B" />
-
-			<Grid
-				Grid.Row="1"
-				Grid.Column="4">
-				<Grid.RowDefinitions>
-					<RowDefinition
-						Height="Auto" />
-					<RowDefinition
-						Height="*" />
-				</Grid.RowDefinitions>
-
+				Padding="0,0,10,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition
-							Width="*" />
+							MinWidth="100"
+							Width="110" />
 						<ColumnDefinition
-							Width="5" />
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="5" />
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="5" />
+							Width="15" />
 						<ColumnDefinition
 							Width="*" />
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="5" />
 						<RowDefinition
 							Height="Auto" />
 						<RowDefinition
 							Height="15" />
 						<RowDefinition
 							Height="Auto" />
-						<RowDefinition
-							Height="5" />
-						<RowDefinition
-							Height="Auto" />
 					</Grid.RowDefinitions>
 
-					<StackPanel>
-						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								x:Name="TitleModelName"
-								TextWrapping="Wrap"
-								Text="{DynamicResource ModelName}" />
-							<Border
-								ToolTip="{DynamicResource ModelNameTip}">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="Chat16" />
-								</Viewbox>
-							</Border>
-						</StackPanel>
-						<TextBox
-							x:Name="TextModelName"
-							TextWrapping="Wrap"
-							MaxLines="1"
-							Text="{Binding CurrentHookupItem.ModelName, UpdateSourceTrigger=PropertyChanged}"
-							VerticalAlignment="Top">
-							<TextBox.Style>
+					<Grid
+						Height="{Binding ActualHeight, ElementName=ViewHookup, Mode=OneWay}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+						<Border
+							Grid.Column="1"
+							Grid.ColumnSpan="4"
+							Style="{DynamicResource MultiControlBorder}" />
+						<Button
+							x:Name="ButtonToyAdd"
+							Grid.Column="1"
+							Click="ButtonAddRowClick">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Add16" />
+							</Viewbox>
+							<Button.Style>
 								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource {x:Type TextBox}}">
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
 									<Style.Triggers>
 										<DataTrigger
-											Binding="{Binding CurrentHookupItem.NameOver12}"
-											Value="True">
+											Binding="{Binding SelectedIndex, ElementName=TableSui}"
+											Value="-1">
 											<Setter
-												Property="Foreground"
-												Value="Red" />
+												Property="IsEnabled"
+												Value="False" />
 										</DataTrigger>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
 									</Style.Triggers>
 								</Style>
-							</TextBox.Style>
-						</TextBox>
-					</StackPanel>
-					<StackPanel
-						Grid.Column="2"
-						Grid.ColumnSpan="3"
-						VerticalAlignment="Bottom">
+							</Button.Style>
+						</Button>
+						<Button
+							x:Name="ButtonToyUp"
+							Grid.Column="2"
+							HorizontalAlignment="Left"
+							Click="SortButtonClick">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="ArrowUp16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListBoxHookup}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+										<DataTrigger
+											Binding="{Binding Items.Count, ElementName=ListBoxHookup}"
+											Value="1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<Button
+							x:Name="ButtonToyDown"
+							Grid.Column="3"
+							HorizontalAlignment="Left"
+							Click="SortButtonClick">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="ArrowDown16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListBoxHookup}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+										<DataTrigger
+											Binding="{Binding Items.Count, ElementName=ListBoxHookup}"
+											Value="1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<Button
+							x:Name="ButtonToyRemove"
+							Grid.Column="4"
+							Click="ButtonDeleteRowClick">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListBoxHookup}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+
+						<Border
+							Grid.Row="1"
+							Grid.RowSpan="2"
+							Grid.ColumnSpan="5"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+							CornerRadius="5" />
 						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelDisplayName}" />
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<Border
-								Grid.ColumnSpan="3"
-								Style="{DynamicResource MultiControlBorder}" />
+							Grid.Row="1"
+							Grid.ColumnSpan="5"
+							Text="{DynamicResource HeaderAccessoryName}"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Center"
+							Padding="0,5"
+							FontWeight="Bold"
+							Margin="10,0,0,0" />
+						<ListBox
+							x:Name="ListBoxHookup"
+							Grid.Row="2"
+							Grid.ColumnSpan="5"
+							d:ItemsSource="{d:SampleData ItemCount=2}"
+							ItemsSource="{Binding Hookups}"
+							SelectedItem="{Binding CurrentHookupItem, Mode=TwoWay}"
+							SelectedIndex="0"
+							SelectionMode="Single">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock
+										Text="{Binding ModelName}"
+										ToolTip="{Binding ModelName}"
+										FontSize="13">
+										<TextBlock.Style>
+											<Style
+												TargetType="TextBlock"
+												BasedOn="{StaticResource {x:Type TextBlock}}">
+												<Style.Triggers>
+													<DataTrigger
+														Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+														Value="True">
+														<Setter
+															Property="Foreground"
+															Value="White" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Grid>
+
+					<GridSplitter
+						Width="1"
+						Grid.Column="1"
+						Margin="4,0"
+						ResizeBehavior="PreviousAndNext"
+						HorizontalAlignment="Center"
+						Background="#FF4C4B4B" />
+
+					<Grid
+						x:Name="ViewHookup"
+						Grid.Column="2">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="*" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="5" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="15" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="5" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="15" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<StackPanel>
+							<StackPanel
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleModelName"
+									TextWrapping="Wrap"
+									Text="{DynamicResource ModelName}" />
+								<Border
+									ToolTip="{DynamicResource ModelNameTip}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
 							<TextBox
-								x:Name="TextDisplayName"
-								Text="{Binding CurrentHookupItem.DisplayName, UpdateSourceTrigger=PropertyChanged}"
+								x:Name="TextModelName"
+								TextWrapping="Wrap"
 								MaxLines="1"
-								TextWrapping="Wrap">
+								Text="{Binding CurrentHookupItem.ModelName, UpdateSourceTrigger=PropertyChanged}"
+								VerticalAlignment="Top">
 								<TextBox.Style>
 									<Style
 										TargetType="TextBox"
-										BasedOn="{StaticResource TextBoxBorderless}">
+										BasedOn="{StaticResource {x:Type TextBox}}">
 										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding CurrentHookupItem.NameOver12}"
+												Value="True">
+												<Setter
+													Property="Foreground"
+													Value="Red" />
+											</DataTrigger>
 											<Trigger
 												Property="Text"
 												Value="">
@@ -737,183 +696,340 @@
 									</Style>
 								</TextBox.Style>
 							</TextBox>
-							<Button
-								x:Name="ButtonCheckRes"
-								Grid.Column="1"
-								Click="CheckStringRes"
-								Visibility="{Binding CurrentHookupItem.CheckResVisibility}"
-								Style="{StaticResource ButtonBorderless}">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="Search16" />
-								</Viewbox>
-							</Button>
-							<Popup
-								x:Name="PopupCheckRes"
-								PlacementTarget="{Binding ElementName=ButtonCheckRes}"
-								PopupAnimation="Slide"
-								AllowsTransparency="True"
-								IsOpen="{Binding PopupCheckOpen}"
-								StaysOpen="False">
-								<Grid>
-									<Border Style="{DynamicResource PopupBorder}" />
-									<StackPanel
-										Margin="10">
-										<TextBlock>
-											<Run
-												Text="{DynamicResource CheckResResult}" />
-										</TextBlock>
-										<Border
-											Margin="0,10,0,10"
-											Style="{DynamicResource SpliterBorder}" />
-										<TextBlock
-											Text="{Binding CheckResResult}" />
-										<Border
-											Margin="0,10,0,10"
-											Style="{DynamicResource SpliterBorder}" />
-										<TextBlock>
-											<Run
-												Text="{DynamicResource CheckResResultTips}" />
-										</TextBlock>
-									</StackPanel>
-								</Grid>
-							</Popup>
-							<Button
-								x:Name="ButtonChooseRes"
-								Grid.Column="2"
-								Click="ChooseStringRes"
-								Style="{StaticResource ButtonBorderless}">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="Translate16" />
-								</Viewbox>
-							</Button>
-						</Grid>
-					</StackPanel>
-					<StackPanel
-						Grid.Row="0"
-						Grid.Column="6">
-
+						</StackPanel>
 						<StackPanel
-							Orientation="Horizontal"
+							Grid.Column="2"
+							Grid.ColumnSpan="3"
 							VerticalAlignment="Bottom">
 							<TextBlock
 								TextWrapping="Wrap"
 								VerticalAlignment="Top"
-								Text="{DynamicResource PartType}" />
-							<Border
-								ToolTip="{DynamicResource PartTypeTip}"
-								Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="Chat16" />
-								</Viewbox>
-							</Border>
+								Text="{DynamicResource ModelDisplayName}" />
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Border
+									Grid.ColumnSpan="3"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBox
+									x:Name="TextDisplayName"
+									Text="{Binding CurrentHookupItem.DisplayName, UpdateSourceTrigger=PropertyChanged}"
+									MaxLines="1"
+									TextWrapping="Wrap">
+									<TextBox.Style>
+										<Style
+											TargetType="TextBox"
+											BasedOn="{StaticResource TextBoxBorderless}">
+											<Style.Triggers>
+												<Trigger
+													Property="Text"
+													Value="">
+													<Setter
+														Property="Background"
+														Value="Yellow" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</TextBox.Style>
+								</TextBox>
+								<Button
+									x:Name="ButtonCheckRes"
+									Grid.Column="1"
+									Click="CheckStringRes"
+									Visibility="{Binding CurrentHookupItem.CheckResVisibility}"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Search16" />
+									</Viewbox>
+								</Button>
+								<Popup
+									x:Name="PopupCheckRes"
+									PlacementTarget="{Binding ElementName=ButtonCheckRes}"
+									PopupAnimation="Slide"
+									AllowsTransparency="True"
+									IsOpen="{Binding PopupCheckOpen}"
+									StaysOpen="False">
+									<Grid>
+										<Border
+											Style="{DynamicResource PopupBorder}" />
+										<StackPanel
+											Margin="10">
+											<TextBlock>
+											<Run
+													Text="{DynamicResource CheckResResult}" />
+											</TextBlock>
+											<Border
+												Margin="0,10,0,10"
+												Style="{DynamicResource SpliterBorder}" />
+											<TextBlock
+												Text="{Binding CheckResResult}" />
+											<Border
+												Margin="0,10,0,10"
+												Style="{DynamicResource SpliterBorder}" />
+											<TextBlock>
+											<Run
+													Text="{DynamicResource CheckResResultTips}" />
+											</TextBlock>
+										</StackPanel>
+									</Grid>
+								</Popup>
+								<Button
+									x:Name="ButtonChooseRes"
+									Grid.Column="2"
+									Click="ChooseStringRes"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Translate16" />
+									</Viewbox>
+								</Button>
+							</Grid>
 						</StackPanel>
-						<ComboBox
-							x:Name="TextPartType"
-							DisplayMemberPath="PartTypeDisplay"
-							SelectedValuePath="PartTypeValue"
-							SelectedValue="{Binding CurrentHookupItem.PartType}"
-							ItemsSource="{Binding PartTypes}"
-							IsEditable="True"
-							IsReadOnly="true" />
-					</StackPanel>
-
-					<StackPanel
-						Grid.Row="2"
-						Grid.Column="0">
-						<TextBlock
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelPrice}"
-							TextTrimming="WordEllipsis" />
-						<TextBox
-							x:Name="TextPrice"
-							Text="{Binding CurrentHookupItem.Price}"
-							MaxLines="1"
-							PreviewTextInput="NumberOnly"
-							TextWrapping="Wrap">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource {x:Type TextBox}}">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-										<Trigger
-											Property="Text"
-											Value="0">
-											<Setter
-												Property="Background"
-												Value="Red" />
-											<Setter
-												Property="ToolTip"
-												Value="{DynamicResource ModelPriceErrNot0}" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-					</StackPanel>
-					<StackPanel
-						Grid.Row="2"
-						Grid.Column="2">
-						<TextBlock
-							TextWrapping="Wrap"
-							VerticalAlignment="Top">
-						<Run
-								Language="zh-cn"
-								Text="{DynamicResource ModelUnlockLevel}" />
-						</TextBlock>
-						<TextBox
-							x:Name="TextUnlockLevel"
-							Text="{Binding CurrentHookupItem.UnlockLevel}"
-							MaxLines="1"
-							PreviewTextInput="NumberOnly"
-							TextWrapping="Wrap">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource {x:Type TextBox}}">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-					</StackPanel>
-					<StackPanel
-						x:Name="PanelIconName"
-						Grid.Row="2"
-						Grid.Column="4">
 						<StackPanel
-							Orientation="Horizontal">
-							<TextBlock
-								x:Name="TitleIconName"
-								TextWrapping="Wrap"
-								VerticalAlignment="Top"
-								Text="{DynamicResource ModelIcon}" />
-							<Border
-								ToolTip="{DynamicResource ModelIconTip}"
-								Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="Chat16" />
-								</Viewbox>
-							</Border>
+							Grid.Row="0"
+							Grid.Column="6">
+
+							<StackPanel
+								Orientation="Horizontal"
+								VerticalAlignment="Bottom">
+								<TextBlock
+									TextWrapping="Wrap"
+									VerticalAlignment="Top"
+									Text="{DynamicResource PartType}" />
+								<Border
+									ToolTip="{DynamicResource PartTypeTip}"
+									Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<ComboBox
+								x:Name="TextPartType"
+								DisplayMemberPath="PartTypeDisplay"
+								SelectedValuePath="PartTypeValue"
+								SelectedValue="{Binding CurrentHookupItem.PartType}"
+								ItemsSource="{Binding PartTypes}"
+								IsEditable="True"
+								IsReadOnly="true" />
 						</StackPanel>
-						<Grid>
+
+						<StackPanel
+							Grid.Row="2"
+							Grid.Column="0">
+							<TextBlock
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelPrice}"
+								TextTrimming="WordEllipsis" />
+							<TextBox
+								x:Name="TextPrice"
+								Text="{Binding CurrentHookupItem.Price}"
+								MaxLines="1"
+								PreviewTextInput="NumberOnly"
+								TextWrapping="Wrap">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource {x:Type TextBox}}">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+											<Trigger
+												Property="Text"
+												Value="0">
+												<Setter
+													Property="Background"
+													Value="Red" />
+												<Setter
+													Property="ToolTip"
+													Value="{DynamicResource ModelPriceErrNot0}" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</StackPanel>
+						<StackPanel
+							Grid.Row="2"
+							Grid.Column="2">
+							<TextBlock
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+						<Run
+									Language="zh-cn"
+									Text="{DynamicResource ModelUnlockLevel}" />
+							</TextBlock>
+							<TextBox
+								x:Name="TextUnlockLevel"
+								Text="{Binding CurrentHookupItem.UnlockLevel}"
+								MaxLines="1"
+								PreviewTextInput="NumberOnly"
+								TextWrapping="Wrap">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource {x:Type TextBox}}">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+						</StackPanel>
+						<StackPanel
+							x:Name="PanelIconName"
+							Grid.Row="2"
+							Grid.Column="4"
+							VerticalAlignment="Top">
+							<StackPanel
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleIconName"
+									TextWrapping="Wrap"
+									VerticalAlignment="Top"
+									Text="{DynamicResource ModelIcon}" />
+								<Border
+									ToolTip="{DynamicResource ModelIconTip}"
+									Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Border
+									Grid.ColumnSpan="3"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBox
+									x:Name="TextIconName"
+									Grid.Column="0"
+									Text="{Binding CurrentHookupItem.IconName}"
+									d:Text="icon_name"
+									MaxLines="1"
+									TextWrapping="Wrap">
+									<TextBox.Style>
+										<Style
+											TargetType="TextBox"
+											BasedOn="{StaticResource TextBoxBorderless}">
+											<Style.Triggers>
+												<Trigger
+													Property="Text"
+													Value="">
+													<Setter
+														Property="Background"
+														Value="Yellow" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</TextBox.Style>
+								</TextBox>
+								<Button
+									x:Name="ButtonIconNameClear"
+									Grid.Column="1"
+									Click="ButtonClearClick">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Dismiss16" />
+									</Viewbox>
+									<Button.Style>
+										<Style
+											TargetType="Button"
+											BasedOn="{StaticResource ButtonBorderless}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding Text, ElementName=TextIconName}"
+													Value="">
+													<Setter
+														Property="Visibility"
+														Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Button.Style>
+								</Button>
+								<Button
+									x:Name="ButtonIconName"
+									Grid.Column="2"
+									Padding="3,3,3,3"
+									Click="ButtonChooseIcon"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Folder16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+						</StackPanel>
+						<Border
+							Grid.Row="2"
+							Grid.Column="6"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Center"
+							Height="{Binding ActualHeight, ElementName=PanelIconName, Mode=OneWay}">
+							<Border.Style>
+								<Style
+									TargetType="Border"
+									BasedOn="{StaticResource MultiControlBorder}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding CurrentHookupItem.ModelIcon}"
+											Value="{x:Null}">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Border.Style>
+							<Viewbox
+								StretchDirection="DownOnly">
+								<Image
+									Stretch="Uniform"
+									Source="{Binding CurrentHookupItem.ModelIcon}"
+									d:Source="/Images/ModelIconPlaceholder.png" />
+							</Viewbox>
+						</Border>
+
+						<Border
+							Height="1"
+							Grid.Row="3"
+							Grid.ColumnSpan="7"
+							Margin="0,7"
+							VerticalAlignment="Center"
+							Background="#FF4C4B4B"
+							HorizontalAlignment="Stretch" />
+
+						<Grid
+							Grid.Row="4"
+							Grid.ColumnSpan="5">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition
 									Width="*" />
@@ -922,16 +1038,28 @@
 								<ColumnDefinition
 									Width="Auto" />
 							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="*" />
+							</Grid.RowDefinitions>
+							<TextBlock
+								Grid.ColumnSpan="3"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelFilePath}" />
 							<Border
+								Grid.Row="1"
 								Grid.ColumnSpan="3"
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBox
-								x:Name="TextIconName"
+								x:Name="TextModelPath"
+								Grid.Row="1"
 								Grid.Column="0"
-								Text="{Binding CurrentHookupItem.IconName}"
-								d:Text="icon_name"
-								MaxLines="1"
-								TextWrapping="Wrap">
+								Text="{Binding CurrentHookupItem.ModelPath}"
+								TextWrapping="Wrap"
+								MaxLines="2">
 								<TextBox.Style>
 									<Style
 										TargetType="TextBox"
@@ -949,7 +1077,8 @@
 								</TextBox.Style>
 							</TextBox>
 							<Button
-								x:Name="ButtonIconNameClear"
+								x:Name="ButtonModelPathClear"
+								Grid.Row="1"
 								Grid.Column="1"
 								Click="ButtonClearClick">
 								<Viewbox>
@@ -962,7 +1091,7 @@
 										BasedOn="{StaticResource ButtonBorderless}">
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding Text, ElementName=TextIconName}"
+												Binding="{Binding Text, ElementName=TextModelPath}"
 												Value="">
 												<Setter
 													Property="Visibility"
@@ -973,10 +1102,10 @@
 								</Button.Style>
 							</Button>
 							<Button
-								x:Name="ButtonIconName"
+								x:Name="ButtonChooseModel"
+								Grid.Row="1"
 								Grid.Column="2"
-								Padding="3,3,3,3"
-								Click="ButtonChooseIcon"
+								Click="ButtonChooseModelClick"
 								Style="{StaticResource ButtonBorderless}">
 								<Viewbox>
 									<ui:SymbolIcon
@@ -984,496 +1113,663 @@
 								</Viewbox>
 							</Button>
 						</Grid>
-					</StackPanel>
+						<StackPanel
+							Grid.Row="4"
+							Grid.Column="6">
+							<TextBlock
+								Grid.Row="0"
+								Grid.ColumnSpan="2"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelLook}" />
+							<ComboBox
+								x:Name="TextLook"
+								Grid.Row="1"
+								Text="{Binding CurrentHookupItem.Look}"
+								ItemsSource="{Binding CurrentHookupItem.LookList}"
+								IsEditable="True"
+								IsTextSearchEnabled="True" />
+						</StackPanel>
 
-					<Border
-						Grid.Row="2"
-						Grid.Column="6"
-						HorizontalAlignment="Left"
-						VerticalAlignment="Center"
-						Height="{Binding ActualHeight, ElementName=PanelIconName, Mode=OneWay}">
-						<Border.Style>
-							<Style
-								TargetType="Border"
-								BasedOn="{StaticResource MultiControlBorder}">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding CurrentHookupItem.ModelIcon}"
-										Value="{x:Null}">
-										<Setter
-											Property="Visibility"
-											Value="Collapsed" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Border.Style>
-						<Viewbox
-							StretchDirection="DownOnly">
-							<Image
-								Stretch="Uniform"
-								Source="{Binding CurrentHookupItem.ModelIcon}"
-								d:Source="/Images/ModelIconPlaceholder.png" />
-						</Viewbox>
-					</Border>
+						<Grid
+							Grid.Row="6"
+							Grid.Column="0"
+							Grid.ColumnSpan="5">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="*" />
+							</Grid.RowDefinitions>
+							<TextBlock
+								x:Name="CheckUseCollPath"
+								Grid.Column="0"
+								Grid.ColumnSpan="3"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelCollPath}" />
+							<Border
+								Grid.Row="1"
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextCollPath"
+								Grid.Row="1"
+								Grid.Column="0"
+								Text="{Binding CurrentHookupItem.CollPath}"
+								TextWrapping="Wrap"
+								MaxLines="2"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonCollPathClear"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonClearClick">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+								<Button.Style>
+									<Style
+										TargetType="Button"
+										BasedOn="{StaticResource ButtonBorderless}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding Text, ElementName=TextCollPath}"
+												Value="">
+												<Setter
+													Property="Visibility"
+													Value="Collapsed" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Button.Style>
+							</Button>
+							<Button
+								x:Name="ButtonChooseColl"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+						<StackPanel
+							Grid.Row="6"
+							Grid.Column="6">
+							<TextBlock
+								Grid.Row="0"
+								Grid.ColumnSpan="2"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelVariant}" />
+							<ComboBox
+								x:Name="TextVariant"
+								Grid.Row="1"
+								Text="{Binding CurrentHookupItem.Variant}"
+								ItemsSource="{Binding CurrentHookupItem.VariantList}"
+								IsEditable="True"
+								IsTextSearchEnabled="True" />
+						</StackPanel>
 
-					<Border
+						<Border
+							Height="1"
+							Grid.Row="7"
+							Grid.ColumnSpan="7"
+							Margin="0,7"
+							VerticalAlignment="Center"
+							Background="#FF4C4B4B"
+							HorizontalAlignment="Stretch" />
+
+						<Grid
+							Grid.Row="8"
+							Grid.ColumnSpan="3">
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Grid.ColumnSpan="3">
+								<Run
+									Text="{DynamicResource Data}" />
+								<Run
+									Text="{DynamicResource ListCount}" />
+								<Run
+									Text="{Binding CurrentHookupItem.Data.Count, Mode=OneWay}" />
+							</TextBlock>
+							<Border
+								x:Name="BorderData"
+								Grid.Row="1"
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBlock
+								Grid.Row="1"
+								Text="{Binding CurrentHookupItem.DataListContent}">
+								<TextBlock.Style>
+									<Style
+										TargetType="TextBlock"
+										BasedOn="{StaticResource ListHint}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding NewData, Converter={StaticResource StringNotEmpty}}" Value="true">
+												<Setter
+													Property="Visibility"
+													Value="Collapsed" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+							<TextBox
+								x:Name="TextData"
+								Grid.Row="1"
+								GotFocus="ListDataGotFocus"
+								LostFocus="ListDataLostFocus"
+								Text="{Binding NewData, UpdateSourceTrigger=PropertyChanged}"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonAddData"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonListClick"
+								FocusManager.IsFocusScope="True"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Add16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonSelectData"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonPhysicsClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="PersonRunning20" />
+								</Viewbox>
+							</Button>
+						</Grid>
+						<Grid
+							Grid.Row="8"
+							Grid.Column="4"
+							Grid.ColumnSpan="3">
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<TextBlock
+								Grid.ColumnSpan="2">
+								<Run
+									Text="{DynamicResource SuitableFor}" />
+								<Run
+									Text="{DynamicResource ListCount}" />
+								<Run
+									Text="{Binding CurrentHookupItem.SuitableFor.Count, Mode=OneWay}" />
+							</TextBlock>
+							<Border
+								Grid.Row="1"
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBlock
+								Grid.Row="1"
+								Text="{Binding CurrentHookupItem.SuitableForListContent}">
+								<TextBlock.Style>
+									<Style
+										TargetType="TextBlock"
+										BasedOn="{StaticResource ListHint}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding NewSuitableFor, Converter={StaticResource StringNotEmpty}}"
+												Value="true">
+												<Setter
+													Property="Visibility"
+													Value="Collapsed" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+							<TextBox
+								x:Name="TextSuitableFor"
+								Grid.Row="1"
+								ContextMenu="{StaticResource MenuSuitableFor}"
+								GotFocus="ListDataGotFocus"
+								LostFocus="ListDataLostFocus"
+								Text="{Binding NewSuitableFor, UpdateSourceTrigger=PropertyChanged}"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonAddSuitableFor"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonListClick"
+								FocusManager.IsFocusScope="True"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Add16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+						<Popup
+							x:Name="PopupListData"
+							FocusManager.IsFocusScope="True"
+							PopupAnimation="Slide"
+							AllowsTransparency="True"
+							StaysOpen="True"
+							Width="{Binding ActualWidth, ElementName=BorderData, Mode=OneWay}">
+						</Popup>
+
+						<ui:ToggleSwitch
+							x:Name="CheckOthers"
+							Grid.Row="9"
+							Grid.ColumnSpan="3"
+							Margin="0,5,0,0"
+							d:IsChecked="true"
+							Content="{DynamicResource Others}"
+							Padding="0,0,11,0"
+							MinHeight="0"
+							VerticalContentAlignment="Center"
+							HorizontalAlignment="Stretch" />
+						<Grid
+							Grid.Row="10"
+							Grid.ColumnSpan="7"
+							Margin="0,2,0,0">
+							<Grid.Style>
+								<Style
+									TargetType="Grid">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding IsChecked, ElementName=CheckOthers}"
+											Value="False">
+											<Setter
+												Property="Visibility"
+												Value="Hidden" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="5" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="5" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="5" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="5" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition
+										Height="Auto" />
+									<RowDefinition
+										Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									Grid.ColumnSpan="2">
+									<Run
+										Text="{DynamicResource ConflictWith}" />
+									<Run
+										Text="{DynamicResource ListCount}" />
+									<Run
+										Text="{Binding CurrentHookupItem.ConflictWith.Count, Mode=OneWay}" />
+								</TextBlock>
+								<Border
+									Grid.Row="1"
+									Grid.ColumnSpan="2"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBlock
+									Grid.Row="1"
+									Text="{Binding CurrentHookupItem.ConflictWithListContent}">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource ListHint}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding NewConflictWith, Converter={StaticResource StringNotEmpty}}"
+													Value="true">
+													<Setter
+														Property="Visibility"
+														Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<TextBox
+									x:Name="TextConflictWith"
+									Grid.Row="1"
+									GotFocus="ListDataGotFocus"
+									LostFocus="ListDataLostFocus"
+									Text="{Binding NewConflictWith, UpdateSourceTrigger=PropertyChanged}"
+									Style="{StaticResource TextBoxBorderless}" />
+								<Button
+									x:Name="ButtonAddConflictWith"
+									Grid.Row="1"
+									Grid.Column="1"
+									Click="ButtonListClick"
+									FocusManager.IsFocusScope="True"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Add16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+							<Grid
+								Grid.Column="2">
+								<Grid.RowDefinitions>
+									<RowDefinition
+										Height="Auto" />
+									<RowDefinition
+										Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									Grid.ColumnSpan="2">
+									<Run
+										Text="{DynamicResource Defaults}" />
+									<Run
+										Text="{DynamicResource ListCount}" />
+									<Run
+										Text="{Binding CurrentHookupItem.Defaults.Count, Mode=OneWay}" />
+								</TextBlock>
+								<Border
+									Grid.Row="1"
+									Grid.ColumnSpan="2"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBlock
+									Grid.Row="1"
+									Text="{Binding CurrentHookupItem.DefaultsListContent}">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource ListHint}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding NewDefaults, Converter={StaticResource StringNotEmpty}}"
+													Value="true">
+													<Setter
+														Property="Visibility"
+														Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<TextBox
+									x:Name="TextDefaults"
+									Grid.Row="1"
+									GotFocus="ListDataGotFocus"
+									LostFocus="ListDataLostFocus"
+									Text="{Binding NewDefaults, UpdateSourceTrigger=PropertyChanged}"
+									Style="{StaticResource TextBoxBorderless}" />
+								<Button
+									x:Name="ButtonAddDefaults"
+									Grid.Row="1"
+									Grid.Column="1"
+									Click="ButtonListClick"
+									FocusManager.IsFocusScope="True"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Add16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+							<Grid
+								Grid.Column="4">
+								<Grid.RowDefinitions>
+									<RowDefinition
+										Height="Auto" />
+									<RowDefinition
+										Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									Grid.ColumnSpan="2">
+									<Run
+										Text="{DynamicResource Overrides}" />
+									<Run
+										Text="{DynamicResource ListCount}" />
+									<Run
+										Text="{Binding CurrentHookupItem.Overrides.Count, Mode=OneWay}" />
+								</TextBlock>
+								<Border
+									Grid.Row="1"
+									Grid.ColumnSpan="2"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBlock
+									Grid.Row="1"
+									Text="{Binding CurrentHookupItem.OverridesListContent}">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource ListHint}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding NewOverrides, Converter={StaticResource StringNotEmpty}}"
+													Value="true">
+													<Setter
+														Property="Visibility"
+														Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<TextBox
+									x:Name="TextOverrides"
+									Grid.Row="1"
+									GotFocus="ListDataGotFocus"
+									LostFocus="ListDataLostFocus"
+									Text="{Binding NewOverrides, UpdateSourceTrigger=PropertyChanged}"
+									Style="{StaticResource TextBoxBorderless}" />
+								<Button
+									x:Name="ButtonAddOverrides"
+									Grid.Row="1"
+									Grid.Column="1"
+									Click="ButtonListClick"
+									FocusManager.IsFocusScope="True"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Add16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+							<Grid
+								Grid.Column="6">
+								<Grid.RowDefinitions>
+									<RowDefinition
+										Height="Auto" />
+									<RowDefinition
+										Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									Grid.ColumnSpan="2">
+									<Run
+										Text="{DynamicResource Require}" />
+									<Run
+										Text="{DynamicResource ListCount}" />
+									<Run
+										Text="{Binding CurrentHookupItem.Require.Count, Mode=OneWay}" />
+								</TextBlock>
+								<Border
+									Grid.Row="1"
+									Grid.ColumnSpan="2"
+									Style="{DynamicResource MultiControlBorder}" />
+								<TextBlock
+									Grid.Row="1"
+									Text="{Binding CurrentHookupItem.RequireListContent}">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource ListHint}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding NewRequire, Converter={StaticResource StringNotEmpty}}"
+													Value="true">
+													<Setter
+														Property="Visibility"
+														Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+								<TextBox
+									x:Name="TextRequire"
+									GotFocus="ListDataGotFocus"
+									LostFocus="ListDataLostFocus"
+									Grid.Row="1"
+									Text="{Binding NewRequire, UpdateSourceTrigger=PropertyChanged}"
+									Style="{StaticResource TextBoxBorderless}">
+								</TextBox>
+								<Button
+									x:Name="ButtonAddRequire"
+									Grid.Row="1"
+									Grid.Column="1"
+									Click="ButtonListClick"
+									FocusManager.IsFocusScope="True"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Add16" />
+									</Viewbox>
+								</Button>
+							</Grid>
+							<Grid
+								Grid.Row="2">
+								<Grid.RowDefinitions>
+									<RowDefinition
+										Height="Auto" />
+									<RowDefinition
+										Height="Auto" />
+								</Grid.RowDefinitions>
+								<TextBlock
+									Text="{DynamicResource ElectricType}" />
+								<ComboBox
+									Grid.Row="1"
+									Text="{Binding CurrentHookupItem.ElectricType}">
+									<ComboBox.Items>
+										<ComboBoxItem
+											Content="vehicle" />
+										<ComboBoxItem
+											Content="aux_light" />
+									</ComboBox.Items>
+								</ComboBox>
+							</Grid>
+						</Grid>
+					</Grid>
+
+					<GridSplitter
 						Height="1"
-						Grid.Row="5"
-						Grid.ColumnSpan="7"
-						Margin="0,7,0,7"
-						VerticalAlignment="Center"
-						Background="#FF4C4B4B"
-						HorizontalAlignment="Stretch" />
-
-					<Grid
-						Grid.Row="4"
-						Grid.ColumnSpan="5">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="*" />
-						</Grid.RowDefinitions>
-						<TextBlock
-							Grid.ColumnSpan="3"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelFilePath}" />
-						<Border
-							Grid.Row="1"
-							Grid.ColumnSpan="3"
-							Style="{DynamicResource MultiControlBorder}" />
-						<TextBox
-							x:Name="TextModelPath"
-							Grid.Row="1"
-							Grid.Column="0"
-							Text="{Binding CurrentHookupItem.ModelPath}"
-							TextWrapping="Wrap"
-							MaxLines="2">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource TextBoxBorderless}">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-						<Button
-							x:Name="ButtonModelPathClear"
-							Grid.Row="1"
-							Grid.Column="1"
-							Click="ButtonClearClick">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Dismiss16" />
-							</Viewbox>
-							<Button.Style>
-								<Style
-									TargetType="Button"
-									BasedOn="{StaticResource ButtonBorderless}">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding Text, ElementName=TextModelPath}"
-											Value="">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</Button.Style>
-						</Button>
-						<Button
-							x:Name="ButtonChooseModel"
-							Grid.Row="1"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonBorderless}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Folder16" />
-							</Viewbox>
-						</Button>
-					</Grid>
-					<StackPanel
-						Grid.Row="4"
-						Grid.Column="6">
-						<TextBlock
-							Grid.Row="0"
-							Grid.ColumnSpan="2"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelLook}" />
-						<ComboBox
-							x:Name="TextLook"
-							Grid.Row="1"
-							Text="{Binding CurrentHookupItem.Look}"
-							ItemsSource="{Binding CurrentHookupItem.LookList}"
-							IsEditable="True"
-							IsTextSearchEnabled="True" />
-					</StackPanel>
-
-					<Grid
-						Grid.Row="6"
-						Grid.Column="0"
-						Grid.ColumnSpan="5">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="*" />
-						</Grid.RowDefinitions>
-						<TextBlock
-							x:Name="CheckUseCollPath"
-							Grid.Column="0"
-							Grid.ColumnSpan="3"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelCollPath}" />
-						<Border
-							Grid.Row="1"
-							Grid.ColumnSpan="3"
-							Style="{DynamicResource MultiControlBorder}" />
-						<TextBox
-							x:Name="TextCollPath"
-							Grid.Row="1"
-							Grid.Column="0"
-							Text="{Binding CurrentHookupItem.CollPath}"
-							TextWrapping="Wrap"
-							MaxLines="2"
-							Style="{StaticResource TextBoxBorderless}" />
-						<Button
-							x:Name="ButtonCollPathClear"
-							Grid.Row="1"
-							Grid.Column="1"
-							Click="ButtonClearClick">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Dismiss16" />
-							</Viewbox>
-							<Button.Style>
-								<Style
-									TargetType="Button"
-									BasedOn="{StaticResource ButtonBorderless}">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding Text, ElementName=TextCollPath}"
-											Value="">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</Button.Style>
-						</Button>
-						<Button
-							x:Name="ButtonChooseColl"
-							Grid.Row="1"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonBorderless}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Folder16" />
-							</Viewbox>
-						</Button>
-					</Grid>
-					<Grid
-						Grid.Row="6"
-						Grid.Column="6">
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="*" />
-						</Grid.RowDefinitions>
-						<TextBlock
-							Grid.Row="0"
-							Grid.ColumnSpan="2"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelVariant}" />
-						<ComboBox
-							x:Name="TextVariant"
-							Grid.Row="1"
-							Text="{Binding CurrentHookupItem.Variant}"
-							ItemsSource="{Binding CurrentHookupItem.VariantList}"
-							IsEditable="True"
-							IsTextSearchEnabled="True" />
-					</Grid>
-				</Grid>
-
-				<Grid
-					Grid.Row="1"
-					Margin="0,5,0,0">
-					<Grid.RowDefinitions>
-						<RowDefinition
-							Height="Auto" />
-						<RowDefinition
-							Height="*" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="*" />
-						<ColumnDefinition
-							Width="Auto" />
-						<ColumnDefinition
-							Width="Auto" />
-					</Grid.ColumnDefinitions>
-					<TextBlock
-						TextWrapping="Wrap"
-						Text="{DynamicResource Others}"
-						VerticalAlignment="Bottom" />
-					<Border
-						Grid.Column="1"
-						ToolTip="{DynamicResource OthersTip}">
-						<Viewbox>
-							<ui:SymbolIcon
-								Symbol="Chat16" />
-						</Viewbox>
-					</Border>
-					<Border
-						Grid.Column="3"
-						Grid.ColumnSpan="2"
-						Style="{DynamicResource MultiControlBorder}" />
-					<Button
-						x:Name="ButtonOthersAdd"
-						Grid.Column="3"
-						Click="ButtonOthersClick"
-						Style="{DynamicResource GridButton}">
-						<Viewbox>
-							<ui:SymbolIcon
-								Symbol="Add16" />
-						</Viewbox>
-					</Button>
-					<Button
-						x:Name="ButtonOthersRemove"
-						Grid.Column="4"
-						Click="ButtonOthersClick">
-						<Viewbox>
-							<ui:SymbolIcon
-								Symbol="Dismiss16" />
-						</Viewbox>
-						<Button.Style>
-							<Style
-								TargetType="Button"
-								BasedOn="{StaticResource GridButton}">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding SelectedIndex, ElementName=TableOthers}"
-										Value="-1">
-										<Setter
-											Property="IsEnabled"
-											Value="False" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Button.Style>
-					</Button>
-					<DataGrid
-						x:Name="TableOthers"
 						Grid.Row="1"
-						Grid.ColumnSpan="5"
-						GridLinesVisibility="Horizontal"
-						CanUserSortColumns="False"
-						CanUserResizeRows="False"
-						CanUserAddRows="False"
-						ItemsSource="{Binding CurrentHookupItem.OthersList}"
-						d:ItemsSource="{d:SampleData ItemCount=2}"
-						AutoGenerateColumns="False"
-						ColumnHeaderStyle="{StaticResource DataGridHeader}"
-						CellStyle="{StaticResource CompatCellStyle}">
-						<DataGrid.HorizontalGridLinesBrush>
-							<LinearGradientBrush
-								EndPoint="0.5,1"
-								StartPoint="0.5,0">
-								<GradientStop
-									Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"
-									Offset="1" />
-							</LinearGradientBrush>
-						</DataGrid.HorizontalGridLinesBrush>
-						<DataGrid.Columns>
-							<DataGridTemplateColumn
-								Header="{DynamicResource HeaderOthersName}"
-								Width="*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0"
-											Text="{Binding OthersName, UpdateSourceTrigger=PropertyChanged}"
-											ToolTip="{Binding OthersNameTip}"
-											ContextMenu="{StaticResource MenuOthers}"
-											FontSize="12"
-											VerticalContentAlignment="Center"
-											Cursor="IBeam">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox"
-													BasedOn="{StaticResource TableTextBoxStyle}">
-													<Style.Triggers>
-														<DataTrigger
-															Binding="{Binding OthersName}"
-															Value="">
-															<Setter
-																Property="Background"
-																Value="Yellow" />
-														</DataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource HeaderIsArray}"
-								Width="Auto">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<CheckBox
-											IsChecked="{Binding IsArray, UpdateSourceTrigger=PropertyChanged}"
-											IsEnabled="{Binding CheckBoxEnabled}"
-											HorizontalAlignment="Center"
-											MinWidth="20"
-											MinHeight="20"
-											HorizontalContentAlignment="Center" />
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource HeaderUseQuote}"
-								Width="Auto">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<CheckBox
-											IsChecked="{Binding UseQuoteMark, UpdateSourceTrigger=PropertyChanged}"
-											IsEnabled="{Binding CheckBoxEnabled}"
-											HorizontalAlignment="Center"
-											MinWidth="20"
-											MinHeight="20"
-											HorizontalContentAlignment="Center" />
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Header="{DynamicResource HeaderOthersValue}"
-								Width="*">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<TextBox
-											BorderThickness="0"
-											Text="{Binding OthersValue, UpdateSourceTrigger=PropertyChanged}"
-											FontSize="12"
-											VerticalContentAlignment="Center">
-											<TextBox.Style>
-												<Style
-													TargetType="TextBox"
-													BasedOn="{StaticResource TableTextBoxStyle}">
-													<Style.Triggers>
-														<DataTrigger
-															Binding="{Binding OthersValue}"
-															Value="">
-															<Setter
-																Property="Background"
-																Value="Yellow" />
-														</DataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBox.Style>
-										</TextBox>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn
-								Width="Auto">
-								<DataGridTemplateColumn.CellTemplate>
-									<DataTemplate>
-										<Button
-											Padding="0"
-											Visibility="{Binding ShowOptionVisibility}"
-											Click="ButtonPhysDataClick"
-											VerticalAlignment="Stretch"
-											HorizontalAlignment="Stretch"
-											HorizontalContentAlignment="Stretch"
-											VerticalContentAlignment="Stretch">
-											<Viewbox>
-												<ui:SymbolIcon
-													Symbol="Settings16" />
-											</Viewbox>
-										</Button>
-									</DataTemplate>
-								</DataGridTemplateColumn.CellTemplate>
-							</DataGridTemplateColumn>
-						</DataGrid.Columns>
-					</DataGrid>
+						Grid.ColumnSpan="3"
+						Padding="0,2"
+						Margin="0,5,10,5"
+						ResizeBehavior="PreviousAndNext"
+						Background="#FF4C4B4B"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Center" />
+
+					<phystoy:PhysicsUC
+						x:Name="UCPhysics"
+						d:Height="412"
+						Grid.Row="2"
+						Grid.ColumnSpan="3"
+						LocalPhysics="False"
+						AddToDataClick="AddToDataClick"
+						ScrollViewer.CanContentScroll="True" />
 				</Grid>
-			</Grid>
+			</ScrollViewer>
 
-			<GridSplitter
-				Height="3"
-				Grid.Row="2"
-				Grid.Column="2"
-				Grid.ColumnSpan="3"
-				Padding="0,2,0,2"
-				Margin="0,5,0,5"
-				ResizeBehavior="PreviousAndNext"
-				Background="#FF4C4B4B"
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Center" />
-
-			<phystoy:PhysicsUC
-				x:Name="UCPhysics"
-				d:Height="412"
-				Grid.Row="3"
-				Grid.Column="2"
-				Grid.ColumnSpan="3"
-				LocalPhysics="False"
-				AddToOthersClick="AddToOthersClick"
-				ScrollViewer.CanContentScroll="True" />
-
+			
 			<StackPanel
-				Grid.Row="4"
+				Grid.Row="2"
 				Grid.ColumnSpan="5"
 				Orientation="Horizontal"
 				FlowDirection="RightToLeft"
-				Margin="0,10,0,0">
+				Margin="0,10,10,0"
+				VerticalAlignment="Top">
 				<Button
 					x:Name="ButtonSave"
 					Content="{DynamicResource ButtonSave}"
-					Padding="50,5,50,5"
+					Padding="50,5"
 					Click="ButtonResultClick" />
 				<Button
 					x:Name="ButtonCancel"
 					Content="{DynamicResource ButtonCancel}"
-					Padding="50,5,50,5"
+					Padding="50,5"
 					Margin="5,0,0,0"
 					Click="ButtonResultClick" />
 			</StackPanel>

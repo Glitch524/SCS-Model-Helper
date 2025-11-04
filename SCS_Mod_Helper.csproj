@@ -11,9 +11,14 @@
 	  <ApplicationManifest>app.manifest</ApplicationManifest>
 	  <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
 	  <AssemblyName>SCS Mod Helper</AssemblyName>
+	  <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 
@@ -23,12 +28,13 @@
 
   <ItemGroup>
     <None Remove="App.config" />
+    <None Remove="Images\AppIcon.png" />
     <None Remove="Images\IconPlaceholder.png" />
     <None Remove="Images\ModelIconPlaceholder.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\AppIcon.ico" />
+    <Resource Include="Images\AppIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\AppIcon.png" />
     <Resource Include="Images\IconPlaceholder.png" />
     <Resource Include="Images\ModelIconPlaceholder.png" />
   </ItemGroup>

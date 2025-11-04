@@ -17,9 +17,7 @@ namespace SCS_Mod_Helper.Accessory.AccHookup;
 public partial class AccHookupWindow: BaseWindow {
 	private readonly AccHookupBinding Binding = new();
 
-	public ObservableCollection<OthersItem>? OthersList => Binding.OthersList;
-
-	private readonly ContextMenu MenuStringRes ,MenuOthers, MenuSuitableFor;
+	private readonly ContextMenu MenuStringRes, MenuSuitableFor;
 
 	public AccHookupWindow() {
 		InitializeComponent();
@@ -29,12 +27,16 @@ public partial class AccHookupWindow: BaseWindow {
 		MenuStringRes = (ContextMenu)Resources["MenuStringRes"];
 		MenuStringRes.PlacementTarget = ButtonChooseRes;
 		MenuStringRes.DataContext = Binding;
-		MenuOthers = (ContextMenu)Resources["MenuOthers"];
 		MenuSuitableFor = (ContextMenu)Resources["MenuSuitableFor"];
 
 		Binding.SuiChanged += OnSuiChanged;
 
-		Binding.LoadFiles();
+		Loaded += OnLoaded;
+
+	}
+
+	private void OnLoaded(object sender, RoutedEventArgs e) {
+		Task.Run(Binding.LoadFiles);
 	}
 
 	void OnSuiChanged(SuiItem? suiItem) => UCPhysics.CurrentSuiItem = suiItem;
@@ -45,11 +47,6 @@ public partial class AccHookupWindow: BaseWindow {
 			Binding.SuiItems.Add(newItem);
 			Binding.CurrentSuiItem = newItem;
 			TableSui.Focus();
-		} else if (sender == ButtonToyAdd) {
-			AccessoryHookupData newItem = new();
-			newItem.OthersList.Add(new(AccDataIO.NameSuitableFor, ""));
-			Binding.Hookups?.Add(newItem);
-			Binding.CurrentHookupItem = newItem;
 		}
 	}
 
@@ -83,11 +80,11 @@ public partial class AccHookupWindow: BaseWindow {
 				AccessoryDataUtil.OpenLocalization(this);
 			} else
 				AccessoryDataUtil.ApplyStringRes(TextDisplayName, (string)item.Tag);
-		} else if (cm == MenuOthers) {
-			AccessoryDataUtil.SetOtherItem(item);
 		} else if (cm == MenuSuitableFor) {
-			OthersItem others = (OthersItem)item.DataContext;
-			others.OthersValue = (string)item.Tag;
+			var newSF = (string)item.Tag;
+			Binding.NewSuitableFor = newSF;
+			Binding.AddNewSuitableFor();
+			TextSuitableFor.Focus();
 		}
 	}
 
@@ -105,39 +102,70 @@ public partial class AccHookupWindow: BaseWindow {
 		} else
 			return;
 	}
-	private void NumberOnly(object sender, TextCompositionEventArgs e) => TextControl.NumberOnly(sender, e);
 
-	private void ButtonOthersClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonOthersAdd) {
-			OthersList?.Add(new());
-		} else if (sender == ButtonOthersRemove) {
-			OthersItem? item;
-			while ((item = TableOthers.SelectedItem as OthersItem) != null) {
-				OthersList?.Remove(item);
-			}
+	private void NumberOnly(object sender, TextCompositionEventArgs e) => TextControl.NumberOnly(sender, e);
+	private void ButtonListClick(object sender, RoutedEventArgs e) {
+		TextBox target;
+		if (sender == ButtonAddData) {
+			target = TextData;
+			Binding.AddNewData();
+		} else if (sender == ButtonAddSuitableFor) {
+			target = TextSuitableFor;
+			Binding.AddNewSuitableFor();
+		} else if (sender == ButtonAddConflictWith) {
+			target = TextConflictWith;
+			Binding.AddNewConflictWith();
+		} else if (sender == ButtonAddDefaults) {
+			target = TextDefaults;
+			Binding.AddNewDefaults();
+		} else if (sender == ButtonAddOverrides) {
+			target = TextOverrides;
+			Binding.AddNewOverrides();
+		} else if (sender == ButtonAddRequire) {
+			target = TextRequire;
+			Binding.AddNewRequire();
+		} else
+			return;
+		target.Focus();
+	}
+
+	private void ListDataGotFocus(object sender, RoutedEventArgs e) => ShowPopupListData((TextBox)sender);
+
+	private void ListDataLostFocus(object sender, RoutedEventArgs e) => PopupListData.IsOpen = false;
+
+	private void ButtonPhysicsClick(object sender, RoutedEventArgs e) {
+		PhysicsWindow physicsWindow = new() {
+			Owner = this,
+			ChooseMode = true,
+		};
+		if (physicsWindow.ShowDialog() == true) {
+			var selected = physicsWindow.SelectedPhysicsData;
+			Binding.AddNewData(selected);
+			TextData.Focus();
+
+			UCPhysics.PhysicsListAdd(selected);
 		}
 	}
 
-	private void ButtonPhysDataClick(object sender, RoutedEventArgs e) {
-		OthersItem others = (OthersItem)((Button)sender).DataContext;
-		if (others.OthersName == AccDataIO.NameData) {
-			PhysicsWindow physicsWindow = new() {
-				Owner = this,
-				ChooseMode = true,
-			};
-			var result = physicsWindow.ShowDialog();
-			if (result == true) {
-				var selected = physicsWindow.SelectedPhysicsData;
-				var physName = selected.PhysicsName;
-				if (!physName.EndsWith(AccDataIO.NamePSuffix))
-					physName += AccDataIO.NamePSuffix;
-				others.OthersValue = physName;
-				UCPhysics.PhysicsListAdd(selected);
-			}
-		} else if (others.OthersName == AccDataIO.NameSuitableFor) {
-			MenuSuitableFor.PlacementTarget = (Button)sender;
-			MenuSuitableFor.IsOpen = true;
+	private void AddToDataClick(object sender, RoutedEventArgs e) {
+		var newPhys = UCPhysics.CurrentPhysicsItem;
+		Binding.AddNewData(newPhys);
+		TextData.Focus();
+	}
+
+	private void ButtonSuitableForClick(object sender, RoutedEventArgs e) {
+		MenuSuitableFor.PlacementTarget = (Button)sender;
+		MenuSuitableFor.IsOpen = true;
+	}
+
+	private void ShowPopupListData(TextBox target) {
+		if (Binding.ListDataUC == null) {
+			Binding.ListDataUC = new();
+			PopupListData.Child = Binding.ListDataUC;
 		}
+		Binding.OpeningList = target.Name;
+		PopupListData.PlacementTarget = target;
+		PopupListData.IsOpen = true;
 	}
 
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
@@ -147,6 +175,4 @@ public partial class AccHookupWindow: BaseWindow {
 			Binding.SaveFiles();
 		}
 	}
-
-	private void AddToOthersClick(object sender, RoutedEventArgs e) => Binding.AddPhysToOthersList(UCPhysics.CurrentPhysicsItem);
 }

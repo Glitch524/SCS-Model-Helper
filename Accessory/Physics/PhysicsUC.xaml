@@ -358,8 +358,8 @@
 				FontWeight="Bold"
 				Margin="10,0,0,0" />
 			<ListBox
-                x:Name="ListBoxPhysics"
-                Grid.Row="2"
+				x:Name="ListBoxPhysics"
+				Grid.Row="2"
 				Grid.ColumnSpan="5"
 				d:ItemsSource="{d:SampleData ItemCount=2}"
 				ItemsSource="{Binding PhysicsItems}"
@@ -394,11 +394,11 @@
 		</Grid>
 
 		<GridSplitter
-			Width="3"
+			Width="1"
 			Grid.Row="0"
 			Grid.RowSpan="2"
 			Grid.Column="1"
-			Margin="4,0,4,0"
+			Margin="4,0"
 			ResizeBehavior="PreviousAndNext"
 			HorizontalAlignment="Center"
 			Background="#FF4C4B4B" />
@@ -434,8 +434,8 @@
 				x:Name="PanelSaveButton"
 				Orientation="Horizontal">
 				<Button
-					x:Name="ButtonAddToOthers"
-					Content="{DynamicResource ButtonAddToOthers}"
+					x:Name="ButtonAddToDataClick"
+					Content="{DynamicResource ButtonAddToData}"
 					Padding="5,2"
 					Click="ButtonPhysicsClick">
 					<Button.Style>
@@ -487,8 +487,8 @@
 						Width="*" />
 				</Grid.ColumnDefinitions>
 				<TextBlock
-                    VerticalAlignment="Center"
-                    Padding="0,0,0,0">
+					VerticalAlignment="Center"
+					Padding="0,0,0,0">
 					<Run
 						Text="{DynamicResource TitlePhysicsType}" />
 				</TextBlock>
@@ -499,7 +499,7 @@
 					Text="{Binding PhysicsType}"
 					VerticalAlignment="Center" />
 			</Grid>
-			
+
 			<Grid
 				x:Name="PanelPTD"
 				Grid.Row="2"
@@ -744,8 +744,8 @@
 							Padding="3,3,3,3"
 							Text="{Binding CurrentToyData.CollPath, UpdateSourceTrigger=PropertyChanged}"
 							TextWrapping="Wrap"
-							MaxLines="2" 
-							Style="{StaticResource TextBoxBorderless}"/>
+							MaxLines="2"
+							Style="{StaticResource TextBoxBorderless}" />
 						<Button
 							x:Name="ButtonPhysicsCollPathClear"
 							Grid.Row="1"
@@ -1158,7 +1158,7 @@
 								Style="{StaticResource Float2_11}" />
 						</Grid>
 					</Grid>
-					
+
 					<Grid
 						Grid.Row="8"
 						Grid.Column="0"
@@ -1192,8 +1192,8 @@
 							Grid.Column="0"
 							Text="{Binding CurrentToyData.RopeMaterial, UpdateSourceTrigger=PropertyChanged}"
 							TextWrapping="Wrap"
-							MaxLines="2" 
-							Style="{StaticResource TextBoxBorderless}"/>
+							MaxLines="2"
+							Style="{StaticResource TextBoxBorderless}" />
 						<Button
 							x:Name="ButtonRopeMaterialClear"
 							Grid.Row="1"
@@ -1229,7 +1229,7 @@
 						<Style
 							TargetType="Grid">
 							<Style.Triggers>
-								
+
 							</Style.Triggers>
 						</Style>
 					</Grid.Style>
@@ -1305,7 +1305,7 @@
 							Text="{Binding CurrentToyData.AngularStiffness0}"
 							d:Text="0.000000"
 							PreviewTextInput="FloatOnly"
-							Style="{StaticResource Float0}"/>
+							Style="{StaticResource Float0}" />
 						<Label
 							Grid.Row="1"
 							Grid.Column="1"
@@ -1432,7 +1432,7 @@
 				</Grid>
 				<Grid
 					x:Name="GridRope"
-					d:Grid.Row ="2"
+					d:Grid.Row="2"
 					Grid.Row="1"
 					Visibility="{Binding CurrentToyData.RopeDataVisibility}">
 					<Grid.RowDefinitions>
@@ -1626,7 +1626,8 @@
 					</Grid.ColumnDefinitions>
 
 					<StackPanel>
-						<TextBlock><Run
+						<TextBlock>
+							<Run
 								Text="{DynamicResource TitlePhysicsName}" />
 						</TextBlock>
 						<TextBox
@@ -1806,7 +1807,8 @@
 							<ColumnDefinition
 								Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Grid.ColumnSpan="3"><Run
+						<TextBlock
+							Grid.ColumnSpan="3"><Run
 								Text="{DynamicResource TitleTCMinFirst}" />
 						</TextBlock>
 						<Border
@@ -1909,7 +1911,7 @@
 						<Label
 							Grid.Row="1"
 							Grid.Column="1"
-							Style="{StaticResource FloatCommaPatch}"/>
+							Style="{StaticResource FloatCommaPatch}" />
 						<TextBox
 							x:Name="TextTCMinSecond1"
 							Grid.Row="1"

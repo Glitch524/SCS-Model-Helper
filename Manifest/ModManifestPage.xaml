@@ -330,8 +330,7 @@
 			<Grid
 				x:Name="GridCategory"
 				Grid.Row="1"
-				Grid.Column="2"
-				Cursor="">
+				Grid.Column="2">
 				<Grid.RowDefinitions>
 					<RowDefinition
 						Height="Auto" />
@@ -736,9 +735,11 @@
 					Grid.Row="2"
 					Grid.Column="2"
 					TextWrapping="Wrap"
+					AcceptsReturn="True"
 					Text="{Binding CurrentLocale.DescContent, UpdateSourceTrigger=PropertyChanged}"
 					VerticalScrollBarVisibility="Auto"
-					FontSize="12" />
+					FontSize="12"
+					Cursor="IBeam" />
 				<Grid
 					Grid.Column="1"
 					Margin="5,0,0,0">

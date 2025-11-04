@@ -1,8 +1,8 @@
 ﻿namespace SCS_Mod_Helper.Accessory.PaintJob
 {
-    public class AccessoryPaintJobItem() : AccessoryData("", "", null, null, "", "unknown", "", "", "")
+    public class AccessoryPaintJobItem() : AccessoryData("", "", null, null, "", "unknown", "", "", "", "")
     {
-		private new readonly string? CollPath, Look, Variant;//屏蔽accdata原本没有的变量（主要是addon和hookup都有就放在里面了）
+		private new readonly string? CollPath, Look, Variant, ElectricType;//屏蔽accdata原本没有的变量（主要是addon和hookup都有就放在里面了）
 
 		//name 从accessoryData继承的变量
 		//icon

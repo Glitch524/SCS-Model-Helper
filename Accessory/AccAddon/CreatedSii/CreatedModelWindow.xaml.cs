@@ -27,7 +27,6 @@ public partial class CreatedModelWindow : BaseWindow
 
 	public ObservableCollection<CreatedModelItem>? CurrentModelItems => Binding.CurrentModelItems;
 
-
 	public CreatedModelWindow()
     {
         InitializeComponent();
@@ -36,14 +35,22 @@ public partial class CreatedModelWindow : BaseWindow
 		Binding.CurrentProjectLocation = ProjectLocation;
 
 		Loaded += OnLoaded;
+		Closed += OnClosed;
 	}
 
+	private readonly CancellationTokenSource source = new();
+
 	private void OnLoaded(object sender, RoutedEventArgs e) {
-		LoadCreatedSii();
+		Task.Run(LoadCreatedSii);
+	}
+
+	private void OnClosed(object? sender, EventArgs e) {
+		source.Cancel();
 	}
 
 	private readonly DirectoryInfo defDir = new(Paths.DefTruckDir(Instances.ProjectLocation));
 	readonly Dictionary<string, CreatedModel> ModelPair = [];
+
 	private void LoadCreatedSii() {
 		ModelPair.Clear();
 		void NoSii() {
@@ -55,18 +62,25 @@ public partial class CreatedModelWindow : BaseWindow
 			return;
 		}
 		LoadCreatedSii(defDir);
+		if (source.IsCancellationRequested)
+			return;
 		if (CreatedModelList.Count == 0) {
 			NoSii();
 			return;
 		}
 		CurrentModel = CreatedModelList.First();
+		Binding.ProgressRingVisible = false;
 	}
 
 	private void LoadCreatedSii(DirectoryInfo info) {
 		foreach (var dir in info.GetDirectories()) {
+			if (source.IsCancellationRequested)
+				return;
 			LoadCreatedSii(dir);
 		}
 		foreach (var file in info.GetFiles()) {
+			if (source.IsCancellationRequested)
+				return;
 			if (file.Extension.Equals(".sii")) {
 				var filePath = file.FullName;
 
@@ -89,12 +103,16 @@ public partial class CreatedModelWindow : BaseWindow
 
 				if (ModelPair.TryGetValue(modelName, out CreatedModel? createdModel)) {
 					c.Parent = createdModel;
-					createdModel.CreatedModelItems.Add(c);
+					Dispatcher.Invoke(new(() => {
+						createdModel.CreatedModelItems.Add(c);
+					}), System.Windows.Threading.DispatcherPriority.Render);
 				} else {
 					CreatedModel cm = new(modelName);
 					c.Parent = cm;
 					cm.CreatedModelItems.Add(c);
-					CreatedModelList.Add(cm);
+					Dispatcher.Invoke(new(() => {
+						CreatedModelList.Add(cm);
+					}), System.Windows.Threading.DispatcherPriority.Render);
 					ModelPair.Add(modelName, cm);
 				}
 			}

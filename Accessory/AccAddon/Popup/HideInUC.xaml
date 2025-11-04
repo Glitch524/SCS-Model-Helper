@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="SCS_Mod_Helper.Accessory.AccAddon.Popup.HideInUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon"
+             mc:Ignorable="d">
+	<Grid>
+		<Border
+			Style="{DynamicResource PopupBorder}" />
+		<StackPanel
+			Margin="10">
+			<TextBlock
+				Text="{DynamicResource TitleHideIn}"
+				TextWrapping="Wrap"
+				MaxWidth="250" />
+			<CheckBox
+				x:Name="CheckMainView"
+				Content="Main View"
+				Margin="0,2,0,0"
+				Tag="0x7"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckReflectionCube"
+				Content="Reflection Cube"
+				Margin="0,2,0,0"
+				Tag="0x1F8"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckCloseMirror"
+				Content="Close Mirror"
+				Margin="0,2,0,0"
+				Tag="0x600"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckFarMirror"
+				Content="Far Mirror"
+				Margin="0,2,0,0"
+				Tag="0x1800"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckSideMirror"
+				Content="Side Mirror"
+				Margin="0,2,0,0"
+				Tag="0x2000"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckFrontMirror"
+				Content="Front Mirror"
+				Margin="0,2,0,0"
+				Tag="0x4000"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckShadows"
+				Content="Shadows"
+				Margin="0,2,0,0"
+				Tag="0x1FFE0000"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+			<CheckBox
+				x:Name="CheckRainReflection"
+				Content="Rain reflection"
+				Margin="0,2,0,0"
+				Tag="0xE0000000"
+				Checked="HideInChecked"
+				Unchecked="HideInUnchecked" />
+		</StackPanel>
+	</Grid>
+</UserControl>

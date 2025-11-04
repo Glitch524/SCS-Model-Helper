@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-public class AccessoryHookupData(string modelName): AccessoryData(modelName, "", null, null, "", "unknown", "", "default", "default") {
+public class AccessoryHookupData(string modelName): AccessoryData(modelName, "", null, null, "", "unknown", "", "default", "default", "vehicle") {
 	public AccessoryHookupData() : this("") {
 	}
 
@@ -72,7 +72,4 @@ public class AccessoryHookupData(string modelName): AccessoryData(modelName, "",
 		setValue(mLookList, oldLook, (set) => Look = set);
 		setValue(mVariantList, oldVariant, (set) => Variant = set);
 	}
-
-	private readonly ObservableCollection<OthersItem> mOthersList = [];
-	public ObservableCollection<OthersItem> OthersList => mOthersList;
 }

@@ -117,13 +117,6 @@ public static class AccessoryDataUtil {
 		TextDisplayName.Focus();
 	}
 
-	public static void SetOtherItem(MenuItem item) {
-		OthersItem o = (OthersItem)item.DataContext;
-		var name = (string)item.Tag;
-		o.OthersName = name;
-		o.OthersNameTip = (string)item.Header;
-	}
-
 	public static string GetInitialPath(params string[] paths) {
 		string? currentPath = null;
 		foreach (var path in paths) {

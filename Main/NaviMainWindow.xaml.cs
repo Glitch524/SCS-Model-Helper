@@ -1,5 +1,7 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.CreatedSii;
 using SCS_Mod_Helper.Accessory.AccHookup;
+using SCS_Mod_Helper.Accessory.PaintJob;
 using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
@@ -36,6 +38,12 @@ public partial class NaviMainWindow : BaseWindow
 				break;
 			case "ModLocalization":
 				window = new ModLocalizationWindow();
+				break;
+			case "PaintJob":
+				window = new PaintJobWindow();
+				break;
+			case "CreatedSii":
+				window = new CreatedModelWindow();
 				break;
 			default:
 				return;

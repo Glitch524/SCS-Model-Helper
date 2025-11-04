@@ -6,10 +6,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using SCS_Mod_Helper.Base;
 
 namespace SCS_Mod_Helper.Accessory.Physics;
 
-class PhysicsBinding: INotifyPropertyChanged {
+class PhysicsBinding: BaseBinding {
 	public static string ProjectLocation => Instances.ProjectLocation;
 
 	private bool mChooseMode = false;
@@ -17,7 +18,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		get => mChooseMode;
 		set {
 			mChooseMode = value;
-			InvokeChange(nameof(ChooseMode));
+			InvokeChange();
 		}
 	}
 
@@ -26,7 +27,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		get => mCurrentSuiItem;
 		set {
 			mCurrentSuiItem = value;
-			InvokeChange(nameof(CurrentSuiItem));
+			InvokeChange();
 
 			InvokeChange(nameof(PhysicsItems));
 			if (PhysicsItems != null && PhysicsItems.Count > 0)
@@ -45,7 +46,8 @@ class PhysicsBinding: INotifyPropertyChanged {
 		get => mCurrentPhysicsItem;
 		set {
 			mCurrentPhysicsItem = value;
-			InvokeChange(nameof(CurrentPhysicsItem));
+			InvokeChange();
+
 			physicsCallback?.Invoke(value);
 			InvokeChange(nameof(CurrentToyData));
 			InvokeChange(nameof(CurrentPatchData));
@@ -87,7 +89,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentToyData != null) {
 				CurrentToyData.ModelPath = value;
-				InvokeChange(nameof(ModelPath));
+				InvokeChange();
 			}
 		}
 	}
@@ -97,7 +99,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentToyData != null) {
 				CurrentToyData.CollPath = value;
-				InvokeChange(nameof(CollPath));
+				InvokeChange();
 			}
 		}
 	}
@@ -106,7 +108,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentToyData != null) {
 				CurrentToyData.ToyType = value;
-				InvokeChange(nameof(ToyType));
+				InvokeChange();
 			}
 		}
 	}
@@ -116,7 +118,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentToyData != null) {
 				CurrentToyData.RopeMaterial = value;
-				InvokeChange(nameof(RopeMaterial));
+				InvokeChange();
 			}
 		}
 	}
@@ -131,7 +133,7 @@ class PhysicsBinding: INotifyPropertyChanged {
 		set {
 			if (CurrentPatchData != null) {
 				CurrentPatchData.Material = value;
-				InvokeChange(nameof(PatchMaterial));
+				InvokeChange();
 			}
 		}
 	}
@@ -206,7 +208,4 @@ class PhysicsBinding: INotifyPropertyChanged {
 				CollPath = modelColl;
 		
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 }

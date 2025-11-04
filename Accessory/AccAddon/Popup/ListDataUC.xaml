@@ -1,0 +1,89 @@
+﻿<UserControl
+	x:Class="SCS_Mod_Helper.Accessory.AccAddon.Popup.ListDataUC"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon.Popup"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+	xmlns:accaddon="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon"
+	xmlns:accessory="clr-namespace:SCS_Mod_Helper.Accessory"
+	d:DataContext="{d:DesignInstance Type=accaddon:AccAddonBinding}"
+	mc:Ignorable="d"
+	d:DesignWidth="200">
+	<Grid
+		MinHeight="30">
+		<Border
+			Style="{DynamicResource PopupBorder}" />
+		<TextBlock
+			VerticalAlignment="Center"
+			HorizontalAlignment="Center">
+			<TextBlock.Style>
+				<Style
+					TargetType="TextBlock">
+					<Style.Triggers>
+						<DataTrigger
+							Binding="{Binding Items.Count, ElementName=OtherList}"
+							Value="0">
+							<Setter
+								Property="Text"
+								Value="{DynamicResource StatusEmpty}" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</TextBlock.Style>
+		</TextBlock>
+		<ItemsControl
+			x:Name="OtherList"
+			Margin="3,2"
+			BorderThickness="0"
+			d:ItemsSource="{d:SampleData ItemCount=3}"
+			ItemsSource="{Binding PopupCollection}"
+			Padding="10,0,0,0">
+			<ItemsControl.Style>
+				<Style
+					TargetType="ItemsControl">
+					<Style.Triggers>
+						<DataTrigger
+							Binding="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
+							Value="0">
+							<Setter
+								Property="Visibility"
+								Value="Collapsed" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ItemsControl.Style>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBlock
+							Grid.Column="0"
+							FontSize="14"
+							Text="{Binding Path=.}"
+							ToolTip="{Binding Path=.}"
+							VerticalAlignment="Center" />
+						<Button
+							Grid.Column="1"
+							VerticalAlignment="Stretch"
+							HorizontalAlignment="Stretch"
+							Width="25"
+							Height="25"
+							Click="DeleteItemClick">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+						</Button>
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</Grid>
+</UserControl>

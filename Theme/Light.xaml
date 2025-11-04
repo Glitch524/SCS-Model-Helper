@@ -67,6 +67,15 @@
 			Property="Padding"
 			Value="5,2" />
 	</Style>
+	<Style
+		TargetType="ListViewItem">
+		<Setter
+			Property="Padding"
+			Value="0,0" />
+		<Setter
+			Property="HorizontalContentAlignment"
+			Value="Stretch" />
+	</Style>
 
 	<Style
 		x:Key="MultiControlBorder"
@@ -124,6 +133,9 @@
 		<Setter
 			Property="FontSize"
 			Value="10" />
+		<Setter
+			Property="BorderThickness"
+			Value="1" />
 	</Style>
 	<Style
 		x:Key="CompatCellStyle"

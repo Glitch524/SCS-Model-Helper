@@ -9,7 +9,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory;
 
@@ -24,13 +26,14 @@ class AccDataIO {
 		sw.WriteLine(NameMFHeader);
 	}
 
-	private static void WriteLine(StreamWriter sw, string name, object? valueObj) => WriteLine(sw, name, valueObj, IsArray(name), HasQuote(name));
-
-	private static void WriteLine(StreamWriter sw, string name, object? valueObj, bool isArray = false, bool hasQuote = false) {
-		if (valueObj == null)
+	private static void WriteLine(StreamWriter sw, string name, object? valueObj, object? skipValue = null) {
+		if (valueObj == skipValue || valueObj == null)
 			return;
 		if (valueObj is string s && s.Length == 0)
 			return;
+		var isArray = IsArray(name);
+		var hasQuote = HasQuote(name);
+
 		string value;
 		if (valueObj is float?[] floats) {
 			if (floats.Length == 2) {
@@ -61,6 +64,7 @@ class AccDataIO {
 		} else
 			sw.WriteLine(value);
 	}
+
 	private static string FloatToString(float? f) => f?.ToString("0.0#####") ?? "0.0";
 
 	private static void BraceIn(StreamWriter sw) {
@@ -295,6 +299,7 @@ class AccDataIO {
 	private const string NameAAExtModelUK = "exterior_model_uk";
 	private const string NameAAIntModelUK = "interior_model_uk";
 	private const string NameAAHideIn = "hide_in";
+	private const string NameElectricType = "electric_type";
 	private static void WriteAAIHeader(StreamWriter sw, string modelName, string truckID, string modelType) {
 		sw.Write(new string('\t', TabCount));
 		sw.WriteLine($"{NameAAIHeader} : {modelName}.{truckID}.{modelType}");
@@ -344,23 +349,6 @@ class AccDataIO {
 			DirectoryInfo sii = new(siiFile);
 			if (!sii.Parent!.Exists)
 				sii.Parent!.Create();
-			var othersList = new List<OthersItem>();
-			othersList.AddRange(binding.OthersList);
-			string? exterior = null, exteriorUK = null;
-			for (int i = 0; i < othersList.Count; i++) {
-				OthersItem? other = othersList[i];
-				if (other.OthersName == NameAAExtModel) {
-					exterior = other.OthersValue;
-					othersList.RemoveAt(i);
-					if (exteriorUK != null)
-						break;
-				} else if (other.OthersName == NameAAExtModelUK) {
-					exteriorUK = other.OthersValue;
-					othersList.RemoveAt(i);
-					if (exterior != null)
-						break;
-				}
-			}
 			TabCount = 0;
 			bool isPatch = truck.ModelType switch {
 				"flag_l" or
@@ -381,35 +369,52 @@ class AccDataIO {
 			WriteLine(sw, NameDisplayName, binding.DisplayName);
 			WriteLine(sw, NamePrice, binding.Price);
 			WriteLine(sw, NameUnlock, binding.UnlockLevel);
-			if (binding.PartType != "unknown")
-				WriteLine(sw, NamePartType, binding.PartType);
+			WriteLine(sw, NamePartType, binding.PartType, "unknown");
 			WriteLine(sw, NameIconName, binding.IconName);
-			WriteLine(sw, NameAAExtModel, exterior ?? binding.ModelPath);
+			if (binding.ExtModelPath != null && binding.ExtModelPath.Length > 0)
+				WriteLine(sw, NameAAExtModel, binding.ExtModelPath);
+			else
+				WriteLine(sw, NameAAExtModel, binding.ModelPath);
 			WriteLine(sw, NameAAIntModel, binding.ModelPath);
 			if (isETS2 && !string.IsNullOrEmpty(binding.ModelPathUK)) {
-				WriteLine(sw, NameAAExtModelUK, exteriorUK ?? binding.ModelPathUK);
+				if (binding.ExtModelPathUK != null && binding.ExtModelPathUK.Length > 0)
+					WriteLine(sw, NameAAExtModelUK, binding.ExtModelPathUK);
+				else
+					WriteLine(sw, NameAAExtModelUK, binding.ModelPath);
 				WriteLine(sw, NameAAIntModelUK, binding.ModelPathUK);
 			}
 			WriteLine(sw, NameCollPath, binding.CollPath);
-			if (truck.Look != "default")
-				WriteLine(sw, NameLook, truck.Look);
-			if (truck.Variant != "default")
-				WriteLine(sw, NameVariant, truck.Variant);
-			if (binding.HideIn != 0)
-				WriteLine(sw, NameAAHideIn, binding.HideIn);
+			WriteLine(sw, NameLook, truck.Look, "default");
+			WriteLine(sw, NameVariant, truck.Variant, "default");
+			WriteLine(sw, NameAAHideIn, binding.HideIn, 0);
+			WriteLine(sw, NameElectricType, binding.ElectricType, "vehicle");
 
-			List<string> physName = [];
-			WriteOthers(sw, othersList, physName, isPatch);
+			WriteList(sw, NameData, binding.Data);
+			WriteList(sw, NameSuitableFor, binding.SuitableFor);
+			WriteList(sw, NameConflictWith, binding.ConflictWith);
+			WriteList(sw, NameDefaults, binding.Defaults);
+			WriteList(sw, NameOverrides, binding.Overrides);
+			WriteList(sw, NameRequire, binding.Require);
+
 			BraceOut(sw);
 
-			foreach (var pn in physName) {
+			for (int i = 0; i < binding.Data.Count; i++) {
+				string? pn = binding.Data[i];
+				pn = pn.EndsWith(NamePSuffix) ? pn[..^NamePSuffix.Length] : pn;
+
 				var physicsList = new List<PhysicsData>();
 				physicsList.AddRange(binding.PhysicsList);
-				for (int i = 0; i < physicsList.Count; i++) {
-					var phys = physicsList[i];
+				for (int j = 0; j < physicsList.Count; j++) {
+					var phys = physicsList[j];
 					if (pn == phys.PhysicsName) {
 						WritePhysicsData(sw, phys);
-						physicsList.RemoveAt(i);
+						physicsList.RemoveAt(j);
+						break;
+					}
+				}
+				foreach (var physItem in AccAppIO.PhysicsItems) {
+					if (pn == physItem.PhysicsName) {
+						WritePhysicsData(sw, physItem);
 						break;
 					}
 				}
@@ -421,63 +426,15 @@ class AccDataIO {
 		return numberCreated;
 	}
 
-	private static void WriteOthers(StreamWriter sw, List<OthersItem> othersList, List<string> physName, bool isPatch = false) {
-		if (othersList.Count > 0) {
-			int i = 0;
-			while (i < othersList.Count) {
-				var other = othersList[i];
-				var name = other.OthersName;
-				var value = other.OthersValue;
-				if (IsUnseless(name, value)) {
-					othersList.RemoveAt(i);
-					continue;
-				}
-				int j = i + 1;
-				while (j < othersList.Count) {
-					var another = othersList[j];
-					var nextName = another.OthersName;
-					var nextValue = another.OthersValue;
-					if (IsUnseless(nextName, nextValue) || (name == nextName && value == nextValue)) {
-						othersList.RemoveAt(j);
-						continue;
-					}
-					j++;
-				}
-				if (name == NameData) {
-					if (value.EndsWith(NamePSuffix)) {
-						physName.Add(value[..^NamePSuffix.Length]);
-					} else {
-						physName.Add(value);
-						value += NamePSuffix;
-					}
-					if (isPatch)
-						other.IsArray = false;
-				}
-				WriteLine(sw, name, value, other.IsArray, other.UseQuoteMark);
-				i++;
-			}
+	private static void WriteList(StreamWriter sw, string listName, ObservableCollection<string> list) {
+		for (int i = 0; i < list.Count; i++) {
+			string? item = list[i];
+			if (item.Length == 0)
+				continue;
+			if (listName == NameData && !item.EndsWith(NamePSuffix))
+				item += NamePSuffix;
+			WriteLine(sw, listName, item);
 		}
-	}
-
-	private static bool IsUnseless(string name, string value) {
-		if (name.Length == 0 || value.Length == 0)
-			return true;
-		return name switch {
-			NameDisplayName or 
-			NamePrice or 
-			NameUnlock or 
-			NameIconName or 
-			NamePartType or 
-			NameAAExtModel or 
-			NameAAIntModel or 
-			NameAAExtModelUK or 
-			NameAAIntModelUK or 
-			NameCollPath or 
-			NameLook or 
-			NameVariant or 
-			NameAAHideIn => true,
-			_ => false,
-		};
 	}
 
 	private readonly static string exportPath = Instances.ProjectLocation;//"D:\\test";
@@ -555,20 +512,27 @@ class AccDataIO {
 				WriteLine(sw, NameLook, hookup.Look);
 			if (hookup.Variant != "default")
 				WriteLine(sw, NameVariant, hookup.Variant);
+			WriteLine(sw, NameElectricType, hookup.ElectricType);
 
-			List<string> physName = [];
-			var othersList = new List<OthersItem>();
-			othersList.AddRange(hookup.OthersList);
-			WriteOthers(sw, othersList, physName);
+			WriteList(sw, NameData, hookup.Data);
+			WriteList(sw, NameSuitableFor, hookup.SuitableFor);
+			WriteList(sw, NameConflictWith, hookup.ConflictWith);
+			WriteList(sw, NameDefaults, hookup.Defaults);
+			WriteList(sw, NameOverrides, hookup.Overrides);
+			WriteList(sw, NameRequire, hookup.Require);
+
 			BraceOut(sw);
 
-			foreach (var pn in physName) {
-				for (int i = 0; i < physicsDatas.Count; i++) {
-					var phys = physicsDatas[i];
+			for (int i = 0; i < hookup.Data.Count; i++) {
+				string? pn = hookup.Data[i];
+				pn = pn.EndsWith(NamePSuffix) ? pn[..^NamePSuffix.Length] : pn;
+
+				for (int j = 0; j < physicsDatas.Count; j++) {
+					var phys = physicsDatas[j];
 					if (pn == phys.PhysicsName) {
 
 						WritePhysicsData(sw, phys);
-						physicsDatas.RemoveAt(i);
+						physicsDatas.RemoveAt(j);
 						break;
 					}
 				}
@@ -729,10 +693,15 @@ class AccDataIO {
 					var suiFilename = hookupFile.Name;
 					SuiItem suiItem = new(suiFilename[..^4]);
 					LoadAddonHookupSui(suiItem, hookupFile);
-					viewModel.SuiItems.Add(suiItem);
+
+					Application.Current.Dispatcher.Invoke(new(() => {
+						viewModel.SuiItems.Add(suiItem); 
+					}), DispatcherPriority.DataBind);
 				}
 			}
-			viewModel.CurrentSuiItem = viewModel.SuiItems.FirstOrDefault();
+			Application.Current.Dispatcher.Invoke(new(() => {
+				viewModel.CurrentSuiItem = viewModel.SuiItems.FirstOrDefault();
+			}), DispatcherPriority.DataBind);
 		}
 	}
 
@@ -770,6 +739,8 @@ class AccDataIO {
 				continue;
 			int colonIndex = line.IndexOf(':');
 			var name = line[..colonIndex].Trim();
+			if (name.EndsWith("[]"))
+				name = name[..^2];
 			var value = ClipValue(line[(colonIndex + 1)..]);
 			switch (name) {
 				case NameDisplayName:
@@ -799,10 +770,23 @@ class AccDataIO {
 				case NameVariant:
 					item.Variant = value;
 					break;
-				default:
-					if (name.Contains("[]")) 
-						name = name.Replace("[]", "");
-					item.OthersList.Add(new(name, value));
+				case NameData:
+					item.Data.Add(value);
+					break;
+				case NameSuitableFor:
+					item.SuitableFor.Add(value);
+					break;
+				case NameConflictWith:
+					item.ConflictWith.Add(value);
+					break;
+				case NameDefaults:
+					item.Defaults.Add(value);
+					break;
+				case NameOverrides:
+					item.Overrides.Add(value);
+					break;
+				case NameRequire:
+					item.Require.Add(value);
 					break;
 			}
 		}
@@ -1242,18 +1226,20 @@ class AccDataIO {
 	}
 
 	private static void ReadNames(StreamReader sr, ObservableCollection<string> list) {
-		string? line;
-		while ((line = sr.ReadLine()?.Trim()) != null) {
-			if (line.StartsWith('#')) {
-				line = line[1..].Trim();
-				if (line.Length > 0)
-					list.Add(line);
-				else
+		Application.Current.Dispatcher.Invoke(() => {
+			string? line;
+			while ((line = sr.ReadLine()?.Trim()) != null) {
+				if (line.StartsWith('#')) {
+					line = line[1..].Trim();
+					if (line.Length > 0)
+						list.Add(line);
+					else
+						break;
+				} else {
 					break;
-			} else {
-				break;
+				}
 			}
-		}
+		}, System.Windows.Threading.DispatcherPriority.Render);
 	}
 
 	private static bool ReadNamesAlt(StreamReader sr, ObservableCollection<string> list) {
@@ -1262,7 +1248,9 @@ class AccDataIO {
 			int start = line.IndexOf('\"');
 			int end = line.LastIndexOf('\"');
 			var look = line.Substring(start + 1, end - start);
-			list.Add(look);
+			Application.Current.Dispatcher.Invoke(() => {
+				list.Add(look);
+			}, System.Windows.Threading.DispatcherPriority.Render);
 			return true;
 		}
 		return false;

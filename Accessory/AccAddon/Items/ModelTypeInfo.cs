@@ -7,13 +7,14 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 	public ModelTypeInfo(
 		string accETS2,
 		string accATS,
-		string name) {
+		string nameKey) {
 		mAccessoryETS2 = accETS2;
 		mAccessoryATS = accATS;
-		if (name == "")
+		NameKey = nameKey;
+		if (nameKey == "")
 			mName = "";
 		else
-			mName = Util.GetString(name);
+			mName = Util.GetString(nameKey);
 	}
 
 	public ModelTypeInfo(
@@ -29,6 +30,7 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 		} else {
 			mAccessoryATS = acc;
 		}
+		NameKey = $"Acc.{acc}";
 		mName = Util.GetString($"Acc.{acc}");
 	}
 
@@ -65,6 +67,8 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 		}
 	}
 
+	private string NameKey;
+
 	private string mName;
 	public string Name {
 		get => mName;
@@ -76,7 +80,7 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 	public void RefreshName() {
 		if (Accessory.Length == 0)
 			return;
-		Name = Util.GetString($"Acc.{Accessory}");
+		Name = Util.GetString(NameKey);
 	}
 	private readonly bool? mGameType;
 	public bool? GameType => mGameType;

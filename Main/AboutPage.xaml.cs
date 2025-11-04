@@ -24,5 +24,5 @@ public partial class AboutPage: BasePage {
 }
 
 public class AboutBinding: BaseBinding {
-	public bool SponserLocal => Instances.CurrentLanguage == "zh-CN";
+	public static bool SponserLocal => Instances.CurrentLanguage == "zh-CN";
 }

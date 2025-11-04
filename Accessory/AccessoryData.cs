@@ -1,11 +1,15 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
+﻿using SCS_Mod_Helper.Accessory.AccAddon;
+using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory {
-    public abstract class AccessoryData(
+    public abstract class AccessoryData: BaseBinding {
+
+		public AccessoryData(
 			string modelName,
 			string displayName,
 			long? price,
@@ -14,9 +18,22 @@ namespace SCS_Mod_Helper.Accessory {
 			string partType,
 			string modelColl,
 			string look,
-			string variant): BaseBinding {
+			string variant,
+			string electricType) {
+			mModelName = modelName;
+			mDisplayName = displayName;
+			mPrice = price;
+			mUnlockLevel = unlockLevel;
+			mIconName = iconName;
+			mPartType = partType;
+			mModelColl = modelColl;
+			mLook = look;
+			mVariant = variant;
+			mElectricType = electricType;
 
-		protected string mModelName = modelName;
+		}
+
+		protected string mModelName;
 		public string ModelName {
 			get => mModelName;
 			set {
@@ -29,7 +46,7 @@ namespace SCS_Mod_Helper.Accessory {
 
 		public bool NameOver12 => ModelName.Length > 12;
 
-		protected string mDisplayName = displayName;
+		protected string mDisplayName;
 		public string DisplayName {
 			get => mDisplayName;
 			set {
@@ -42,7 +59,7 @@ namespace SCS_Mod_Helper.Accessory {
 
 		public Visibility CheckResVisibility => DisplayName.Contains("@@") ? Visibility.Visible : Visibility.Collapsed;
 
-		protected long? mPrice = price;
+		protected long? mPrice;
 		public long? Price {
 			get => mPrice;
 			set {
@@ -51,7 +68,7 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-		protected uint? mUnlockLevel = unlockLevel;
+		protected uint? mUnlockLevel;
 		public uint? UnlockLevel {
 			get => mUnlockLevel;
 			set {
@@ -60,7 +77,7 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-		protected string mIconName = iconName;
+		protected string mIconName;
 		public string IconName {
 			get => mIconName;
 			set {
@@ -79,7 +96,7 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-		protected string mPartType = partType;
+		protected string mPartType;
 		public string PartType {
 			get => mPartType;
 			set {
@@ -94,7 +111,7 @@ namespace SCS_Mod_Helper.Accessory {
 			new("factory", Util.GetString("PartTypeFactory")),
 			new("licensed", Util.GetString("PartTypeLicensed"))];
 
-		protected string mModelColl = modelColl;
+		protected string mModelColl;
 		public string CollPath {
 			get => mModelColl;
 			set {
@@ -103,7 +120,7 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-		protected string mLook = look;
+		protected string mLook;
 		public string Look {
 			get => mLook;
 			set {
@@ -112,7 +129,7 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-		protected string mVariant = variant;
+		protected string mVariant;
 		public string Variant {
 			get => mVariant;
 			set {
@@ -120,5 +137,63 @@ namespace SCS_Mod_Helper.Accessory {
 				InvokeChange();
 			}
 		}
+
+		private string mElectricType;
+		public string ElectricType {
+			get => mElectricType;
+			set {
+				mElectricType = value;
+				InvokeChange();
+			}
+		}
+
+		private ObservableCollection<string> data = [];
+		private ObservableCollection<string> suitableFor = [];
+		private ObservableCollection<string> conflictWith = [];
+		private ObservableCollection<string> defaults = [];
+		private ObservableCollection<string> overrides = [];
+		private ObservableCollection<string> require = [];
+		public ObservableCollection<string> Data { get => data; set => data = value; }
+		public ObservableCollection<string> SuitableFor { get => suitableFor; set => suitableFor = value; }
+		public ObservableCollection<string> ConflictWith { get => conflictWith; set => conflictWith = value; }
+		public ObservableCollection<string> Defaults { get => defaults; set => defaults = value; }
+		public ObservableCollection<string> Overrides { get => overrides; set => overrides = value; }
+		public ObservableCollection<string> Require { get => require; set => require = value; }
+		public string DataListContent => JoinList(Data);
+		public string SuitableForListContent => JoinList(SuitableFor);
+		public string ConflictWithListContent => JoinList(ConflictWith);
+		public string DefaultsListContent => JoinList(Defaults);
+		public string OverridesListContent => JoinList(Overrides);
+		public string RequireListContent => JoinList(Require);
+
+		private static string JoinList(ObservableCollection<string>? list) {
+			if (list == null || list.Count == 0)
+				return string.Empty;
+			return string.Join(", ", list);
+		}
+
+		private string? mOpeningList = null;
+
+		public string? OpeningList {
+			get => mOpeningList;
+			set {
+				mOpeningList = value;
+				InvokeChange(nameof(PopupCollection));
+			}
+		}
+		public ObservableCollection<string>? PopupCollection {
+			get {
+				return OpeningList switch {
+					"TextData" => Data,
+					"TextSuitableFor" => SuitableFor,
+					"TextConflictWith" => ConflictWith,
+					"TextDefaults" => Defaults,
+					"TextOverrides" => Overrides,
+					"TextRequire" => Require,
+					_ => null,
+				};
+			}
+		}
+
 	}
 }

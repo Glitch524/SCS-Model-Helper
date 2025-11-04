@@ -3,6 +3,7 @@ using SCS_Mod_Helper.Accessory;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -108,9 +109,18 @@ public partial class ModManifestPage : BasePage {
 		if (color == null)
 			return;
 		var sStart = TextDescription.SelectionStart;
+		var sLength = TextDescription.SelectionLength;
+
 		DescContent = DescContent.Insert(sStart, color);
 		sStart += color.Length;
-		TextDescription.SelectionStart = sStart;
+
+		if (sLength > 0) {
+			var sEnd = sStart + sLength;
+			DescContent = DescContent.Insert(sEnd, "[normal]");
+			sEnd += "[normal]".Length;
+			TextDescription.SelectionStart = sEnd;
+		} else 
+			TextDescription.SelectionStart = sStart;
 		TextDescription.Focus();
 	}
 

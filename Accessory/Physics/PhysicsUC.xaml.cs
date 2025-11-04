@@ -38,14 +38,14 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 			get => (bool)GetValue(LocalPhysicsProperty); set => SetValue(LocalPhysicsProperty, value);
 		}
 
-		private static readonly RoutedEvent AddToOthersClickEvent = EventManager.RegisterRoutedEvent(
-			"AddToOthersClick",
+		private static readonly RoutedEvent AddToDataClickEvent = EventManager.RegisterRoutedEvent(
+			"AddToDataClick",
 			RoutingStrategy.Bubble,
 			typeof(RoutedEventHandler),
 			typeof(PhysicsUC));
 
-		public event RoutedEventHandler? AddToOthersClick { 
-			add => AddHandler(AddToOthersClickEvent, value); remove => RemoveHandler(AddToOthersClickEvent, value);
+		public event RoutedEventHandler? AddToDataClick { 
+			add => AddHandler(AddToDataClickEvent, value); remove => RemoveHandler(AddToDataClickEvent, value);
 		}
 
 		public SuiItem? CurrentSuiItem {
@@ -89,8 +89,8 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 		public void PhysicsListAdd(PhysicsData physics) => Binding.PhysicsListAdd(physics);
 
 		private void ButtonPhysicsClick(object sender, RoutedEventArgs e) {
-			if (sender == ButtonAddToOthers) {
-				RoutedEventArgs args = new(AddToOthersClickEvent);
+			if (sender == ButtonAddToDataClick) {
+				RoutedEventArgs args = new(AddToDataClickEvent);
 				RaiseEvent(args);
 			} else if (sender == ButtonSaveToPhysList) {
 				var physics = Binding.CurrentPhysicsItem;
@@ -100,8 +100,6 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 				MessageBox.Show(Util.GetString("MessageResultPhysSaved"));
 			}
 		}
-
-		public static void SavePhysicsList() => AccAppIO.SavePhysicsList();
 
 		private void ButtonAddRowClick(object sender, RoutedEventArgs e) => MenuPhysicsType.IsOpen = true;
 		private void AddPhysicDataClick(object sender, RoutedEventArgs e) {
@@ -163,14 +161,18 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 		}
 
 		private void ButtonChooseMaterialClick(object sender, RoutedEventArgs e) {
-			if (sender == ButtonChooseRopeMaterial) {
-				var mat = AccessoryDataUtil.ChooseRope();
-				if (mat != null)
-					RopeMaterial = mat;
-			} else if (sender == ButtonChoosePatchMaterial) {
-				var mat = AccessoryDataUtil.ChoosePatch();
-				if (mat != null)
-					PatchMaterial = mat;
+			try {
+				if (sender == ButtonChooseRopeMaterial) {
+					var mat = AccessoryDataUtil.ChooseRope();
+					if (mat != null)
+						RopeMaterial = mat;
+				} else if (sender == ButtonChoosePatchMaterial) {
+					var mat = AccessoryDataUtil.ChoosePatch();
+					if (mat != null)
+						PatchMaterial = mat;
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(ex.Message);
 			}
 		}
 	}

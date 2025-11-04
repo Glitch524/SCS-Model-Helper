@@ -180,7 +180,7 @@ public class AutoFillBinding(
 
 	public Visibility VisibleModelPath {
 		get {
-			if (ChooseType == AccAddonBinding.MODEL || string.IsNullOrEmpty(TextModelPath))
+			if (ChooseType == AccAddonBinding.MODEL || ChooseType == AccAddonBinding.EXT_MODEL || string.IsNullOrEmpty(TextModelPath))
 				return Visibility.Collapsed;
 			return Visibility.Visible;
 		}
@@ -209,7 +209,7 @@ public class AutoFillBinding(
 
 	public Visibility VisibleModelPathUK {
 		get {
-			if (ChooseType == AccAddonBinding.MODEL_UK || string.IsNullOrEmpty(TextModelPathUK))
+			if (ChooseType == AccAddonBinding.MODEL_UK || ChooseType == AccAddonBinding.EXT_MODEL_UK || string.IsNullOrEmpty(TextModelPathUK))
 				return Visibility.Collapsed;
 			return Visibility.Visible;
 		}

@@ -45,6 +45,15 @@ namespace SCS_Mod_Helper.Utils {
 			return DependencyProperty.UnsetValue;
 		}
 	}
+	public class StringNotEmptyConverter: IValueConverter {
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+			return value is string str && str.Length > 0;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			throw new NotImplementedException();
+		}
+	}
 	public class Float3Converter: IValueConverter {
 		public object? Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 			if (value != null && value is float[] f) {
