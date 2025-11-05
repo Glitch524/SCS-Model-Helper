@@ -1,6 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
@@ -66,7 +65,7 @@ public class AutoFillBinding(
 	string? modelType,
 	string? modelPath,
 	string? modelPathUK,
-	string? collPath): INotifyPropertyChanged {
+	string? collPath): BaseBinding {
 
 	private int mchooseType = chooseType;
 	public int ChooseType {
@@ -243,7 +242,4 @@ public class AutoFillBinding(
 			return Visibility.Visible;
 		}
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	private void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
 }

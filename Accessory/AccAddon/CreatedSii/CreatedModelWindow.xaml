@@ -82,7 +82,7 @@
 					Text="{DynamicResource ModelName}"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Center"
-					Padding="0,5,0,5"
+					Padding="0,5"
 					FontWeight="Bold"
 					Margin="10,0,0,0" />
 				<ListBox
@@ -136,9 +136,9 @@
 				SelectionMode="Single"
 				Margin="5,5,0,0"
 				GridLinesVisibility="Horizontal"
-				CanUserSortColumns="False"
 				d:ItemsSource="{d:SampleData ItemCount=2}"
 				ItemsSource="{Binding CurrentModelItems}"
+				SelectedItem="{Binding CurrentModelItem}"
 				AutoGenerateColumns="False"
 				BorderThickness="1"
 				BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
@@ -196,14 +196,13 @@
 					<DataGridTextColumn
 						Header="{DynamicResource ModelType}"
 						IsReadOnly="True"
-						Width="5*"
+						Width="3*"
 						Binding="{Binding ModelType}">
 					</DataGridTextColumn>
 					<DataGridTextColumn
 						Header="{DynamicResource ModelDisplayName}"
 						IsReadOnly="True"
 						Width="5*"
-						Visibility="Collapsed"
 						Binding="{Binding IngameName}">
 						<DataGridTextColumn.CellStyle>
 							<Style
@@ -218,14 +217,12 @@
 						Header="{DynamicResource ModelLook}"
 						IsReadOnly="True"
 						Width="5*"
-						Visibility="Collapsed"
 						Binding="{Binding Look}">
 					</DataGridTextColumn>
 					<DataGridTextColumn
 						Header="{DynamicResource ModelVariant}"
 						IsReadOnly="True"
 						Width="5*"
-						Visibility="Collapsed"
 						Binding="{Binding Variant}">
 					</DataGridTextColumn>
 				</DataGrid.Columns>

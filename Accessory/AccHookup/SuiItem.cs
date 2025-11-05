@@ -1,9 +1,9 @@
 ﻿using SCS_Mod_Helper.Accessory.Physics;
+using SCS_Mod_Helper.Base;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup {
-	public class SuiItem(string suiFilename): INotifyPropertyChanged {
+	public class SuiItem(string suiFilename): BaseBinding {
 
 		public SuiItem():this("") {
 
@@ -14,17 +14,12 @@ namespace SCS_Mod_Helper.Accessory.AccHookup {
 			get => mSuiFilename;
 			set {
 				mSuiFilename = value;
-				InvokeChange(nameof(SuiFilename));
+				InvokeChange();
 			}
 		}
 
 		public readonly ObservableCollection<AccessoryHookupData> HookupItems = [];
 
 		public readonly ObservableCollection<PhysicsData> PhysicsItems = [];
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-		private void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 	}
-
-
 }

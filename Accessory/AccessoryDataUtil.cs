@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon;
-using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
@@ -192,8 +191,8 @@ public static class AccessoryDataUtil {
 	/// <summary>
 	/// 检查图标文件是否有对应的tobj和mat。
 	/// 会从图标所在位置以及Accessory文件夹检查
-	/// 输出：mat文件的绝对路径
 	/// </summary>
+	/// <returns>mat文件的绝对路径</returns>
 	public static string? CheckIconFileExistence(Window window, string pathAcc, DirectoryInfo iconFile) {//如果图标不在accessory文件夹内，就只能选择accessory文件夹生成
 		string projectLocation = Instances.ProjectLocation;
 
@@ -223,10 +222,7 @@ public static class AccessoryDataUtil {
 			string genLocation;
 			var result = dialog.ShowDialog();
 			if (result == true) {
-				if (dialog.CreateOnAccessory)
-					genLocation = pathAcc;
-				else
-					genLocation = iconParent;
+				genLocation = dialog.CreateOnAccessory ? pathAcc : iconParent;
 			} else
 				return null;
 			{
@@ -291,7 +287,6 @@ public static class AccessoryDataUtil {
 			return null;
 		return Util.LoadPfimIcon(iconPath);
 	}
-
 
 	public static string? ChooseRope() => ChooseMaterial(Util.GetString("DialogTitleChooseRope"));
 	public static string? ChoosePatch() => ChooseMaterial(Util.GetString("DialogTitleChoosePatch"));
@@ -372,17 +367,11 @@ public class StringResItem: BaseBinding {
 
 	public static StringResItem Head() => new(Util.GetString("MenuResTip"), "head") { IsEnabled = false };
 
-	public static StringResItem Separator() {
-		return new();
-	}
+	public static StringResItem Separator() => new();
 
-	public static StringResItem Empty() {
-		return new(Util.GetString("StatusEmpty"), "empty") { IsEnabled = false };
-	}
+	public static StringResItem Empty() => new(Util.GetString("StatusEmpty"), "empty") { IsEnabled = false };
 
-	public static StringResItem OpenLocalization() {
-		return new(Util.GetString("MenuResOption"), "openLocalization");
-	}
+	public static StringResItem OpenLocalization() => new(Util.GetString("MenuResOption"), "openLocalization");
 
 	private StringResItem() {
 		IsSeparator = true;

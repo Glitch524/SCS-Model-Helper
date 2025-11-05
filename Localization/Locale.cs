@@ -1,9 +1,9 @@
-﻿using SCS_Mod_Helper.Utils;
-using System.ComponentModel;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 
 namespace SCS_Mod_Helper.Localization; 
 
-public abstract class Locale(string localeValue, string localeDisplay): INotifyPropertyChanged {
+public abstract class Locale(string localeValue, string localeDisplay): BaseBinding {
 	public static readonly string LocaleValueUni = "universal";
 
 	private string mLocaleValue = localeValue;
@@ -11,7 +11,7 @@ public abstract class Locale(string localeValue, string localeDisplay): INotifyP
 		get => mLocaleValue;
 		set {
 			mLocaleValue = value;
-			InvokeChange(nameof(LocaleValue));
+			InvokeChange();
 		}
 	}
 
@@ -20,16 +20,13 @@ public abstract class Locale(string localeValue, string localeDisplay): INotifyP
 		get => mLocaleDisplay;
 		set {
 			mLocaleDisplay = value;
-			InvokeChange(nameof(LocaleDisplay));
+			InvokeChange();
 		}
 	}
 
 	public void RefreshName() {
 		LocaleDisplay = Util.GetString($"locale.{LocaleValue}");
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	protected void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 
 	protected static List<string[]> SupportedLocales {
 		get => GetLocalePair(

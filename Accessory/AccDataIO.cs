@@ -66,7 +66,7 @@ class AccDataIO {
 
 	private static string FloatToString(float? f) => f?.ToString("0.0#####") ?? "0.0";
 
-	private static void BraceIn(StreamWriter sw) {
+	private static void BraceIn(StreamWriter sw) {//将括号下的内容缩进
 		sw.Write(new string('\t', TabCount));
 		sw.WriteLine('{');
 		TabCount++;
@@ -80,7 +80,7 @@ class AccDataIO {
 	}
 	private static void WriteEmptyLine(StreamWriter sw) => sw.WriteLine("");
 
-	public static bool IsArray(string name) => name switch {
+	public static bool IsArray(string name) => name switch {//确定这个Key是否为列表，如果是，这个key要在后面添加[]
 		NameMFCategory or
 		NameData or
 		NameSuitableFor or
@@ -94,7 +94,7 @@ class AccDataIO {
 		_ => false,
 	};
 
-	public static bool HasQuote(string name) => name switch {
+	public static bool HasQuote(string name) => name switch {//确定这个Key的值是否需要双引号，如果是，这个值要添加双引号
 		NameMFPackageVersion or
 		NameMFDisplayName or
 		NameMFAuthor or
@@ -507,7 +507,7 @@ class AccDataIO {
 				continue;
 			sw.WriteLine(string.Format(includeFormat, sui.SuiFilename));
 
-			var cTab = TabCount;
+			var cTab = TabCount;//@include的前面不能有空格或制表符，否则会无法读取
 			TabCount = 0;
 			CreateAddonHookupSui(sui);
 			TabCount = cTab;
@@ -997,7 +997,7 @@ class AccDataIO {
 	private const string DictPreffix = "local_module";
 	private const string NameKey = "key";
 	private const string NameValue = "val";
-	private const string KeyGenerated = "Generated";
+	private const string KeyGenerated = "Generated";//自动生成的键值对 用来判断locale文件是否为自动创建的文件 用户编写的文件gen为false
 
 	public static void ReadLocaleDict(Window window, ObservableCollection<LocaleModule> moduleList) {
 		var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
@@ -1048,8 +1048,6 @@ class AccDataIO {
 								} else if (stringKey != null) 
 									langDict.AddPair(stringKey, stringValue);
 								stringKey = null;
-
-
 							}
 						}
 						if (copyToUni) {
@@ -1109,7 +1107,6 @@ class AccDataIO {
 								}
 							}
 						}
-
 					} catch (Exception) {
 					}
 				}
@@ -1154,17 +1151,17 @@ class AccDataIO {
 		ObservableCollection<LocalePair> dict;
 		bool Genearated = false;
 		var localeFile = Paths.LocaleFile(Instances.ProjectLocation, locale.LocaleValue, moduleName);
-		if (locale.Dictionary.Count != 0)
+		if (locale.Dictionary.Count > 0)//如果当前字典内有值，就输出字典的值
 			dict = locale.Dictionary;
-		else if (universal.Count == 0) {
+		else if (universal.Count > 0) {//如果有通用字典，则输出通用字典内容，并将代表通用字典内容的generated设置为true
+			dict = universal;
+			Genearated = true;
+		} else {//如果通用字典为空，就删除已有locale文件
 			File.Delete(localeFile);
 			var parent = Directory.GetParent(localeFile);
 			if (parent != null && parent.GetFiles().Length == 0)
 				parent.Delete();
 			return;
-		} else {
-			dict = universal;
-			Genearated = true;
 		}
 		var hasValue = false;
 		{
@@ -1192,6 +1189,9 @@ class AccDataIO {
 		}
 		if (!hasValue) {
 			File.Delete(localeFile);
+			var parent = Directory.GetParent(localeFile);
+			if (parent != null && parent.GetFiles().Length == 0)
+				parent.Delete();
 		}
 	}
 
@@ -1214,9 +1214,11 @@ class AccDataIO {
 		sw.WriteLine(NameLocHeader);
 	}
 
-
-
-
+	/// <summary>
+	/// <para>读取pit文件内的look和variant，pit内有两种方法获取</para>
+	/// <para>从blender生成的pit文件前几行会有注释写明包含的所有look和variant</para>
+	/// <para>使用转换软件生成的pit则没有，只能文件的具体数据读取</para>
+	/// </summary>
 	public static void ReadLookAndVariant(string pitFile, ObservableCollection<string> LookList, ObservableCollection<string> VariantList) {
 		if (File.Exists(pitFile)) {
 			using StreamReader sr = new(pitFile);
@@ -1267,7 +1269,7 @@ class AccDataIO {
 					break;
 				}
 			}
-		}, System.Windows.Threading.DispatcherPriority.Render);
+		}, DispatcherPriority.Render);
 	}
 
 	private static bool ReadNamesAlt(StreamReader sr, ObservableCollection<string> list) {
@@ -1278,7 +1280,7 @@ class AccDataIO {
 			var look = line.Substring(start + 1, end - start);
 			Application.Current.Dispatcher.Invoke(() => {
 				list.Add(look);
-			}, System.Windows.Threading.DispatcherPriority.Render);
+			}, DispatcherPriority.Render);
 			return true;
 		}
 		return false;

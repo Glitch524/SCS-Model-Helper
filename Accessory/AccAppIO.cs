@@ -104,7 +104,7 @@ namespace SCS_Mod_Helper.Accessory;
 		TabCount = 0;
 		using StreamWriter sw = new(physFile);
 		WriteFileHeader(sw, ":Physics");
-		foreach (var phys in PhysicsItems) {//todo 读写physics patch data
+		foreach (var phys in PhysicsItems) {
 			if (phys is PhysicsToyData toyData) {
 				WritePhysToyHeader(sw, toyData.PhysicsName);
 				BraceIn(sw);

@@ -40,13 +40,9 @@ public partial class CreatedModelWindow : BaseWindow
 
 	private readonly CancellationTokenSource source = new();
 
-	private void OnLoaded(object sender, RoutedEventArgs e) {
-		Task.Run(LoadCreatedSii);
-	}
+	private void OnLoaded(object sender, RoutedEventArgs e) => Task.Run(LoadCreatedSii);
 
-	private void OnClosed(object? sender, EventArgs e) {
-		source.Cancel();
-	}
+	private void OnClosed(object? sender, EventArgs e) => source.Cancel();
 
 	private readonly DirectoryInfo defDir = new(Paths.DefTruckDir(Instances.ProjectLocation));
 	readonly Dictionary<string, CreatedModel> ModelPair = [];
@@ -89,9 +85,6 @@ public partial class CreatedModelWindow : BaseWindow
 				var modelName = "";
 				var truckID = "";
 				var modelType = "";
-				var ingameName = "";
-				var look = "";
-				var variant = "";
 				var deTruck = filePath.Replace(defDir.FullName + '\\', "");
 				var split = deTruck.Split('\\');
 				if (split.Length >= 4) {
@@ -99,7 +92,7 @@ public partial class CreatedModelWindow : BaseWindow
 					modelType = split[2];
 					modelName = split[3][..^4];
 				}
-				CreatedModelItem c = new(filePath, pathShort, truckID, modelType, modelName, ingameName, look, variant);
+				CreatedModelItem c = new(filePath, pathShort, truckID, modelType, modelName);
 
 				if (ModelPair.TryGetValue(modelName, out CreatedModel? createdModel)) {
 					c.Parent = createdModel;

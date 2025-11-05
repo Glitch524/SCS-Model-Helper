@@ -4,7 +4,6 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Localization;
 
@@ -13,7 +12,6 @@ namespace SCS_Mod_Helper.Localization;
 /// </summary>
 public partial class ModLocalizationWindow : BaseWindow
 {
-
 	private readonly LocaleBinding binding = new();
 
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -38,15 +36,13 @@ public partial class ModLocalizationWindow : BaseWindow
     }
 
 	private void OnLoaded(object sender, RoutedEventArgs e) {
-		var task = Task.Run(() => {
-			AccDataIO.ReadLocaleDict(this, Modules);
-		});
+		var task = Task.Run(() => AccDataIO.ReadLocaleDict(this, Modules));
 		task.Wait();
 		Modules.CollectionChanged += ModulesCollectionChanged;
 		foreach (var module in Modules) {
 			MenuModule.Items.Add(NewModuleItem(module));
 		}
-		binding.CurrentModule = null;
+		binding.CurrentModule = null;//参考LocaleBinding内的CurrentModule 设为空时会获取LocaleModules列表的第一个module
 	}
 
 
@@ -150,7 +146,6 @@ public partial class ModLocalizationWindow : BaseWindow
 		HasChanges = true;
 		MessageBox.Show(this, GetString("MessageSaveSuccess"));
 	}
-
 
 	private void ButtonCleanClick(object sender, RoutedEventArgs e) {
 		binding.CleanSameDict();

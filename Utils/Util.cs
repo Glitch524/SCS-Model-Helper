@@ -102,7 +102,6 @@ namespace SCS_Mod_Helper.Utils {
 			}
 		}
 
-
 		public static PixelFormat PfimGetPixelFormat(IImage image) {
 			switch (image.Format) {
 				case ImageFormat.Rgb24:

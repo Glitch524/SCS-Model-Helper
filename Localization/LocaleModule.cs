@@ -1,14 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using SCS_Mod_Helper.Base;
+using System.Collections.ObjectModel;
 
 namespace SCS_Mod_Helper.Localization;
-public class LocaleModule: INotifyPropertyChanged {
+public class LocaleModule: BaseBinding {
 	private string mModuleName;
 	public string ModuleName {
 		get => mModuleName;
 		set {
 			mModuleName = value;
-			InvokeChange(nameof(ModuleName));
+			InvokeChange();
 		}
 	}
 
@@ -30,9 +30,6 @@ public class LocaleModule: INotifyPropertyChanged {
 		}
 		throw new ArgumentException("wrong locale: " + locale);
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	private void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 }
 
 public class ModLocale: Locale {
@@ -67,24 +64,21 @@ public class ModLocale: Locale {
 }
 
 
-public class LocalePair(string key, string value): INotifyPropertyChanged {
+public class LocalePair(string key, string value): BaseBinding {
 	private string mKey = key;
 	private string mValue = value;
 	public string Key {
 		get => mKey;
 		set {
 			mKey = value;
-			InvokeChange(nameof(Key));
+			InvokeChange();
 		}
 	}
 	public string Value {
 		get => mValue;
 		set {
 			mValue = value;
-			InvokeChange(nameof(Value));
+			InvokeChange();
 		}
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	private void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 }

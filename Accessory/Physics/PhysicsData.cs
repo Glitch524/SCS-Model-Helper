@@ -1,8 +1,7 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using SCS_Mod_Helper.Base;
 
 namespace SCS_Mod_Helper.Accessory.Physics; 
-public class PhysicsData: INotifyPropertyChanged {
+public class PhysicsData: BaseBinding {
 
 	protected PhysicsData(string physicsName) {
 		mPhysicsName = physicsName;
@@ -14,10 +13,7 @@ public class PhysicsData: INotifyPropertyChanged {
 		get => mPhysicsName;
 		set {
 			mPhysicsName = value;
-			InvokeChange(nameof(PhysicsName));
+			InvokeChange();
 		}
 	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	public void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
 }

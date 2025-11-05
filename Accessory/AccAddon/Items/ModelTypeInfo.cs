@@ -1,8 +1,8 @@
-﻿using SCS_Mod_Helper.Utils;
-using System.ComponentModel;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.Items; 
-public class ModelTypeInfo: INotifyPropertyChanged {
+public class ModelTypeInfo: BaseBinding {
 
 	public ModelTypeInfo(
 		string accETS2,
@@ -41,7 +41,7 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 		get => mAccessoryETS2;
 		set {
 			mAccessoryETS2 = value;
-			InvokeChange(nameof(AccessoryETS2));
+			InvokeChange();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 		get => mAccessoryATS;
 		set {
 			mAccessoryATS = value;
-			InvokeChange(nameof(AccessoryATS));
+			InvokeChange();
 		}
 	}
 	public string Accessory {
@@ -74,7 +74,7 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 		get => mName;
 		set {
 			mName = value;
-			InvokeChange(nameof(Name));
+			InvokeChange();
 		}
 	}
 	public void RefreshName() {
@@ -87,7 +87,4 @@ public class ModelTypeInfo: INotifyPropertyChanged {
 
 	public bool ForETS2 => mGameType == null || mGameType == true;
 	public bool ForATS => mGameType == null || mGameType == false;
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-	public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 }

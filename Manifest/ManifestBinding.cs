@@ -1,7 +1,7 @@
 ﻿using SCS_Mod_Helper.Accessory;
+using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using Wpf.Ui.Input;
 
 namespace SCS_Mod_Helper.Manifest {
-	public class ManifestBinding: INotifyPropertyChanged {
+	public class ManifestBinding: BaseBinding {
 		private static ManifestBinding? mBinding = null;
 		public static ManifestBinding Instance {
 			get {
@@ -231,8 +231,5 @@ namespace SCS_Mod_Helper.Manifest {
 				locale.RefreshName();
 			}
 		}
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-		public void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
 	}
 }

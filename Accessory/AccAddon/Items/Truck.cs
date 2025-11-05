@@ -1,5 +1,5 @@
-﻿using SCS_Mod_Helper.Utils;
-using System.ComponentModel;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 using System.Runtime.CompilerServices;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.Items; 
@@ -13,9 +13,7 @@ public class Truck(
 	string modelType = "",
 	string look = "",
 	string variant = "",
-	bool ets2 = false): INotifyPropertyChanged, IComparable {
-
-	public event PropertyChangedEventHandler? PropertyChanged;
+	bool ets2 = false): BaseBinding, IComparable {
 
 	public Truck(
 		string truckID,
@@ -42,7 +40,7 @@ public class Truck(
 		get => mTruckID;
 		set {
 			mTruckID = value;
-			InvokeChange(nameof(TruckID));
+			InvokeChange();
 		}
 	}
 
@@ -76,7 +74,7 @@ public class Truck(
 		get => mCheck;
 		set {
 			mCheck = value;
-			InvokeChange(nameof(Check));
+			InvokeChange();
 		}
 	}
 	private string mIngameName = ingameName;
@@ -84,7 +82,7 @@ public class Truck(
 		get => mIngameName;
 		set {
 			mIngameName = value;
-			InvokeChange(nameof(IngameName));
+			InvokeChange();
 		}
 	}
 	private string mDescription = description;
@@ -92,7 +90,7 @@ public class Truck(
 		get => mDescription;
 		set {
 			mDescription = value;
-			InvokeChange(nameof(Description));
+			InvokeChange();
 		}
 	}
 	private string mModelType = modelType;
@@ -100,7 +98,7 @@ public class Truck(
 		get => mModelType;
 		set {
 			mModelType = value;
-			InvokeChange(nameof(ModelType));
+			InvokeChange();
 		}
 	}
 
@@ -109,7 +107,7 @@ public class Truck(
 		get => mLook;
 		set {
 			mLook = value;
-			InvokeChange(nameof(Look));
+			InvokeChange();
 		}
 	}
 
@@ -118,7 +116,7 @@ public class Truck(
 		get => mVariant;
 		set {
 			mVariant = value;
-			InvokeChange(nameof(Variant));
+			InvokeChange();
 		}
 	}
 
@@ -127,7 +125,7 @@ public class Truck(
 		get => mIsETS2;
 		set {
 			mIsETS2 = value;
-			InvokeChange(nameof(IsETS2));
+			InvokeChange();
 		}
 	}
 
@@ -169,8 +167,6 @@ public class Truck(
 		Look,
 		Variant
 		]);
-
-	public void InvokeChange(string name) => PropertyChanged?.Invoke(this, new(name));
 
 	public int CompareTo(object? obj) {
 		if (obj is Truck other) {

@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using SCS_Mod_Helper.Base;
 
 namespace SCS_Mod_Helper.Manifest;
 
-public class CategoryInfo(string category): INotifyPropertyChanged {
+public class CategoryInfo(string category): BaseBinding {
 	private bool mCheck = false;
 	public bool Check {
 		get => mCheck;
@@ -21,7 +20,4 @@ public class CategoryInfo(string category): INotifyPropertyChanged {
             InvokeChange();
         }
     }
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-    private void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
-    }
+}

@@ -3,7 +3,6 @@ using SCS_Mod_Helper.Accessory.AccHookup;
 using SCS_Mod_Helper.Utils;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using SCS_Mod_Helper.Base;

@@ -1,16 +1,11 @@
-﻿using SCS_Mod_Helper.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 using System.Windows;
 using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Hookups;
 
-public class HookupBinding: INotifyPropertyChanged {
+public class HookupBinding: BaseBinding {
 
 	public HookupBinding() {
 	}
@@ -32,7 +27,7 @@ public class HookupBinding: INotifyPropertyChanged {
 		get => mIsAnimHookup;
 		set {
 			mIsAnimHookup = value;
-			InvokeChange(nameof(IsAnimHookup));
+			InvokeChange();
 
 			InvokeChange(nameof(AnimVisibility));
 			InvokeChange(nameof(StartClickable));
@@ -44,7 +39,7 @@ public class HookupBinding: INotifyPropertyChanged {
 		get => mHookupName;
 		set {
 			mHookupName = value;
-			InvokeChange(nameof(HookupName));
+			InvokeChange();
 
 			InvokeChange(nameof(StartClickable));
 			InvokeChange(nameof(HookupNameForeground));
@@ -58,7 +53,7 @@ public class HookupBinding: INotifyPropertyChanged {
 		get => mModelLocation;
 		set {
 			mModelLocation = value;
-			InvokeChange(nameof(ModelLocation));
+			InvokeChange();
 
 			InvokeChange(nameof(StartClickable));
 		}
@@ -69,7 +64,7 @@ public class HookupBinding: INotifyPropertyChanged {
 		get => mAnimationLocation;
 		set {
 			mAnimationLocation = value;
-			InvokeChange(nameof(AnimationLocation));
+			InvokeChange();
 
 			InvokeChange(nameof(StartClickable));
 		}
@@ -79,11 +74,5 @@ public class HookupBinding: INotifyPropertyChanged {
 
 	public bool StartClickable {
 		get => HookupName.Length > 0 && ModelLocation.Length > 0 && (!IsAnimHookup || AnimationLocation.Length > 0);
-	}
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	private void InvokeChange(string name) {
-		PropertyChanged?.Invoke(this, new(name));
 	}
 }
