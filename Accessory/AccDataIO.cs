@@ -1,5 +1,5 @@
 ﻿using SCS_Mod_Helper.Accessory.AccAddon;
-using SCS_Mod_Helper.Accessory.AccAddon.Items;
+using SCS_Mod_Helper.Accessory.AccAddon.CreatedSii;
 using SCS_Mod_Helper.Accessory.AccHookup;
 using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Localization;
@@ -7,12 +7,9 @@ using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory;
@@ -436,6 +433,33 @@ class AccDataIO {
 			if (listName == NameData && !item.EndsWith(NamePSuffix))
 				item += NamePSuffix;
 			WriteLine(sw, listName, item);
+		}
+	}
+
+	public static void ReadAccAddon(CreatedModelItem item) {
+		if (File.Exists(item.Path)) {
+			using StreamReader sr = new(item.Path);
+			string? line;
+			while ((line = sr.ReadLine()?.Trim()) != null) {
+				if (line == "}")
+					break;
+				if (line == "{" || line == "SiiNunit" || line.Length == 0 || line.StartsWith('#'))
+					continue;
+				int colonIndex = line.IndexOf(':');
+				var name = line[..colonIndex].Trim();
+				var value = ClipValue(line[(colonIndex + 1)..]);
+				switch(name) {
+					case NameDisplayName:
+						item.IngameName = value;
+						break;
+					case NameLook:
+						item.Look = value;
+						break;
+					case NameValue:
+						item.Variant = value;
+						break;
+				}
+			}
 		}
 	}
 
@@ -958,7 +982,7 @@ class AccDataIO {
 	private static string ClipValue(string value) {
 		if (value.Contains('#'))//部分行会有注释
 			value = value[..value.IndexOf('#')];
-		if (value.Contains('"')) {
+		if (value.Contains('"')) {//string 类数值会有双引号
 			value = value[(value.IndexOf('"') + 1)..value.LastIndexOf('"')];
 		} else
 			value = value.Trim();

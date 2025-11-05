@@ -1,17 +1,7 @@
 ﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon.CreatedSii {
 	internal class CreatedModelBinding: BaseBinding {
@@ -65,9 +55,9 @@ namespace SCS_Mod_Helper.Accessory.AccAddon.CreatedSii {
 
 		private CreatedModel? mCurrentModel = null;
 		public CreatedModel? CurrentModel {
-			get => mCurrentModel;
+			get => mCurrentModel ?? CreatedModelList.FirstOrDefault();
 			set {
-				mCurrentModel = value;
+				mCurrentModel = value ?? CreatedModelList.FirstOrDefault();
 				InvokeChange();
 
 				InvokeChange(nameof(CurrentModelItems));
@@ -75,5 +65,16 @@ namespace SCS_Mod_Helper.Accessory.AccAddon.CreatedSii {
 		}
 
 		public ObservableCollection<CreatedModelItem>? CurrentModelItems => CurrentModel?.CreatedModelItems;
+
+		private CreatedModelItem? currentModelItem = null;
+		public CreatedModelItem? CurrentModelItem {
+			get => currentModelItem;
+			set {
+				currentModelItem = value;
+				InvokeChange();
+
+				value?.ReadModelDetail();
+			}
+		}
 	}
 }
