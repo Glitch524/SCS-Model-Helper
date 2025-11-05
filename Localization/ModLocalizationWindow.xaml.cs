@@ -4,6 +4,7 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Localization;
 
@@ -37,17 +38,19 @@ public partial class ModLocalizationWindow : BaseWindow
     }
 
 	private void OnLoaded(object sender, RoutedEventArgs e) {
-		AccDataIO.ReadLocaleDict(this, Modules);
+		var task = Task.Run(() => {
+			AccDataIO.ReadLocaleDict(this, Modules);
+		});
+		task.Wait();
 		Modules.CollectionChanged += ModulesCollectionChanged;
 		foreach (var module in Modules) {
 			MenuModule.Items.Add(NewModuleItem(module));
 		}
+		binding.CurrentModule = null;
 	}
 
 
 	private readonly ContextMenu MenuModule = new();
-	private void SetupMenuModule() {
-	}
 
 	private void OnModuleChanged(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;

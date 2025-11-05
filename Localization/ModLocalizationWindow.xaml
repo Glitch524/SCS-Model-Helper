@@ -134,10 +134,24 @@
 				<Button
 					x:Name="ButtonDeleteModule"
 					Grid.Column="4"
-					IsEnabled="{Binding ModuleNotNull}"
 					Click="ButtonModuleClick"
 					VerticalAlignment="Stretch"
 					Width="25">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding CurrentModule}"
+									Value="{x:Null}">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
 					<Viewbox>
 						<ui:SymbolIcon
 							Symbol="Dismiss16" />
@@ -148,10 +162,24 @@
 			<Button
 				x:Name="ButtonClean"
 				Grid.Row="2"
-				IsEnabled="{Binding ModuleNotNull}"
 				Click="ButtonCleanClick"
 				Padding="3"
 				HorizontalAlignment="Stretch">
+				<Button.Style>
+					<Style
+						TargetType="Button"
+						BasedOn="{StaticResource {x:Type Button}}">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding CurrentModule}"
+								Value="{x:Null}">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
 				<TextBlock
 					Text="{DynamicResource ButtonCleanUpSame}"
 					ToolTip="{DynamicResource ButtonCleanUpSameTip}"
@@ -277,7 +305,6 @@
 					Grid.Column="0"
 					Content="{DynamicResource ButtonSyncWithUni}"
 					HorizontalAlignment="Left"
-					IsEnabled="{Binding ModuleNotNull}"
 					Padding="3"
 					Click="ButtonSyncingClick"
 					VerticalAlignment="Bottom">
@@ -286,6 +313,13 @@
 							TargetType="Button"
 							BasedOn="{StaticResource {x:Type Button}}">
 							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding CurrentModule}"
+									Value="{x:Null}">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
 								<DataTrigger
 									Binding="{Binding Path=CurrentLocale.LocaleValue}"
 									Value="universal">
@@ -303,21 +337,50 @@
 					Margin="5,0,0,0"
 					Content="{DynamicResource ButtonSyncOrder}"
 					HorizontalAlignment="Left"
-					IsEnabled="{Binding ModuleNotNull}"
 					Padding="3"
 					VerticalAlignment="Bottom"
-					Click="ButtonSyncingClick" />
+					Click="ButtonSyncingClick">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding CurrentModule}"
+									Value="{x:Null}">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
 				
 				<Button
 					x:Name="ButtonAdd"
 					Grid.Column="3"
 					Margin="5,0,0,0"
 					HorizontalAlignment="Left"
-					IsEnabled="{Binding ModuleNotNull}"
 					Click="OperateButtonClick"
 					VerticalAlignment="Bottom"
 					Height="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}"
 					Width="{Binding ActualHeight, ElementName=ButtonSyncWithUni, Mode=OneWay}">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding CurrentModule}"
+									Value="{x:Null}">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
 					<Viewbox>
 						<ui:SymbolIcon
 							Symbol="Add16" />

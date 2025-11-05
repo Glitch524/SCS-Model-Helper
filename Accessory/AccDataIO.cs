@@ -7,10 +7,12 @@ using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory;
@@ -991,6 +993,8 @@ class AccDataIO {
 							module = new(moduleName);
 							moduleList.Add(module);
 						}
+						if (module == null)
+							return;
 						var lang = dir.Name;
 						var langDict = module.GetLocale(lang)!;
 						using StreamReader sr = new(file.FullName);
