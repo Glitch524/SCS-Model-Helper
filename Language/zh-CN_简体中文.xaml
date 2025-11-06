@@ -28,6 +28,7 @@
 	<s:String x:Key="Author">作者：</s:String>
 	<s:String x:Key="CheckBoxMP">多人模式非必须mod</s:String>
 	<s:String x:Key="CheckBoxMPTip">指能否启用此mod进入多人模式，即使他人没有安装此mod。要求mod不能涉及影响游戏玩法的内容</s:String>
+	<s:String x:Key="ResultSaved">基本内容已保存</s:String>
 		<!--图标-->
 	<s:String x:Key="TitleModIcon">MOD图标（JPG 276x162）</s:String>
 	<s:String x:Key="IconName">图标文件名：</s:String>

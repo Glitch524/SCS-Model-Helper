@@ -29,8 +29,6 @@
   <ItemGroup>
     <None Remove="App.config" />
     <None Remove="Images\AppIcon.png" />
-    <None Remove="Images\IconPlaceholder.png" />
-    <None Remove="Images\ModelIconPlaceholder.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,8 +48,6 @@
 
   <ItemGroup>
     <Resource Include="Images\AppIcon.png" />
-    <Resource Include="Images\IconPlaceholder.png" />
-    <Resource Include="Images\ModelIconPlaceholder.png" />
   </ItemGroup>
 
   <ItemGroup>

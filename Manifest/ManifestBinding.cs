@@ -121,10 +121,9 @@ namespace SCS_Mod_Helper.Manifest {
 		}
 
 		public string? OldIconName = null;
-		private readonly BitmapImage DefaultIcon = new(new("pack://application:,,,/Images/IconPlaceholder.png"));
 		private BitmapImage? mModIcon = null;
 		public BitmapImage? ModIcon {
-			get => mModIcon ?? DefaultIcon;
+			get => mModIcon;
 			set {
 				mModIcon?.Freeze();
 				mModIcon = value;

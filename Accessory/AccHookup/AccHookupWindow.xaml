@@ -1014,7 +1014,8 @@
 								<Image
 									Stretch="Uniform"
 									Source="{Binding CurrentHookupItem.ModelIcon}"
-									d:Source="/Images/ModelIconPlaceholder.png" />
+									Width="256"
+									Height="64" />
 							</Viewbox>
 						</Border>
 
@@ -1326,6 +1327,8 @@
 									Width="*" />
 								<ColumnDefinition
 									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
 							</Grid.ColumnDefinitions>
 
 							<TextBlock
@@ -1378,6 +1381,17 @@
 								<Viewbox>
 									<ui:SymbolIcon
 										Symbol="Add16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonSelectSuitableFor"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonChooseSuitableFor"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="AppsList20" />
 								</Viewbox>
 							</Button>
 						</Grid>
@@ -1466,6 +1480,7 @@
 										Text="{Binding CurrentHookupItem.ConflictWith.Count, Mode=OneWay}" />
 								</TextBlock>
 								<Border
+									x:Name="BorderConflictWith"
 									Grid.Row="1"
 									Grid.ColumnSpan="2"
 									Style="{DynamicResource MultiControlBorder}" />

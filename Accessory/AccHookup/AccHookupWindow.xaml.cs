@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
@@ -28,6 +29,7 @@ public partial class AccHookupWindow: BaseWindow {
 		MenuStringRes.PlacementTarget = ButtonChooseRes;
 		MenuStringRes.DataContext = Binding;
 		MenuSuitableFor = (ContextMenu)Resources["MenuSuitableFor"];
+		MenuStringRes.PlacementTarget = ButtonSelectSuitableFor;
 
 		Binding.SuiChanged += OnSuiChanged;
 
@@ -129,6 +131,8 @@ public partial class AccHookupWindow: BaseWindow {
 		target.Focus();
 	}
 
+	private void ButtonChooseSuitableFor(object sender, RoutedEventArgs e) => MenuSuitableFor.IsOpen = true;
+
 	private void ListDataGotFocus(object sender, RoutedEventArgs e) => ShowPopupListData((TextBox)sender);
 
 	private void ListDataLostFocus(object sender, RoutedEventArgs e) => PopupListData.IsOpen = false;
@@ -165,6 +169,10 @@ public partial class AccHookupWindow: BaseWindow {
 		}
 		Binding.OpeningList = target.Name;
 		PopupListData.PlacementTarget = target;
+		if (target == TextData || target == TextSuitableFor) {
+			PopupListData.Width = BorderData.ActualWidth;
+		} else
+			PopupListData.Width = BorderConflictWith.ActualWidth;
 		PopupListData.IsOpen = true;
 	}
 

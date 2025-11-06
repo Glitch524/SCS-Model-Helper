@@ -28,6 +28,7 @@
 	<s:String x:Key="Author">Author: </s:String>
 	<s:String x:Key="CheckBoxMP">MP Mod Optional</s:String>
 	<s:String x:Key="CheckBoxMPTip">Specifies whether players can join a multiplayer game with this mod installed, even if the server or other players do not have this mod. Such mod must not affect gameplay in a way that would require all participants to have it installed.</s:String>
+	<s:String x:Key="ResultSaved">Manifest Saved</s:String>
 		<!--Icon-->
 	<s:String x:Key="TitleModIcon">MOD Icon（JPG 276x162）</s:String>
 	<s:String x:Key="IconName">Icon Filename: </s:String>
