@@ -6,6 +6,7 @@ using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Manifest;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -26,10 +27,17 @@ class AccDataIO {
 	}
 
 	private static void WriteLine(StreamWriter sw, string name, object? valueObj, object? skipValue = null) {
-		if (valueObj == skipValue || valueObj == null)
+		if (valueObj == null)
 			return;
-		if (valueObj is string s && s.Length == 0)
-			return;
+		if (valueObj is string s) {
+			if (s.Length == 0)
+				return;
+			if (skipValue != null && s == (string)skipValue)
+				return;
+		} else {
+			if (valueObj == skipValue)
+				return;
+		}
 		var isArray = IsArray(name);
 		var hasQuote = HasQuote(name);
 
@@ -143,12 +151,13 @@ class AccDataIO {
 			if (File.Exists(oldIconFile))
 				File.Delete(oldIconFile);
 		}
-		if (binding.ModIcon == null) {
-			binding.ModIcon = new BitmapImage(new("pack://application:,,,/Images/IconPlaceholder.png"));
-			binding.NewIcon = true;
-		}
 		var iconFile = Path.Combine(saveLocation, binding.IconName);
-		if (binding.NewIcon || !File.Exists(iconFile)) {
+		if (binding.ModIcon == null) {
+			if (File.Exists(iconFile))
+				File.Delete(iconFile);
+			var bitmap = new System.Drawing.Bitmap(276, 162);
+			bitmap.Save(iconFile, ImageFormat.Jpeg);
+		} else if (binding.NewIcon || !File.Exists(iconFile)) {
 			JpegBitmapEncoder encoder = new();
 			encoder.Frames.Add(BitmapFrame.Create(binding.ModIcon));
 			if (File.Exists(iconFile))
