@@ -308,12 +308,15 @@
 						Margin="0,5,0,0"
 						BorderThickness="1"
 						BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-						<Image
-							x:Name="ImageModIcon"
-							VerticalAlignment="Top"
-							Stretch="Uniform"
-							d:Height="200"
-							Source="{Binding ModIcon}" />
+						<Viewbox>
+							<Image
+								x:Name="ImageModIcon"
+								VerticalAlignment="Top"
+								Stretch="Uniform"
+								Source="{Binding ModIcon}"
+								Width="276"
+								Height="162" />
+						</Viewbox>
 					</Border>
 				</StackPanel>
 

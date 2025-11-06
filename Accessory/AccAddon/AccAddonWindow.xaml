@@ -13,7 +13,7 @@
 	mc:Ignorable="d"
 	Title="{DynamicResource TitleAccessoryAddon}"
 	Width="1235"
-	Height="800"
+	Height="850"
 	WindowStartupLocation="CenterOwner"
 	Closing="SaveOnClosing">
 	<base:BaseWindow.Resources>
@@ -852,12 +852,12 @@
 								</Style.Triggers>
 							</Style>
 						</Border.Style>
-						<Viewbox
-							StretchDirection="DownOnly">
+						<Viewbox>
 							<Image
 								Stretch="Uniform"
 								Source="{Binding ModelIcon}"
-								d:Source="/Images/ModelIconPlaceholder.png" />
+								Width="256"
+								Height="64" />
 						</Viewbox>
 					</Border>
 
