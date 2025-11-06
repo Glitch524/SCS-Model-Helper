@@ -210,8 +210,9 @@ class AccHookupBinding: BaseBinding {
 	}
 	public void AddNewData(string? data = null) {
 		AddListItem(Data, data ?? NewData);
-		if (data != null)
-			NewData = string.Empty;
+		NewData = string.Empty;
+		if (CurrentHookupItem != null)
+			CurrentHookupItem.InvokeChange(nameof(DataListContent));
 	}
 
 	public void AddNewData(PhysicsData? physicsData) {
@@ -226,26 +227,36 @@ class AccHookupBinding: BaseBinding {
 	public void AddNewSuitableFor() {
 		AddListItem(SuitableFor, NewSuitableFor);
 		NewSuitableFor = string.Empty;
+		if (CurrentHookupItem != null)
+			CurrentHookupItem.InvokeChange(nameof(SuitableForListContent));
 	}
 
 	public void AddNewConflictWith() {
 		AddListItem(ConflictWith, NewConflictWith);
 		NewConflictWith = string.Empty;
+		if (CurrentHookupItem != null)
+			CurrentHookupItem.InvokeChange(nameof(ConflictWithListContent));
 	}
 
 	public void AddNewDefaults() {
 		AddListItem(Defaults, NewDefaults);
 		NewDefaults = string.Empty;
+		if (CurrentHookupItem != null)
+			CurrentHookupItem.InvokeChange(nameof(DefaultsListContent));
 	}
 
 	public void AddNewOverrides() {
 		AddListItem(Overrides, NewOverrides);
 		NewOverrides = string.Empty;
+		if (CurrentHookupItem != null)
+			CurrentHookupItem.InvokeChange(nameof(OverridesListContent));
 	}
 
 	public void AddNewRequire() {
 		AddListItem(Require, NewRequire);
 		NewRequire = string.Empty;
+		if (CurrentHookupItem != null)
+			CurrentHookupItem.InvokeChange(nameof(RequireListContent));
 	}
 	public string DataListContent => CurrentHookupItem?.DataListContent ?? "";
 	public string SuitableForListContent => CurrentHookupItem?.SuitableForListContent ?? "";

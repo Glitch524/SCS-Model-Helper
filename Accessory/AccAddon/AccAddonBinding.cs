@@ -399,33 +399,38 @@ public class AccAddonBinding: BaseBinding {
 	}
 	public void AddNewData(string? data = null) {
 		AddListItem(Data, data ?? NewData);
-		if (data != null)
-			NewData = string.Empty;
+		NewData = string.Empty;
+		InvokeChange(nameof(DataListContent));
 	}
 
 	public void AddNewSuitableFor() {
 		AddListItem(SuitableFor, NewSuitableFor);
 		NewSuitableFor = string.Empty;
+		InvokeChange(nameof(SuitableForListContent));
 	}
 
 	public void AddNewConflictWith() {
 		AddListItem(ConflictWith, NewConflictWith);
 		NewConflictWith = string.Empty;
+		InvokeChange(nameof(ConflictWithListContent));
 	}
 
 	public void AddNewDefaults() {
 		AddListItem(Defaults, NewDefaults);
 		NewDefaults = string.Empty;
+		InvokeChange(nameof(DefaultsListContent));
 	}
 
 	public void AddNewOverrides() {
 		AddListItem(Overrides, NewOverrides);
 		NewOverrides = string.Empty;
+		InvokeChange(nameof(OverridesListContent));
 	}
 
 	public void AddNewRequire() {
 		AddListItem(Require, NewRequire);
 		NewRequire = string.Empty;
+		InvokeChange(nameof(RequireListContent));
 	}
 
 	public static void AddListItem(ObservableCollection<string> list,string newItem) {
