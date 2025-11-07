@@ -152,7 +152,7 @@ public static class AccessoryDataUtil {
 			string projectLocation = Instances.ProjectLocation;
 			if (projectLocation.Length == 0)
 				throw new(Util.GetString("MessageProjectLocationFirst"));
-			var pathAcc = Paths.AccessoryDir(projectLocation);
+			var pathAcc = Paths.AccessoryIconDir(projectLocation);
 			var fileDialog = new OpenFileDialog {
 				Multiselect = false,
 				DefaultDirectory = pathAcc,
@@ -211,7 +211,7 @@ public static class AccessoryDataUtil {
 		else if (accExist)
 			siiIconLocation = pathAcc + '\\' + matName;
 		else {
-			var accessoryLocation = Paths.AccessoryDir(projectLocation);
+			var accessoryLocation = Paths.AccessoryIconDir(projectLocation);
 			var notInAcc = !iconFile.FullName.StartsWith(accessoryLocation);
 			var atAcc = string.Equals(iconParent, pathAcc);
 
@@ -254,7 +254,7 @@ public static class AccessoryDataUtil {
 			return null;
 		var projectLocation = Instances.ProjectLocation;
 		iconName = iconName.Replace('/', '\\');
-		var iconPath = Paths.AccessoryDir(projectLocation, iconName);
+		var iconPath = Paths.AccessoryIconDir(projectLocation, iconName);
 		var iconFile = iconPath + ".tga";
 		if (File.Exists(iconFile)) 
 			return LoadModelIcon(iconFile);

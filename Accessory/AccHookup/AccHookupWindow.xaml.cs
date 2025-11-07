@@ -1,14 +1,9 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.Physics;
+﻿using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 

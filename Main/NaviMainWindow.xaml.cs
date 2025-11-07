@@ -4,6 +4,7 @@ using SCS_Mod_Helper.Accessory.AccHookup;
 using SCS_Mod_Helper.Accessory.PaintJob;
 using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Hookups;
 using SCS_Mod_Helper.Localization;
 using System.Windows;
 using Wpf.Ui.Input;
@@ -44,6 +45,9 @@ public partial class NaviMainWindow : BaseWindow
 				break;
 			case "CreatedSii":
 				window = new CreatedModelWindow();
+				break;
+			case "CreateHookupSii":
+				window = new HookupsWindow();
 				break;
 			default:
 				return;

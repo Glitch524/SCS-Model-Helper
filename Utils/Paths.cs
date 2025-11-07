@@ -19,7 +19,7 @@ class Paths {
 			Directory.CreateDirectory(dir);
 		return Path.Combine(dir, $"local_module.{moduleName}.sii");
 	}
-	public static string AccessoryDir(string projectLocation, string sub = "") {
+	public static string AccessoryIconDir(string projectLocation, string sub = "") {
 		var p =  $@"{projectLocation}\material\ui\accessory";
 		if (p.Length > 0)
 			p += $"\\{sub}";

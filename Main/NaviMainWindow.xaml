@@ -82,6 +82,11 @@
 					Icon="{ui:SymbolIcon Broom20}"
 					Command="{Binding WindowCommand}"
 					CommandParameter="CreatedSii" />
+				<ui:NavigationViewItem
+					Content="{DynamicResource TitleCreateHookupSii}"
+					Icon="{ui:SymbolIcon Wrench20}"
+					Command="{Binding WindowCommand}"
+					CommandParameter="CreateHookupSii" />
 			</ui:NavigationView.MenuItems>
 			<ui:NavigationView.FooterMenuItems>
 				<ui:NavigationViewItem

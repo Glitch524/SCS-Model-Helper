@@ -8,8 +8,6 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
