@@ -213,7 +213,9 @@ public static class AccessoryDataUtil {
 		else {
 			var accessoryLocation = Paths.AccessoryIconDir(projectLocation);
 			var notInAcc = !iconFile.FullName.StartsWith(accessoryLocation);
-			var atAcc = string.Equals(iconParent, pathAcc);
+			if (pathAcc.EndsWith('\\'))
+				pathAcc = pathAcc[..^1];
+			var atAcc = iconParent == pathAcc;
 
 			var dialog = new IconDefWIndow(notInAcc, atAcc) {
 				Owner = window
