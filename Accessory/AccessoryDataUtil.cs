@@ -76,6 +76,8 @@ public static class AccessoryDataUtil {
 					if (list != null) {
 						hasKey = true;
 						for (int j = 0; j < values.Length; j++) {
+							if (j >= list.Count)//list[j]在目前可能会报错，后续需要修改，比如将列表改成记录语言类型，有值的输出值，没有的原样输出 目前不知道为什么相同内容会不add
+								continue;
 							values[j] += list[j];
 						}
 						continue;

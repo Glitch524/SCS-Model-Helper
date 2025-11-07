@@ -84,8 +84,7 @@ public static class Instances {
 
 	public static void LocaleDictAdd(string key, string value) {
 		if (mLocaleDict!.TryGetValue(key, out List<string>? list)) {
-			if (!list.Contains(value))
-				list.Add(value);
+			list.Add(value);
 		} else {
 			list = [value];
 			mLocaleDict.Add(key, list);
