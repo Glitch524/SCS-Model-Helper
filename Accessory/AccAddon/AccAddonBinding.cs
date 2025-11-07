@@ -754,6 +754,22 @@ public class AccAddonBinding: BaseBinding {
 		}
 	}
 
+	public void LoadIcon() {
+		if (IconName.Length == 0)
+			return;
+		var iconPath = IconName;
+		if (iconPath.Contains('/'))
+			iconPath = iconPath.Replace("/", "\\");
+		iconPath = Paths.AccessoryIconDir(ProjectLocation, iconPath);
+		var fullIconPath = iconPath + ".tga";
+		if (!File.Exists(fullIconPath)) {
+			fullIconPath = iconPath + ".dds";
+			if (!File.Exists(fullIconPath))
+				return;
+		}
+		ModelIcon = AccessoryDataUtil.LoadModelIcon(fullIconPath);
+	}
+
 	public const int MODEL = 0;
 	public const int MODEL_UK = 1;
 	public const int EXT_MODEL = 2;

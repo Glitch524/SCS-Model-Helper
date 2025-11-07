@@ -571,6 +571,7 @@ namespace SCS_Mod_Helper.Accessory;
 		binding.Price = price;
 		binding.UnlockLevel = unlockLevel;
 		binding.IconName = iconName;
+		binding.LoadIcon();
 		binding.PartType = partType;
 		binding.ModelPath = modelPath;
 		binding.ModelPathUK = modelPathUK;
