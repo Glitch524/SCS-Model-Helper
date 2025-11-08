@@ -57,7 +57,7 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
-		ContextMenu cm = (ContextMenu)item.Parent ?? item.ContextMenu;
+		ContextMenu cm = (ContextMenu)item.Parent;
 		if (cm == MenuStringRes) {
 			var tag = (string)item.Tag;
 			if (tag.Equals("openLocalization")) {
@@ -65,17 +65,24 @@ public partial class AccAddonWindow: BaseWindow {
 			} else {
 				AccessoryDataUtil.ApplyStringRes(TextDisplayName, tag);
 			}
+		} else if (cm == MenuModelType) {
+			Truck truck = (Truck)cm.DataContext;
+			var type = (string)item.Tag;
+			int i;
+			if ((i = type.IndexOf('/')) == -1)
+				truck.ModelType = (string)item.Tag;
+			else if (truck.IsETS2)
+				truck.ModelType = type[..i];
+			else
+				truck.ModelType = type[(i + 1)..];
 		} else {
+			var menuName = (string)item.CommandParameter;
+			if (menuName == "MenuLook")
+				cm = MenuLook;
+			else
+				cm = MenuVariant;
 			Truck truck = (Truck)cm.DataContext;
 			if (cm == MenuModelType) {
-				var type = (string)item.Tag;
-				int i;
-				if ((i = type.IndexOf('/')) == -1) 
-					truck.ModelType = (string)item.Tag;
-				else if (truck.IsETS2)
-					truck.ModelType = type[..i];
-				else
-					truck.ModelType = type[(i + 1)..];
 			} else if (cm == MenuLook) {
 				truck.Look = (string)item.DataContext;
 			} else if (cm == MenuVariant) {

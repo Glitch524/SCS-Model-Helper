@@ -27,8 +27,8 @@
 			TargetType="MenuItem"
 			BasedOn="{StaticResource {x:Type MenuItem}}">
 			<Setter
-				Property="ContextMenu"
-				Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=.}" />
+				Property="CommandParameter"
+				Value="{Binding Path=Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}}" />
 			<Setter
 				Property="Tag"
 				Value="{Binding Path=.}" />
@@ -190,6 +190,7 @@
 		</ContextMenu>
 		<ContextMenu
 			x:Key="MenuLook"
+			Tag="MenuLook"
 			ItemContainerStyle="{StaticResource CMStyle}"
 			ItemTemplate="{StaticResource CMTemplate}">
 			<ContextMenu.Resources>
@@ -209,6 +210,7 @@
 		</ContextMenu>
 		<ContextMenu
 			x:Key="MenuVariant"
+			Tag="MenuVariant"
 			ItemContainerStyle="{StaticResource CMStyle}"
 			ItemTemplate="{StaticResource CMTemplate}" />
 
@@ -901,151 +903,162 @@
 						</ui:ToggleSwitch.Style>
 					</ui:ToggleSwitch>
 
-					<Grid
+					<StackPanel
 						Grid.Row="11"
 						Grid.ColumnSpan="3">
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="3" />
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="Auto" />
-						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
 
-						<TextBlock
-							Grid.ColumnSpan="3"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ModelFilePath}" />
-						<Border
-							Grid.Row="1"
-							Grid.Column="0"
-							Grid.ColumnSpan="3"
-							Style="{DynamicResource MultiControlBorder}" />
-						<TextBox
-							x:Name="TextModelPath"
-							Grid.Row="1"
-							Grid.Column="0"
-							Text="{Binding ModelPath, UpdateSourceTrigger=PropertyChanged}"
-							TextWrapping="Wrap"
-							MaxLines="2">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource TextBoxBorderless}">
-									<Style.Triggers>
-										<Trigger
-											Property="Text"
-											Value="">
-											<Setter
-												Property="Background"
-												Value="Yellow" />
-										</Trigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
-						</TextBox>
-						<Button
-							x:Name="ButtonChooseModelClear"
-							Grid.Row="1"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding ModelPathClearVisibility}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Dismiss16" />
-							</Viewbox>
-						</Button>
-						<Button
-							x:Name="ButtonChooseModel"
-							Grid.Row="1"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonBorderless}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Folder16" />
-							</Viewbox>
-						</Button>
-
-
-						<StackPanel
-							Grid.Row="3"
-							Grid.ColumnSpan="2"
-							Orientation="Horizontal">
 							<TextBlock
-								x:Name="TitleModelPathUK"
-								Grid.Row="0"
+								Grid.ColumnSpan="3"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ModelFilePath}" />
+							<Border
+								Grid.Row="1"
 								Grid.Column="0"
 								Grid.ColumnSpan="3"
-								TextWrapping="Wrap">
-								<Run
-									Text="{DynamicResource ModelFilePathUK}" />
-							</TextBlock>
-							<Viewbox
-								ToolTip="{DynamicResource ModelFilePathUKTip}">
-								<ui:SymbolIcon
-									Symbol="ChatWarning20" />
-							</Viewbox>
-						</StackPanel>
-						<Border
-							Grid.Row="4"
-							Grid.ColumnSpan="3"
-							Style="{DynamicResource MultiControlBorder}" />
-						<TextBox
-							x:Name="TextModelPathUK"
-							Grid.Row="4"
-							Grid.Column="0"
-							Text="{Binding ModelPathUK}"
-							TextWrapping="Wrap"
-							MaxLines="2"
-							Style="{StaticResource TextBoxBorderless}" />
-						<Button
-							x:Name="ButtonChooseModelUKClear"
-							Grid.Row="4"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding ModelPathUKClearVisibility}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Dismiss16" />
-							</Viewbox>
-						</Button>
-						<Button
-							x:Name="ButtonChooseModelUK"
-							Grid.Row="4"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonBorderless}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Folder16" />
-							</Viewbox>
-						</Button>
-					</Grid>
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextModelPath"
+								Grid.Row="1"
+								Grid.Column="0"
+								Text="{Binding ModelPath, UpdateSourceTrigger=PropertyChanged}"
+								TextWrapping="Wrap"
+								MaxLines="2">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource TextBoxBorderless}">
+										<Style.Triggers>
+											<Trigger
+												Property="Text"
+												Value="">
+												<Setter
+													Property="Background"
+													Value="Yellow" />
+											</Trigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+							<Button
+								x:Name="ButtonChooseModelClear"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding ModelPathClearVisibility}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseModel"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+						<Grid
+							Grid.Row="2"
+							Margin="0,3,0,0">
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<StackPanel
+								Grid.ColumnSpan="3"
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleModelPathUK"
+									Grid.Row="0"
+									Grid.Column="0"
+									Grid.ColumnSpan="3"
+									TextWrapping="Wrap">
+									<Run
+										Text="{DynamicResource ModelFilePathUK}" />
+								</TextBlock>
+								<Viewbox
+									ToolTip="{DynamicResource ModelFilePathUKTip}">
+									<ui:SymbolIcon
+										Symbol="ChatWarning20" />
+								</Viewbox>
+							</StackPanel>
+							<Border
+								Grid.Row="1"
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextModelPathUK"
+								Grid.Row="1"
+								Grid.Column="0"
+								Text="{Binding ModelPathUK}"
+								TextWrapping="Wrap"
+								MaxLines="2"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonChooseModelUKClear"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding ModelPathUKClearVisibility}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseModelUK"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+					</StackPanel>
 
-					<Grid
+					<StackPanel
 						Grid.Row="12"
 						Grid.ColumnSpan="3"
 						Margin="0,5,0,0">
-						<Grid.Style>
+						<StackPanel.Style>
 							<Style
-								TargetType="Grid">
+								TargetType="StackPanel">
 								<Style.Triggers>
 									<DataTrigger
 										Binding="{Binding IsChecked, ElementName=CheckExteriorPath}"
@@ -1056,113 +1069,125 @@
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>
-						</Grid.Style>
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="Auto" />
-						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition
-								Width="*" />
-							<ColumnDefinition
-								Width="Auto" />
-							<ColumnDefinition
-								Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<TextBlock
-							Grid.ColumnSpan="3"
-							TextWrapping="Wrap"
-							VerticalAlignment="Top"
-							Text="{DynamicResource ExtModelFilePath}" />
+						</StackPanel.Style>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Grid.ColumnSpan="3"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top"
+								Text="{DynamicResource ExtModelFilePath}" />
 
-						<Border
-							Grid.Row="1"
-							Grid.Column="0"
-							Grid.ColumnSpan="3"
-							Style="{DynamicResource MultiControlBorder}" />
-						<TextBox
-							x:Name="TextExtModelPath"
-							Grid.Row="1"
-							Grid.Column="0"
-							Text="{Binding ExtModelPath, UpdateSourceTrigger=PropertyChanged}"
-							TextWrapping="Wrap"
-							MaxLines="2"
-							Style="{StaticResource TextBoxBorderless}" />
-						<Button
-							x:Name="ButtonChooseExtModelClear"
-							Grid.Row="1"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding ExtModelPathClearVisibility}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Dismiss16" />
-							</Viewbox>
-						</Button>
-						<Button
-							x:Name="ButtonChooseExtModel"
-							Grid.Row="1"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonBorderless}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Folder16" />
-							</Viewbox>
-						</Button>
-
-						<TextBlock
-							x:Name="TitleExtModelPathUK"
-							Grid.Row="2"
-							Grid.ColumnSpan="3"
-							TextWrapping="Wrap">
+							<Border
+								Grid.Row="1"
+								Grid.Column="0"
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextExtModelPath"
+								Grid.Row="1"
+								Grid.Column="0"
+								Text="{Binding ExtModelPath, UpdateSourceTrigger=PropertyChanged}"
+								TextWrapping="Wrap"
+								MaxLines="2"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonChooseExtModelClear"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding ExtModelPathClearVisibility}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseExtModel"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								x:Name="TitleExtModelPathUK"
+								Grid.ColumnSpan="3"
+								TextWrapping="Wrap">
 								<Run
-								Text="{DynamicResource ExtModelFilePathUK}" />
-						</TextBlock>
+									Text="{DynamicResource ExtModelFilePathUK}" />
+							</TextBlock>
 
-						<Border
-							Grid.Row="3"
-							Grid.ColumnSpan="3"
-							Style="{DynamicResource MultiControlBorder}" />
-						<TextBox
-							x:Name="TextExtModelPathUK"
-							Grid.Row="3"
-							Grid.Column="0"
-							Text="{Binding ExtModelPathUK}"
-							TextWrapping="Wrap"
-							MaxLines="2"
-							Style="{StaticResource TextBoxBorderless}" />
-						<Button
-							x:Name="ButtonChooseExtModelUKClear"
-							Grid.Row="3"
-							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding ExtModelPathUKClearVisibility}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Dismiss16" />
-							</Viewbox>
-						</Button>
-						<Button
-							x:Name="ButtonChooseExtModelUK"
-							Grid.Row="3"
-							Grid.Column="2"
-							Click="ButtonChooseModelClick"
-							Style="{StaticResource ButtonBorderless}">
-							<Viewbox>
-								<ui:SymbolIcon
-									Symbol="Folder16" />
-							</Viewbox>
-						</Button>
-					</Grid>
+							<Border
+								Grid.Row="1"
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+							<TextBox
+								x:Name="TextExtModelPathUK"
+								Grid.Row="1"
+								Grid.Column="0"
+								Text="{Binding ExtModelPathUK}"
+								TextWrapping="Wrap"
+								MaxLines="2"
+								Style="{StaticResource TextBoxBorderless}" />
+							<Button
+								x:Name="ButtonChooseExtModelUKClear"
+								Grid.Row="1"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding ExtModelPathUKClearVisibility}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseExtModelUK"
+								Grid.Row="1"
+								Grid.Column="2"
+								Click="ButtonChooseModelClick"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+						</Grid>
+					</StackPanel>
 
 					<ui:ToggleSwitch
 						x:Name="CheckUseCollPath"
