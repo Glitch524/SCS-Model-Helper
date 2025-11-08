@@ -62,7 +62,8 @@
 				Grid.Column="2"
 				Margin="5,5,0,0"
 				Content="{DynamicResource CheckBoxSelectAll}"
-				IsChecked="{Binding SelectAll}" />
+				IsThreeState="True"
+				IsChecked="{Binding CurrentModel.SelectAll}" />
 			<Grid
 				Grid.Row="2"
 				Grid.Column="0"
@@ -160,7 +161,8 @@
 							<DataTemplate>
 								<CheckBox
 									HorizontalAlignment="Center"
-									Click="CheckBoxClick"
+									Checked="CheckBoxChecked"
+									Unchecked="CheckBoxUnchecked"
 									IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>

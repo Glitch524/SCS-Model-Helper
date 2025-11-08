@@ -95,13 +95,11 @@ public partial class CreatedModelWindow : BaseWindow
 				CreatedModelItem c = new(filePath, pathShort, truckID, modelType, modelName);
 
 				if (ModelPair.TryGetValue(modelName, out CreatedModel? createdModel)) {
-					c.Parent = createdModel;
 					Dispatcher.Invoke(new(() => {
 						createdModel.CreatedModelItems.Add(c);
 					}), System.Windows.Threading.DispatcherPriority.Render);
 				} else {
 					CreatedModel cm = new(modelName);
-					c.Parent = cm;
 					cm.CreatedModelItems.Add(c);
 					Dispatcher.Invoke(new(() => {
 						CreatedModelList.Add(cm);
@@ -116,19 +114,8 @@ public partial class CreatedModelWindow : BaseWindow
 		if (sender == ButtonDelete) {
 			var result = MessageBox.Show(this, GetString("MessageDeleteDoubleCheck"), GetString("ButtonDelete"), MessageBoxButton.YesNo);
 			if (result == MessageBoxResult.Yes) {
-				foreach (var s in selected) {
-					if (s.Check) {
-						File.Delete(s.Path);
-						var parent = s.Parent;
-						if (parent != null) {
-							parent.CreatedModelItems.Remove(s);
-							if (parent.CreatedModelItems.Count == 0)
-								CreatedModelList.Remove(parent);
-						}
-					}
-				}
+				Binding.DeleteSelected();
 			}
-			Binding.SelectAll = false;
 		} else if (sender == ButtonOpen) {
 			CreatedModelItem s = (CreatedModelItem)TableCreatedSii.SelectedItem;
 			if (s == null) {
@@ -145,17 +132,12 @@ public partial class CreatedModelWindow : BaseWindow
 		}
 	}
 
-	private readonly ObservableCollection<CreatedModelItem> selected = [];
+	private void CheckBoxChecked(object sender, RoutedEventArgs e) {
+		Binding.SelectCount++;
+	}
 
-	private void CheckBoxClick(object sender, RoutedEventArgs e) {
-		CheckBox box = (CheckBox)sender;
-		CreatedModelItem createdSii = (CreatedModelItem)box.DataContext;
-		if (createdSii.Check) {
-			if (selected.Contains(createdSii))
-				return;
-			selected.Add(createdSii);
-		} else
-			selected.Remove(createdSii);
+	private void CheckBoxUnchecked(object sender, RoutedEventArgs e) {
+		Binding.SelectCount--;
 	}
 }
 

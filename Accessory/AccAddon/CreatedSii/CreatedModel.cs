@@ -21,6 +21,35 @@ public class CreatedModel(string modelName): BaseBinding {
 			InvokeChange();
 		}
 	}
+
+	private int selectCount = 0;
+	public int SelectCount {
+		get => selectCount;
+		set {
+			selectCount = value;
+			InvokeChange(nameof(SelectAll));
+		}
+	}
+
+	public void UpdateCount() {
+		selectCount = 0;
+	}
+
+	public bool? SelectAll {
+		get {
+			if (SelectCount == CreatedModelItems.Count)
+				return true;
+			else if (SelectCount == 0)
+				return false;
+			return null;
+		}
+		set {
+			if (value == true)
+				SelectCount = createdModelItems.Count;
+			else if (value == false)
+				SelectCount = 0;
+		}
+	}
 }
 
 public class CreatedModelItem: BaseBinding {
@@ -40,8 +69,6 @@ public class CreatedModelItem: BaseBinding {
 		this.modelType = modelType;
 		this.modelName = modelName;
 	}
-
-	public CreatedModel? Parent = null;
 
 	public bool MCheck = false;
 	public bool Check {
