@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory;
@@ -26,16 +27,21 @@ class AccDataIO {
 		sw.WriteLine(NameMFHeader);
 	}
 
-	private static void WriteLine(StreamWriter sw, string name, object? valueObj, object? skipValue = null) {
+	private static void WriteLine(StreamWriter sw, string name, object? valueObj, object skipValue) {
+		if (valueObj == null)
+			return;
+		var vals = valueObj.ToString();
+		var skips = skipValue.ToString();
+		if (vals == skips)
+			return;
+		WriteLine(sw, name, valueObj);
+	}
+
+	private static void WriteLine(StreamWriter sw, string name, object? valueObj) {
 		if (valueObj == null)
 			return;
 		if (valueObj is string s) {
 			if (s.Length == 0)
-				return;
-			if (skipValue != null && s == (string)skipValue)
-				return;
-		} else {
-			if (valueObj == skipValue)
 				return;
 		}
 		var isArray = IsArray(name);
