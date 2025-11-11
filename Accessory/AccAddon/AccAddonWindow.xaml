@@ -45,6 +45,7 @@
 
 		<ContextMenu
 			x:Key="MenuStringRes"
+			Tag="MenuStringRes"
 			Placement="Top"
 			ItemsSource="{Binding StringResList}">
 			<ContextMenu.ItemContainerStyle>

@@ -58,14 +58,7 @@ public partial class AccAddonWindow: BaseWindow {
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
 		ContextMenu cm = (ContextMenu)item.Parent;
-		if (cm == MenuStringRes) {
-			var tag = (string)item.Tag;
-			if (tag.Equals("openLocalization")) {
-				AccessoryDataUtil.OpenLocalization(this);
-			} else {
-				AccessoryDataUtil.ApplyStringRes(TextDisplayName, tag);
-			}
-		} else if (cm == MenuModelType) {
+		if (cm == MenuModelType) {
 			Truck truck = (Truck)cm.DataContext;
 			var type = (string)item.Tag;
 			int i;
@@ -77,18 +70,28 @@ public partial class AccAddonWindow: BaseWindow {
 				truck.ModelType = type[(i + 1)..];
 		} else {
 			var menuName = (string)item.CommandParameter;
-			if (menuName == "MenuLook")
-				cm = MenuLook;
-			else
-				cm = MenuVariant;
-			Truck truck = (Truck)cm.DataContext;
-			if (cm == MenuModelType) {
-			} else if (cm == MenuLook) {
-				truck.Look = (string)item.DataContext;
-			} else if (cm == MenuVariant) {
-				truck.Variant = (string)item.DataContext;
-			} else
-				return;
+			cm = menuName switch {
+				"MenuStringRes" => MenuStringRes,
+				"MenuLook" => MenuLook,
+				_ => MenuVariant,
+			};
+			if (cm == MenuStringRes) {
+				var tag = (string)item.Tag;
+				if (tag.Equals("openLocalization")) {
+					AccessoryDataUtil.OpenLocalization(this);
+				} else {
+					AccessoryDataUtil.ApplyStringRes(TextDisplayName, tag);
+				}
+			} else {
+				Truck truck = (Truck)cm.DataContext;
+				if (cm == MenuModelType) {
+				} else if (cm == MenuLook) {
+					truck.Look = (string)item.DataContext;
+				} else if (cm == MenuVariant) {
+					truck.Variant = (string)item.DataContext;
+				} else
+					return;
+			}
 		}
 	}
 
