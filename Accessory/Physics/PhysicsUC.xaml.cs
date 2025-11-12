@@ -10,7 +10,6 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 	/// PhysicsToyUC.xaml 的交互逻辑
 	/// </summary>
 	public partial class PhysicsUC: UserControl {
-		private readonly PhysicsBinding Binding = new();
 
 		private static readonly DependencyProperty CurrentPhysicsItemProperty = DependencyProperty.Register(
 			"CurrentPhysicsItem",
@@ -25,6 +24,12 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 			"LocalPhysics", 
 			typeof(bool), 
 			typeof(PhysicsUC));
+		public bool LocalPhysics {
+			get => (bool)GetValue(LocalPhysicsProperty); set => SetValue(LocalPhysicsProperty, value);
+		}
+
+
+		private readonly PhysicsBinding Binding = new();
 
 		private PhysicsToyData? CurrentToyData {
 			get => Binding.CurrentToyData; set => Binding.CurrentToyData = value;
@@ -34,9 +39,6 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 			get => Binding.CurrentPatchData; set => Binding.CurrentPatchData = value;
 		}
 
-		public bool LocalPhysics {
-			get => (bool)GetValue(LocalPhysicsProperty); set => SetValue(LocalPhysicsProperty, value);
-		}
 
 		private static readonly RoutedEvent AddToDataClickEvent = EventManager.RegisterRoutedEvent(
 			"AddToDataClick",
@@ -74,6 +76,7 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 		}
 
 		private void OnLoaded(object sender, RoutedEventArgs e) {
+			Binding.LocalPhysics = LocalPhysics;
 			if (LocalPhysics) {
 				GridAngular.Visibility = Visibility.Visible;
 				GridRope.Visibility = Visibility.Visible;
@@ -106,11 +109,15 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 			MenuItem item = (MenuItem)sender;
 			ContextMenu cm = (ContextMenu)item.Parent;
 			if (cm == MenuPhysicsType) {
+				PhysicsData newPhys;
 				if (item.Name == "PhysicsToyData") {
-					Binding.PhysicsItems?.Add(new PhysicsToyData());
+					newPhys = new PhysicsToyData();
 				} else if (item.Name == "PhysicsPatchData") {
-					Binding.PhysicsItems?.Add(new PhysicsPatchData());
-				}
+					newPhys = new PhysicsPatchData();
+				} else
+					return;
+				Binding.PhysicsItems?.Add(newPhys);
+				Binding.CurrentPhysicsItem = newPhys;
 			}
 		}
 

@@ -12,6 +12,8 @@ namespace SCS_Mod_Helper.Accessory.Physics;
 class PhysicsBinding: BaseBinding {
 	public static string ProjectLocation => Instances.ProjectLocation;
 
+	public bool LocalPhysics = false;
+
 	private bool mChooseMode = false;
 	public bool ChooseMode {
 		get => mChooseMode;
@@ -34,8 +36,16 @@ class PhysicsBinding: BaseBinding {
 		}
 	}
 
-	public ObservableCollection<PhysicsData> PhysicsItems => 
-		CurrentSuiItem != null ? CurrentSuiItem.PhysicsItems : AccAppIO.PhysicsItems;
+	public ObservableCollection<PhysicsData> PhysicsItems {
+		get {
+			if (LocalPhysics)
+				return AccAppIO.PhysicsItems;
+			else if (CurrentSuiItem != null) 
+				return CurrentSuiItem.PhysicsItems;
+			else 
+				return [];
+		}
+	}
 
 	public delegate void CurrentPhysicsCallback(PhysicsData? physics);
 	public CurrentPhysicsCallback? physicsCallback = null;

@@ -36,8 +36,6 @@ class AccHookupBinding: BaseBinding {
 		get => mCurrentSuiItem;
 		set {
 			mCurrentSuiItem = value;
-			if (SuiItems.Count > 0)
-				mCurrentSuiItem = SuiItems.FirstOrDefault();//不能放在invokechange下面否则不会更新
 			InvokeChange();
 
 			InvokeChange(nameof(Hookups));

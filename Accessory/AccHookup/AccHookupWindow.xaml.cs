@@ -53,8 +53,11 @@ public partial class AccHookupWindow: BaseWindow {
 
 	private void ButtonDeleteRowClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSuiRemove) {
-			if (Binding.CurrentSuiItem != null)
+			if (Binding.CurrentSuiItem != null) {
 				Binding.SuiItems.Remove(Binding.CurrentSuiItem);
+				if (Binding.SuiItems.Count > 0) 
+					Binding.CurrentSuiItem = Binding.SuiItems.FirstOrDefault();
+			}
 		} else if (sender == ButtonToyRemove) {
 			if (Binding.CurrentHookupItem != null)
 				Binding.Hookups?.Remove(Binding.CurrentHookupItem);
