@@ -417,14 +417,18 @@ class AccDataIO {
 
 				var physicsList = new List<PhysicsData>();
 				physicsList.AddRange(binding.PhysicsList);
+				bool dataWriiten = false;
 				for (int j = 0; j < physicsList.Count; j++) {
 					var phys = physicsList[j];
 					if (pn == phys.PhysicsName) {
 						WritePhysicsData(sw, phys);
 						physicsList.RemoveAt(j);
+						dataWriiten = true;
 						break;
 					}
 				}
+				if (dataWriiten)
+					continue;
 				foreach (var physItem in AccAppIO.PhysicsItems) {
 					if (pn == physItem.PhysicsName) {
 						WritePhysicsData(sw, physItem);
