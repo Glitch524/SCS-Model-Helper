@@ -12,7 +12,14 @@ namespace SCS_Mod_Helper.Accessory.Physics;
 class PhysicsBinding: BaseBinding {
 	public static string ProjectLocation => Instances.ProjectLocation;
 
-	public bool LocalPhysics = false;
+	private bool localPhysics = false;
+	public bool LocalPhysics {
+		get => localPhysics;
+		set {
+			localPhysics = value;
+			InvokeChange(nameof(PhysicsItems));
+		}
+	}
 
 	private bool mChooseMode = false;
 	public bool ChooseMode {
