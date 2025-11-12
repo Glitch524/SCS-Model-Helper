@@ -273,9 +273,10 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 	}
 	public ObservableCollection<string>? PopupCollection => CurrentHookupItem?.PopupCollection;
 
-	public void UpdateContent() {
+	public void DeleteItem(string item) {
 		if (CurrentHookupItem == null)
 			return;
+		PopupCollection?.Remove(item);
 		switch (OpeningList) {
 			case "TextData":
 				CurrentHookupItem.InvokeChange(nameof(DataListContent));

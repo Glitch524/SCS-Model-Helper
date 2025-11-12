@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace SCS_Mod_Helper.Accessory;
@@ -15,15 +14,12 @@ public partial class ListDataUC: UserControl {
 	private void DeleteItemClick(object sender, RoutedEventArgs e) {
 		Button button = (Button)sender;
 		if (OtherList.DataContext is IListDataInterface ldi) {
-			ldi.PopupCollection?.Remove((string)button.DataContext);
-			ldi.UpdateContent();
+			ldi.DeleteItem((string)button.DataContext);
 		} else
 			return;
 	}
 }
 
 public interface IListDataInterface {
-	public ObservableCollection<string>? PopupCollection { get; }
-
-	public void UpdateContent();
+	public void DeleteItem(string item);
 }

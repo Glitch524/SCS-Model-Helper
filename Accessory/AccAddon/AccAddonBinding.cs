@@ -455,8 +455,9 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public ObservableCollection<string>? PopupCollection => AddonItem.PopupCollection;
 
-	public void UpdateContent() {
-		switch(OpeningList) {
+	public void DeleteItem(string item) {
+		PopupCollection?.Remove(item);
+		switch (OpeningList) {
 			case "TextData":
 				InvokeChange(nameof(DataListContent));
 				break;
