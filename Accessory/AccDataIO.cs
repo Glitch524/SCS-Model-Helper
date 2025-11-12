@@ -67,6 +67,8 @@ class AccDataIO {
 		} else
 			value = valueObj.ToString() ?? "";
 		sw.Write(new string('\t', TabCount));
+		if (name == NamePatchData)
+			name = NameData;
 		sw.Write(name);
 		if (isArray)
 			sw.Write("[]");
@@ -332,6 +334,7 @@ class AccDataIO {
 
 	//others
 	public const string NameData = "data";
+	public const string NamePatchData = "patch_data";
 	public const string NameSuitableFor = "suitable_for";
 	public const string NameConflictWith = "conflict_with";
 	public const string NameDefaults = "defaults";
@@ -352,10 +355,10 @@ class AccDataIO {
 		foreach (var truck in isETS2 ? binding.TrucksETS2 : binding.TrucksATS) {
 			var siiFile = Paths.SiiFile(Instances.ProjectLocation, truck.TruckID, truck.ModelType, binding.ModelName);
 			if (truck.Check) {
-				if (truck.ModelType.Length == 0 || truck.TruckID.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)
+				if (truck.ModelType.Length == 0 || truck.TruckID.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)//确保modeltype look variant 都有值，否则跳过
 					continue;
 			} else {
-				if (binding.DeleteUnchecked && File.Exists(siiFile))
+				if (binding.DeleteUnchecked && File.Exists(siiFile))//如果勾选了删除未勾选sii文件，就将未勾选但存在的sii文件删除
 					File.Delete(siiFile);
 				continue;
 			}
@@ -363,20 +366,17 @@ class AccDataIO {
 			if (!sii.Parent!.Exists)
 				sii.Parent!.Create();
 			TabCount = 0;
-			bool isPatch = truck.ModelType switch {
-				"flag_l" or
-				"flag_r" or
-				"flag_f_l" or
-				"flag_f_r" => true,
+			bool isPatch = truck.ModelType switch {//当modeltype为flag等，addon_data的标题应为accessory_addon_patch_data才能让旗子正常显示，而且填写物理模型的data并非数组，不带中括号
+				"flag_l" or "flag_r" or "flag_f_l" or "flag_f_r" => true,
 				_ => false,
 			};
 			using StreamWriter sw = new(siiFile);
 			WriteFileHeader(sw);
 			BraceIn(sw);
 			if (isPatch) {
-				WriteAAPHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);
+				WriteAAPHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);//输出标题accessory_addon_patch_data
 			} else {
-				WriteAAIHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);
+				WriteAAIHeader(sw, binding.ModelName, truck.TruckID, truck.ModelType);//输出标题accessory_addon_int_data
 			}
 			BraceIn(sw);
 			WriteLine(sw, NameDisplayName, binding.DisplayName);
@@ -402,7 +402,7 @@ class AccDataIO {
 			WriteLine(sw, NameAAHideIn, binding.HideIn, 0);
 			WriteLine(sw, NameElectricType, binding.ElectricType, "vehicle");
 
-			WriteList(sw, NameData, binding.Data);
+			WriteList(sw, isPatch ? NamePatchData : NameData, binding.Data);//如果modeltype为patch，data的key应为“data”，而非一般的“data[]”
 			WriteList(sw, NameSuitableFor, binding.SuitableFor);
 			WriteList(sw, NameConflictWith, binding.ConflictWith);
 			WriteList(sw, NameDefaults, binding.Defaults);
@@ -415,7 +415,7 @@ class AccDataIO {
 				string? pn = binding.Data[i];
 				pn = pn.EndsWith(NamePSuffix) ? pn[..^NamePSuffix.Length] : pn;
 
-				var physicsList = new List<PhysicsData>();
+				var physicsList = new List<PhysicsData>();//如果填写内容时添加过物理模型，添加的模型对象会被储存在binding的PhysicsList内，可以直接读取
 				physicsList.AddRange(binding.PhysicsList);
 				bool dataWriiten = false;
 				for (int j = 0; j < physicsList.Count; j++) {
@@ -423,7 +423,7 @@ class AccDataIO {
 					if (pn == phys.PhysicsName) {
 						WritePhysicsData(sw, phys);
 						physicsList.RemoveAt(j);
-						dataWriiten = true;
+						dataWriiten = true;//如果在physicsList找到对应物理模型，就直接用来输出，因为无法直接对外层continue，只能使用变量dataWritten在外层continue。没有dataWriiten的话会导致物理模型被输出两次。
 						break;
 					}
 				}
