@@ -544,15 +544,12 @@ class AccDataIO {
 			WriteLine(sw, NamePrice, hookup.Price);
 			WriteLine(sw, NameUnlock, hookup.UnlockLevel);
 			WriteLine(sw, NameIconName, hookup.IconName);
-			if (hookup.PartType != "unknown")
-				WriteLine(sw, NamePartType, hookup.PartType);
+			WriteLine(sw, NamePartType, hookup.PartType, "unknown");
 			WriteLine(sw, NameAHModel, hookup.ModelPath);
 			WriteLine(sw, NameCollPath, hookup.CollPath);
-			if (hookup.Look != "default")
-				WriteLine(sw, NameLook, hookup.Look);
-			if (hookup.Variant != "default")
-				WriteLine(sw, NameVariant, hookup.Variant);
-			WriteLine(sw, NameElectricType, hookup.ElectricType);
+			WriteLine(sw, NameLook, hookup.Look, "default");
+			WriteLine(sw, NameVariant, hookup.Variant, "default");
+			WriteLine(sw, NameElectricType, hookup.ElectricType, "vehicle");
 
 			WriteList(sw, NameData, hookup.Data);
 			WriteList(sw, NameSuitableFor, hookup.SuitableFor);
