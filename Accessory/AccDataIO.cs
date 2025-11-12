@@ -11,7 +11,6 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory;
