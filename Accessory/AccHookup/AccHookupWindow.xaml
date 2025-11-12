@@ -29,6 +29,7 @@
 
 		<ContextMenu
 			x:Key="MenuStringRes"
+			Tag="MenuStringRes"
 			Placement="Top"
 			ItemsSource="{Binding StringResList}">
 			<ContextMenu.ItemContainerStyle>
@@ -36,8 +37,8 @@
 					TargetType="MenuItem"
 					BasedOn="{StaticResource {x:Type MenuItem}}">
 					<Setter
-						Property="ContextMenu"
-						Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}, Path=.}" />
+						Property="CommandParameter"
+						Value="{Binding Path=Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}}" />
 					<Setter
 						Property="ToolTip"
 						Value="{Binding Tooltip}" />

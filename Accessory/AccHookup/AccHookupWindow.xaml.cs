@@ -24,7 +24,7 @@ public partial class AccHookupWindow: BaseWindow {
 		MenuStringRes.PlacementTarget = ButtonChooseRes;
 		MenuStringRes.DataContext = Binding;
 		MenuSuitableFor = (ContextMenu)Resources["MenuSuitableFor"];
-		MenuStringRes.PlacementTarget = ButtonSelectSuitableFor;
+		MenuSuitableFor.PlacementTarget = ButtonSelectSuitableFor;
 
 		Binding.SuiChanged += OnSuiChanged;
 
@@ -79,16 +79,20 @@ public partial class AccHookupWindow: BaseWindow {
 	private void OnMenuClicked(object sender, RoutedEventArgs e) {
 		MenuItem item = (MenuItem)sender;
 		ContextMenu cm = (ContextMenu)item.Parent ?? item.ContextMenu;
-		if (cm == MenuStringRes) {
-			if (item.Name.Equals("openLocalization")) {
-				AccessoryDataUtil.OpenLocalization(this);
-			} else
-				AccessoryDataUtil.ApplyStringRes(TextDisplayName, (string)item.Tag);
-		} else if (cm == MenuSuitableFor) {
+		if (cm == MenuSuitableFor) {
 			var newSF = (string)item.Tag;
 			Binding.NewSuitableFor = newSF;
 			Binding.AddNewSuitableFor();
 			TextSuitableFor.Focus();
+		} else {
+			var menuName = (string)item.CommandParameter;
+			var tag = (string)item.Tag;
+			if (menuName == "MenuStringRes") {
+				if (tag.Equals("openLocalization")) {
+					AccessoryDataUtil.OpenLocalization(this);
+				} else
+					AccessoryDataUtil.ApplyStringRes(TextDisplayName, (string)item.Tag);
+			}
 		}
 	}
 
