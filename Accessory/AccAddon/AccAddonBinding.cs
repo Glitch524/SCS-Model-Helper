@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
-public class AccAddonBinding: BaseBinding {
+public class AccAddonBinding: BaseBinding, IListDataInterface {
 	private readonly AccessoryAddonData mAddonItem = new();
 	public AccessoryAddonData AddonItem => mAddonItem;
 
@@ -454,6 +454,38 @@ public class AccAddonBinding: BaseBinding {
 	}
 
 	public ObservableCollection<string>? PopupCollection => AddonItem.PopupCollection;
+
+	public void UpdateContent() {
+		switch(OpeningList) {
+			case "TextData":
+				InvokeChange(nameof(DataListContent));
+				break;
+			case "TextSuitableFor":
+				InvokeChange(nameof(SuitableForListContent));
+				break;
+			case "TextConflictWith":
+				InvokeChange(nameof(ConflictWithListContent));
+				break;
+			case "TextDefaults":
+				InvokeChange(nameof(DefaultsListContent));
+				break;
+			case "TextOverrides":
+				InvokeChange(nameof(OverridesListContent));
+				break;
+			case "TextRequire":
+				InvokeChange(nameof(RequireListContent));
+				break;
+		}
+	}
+
+	public void UpdateAllContent() {
+		InvokeChange(nameof(DataListContent));
+		InvokeChange(nameof(SuitableForListContent));
+		InvokeChange(nameof(ConflictWithListContent));
+		InvokeChange(nameof(DefaultsListContent));
+		InvokeChange(nameof(OverridesListContent));
+		InvokeChange(nameof(RequireListContent));
+	}
 
 	public ListDataUC? ListDataUC = null;
 

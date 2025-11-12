@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-class AccHookupBinding: BaseBinding {
+class AccHookupBinding: BaseBinding, IListDataInterface {
 
 	public AccHookupBinding() { }
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -272,6 +272,32 @@ class AccHookupBinding: BaseBinding {
 		}
 	}
 	public ObservableCollection<string>? PopupCollection => CurrentHookupItem?.PopupCollection;
+
+	public void UpdateContent() {
+		if (CurrentHookupItem == null)
+			return;
+		switch (OpeningList) {
+			case "TextData":
+				CurrentHookupItem.InvokeChange(nameof(DataListContent));
+				break;
+			case "TextSuitableFor":
+				CurrentHookupItem.InvokeChange(nameof(SuitableForListContent));
+				break;
+			case "TextConflictWith":
+				CurrentHookupItem.InvokeChange(nameof(ConflictWithListContent));
+				break;
+			case "TextDefaults":
+				CurrentHookupItem.InvokeChange(nameof(DefaultsListContent));
+				break;
+			case "TextOverrides":
+				CurrentHookupItem.InvokeChange(nameof(OverridesListContent));
+				break;
+			case "TextRequire":
+				CurrentHookupItem.InvokeChange(nameof(RequireListContent));
+				break;
+		}
+		;
+	}
 
 	public static void AddListItem(ObservableCollection<string>? list, string newItem) {
 		if (list == null || newItem.Length == 0 || list.Contains(newItem))

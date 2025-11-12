@@ -1,10 +1,10 @@
 ﻿<UserControl
-	x:Class="SCS_Mod_Helper.Accessory.AccAddon.Popup.ListDataUC"
+	x:Class="SCS_Mod_Helper.Accessory.ListDataUC"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon.Popup"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	xmlns:accaddon="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon"
 	xmlns:accessory="clr-namespace:SCS_Mod_Helper.Accessory"

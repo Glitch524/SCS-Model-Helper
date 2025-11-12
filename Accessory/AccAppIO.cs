@@ -600,6 +600,7 @@ namespace SCS_Mod_Helper.Accessory;
 		ReadLists(binding.Defaults, defaultsList);
 		ReadLists(binding.Overrides, overridesList);
 		ReadLists(binding.Require, requireList);
+		binding.UpdateAllContent();
 
 		binding.SelectAllETS2 = false;
 		binding.SelectAllATS = false;
