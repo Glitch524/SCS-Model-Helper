@@ -44,6 +44,10 @@ public partial class AccHookupWindow: BaseWindow {
 			Binding.SuiItems.Add(newItem);
 			Binding.CurrentSuiItem = newItem;
 			TableSui.Focus();
+		} else if (sender == ButtonToyAdd) {
+			AccessoryHookupData newItem = new();
+			Binding.Hookups?.Add(newItem);
+			Binding.CurrentHookupItem = newItem;
 		}
 	}
 
