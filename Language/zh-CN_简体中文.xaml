@@ -459,6 +459,7 @@
 	<s:String x:Key="Acc.toyhang">挂件</s:String>
 	<s:String x:Key="Acc.toyac">空调出风口</s:String>
 	<s:String x:Key="Acc.toystand">中控台物品</s:String>
+	<s:String x:Key="Acc.toydash">仪表盘储藏物品</s:String>
 	<s:String x:Key="Acc.toyseat">座椅物品（副驾驶）</s:String>
 	<s:String x:Key="Acc.toybed">卧铺物品</s:String>
 	<s:String x:Key="Acc.toybig">地板物品</s:String>

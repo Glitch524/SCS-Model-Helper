@@ -65,6 +65,7 @@ namespace SCS_Mod_Helper.Utils {
 		public const string TypeToyHang = "toyhang";
 		public const string TypeToyAc = "toyac";
 		public const string TypeToyStand = "toystand";
+		public const string TypeToyDash = "toydash";
 		public const string TypeToySeat = "toyseat";
 		public const string TypeToyBed = "toybed";
 		public const string TypeToyBig = "toybig";
@@ -88,6 +89,7 @@ namespace SCS_Mod_Helper.Utils {
 				new(TypeToyHang),
 				new(TypeToyAc),
 				new(TypeToyStand),
+				new(TypeToyDash, false),
 				new(TypeToySeat),
 				new(TypeToyBed),
 				new(TypeToyBig),

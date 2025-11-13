@@ -458,6 +458,7 @@
 	<s:String x:Key="Acc.toyhang">Hanging Items</s:String>
 	<s:String x:Key="Acc.toyac">Air Conditioner Items</s:String>
 	<s:String x:Key="Acc.toystand">Console Items</s:String>
+	<s:String x:Key="Acc.toydash">Dashboard Storage Items</s:String>
 	<s:String x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
 	<s:String x:Key="Acc.toybed">Bed Items</s:String>
 	<s:String x:Key="Acc.toybig">Center Floor Items</s:String>
