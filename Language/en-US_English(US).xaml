@@ -415,7 +415,7 @@
 
 
 	<!--Truck Description ATS-->
-	<s:String x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
+	<x:Static x:Key="TruckDesc.freightliner.cascadia2019" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.freightliner.ecascadia">TBA</s:String>
 	<s:String x:Key="TruckDesc.intnational.9900i">EOL</s:String>

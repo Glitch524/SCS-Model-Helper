@@ -416,7 +416,7 @@
 	
 	
 	<!--卡车备注 ATS-->
-	<s:String x:Key="TruckDesc.freightliner.cascadia2019">没有toybed</s:String>
+	<x:Static x:Key="TruckDesc.freightliner.cascadia2019" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.freightliner.ecascadia">未推出</s:String>
 	<s:String x:Key="TruckDesc.intnational.9900i">停产</s:String>
