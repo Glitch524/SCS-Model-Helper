@@ -19,7 +19,7 @@ public class ModelTypeInfo: BaseBinding {
 
 	public ModelTypeInfo(
 		string acc,
-		bool? gameType = null) {
+		bool? gameType = null) {// null: both, true: ETS2, false: ATS
 		mAccessoryETS2 = acc;
 		mGameType = gameType;
 		if (gameType == null) {
