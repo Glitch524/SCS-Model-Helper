@@ -44,10 +44,10 @@ public class CreatedModel(string modelName): BaseBinding {
 			return null;
 		}
 		set {
-			if (value == true)
-				SelectCount = createdModelItems.Count;
-			else if (value == false)
-				SelectCount = 0;
+			foreach (var item in CreatedModelItems) {
+				item.Check = value == true;
+			}
+			SelectCount = value == true ? createdModelItems.Count : 0;
 		}
 	}
 }

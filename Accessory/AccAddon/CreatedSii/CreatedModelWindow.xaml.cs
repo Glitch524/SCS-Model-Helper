@@ -132,12 +132,13 @@ public partial class CreatedModelWindow : BaseWindow
 		}
 	}
 
-	private void CheckBoxChecked(object sender, RoutedEventArgs e) {
-		Binding.SelectCount++;
-	}
-
-	private void CheckBoxUnchecked(object sender, RoutedEventArgs e) {
-		Binding.SelectCount--;
+	private void CheckBoxClicked(object sender, RoutedEventArgs e) {//不使用Checked和Unchecked事件，因为切换CreatedModel时会触发Checked，导致SelectCount错误
+		if (sender is CheckBox checkBox) {
+			if (checkBox.IsChecked == true)
+				Binding.SelectCount++;
+			else
+				Binding.SelectCount--;
+		}
 	}
 }
 
