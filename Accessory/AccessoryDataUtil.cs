@@ -20,6 +20,7 @@ public static class AccessoryDataUtil {
 			return mStringResList;
 		}
 	}
+	public static void CleanStringResList() => mStringResList.Clear();
 
 	private static void SetupStringResList() {
 		StringResItem head, separator;

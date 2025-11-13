@@ -52,6 +52,7 @@ public static class Instances {
 			mProjectLocation = value;
 			Settings.Default.ProjectLocation = value;
 			Settings.Default.Save();
+			AccessoryDataUtil.CleanStringResList();
 		}
 	}
 
