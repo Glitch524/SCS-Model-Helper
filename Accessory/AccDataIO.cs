@@ -473,7 +473,7 @@ class AccDataIO {
 					case NameLook:
 						item.Look = value;
 						break;
-					case NameValue:
+					case NameVariant:
 						item.Variant = value;
 						break;
 				}
