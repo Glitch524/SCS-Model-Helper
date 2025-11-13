@@ -481,7 +481,6 @@ class AccDataIO {
 		}
 	}
 
-	private readonly static string exportPath = Instances.ProjectLocation;//"D:\\test";
 	public static void SaveAddonHookup(AccHookupBinding viewModel) {
 		MessageBox.Show(Util.GetString("MessageSaveBeforeStart"));
 		if (viewModel.StorageName.Length == 0) {
@@ -492,7 +491,7 @@ class AccDataIO {
 			MessageBox.Show(Util.GetString("MessageSaveSui0"));
 			return;
 		}
-		var StorageDir = Paths.HookupStorageDir(exportPath);
+		var StorageDir = Paths.HookupStorageDir(Instances.ProjectLocation);
 		Directory.CreateDirectory(StorageDir);
 		var storageFilename = $"{NameAHSPreffix}.{viewModel.StorageName}.sii";
 		var storageFile = Path.Combine(StorageDir, storageFilename);
@@ -537,7 +536,7 @@ class AccDataIO {
 	private const string NameAHSPreffix = "addon_hookup_storage";
 
 	public static void CreateAddonHookupSui(SuiItem sui) {
-		var suiPath = Paths.AddonHookupsDir(exportPath, sui.SuiFilename);
+		var suiPath = Paths.AddonHookupsDir(Instances.ProjectLocation, sui.SuiFilename);
 		var physicsDatas = new List<PhysicsData>();
 		physicsDatas.AddRange(sui.PhysicsItems);
 		using StreamWriter sw = new(suiPath);

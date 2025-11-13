@@ -612,6 +612,20 @@
 					<Grid
 						x:Name="ViewHookup"
 						Grid.Column="2">
+						<Grid.Style>
+							<Style
+								TargetType="Grid">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Path=SelectedIndex, ElementName=ListBoxHookup}"
+										Value="-1">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Grid.Style>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition
 								Width="*" />
