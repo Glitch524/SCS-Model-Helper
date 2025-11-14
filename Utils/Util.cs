@@ -43,6 +43,11 @@ namespace SCS_Mod_Helper.Utils {
 	}
 
 	static class Util {
+		public static string SystemLocaleForSCS() {
+			var culture = System.Globalization.CultureInfo.InstalledUICulture.Name;
+			return culture.Replace('-', '_').ToLower();
+		}
+
 		public static Window? MainWindow = null;
 		public static string GetString(string key, params object[] args) {
 			string res;

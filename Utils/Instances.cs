@@ -1,5 +1,7 @@
 ﻿using SCS_Mod_Helper.Accessory;
+using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Main;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 
@@ -52,12 +54,30 @@ public static class Instances {
 			mProjectLocation = value;
 			Settings.Default.ProjectLocation = value;
 			Settings.Default.Save();
-			AccessoryDataUtil.CleanStringResList();
+			StringResUtil.CleanStringResList();
 		}
 	}
 
 
 	private static string projectLocationOfDict = "";
+	private static ObservableCollection<LocaleModule>? localeModules = null;
+	public static ObservableCollection<LocaleModule> LocaleModules {
+		get {
+			if (localeModules == null || ProjectLocation != projectLocationOfDict) {
+				if (localeModules == null)
+					localeModules = [];
+				else
+					localeModules.Clear();
+				projectLocationOfDict = ProjectLocation;
+				AccDataIO.ReadLocaleDict(localeModules);
+			}
+			return localeModules;
+		}
+	}
+	public static void CleanLocaleModules() {
+		localeModules = null;
+		mLocaleDict = null;
+	}
 
 	private static Dictionary<string, List<string>>? mLocaleDict = null;
 	public static Dictionary<string, List<string>> LocaleDict {
@@ -69,18 +89,10 @@ public static class Instances {
 				else
 					mLocaleDict.Clear();
 				projectLocationOfDict = projectLocation;
-				AccDataIO.CheckLocaleDict(mLocaleDict);
+				StringResUtil.CheckLocaleDict(mLocaleDict);
 			}
 			return mLocaleDict;
 		}
-	}
-
-	public static void LocaleDictReset(string projectLocation) {
-		projectLocationOfDict = projectLocation;
-		if (mLocaleDict == null) {
-			mLocaleDict = [];
-		} else
-			mLocaleDict.Clear();
 	}
 
 	public static void LocaleDictAdd(string key, string value) {

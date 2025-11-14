@@ -36,7 +36,7 @@ public partial class ModLocalizationWindow : BaseWindow
     }
 
 	private void OnLoaded(object sender, RoutedEventArgs e) {
-		var task = Task.Run(() => AccDataIO.ReadLocaleDict(this, Modules));
+		var task = Task.Run(() => AccDataIO.ReadLocaleDict(Modules));
 		task.Wait();
 		Modules.CollectionChanged += ModulesCollectionChanged;
 		foreach (var module in Modules) {

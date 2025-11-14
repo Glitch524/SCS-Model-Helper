@@ -23,6 +23,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(AddonItem.IconName);
 
 		UseCollPath = CollPath.Length > 0;
+
+		UpdateOthersChecked();
 	}
 
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -32,13 +34,15 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		get => AddonItem.DisplayName;
 		set {
 			AddonItem.DisplayName = value;
+			CheckResResult = null;
 			InvokeChange();
 			InvokeChange(nameof(CheckResVisibility));
 		}
 	}
+	private string? LocalizedDisplayName = null;
 
-	private string mCheckResResult = "";
-	public string CheckResResult {
+	private string? mCheckResResult = null;
+	public string? CheckResResult {
 		get => mCheckResResult;
 		set {
 			mCheckResResult = value;
@@ -58,9 +62,11 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	public Visibility CheckResVisibility => AddonItem.CheckResVisibility;
 
 	public void CheckNameStringRes() {
-		CheckResResult = AccessoryDataUtil.GetStringResResults(DisplayName);
+		CheckResResult ??= StringResUtil.GetStringResResults(DisplayName, out LocalizedDisplayName);
 		PopupCheckOpen = true;
 	}
+
+
 
 	public string ModelName {
 		get => AddonItem.ModelName;
@@ -260,7 +266,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public static ObservableCollection<StringResItem> StringResList => AccessoryDataUtil.StringResList;
+	public static ObservableCollection<StringResItem> StringResList => StringResUtil.StringResList;
 
 	public ObservableCollection<string> LookList => AddonItem.LookList;
 	public ObservableCollection<string> VariantList => AddonItem.VariantList;
@@ -321,6 +327,27 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		} catch (Exception ex) {
 			MessageBox.Show(Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
 		}
+	}
+
+
+
+	private bool othersChecked = false;
+	public bool OthersChecked {
+		get => othersChecked;
+		set {
+			othersChecked = value;
+			InvokeChange();
+		}
+	}
+	private void UpdateOthersChecked() {
+		OthersChecked = HideIn != 0
+			|| ElectricType != "vehicle"
+			|| Data.Count > 0
+			|| SuitableFor.Count > 0
+			|| ConflictWith.Count > 0
+			|| Defaults.Count > 0
+			|| Overrides.Count > 0
+			|| Require.Count > 0;
 	}
 
 	public uint HideIn {
@@ -640,8 +667,10 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			Filter = Util.GetFilter("DialogFilterDED"),
 		};
 		if (LoadedFilename == null) {
-			if (DisplayName.Length > 0 && ModelType.Length > 0 && ModelName.Length > 0)
-				saveFileDialog.FileName = $"{DisplayName} {ModelType} {ModelName}";
+			if (LocalizedDisplayName == null) {
+				StringResUtil.GetStringResResults(DisplayName, out LocalizedDisplayName);
+			}
+			saveFileDialog.FileName = $"{LocalizedDisplayName} {ModelType} {ModelName}";
 		} else
 			saveFileDialog.FileName = LoadedFilename;
 		if (saveFileDialog.ShowDialog() == true) {
@@ -667,6 +696,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				SaveDedLocation(openFileDialog.FileName);
 				LoadedFilename = openFileDialog.SafeFileName;
 				AccAppIO.LoadAccAddon(this, openFileDialog.FileName);
+				UpdateOthersChecked();
 			}
 		} catch (Exception ex) {
 			MessageBox.Show(Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);

@@ -1013,7 +1013,8 @@ class AccDataIO {
 	private const string NameValue = "val";
 	private const string KeyGenerated = "Generated";//自动生成的键值对 用来判断locale文件是否为自动创建的文件 用户编写的文件gen为false
 
-	public static void ReadLocaleDict(Window window, ObservableCollection<LocaleModule> moduleList) {
+	public static void ReadLocaleDict(ObservableCollection<LocaleModule> moduleList) {
+		moduleList.Clear();
 		var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
 		if (!localeDir.Exists)
 			return;
@@ -1071,57 +1072,7 @@ class AccDataIO {
 							langDict.ClearDict();
 						}
 					} catch (Exception ex) {
-						MessageBox.Show(window, Util.GetString("MessageLoadErr") + "\n" + ex.Message);
-					}
-				}
-			}
-		}
-	}
-
-	public static void CheckLocaleDict(Dictionary<string, List<string>> localeDict) {
-		var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
-		if (!localeDir.Exists)
-			return;
-		List<string> generatedRead = [];
-		foreach (var dir in localeDir.GetDirectories()) {
-			foreach (var file in dir.GetFiles()) {
-				if (file.Name.StartsWith(DictPreffix)) {
-					try {
-						using StreamReader sr = new(file.FullName);
-						string? line = sr.ReadLine()?.Trim();
-						if (line == null || line != FileHeader)
-							continue;
-						string? stringKey = null;
-						while ((line = sr.ReadLine()?.Trim()) != null) {
-							if (line.Length == 0 || line == "{" || line.StartsWith("localization"))
-								continue;
-							if (line == "}")
-								break;
-							if (line.StartsWith(NameKey)) {
-								stringKey = GetContent(line);
-							} else if (line.StartsWith(NameValue)) {
-								var stringValue = GetContent(line);
-								if (stringKey == KeyGenerated) {
-									if (stringValue == bool.TrueString) {
-										if (generatedRead.Contains(file.Name)) {
-											break;
-										} else
-											generatedRead.Add(file.Name);
-									}
-								} else if (stringKey != null) {
-									List<string> valueDict;
-									if (localeDict.TryGetValue(stringKey, out List<string>? dict)) {
-										valueDict = dict;
-									} else {
-										valueDict = [];
-										localeDict.Add(stringKey, valueDict);
-									}
-									valueDict.Add(stringValue);
-									stringKey = null;
-								}
-							}
-						}
-					} catch (Exception) {
+						MessageBox.Show(Util.GetString("MessageLoadErr") + "\n" + ex.Message);
 					}
 				}
 			}
@@ -1141,7 +1092,7 @@ class AccDataIO {
 				return;
 			}
 		}
-		Instances.LocaleDictReset(projectLocation);
+		Instances.CleanLocaleModules();//mod localization更改并保存后，清理Instances内的locale字典，使用时重新加载
 		foreach (var module in moduleList) {
 			var moduleName = module.ModuleName;
 			var universal = module.UniversalDict;

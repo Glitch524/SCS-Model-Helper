@@ -54,6 +54,15 @@ public class ModLocale: Locale {
 	public readonly ObservableCollection<LocalePair> Dictionary = [];
 
 	public void AddPair(string key, string value) => Dictionary.Add(new(key, value));
+
+	public string? GetValue(string key) {
+		foreach (var pair in Dictionary) {
+			if (pair.Key == key)
+				return pair.Value;
+		}
+		return null;
+	}
+
 	public void ClearDict() => Dictionary.Clear();
 
 	public ModLocale(string localeValue, string localeDisplay) : base(localeValue, localeDisplay) {

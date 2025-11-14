@@ -78,9 +78,9 @@ public partial class AccAddonWindow: BaseWindow {
 			if (cm == MenuStringRes) {
 				var tag = (string)item.Tag;
 				if (tag.Equals("openLocalization")) {
-					AccessoryDataUtil.OpenLocalization(this);
+					StringResUtil.OpenLocalization(this);
 				} else {
-					AccessoryDataUtil.ApplyStringRes(TextDisplayName, tag);
+					StringResUtil.ApplyStringRes(TextDisplayName, tag);
 				}
 			} else {
 				Truck truck = (Truck)cm.DataContext;

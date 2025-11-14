@@ -1,5 +1,4 @@
-﻿using SCS_Mod_Helper.Accessory.AccAddon;
-using SCS_Mod_Helper.Accessory.AccAddon.Items;
+﻿using SCS_Mod_Helper.Accessory.AccAddon.Items;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
@@ -105,7 +104,7 @@ namespace SCS_Mod_Helper.Accessory {
 			}
 		}
 
-		public readonly static List<PartTypeItem> PartTypes = [
+		public static List<PartTypeItem> PartTypes => [
 			new("unknown", Util.GetString("PartTypeUnknown")),
 			new("aftermarket", Util.GetString("PartTypeAftermarket")),
 			new("factory", Util.GetString("PartTypeFactory")),

@@ -611,7 +611,8 @@
 
 					<Grid
 						x:Name="ViewHookup"
-						Grid.Column="2">
+						Grid.Column="2"
+						d:Visibility="Visible">
 						<Grid.Style>
 							<Style
 								TargetType="Grid">
@@ -1425,6 +1426,7 @@
 							Grid.ColumnSpan="3"
 							Margin="0,5,0,0"
 							d:IsChecked="true"
+							IsChecked="{Binding OthersChecked}"
 							Content="{DynamicResource Others}"
 							Padding="0,0,11,0"
 							MinHeight="0"

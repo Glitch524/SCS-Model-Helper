@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Accessory.AccAddon;
 using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Accessory.AccAddon.Popup;
 using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
@@ -26,7 +25,7 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public static ObservableCollection<StringResItem> StringResList => AccessoryDataUtil.StringResList;
+	public static ObservableCollection<StringResItem> StringResList => StringResUtil.StringResList;
 
 	public readonly ObservableCollection<SuiItem> mSuiItems = [];
 	public ObservableCollection<SuiItem> SuiItems => mSuiItems;
@@ -62,6 +61,7 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 			InvokeChange();
 
 			InvokeChange(nameof(PopupCollection));
+			UpdateOthersChecked();
 		}
 	}
 	public string ModelName {
@@ -103,7 +103,7 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 	}
 
 	public void CheckNameStringRes() {
-		CheckResResult = AccessoryDataUtil.GetStringResResults(DisplayName);
+		CheckResResult = StringResUtil.GetStringResResults(DisplayName, out _);
 		PopupCheckOpen = true;
 	}
 
@@ -147,6 +147,25 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 				InvokeChange();
 			}
 		}
+	}
+
+	private bool othersChecked = false;
+	public bool OthersChecked {
+		get => othersChecked;
+		set {
+			othersChecked = value;
+			InvokeChange();
+		}
+	}
+	private void UpdateOthersChecked() {
+			if (CurrentHookupItem == null)
+			return;
+		OthersChecked = 
+			CurrentHookupItem.ElectricType != "vehicle" || 
+			CurrentHookupItem.ConflictWith.Count > 0 || 
+			CurrentHookupItem.Defaults.Count > 0 ||
+			CurrentHookupItem.Overrides.Count > 0 ||
+			CurrentHookupItem.Require.Count > 0;
 	}
 
 	public ObservableCollection<string>? Data => CurrentHookupItem?.Data;
@@ -209,8 +228,7 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 	public void AddNewData(string? data = null) {
 		AddListItem(Data, data ?? NewData);
 		NewData = string.Empty;
-		if (CurrentHookupItem != null)
-			CurrentHookupItem.InvokeChange(nameof(DataListContent));
+		CurrentHookupItem?.InvokeChange(nameof(DataListContent));
 	}
 
 	public void AddNewData(PhysicsData? physicsData) {
@@ -225,36 +243,31 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 	public void AddNewSuitableFor() {
 		AddListItem(SuitableFor, NewSuitableFor);
 		NewSuitableFor = string.Empty;
-		if (CurrentHookupItem != null)
-			CurrentHookupItem.InvokeChange(nameof(SuitableForListContent));
+		CurrentHookupItem?.InvokeChange(nameof(SuitableForListContent));
 	}
 
 	public void AddNewConflictWith() {
 		AddListItem(ConflictWith, NewConflictWith);
 		NewConflictWith = string.Empty;
-		if (CurrentHookupItem != null)
-			CurrentHookupItem.InvokeChange(nameof(ConflictWithListContent));
+		CurrentHookupItem?.InvokeChange(nameof(ConflictWithListContent));
 	}
 
 	public void AddNewDefaults() {
 		AddListItem(Defaults, NewDefaults);
 		NewDefaults = string.Empty;
-		if (CurrentHookupItem != null)
-			CurrentHookupItem.InvokeChange(nameof(DefaultsListContent));
+		CurrentHookupItem?.InvokeChange(nameof(DefaultsListContent));
 	}
 
 	public void AddNewOverrides() {
 		AddListItem(Overrides, NewOverrides);
 		NewOverrides = string.Empty;
-		if (CurrentHookupItem != null)
-			CurrentHookupItem.InvokeChange(nameof(OverridesListContent));
+		CurrentHookupItem?.InvokeChange(nameof(OverridesListContent));
 	}
 
 	public void AddNewRequire() {
 		AddListItem(Require, NewRequire);
 		NewRequire = string.Empty;
-		if (CurrentHookupItem != null)
-			CurrentHookupItem.InvokeChange(nameof(RequireListContent));
+		CurrentHookupItem?.InvokeChange(nameof(RequireListContent));
 	}
 	public string DataListContent => CurrentHookupItem?.DataListContent ?? "";
 	public string SuitableForListContent => CurrentHookupItem?.SuitableForListContent ?? "";

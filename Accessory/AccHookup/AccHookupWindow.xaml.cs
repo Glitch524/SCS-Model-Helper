@@ -89,9 +89,9 @@ public partial class AccHookupWindow: BaseWindow {
 			var tag = (string)item.Tag;
 			if (menuName == "MenuStringRes") {
 				if (tag.Equals("openLocalization")) {
-					AccessoryDataUtil.OpenLocalization(this);
+					StringResUtil.OpenLocalization(this);
 				} else
-					AccessoryDataUtil.ApplyStringRes(TextDisplayName, (string)item.Tag);
+					StringResUtil.ApplyStringRes(TextDisplayName, (string)item.Tag);
 			}
 		}
 	}
