@@ -44,7 +44,7 @@ namespace SCS_Mod_Helper.Manifest {
 			MPOptional = false;
 			IconName = "";
 			ModIcon = null;
-			SelectedCategories.Clear();
+			ClearCategories();
 			DescriptionName = "";
 			foreach (var l in Locales) {
 				l.DescContent = "";
@@ -134,7 +134,7 @@ namespace SCS_Mod_Helper.Manifest {
 
 		public ObservableCollection<string> SelectedCategories = [];
 		public bool GetCategory(string cate) => SelectedCategories.Contains(cate);
-		private void SetCategory(bool value, string cate, [CallerMemberName] string caller = "") {
+		public void SetCategory(bool value, string cate, [CallerMemberName] string caller = "") {
 			if (value) {
 				SelectedCategories.Add(cate);
 				if(SelectedCategories.Count > 2) {
@@ -145,7 +145,13 @@ namespace SCS_Mod_Helper.Manifest {
 			} else {
 				SelectedCategories.Remove(cate);
 			}
-			InvokeChange(caller);
+			InvokeChange($"Check_{cate}");
+		}
+
+		public void ClearCategories() {
+			while(SelectedCategories.Count > 0) {
+				SetCategory(false, SelectedCategories[0]);
+			}
 		}
 
 		public bool Check_truck { get => GetCategory("truck"); set => SetCategory(value, "truck"); }

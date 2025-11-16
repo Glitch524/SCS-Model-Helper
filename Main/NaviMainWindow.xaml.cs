@@ -6,6 +6,7 @@ using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Hookups;
 using SCS_Mod_Helper.Localization;
+using System.Drawing.Imaging;
 using System.Windows;
 using Wpf.Ui.Input;
 

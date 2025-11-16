@@ -244,7 +244,8 @@ class AccDataIO {
 						binding.Author = value;
 						break;
 					case NameMFCategory:
-						binding.SelectedCategories.Add(value);
+						binding.SetCategory(true, value);
+						//binding.SelectedCategories.Add(value);
 						break;
 					case NameMFIcon:
 						binding.IconName = value;
