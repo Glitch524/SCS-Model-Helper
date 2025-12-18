@@ -11,7 +11,7 @@
 		- Search and clean created sii files
 	- Model Hookup files for model animation or compass
 	- Localization for item names
-- System settings
+- App settings
 	- App Localization: English, Simplified Chinese (Follow System by default, English if no corresponding language)
 	- Themes: Light, Dark, Follow System
 
@@ -22,15 +22,19 @@
 ---
 
 ### 包含的功能：
-- Manifest文件的创建与修改
-- Mod描述文件的创建以及多语言支持
-- 车内模型的定义：
-	- 各车型的车内模型定义sii文件的生成，支持选择车型生成
-	- 套件模型的定义与生成
-	- 物理模型的定义与生成
-	- 已生成sii文件的查看和清理
-- 模型动画绑定文件的生成
-- 文字的多语言定义的设置与文件生成
+- 软件功能
+	- Manifest文件的创建与修改
+	- Mod描述文件的创建以及多语言支持
+	- 车内模型的定义：
+		- 各车型的车内模型定义sii文件的生成，支持选择车型生成
+		- 套件模型的定义与生成
+		- 物理模型的定义与生成
+		- 已生成sii文件的查看和清理
+	- 模型动画绑定文件的生成
+	- 文字的多语言定义的设置与文件生成
+-软件设置
+	- 本地化：英语，简体中文（默认跟随系统，没有对应语言则显示英语）
+ 	- 颜色模式：浅色、深色、跟随系统
 
 ### 大概会更新的功能：
 - 车辆涂装的定义与生成
