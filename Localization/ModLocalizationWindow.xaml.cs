@@ -36,7 +36,7 @@ public partial class ModLocalizationWindow : BaseWindow
     }
 
 	private void OnLoaded(object sender, RoutedEventArgs e) {
-		var task = Task.Run(() => AccDataIO.ReadLocaleDict(Modules));
+		var task = Task.Run(() => LocaleIO.ReadLocaleDict(Modules));
 		task.Wait();
 		Modules.CollectionChanged += ModulesCollectionChanged;
 		foreach (var module in Modules) {
@@ -142,7 +142,7 @@ public partial class ModLocalizationWindow : BaseWindow
 		}
 	}
 	private void RunSave() {
-		AccDataIO.SaveLocaleDict(this, Modules, DeletedModules);
+		LocaleIO.SaveLocaleDict(this, Modules, DeletedModules);
 		HasChanges = true;
 		MessageBox.Show(this, GetString("MessageSaveSuccess"));
 	}

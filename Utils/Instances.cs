@@ -70,7 +70,7 @@ public static class Instances {
 				else
 					localeModules.Clear();
 				projectLocationOfDict = ProjectLocation;
-				AccDataIO.ReadLocaleDict(localeModules);
+				LocaleIO.ReadLocaleDict(localeModules);
 			}
 			return localeModules;
 		}

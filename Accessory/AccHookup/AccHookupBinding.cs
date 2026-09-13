@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-class AccHookupBinding: BaseBinding, IListDataInterface {
+public class AccHookupBinding: BaseBinding, IListDataInterface {
 
 	public AccHookupBinding() { }
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -321,8 +321,8 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 
 	public ListDataUC? ListDataUC = null;
 
-	public void LoadFiles() => AccDataIO.LoadAddonHookup(this);
-	public void SaveFiles(Window window) => AccDataIO.SaveAddonHookup(window, this);
+	public void LoadFiles() => AccHookupDataIO.LoadAddonHookup(this);
+	public void SaveFiles(Window window) => AccHookupDataIO.SaveAddonHookup(window, this);
 
 	//模型、碰撞体
 	public void ChooseModel(Window window, bool isColl) {

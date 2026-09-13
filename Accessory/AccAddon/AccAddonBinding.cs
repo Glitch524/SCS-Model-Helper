@@ -802,7 +802,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			} catch {
 				throw new(Util.GetString("ModelPriceErrNoNumber"));
 			}
-			var created = AccDataIO.CreateAccAddonSii(this);
+			var created = AccAddonDataIO.CreateAccAddonSii(this);
 			MessageBox.Show(window, Util.GetString(created == 0 ? "MessageCreateSiiZero" : "MessageCreateSiiResult"));
 		} catch (Exception ex) {
 			MessageBox.Show(window, ex.Message);

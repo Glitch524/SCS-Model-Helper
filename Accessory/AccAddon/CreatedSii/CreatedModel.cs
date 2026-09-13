@@ -154,7 +154,7 @@ public class CreatedModelItem: BaseBinding {
 		if (IngameName != string.Empty)
 			return;
 		Task.Run(() => {
-			AccDataIO.ReadAccAddon(this);
+			AccAddonDataIO.ReadAccAddon(this);
 			if (Look == string.Empty)
 				Look = "default";
 			if (Variant == string.Empty)

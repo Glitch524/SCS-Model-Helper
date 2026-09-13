@@ -153,7 +153,7 @@ public partial class ModManifestPage : BasePage {
 
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSave) {
-			AccDataIO.SaveManifest(Window.GetWindow(this), binding);
+			ManifestIO.SaveManifest(Window.GetWindow(this), binding);
 			MessageBox.Show(Window.GetWindow(this), GetString("ResultSaved"));
 		}
 	}

@@ -1,0 +1,188 @@
+﻿using SCS_Mod_Helper.IO;
+using SCS_Mod_Helper.Utils;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+
+namespace SCS_Mod_Helper.Localization {
+	internal class LocaleIO() : ModIO {
+		private const string NameLocHeader = "localization_db : .localization";
+		private const string DictPreffix = "local_module";
+		private const string NameKey = "key";
+		private const string NameValue = "val";
+		private const string KeyGenerated = "Generated";//自动生成的键值对 用来判断locale文件是否为自动创建的文件 用户编写的文件gen为false
+		private void WriteLocalHeader(StreamWriter sw, Action data) {
+			sw.Write(new string('\t', TabCount));
+			sw.WriteLine(NameLocHeader);
+			BraceIn(sw);
+			data();
+			BraceOut(sw);
+		}
+
+		protected override bool IsArray(string name) => name.Equals(NameKey) || name.Equals(NameValue);
+
+		protected override bool HasQuote(string name) => name.Equals(NameKey) || name.Equals(NameValue);
+
+		public static void ReadLocaleDict(ObservableCollection<LocaleModule> moduleList) {
+			moduleList.Clear();
+			var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
+			if (!localeDir.Exists)
+				return;
+			foreach (var dir in localeDir.GetDirectories()) {//地区文件夹
+				foreach (var file in dir.GetFiles()) {
+					if (file.Name.StartsWith(DictPreffix)) {
+						try {
+							string moduleName = GetContent(file.Name, '.');
+							LocaleModule? module = null;
+							foreach (var item in moduleList) {
+								if (item.ModuleName == moduleName)
+									module = item;
+							}
+							if (module == null) {
+								module = new(moduleName);
+								moduleList.Add(module);
+							}
+							if (module == null)
+								return;
+							var lang = dir.Name;
+							var langDict = module.GetLocale(lang)!;
+							using StreamReader sr = new(file.FullName);
+							string? line = sr.ReadLine()?.Trim();
+							if (line == null || line != FileHeader)
+								throw new(Util.GetString("MessageLoadErrNotLocale"));
+							string? stringKey = null;
+							bool copyToUni = false;
+							while ((line = sr.ReadLine()?.Trim()) != null) {
+								if (line.Length == 0 || line == "{" || line.StartsWith("localization"))
+									continue;
+								if (line == "}")
+									break;
+								if (line.StartsWith(NameKey)) {
+									stringKey = GetContent(line);
+								} else if (line.StartsWith(NameValue)) {
+									var stringValue = GetContent(line);
+									if (stringKey == KeyGenerated) {
+										if (stringValue == bool.TrueString) {
+											if (module.UniversalDict.Count == 0)
+												copyToUni = true;
+											else {
+												langDict.ClearDict();
+												break;
+											}
+										}
+									} else if (stringKey != null)
+										langDict.AddPair(stringKey, stringValue);
+									stringKey = null;
+								}
+							}
+							if (copyToUni) {
+								foreach (var p2 in langDict.Dictionary) {
+									module.UniversalDict.Add(new(p2.Key, p2.Value));
+								}
+								langDict.ClearDict();
+							}
+						} catch (Exception ex) {
+							MessageBox.Show(Util.GetString("MessageLoadErr") + "\n" + ex.Message);
+						}
+					}
+				}
+			}
+		}
+
+		private static string GetContent(string line, char indexValue = '"') {
+			var start = line.IndexOf(indexValue);
+			var end = line.LastIndexOf(indexValue);
+			return line[(start + 1)..end];
+		}
+
+		public static void SaveLocaleDict(Window window, ObservableCollection<LocaleModule> moduleList, ObservableCollection<LocaleModule> deletedModuleList) {
+			new LocaleIO().SaveLocaleDictInternal(window, moduleList, deletedModuleList);
+		}
+
+		public void SaveLocaleDictInternal(Window window, ObservableCollection<LocaleModule> moduleList, ObservableCollection<LocaleModule> deletedModuleList) {
+			foreach (var module in moduleList) {
+				if (module.ModuleName.Length == 0) {
+					MessageBox.Show(window, Util.GetString("MessageSaveErrNoName"));
+					return;
+				}
+			}
+			Instances.CleanLocaleModules();//mod localization更改并保存后，清理Instances内的locale字典，使用时重新加载
+			foreach (var module in moduleList) {
+				var moduleName = module.ModuleName;
+				var universal = module.UniversalDict;
+				foreach (var locale in module.LocaleList) {
+					if (locale.LocaleValue == Locale.LocaleValueUni) {
+						foreach (var pair in locale.Dictionary) {
+							Instances.LocaleDictAdd(pair.Key, pair.Value);
+						}
+						continue;
+					}
+					CreateLocaleSii(moduleName, locale, universal);
+				}
+			}
+			foreach (var module in deletedModuleList) {
+				DeleteLocaleSii(module);
+			}
+		}
+
+		private void CreateLocaleSii(string moduleName, ModLocale locale, ObservableCollection<LocalePair> universal) {
+			ObservableCollection<LocalePair> dict;
+			bool Genearated = false;
+			var localeFile = Paths.LocaleFile(Instances.ProjectLocation, locale.LocaleValue, moduleName);
+			if (locale.Dictionary.Count > 0)//如果当前字典内有值，就输出字典的值
+				dict = locale.Dictionary;
+			else if (universal.Count > 0) {//如果有通用字典，则输出通用字典内容，并将代表通用字典内容的generated设置为true
+				dict = universal;
+				Genearated = true;
+			} else {//如果通用字典为空，就删除已有locale文件
+				File.Delete(localeFile);
+				var parent = Directory.GetParent(localeFile);
+				if (parent != null && parent.GetFiles().Length == 0)
+					parent.Delete();
+				return;
+			}
+			var hasValue = false;
+			{
+				using StreamWriter sw = new(localeFile);
+				WriteFileStructure(sw, () => {
+					WriteLocalHeader(sw, () => {
+						WriteLine(sw, NameKey, KeyGenerated);
+						WriteLine(sw, NameValue, Genearated);
+						foreach (var pair in dict) {
+							if (pair.Key.Length == 0)
+								continue;
+							WriteEmptyLine(sw);
+							if (!hasValue) {
+								hasValue = true;
+							}
+							WriteLine(sw, NameKey, pair.Key);
+							WriteLine(sw, NameValue, pair.Value);
+							if (!Genearated)
+								Instances.LocaleDictAdd(pair.Key, pair.Value);
+						}
+					});
+				});
+			}
+			if (!hasValue) {
+				File.Delete(localeFile);
+				var parent = Directory.GetParent(localeFile);
+				if (parent != null && parent.GetFiles().Length == 0)
+					parent.Delete();
+			}
+		}
+
+		private static void DeleteLocaleSii(LocaleModule module) {
+			var moduleName = module.ModuleName;
+			foreach (var locale in module.LocaleList) {
+				var localeFile = Paths.LocaleFile(Instances.ProjectLocation, locale.LocaleValue, moduleName, false);
+				File.Delete(localeFile);
+				var parent = Directory.GetParent(localeFile)!;
+				if (parent.GetFiles().Length == 0)
+					parent.Delete();
+			}
+			var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
+			if (localeDir.GetDirectories().Length == 0 && localeDir.GetFiles().Length == 0)
+				localeDir.Delete();
+		}
+	}
+}

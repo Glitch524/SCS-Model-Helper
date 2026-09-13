@@ -56,7 +56,7 @@ namespace SCS_Mod_Helper.Manifest {
 			var manifest = Paths.ManifestFile(ProjectLocation);
 			if (!File.Exists(manifest))
 				return;
-			AccDataIO.LoadManifest(this);
+			ManifestIO.LoadManifest(this);
 		}
 
 		private string? CurrentProjectLocation = null;
