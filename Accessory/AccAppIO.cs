@@ -438,7 +438,7 @@ namespace SCS_Mod_Helper.Accessory;
 		BraceOut(sw);
 	}
 
-	public static void LoadAccAddon(AccAddonBinding binding, string dedFile) {
+	public static void LoadAccAddon(Window window, AccAddonBinding binding, string dedFile) {
 		using StreamReader sr = new(dedFile);
 		string? line = sr.ReadLine();
 		if (line == null || !line.StartsWith($"{FileHeader}"))
@@ -484,7 +484,7 @@ namespace SCS_Mod_Helper.Accessory;
 					var currentProjectLocation = Instances.ProjectLocation;
 					if (currentProjectLocation != read[1]) {
 						var message = Util.GetString("MessageLoadDEDDifferentProject", read[1], currentProjectLocation);
-						var result = MessageBox.Show(message, Util.GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+						var result = MessageBox.Show(window, message, Util.GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 						if (result != MessageBoxResult.Yes)
 							return;
 					}

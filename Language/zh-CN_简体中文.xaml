@@ -17,6 +17,7 @@
 	<s:String x:Key="ThemeFollowSystem">跟随系统</s:String>
 	<s:String x:Key="ThemeLight">浅色</s:String>
 	<s:String x:Key="ThemeDark">深色</s:String>
+	<s:String x:Key="MessagePixNotSet">找不到ConverterPix程序，请先在设置内设定</s:String>
 	
 	<!--MOD基本内容页-->
 	<s:String x:Key="TitleModManifest">MOD基本内容</s:String>
@@ -73,7 +74,7 @@
 	<s:String x:Key="ModelPriceErrNot0">价格不能为0，否则会不显示</s:String>
 	<s:String x:Key="ModelPriceErrNoNumber">输入的内容必须为数字</s:String>
 	<s:String x:Key="ModelUnlockLevel">解锁等级</s:String>
-	<s:String x:Key="ModelIcon">图标(TGA 256x64)</s:String>
+	<s:String x:Key="ModelIcon">图标(TGA/DDS 256x64)</s:String>
 	<s:String x:Key="PartType">部件类型</s:String>
 	<s:String x:Key="PartTypeTip">游戏中会在模型图标右上角显示对应类型（默认为未知）</s:String>
 	<s:String x:Key="ModelFilePath">模型路径（选择pim会自动改成pmd）</s:String>
@@ -209,7 +210,7 @@
 	
 	
 	<!--物理模型定义页-->
-	<s:String x:Key="TitlePhysicsToyData">设置物理模型</s:String>
+	<s:String x:Key="TitlePhysicsToyData">预设物理模型</s:String>
 	<s:String x:Key="MsgPhysics1">定义物理模型，在主体模型定义添加data并指定即可添加物理模型</s:String>
 	<s:String x:Key="MsgPhysics2">选择一个物理定义插入到模型定义中</s:String>
 	
@@ -280,7 +281,57 @@
 	<s:String x:Key="MessageErrorChooseMaterial">选择的文件必须是mat文件或其贴图，否则这么写也没用的哦</s:String>
 	
 	
+	<!--设置喷漆页-->
+	<s:String x:Key="TitleSetupPaintJob">添加喷漆</s:String>
+	<s:String x:Key="TitleTruck">卡车</s:String>
+	<s:String x:Key="TitleCabin">驾驶室</s:String>
+	<s:String x:Key="TitleBaseColor">基础颜色</s:String>
+	<s:String x:Key="ToolTipBaseColor">定义喷漆的默认颜色</s:String>
+	<s:String x:Key="TitleColorCustomizable">自定义</s:String>
+	<s:String x:Key="TooltipColorCustomizable">让玩家可自定义颜色</s:String>
+	<s:String x:Key="TitleAlternateUVSet">Alternate UV Set</s:String>
+	<s:String x:Key="TooltipAlternateUVSet">When true, the resulting material will have the altuv flavor. This triggers usage of the alternate UV layout, if configured.</s:String>
+	<s:String x:Key="TitlePaintJobTexture">喷漆贴图</s:String>
+	<s:String x:Key="TextureRequire">（TOBJ，或其代表的图片）</s:String>
+	<s:String x:Key="TooltipPaintJobTexture">用在颜色遮罩或贴图混合的贴图资源路径（.tobj）。</s:String>
+	<s:String x:Key="TitleBaseTextureOverride">覆盖基础贴图</s:String>
+	<s:String x:Key="TooltipBaseTextureOverride">定义一个纹理资源（.tobj）的路径，用来覆盖卡车喷漆材质的基础纹理。如果为空则使用默认的基础贴图。如果想要不同的高光效果，这个对覆盖基础纹理的透明通道很有用。</s:String>
 	
+	<s:String x:Key="HeaderAirbrush">喷枪模式</s:String>
+	<s:String x:Key="ExplainAirbrush">在喷枪模式内，将根据喷漆贴图的透明通道将贴图与基础颜色混合。</s:String>
+	<s:String x:Key="TitleFlipFlake">变色龙漆、鳞片涂料</s:String>
+	<s:String x:Key="TitleFlipColor">变色龙漆颜色</s:String>
+	<s:String x:Key="TooltipFlipColor">定义喷漆的变色龙漆颜色</s:String>
+	<s:String x:Key="TitleFlipStrength">变色龙漆强度</s:String>
+	<s:String x:Key="TooltipFlipStrength">定义变色龙漆效果的相对强度。</s:String>
+	<s:String x:Key="TitleFlakeColor">鳞片涂料颜色</s:String>
+	<s:String x:Key="TooltipFlakeColor">定义喷漆的鳞片涂料颜色</s:String>
+	<s:String x:Key="TitleFlakeShininess">鳞片涂料光泽度</s:String>
+	<s:String x:Key="TitleFlakeDensity">鳞片涂料集中系数</s:String>
+	<s:String x:Key="TooltipFlakeDensity">定义鳞片效果与镜面高光之间的"紧密程度"。数值越高，鳞片效果集中的区域越小；数值越低，鳞片效果分布的范围越广。</s:String>
+	<s:String x:Key="TitleFlakeClearcoatRolloff">鳞片清漆衰减</s:String>
+	<s:String x:Key="TooltipFlakeClearcoatRolloff">调节清漆镜面高光的锐度。数值越高，高光边缘越锐利。</s:String>
+	<s:String x:Key="TitleFlakeUVScale">鳞片涂料UV比例</s:String>
+	<s:String x:Key="TooltipFlakeUVScale">定义鳞片噪点贴图在一张UV图内重复的次数</s:String>
+	<s:String x:Key="TitleFlakeNoise">鳞片噪点</s:String>
+	<s:String x:Key="TooltipFlakeNoise">鳞片贴图的资源路径。RGB通道用于与鳞片颜色相乘，A通道用于对鳞片效果进行遮罩。</s:String>
+	
+	<s:String x:Key="HeaderColormask">颜色遮罩</s:String>
+	<s:String x:Key="ExplainColormask">颜色遮罩使用喷漆贴图的RGB Alpha通道进行颜色融合</s:String>
+	<s:String x:Key="ErrorColorHex">粘贴的颜色Hex格式错误</s:String>
+	<s:String x:Key="TitleMaskR">颜色遮罩（红）</s:String>
+	<s:String x:Key="TooltipMaskR">定义喷漆的颜色遮罩（红）的颜色</s:String>
+	<s:String x:Key="TitleMaskG">颜色遮罩（绿）</s:String>
+	<s:String x:Key="TooltipMaskG">定义喷漆的颜色遮罩（红）的颜色</s:String>
+	<s:String x:Key="TitleMaskB">颜色遮罩（蓝）</s:String>
+	<s:String x:Key="TooltipMaskB">定义喷漆的颜色遮罩（红）的颜色</s:String>
+	
+	<s:String x:Key="TitlePaintJobOverride">配件喷漆设置</s:String>
+	<s:String x:Key="TitleOverrides">设置</s:String>
+	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
+	<s:String x:Key="TitleAccessoryParts">配件</s:String>
+	
+	<s:String x:Key="DialogFilterTextureFile">贴图文件|*.tobj;*.dds;*.tga;*.jpg;*.jpeg;*.png</s:String>
 
 
 	<!--浏览已创建模型定义文件-->
@@ -315,6 +366,35 @@
 	<s:String x:Key="MessageCreateSuccess">文件已创建</s:String>
 
 
+	<!--Converter PIX-->
+	<s:String x:Key="TitleConverterPIX">Converter PIX</s:String>
+	<s:String x:Key="TitleModPath">Mod路径：</s:String>
+	<s:String x:Key="TitleCustomExportPath">自定义导出路径：</s:String>
+	<s:String x:Key="DialogFilterMod">"SCS Mod文件|*.scs;*.zip|所有文件|*.*"</s:String>
+	<s:String x:Key="TitleExtractFile">提取文件</s:String>
+	<s:String x:Key="TitleOpenExtractedLocation">打开提取文件位置</s:String>
+	<s:String x:Key="TitleFindAnim">寻找动画文件</s:String>
+	<s:String x:Key="TitleGlanceFile">查看文件</s:String>
+	<s:String x:Key="TitleEDF">提取并解密所有文件</s:String>
+	<s:String x:Key="TooltipEDF">除了自动生成文件</s:String>
+	<s:String x:Key="DialogMessageEDF">注意，你不能未经允许使用此工具解密他人的Mod工程用作他用</s:String>
+	<s:String x:Key="MessageGatherFiles">正在收集文件…</s:String>
+	<s:String x:Key="MessageExtractPMD">正在提取模型文件…</s:String>
+	<s:String x:Key="MessageExtractTOBJ">正在提取TOBJ文件…</s:String>
+	<s:String x:Key="MessageExtractDDS">正在提取DDS文件…</s:String>
+	<s:String x:Key="MessageExtractDEF">正在提取DEF文件…</s:String>
+	<s:String x:Key="MessageExtractMAT">正在提取MAT文件…</s:String>
+	<s:String x:Key="MessageExtractOther">正在提取其他文件…</s:String>
+	<s:String x:Key="MessageExtractDir">正在提取空白文件夹…&#10;（不知道为什么，但我就是提取了）</s:String>
+	<s:String x:Key="CurrentFilePMD">PMD文件：</s:String>
+	<s:String x:Key="CurrentFileTOBJ">TOBJ文件：</s:String>
+	<s:String x:Key="CurrentFileDDS">DDS文件：</s:String>
+	<s:String x:Key="CurrentFileDEF">DEF文件：</s:String>
+	<s:String x:Key="CurrentFileMAT">MAT文件：</s:String>
+	<s:String x:Key="CurrentFileOther">其他文件：</s:String>
+	<s:String x:Key="CurrentFileDir">文件夹：</s:String>
+	
+
 
 
 
@@ -338,12 +418,8 @@
 	<s:String x:Key="MessageSaveErrNoName">翻译文件列表中存在未命名的文件</s:String>
 	<s:String x:Key="MessageSaveSuccess">文件已保存</s:String>
 	<s:String x:Key="MessageDeleteLocale">确定是否删除此翻译文件？</s:String>
-	<s:String x:Key="MessageUniEmpty">通用翻译为空,没有定义翻译的语言可能无法正常显示，是否继续？</s:String>
-	
-	
-	<!--设置喷漆页-->
-	<s:String x:Key="TitleSetupPaintJob">添加喷漆</s:String>
-	
+	<s:String
+		x:Key="MessageUniEmpty">通用翻译为空,没有定义翻译的语言可能无法正常显示，是否继续？</s:String>
 	
 	
 	<!--关于-->
@@ -381,6 +457,7 @@
 	<s:String x:Key="ButtonOpenFile">打开文件</s:String>
 	<s:String x:Key="ButtonSelect">选定</s:String>
 	<s:String x:Key="ButtonBrowse">浏览</s:String>
+	<s:String x:Key="ButtonDontShowAgain">不再显示</s:String>
 	<s:String x:Key="CheckBoxSelectAll">全选</s:String>
 
 	<s:String x:Key="FilterAllFiles">所有文件|*.*</s:String>

@@ -47,7 +47,7 @@ public partial class AccAddonWindow: BaseWindow {
 	private void OnLoaded(object sender, RoutedEventArgs e) {
 		Task.Run(() => {
 			binding.LoadTrucks();
-			binding.LoadLooksAndVariants();
+			binding.LoadLooksAndVariants(this);
 		});
 	}
 
@@ -216,13 +216,13 @@ public partial class AccAddonWindow: BaseWindow {
 		PopupListData.IsOpen = true;
 	}
 
-	private void ButtonStartClick(object sender, RoutedEventArgs e) => binding.StartCreateSii();
+	private void ButtonStartClick(object sender, RoutedEventArgs e) => binding.StartCreateSii(this);
 
-	private void ButtonSaveClick(object sender, RoutedEventArgs e) => binding.SaveDED();
+	private void ButtonSaveClick(object sender, RoutedEventArgs e) => binding.SaveDED(this);
 
 	private void ButtonLoadClick(object sender, RoutedEventArgs e) {
-		binding.LoadDED();
-		binding.LoadLooksAndVariants();
+		binding.LoadDED(this);
+		binding.LoadLooksAndVariants(this);
 	}
 
 	private void NumberOnly(object sender, TextCompositionEventArgs e) => e.Handled = RegexNumber().IsMatch(e.Text);
@@ -248,7 +248,7 @@ public partial class AccAddonWindow: BaseWindow {
 	private void AddTruckResult(bool OK) {
 		if (OK) {
 			Truck newTruck = binding.AddTruckUC?.NewTruck!;
-			binding.AddNewTruck(newTruck);
+			binding.AddNewTruck(this, newTruck);
 		}
 		PopupAddTruck.IsOpen = false;
 	}

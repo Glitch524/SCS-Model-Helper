@@ -95,8 +95,7 @@
 				DisplayMemberPath="ThemeName"
 				ItemsSource="{Binding ThemeList}" />
 		</ui:CardControl>
-		<ui:CardControl
-			Visibility="Collapsed">
+		<ui:CardControl>
 			<ui:CardControl.Header>
 				<StackPanel
 					Orientation="Horizontal"
@@ -117,9 +116,11 @@
 					</ui:TextBlock>
 					<Label
 						VerticalContentAlignment="Center"
-						Margin="10,0,0,0">
+						Margin="10,0,0,0"
+						FontWeight="Bold">
 						<Run
-							Text="{Binding ConverterPixPath}" />
+							Text="{Binding ConverterPixPath}"
+							d:Text="Test Path" />
 					</Label>
 				</StackPanel>
 			</ui:CardControl.Header>

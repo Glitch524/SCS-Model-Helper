@@ -1,18 +1,12 @@
 ﻿using SCS_Mod_Helper.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SCS_Mod_Helper.Utils;
+using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SCS_Mod_Helper.Accessory.PaintJob
 {
@@ -21,25 +15,243 @@ namespace SCS_Mod_Helper.Accessory.PaintJob
     /// </summary>
     public partial class PaintJobWindow : BaseWindow
     {
-        public PaintJobWindow()
+		private readonly PaintJobBinding binding = new();
+
+		private readonly ContextMenu MenuStringRes;
+		public PaintJobWindow()
         {
             InitializeComponent();
+
+			GridMain.DataContext = binding;
+
+			MenuStringRes = (ContextMenu)Resources["MenuStringRes"];
+			MenuStringRes.PlacementTarget = ButtonChooseRes;
+			MenuStringRes.DataContext = binding;
+		}
+
+		public static Color ColorMask(
+		Color baseColor,
+		Color paintJobColor,
+		Color maskR,
+		Color maskG,
+		Color maskB) {
+			float remain = 1f;
+
+			float percentR = paintJobColor.R / 255f;
+			float percentG = paintJobColor.G / 255f;
+			float percentB = paintJobColor.B / 255f;
+			Debug.WriteLine($"pjFloat = {paintJobColor.R}={percentR}%, {paintJobColor.G}={percentG}%, {paintJobColor.B}={percentB}%");
+
+			float percent = percentR;
+			remain -= percent;
+
+			Color colorR = Color.FromRgb(
+				(byte) (percent * maskR.R), 
+				(byte) (percent * maskR.G), 
+				(byte) (percent * maskR.B));
+			Debug.WriteLine($"blendR={colorR} percent={percent}");
+
+
+			percent = percentG * remain;
+			remain -= percent;
+
+			Color colorG = Color.FromRgb(
+				(byte) (percent * maskG.R), 
+				(byte) (percent * maskG.G), 
+				(byte) (percent * maskG.B));
+			Debug.WriteLine($"blendG={colorG} percent={percent}");
+
+
+			percent = percentB * remain;
+			remain -= percent;
+
+			Color colorB = Color.FromRgb(
+				(byte) (percent * maskB.R), 
+				(byte) (percent * maskB.G), 
+				(byte) (percent * maskB.B));
+			Debug.WriteLine($"blendB={colorB} percent={percent}");
+
+			Color colorBase = Color.FromRgb(
+				(byte) (remain * baseColor.R), 
+				(byte) (remain * baseColor.G), 
+				(byte) (remain * baseColor.B));
+
+			Color result = Color.FromRgb(
+				(byte) (colorR.R + colorG.R + colorB.R + colorBase.R), 
+				(byte) (colorR.G + colorG.G + colorB.G + colorBase.G), 
+				(byte) (colorR.B + colorG.B + colorB.B + colorBase.B));
+
+			return result;
+		}
+
+		private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			var answer = MessageBox.Show(this, $"Selected Tab: {((TabItem)((TabControl)sender).SelectedItem).Header}");
+			Debug.WriteLine($"Selected Tab: {((TabItem)((TabControl)sender).SelectedItem).Header} answer={answer}");
+		}
+
+
+		private void OnMenuClicked(object sender, RoutedEventArgs e) {
+			MenuItem item = (MenuItem)sender;
+			ContextMenu cm = (ContextMenu)item.Parent;
+			if (cm == MenuStringRes) {
+				var menuName = (string)item.CommandParameter;
+				cm = menuName switch {
+					"MenuStringRes" => MenuStringRes,
+					_ => throw new NotImplementedException(),
+				};
+				if (cm == MenuStringRes) {
+					var tag = (string)item.Tag;
+					if (tag.Equals("openLocalization")) {
+						StringResUtil.OpenLocalization(this);
+					} else {
+						StringResUtil.ApplyStringRes(TextDisplayName, tag);
+					}
+				}
+			}
+		}
+
+
+
+
+
+		private void NumberOnly(object sender, TextCompositionEventArgs e) => TextControl.NumberOnly(sender, e);
+
+		private void FloatOnly(object sender, TextCompositionEventArgs e) => TextControl.FloatOnly(sender, e);
+
+		private void HexCheck(object sender, TextCompositionEventArgs e) {
+			if (sender is TextBox textBox) {
+				if (textBox.Text.Length >= 6 && textBox.SelectionLength == 0) {
+					e.Handled = true;
+					return;
+				}
+				char c = e.Text[0];
+				if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')) {
+					e.Handled = false;
+				} else
+					e.Handled = true;
+			}
+		}
+
+		private void OnPasted(object sender, DataObjectPastingEventArgs e) {
+			if (sender is TextBox textBox) {
+				if (e.DataObject.GetDataPresent(DataFormats.UnicodeText)) {
+					string pasted = (string)e.DataObject.GetData(DataFormats.UnicodeText);
+					if (pasted.StartsWith('#'))
+						pasted = pasted[1..];
+					if (pasted.Length > 8) {
+						e.CancelCommand();
+						FlyoutWrongHex.Show();
+					}
+					pasted = pasted.ToUpper();
+					for (int i =0; i < pasted.Length; i ++) {
+						char c = pasted[i];
+						if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')) {
+							continue;
+						} else {
+							e.CancelCommand();
+							FlyoutWrongHex.Show();
+							return;
+						}
+					}
+					e.CancelCommand();
+					if (pasted.Length > 6) {
+						pasted = pasted[^6..];
+					} else
+						pasted = pasted.PadLeft(6, '0');
+					textBox.Text = pasted;
+					textBox.SelectionStart = 0;
+					textBox.SelectionLength = pasted.Length;
+				}
+			}
+		}
+
+		private void ButtonChooseTruck(object sender, RoutedEventArgs e) {
+
         }
-    }
+
+		private void CheckStringRes(object sender, RoutedEventArgs e) => binding.CheckNameStringRes();
+		private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
+
+		private void ButtonChooseIcon(object sender, RoutedEventArgs e) => binding.ChooseIcon(this);
+
+		private void ButtonChooseColor(object sender, RoutedEventArgs e) {
+			PopupColorPicker.PlacementTarget = (UIElement)sender;
+			PopupColorPicker.IsOpen = true;
+			if (sender == ButtonBaseColor) {
+
+			} else if (sender == ButtonFlipColor) {
+
+			} else if (sender == ButtonFlakeColor) {
+
+			} else if (sender == ButtonMaskR) {
+
+			} else if (sender == ButtonMaskG) {
+
+			} else if (sender == ButtonMaskB) {
+
+			}
+		}
+
+		private void ButtonClearClick(object sender, RoutedEventArgs e) {
+			if (sender == ButtonIconNameClear) {
+				binding.IconName = "";
+				binding.ModelIcon = null;
+			} else if (sender == ButtonPaintJobTexClear) {
+				binding.PaintJobTex = "";
+				binding.PaintJobTexImage = null;
+			} else if (sender == ButtonBaseTexOverrideClear) {
+				binding.BaseTexOverride = "";
+			} else if (sender == ButtonFlakeNoiseClear) {
+				binding.FlakeNoise = AccessoryPaintJobData.DefaultFlakeNoise;
+			} else if (sender == ButtonAccTexClear) {
+				binding.AccTex = "";
+				binding.AccTexImage = null;
+			}
+		}
+
+		private void ButtonChooseTextureClick(object sender, RoutedEventArgs e) {
+			int type;
+			if (sender == ButtonPaintJob) {
+				type = PaintJobBinding.TEX_PAINT_JOB;
+			} else if (sender == ButtonBaseTexOverride) {
+				type = PaintJobBinding.TEX_BASE_TEX_OVR;
+			} else if (sender == ButtonChooseFlakeNoise) {
+				type = PaintJobBinding.TEX_FLAKE_NOISE;
+			} else if (sender == ButtonChooseAccTex) {
+				type = PaintJobBinding.TEX_ACC_TEX;
+			} else { return; }
+			binding.ChooseTex(this, type);
+		}
+
+		private void FileDrop(object sender, DragEventArgs e) {
+
+		}
+
+		private void ButtonAddRowClick(object sender, RoutedEventArgs e) {
+			if (sender == ButtonOvrAdd) {
+				int size = binding.OverrideList.Count;
+				string ovrName = ".ovr" + size;
+				PaintJobOverrideData overrideData = new(ovrName);
+				binding.OverrideList.Add(overrideData);
+			} else if (sender == ButtonPartAdd) {
+
+			}
+		}
+
+		private void ButtonDeleteRowClick(object sender, RoutedEventArgs e) {
+			if (sender == ButtonOvrRemove) {
+				int selectedIndex;
+				while((selectedIndex = ListOverrides.SelectedIndex) != -1) {
+					binding.OverrideList.RemoveAt(selectedIndex);
+				}
+			} else if (sender == ButtonPartRemove) {
+				int selectedIndex;
+				while ((selectedIndex = ListAccList.SelectedIndex) != -1) {
+					binding.AccList.RemoveAt(selectedIndex);
+				}
+			}
+		}
+	}
 }
 
 
-//Let's try to encode via sRGB Transformations manually...
-
-//We have color 235.
-//Let f denote a fractional (from the word "float") number.
-
-//We encode "directly" (according to the upper formula).
-//f = 235 / 255 = 0.92156862745098039215686274509804.
-//The number f turned out to be greater than 0.04045, so we consider this: ((f + 0.055) / 1.055) and then raise it to the power of 2.4.
-//We get: 0.83076987677465456326680486629645.That is as in def.
-
-//We encode "inversely" (according to the lower formula).
-//Number f = 0.8307 (taken from def).
-//We have a number f greater than 0.0031308, so we consider this: we raise f to the power (1/2.4), then multiply by 1.055, then subtract 0.055.
-//We get: 0.92153440159716157976920448100598.Multiplying it by 255, we get 234.99127240727620284114714265653, i.e., rounded up, 235.

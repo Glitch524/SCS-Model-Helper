@@ -100,7 +100,7 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 				if (physics == null)
 					return;
 				AccAppIO.AddPhysicsToList(physics);
-				MessageBox.Show(Util.GetString("MessageResultPhysSaved"));
+				MessageBox.Show(Window.GetWindow(this), Util.GetString("MessageResultPhysSaved"));
 			}
 		}
 
@@ -133,7 +133,7 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 			try {
 				Binding.ChooseModel(sender == ButtonChoosePhysicsColl);
 			} catch (Exception ex) {
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(Window.GetWindow(this), ex.Message);
 			}
 		}
 
@@ -158,9 +158,9 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 
 		private void ButtonInstanceOffsetClicked(object sender, RoutedEventArgs e) {
 			if (sender == ButtonInstanceOffsetAdd) {
-				CurrentToyData?.AddMenuInstanceOffset();
+				CurrentToyData?.AddMenuInstanceOffset(Window.GetWindow(this));
 			} else if (sender == ButtonInstanceOffsetRemove) {
-				CurrentToyData?.RemoveMenuInstanceOffset();
+				CurrentToyData?.RemoveMenuInstanceOffset(Window.GetWindow(this));
 			} else if (sender == ButtonInstanceOffsetList) {
 				if (MenuInstanceOffset != null)
 					MenuInstanceOffset.IsOpen = true;
@@ -179,7 +179,7 @@ namespace SCS_Mod_Helper.Accessory.Physics {
 						PatchMaterial = mat;
 				}
 			} catch (Exception ex) {
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(Window.GetWindow(this), ex.Message);
 			}
 		}
 	}

@@ -4,9 +4,11 @@ using SCS_Mod_Helper.Accessory.AccHookup;
 using SCS_Mod_Helper.Accessory.PaintJob;
 using SCS_Mod_Helper.Accessory.Physics;
 using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.ConverterPix;
 using SCS_Mod_Helper.Hookups;
 using SCS_Mod_Helper.Localization;
-using System.Drawing.Imaging;
+using SCS_Mod_Helper.Utils;
+using System.IO;
 using System.Windows;
 using Wpf.Ui.Input;
 
@@ -49,6 +51,29 @@ public partial class NaviMainWindow : BaseWindow
 				break;
 			case "CreateHookupSii":
 				window = new HookupsWindow();
+				break;
+			case "ConverterPIX":
+				string pixPath = Instances.ConverterPixPath;
+				if (string.IsNullOrEmpty(pixPath) || !File.Exists(pixPath)) {
+					var result = MessageBox.Show(GetString("MessagePixNotSet"),GetString("MessageTitleNotice"));
+					if (result == MessageBoxResult.OK) {
+						Navigation.Navigate("Settings");
+					}
+					return;
+				}
+				if (Settings.Default.ConverterPixNotice) {
+					ConverterNoticeBox notice = new() {
+						Owner = this
+					};
+					if (notice.ShowDialog() == true) {
+						if (notice.DontShowAgain) {
+							Settings.Default.ConverterPixNotice = false;
+							Settings.Default.Save();
+						}
+					} else
+						return;
+				}
+				window = new ConverterPixWindow();
 				break;
 			default:
 				return;

@@ -12,6 +12,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Windows.UI;
 
 namespace SCS_Mod_Helper.Accessory;
 
@@ -142,9 +143,9 @@ class AccDataIO {
 	private const string NameMFIcon = "icon";
 	private const string NameMFDescriptionFile = "description_file";
 	private const string NameMFMPOptional = "mp_mod_optional";
-	public static void SaveManifest(ManifestBinding binding) {
+	public static void SaveManifest(Window window, ManifestBinding binding) {
 		if (Util.IsEmpty(binding.ProjectLocation, binding.ModDisplayName, binding.DescriptionName)) {
-			MessageBox.Show(Util.GetString("MessageManifestNotFilled"));
+			MessageBox.Show(window, Util.GetString("MessageManifestNotFilled"));
 			return;
 		}
 
@@ -482,14 +483,14 @@ class AccDataIO {
 		}
 	}
 
-	public static void SaveAddonHookup(AccHookupBinding viewModel) {
+	public static void SaveAddonHookup(Window window, AccHookupBinding viewModel) {
 		MessageBox.Show(Util.GetString("MessageSaveBeforeStart"));
 		if (viewModel.StorageName.Length == 0) {
-			MessageBox.Show(Util.GetString("MessageSaveNoName"));
+			MessageBox.Show(window, Util.GetString("MessageSaveNoName"));
 			return;
 		}
 		if (viewModel.SuiItems.Count == 0) {
-			MessageBox.Show(Util.GetString("MessageSaveSui0"));
+			MessageBox.Show(window, Util.GetString("MessageSaveSui0"));
 			return;
 		}
 		var StorageDir = Paths.HookupStorageDir(Instances.ProjectLocation);
@@ -505,7 +506,7 @@ class AccDataIO {
 			WriteInclude(sw, viewModel);
 			BraceOut(sw);
 		}
-		MessageBox.Show(Util.GetString("MessageSaved"));
+		MessageBox.Show(window, Util.GetString("MessageSaved"));
 	}
 
 	private static void WriteStorageTips(StreamWriter sw) {
@@ -1086,10 +1087,10 @@ class AccDataIO {
 		return line[(start + 1)..end];
 	}
 
-	public static void SaveLocaleDict(string projectLocation, ObservableCollection<LocaleModule> moduleList, ObservableCollection<LocaleModule> deletedModuleList) {
+	public static void SaveLocaleDict(Window window, ObservableCollection<LocaleModule> moduleList, ObservableCollection<LocaleModule> deletedModuleList) {
 		foreach (var module in moduleList) {
 			if (module.ModuleName.Length == 0) {
-				MessageBox.Show(Util.GetString("MessageSaveErrNoName"));
+				MessageBox.Show(window, Util.GetString("MessageSaveErrNoName"));
 				return;
 			}
 		}

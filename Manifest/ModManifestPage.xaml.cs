@@ -70,7 +70,7 @@ public partial class ModManifestPage : BasePage {
 					ExecuteLoad();
 					return;
 				}
-				var result = MessageBox.Show(GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				var result = MessageBox.Show(Window.GetWindow(this), GetString("MessageNoManifest"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.Yes) {
 					ExecuteLoad();
 				}
@@ -93,13 +93,13 @@ public partial class ModManifestPage : BasePage {
 					binding.ModIcon = Util.LoadIcon(ofd.FileName);
 					binding.NewIcon = true;
 				} else {
-					var result = MessageBox.Show(GetString("MessageIconErrWrongSize"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+					var result = MessageBox.Show(Window.GetWindow(this), GetString("MessageIconErrWrongSize"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 					if (result == MessageBoxResult.Yes)
 						Process.Start("explorer.exe", "/select," + ofd.FileName);
 				}
 			} catch (Exception ex) {
 				if (ex.Message.Equals("Parameter is not valid."))
-					MessageBox.Show(GetString("MessageIconErrNotValidImage"));
+					MessageBox.Show(Window.GetWindow(this), GetString("MessageIconErrNotValidImage"));
 			}
 		}
 	}
@@ -127,10 +127,10 @@ public partial class ModManifestPage : BasePage {
 		if (sender is Button button) {
 			DescLocale locale = (DescLocale)button.DataContext;
 			if (locale.LocaleValue.Equals(Locale.LocaleValueUni)) {
-				MessageBox.Show(GetString("MessageDeleteLocaleErrUni"));
+				MessageBox.Show(Window.GetWindow(this), GetString("MessageDeleteLocaleErrUni"));
 				return;
 			} else {
-				var result = MessageBox.Show(GetString("MessageDeleteLocaleDoubleCheck"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				var result = MessageBox.Show(Window.GetWindow(this), GetString("MessageDeleteLocaleDoubleCheck"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.Yes) {
 					locale.DescContent = "";
 				}
@@ -143,7 +143,7 @@ public partial class ModManifestPage : BasePage {
 			if (CurrentLocale.LocaleValue.Equals(Locale.LocaleValueUni))
 				return;
 			if (DescContent.Length > 0) {
-				var result = MessageBox.Show(GetString("MessageCopyDescNotEmpty"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				var result = MessageBox.Show(Window.GetWindow(this), GetString("MessageCopyDescNotEmpty"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.No)
 					return;
 			}
@@ -153,8 +153,8 @@ public partial class ModManifestPage : BasePage {
 
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonSave) {
-			AccDataIO.SaveManifest(binding);
-			MessageBox.Show(GetString("ResultSaved"));
+			AccDataIO.SaveManifest(Window.GetWindow(this), binding);
+			MessageBox.Show(Window.GetWindow(this), GetString("ResultSaved"));
 		}
 	}
 

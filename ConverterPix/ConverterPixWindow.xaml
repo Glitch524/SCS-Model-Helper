@@ -1,0 +1,344 @@
+﻿<base:BaseWindow
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.ConverterPix"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	d:DataContext="{d:DesignInstance Type=local:ConverterPixBinding}"
+	x:Class="SCS_Mod_Helper.ConverterPix.ConverterPixWindow"
+	ExtendsContentIntoTitleBar="True"
+	mc:Ignorable="d"
+	Title="{DynamicResource TitleConverterPix}"
+	WindowStartupLocation="CenterOwner"
+	Height="600"
+	Width="900">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+		</Grid.RowDefinitions>
+		<ui:TitleBar
+			Title="{DynamicResource TitleConverterPIX}" />
+		<Grid
+			x:Name="GridMain"
+			Margin="10"
+			Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="5" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="*" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					TextWrapping="Wrap"
+					Text="{DynamicResource TitleModPath}"
+					VerticalAlignment="Center" />
+				<TextBox
+					x:Name="BoxFile"
+					Grid.Column="1"
+					Text="{Binding PackPath}" />
+				<Button
+					x:Name="ButtonChooseFile"
+					Content="{DynamicResource ButtonBrowse}"
+					Grid.Column="2"
+					Click="ButtonChoosePack"
+					Padding="10,5"
+					Margin="5,0,0,0" />
+			</Grid>
+			<Grid 
+				Grid.Row="1"
+				Margin="0,5,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<CheckBox
+					x:Name="CheckBoxCustomExportPath"
+					Grid.Column="0"
+					Content="{DynamicResource TitleCustomExportPath}"
+					IsChecked="{Binding CustomDestPath}"
+					FontSize="12" />
+				<TextBox
+					Grid.Column="1"
+					Text="{Binding DestPath}"
+					Cursor="">
+					<TextBox.Style>
+						<Style
+							TargetType="TextBox"
+							BasedOn="{StaticResource {x:Type TextBox}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding IsChecked, ElementName=CheckBoxCustomExportPath}"
+									Value="False">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</TextBox.Style>
+				</TextBox>
+				<Button
+					x:Name="ButtonChooseDest"
+					Content="{DynamicResource ButtonBrowse}"
+					Grid.Column="2"
+					Click="ButtonChooseDestClick"
+					Padding="10,5"
+					Margin="5,0,0,0"
+					Cursor="">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding IsChecked, ElementName=CheckBoxCustomExportPath}" 
+									Value="False">
+									<Setter
+										Property="Visibility"
+										Value="Collapsed" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</Grid>
+
+			<Border
+				Grid.Row="3"
+				BorderThickness="1"
+				BorderBrush="LightGray" />
+
+			<Grid
+				Grid.Row="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<Rectangle
+					Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
+				<Button
+					x:Name="ButtonBack"
+					Click="ButtonBackClick"
+					ToolTip="Go Back"
+					Background="{x:Null}"
+					BorderBrush="{x:Null}"
+					VerticalAlignment="Stretch"
+					HorizontalAlignment="Stretch">
+					<Viewbox
+						Stretch="UniformToFill">
+						<ui:SymbolIcon
+							Symbol="ArrowUp20"
+							FontSize="20" />
+					</Viewbox>
+				</Button>
+
+				<ui:BreadcrumbBar
+					Margin="5"
+					Grid.Column="1"
+					d:ItemsSource="{d:SampleData ItemCount=2}"
+					ItemsSource="{Binding DirList}"
+					ItemClicked="BreadcrumbBarItemClicked"
+					MinHeight="20">
+					<ui:BreadcrumbBar.ItemTemplate>
+						<DataTemplate>
+							<TextBlock
+								Text="{Binding Title}"
+								ToolTip="{Binding Title}" />
+						</DataTemplate>
+					</ui:BreadcrumbBar.ItemTemplate>
+				</ui:BreadcrumbBar>
+			</Grid>
+
+			<Border
+				Grid.Row="4"
+				BorderThickness="1"
+				BorderBrush="LightGray" />
+
+			<ListBox
+				x:Name="ListFiles"
+				Grid.Row="4"
+				d:ItemsSource="{d:SampleData ItemCount=2}"
+				ItemsSource="{Binding FileList}"
+				SelectedItem="{Binding SelectedFile}"
+				SelectionMode="Single"
+				KeyDown="ListBoxKeyDown">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid
+							Margin="0,5">
+							<Grid.InputBindings>
+								<MouseBinding
+									Command="{Binding DataContext.OpenFileCommand, 
+								RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+									CommandParameter="{Binding}"
+									MouseAction="LeftDoubleClick" />
+							</Grid.InputBindings>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="5" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Rectangle
+								Grid.RowSpan="2"
+								Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
+							<Viewbox
+								Grid.RowSpan="2"
+								Stretch="Uniform">
+								<ui:SymbolIcon>
+									<ui:SymbolIcon.Style>
+										<Style
+											TargetType="ui:SymbolIcon">
+											<Setter
+												Property="Symbol"
+												Value="Document20" />
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding IsDir}"
+													Value="True">
+													<Setter
+														Property="Symbol"
+														Value="Folder20" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</ui:SymbolIcon.Style>
+								</ui:SymbolIcon>
+							</Viewbox>
+							<TextBlock
+								Text="{Binding Title}"
+								ToolTip="{Binding Title}"
+								Grid.Column="2"
+								FontSize="13">
+								<TextBlock.Style>
+									<Style
+										TargetType="TextBlock"
+										BasedOn="{StaticResource {x:Type TextBlock}}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+												Value="True">
+												<Setter
+													Property="Foreground"
+													Value="White" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+							<TextBlock
+								Text="{Binding Subtitle}"
+								Grid.Column="2"
+								Grid.Row="1"
+								Margin="0,5,0,0">
+								<TextBlock.Style>
+									<Style
+										TargetType="TextBlock"
+										BasedOn="{StaticResource {x:Type TextBlock}}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+												Value="True">
+												<Setter
+													Property="Foreground"
+													Value="White" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+			<Grid
+				Grid.Row="5"
+				Margin="0,5"
+				IsEnabled="{Binding PathSet}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<Button
+					Grid.Column="0"
+					Content="{DynamicResource TitleExtractFile}"
+					Padding="10,5"
+					Click="ButtonExtractFileClick" />
+				<CheckBox
+					Grid.Column="1"
+					Content="{DynamicResource TitleOpenExtractedLocation}"
+					IsChecked="{Binding OpenExtracted}"
+					Padding="10,5"
+					Margin="5,0,0,0" />
+				<CheckBox
+					Grid.Column="2"
+					Content="{DynamicResource TitleFindAnim}"
+					IsChecked="{Binding SearchAnim}"
+					Padding="10,5"
+					Margin="5,0,0,0" />
+				<Button
+					Grid.Column="3"
+					Content="{DynamicResource TitleGlanceFile}"
+					Padding="10,5"
+					Click="ButtonShowFileClick" />
+
+				<Button
+					Grid.Column="5"
+					Content="{DynamicResource TitleEDF}"
+					ToolTip="{DynamicResource TooltipEDF}"
+					Padding="10,5"
+					Click="ButtonEDF">
+				</Button>
+			</Grid>
+		</Grid>
+	</Grid>
+	
+</base:BaseWindow>

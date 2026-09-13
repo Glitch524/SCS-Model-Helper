@@ -7,16 +7,16 @@
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Main"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-	xmlns:aa="clr-namespace:SCS_Mod_Helper.Accessory.AccAddon"
 	xmlns:manifest="clr-namespace:SCS_Mod_Helper.Manifest"
 	xmlns:localization="clr-namespace:SCS_Mod_Helper.Localization"
 	d:DataContext="{d:DesignInstance Type=local:MainWindowBinding}"
-	Loaded="NaviMainWindowLoaded"
 	mc:Ignorable="d"
+	Loaded="NaviMainWindowLoaded"
 	Title="SCS Model Helper"
 	Height="700"
 	Width="1200"
-	ExtendsContentIntoTitleBar="True">
+	ExtendsContentIntoTitleBar="True"
+	Style="{DynamicResource BaseWindowStyle}">
 	<Grid
 		x:Name="GridMain">
 		<Grid.RowDefinitions>
@@ -41,16 +41,10 @@
 			OpenPaneLength="200">
 			<ui:NavigationView.MenuItems>
 				<ui:NavigationViewItem
-					Content="Home"
-					Icon="{ui:SymbolIcon Home16}"
-					TargetPageType="{x:Type local:AboutPage}"
-					TargetPageTag="MainPage"
-					Visibility="Collapsed"/>
-				<ui:NavigationViewItem
 					Content="{DynamicResource TitleModManifest}"
 					Icon="{ui:SymbolIcon DocumentEdit20}"
 					TargetPageType="{x:Type manifest:ModManifestPage}"
-					TargetPageTag="ModManifest" />
+					TargetPageTag="ModManifest"/>
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleAccessoryAddon}"
 					Icon="{ui:SymbolIcon Chess20}"
@@ -74,7 +68,6 @@
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleSetupPaintJob}"
 					Icon="{ui:SymbolIcon PaintBrush20}"
-					Visibility="Collapsed"
 					Command="{Binding WindowCommand}"
 					CommandParameter="PaintJob" />
 				<ui:NavigationViewItem
@@ -87,6 +80,12 @@
 					Icon="{ui:SymbolIcon Wrench20}"
 					Command="{Binding WindowCommand}"
 					CommandParameter="CreateHookupSii" />
+				<ui:NavigationViewItem
+					Content="{DynamicResource TitleConverterPIX}"
+					Icon="{ui:SymbolIcon BoxSearch20}"
+					Command="{Binding WindowCommand}"
+					CommandParameter="ConverterPIX"
+					Cursor="Hand" />
 			</ui:NavigationView.MenuItems>
 			<ui:NavigationView.FooterMenuItems>
 				<ui:NavigationViewItem

@@ -8,6 +8,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SCS_Mod_Helper.Main; 
 /// <summary>
@@ -31,15 +32,22 @@ public partial class SettingsPage: BasePage {
 			var psi = new ProcessStartInfo(Paths.LanguageDir()) { UseShellExecute = true };
 			Process.Start(psi);
 		} else if (sender == ButtonConverterPix) {
+			string start = binding.ConverterPixPath;
+			if (start.Length == 0) {
+				start = "";
+			} else {
+				start = new DirectoryInfo(start).Parent?.FullName ?? "";
+			}
 			var fileDialog = new OpenFileDialog {
-				Multiselect = false,
-				DefaultExt = "converter_pix.exe",
-				Title = GetString("ConverterPixPath"),
-				Filter = Util.GetFilter("FilterCPix")
-			};
+					Multiselect = false,
+					InitialDirectory = start,
+					DefaultExt = "converter_pix.exe",
+					Title = GetString("ConverterPixPath"),
+					Filter = Util.GetFilter("FilterCPix")
+				};
 			if (fileDialog.ShowDialog() == true) {
 				if (fileDialog.SafeFileName != "converter_pix.exe") {
-					MessageBox.Show("MessageErrNotCPix");
+					MessageBox.Show(Window.GetWindow(this), "MessageErrNotCPix");
 					return;
 				}
 				var path = fileDialog.FileName;
@@ -80,7 +88,7 @@ public partial class SettingsPage: BasePage {
 	}
 }
 
-public class SettingsBinding: BaseBinding {
+public class SettingsBinding(): BaseBinding {
 
 	private readonly ObservableCollection<LanguageItem> mLanguages = [];
 	public ObservableCollection<LanguageItem> Languages => mLanguages;

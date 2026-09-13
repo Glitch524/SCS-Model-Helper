@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using Windows.UI;
 
 namespace SCS_Mod_Helper.Accessory.Physics
 {
@@ -318,22 +319,22 @@ namespace SCS_Mod_Helper.Accessory.Physics
 			return offset;
 		}
 
-		public void AddMenuInstanceOffset() {
+		public void AddMenuInstanceOffset(Window window) {
 			var offset = OffsetAction((i) => {
-				MessageBox.Show("已有相同的值，offset不会新增入数组中");
+				MessageBox.Show(window, "已有相同的值，offset不会新增入数组中");
 			});
 			if (offset != null) {
 				InstanceOffsetList?.Add(offset);
 				MenuInstanceOffset.Items.Add(NewMenuItem(offset));
-				MessageBox.Show("offset已新增入数组中");
+				MessageBox.Show(window, "offset已新增入数组中");
 			}
 		}
 
-		public void RemoveMenuInstanceOffset() {
+		public void RemoveMenuInstanceOffset(Window window) {
 			OffsetAction((i) => {
 				InstanceOffsetList?.RemoveAt(i);
 				MenuInstanceOffset.Items.RemoveAt(i);
-				MessageBox.Show("已将offset值从数组中删除");
+				MessageBox.Show(window, "已将offset值从数组中删除");
 			});
 		}
 

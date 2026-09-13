@@ -4,6 +4,7 @@ using SCS_Mod_Helper.Main;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using Wpf.Ui.Appearance;
 
 namespace SCS_Mod_Helper.Utils; 
 public static class Instances {
@@ -127,7 +128,7 @@ class DictionaryUtil {
 	}
 
 	public static void SetupDictionary() {
-		if (langs.Count == 0 || themes.Count == 0) {
+		if (langs.Count == 0 && themes.Count == 0) {
 			CollectDictionaries();
 			var langDir = new DirectoryInfo(Paths.LanguageDir());
 			if (langDir.Exists) {
@@ -168,11 +169,11 @@ class DictionaryUtil {
 			theme = GetSystemTheme();
 		switch (theme) {
 			case "Light":
-				Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
+				ApplicationThemeManager.Apply(ApplicationTheme.Light);
 				UpdateThemeDict(theme);
 				break;
 			case "Dark":
-				Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
+				ApplicationThemeManager.Apply(ApplicationTheme.Dark);
 				UpdateThemeDict(theme);
 				break;
 		}
@@ -188,7 +189,7 @@ class DictionaryUtil {
 	}
 
 	public static string GetSystemTheme() {
-		Wpf.Ui.Appearance.SystemThemeManager.UpdateSystemThemeCache();
+		SystemThemeManager.UpdateSystemThemeCache();
 		return Wpf.Ui.Appearance.SystemThemeManager.GetCachedSystemTheme().ToString();
 	}
 }

@@ -7,29 +7,2555 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Accessory.PaintJob"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+	xmlns:h="http://helix-toolkit.org/wpf"
+	xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+	d:DataContext="{d:DesignInstance Type=local:PaintJobBinding}"
 	ExtendsContentIntoTitleBar="True"
 	mc:Ignorable="d"
-	d:DesignHeight="450"
-	d:DesignWidth="800"
-	Title="PaintJobWindow">
-	<Grid>
+	Width="1060"
+	MinHeight="690"
+	Title="{DynamicResource TitleSetupPaintJob}">
+	<base:BaseWindow.Resources>
+		<Style
+			x:Key="CMStyle"
+			TargetType="MenuItem"
+			BasedOn="{StaticResource {x:Type MenuItem}}">
+			<Setter
+				Property="CommandParameter"
+				Value="{Binding Path=Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}}" />
+			<Setter
+				Property="Tag"
+				Value="{Binding Path=.}" />
+			<EventSetter
+				Event="Click"
+				Handler="OnMenuClicked" />
+		</Style>
+		<DataTemplate
+			x:Key="CMTemplate">
+			<TextBlock
+				Text="{Binding Path=.}" />
+		</DataTemplate>
+
+		<ContextMenu
+			x:Key="MenuStringRes"
+			Tag="MenuStringRes"
+			Placement="Top"
+			ItemsSource="{Binding StringResList}">
+			<ContextMenu.ItemContainerStyle>
+				<Style
+					TargetType="MenuItem"
+					BasedOn="{StaticResource CMStyle}">
+					<Setter
+						Property="ToolTip"
+						Value="{Binding Tooltip}" />
+					<Setter
+						Property="ToolTipService.InitialShowDelay"
+						Value="100" />
+					<Setter
+						Property="Tag"
+						Value="{Binding Tag}" />
+					<Setter
+						Property="IsEnabled"
+						Value="{Binding IsEnabled}" />
+				</Style>
+			</ContextMenu.ItemContainerStyle>
+			<ContextMenu.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<TextBlock
+							Text="{Binding Header}"
+							Visibility="{Binding TextBlockVisibility}" />
+						<Separator
+							Height="1"
+							Visibility="{Binding SeparatorVisibility}" />
+					</Grid>
+				</DataTemplate>
+			</ContextMenu.ItemTemplate>
+		</ContextMenu>
+
+		<Style
+			x:Key="TextBoxBorderless"
+			TargetType="TextBox"
+			BasedOn="{StaticResource {x:Type TextBox}}">
+			<Setter
+				Property="Padding"
+				Value="5,3" />
+			<Setter
+				Property="Background"
+				Value="{x:Null}" />
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
+			<Setter
+				Property="VerticalContentAlignment"
+				Value="Center" />
+		</Style>
+		<Style
+			x:Key="ComboBoxBorderless"
+			TargetType="ComboBox"
+			BasedOn="{StaticResource {x:Type ComboBox}}">
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
+			<Setter
+				Property="VerticalContentAlignment"
+				Value="Center" />
+		</Style>
+		<Style
+			x:Key="ButtonBorderless"
+			TargetType="Button"
+			BasedOn="{StaticResource {x:Type Button}}">
+			<Setter
+				Property="Padding"
+				Value="2" />
+			<Setter
+				Property="VerticalAlignment"
+				Value="Top" />
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
+			<Setter
+				Property="Width"
+				Value="{Binding ActualHeight, ElementName=TextModelName}" />
+			<Setter
+				Property="Height"
+				Value="{Binding ActualHeight, ElementName=TextModelName}" />
+		</Style>
+		<Style
+			x:Key="CateCheckBox"
+			TargetType="CheckBox"
+			BasedOn="{StaticResource {x:Type CheckBox}}">
+			<Setter
+				Property="MinHeight"
+				Value="25" />
+			<Setter
+				Property="HorizontalAlignment"
+				Value="Stretch" />
+		</Style>
+	</base:BaseWindow.Resources>
+	<Grid
+		x:Name="GridMain">
 		<Grid.RowDefinitions>
 			<RowDefinition
 				Height="Auto" />
 			<RowDefinition
-				Height="*" />
+				Height="91*" />
+			<RowDefinition
+				Height="118*" />
 		</Grid.RowDefinitions>
 		<ui:TitleBar
-			Title="PaintJobWindow" />
+			Title="{DynamicResource TitleSetupPaintJob}"
+			VerticalAlignment="Center" />
+		<Popup
+			x:Name="PopupColorPicker"
+			PopupAnimation="Slide"
+			AllowsTransparency="True">
+			<Grid
+				Background="White">
+				<Border
+					Style="{DynamicResource PopupBorder}" />
+				<colorpicker:StandardColorPicker
+					Width="40"
+					Height="40"
+					Foreground="White" 
+					Style="{StaticResource ColorPickerStyle}"/>
+
+			</Grid>
+		</Popup>
+		
 		<Grid
-			Grid.Row="1">
+			x:Name="GridBasicData"
+			Grid.Row="1"
+			Margin="10,10,10,10"
+			Grid.RowSpan="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*"
+					MaxWidth="200" />
+			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition
-					Height="*" />
+					Height="Auto" />
+				<RowDefinition
+					Height="5" />
 				<RowDefinition
 					Height="Auto" />
+				<RowDefinition
+					Height="5" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="5" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="5" />
+				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
+					Height="15" />
+				<RowDefinition
+					Height="*" />
 			</Grid.RowDefinitions>
 
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					x:Name="TitleModelName"
+					TextWrapping="Wrap"
+					Text="{DynamicResource ModelName}"
+					VerticalAlignment="Bottom" />
+				<Border
+					Grid.Column="1"
+					ToolTip="{DynamicResource ModelNameTip}"
+					Width="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}"
+					Height="{Binding ActualHeight, ElementName=TitleModelName, Mode=OneWay}"
+					HorizontalAlignment="Left">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="ChatWarning20" />
+					</Viewbox>
+				</Border>
+				<TextBox
+					x:Name="TextModelName"
+					Grid.Row="1"
+					Grid.ColumnSpan="2"
+					TextWrapping="Wrap"
+					MaxLines="1"
+					Text="{Binding ModelName, UpdateSourceTrigger=PropertyChanged}"
+					VerticalAlignment="Top">
+					<TextBox.Style>
+						<Style
+							TargetType="TextBox"
+							BasedOn="{StaticResource {x:Type TextBox}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding NameOver12}"
+									Value="True">
+									<Setter
+										Property="Foreground"
+										Value="Red" />
+								</DataTrigger>
+								<Trigger
+									Property="Text"
+									Value="">
+									<Setter
+										Property="Background"
+										Value="Yellow" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</TextBox.Style>
+				</TextBox>
+			</Grid>
+			<StackPanel
+				Grid.Column="2">
+				<TextBlock
+					TextWrapping="Wrap"
+					VerticalAlignment="Bottom"
+					Text="{DynamicResource TitleTruck}" />
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBox
+						Text="{Binding SuitableForListContent, Mode=OneWay}"
+						MaxLines="1"
+						TextWrapping="Wrap"
+						IsEnabled="True"
+						Style="{StaticResource TextBoxBorderless}">
+					</TextBox>
+					<Button
+						Grid.Column="2"
+						Style="{StaticResource ButtonBorderless}"
+						Click="ButtonChooseTruck">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="VehicleTruckProfile20" />
+						</Viewbox>
+					</Button>
+					<Border
+						Grid.ColumnSpan="3"
+						Style="{DynamicResource MultiControlBorder}" />
+				</Grid>
+			</StackPanel>
+			<StackPanel
+				Grid.Column="4"
+				VerticalAlignment="Bottom">
+				<TextBlock
+					TextWrapping="Wrap"
+					VerticalAlignment="Top"
+					Text="{DynamicResource TitleCabin}" />
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBox
+						Text="{Binding SuitableForListContent, Mode=OneWay}"
+						MaxLines="1"
+						TextWrapping="Wrap"
+						IsEnabled="True"
+						Style="{StaticResource TextBoxBorderless}"
+						Cursor="IBeam">
+					</TextBox>
+					<Button
+						Grid.Column="2"
+						Style="{StaticResource ButtonBorderless}"
+						Click="ButtonChooseTruck">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="VehicleTruckProfile20" />
+						</Viewbox>
+					</Button>
+					<Border
+						Grid.ColumnSpan="3"
+						Style="{DynamicResource MultiControlBorder}" />
+				</Grid>
+			</StackPanel>
+			<Grid
+				Grid.Column="6">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					TextWrapping="Wrap"
+					VerticalAlignment="Bottom"
+					Text="{DynamicResource PartType}" />
+				<Border
+					Grid.Column="1"
+					ToolTip="{DynamicResource PartTypeTip}"
+					Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}"
+					HorizontalAlignment="Left">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="ChatWarning20" />
+					</Viewbox>
+				</Border>
+				<ComboBox
+					x:Name="TextPartType"
+					Grid.Row="1"
+					Grid.ColumnSpan="2"
+					DisplayMemberPath="PartTypeDisplay"
+					SelectedValuePath="PartTypeValue"
+					SelectedValue="{Binding PartType}"
+					ItemsSource="{Binding PartTypes}"
+					IsEditable="True"
+					IsReadOnly="true" />
+			</Grid>
+
+
+			<Grid
+				Grid.Row="2"
+				Grid.ColumnSpan="3">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
+						Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBlock
+					Grid.ColumnSpan="3"
+					TextWrapping="Wrap"
+					VerticalAlignment="Top"
+					Text="{DynamicResource ModelDisplayName}" />
+				<TextBox
+					x:Name="TextDisplayName"
+					Grid.Row="1"
+					Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
+					TextWrapping="Wrap">
+					<TextBox.Style>
+						<Style
+							TargetType="TextBox"
+							BasedOn="{StaticResource TextBoxBorderless}">
+							<Style.Triggers>
+								<Trigger
+									Property="Text"
+									Value="">
+									<Setter
+										Property="Background"
+										Value="Yellow" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</TextBox.Style>
+				</TextBox>
+				<Button
+					x:Name="ButtonCheckRes"
+					Grid.Row="1"
+					Grid.Column="1"
+					Click="CheckStringRes"
+					Visibility="{Binding CheckResVisibility}"
+					Style="{StaticResource ButtonBorderless}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Search16" />
+					</Viewbox>
+				</Button>
+				<Popup
+					x:Name="PopupCheckRes"
+					PlacementTarget="{Binding ElementName=ButtonCheckRes}"
+					PopupAnimation="Slide"
+					AllowsTransparency="True"
+					IsOpen="{Binding PopupCheckOpen}"
+					StaysOpen="False">
+					<Grid>
+						<Border
+							Style="{DynamicResource PopupBorder}" />
+						<StackPanel
+							Margin="10">
+							<TextBlock>
+												<Run
+									Text="{DynamicResource CheckResResult}" />
+							</TextBlock>
+							<Border
+								Margin="0,10"
+								Style="{DynamicResource SpliterBorder}" />
+							<TextBlock
+								Text="{Binding CheckResResult}" />
+							<Border
+								Margin="0,10"
+								Style="{DynamicResource SpliterBorder}" />
+							<TextBlock>
+											<Run
+									Text="{DynamicResource CheckResResultTips}" />
+							</TextBlock>
+						</StackPanel>
+					</Grid>
+				</Popup>
+				<Button
+					x:Name="ButtonChooseRes"
+					Grid.Row="1"
+					Grid.Column="2"
+					Click="ChooseStringRes"
+					Style="{StaticResource ButtonBorderless}"
+					Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Translate16" />
+					</Viewbox>
+				</Button>
+				<Border
+					Grid.Row="1"
+					Grid.ColumnSpan="3"
+					Style="{DynamicResource MultiControlBorder}" />
+			</Grid>
+			<StackPanel
+				x:Name="PanelIconName"
+				Grid.Row="2"
+				Grid.Column="4"
+				VerticalAlignment="Top">
+				<StackPanel
+					Orientation="Horizontal">
+					<TextBlock
+						x:Name="TitleIconName"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top"
+						Text="{DynamicResource ModelIcon}" />
+					<Border
+						ToolTip="{DynamicResource ModelIconTip}"
+						Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="ChatWarning20" />
+						</Viewbox>
+					</Border>
+				</StackPanel>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBox
+						x:Name="TextIconName"
+						Text="{Binding IconName}"
+						MaxLines="1"
+						TextWrapping="Wrap"
+						AllowDrop="True"
+						Drop="FileDrop">
+						<TextBox.Style>
+							<Style
+								TargetType="TextBox"
+								BasedOn="{StaticResource TextBoxBorderless}">
+								<Style.Triggers>
+									<Trigger
+										Property="Text"
+										Value="">
+										<Setter
+											Property="Background"
+											Value="Yellow" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</TextBox.Style>
+					</TextBox>
+					<Button
+						x:Name="ButtonIconNameClear"
+						Grid.Column="1"
+						Click="ButtonClearClick"
+						Style="{StaticResource ButtonBorderless}"
+						Visibility="{Binding IconNameClearVisibility}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Dismiss16" />
+						</Viewbox>
+					</Button>
+					<Button
+						x:Name="ButtonIconName"
+						Grid.Column="2"
+						Click="ButtonChooseIcon"
+						AllowDrop="True"
+						Drop="FileDrop"
+						Style="{StaticResource ButtonBorderless}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Folder16" />
+						</Viewbox>
+					</Button>
+					<Border
+						Grid.ColumnSpan="3"
+						Style="{DynamicResource MultiControlBorder}" />
+				</Grid>
+			</StackPanel>
+			<Border
+				Grid.Row="2"
+				Grid.Column="6"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Center"
+				d:Visibility="Visible"
+				d:Background="LightBlue"
+				Height="{Binding ActualHeight, ElementName=PanelIconName, Mode=OneWay}">
+				<Border.Style>
+					<Style
+						TargetType="Border"
+						BasedOn="{StaticResource MultiControlBorder}">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding ModelIcon}"
+								Value="{x:Null}">
+								<Setter
+									Property="Visibility"
+									Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Border.Style>
+				<Viewbox>
+					<Image
+						Stretch="Uniform"
+						Source="{Binding ModelIcon}"
+						Width="256"
+						Height="64" />
+				</Viewbox>
+			</Border>
+
+
+			<StackPanel
+				Grid.Row="4">
+				<TextBlock
+					TextWrapping="Wrap"
+					VerticalAlignment="Top"
+					Text="{DynamicResource ModelPrice}" />
+				<TextBox
+					x:Name="TextPrice"
+					Text="{Binding Price}"
+					MaxLines="1"
+					PreviewTextInput="NumberOnly"
+					TextWrapping="Wrap"
+					VerticalAlignment="Top">
+					<TextBox.Style>
+						<Style
+							TargetType="TextBox"
+							BasedOn="{StaticResource {x:Type TextBox}}">
+							<Style.Triggers>
+								<Trigger
+									Property="Text"
+									Value="">
+									<Setter
+										Property="Background"
+										Value="Yellow" />
+								</Trigger>
+								<Trigger
+									Property="Text"
+									Value="0">
+									<Setter
+										Property="Background"
+										Value="Red" />
+									<Setter
+										Property="ToolTip"
+										Value="{DynamicResource ModelPriceErrNot0}" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</TextBox.Style>
+				</TextBox>
+			</StackPanel>
+			<StackPanel
+				Grid.Row="4"
+				Grid.Column="2">
+				<TextBlock
+					TextWrapping="Wrap"
+					VerticalAlignment="Top">
+								<Run
+						Language="zh-cn"
+						Text="{DynamicResource ModelUnlockLevel}" />
+				</TextBlock>
+				<TextBox
+					x:Name="TextUnlockLevel"
+					Text="{Binding UnlockLevel}"
+					MaxLines="1"
+					PreviewTextInput="NumberOnly"
+					TextWrapping="Wrap"
+					VerticalAlignment="Top">
+					<TextBox.Style>
+						<Style
+							TargetType="TextBox"
+							BasedOn="{StaticResource {x:Type TextBox}}">
+							<Style.Triggers>
+								<Trigger
+									Property="Text"
+									Value="">
+									<Setter
+										Property="Background"
+										Value="Yellow" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</TextBox.Style>
+				</TextBox>
+			</StackPanel>
+
+			<StackPanel
+				Grid.Row="6"
+				VerticalAlignment="Top">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						x:Name="TitleBaseColor"
+						ToolTip="{DynamicResource ToolTipBaseColor}"
+						TextWrapping="Wrap"
+						VerticalAlignment="Bottom"
+						Text="{DynamicResource TitleBaseColor}" />
+					<Border
+						Grid.Column="1"
+						ToolTip="{DynamicResource ToolTipBaseColor}"
+						Height="{Binding ActualHeight, ElementName=TitleBaseColor, Mode=OneWay}"
+						VerticalAlignment="Bottom">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="ChatWarning20" />
+						</Viewbox>
+					</Border>
+
+					<CheckBox
+						Grid.Column="3"
+						Content="{DynamicResource TitleColorCustomizable}"
+						IsChecked="{Binding BaseColorCustomizable}"
+						ToolTip="{DynamicResource TooltipColorCustomizable}" />
+				</Grid>
+				<Grid
+					Height="{Binding ActualHeight, ElementName=TextPaintJobTex, Mode=OneWay}">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Border
+						d:Background="Blue"
+						Background="{Binding BaseColorVisual}"
+						Style="{DynamicResource MultiControlBorder}" />
+					<Button
+						x:Name="ButtonBaseColor"
+						Grid.Column="1"
+						Style="{StaticResource ButtonBorderless}"
+						Click="ButtonChooseColor">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Color20" />
+						</Viewbox>
+					</Button>
+				</Grid>
+			</StackPanel>
+			<CheckBox
+				Grid.Row="6"
+				Grid.Column="2"
+				Content="{DynamicResource TitleAlternateUVSet}"
+				ToolTip="{DynamicResource TooltipAlternateUVSet}"
+				IsChecked="{Binding AlternateUVSet}"
+				VerticalAlignment="Bottom" />
+
+
+			<StackPanel
+				Grid.Row="8"
+				Grid.ColumnSpan="3"
+				VerticalAlignment="Bottom">
+				<StackPanel
+					Orientation="Horizontal">
+					<TextBlock
+						x:Name="TitlePaintJobTex"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top">
+							<Run
+							Text="{DynamicResource TitlePaintJobTexture}" />
+							<Run
+							Text="{DynamicResource TextureRequire}" />
+					</TextBlock>
+					<Border
+						ToolTip="{DynamicResource TooltipPaintJobTexture}"
+						Height="{Binding ActualHeight, ElementName=TitleIconName, Mode=OneWay}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="ChatWarning20" />
+						</Viewbox>
+					</Border>
+				</StackPanel>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBox
+						x:Name="TextPaintJobTex"
+						Text="{Binding PaintJobTex}"
+						MaxLines="1"
+						TextWrapping="Wrap"
+						Style="{StaticResource TextBoxBorderless}"
+						AllowDrop="True"
+						Drop="FileDrop">
+					</TextBox>
+					<Button
+						x:Name="ButtonPaintJobTexClear"
+						Grid.Column="1"
+						Click="ButtonClearClick"
+						Style="{StaticResource ButtonBorderless}"
+						Visibility="{Binding PaintJobTexVisibility}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Dismiss16" />
+						</Viewbox>
+					</Button>
+					<Button
+						x:Name="ButtonPaintJob"
+						Grid.Column="2"
+						Style="{StaticResource ButtonBorderless}"
+						Click="ButtonChooseTextureClick"
+						AllowDrop="True"
+						Drop="FileDrop">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Folder16" />
+						</Viewbox>
+					</Button>
+					<Border
+						Grid.ColumnSpan="3"
+						Style="{DynamicResource MultiControlBorder}" />
+				</Grid>
+			</StackPanel>
+			<StackPanel
+				Grid.Row="8"
+				Grid.Column="4"
+				Grid.ColumnSpan="3"
+				VerticalAlignment="Top">
+				<StackPanel
+					Orientation="Horizontal">
+					<TextBlock
+						x:Name="TitleBaseTexOverride"
+						VerticalAlignment="Top"
+						ToolTip="{DynamicResource TooltipBaseTextureOverride}">
+							<Run
+							Text="{DynamicResource TitleBaseTextureOverride}" />
+							<Run
+							Text="{DynamicResource TextureRequire}" />
+					</TextBlock>
+					<Border
+						VerticalAlignment="Bottom"
+						ToolTip="{DynamicResource TooltipBaseTextureOverride}"
+						Height="{Binding ActualHeight, ElementName=TitleBaseTexOverride, Mode=OneWay}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="ChatWarning20" />
+						</Viewbox>
+					</Border>
+				</StackPanel>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBox
+						x:Name="TextBaseTexOverride"
+						Text="{Binding BaseTexOverride}"
+						MaxLines="1"
+						TextWrapping="Wrap"
+						Style="{StaticResource TextBoxBorderless}"
+						AllowDrop="True"
+						Drop="FileDrop">
+					</TextBox>
+					<Button
+						x:Name="ButtonBaseTexOverrideClear"
+						Grid.Column="1"
+						Click="ButtonClearClick"
+						Style="{StaticResource ButtonBorderless}"
+						Visibility="{Binding BaseTexOverrideVisibility}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Dismiss16" />
+						</Viewbox>
+					</Button>
+					<Button
+						x:Name="ButtonBaseTexOverride"
+						Grid.Column="2"
+						Style="{StaticResource ButtonBorderless}"
+						Click="ButtonChooseTextureClick"
+						AllowDrop="True"
+						Drop="FileDrop">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Folder16" />
+						</Viewbox>
+					</Button>
+					<Border
+						Grid.ColumnSpan="3"
+						Style="{DynamicResource MultiControlBorder}" />
+				</Grid>
+			</StackPanel>
+
+			<Border
+				Grid.Column="8"
+				Grid.RowSpan="9"
+				BorderThickness="1"
+				BorderBrush="Black"
+				d:Background="LimeGreen"
+				VerticalAlignment="Top"
+				MaxWidth="200"
+				MaxHeight="200">
+				<Border.Style>
+					<Style
+						TargetType="Border">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding PaintJobTex.Length}"
+								Value="0">
+								<Setter
+									Property="Visibility"
+									Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Border.Style>
+				<Viewbox>
+					<Image
+						d:Source="/Accessory/PaintJob/arrow.png"
+						Source="{Binding PaintJobTexImage}" />
+				</Viewbox>
+			</Border>
+
+
+			<Border
+				Height="1"
+				HorizontalAlignment="Stretch"
+				Grid.Row="9"
+				Grid.ColumnSpan="9"
+				Background="LightGray"
+				VerticalAlignment="Center" />
+
+			<TabControl
+				Grid.Row="10"
+				Grid.ColumnSpan="3"
+				SelectedIndex="0">
+				<TabItem
+					Header="{DynamicResource HeaderAirbrush}">
+					<StackPanel>
+						<TextBlock
+							Margin="0,5,0,0"
+							TextWrapping="Wrap"
+							Text="{DynamicResource ExplainAirbrush}" />
+						<CheckBox
+							x:Name="CheckFlipFlake"
+							Margin="0,5,0,10"
+							Content="{DynamicResource TitleFlipFlake}"
+							IsChecked="{Binding FlipFlake}"
+							HorizontalAlignment="Stretch" />
+						<Grid
+							IsEnabled="{Binding FlipFlake}">
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="10" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="10" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="10" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="10" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="5" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									x:Name="TitleFlipColor"
+									ToolTip="{DynamicResource TooltipFlipColor}"
+									TextWrapping="Wrap"
+									VerticalAlignment="Bottom"
+									Text="{DynamicResource TitleFlipColor}" />
+								<Border
+									Grid.Column="1"
+									ToolTip="Defines the flip color of the paint job."
+									Height="{Binding ActualHeight, ElementName=TitleFlipColor, Mode=OneWay}"
+									VerticalAlignment="Bottom">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+
+								<CheckBox
+									Grid.Column="3"
+									Content="{DynamicResource TitleColorCustomizable}"
+									IsChecked="{Binding FlipColorCustomizable}"
+									ToolTip="{DynamicResource TooltipColorCustomizable}"
+									VerticalContentAlignment="Bottom" />
+							</Grid>
+							<Grid
+								Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Border
+									d:Background="Pink"
+									Background="{Binding FlipColorVisual}"
+									Style="{DynamicResource MultiControlBorder}" />
+								<Button
+									x:Name="ButtonFlipColor"
+									Grid.Column="1"
+									Click="ButtonChooseColor"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Color20" />
+									</Viewbox>
+								</Button>
+							</Grid>
+
+							<Grid
+								Grid.Column="2">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									x:Name="TitleFlipStrength"
+									TextWrapping="Wrap"
+									VerticalAlignment="Bottom"
+									Text="{DynamicResource TitleFlipStrength}"
+									ToolTip="{DynamicResource TooltipFlipStrength}" />
+								<Border
+									Grid.Column="1"
+									ToolTip="{DynamicResource TooltipFlipStrength}"
+									Height="{Binding ActualHeight, ElementName=TitleFlipStrength, Mode=OneWay}"
+									VerticalAlignment="Bottom">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</Grid>
+							<TextBox
+								x:Name="TextFlipStrength"
+								Grid.Row="1"
+								Grid.Column="2"
+								Text="{Binding FlipStrength}"
+								PreviewTextInput="FloatOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+							</TextBox>
+
+							<Grid
+								Grid.Row="3">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="*" />
+								</Grid.ColumnDefinitions>
+								<TextBlock
+									x:Name="TitleFlakeColor"
+									TextWrapping="Wrap"
+									VerticalAlignment="Bottom"
+									Text="{DynamicResource TitleFlakeColor}"
+									ToolTip="{DynamicResource TooltipFlakeColor}" />
+								<Border
+									Grid.Column="1"
+									ToolTip="{DynamicResource TooltipFlakeColor}"
+									Height="{Binding ActualHeight, ElementName=TitleFlakeColor, Mode=OneWay}"
+									VerticalAlignment="Bottom">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+
+								<CheckBox
+									Grid.Column="3"
+									Content="{DynamicResource TitleColorCustomizable}"
+									IsChecked="{Binding FlakeColorCustomizable}"
+									ToolTip="{DynamicResource TooltipColorCustomizable}"
+									VerticalContentAlignment="Bottom" />
+							</Grid>
+							<Grid
+								Grid.Row="4">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<Border
+									d:Background="LimeGreen"
+									Background="{Binding FlakeColorVisual}"
+									Style="{DynamicResource MultiControlBorder}" />
+								<Button
+									x:Name="ButtonFlakeColor"
+									Grid.Column="1"
+									Click="ButtonChooseColor"
+									Style="{StaticResource ButtonBorderless}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Color20" />
+									</Viewbox>
+								</Button>
+							</Grid>
+
+							<TextBlock
+								Grid.Row="3"
+								Grid.Column="2"
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource TitleFlakeShininess}" />
+							<TextBox
+								Grid.Row="4"
+								Grid.Column="2"
+								MaxLines="1"
+								Text="{Binding FlakeShininess}"
+								PreviewTextInput="FloatOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+							</TextBox>
+
+
+							<StackPanel
+								Grid.Row="6"
+								Orientation="Horizontal">
+								<TextBlock
+									TextWrapping="Wrap"
+									VerticalAlignment="Bottom"
+									Text="{DynamicResource TitleFlakeDensity}"
+									ToolTip="{DynamicResource TooltipFlakeDensity}" />
+								<Border
+									ToolTip="{DynamicResource TooltipFlakeDensity}"
+									Height="{Binding ActualHeight, ElementName=TitleBaseColor, Mode=OneWay}"
+									VerticalAlignment="Bottom">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<TextBox
+								Grid.Row="7"
+								MaxLines="1"
+								Text="{Binding FlakeDensity}"
+								PreviewTextInput="FloatOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+							</TextBox>
+
+
+							<StackPanel
+								Grid.Row="6"
+								Grid.Column="2"
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleFlakeClearcoatRolloff"
+									TextWrapping="Wrap"
+									VerticalAlignment="Bottom"
+									Text="{DynamicResource TitleFlakeClearcoatRolloff}"
+									ToolTip="{DynamicResource TooltipFlakeClearcoatRolloff}" />
+								<Border
+									ToolTip="{DynamicResource TooltipFlakeClearcoatRolloff}"
+									Height="{Binding ActualHeight, ElementName=TitleFlakeClearcoatRolloff, Mode=OneWay}"
+									VerticalAlignment="Bottom">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<TextBox
+								Grid.Row="7"
+								Grid.Column="2"
+								Text="{Binding FlakeClearcoatRolloff}"
+								PreviewTextInput="FloatOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+							</TextBox>
+
+
+							<StackPanel
+								Grid.Row="9"
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleFlakeUVScale"
+									TextWrapping="Wrap"
+									VerticalAlignment="Bottom"
+									Text="{DynamicResource TitleFlakeUVScale}"
+									ToolTip="{DynamicResource TooltipFlakeUVScale}" />
+								<Border
+									ToolTip="{DynamicResource TooltipFlakeUVScale}"
+									Height="{Binding ActualHeight, ElementName=TitleFlakeUVScale, Mode=OneWay}"
+									VerticalAlignment="Bottom">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<TextBox
+								Grid.Row="10"
+								Text="{Binding FlakeUVScale}"
+								PreviewTextInput="FloatOnly"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+							</TextBox>
+
+							<StackPanel
+								Grid.Row="12"
+								Grid.ColumnSpan="3"
+								Orientation="Horizontal">
+								<TextBlock
+									x:Name="TitleFlakeNoise"
+									TextWrapping="Wrap"
+									VerticalAlignment="Top"
+									Text="{DynamicResource TitleFlakeNoise}" />
+								<Border
+									ToolTip="{DynamicResource TooltipFlakeNoise}"
+									Height="{Binding ActualHeight, ElementName=TitleFlakeNoise, Mode=OneWay}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="ChatWarning20" />
+									</Viewbox>
+								</Border>
+							</StackPanel>
+							<Grid
+								Grid.Row="13"
+								Grid.ColumnSpan="3">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition
+										Width="*" />
+									<ColumnDefinition
+										Width="Auto" />
+									<ColumnDefinition
+										Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBox
+									Text="{Binding FlakeNoise}"
+									MaxLines="1"
+									TextWrapping="Wrap"
+									AllowDrop="True"
+									Drop="FileDrop" />
+								<Button
+									x:Name="ButtonFlakeNoiseClear"
+									Grid.Column="1"
+									Click="ButtonClearClick"
+									Style="{StaticResource ButtonBorderless}"
+									Visibility="{Binding FlakeNoiseVisibility}">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Dismiss16" />
+									</Viewbox>
+								</Button>
+								<Button
+									x:Name="ButtonChooseFlakeNoise"
+									Grid.Column="2"
+									Style="{StaticResource ButtonBorderless}"
+									Click="ButtonChooseTextureClick"
+									AllowDrop="True"
+									Drop="FileDrop">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Folder16" />
+									</Viewbox>
+								</Button>
+								<Border
+									Grid.ColumnSpan="3"
+									Style="{DynamicResource MultiControlBorder}" />
+							</Grid>
+						</Grid>
+					</StackPanel>
+				</TabItem>
+				<TabItem
+					Header="{DynamicResource HeaderColormask}">
+					<Grid>
+						<Grid.Resources>
+							<Style
+								x:Key="StyleTextBlockColor"
+								TargetType="TextBlock"
+								BasedOn="{StaticResource {x:Type TextBlock}}">
+								<Setter
+									Property="VerticalAlignment"
+									Value="Center" />
+								<Setter
+									Property="FontSize"
+									Value="14" />
+							</Style>
+							<Style
+								x:Key="StyleTextBoxColor"
+								TargetType="TextBox"
+								BasedOn="{StaticResource TextBoxBorderless}">
+								<Setter
+									Property="Padding"
+									Value="0,3" />
+								<Setter
+									Property="FontSize"
+									Value="14" />
+							</Style>
+							<Style
+								x:Key="StyleColorResult"
+								TargetType="Border"
+								BasedOn="{StaticResource MultiControlBorder}">
+								<Setter
+									Property="BorderThickness"
+									Value="1,1,0,1"></Setter>
+								<Setter
+									Property="BorderBrush"
+									Value="{x:Null}"></Setter>
+								<Setter
+									Property="CornerRadius"
+									Value="3.3,0,0,3.8"></Setter>
+							</Style>
+						</Grid.Resources>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="5*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="3*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="5*" />
+							<ColumnDefinition
+								Width="5" />
+							<ColumnDefinition
+								Width="*" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="5" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="5" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="5" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+						</Grid.RowDefinitions>
+						<TextBlock
+							Grid.ColumnSpan="7"
+							Margin="0,5,0,0"
+							TextWrapping="Wrap">
+								<Run
+								Text="{DynamicResource ExplainColormask}" />
+						</TextBlock>
+
+						<ui:Flyout
+							x:Name="FlyoutWrongHex"
+							Placement="MousePoint"
+							Content="{DynamicResource ErrorColorHex}" />
+
+						<Grid
+							Grid.Row="2"
+							Grid.ColumnSpan="7">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								x:Name="TitleMaskR"
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource TitleMaskR}" />
+							<Border
+								Grid.Column="1"
+								ToolTip="{DynamicResource TooltipMaskR}"
+								Height="{Binding ActualHeight, ElementName=TitleMaskR, Mode=OneWay}"
+								VerticalAlignment="Bottom">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="ChatWarning20" />
+								</Viewbox>
+							</Border>
+
+							<CheckBox
+								Grid.Column="3"
+								Content="{DynamicResource TitleColorCustomizable}"
+								ToolTip="{DynamicResource TooltipColorCustomizable}"
+								IsChecked="{Binding MaskRCustomizable}" />
+						</Grid>
+						<Grid
+							Grid.Row="3">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Border
+								d:Background="Red"
+								Background="{Binding MaskRColorVisual}"
+								Style="{DynamicResource StyleColorResult}" />
+							<Button
+								x:Name="ButtonMaskR"
+								Grid.Column="1"
+								Click="ButtonChooseColor"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Color20" />
+								</Viewbox>
+							</Button>
+							<Border
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+
+						<Grid
+							Grid.Row="3"
+							Grid.Column="2">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Text="#"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								x:Name="TextMaskRHex"
+								Grid.Column="1"
+								d:Text="FF0000"
+								PreviewTextInput="HexCheck"
+								DataObject.Pasting="OnPasted"
+								Text="{Binding MaskRColorHex}"
+								Style="{StaticResource StyleTextBoxColor}" />
+
+							<Border
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+						<Grid
+							Grid.Row="3"
+							Grid.Column="4">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Text="R:"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="1"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskRColorR}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<TextBlock
+								Text="G:"
+								Grid.Column="2"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="3"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskRColorG}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<TextBlock
+								Text="B:"
+								Grid.Column="4"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="5"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskRColorB}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<Border
+								Grid.ColumnSpan="6"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+
+						<Grid
+							Grid.Row="5"
+							Grid.ColumnSpan="7">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								x:Name="TitleMaskG"
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource TitleMaskG}" />
+							<Border
+								Grid.Column="1"
+								ToolTip="{DynamicResource TooltipMaskG}"
+								Height="{Binding ActualHeight, ElementName=TitleMaskG, Mode=OneWay}"
+								VerticalAlignment="Bottom">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="ChatWarning20" />
+								</Viewbox>
+							</Border>
+
+							<CheckBox
+								Grid.Column="3"
+								Content="{DynamicResource TitleColorCustomizable}"
+								ToolTip="{DynamicResource TooltipColorCustomizable}"
+								IsChecked="{Binding MaskGCustomizable}" />
+						</Grid>
+						<Grid
+							Grid.Row="6">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Border
+								d:Background="Green"
+								Background="{Binding MaskGColorVisual}"
+								Style="{DynamicResource StyleColorResult}" />
+							<Button
+								x:Name="ButtonMaskG"
+								Grid.Column="1"
+								Click="ButtonChooseColor"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Color20" />
+								</Viewbox>
+							</Button>
+							<Border
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+
+						<Grid
+							Grid.Row="6"
+							Grid.Column="2">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Text="#"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="1"
+								d:Text="FF0000"
+								PreviewTextInput="HexCheck"
+								DataObject.Pasting="OnPasted"
+								Text="{Binding MaskGColorHex}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<Border
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+						<Grid
+							Grid.Row="6"
+							Grid.Column="4">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Text="R:"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="1"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskGColorR}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<TextBlock
+								Text="G:"
+								Grid.Column="2"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="3"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskGColorG}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<TextBlock
+								Text="B:"
+								Grid.Column="4"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="5"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskGColorB}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<Border
+								Grid.ColumnSpan="6"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+
+
+						<Grid
+							Grid.Row="8"
+							Grid.ColumnSpan="7">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								x:Name="TitleMaskB"
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource TitleMaskB}" />
+							<Border
+								Grid.Column="1"
+								ToolTip="{DynamicResource TooltipMaskB}"
+								Height="{Binding ActualHeight, ElementName=TitleMaskB, Mode=OneWay}"
+								VerticalAlignment="Bottom">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="ChatWarning20" />
+								</Viewbox>
+							</Border>
+
+							<CheckBox
+								Grid.Column="3"
+								Content="{DynamicResource TitleColorCustomizable}"
+								ToolTip="{DynamicResource TooltipColorCustomizable}"
+								IsChecked="{Binding MaskBCustomizable}" />
+						</Grid>
+						<Grid
+							Grid.Row="9">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Border
+								d:Background="Blue"
+								Background="{Binding MaskBColorVisual}"
+								Style="{DynamicResource StyleColorResult}" />
+							<Button
+								x:Name="ButtonMaskB"
+								Grid.Column="1"
+								Click="ButtonChooseColor"
+								Style="{StaticResource ButtonBorderless}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Color20" />
+								</Viewbox>
+							</Button>
+							<Border
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+
+						<Grid
+							Grid.Row="9"
+							Grid.Column="2">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Text="#"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="1"
+								d:Text="FF0000"
+								PreviewTextInput="HexCheck"
+								DataObject.Pasting="OnPasted"
+								Text="{Binding MaskBColorHex}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<Border
+								Grid.ColumnSpan="2"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+						<Grid
+							Grid.Row="9"
+							Grid.Column="4">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="*" />
+							</Grid.ColumnDefinitions>
+							<TextBlock
+								Text="R:"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="1"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskBColorR}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<TextBlock
+								Text="G:"
+								Grid.Column="2"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="3"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskBColorG}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<TextBlock
+								Text="B:"
+								Grid.Column="4"
+								Style="{StaticResource StyleTextBlockColor}" />
+							<TextBox
+								Grid.Column="5"
+								d:Text="255"
+								PreviewTextInput="NumberOnly"
+								Text="{Binding MaskBColorB}"
+								Style="{StaticResource StyleTextBoxColor}" />
+							<Border
+								Grid.ColumnSpan="6"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+					</Grid>
+				</TabItem>
+			</TabControl>
+
+			<Border
+				Width="1"
+				VerticalAlignment="Stretch"
+				Grid.Row="10"
+				Grid.Column="3"
+				Background="LightGray"
+				HorizontalAlignment="Center" />
+
+			<Grid
+				Grid.Row="10"
+				Grid.Column="4"
+				Grid.ColumnSpan="5">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="10" />
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="10" />
+					<ColumnDefinition
+						Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="*" />
+				</Grid.RowDefinitions>
+				<TextBlock
+					Grid.ColumnSpan="5"
+					Text="{DynamicResource TitlePaintJobOverride}"
+					FontSize="16"
+					HorizontalAlignment="Center"
+					Margin="0,5"></TextBlock>
+				
+				<Grid
+					Grid.Row="1">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Border
+						Grid.RowSpan="2"
+						Grid.ColumnSpan="3"
+						BorderThickness="1"
+						BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+						CornerRadius="5" />
+					<TextBlock
+						FontSize="12"
+						Text="{DynamicResource TitleOverrides}"
+						Margin="5,0,0,0"
+						VerticalAlignment="Bottom" />
+
+					<Border
+						Grid.Column="1"
+						Grid.ColumnSpan="2"
+						Style="{DynamicResource MultiControlBorder}" />
+					<Button
+						x:Name="ButtonOvrAdd"
+						Grid.Column="1"
+						Click="ButtonAddRowClick"
+						VerticalAlignment="Bottom"
+						Style="{StaticResource GridButton}">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Add16" />
+						</Viewbox>
+					</Button>
+					<Button
+						x:Name="ButtonOvrRemove"
+						Grid.Column="2"
+						Click="ButtonDeleteRowClick"
+						VerticalAlignment="Bottom">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Dismiss16" />
+						</Viewbox>
+						<Button.Style>
+							<Style
+								TargetType="Button"
+								BasedOn="{StaticResource GridButton}">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding SelectedIndex, ElementName=ListOverrides}"
+										Value="-1">
+										<Setter
+											Property="IsEnabled"
+											Value="False" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Button.Style>
+					</Button>
+
+					<ListBox
+						x:Name="ListOverrides"
+						Grid.Row="1"
+						Grid.ColumnSpan="3"
+						SelectionMode="Single"
+						Margin="0,5,0,0"
+						BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+						d:ItemsSource="{d:SampleData ItemCount=2}"
+						ItemsSource="{Binding OverrideList}"
+						SelectedItem="{Binding SelectedOverride}"
+						SelectedIndex="0">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock
+									Text="{Binding OvrName}"
+									FontSize="13">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource {x:Type TextBlock}}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+													Value="True">
+													<Setter
+														Property="Foreground"
+														Value="White" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+
+				<Grid
+					Grid.Column="2"
+					Grid.ColumnSpan="3"
+					Grid.Row="1">
+					<Grid.Style>
+						<Style
+							TargetType="Grid">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding SelectedIndex, ElementName=ListOverrides}"
+									Value="-1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Grid.Style>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="10" />
+						<ColumnDefinition
+							Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="10" />
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="10" />
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="10" />
+						<RowDefinition
+							Height="*" />
+					</Grid.RowDefinitions>
+
+					<StackPanel
+						Grid.ColumnSpan="3"
+						VerticalAlignment="Bottom">
+						<StackPanel
+							Orientation="Horizontal">
+							<TextBlock
+								x:Name="TitleAccTex"
+								TextWrapping="Wrap"
+								VerticalAlignment="Top">
+								<Run
+									Text="{DynamicResource TitlePaintJobTexture}" />
+								<Run
+									Text="{DynamicResource TextureRequire}" />
+							</TextBlock>
+							<Border
+								ToolTip="{DynamicResource TooltipPaintJobTexture}"
+								Height="{Binding ActualHeight, ElementName=TitleAccTex, Mode=OneWay}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="ChatWarning20" />
+								</Viewbox>
+							</Border>
+						</StackPanel>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<TextBox
+								x:Name="TextAccTex"
+								Text="{Binding AccTex}"
+								MaxLines="1"
+								TextWrapping="Wrap"
+								Style="{StaticResource TextBoxBorderless}"
+								AllowDrop="True"
+								Drop="FileDrop">
+							</TextBox>
+							<Button
+								x:Name="ButtonAccTexClear"
+								Grid.Column="1"
+								Click="ButtonClearClick"
+								Style="{StaticResource ButtonBorderless}"
+								Visibility="{Binding AccTexVisibility}">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Dismiss16" />
+								</Viewbox>
+							</Button>
+							<Button
+								x:Name="ButtonChooseAccTex"
+								Grid.Column="2"
+								Style="{StaticResource ButtonBorderless}"
+								Click="ButtonChooseTextureClick"
+								AllowDrop="True"
+								Drop="FileDrop">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="Folder16" />
+								</Viewbox>
+							</Button>
+							<Border
+								Grid.ColumnSpan="3"
+								Style="{DynamicResource MultiControlBorder}" />
+						</Grid>
+					</StackPanel>
+
+					<StackPanel
+						Grid.Row="2">
+						<StackPanel
+							Orientation="Horizontal">
+							<TextBlock
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource TitleFlakeUVScale}" />
+							<Border
+								Grid.Column="1"
+								ToolTip="{DynamicResource TooltipFlakeUVScale}"
+								Height="{Binding ActualHeight, ElementName=TitleBaseColor, Mode=OneWay}"
+								VerticalAlignment="Bottom">
+								<Viewbox>
+									<ui:SymbolIcon
+										Symbol="ChatWarning20" />
+								</Viewbox>
+							</Border>
+						</StackPanel>
+						<TextBox
+							MaxLines="1"
+							Text="{Binding AccFlakeUVScale}"
+							PreviewTextInput="FloatOnly"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top">
+						</TextBox>
+					</StackPanel>
+					<StackPanel
+						Grid.Row="4">
+						<StackPanel
+							Orientation="Horizontal">
+							<TextBlock
+								TextWrapping="Wrap"
+								VerticalAlignment="Bottom"
+								Text="{DynamicResource TitleFlakeVRatio}" />
+						</StackPanel>
+						<TextBox
+							MaxLines="1"
+							Text="{Binding AccFlakeVRatio}"
+							PreviewTextInput="FloatOnly"
+							TextWrapping="Wrap"
+							VerticalAlignment="Top">
+						</TextBox>
+					</StackPanel>
+
+					<Grid
+						Grid.Row="6">
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Border
+							Grid.RowSpan="2"
+							Grid.ColumnSpan="3"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+							CornerRadius="5" />
+						<TextBlock
+							Text="{DynamicResource TitleAccessoryParts}"
+							FontSize="12"
+							Margin="5,0,0,0"
+							VerticalAlignment="Bottom"></TextBlock>
+
+
+						<Border
+							Grid.Column="1"
+							Grid.ColumnSpan="2"
+							Style="{DynamicResource MultiControlBorder}" />
+						<Button
+							x:Name="ButtonPartAdd"
+							Grid.Column="1"
+							Click="ButtonAddRowClick"
+							VerticalAlignment="Bottom">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Add16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListOverrides}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<Button
+							x:Name="ButtonPartRemove"
+							Grid.Column="2"
+							Click="ButtonDeleteRowClick"
+							VerticalAlignment="Bottom">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListAccList}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<ListBox
+							x:Name="ListAccList"
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							SelectionMode="Single"
+							Margin="0,5,0,0"
+							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+							BorderThickness="1"
+							d:ItemsSource="{d:SampleData ItemCount=2}"
+							ItemsSource="{Binding AccList}">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock
+										Text="{Binding Path=.}"
+										FontSize="13">
+										<TextBlock.Style>
+											<Style
+												TargetType="TextBlock"
+												BasedOn="{StaticResource {x:Type TextBlock}}">
+												<Style.Triggers>
+													<DataTrigger
+														Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+														Value="True">
+														<Setter
+															Property="Foreground"
+															Value="White" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Grid>
+
+					<Grid
+						Grid.Column="2"
+						Grid.Row="2"
+						Grid.RowSpan="5">
+						<Border
+							BorderThickness="1"
+							BorderBrush="Black"
+							d:Background="LimeGreen"
+							Width="200"
+							Height="200"
+							MaxWidth="200"
+							MaxHeight="200"
+							VerticalAlignment="Bottom">
+							<Border.Style>
+								<Style
+									TargetType="Border">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding AccTex.Length}"
+											Value="0">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Border.Style>
+							<Viewbox>
+								<Image
+									d:Source="/Accessory/PaintJob/arrow.png"
+									Source="{Binding AccTexImage}" />
+							</Viewbox>
+						</Border>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+
+
+		<Grid
+			Visibility="Collapsed">
+			<!--ShowViewCube="True" 属性用于关闭旋转控制3D互动的图标-->
+			<!--ViewCubeWidth="200" 设置旋转图标的宽度-->
+			<!--ViewCubeHeight="200" 设置旋转图标的高度-->
+			<!--ViewCubeHorizontalPosition="Left" 设置旋转图标的水平位置-->
+			<!--ViewCubeVerticalPosition="Top" 设置垂直图标的位置-->
+			<!--ViewCubeFrontText="前" 设置旋转图标前文本-->
+			<!--ViewCubeTopText="上" 设置旋转图标上文本-->
+
+			<!--ShowCoordinateSystem="True" 设置显示坐标轴-->
+			<!--CoordinateSystemLabelForeground="#5000" 设置坐标系统的字体颜色-->
+			<!--CoordinateSystemHorizontalPosition="Center" 设置坐标系的水平位置-->
+			<!--CoordinateSystemVerticalPosition="Center" 设置坐标系的垂直位置-->
+			<h:HelixViewport3D
+				ShowViewCube="True"
+				ViewCubeWidth="100"
+				ViewCubeHeight="100"
+				ViewCubeHorizontalPosition="Right"
+				ViewCubeVerticalPosition="Bottom"
+				ViewCubeFrontText="前"
+				ViewCubeBackText="后"
+				ViewCubeTopText="上"
+				ViewCubeBottomText="下"
+				ViewCubeLeftText="左"
+				ViewCubeRightText="右"
+				ShowCoordinateSystem="True"
+				CoordinateSystemLabelForeground="#5000"
+				CoordinateSystemHorizontalPosition="Right"
+				CoordinateSystemVerticalPosition="Top"
+				Margin="-10,0,10,0">
+				<!--相机-->
+				<h:HelixViewport3D.Camera>
+					<!-- PerspectiveCamera标签-透视相机（近比例长远比例小，符合我们正常观察事物的视觉-常用）-->
+					<!--Position="100,100,100" 设置视角x,y,z-->
+					<!--LookDirection="-2,-2,-2" 设置相机的观看视角-相机观察的方向-->
+					<!--FieldOfView="90" 调整相机焦距 设置相机与观看物体的距离，离得远观看物体区域范围大，离得近观看物体区域范围小 -->
+					<!--UpDirection="0,1,0" （x, y,z）设置相机视口的旋转角度，斜着拍还是正着拍 -->
+					<!--FarPlaneDistance="1000" 设置相机远处景色的渲染范围，如果值设置的比较小，远处景色是模糊的-->
+					<!--NearPlaneDistance="1" 设置相机近处的晶圆渲染范围，如果值越大，近处景色是模糊的-->
+					<PerspectiveCamera
+						Position="10,10,10"
+						LookDirection="-2,-2,-2"
+						FieldOfView="50"
+						UpDirection="0,1,0"
+						FarPlaneDistance="1000"
+						NearPlaneDistance="1">
+						<!--设置相机旋转标签-->
+						<PerspectiveCamera.Transform>
+							<!--分组标签，在分组标签内可以有多个变形标签-->
+							<Transform3DGroup>
+								<!--CenterX="0" CenterY="0" CenterZ="0" 设置相机旋转中心点-->
+								<RotateTransform3D
+									CenterX="0"
+									CenterY="0"
+									CenterZ="0">
+									<!--设置相机旋转方式标签-->
+									<RotateTransform3D.Rotation>
+										<!--AxisAngleRotation3D 设置相机按照轴的方式旋转标签-->
+										<!--Angle="45" 设置相机按照45度角旋转-->
+										<!--Axis="0 1 0" 设置以那个轴进行旋转 （x y z）-->
+										<AxisAngleRotation3D
+											Angle="0"
+											Axis="0 1 0"
+											x:Name="aar" />
+									</RotateTransform3D.Rotation>
+								</RotateTransform3D>
+								<!--平移标签-->
+								<!--OffsetX="1" OffsetY="1" OffsetZ="1" 设置 x y z 三个方向的移动距离-->
+								<TranslateTransform3D
+									OffsetX="0"
+									OffsetY="0"
+									OffsetZ="0"
+									x:Name="tt" />
+								<!--缩放标签-->
+								<!--ScaleX="1" ScaleY="1" ScaleZ="1" 设置图像缩放大小 1是原始大小 小于1是相机尺寸变小，图像变大 大于1是相机尺寸变大，图像变小 -->
+								<!--一般很少使用相机平移调整图像放大缩小，可以使用相机视野调整图像放大与缩小-->
+								<ScaleTransform3D
+									ScaleX="1"
+									ScaleY="1"
+									ScaleZ="1" />
+							</Transform3DGroup>
+						</PerspectiveCamera.Transform>
+					</PerspectiveCamera>
+					<!--正交相机（远近比例都一样-很少用）-->
+					<!--Width="50" 相当与透视相机的视野范围属性-->
+					<!--<OrthographicCamera Position="100,100,100"
+     LookDirection="-2,-2,-2"
+     Width="50"
+     UpDirection="0,1,0"
+     FarPlaneDistance="1000"
+      NearPlaneDistance="1"/>-->
+				</h:HelixViewport3D.Camera>
+
+
+				<!--设置旋转动作靠什么来操作-->
+				<h:HelixViewport3D.RotateGesture>
+					<!--设置鼠标操作旋转动作-->
+					<!--MouseAction="LeftClick" 设置鼠标左键旋转-->
+					<MouseGesture
+						MouseAction="LeftClick" />
+				</h:HelixViewport3D.RotateGesture>
+				<!--设置3D图像移动操作-->
+				<h:HelixViewport3D.PanGesture>
+					<!--设置鼠标右键移动3D图像-->
+					<MouseGesture
+						MouseAction="RightClick" />
+				</h:HelixViewport3D.PanGesture>
+
+
+				<!--第二步在3D世界设置光源进来，没有光源全是黑的呀-->
+				<!--光源标签-设置光源的相关属性-->
+				<ModelVisual3D>
+					<!--光源内容标签-->
+					<ModelVisual3D.Content>
+						<!--多个光源可以组合使用-会出现不同的效果-->
+						<Model3DGroup>
+							<!--环境光标签    -->
+							<!--Color="White"-设置环境光颜色 -->
+							<AmbientLight
+								Color="White" />
+
+							<!--平行光-设置某一个方向上照射的光-平行光不发散 -->
+							<!--Direction="-1,-1,-1" （x,y,z）三个方向照射的光 设置平行光的照射方向-->
+							<!--<DirectionalLight Color="White" Direction="-1,-1,-1"/>-->
+
+							<!--点光源-点光源是向四面八方发散的光源 -->
+							<!--Position="100,100,100" （x,y,z） 设置光源点-->
+							<!--Range="200" 设置光源的照射范围-->
+							<!--<PointLight Color="White" Position="100,100,100" Range="200"/>-->
+
+							<!--射灯光源（聚光灯，手电筒）-某一个方向去发射光源-相当于手电筒有一个中心的光柱（比较亮的）以及两遍发散的光源（相对较暗） -->
+							<!--InnerConeAngle="100" 设置中心范围光柱的角度-->
+							<!--OuterConeAngle="40" 设置两遍光源的范围角度-->
+							<!--Position="50,50,50" 设置光源的中心位置-->
+							<!--Direction="-1,-1,-1" （x,y,z）三个方向照射的光 设置光源的照射方向-->
+							<!--<SpotLight Color="Orange" InnerConeAngle="100"
+   OuterConeAngle="40"
+   Position="50,50,50"
+   Direction="-1,-1,-1"/>-->
+						</Model3DGroup>
+					</ModelVisual3D.Content>
+				</ModelVisual3D>
+
+				<!--动态库提供的光源-比较全-建议使用这个-当然自己写也可以 -->
+				<!--<h:DefaultLights/>-->
+
+
+				<!--3D图形的第一个面 可以把所有的面放在一起写-->
+				<!--3DUIElement标签-固定写法-->
+				<!--MouseLeftButtonDown 鼠标左键点击事件-->
+				<ModelUIElement3D>
+					<ModelUIElement3D.Model>
+						<!--GeometryModel3D网格标签-->
+						<GeometryModel3D>
+							<!--第三步物体需要呈现出来需要材质-->
+							<!--3D的材质 标签-->
+							<GeometryModel3D.Material>
+								<MaterialGroup>
+									<!--漫反射的一种材质 材质是与网格属性标签组合在一起使用的-->
+									<!--DiffuseMaterial 慢反射材质标签-->
+									<!--Brush 设置材质颜色或图片-->
+									<!--<DiffuseMaterial Brush="Orange"/>-->
+									<!--3D面设置背景图-需要在网格标签中设置TextureCoordinates="0,1 0,0 1,0 1,1"属性，背景图显示方向，才能显示出背景图 -->
+									<DiffuseMaterial>
+										<DiffuseMaterial.Brush>
+											<ImageBrush
+												ImageSource="Arrow.png" />
+										</DiffuseMaterial.Brush>
+									</DiffuseMaterial>
+									<!--自发光-->
+									<!--<EmissiveMaterial Brush="Red"/>-->
+									<!--<SpecularMaterial Brush="Blue"/>-->
+								</MaterialGroup>
+							</GeometryModel3D.Material>
+							<!--BackMaterial 异面材质标签-->
+							<GeometryModel3D.BackMaterial>
+								<DiffuseMaterial
+									Brush="Green" />
+							</GeometryModel3D.BackMaterial>
+							<!--网格标签-->
+							<GeometryModel3D.Geometry>
+								<!-- MeshGeometry3D呈现3D图形的标签  Positions="0,0,0（x,y,z）     3,0,0      3,2,0      0,2,0" 一个面的4个点-->
+								<!--TriangleIndices ="0,2,3（第一组-这里的坐标点需要逆时针顺序） 0,1,2（第二组）" 设置Positions的3个点组成一个三角行 -->
+								<!--这里如果呈现的是三角行而不是四边行的画，是因为TriangleIndices="0,2,3 0,1,2"的画点顺序需要逆时针顺序-->
+								<!--TextureCoordinates 设置平面对象与3D对象的映射关系-用来解决平面设置背景图显示问题-如果不设置这个属性平面设置的背景图不显示-->
+								<MeshGeometry3D
+									Positions="0,0,0     3,0,0      3,2,0      0,2,0"
+									TriangleIndices="0,2,3 0,1,2"
+									TextureCoordinates="1,1 1,0 0,0 0,1" />
+								<!--箭头向下-->
+								<!--TextureCoordinates="1,1 0,1 0,0 1,0"/> 箭头向左-->
+								<!--TextureCoordinates="0,1 1,1 1,0 0,0"/> 箭头向右-->
+								<!--TextureCoordinates="0,1 0,0 1,0 1,1"/>-->
+								<!--  箭头向上-->
+							</GeometryModel3D.Geometry>
+						</GeometryModel3D>
+					</ModelUIElement3D.Model>
+				</ModelUIElement3D>
+
+				<!--Viewport2DVisual3D 平面对象加载标签用于在3D对象中呈现2D控件-->
+				<Viewport2DVisual3D>
+					<!--网格标签-->
+					<Viewport2DVisual3D.Geometry>
+						<!-- MeshGeometry3D呈现3D图形的标签  Positions="0,0,0（x,y,z）     3,0,0      3,2,0      0,2,0" 一个面的4个点-->
+						<!--TriangleIndices ="0,2,3（第一组-这里的坐标点需要逆时针顺序） 0,1,2（第二组）" 设置Positions的3个点组成一个三角行 -->
+						<!--这里如果呈现的是三角行而不是四边行的画，是因为TriangleIndices="0,2,3 0,1,2"的画点顺序需要逆时针顺序-->
+						<!--TextureCoordinates 设置平面对象与3D对象的映射关系-用来解决平面设置背景图显示问题-如果不设置这个属性平面设置的背景图不显示-->
+						<MeshGeometry3D
+							Positions="0,0,1     3,0,1      3,2,1      0,2,1"
+							TriangleIndices="0,2,3 0,1,2"
+							TextureCoordinates="0,1 1,1 1,0 0,0" />
+					</Viewport2DVisual3D.Geometry>
+					<!--Material设置3D的材质 标签-->
+					<Viewport2DVisual3D.Material>
+						<!--IsVisualHostMaterial 属性是将DiffuseMaterial材质设置成2D平面的盒子 - 用于解决将Button按钮显示出来 -->
+						<DiffuseMaterial
+							Viewport2DVisual3D.IsVisualHostMaterial="True" />
+					</Viewport2DVisual3D.Material>
+
+					<Border>
+						<Button
+							Content="Hello" />
+					</Border>
+				</Viewport2DVisual3D>
+
+				<!--3D图形的第二个面 可以把所有的面放在一起写 这里没有放在一起写是因为可以给每个面设置不同的颜色-->
+				<!--3DUIElement标签-固定写法-->
+				<ModelUIElement3D>
+					<ModelUIElement3D.Model>
+						<!--GeometryModel3D网格标签-->
+						<GeometryModel3D>
+							<!--第三步物体需要呈现出来需要材质-->
+							<!--3D的材质 标签-->
+							<GeometryModel3D.Material>
+								<MaterialGroup>
+									<!--漫反射的一种材质 材质是与网格属性标签组合在一起使用的-->
+									<!--DiffuseMaterial 慢反射材质标签-->
+									<!--Brush 设置材质颜色或图片-->
+									<DiffuseMaterial
+										Brush="Red" />
+									<!--<DiffuseMaterial>
+          <DiffuseMaterial.Brush>
+              <ImageBrush ImageSource="Arrow.png"/>
+          </DiffuseMaterial.Brush>
+      </DiffuseMaterial>-->
+									<!--自发光 标签-用于设置在没有光源的情况下可以看见自发光颜色-在有光源的情况下自发光颜色会影响到材质颜色的显示 -->
+									<!--<EmissiveMaterial Brush="Green"/>-->
+									<!--全反射标签 目前只是了解一下-->
+									<!--<SpecularMaterial Brush="Blue"/>-->
+								</MaterialGroup>
+							</GeometryModel3D.Material>
+							<!--BackMaterial 异面材质标签-->
+							<GeometryModel3D.BackMaterial>
+								<DiffuseMaterial
+									Brush="Blue" />
+							</GeometryModel3D.BackMaterial>
+							<!--网格标签-->
+							<GeometryModel3D.Geometry>
+								<!-- 呈现3D图形的标签  Positions="0,0,0（x,y,z）     3,0,0      3,2,0      0,2,0" 一个面的4个点-->
+								<!--TriangleIndices ="0,2,3（第一组-这里的坐标点需要逆时针顺序） 0,1,2（第二组）" 设置Positions的3个点组成一个三角行 -->
+								<!--这里如果呈现的是三角行而不是四边行的画，是因为TriangleIndices="0,2,3 0,1,2"的画点顺序需要逆时针顺序-->
+								<MeshGeometry3D
+									Positions="3,2,1     3,2,0      3,0,0      3,0,1"
+									TriangleIndices="0,3,1    1,3,2" />
+							</GeometryModel3D.Geometry>
+						</GeometryModel3D>
+					</ModelUIElement3D.Model>
+				</ModelUIElement3D>
+
+			</h:HelixViewport3D>
 		</Grid>
 	</Grid>
 

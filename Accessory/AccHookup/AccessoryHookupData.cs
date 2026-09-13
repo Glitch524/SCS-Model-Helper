@@ -1,16 +1,9 @@
-﻿using SCS_Mod_Helper.Accessory;
-using SCS_Mod_Helper.Accessory.AccAddon.Items;
-using SCS_Mod_Helper.Utils;
-using System;
-using System.Collections.Generic;
+﻿using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SCS_Mod_Helper.Accessory.AccHookup;
 
-public class AccessoryHookupData(string modelName): AccessoryData(modelName, "", null, null, "", "unknown", "", "default", "default", "vehicle") {
+public class AccessoryHookupData(string modelName): AccessoryIntData(modelName, "", null, null, "", "unknown", "", "default", "default", "vehicle") {
 	public AccessoryHookupData() : this("") {
 	}
 

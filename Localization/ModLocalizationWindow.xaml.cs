@@ -94,7 +94,7 @@ public partial class ModLocalizationWindow : BaseWindow
 			Modules.Add(newModule);
 			CurrentModule = newModule;
 		} else if (sender == ButtonDeleteModule) {
-			var result = MessageBox.Show(GetString("MessageDeleteLocale"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+			var result = MessageBox.Show(this, GetString("MessageDeleteLocale"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 			if (result == MessageBoxResult.Yes) {
 				DeletedModules.Add(CurrentModule);
 				Modules.Remove(CurrentModule);
@@ -135,14 +135,14 @@ public partial class ModLocalizationWindow : BaseWindow
 			if (UniversalDict.Count > 0) 
 				RunSave();
 			else {
-				var result = MessageBox.Show(GetString("MessageUniEmpty"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
+				var result = MessageBox.Show(this, GetString("MessageUniEmpty"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.Yes)
 					RunSave();
 			}
 		}
 	}
 	private void RunSave() {
-		AccDataIO.SaveLocaleDict(ProjectLocation, Modules, DeletedModules);
+		AccDataIO.SaveLocaleDict(this, Modules, DeletedModules);
 		HasChanges = true;
 		MessageBox.Show(this, GetString("MessageSaveSuccess"));
 	}

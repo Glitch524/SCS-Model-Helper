@@ -322,10 +322,10 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 	public ListDataUC? ListDataUC = null;
 
 	public void LoadFiles() => AccDataIO.LoadAddonHookup(this);
-	public void SaveFiles() => AccDataIO.SaveAddonHookup(this);
+	public void SaveFiles(Window window) => AccDataIO.SaveAddonHookup(window, this);
 
 	//模型、碰撞体
-	public void ChooseModel(bool isColl) {
+	public void ChooseModel(Window window, bool isColl) {
 		try {
 			if (ProjectLocation.Length == 0)
 				throw new(Util.GetString("MessageProjectLocationFirst"));
@@ -383,7 +383,7 @@ class AccHookupBinding: BaseBinding, IListDataInterface {
 			if (modelColl != null)
 				CollPath = modelColl;
 		} catch (Exception ex) {
-			MessageBox.Show(ex.Message);
+			MessageBox.Show(window, ex.Message);
 		}
 	}
 

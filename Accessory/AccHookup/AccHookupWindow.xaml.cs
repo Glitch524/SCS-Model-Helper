@@ -98,7 +98,7 @@ public partial class AccHookupWindow: BaseWindow {
 
 	private void ButtonChooseIcon(object sender, RoutedEventArgs e) => Binding.ChooseIcon(this);
 
-	private void ButtonChooseModelClick(object sender, RoutedEventArgs e) => Binding.ChooseModel(sender == ButtonChooseColl);
+	private void ButtonChooseModelClick(object sender, RoutedEventArgs e) => Binding.ChooseModel(this, sender == ButtonChooseColl);
 
 	private void ButtonClearClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonIconNameClear) {
@@ -186,7 +186,7 @@ public partial class AccHookupWindow: BaseWindow {
 		if (sender == ButtonCancel) {
 			Close();
 		} else if (sender == ButtonSave) {
-			Binding.SaveFiles();
+			Binding.SaveFiles(this);
 		}
 	}
 }

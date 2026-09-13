@@ -4,7 +4,7 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 
 namespace SCS_Mod_Helper.Accessory.AccAddon;
-public class AccessoryAddonData: AccessoryData {
+public class AccessoryAddonData: AccessoryIntData {
 	public AccessoryAddonData() : base(
 		AccAddonHistory.Default.ModelName,
 		AccAddonHistory.Default.DisplayName,

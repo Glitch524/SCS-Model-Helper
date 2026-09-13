@@ -27,11 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Accessory\PaintJob\arrow.png" />
     <None Remove="App.config" />
     <None Remove="Images\AppIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Accessory\PaintJob\arrow.png" />
     <Resource Include="Images\AppIcon.ico" />
   </ItemGroup>
 
@@ -40,10 +42,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pfim" Version="0.11.3" />
-    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
-    <PackageReference Include="System.Drawing.Common" Version="10.0.0-rc.2.25502.107" />
-    <PackageReference Include="WPF-UI" Version="4.0.3" />
+    <PackageReference Include="HelixToolkit.Wpf" Version="3.1.2" />
+    <PackageReference Include="Pfim" Version="0.11.4" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2.3" />
+    <PackageReference Include="System.Drawing.Common" Version="11.0.0-rc.1.26425.128" />
+    <PackageReference Include="WPF-UI" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

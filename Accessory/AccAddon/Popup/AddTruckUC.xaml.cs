@@ -37,7 +37,7 @@ public partial class AddTruckUC: UserControl {
 
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
 		if (binding.TruckID.Length == 0 || binding.IngameName.Length == 0) {
-			MessageBox.Show(Util.GetString("MessageAddErrNotFilled"));
+			MessageBox.Show(Window.GetWindow(this), Util.GetString("MessageAddErrNotFilled"));
 			return;
 		}
 		if (sender == ButtonOK)

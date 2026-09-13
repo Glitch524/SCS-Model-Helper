@@ -287,7 +287,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public List<PhysicsData> PhysicsList => AddonItem.PhysicsList;
 
-	public void LoadLooksAndVariants(string? path = null) {
+	public void LoadLooksAndVariants(Window window, string? path = null) {
 		try {
 			string oldLook = Look, oldVariant = Variant;
 			if (path == null) {
@@ -325,7 +325,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			setValue(LookList, oldLook, (set) => Look = set);
 			setValue(VariantList, oldVariant, (set) => Variant = set);
 		} catch (Exception ex) {
-			MessageBox.Show(Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
+			MessageBox.Show(window, Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
 		}
 	}
 
@@ -656,7 +656,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	}
 
 	string? LoadedFilename = null;
-	public void SaveDED() {
+	public void SaveDED(Window window) {
 		PopupAddTruckOpen = false;
 		SaveFileDialog saveFileDialog = new() {
 			Title = Util.GetString("SaveDED"),
@@ -676,11 +676,11 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		if (saveFileDialog.ShowDialog() == true) {
 			SaveDedLocation(saveFileDialog.FileName);
 			AccAppIO.SaveAccAddon(this, saveFileDialog.FileName);
-			MessageBox.Show(Util.GetString("MessageSaveDED"));
+			MessageBox.Show(window, Util.GetString("MessageSaveDED"));
 		}
 	}
 
-	public void LoadDED() {
+	public void LoadDED(Window window) {
 		try {
 			PopupAddTruckOpen = false;
 			OpenFileDialog openFileDialog = new() {
@@ -695,11 +695,11 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			if (openFileDialog.ShowDialog() == true) {
 				SaveDedLocation(openFileDialog.FileName);
 				LoadedFilename = openFileDialog.SafeFileName;
-				AccAppIO.LoadAccAddon(this, openFileDialog.FileName);
+				AccAppIO.LoadAccAddon(window, this, openFileDialog.FileName);
 				UpdateOthersChecked();
 			}
 		} catch (Exception ex) {
-			MessageBox.Show(Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
+			MessageBox.Show(window, Util.GetString("MessageLoadDEDErrFail") + "\n" + ex.Message);
 		}
 	}
 
@@ -724,7 +724,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public AddTruckUC? AddTruckUC;
 
-	public void AddNewTruck(Truck newTruck) {
+	public void AddNewTruck(Window window, Truck newTruck) {
 		try {
 			bool isETS2 = newTruck.IsETS2;
 			ObservableCollection<Truck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
@@ -756,7 +756,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			}
 			AccAppIO.SaveTruckList(isETS2, Trucks);
 		} catch (Exception ex) {
-			MessageBox.Show(ex.Message, Util.GetString("MessageTitleErr"));
+			MessageBox.Show(window, ex.Message, Util.GetString("MessageTitleErr"));
 		}
 	}
 
@@ -782,7 +782,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public void StartCreateSii() {
+	public void StartCreateSii(Window window) {
 		try {
 			PopupAddTruckOpen = false;
 			if (!TruckExpandedETS2 && !TruckExpandedATS)
@@ -803,9 +803,9 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				throw new(Util.GetString("ModelPriceErrNoNumber"));
 			}
 			var created = AccDataIO.CreateAccAddonSii(this);
-			MessageBox.Show(Util.GetString(created == 0 ? "MessageCreateSiiZero" : "MessageCreateSiiResult"));
+			MessageBox.Show(window, Util.GetString(created == 0 ? "MessageCreateSiiZero" : "MessageCreateSiiResult"));
 		} catch (Exception ex) {
-			MessageBox.Show(ex.Message);
+			MessageBox.Show(window, ex.Message);
 		}
 	}
 
@@ -842,27 +842,34 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	public void ChooseModel(Window window, int type) {
 		if (ProjectLocation.Length == 0)
 			throw new(Util.GetString("MessageProjectLocationFirst"));
-		string title, fileter, defaultExt;
-		if (type == MODEL || type == EXT_MODEL) {
-			title = Util.GetString("DialogTitleChooseModel");
-			fileter = Util.GetFilter("DialogFilterChooseModel");
-			defaultExt = "pmd";
-		} else if (type == MODEL_UK || type == EXT_MODEL_UK) {
-			title = Util.GetString("DialogTitleChooseModelUK");
-			fileter = Util.GetFilter("DialogFilterChooseModel");
-			defaultExt = "pmd";
-		} else if (type == MODEL_COLL) {
-			title = Util.GetString("DialogTitleChooseColl");
-			fileter = Util.GetFilter("DialogFilterChooseColl");
-			defaultExt = "pmc";
-		} else
-			return;
+		string title, filter, defaultExt;
+		switch (type) {
+			case MODEL:
+			case EXT_MODEL:
+				title = Util.GetString("DialogTitleChooseModel");
+				filter = Util.GetFilter("DialogFilterChooseModel");
+				defaultExt = "pmd";
+				break;
+			case MODEL_UK:
+			case EXT_MODEL_UK:
+				title = Util.GetString("DialogTitleChooseModelUK");
+				filter = Util.GetFilter("DialogFilterChooseModel");
+				defaultExt = "pmd";
+				break;
+			case MODEL_COLL:
+				title = Util.GetString("DialogTitleChooseColl");
+				filter = Util.GetFilter("DialogFilterChooseColl");
+				defaultExt = "pmc";
+				break;
+			default:
+				return;
+		}
 		var fileDialog = new OpenFileDialog {
 			Multiselect = false,
 			DefaultDirectory = ProjectLocation,
 			DefaultExt = defaultExt,
 			Title = title,
-			Filter = fileter,
+			Filter = filter,
 			InitialDirectory = AccessoryDataUtil.GetInitialPath([ModelPath, ModelPathUK, CollPath])
 		};
 		if (fileDialog.ShowDialog() != true)
@@ -878,7 +885,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 		AccAddonHistory.Default.ChooseModelHistory = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
 		AccAddonHistory.Default.Save();
-		LoadLooksAndVariants(path);//修改模型路径后，look和variant都不同，需要重新读取
+		LoadLooksAndVariants(window, path);//修改模型路径后，look和variant都不同，需要重新读取
 		string inProjectPath = path.Replace(ProjectLocation, "");
 		var s = inProjectPath.Split('\\');
 

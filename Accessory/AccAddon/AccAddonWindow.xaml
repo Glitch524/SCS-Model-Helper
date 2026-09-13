@@ -839,6 +839,8 @@
 						Grid.Column="2"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Center"
+						d:Visibility="Visible"
+						d:Background="LightBlue"
 						Height="{Binding ActualHeight, ElementName=PanelIconName, Mode=OneWay}">
 						<Border.Style>
 							<Style
