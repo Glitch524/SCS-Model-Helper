@@ -1,12 +1,6 @@
-﻿using SCS_Mod_Helper.Base;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace SCS_Mod_Helper.IO {
+namespace SCS_Mod_Helper.Base {
 	public abstract class ModIO() {
 		protected const string FileHeader = "SiiNunit";
 		protected int TabCount = 0;
