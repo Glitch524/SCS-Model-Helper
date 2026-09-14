@@ -490,32 +490,32 @@
 	<s:String x:Key="TruckDesc.volvo.fh16">停产</s:String>
 	<s:String x:Key="TruckDesc.volvo.fh16_2012">停产，UK副驾驶向左转了大概50度</s:String>
 	<x:Static x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.volvo.fh_2024">toybed有个小桌子，可能会挡住</s:String>
+	<x:Static x:Key="TruckDesc.volvo.fh_2024" Member="s:String.Empty" />
 	
 	
 	<!--卡车备注 ATS-->
 	<x:Static x:Key="TruckDesc.freightliner.cascadia2019" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.freightliner.ecascadia">未推出</s:String>
+	<x:Static x:Key="TruckDesc.freightliner.ecascadia" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.intnational.9900i">停产</s:String>
 	<x:Static x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.intnational.lt">toybed与LoneStar一样</s:String>
 	<x:Static x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.kenworth.t680_2022">toybed太后，一般坐姿可能会穿模</s:String>
 	<s:String x:Key="TruckDesc.kenworth.w900">toybed太后，一般坐姿可能会穿模</s:String>
-	<s:String x:Key="TruckDesc.kenworth.w990">未推出</s:String>
+	<x:Static x:Key="TruckDesc.kenworth.w990" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.mack.anthem2026" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.mack.pioneer">未推出</s:String>
+	<x:Static x:Key="TruckDesc.mack.pioneer" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.peterbilt.579_2022">未推出</s:String>
-	<s:String x:Key="TruckDesc.peterbilt.589">未推出</s:String>
+	<x:Static x:Key="TruckDesc.peterbilt.579_2022" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.peterbilt.589" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.volvo.vnl2024">未推出</s:String>
-	<s:String x:Key="TruckDesc.volvo.vnr_electric">未推出</s:String>
+	<x:Static x:Key="TruckDesc.volvo.vnl2024" Member="s:String.Empty" />
+	<x:Static x:Key="TruckDesc.volvo.vnr_electric" Member="s:String.Empty" />
 	<s:String x:Key="TruckDesc.westernstar.5700xe">停产，toybed太后，一般坐姿可能会穿模</s:String>
 	<x:Static x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
 	<x:Static x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
