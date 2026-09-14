@@ -68,10 +68,8 @@
 				Width="150"
 				Padding="0,5,0,5"
 				Click="ButtonClick"
-				Margin="15,0,15,0">
-				<TextBlock
-					TextWrapping="Wrap"
-					Text="{DynamicResource ButtonLanguageDir}" />
+				Margin="15,0,15,0"
+				Content="{DynamicResource ButtonLanguageDir}">
 			</Button>
 		</Grid>
 		<ui:CardControl>

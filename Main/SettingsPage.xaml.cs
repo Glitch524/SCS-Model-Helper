@@ -2,13 +2,9 @@
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace SCS_Mod_Helper.Main; 
 /// <summary>

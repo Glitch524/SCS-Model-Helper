@@ -42,7 +42,7 @@ public partial class ModLocalizationWindow : BaseWindow
 		foreach (var module in Modules) {
 			MenuModule.Items.Add(NewModuleItem(module));
 		}
-		binding.CurrentModule = null;//参考LocaleBinding内的CurrentModule 设为空时会获取LocaleModules列表的第一个module
+		binding.CurrentModule = null;//见LocaleBinding内的CurrentModule 设为空时会获取LocaleModules列表的第一个module
 	}
 
 
