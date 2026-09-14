@@ -17,7 +17,8 @@
 			x:Name="ButtonAccAddon"
 			Background="{x:Null}"
 			BorderThickness="0"
-			Click="OpenWindows">
+			Click="OpenWindows"
+			Cursor="Hand">
 			<StackPanel>
 				<Viewbox
 					Width="120">
@@ -35,7 +36,8 @@
 			x:Name="ButtonAccHookup"
 			Background="{x:Null}"
 			BorderThickness="0"
-			Click="OpenWindows">
+			Click="OpenWindows"
+			Cursor="Hand">
 			<StackPanel>
 				<Viewbox
 					Width="120">
@@ -53,7 +55,8 @@
 			x:Name="ButtonPhysicsToyData"
 			Background="{x:Null}"
 			BorderThickness="0"
-			Click="OpenWindows">
+			Click="OpenWindows"
+			Cursor="Hand">
 			<StackPanel>
 				<Viewbox
 					Width="120">
@@ -71,7 +74,8 @@
 			x:Name="ButtonCreatedSii"
 			Background="{x:Null}"
 			BorderThickness="0"
-			Click="OpenWindows">
+			Click="OpenWindows"
+			Cursor="Hand">
 			<StackPanel>
 				<Viewbox
 					Width="120">
@@ -89,7 +93,8 @@
 			x:Name="ButtonCreateHookupSii"
 			Background="{x:Null}"
 			BorderThickness="0"
-			Click="OpenWindows">
+			Click="OpenWindows"
+			Cursor="Hand">
 			<StackPanel>
 				<Viewbox
 					Width="120">
