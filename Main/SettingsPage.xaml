@@ -59,6 +59,7 @@
 				IsOpen="True"
 				IsClosable="False"
 				FontSize="12"
+				Padding="0,0,180,0"
 				VerticalAlignment="Center" />
 			<Button
 				x:Name="ButtonDirLanguage"

@@ -61,7 +61,7 @@
 	<s:String x:Key="MessageManifestNotFilled">Please fill in all necessary content</s:String>
 
 
-
+	<s:String x:Key="TitleAccessory">Accessory Settings</s:String>
 	<!--AccAddonWindow-->
 	<s:String x:Key="TitleAccessoryAddon">Create Accessory Addon</s:String>
 	<s:String x:Key="SCSProjectLocation">Project Location</s:String>

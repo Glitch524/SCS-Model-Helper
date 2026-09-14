@@ -31,26 +31,11 @@ public partial class NaviMainWindow : BaseWindow
 			return;
 		Window window;
 		switch (type) {
-			case "AccessoryAddon":
-				window = new AccAddonWindow();
-				break;
-			case "AccessoryHookup":
-				window = new AccHookupWindow();
-				break;
-			case "PhysicsToyData":
-				window = new PhysicsWindow();
-				break;
 			case "ModLocalization":
 				window = new ModLocalizationWindow();
 				break;
 			case "PaintJob":
 				window = new PaintJobWindow();
-				break;
-			case "CreatedSii":
-				window = new CreatedModelWindow();
-				break;
-			case "CreateHookupSii":
-				window = new HookupsWindow();
 				break;
 			case "ConverterPIX":
 				string pixPath = Instances.ConverterPixPath;

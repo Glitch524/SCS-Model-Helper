@@ -8,6 +8,7 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Main"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	xmlns:manifest="clr-namespace:SCS_Mod_Helper.Manifest"
+	xmlns:acc="clr-namespace:SCS_Mod_Helper.Accessory"
 	xmlns:localization="clr-namespace:SCS_Mod_Helper.Localization"
 	d:DataContext="{d:DesignInstance Type=local:MainWindowBinding}"
 	mc:Ignorable="d"
@@ -38,7 +39,8 @@
 			x:Name="Navigation"
 			Grid.Row="1"
 			IsBackButtonVisible="Collapsed"
-			OpenPaneLength="200">
+			OpenPaneLength="200"
+			Cursor="">
 			<ui:NavigationView.MenuItems>
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleModManifest}"
@@ -46,20 +48,10 @@
 					TargetPageType="{x:Type manifest:ModManifestPage}"
 					TargetPageTag="ModManifest"/>
 				<ui:NavigationViewItem
-					Content="{DynamicResource TitleAccessoryAddon}"
+					Content="{DynamicResource TitleAccessory}"
 					Icon="{ui:SymbolIcon Chess20}"
-					Command="{Binding WindowCommand}"
-					CommandParameter="AccessoryAddon" />
-				<ui:NavigationViewItem
-					Content="{DynamicResource TitleAccessoryHookup}"
-					Icon="{ui:SymbolIcon BoardGames20}"
-					Command="{Binding WindowCommand}"
-					CommandParameter="AccessoryHookup" />
-				<ui:NavigationViewItem
-					Content="{DynamicResource TitlePhysicsToyData}"
-					Icon="{ui:SymbolIcon PersonRunning20}"
-					Command="{Binding WindowCommand}"
-					CommandParameter="PhysicsToyData"/>
+					TargetPageType="{x:Type acc:AccessoryMainPage}"
+					TargetPageTag="AccessoryMainPage" />
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleSetupLocalization}"
 					Icon="{ui:SymbolIcon BookOpenGlobe20}"
@@ -70,16 +62,6 @@
 					Icon="{ui:SymbolIcon PaintBrush20}"
 					Command="{Binding WindowCommand}"
 					CommandParameter="PaintJob" />
-				<ui:NavigationViewItem
-					Content="{DynamicResource TitleCreatedSii}"
-					Icon="{ui:SymbolIcon Broom20}"
-					Command="{Binding WindowCommand}"
-					CommandParameter="CreatedSii" />
-				<ui:NavigationViewItem
-					Content="{DynamicResource TitleCreateHookupSii}"
-					Icon="{ui:SymbolIcon Wrench20}"
-					Command="{Binding WindowCommand}"
-					CommandParameter="CreateHookupSii" />
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleConverterPIX}"
 					Icon="{ui:SymbolIcon BoxSearch20}"
