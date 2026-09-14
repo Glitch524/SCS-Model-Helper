@@ -436,7 +436,7 @@
 	<s:String x:Key="TipsCustomLanguage">Find the Language directory in the app's location, place a translated xaml file and rename in the specific format, then you can find the new language here.</s:String>
 	<s:String x:Key="ButtonLanguageDir">Language folder</s:String>
 	<s:String x:Key="ColorMode">Color Mode</s:String>
-	<s:String x:Key="ConverterPixPath"> Path</s:String>
+	<s:String x:Key="ExternalToolsPath"> Path</s:String>
 	<s:String x:Key="FilterCPix">App|converter_pix.exe</s:String>
 	<s:String x:Key="MessageErrNotCPix">Selected file is not ConverterPix.exe</s:String>
 	<s:String x:Key="MessageErrDifferentStructure">Selected file's directory seems different, continue?</s:String>

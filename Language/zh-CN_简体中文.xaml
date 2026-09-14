@@ -436,7 +436,7 @@
 	<s:String x:Key="TipsCustomLanguage">在软件的文件夹找到Language文件夹，在里面放好翻译好且按照格式重命名的xaml即可识别使用</s:String>
 	<s:String x:Key="ButtonLanguageDir">Language文件夹</s:String>
 	<s:String x:Key="ColorMode">颜色模式</s:String>
-	<s:String x:Key="ConverterPixPath">路径</s:String>
+	<s:String x:Key="ExternalToolsPath">路径</s:String>
 	<s:String x:Key="FilterCPix">应用程序|converter_pix.exe</s:String>
 	<s:String x:Key="MessageErrNotCPix">选择的文件不是ConverterPix.exe</s:String>
 	<s:String x:Key="MessageErrDifferentStructure">选择的文件路径结构似乎有所不同，是否继续使用？</s:String>

@@ -45,7 +45,8 @@
 				SelectedValuePath="Locale"
 				ItemsSource="{Binding Languages}"
 				SelectedValue="{Binding CurrentLanguage}"
-				Width="150" />
+				Width="150"
+				Padding="5" />
 		</ui:CardControl>
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -65,7 +66,7 @@
 				x:Name="ButtonDirLanguage"
 				Grid.Column="1"
 				Width="150"
-				Padding="0,3,0,3"
+				Padding="0,5,0,5"
 				Click="ButtonClick"
 				Margin="15,0,15,0">
 				<TextBlock
@@ -94,7 +95,8 @@
 				SelectedValue="{Binding CurrentTheme}"
 				SelectedValuePath="ThemeValue"
 				DisplayMemberPath="ThemeName"
-				ItemsSource="{Binding ThemeList}" />
+				ItemsSource="{Binding ThemeList}"
+				Padding="5" />
 		</ui:CardControl>
 		<ui:CardControl>
 			<ui:CardControl.Header>
@@ -113,7 +115,7 @@
 							NavigateUri="https://github.com/mwl4/ConverterPIX"
 							RequestNavigate="HyperlinkClick">Converter PIX</Hyperlink>
 						<Run
-							Text="{DynamicResource ConverterPixPath}" />
+							Text="{DynamicResource ExternalToolsPath}" />
 					</ui:TextBlock>
 					<Label
 						VerticalContentAlignment="Center"
@@ -129,7 +131,43 @@
 				x:Name="ButtonConverterPix"
 				Width="150"
 				Content="{DynamicResource ButtonBrowse}"
-				Padding="0,3,0,3"
+				Padding="0,5,0,5"
+				Click="ButtonClick" />
+		</ui:CardControl>
+		<ui:CardControl>
+			<ui:CardControl.Header>
+				<StackPanel
+					Orientation="Horizontal"
+					Height="40">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="BoxEdit20" />
+					</Viewbox>
+					<ui:TextBlock
+						FontTypography="BodyStrong"
+						VerticalAlignment="Center"
+						Margin="10,0,0,0">
+						<Hyperlink
+							NavigateUri="https://modding.scssoft.com/wiki/Documentation/Tools/Conversion_Tools"
+							RequestNavigate="HyperlinkClick">Conversion Tools</Hyperlink>
+						<Run
+							Text="{DynamicResource ExternalToolsPath}" />
+					</ui:TextBlock>
+					<Label
+						VerticalContentAlignment="Center"
+						Margin="10,0,0,0"
+						FontWeight="Bold">
+						<Run
+							Text="{Binding ConversionToolsPath}"
+							d:Text="Test Path" />
+					</Label>
+				</StackPanel>
+			</ui:CardControl.Header>
+			<Button
+				x:Name="ButtonConversionTools"
+				Width="150"
+				Content="{DynamicResource ButtonBrowse}"
+				Padding="0,5,0,5"
 				Click="ButtonClick" />
 		</ui:CardControl>
 	</StackPanel>

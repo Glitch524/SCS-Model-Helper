@@ -82,5 +82,17 @@ namespace SCS_Mod_Helper.Main {
                 this["ConverterPixNotice"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConversionToolsPath {
+            get {
+                return ((string)(this["ConversionToolsPath"]));
+            }
+            set {
+                this["ConversionToolsPath"] = value;
+            }
+        }
     }
 }

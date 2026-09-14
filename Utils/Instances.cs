@@ -47,6 +47,21 @@ public static class Instances {
 		}
 	}
 
+	private static string mConversionToolsPath = Settings.Default.ConversionToolsPath;
+	public static string ConversionToolsPath {
+		get {
+			if (mConversionToolsPath.Length == 0)
+				return Util.GetString("StatusEmpty");
+			return mConversionToolsPath;
+		}
+
+		set {
+			mConversionToolsPath = value;
+			Settings.Default.ConversionToolsPath = value;
+			Settings.Default.Save();
+		}
+	}
+
 
 	private static string mProjectLocation = Settings.Default.ProjectLocation;
 	public static string ProjectLocation {

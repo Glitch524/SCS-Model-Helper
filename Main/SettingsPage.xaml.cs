@@ -33,18 +33,15 @@ public partial class SettingsPage: BasePage {
 			Process.Start(psi);
 		} else if (sender == ButtonConverterPix) {
 			string start = binding.ConverterPixPath;
-			if (start.Length == 0) {
-				start = "";
-			} else {
+			if (start.Length > 0) 
 				start = new DirectoryInfo(start).Parent?.FullName ?? "";
-			}
 			var fileDialog = new OpenFileDialog {
-					Multiselect = false,
-					InitialDirectory = start,
-					DefaultExt = "converter_pix.exe",
-					Title = GetString("ConverterPixPath"),
-					Filter = Util.GetFilter("FilterCPix")
-				};
+				Multiselect = false,
+				InitialDirectory = start,
+				DefaultExt = "converter_pix.exe",
+				Title = "ConverterPix" + GetString("ExternalToolsPath"),
+				Filter = Util.GetFilter("FilterCPix")
+			};
 			if (fileDialog.ShowDialog() == true) {
 				if (fileDialog.SafeFileName != "converter_pix.exe") {
 					MessageBox.Show(Window.GetWindow(this), "MessageErrNotCPix");
@@ -75,6 +72,17 @@ public partial class SettingsPage: BasePage {
 						break;
 				}
 				binding.ConverterPixPath = path;
+			}
+		} else if (sender == ButtonConversionTools) {
+			string start = binding.ConversionToolsPath;
+			var folderDialog = new OpenFolderDialog {
+				Multiselect = false,
+				InitialDirectory = start,
+				Title = "Conversion Tools" + GetString("ExternalToolsPath"),
+			};
+			if (folderDialog.ShowDialog() == true) {
+				var path = folderDialog.FolderName;
+				binding.ConversionToolsPath = path;
 			}
 		}
 	}
@@ -130,6 +138,13 @@ public class SettingsBinding(): BaseBinding {
 		get => Instances.ConverterPixPath;
 		set {
 			Instances.ConverterPixPath = value;
+			InvokeChange();
+		}
+	}
+	public string ConversionToolsPath {
+		get => Instances.ConversionToolsPath;
+		set {
+			Instances.ConversionToolsPath = value;
 			InvokeChange();
 		}
 	}
