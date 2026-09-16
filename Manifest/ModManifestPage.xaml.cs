@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using SCS_Mod_Helper.Accessory;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
@@ -9,11 +8,11 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SCS_Mod_Helper.Manifest; 
+namespace SCS_Mod_Helper.Manifest;
 /// <summary>
 /// ModManifestPage.xaml 的交互逻辑
 /// </summary>
-public partial class ModManifestPage : BasePage {
+public partial class ModManifestPage: BasePage {
 	private readonly ManifestBinding binding;
 
 	string IconName {
@@ -32,9 +31,8 @@ public partial class ModManifestPage : BasePage {
 
 	Dictionary<string, DescLocale> LocaleDict => binding.LocaleDict;
 
-	public ModManifestPage()
-    {
-        InitializeComponent();
+	public ModManifestPage() {
+		InitializeComponent();
 
 		binding = ManifestBinding.Instance;
 
@@ -118,7 +116,7 @@ public partial class ModManifestPage : BasePage {
 			DescContent = DescContent.Insert(sEnd, "[normal]");
 			sEnd += "[normal]".Length;
 			TextDescription.SelectionStart = sEnd;
-		} else 
+		} else
 			TextDescription.SelectionStart = sStart;
 		TextDescription.Focus();
 	}

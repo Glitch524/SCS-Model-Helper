@@ -8,7 +8,6 @@
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Main"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	xmlns:manifest="clr-namespace:SCS_Mod_Helper.Manifest"
-	xmlns:acc="clr-namespace:SCS_Mod_Helper.Accessory"
 	xmlns:localization="clr-namespace:SCS_Mod_Helper.Localization"
 	d:DataContext="{d:DesignInstance Type=local:MainWindowBinding}"
 	mc:Ignorable="d"
@@ -50,7 +49,7 @@
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleAccessory}"
 					Icon="{ui:SymbolIcon Chess20}"
-					TargetPageType="{x:Type acc:AccessoryMainPage}"
+					TargetPageType="{x:Type local:AccessoryMainPage}"
 					TargetPageTag="AccessoryMainPage" />
 				<ui:NavigationViewItem
 					Content="{DynamicResource TitleSetupLocalization}"

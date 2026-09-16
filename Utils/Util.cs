@@ -1,4 +1,5 @@
 ﻿using Pfim;
+using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -130,7 +131,7 @@ namespace SCS_Mod_Helper.Utils {
 			foreach (var truck in trucks) {
 				if (condition?.Invoke(truck) ?? true) {
 					if (sb.Length > 0)
-						sb.Append(DefaultData.LineSplit);
+						sb.Append(TruckDefault.LineSplit);
 					sb.Append(toLine(truck));
 				}
 			}

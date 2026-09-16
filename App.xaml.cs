@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using SCS_Mod_Helper.Accessory;
+using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Windows;
@@ -9,8 +9,7 @@ namespace SCS_Mod_Helper;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
-{
+public partial class App: Application {
 	App() {
 		Startup += App_Startup;
 	}
@@ -22,7 +21,7 @@ public partial class App : Application
 	}
 
 	private void OnUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e) {
-		if(Instances.FollowSystem) {
+		if (Instances.FollowSystem) {
 			DictionaryUtil.UpdateThemeDict(DictionaryUtil.GetSystemTheme());
 		}
 	}

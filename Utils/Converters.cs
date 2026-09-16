@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace SCS_Mod_Helper.Utils {
 
@@ -139,7 +138,7 @@ namespace SCS_Mod_Helper.Utils {
 
 	public class ValueEqualsConverter: IMultiValueConverter {
 		public object? Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
-			if (values.Length <2) 
+			if (values.Length < 2)
 				return false;
 			return values[0].Equals(values[1]);
 		}

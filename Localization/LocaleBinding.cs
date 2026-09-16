@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 
-namespace SCS_Mod_Helper.Localization; 
+namespace SCS_Mod_Helper.Localization;
 public class LocaleBinding: BaseBinding {
 	public readonly ObservableCollection<LocaleModule> LocaleModules = [];
 	public readonly ObservableCollection<LocaleModule> DeletedModules = [];

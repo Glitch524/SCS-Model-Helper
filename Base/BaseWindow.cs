@@ -1,11 +1,11 @@
 ﻿using SCS_Mod_Helper.Utils;
 using Wpf.Ui.Controls;
 
-namespace SCS_Mod_Helper.Base; 
+namespace SCS_Mod_Helper.Base;
 public class BaseWindow: FluentWindow {
 
 	public BaseWindow() {
-		if(Instances.FollowSystem) {
+		if (Instances.FollowSystem) {
 			Loaded += (sender, e) => {
 				SetThemeWatcher(true);
 			};

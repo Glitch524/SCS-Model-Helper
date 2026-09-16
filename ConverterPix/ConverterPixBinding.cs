@@ -3,16 +3,14 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using Windows.UI;
 using Wpf.Ui.Input;
 
 namespace SCS_Mod_Helper.ConverterPix {
-	public class ConverterPixBinding: BaseBinding {
+	public class ConverterPixBinding(Action listBoxScrollToTop): BaseBinding {
+		private Action ListBoxScrollToTop = listBoxScrollToTop;
 
 		public string mPackPath = "";
 		public string PackPath {
@@ -59,7 +57,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 				mSelectedFile = value;
 				InvokeChange();
 			}
-		} 
+		}
 
 
 		public void ReadDir() {
@@ -68,6 +66,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			p.Start();
 
+			bool error = false;
 			bool clearList = true;
 			string? line;
 			while ((line = p.StandardOutput.ReadLine()) != null) {
@@ -75,6 +74,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 				if (line.StartsWith("<error>")) {
 					var reason = line[(line.IndexOf(':') + 1)..];
 					MessageBox.Show($"Unable to read the file: {reason}");
+					error = true;
 					break;
 				}
 				if (clearList) {
@@ -92,6 +92,8 @@ namespace SCS_Mod_Helper.ConverterPix {
 			}
 			p.WaitForExit();
 			p.Close();
+			if (!error)
+				ListBoxScrollToTop();
 		}
 
 		public ICommand OpenFileCommand => new RelayCommand<object>(OpenFile);
@@ -115,7 +117,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 		public ObservableCollection<PackDir> DirList => mDirList;
 
 		public void DirBack(int index) {
-			while(DirList.Count > index + 1) {
+			while (DirList.Count > index + 1) {
 				DirList.RemoveAt(index + 1);
 			}
 			ReadDir();
@@ -136,40 +138,43 @@ namespace SCS_Mod_Helper.ConverterPix {
 		public void TestExtract(Window window, PIXFile pixFile) {
 			StringBuilder args = new($"-b \"{PackPath}\" -e \"{DestPath}\"");
 			int type = 0;
-			switch (pixFile.Extension.ToLower()) {
-				case "pmd":
-				case "pmg":
-				case "pma"://可能出现没有pmd的情况，需要找pmd
-				case "pmc":
-					type = 1;
-					var name = pixFile.Filename;
-					name = name[..^4];
-					args.Append(" -m \"").Append(name).Append('"');
-					if (SearchAnim) {
-						var anim = SearchAnimExe(name);
-						if (anim.Count > 0)
-							foreach (string a in anim) {
-								args.Append(" \"").Append(a).Append('"');
-								break;
-							}
-					}
-					break;
-				case "tobj":
-					type = 2;
-					args.Append(" -t \"").Append(pixFile.Filename).Append('"');
-					break;
-				default:
-					args.Append(" -extract_f \"").Append(pixFile.Filename).Append('"');
-					break;
+			if (pixFile.IsDir) {
+				args.Append(" -extract_d \"").Append(pixFile.Filename).Append('"');
+			} else {
+				switch (pixFile.Extension.ToLower()) {
+					case "pmd":
+					case "pmg":
+					case "pma"://可能出现没有pmd的情况，需要找pmd
+					case "pmc":
+						type = 1;
+						var name = pixFile.Filename;
+						name = name[..^4];
+						args.Append(" -m \"").Append(name).Append('"');
+						if (SearchAnim) {
+							var anim = SearchAnimExe(name);
+							if (anim.Count > 0)
+								foreach (string a in anim) {
+									args.Append(" \"").Append(a).Append('"');
+									break;
+								}
+						}
+						break;
+					case "tobj":
+						type = 2;
+						args.Append(" -t \"").Append(pixFile.Filename).Append('"');
+						break;
+					default:
+						args.Append(" -extract_f \"").Append(pixFile.Filename).Append('"');
+						break;
+				}
 			}
 			Process p = CallPix(args.ToString());
 			p.Start();
-			p.WaitForExit();
 
 			string? line;
 			bool success = true;
 			List<string> errors = [];
-			while((line = p.StandardOutput.ReadLine()) != null) {
+			while ((line = p.StandardOutput.ReadLine()) != null) {
 				Debug.WriteLine(line);
 
 				if (line.Trim().StartsWith('*') || line.Length == 0)
@@ -180,6 +185,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 					errors.Add(line);
 				}
 			}
+			p.WaitForExit();
 			p.Close();
 			if (success) {
 				string osFilename = pixFile.Filename.Replace('/', '\\');
@@ -233,7 +239,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 			p.WaitForExit();
 			List<string> anims = [];
 			string? line;
-			while((line = p.StandardOutput.ReadLine()) != null) {
+			while ((line = p.StandardOutput.ReadLine()) != null) {
 				if (line.StartsWith('*') || line.Length == 0)
 					continue;
 				if (line.EndsWith(".pma")) {

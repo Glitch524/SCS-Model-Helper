@@ -197,8 +197,7 @@
 							Margin="0,5">
 							<Grid.InputBindings>
 								<MouseBinding
-									Command="{Binding DataContext.OpenFileCommand, 
-								RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+									Command="{Binding DataContext.OpenFileCommand, ElementName=ListFiles}"
 									CommandParameter="{Binding}"
 									MouseAction="LeftDoubleClick" />
 							</Grid.InputBindings>
@@ -216,6 +215,12 @@
 								<RowDefinition
 									Height="Auto" />
 							</Grid.RowDefinitions>
+							<Border
+								Grid.ColumnSpan="3"
+								Grid.RowSpan="2" />
+							<TextBlock
+								Grid.ColumnSpan="3"
+								Grid.RowSpan="2" />
 							<Rectangle
 								Grid.RowSpan="2"
 								Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />

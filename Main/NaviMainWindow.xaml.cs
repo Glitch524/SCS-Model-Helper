@@ -1,22 +1,20 @@
-﻿using SCS_Mod_Helper.Accessory.PaintJob;
-using SCS_Mod_Helper.Base;
+﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.ConverterPix;
 using SCS_Mod_Helper.Localization;
+using SCS_Mod_Helper.Modding.PaintJob;
 using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Windows;
 using Wpf.Ui.Input;
 
-namespace SCS_Mod_Helper.Main; 
+namespace SCS_Mod_Helper.Main;
 /// <summary>
 /// NaviMainWindow.xaml 的交互逻辑
 /// </summary>
-public partial class NaviMainWindow : BaseWindow
-{
+public partial class NaviMainWindow: BaseWindow {
 	readonly MainWindowBinding binding;
-	public NaviMainWindow()
-    {
-        InitializeComponent();
+	public NaviMainWindow() {
+		InitializeComponent();
 		binding = new(new(OpenWindow));
 		GridMain.DataContext = binding;
 	}
@@ -35,7 +33,7 @@ public partial class NaviMainWindow : BaseWindow
 			case "ConverterPIX":
 				string pixPath = Instances.ConverterPixPath;
 				if (string.IsNullOrEmpty(pixPath) || !File.Exists(pixPath)) {
-					var result = MessageBox.Show(GetString("MessagePixNotSet"),GetString("MessageTitleNotice"));
+					var result = MessageBox.Show(GetString("MessagePixNotSet"), GetString("MessageTitleNotice"));
 					if (result == MessageBoxResult.OK) {
 						Navigation.Navigate("Settings");
 					}

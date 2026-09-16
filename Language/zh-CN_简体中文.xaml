@@ -464,61 +464,6 @@
 	<s:String x:Key="FilterAllFiles">所有文件|*.*</s:String>
 
 
-	<!--卡车备注 ETS2-->
-	<x:Static x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.daf.xd">床铺高，toybed坐姿头顶可能会穿模</s:String>
-	<s:String x:Key="TruckDesc.daf.xf">停产</s:String>
-	<x:Static x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.daf.xf_electric">目前没有装饰位</s:String>
-	<s:String x:Key="TruckDesc.iveco.hiway">停产</s:String>
-	<s:String x:Key="TruckDesc.iveco.stralis">停产</s:String>
-	<x:Static x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.man.tgx">停产</s:String>
-	<x:Static x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.mercedes.actros">停产</s:String>
-	<x:Static x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.renault.etech_t">目前没有装饰位</s:String>
-	<s:String x:Key="TruckDesc.renault.magnum">停产，toybed是座位，横躺穿模</s:String>
-	<s:String x:Key="TruckDesc.renault.premium">停产</s:String>
-	<x:Static x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.scania.r">停产</s:String>
-	<x:Static x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.scania.streamline">停产</s:String>
-	<s:String x:Key="TruckDesc.volvo.fh16">停产</s:String>
-	<s:String x:Key="TruckDesc.volvo.fh16_2012">停产，UK副驾驶向左转了大概50度</s:String>
-	<x:Static x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.fh_2024" Member="s:String.Empty" />
-	
-	
-	<!--卡车备注 ATS-->
-	<x:Static x:Key="TruckDesc.freightliner.cascadia2019" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.freightliner.ecascadia" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.intnational.9900i">停产</s:String>
-	<x:Static x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.intnational.lt">toybed与LoneStar一样</s:String>
-	<x:Static x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.kenworth.t680_2022">toybed太后，一般坐姿可能会穿模</s:String>
-	<s:String x:Key="TruckDesc.kenworth.w900">toybed太后，一般坐姿可能会穿模</s:String>
-	<x:Static x:Key="TruckDesc.kenworth.w990" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.mack.anthem2026" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.mack.pioneer" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.peterbilt.579_2022" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.peterbilt.589" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.vnl2024" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.vnr_electric" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.westernstar.5700xe">停产，toybed太后，一般坐姿可能会穿模</s:String>
-	<x:Static x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
 	
 	
 	<!--饰品位置-->

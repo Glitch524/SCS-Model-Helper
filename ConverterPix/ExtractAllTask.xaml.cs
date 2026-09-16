@@ -1,5 +1,4 @@
-﻿using Pfim;
-using SCS_Mod_Helper.Base;
+﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Diagnostics;
 using System.IO;
@@ -7,28 +6,25 @@ using System.Text;
 using System.Windows;
 using Util = SCS_Mod_Helper.Utils.Util;
 
-namespace SCS_Mod_Helper.ConverterPix
-{
-    /// <summary>
-    /// ExtractAllTask.xaml 的交互逻辑
-    /// </summary>
-    public partial class ExtractAllTask : BaseWindow
-    {
+namespace SCS_Mod_Helper.ConverterPix {
+	/// <summary>
+	/// ExtractAllTask.xaml 的交互逻辑
+	/// </summary>
+	public partial class ExtractAllTask: BaseWindow {
 		Task ExtractTask;
 		private readonly string PackPath;
 		private readonly string DestPath;
 		public CancellationToken Token => TokenSource.Token;
-		public ExtractAllTask(string packPath, string destPath)
-        {
-            InitializeComponent();
+		public ExtractAllTask(string packPath, string destPath) {
+			InitializeComponent();
 
 			reporter = new Progress<string>(UpdateCall);
 
 			PackPath = packPath;
 			DestPath = destPath;
 
-            ExtractTask = new(Extraction(reporter), Token);
-            ExtractTask.Start();
+			ExtractTask = new(Extraction(reporter), Token);
+			ExtractTask.Start();
 		}
 
 		readonly IProgress<string> reporter;
@@ -59,10 +55,10 @@ namespace SCS_Mod_Helper.ConverterPix
 		}
 
 		private void ButtonCancelClick(object sender, RoutedEventArgs e) {
-            TokenSource.Cancel();
-            Close();
+			TokenSource.Cancel();
+			Close();
 		}
-		
+
 		bool PrepareMode = true;
 		int Step = 0;
 		string Message = "";
@@ -499,7 +495,7 @@ namespace SCS_Mod_Helper.ConverterPix
 		private void CreateDirs(string dirName) {
 			dirName = dirName.Replace('/', '\\');
 			string osFilename = DestPath + dirName;
-			if (File.Exists(osFilename) || Directory.Exists(osFilename)) 
+			if (File.Exists(osFilename) || Directory.Exists(osFilename))
 				return;
 			Directory.CreateDirectory(osFilename);
 		}

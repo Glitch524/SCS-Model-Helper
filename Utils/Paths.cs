@@ -20,7 +20,7 @@ class Paths {
 		return Path.Combine(dir, $"local_module.{moduleName}.sii");
 	}
 	public static string AccessoryIconDir(string projectLocation, string sub = "") {
-		var p =  $@"{projectLocation}\material\ui\accessory";
+		var p = $@"{projectLocation}\material\ui\accessory";
 		if (p.Length > 0)
 			p += $"\\{sub}";
 		return p;
@@ -41,6 +41,7 @@ class Paths {
 	}
 
 	public static string LanguageDir() => Path.Combine(Environment.CurrentDirectory, "Language");
+	public static string TrucksLanguageDir() => Path.Combine(Environment.CurrentDirectory, "Language\\Trucks");
 	public static string SavedPhysicsFile() => Path.Combine(Environment.CurrentDirectory, "Physics.DEP");
 	public static string DefaultDEDDir() => Path.Combine(Environment.CurrentDirectory, "Def Files");
 

@@ -1,8 +1,7 @@
 ﻿using System.Windows.Controls;
 
-namespace SCS_Mod_Helper.Base
-{
-    public class BasePage: Page {
+namespace SCS_Mod_Helper.Base {
+	public class BasePage: Page {
 		public string GetString(string key, params object[] args) {
 			string res = FindResource(key).ToString()!;
 			if (args.Length > 0) {

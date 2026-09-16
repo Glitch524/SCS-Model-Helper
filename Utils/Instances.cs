@@ -1,12 +1,12 @@
-﻿using SCS_Mod_Helper.Accessory;
-using SCS_Mod_Helper.Localization;
+﻿using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Main;
+using SCS_Mod_Helper.Modding.Accessories;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using Wpf.Ui.Appearance;
 
-namespace SCS_Mod_Helper.Utils; 
+namespace SCS_Mod_Helper.Utils;
 public static class Instances {
 
 	public static string CurrentLanguage {
@@ -125,6 +125,7 @@ class DictionaryUtil {
 	public static readonly Dictionary<string, Double<string, ResourceDictionary>> langs = [];
 	public static readonly Dictionary<string, ResourceDictionary> themes = [];
 
+	public static string ExtLangPreffix = "ext_";
 	private static void CollectDictionaries() {
 		var md = Application.Current.Resources.MergedDictionaries;
 		foreach (var dict in md) {
@@ -156,7 +157,7 @@ class DictionaryUtil {
 						var dict = new ResourceDictionary {
 							Source = new Uri(file.FullName)
 						};
-						langs.Add("ext_" + s[0], new("Ext:" + s[1], dict));
+						langs.Add(ExtLangPreffix + s[0], new("Ext:" + s[1], dict));
 					}
 				}
 			}

@@ -27,13 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Accessory\PaintJob\arrow.png" />
+    <None Remove="Modding\PaintJob\arrow.png" />
     <None Remove="App.config" />
     <None Remove="Images\AppIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Accessory\PaintJob\arrow.png" />
+    <Resource Include="Modding\PaintJob\arrow.png" />
     <Resource Include="Images\AppIcon.ico" />
   </ItemGroup>
 
@@ -59,7 +59,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Accessory\AccAddon\AccAddonHistory.Designer.cs">
+    <Compile Update="Modding\Accessories\AccAddon\AccAddonHistory.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>AccAddonHistory.settings</DependentUpon>
@@ -77,7 +77,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Update="Accessory\AccAddon\AccAddonHistory.settings">
+    <None Update="Modding\Accessories\AccAddon\AccAddonHistory.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>AccAddonHistory.Designer.cs</LastGenOutput>
     </None>

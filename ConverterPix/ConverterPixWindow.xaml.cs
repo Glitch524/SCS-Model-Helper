@@ -10,11 +10,12 @@ namespace SCS_Mod_Helper.ConverterPix {
 	/// ConverterPixWindow.xaml 的交互逻辑
 	/// </summary>
 	public partial class ConverterPixWindow: BaseWindow {
-		private readonly ConverterPixBinding Binding = new();
+		private readonly ConverterPixBinding Binding;
 
 		public ConverterPixWindow() {
 			InitializeComponent();
 
+			Binding = new(ListBoxScrollToTop);
 			GridMain.DataContext = Binding;
 		}
 
@@ -62,10 +63,12 @@ namespace SCS_Mod_Helper.ConverterPix {
 			Binding.DirBack(index);
 		}
 
+		public void ListBoxScrollToTop() {
+			ListFiles.ScrollIntoView(Binding.FileList[0]);
+		}
+
 		private void ButtonExtractFileClick(object sender, RoutedEventArgs e) {
 			if (Binding.SelectedFile is PIXFile pixFile) {
-				if (pixFile.IsDir)
-					return;
 				Binding.TestExtract(this, pixFile);
 			}
 		}
@@ -85,7 +88,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 				FolderBack();
 				e.Handled = true;//没有这个会导致在返回时莫名其妙选中第一个文件
 			}
-        }
+		}
 
 		private void ButtonEDF(object sender, RoutedEventArgs e) {
 			var extractTask = new ExtractAllTask(PackPath, Binding.DestPath) {

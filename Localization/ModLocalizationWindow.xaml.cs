@@ -1,5 +1,4 @@
-﻿using SCS_Mod_Helper.Accessory;
-using SCS_Mod_Helper.Base;
+﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -10,8 +9,7 @@ namespace SCS_Mod_Helper.Localization;
 /// <summary>
 /// ModLocalization.xaml 的交互逻辑
 /// </summary>
-public partial class ModLocalizationWindow : BaseWindow
-{
+public partial class ModLocalizationWindow: BaseWindow {
 	private readonly LocaleBinding binding = new();
 
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -27,13 +25,12 @@ public partial class ModLocalizationWindow : BaseWindow
 	public ObservableCollection<LocalePair> UniversalDict => binding.UniversalDict!;
 
 	public bool HasChanges = false;
-	public ModLocalizationWindow()
-    {
-        InitializeComponent();
+	public ModLocalizationWindow() {
+		InitializeComponent();
 		GridMain.DataContext = binding;
 
 		Loaded += OnLoaded;
-    }
+	}
 
 	private void OnLoaded(object sender, RoutedEventArgs e) {
 		var task = Task.Run(() => LocaleIO.ReadLocaleDict(Modules));
@@ -120,7 +117,7 @@ public partial class ModLocalizationWindow : BaseWindow
 
 	private void OperateButtonClick(object sender, RoutedEventArgs e) {
 		if (sender == ButtonAdd) {
-			CollectionUtil.AddItem(TableDict, CurrentDict, new("",""));
+			CollectionUtil.AddItem(TableDict, CurrentDict, new("", ""));
 		} else if (sender == ButtonDelete) {
 			CollectionUtil.RemoveItem(TableDict, CurrentDict);
 		} else if (sender == ButtonUp || sender == ButtonDown) {
@@ -132,7 +129,7 @@ public partial class ModLocalizationWindow : BaseWindow
 		if (sender == ButtonCancel) {
 			Close();
 		} else if (sender == ButtonSave) {
-			if (UniversalDict.Count > 0) 
+			if (UniversalDict.Count > 0)
 				RunSave();
 			else {
 				var result = MessageBox.Show(this, GetString("MessageUniEmpty"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);

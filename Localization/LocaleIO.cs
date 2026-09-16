@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows;
 
 namespace SCS_Mod_Helper.Localization {
-	internal class LocaleIO() : ModIO {
+	internal class LocaleIO(): ModIO {
 		private const string NameLocHeader = "localization_db : .localization";
 		private const string DictPreffix = "local_module";
 		private const string NameKey = "key";

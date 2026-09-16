@@ -6,14 +6,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
-namespace SCS_Mod_Helper.Main; 
+namespace SCS_Mod_Helper.Main;
 /// <summary>
 /// SettingsPage.xaml 的交互逻辑
 /// </summary>
 public partial class SettingsPage: BasePage {
 	private readonly SettingsBinding binding = new();
 	public SettingsPage() {
-        InitializeComponent();
+		InitializeComponent();
 		binding.ISetThemeWatcher += (watch) => {
 			var window = (BaseWindow)Window.GetWindow(this);
 			window.SetThemeWatcher(watch);
@@ -29,7 +29,7 @@ public partial class SettingsPage: BasePage {
 			Process.Start(psi);
 		} else if (sender == ButtonConverterPix) {
 			string start = binding.ConverterPixPath;
-			if (start.Length > 0) 
+			if (start.Length > 0)
 				start = new DirectoryInfo(start).Parent?.FullName ?? "";
 			var fileDialog = new OpenFileDialog {
 				Multiselect = false,

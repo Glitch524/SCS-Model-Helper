@@ -2,7 +2,7 @@
 using SCS_Mod_Helper.Utils;
 using System.Windows.Navigation;
 
-namespace SCS_Mod_Helper.Main; 
+namespace SCS_Mod_Helper.Main;
 /// <summary>
 /// AboutWindow.xaml 的交互逻辑
 /// </summary>
