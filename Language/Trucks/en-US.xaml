@@ -1,0 +1,2471 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:s="clr-namespace:System;assembly=mscorlib"
+	xml:space="preserve">
+	<!--Truck Description ETS2-->
+	<s:String
+		x:Key="name.daf.xf">DAF XF105</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xf">2005</s:Int32>
+	<s:String
+		x:Key="desc.daf.xf">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="space_cab.daf.xf.cabin">Space</s:String>
+	<s:String
+		x:Key="s_cab_plus.daf.xf.cabin">Space Cab Plus</s:String>
+	<s:String
+		x:Key="super_s_cab.daf.xf.cabin">Super Space</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.xf.r_bumper.chrome">后保险杠-Centurion（XF Tuning DLC）</s:String>
+	<s:String
+		x:Key="daf.xf.r_bumper.steel">后保险杠-Thor（XF Tuning DLC）</s:String>
+	<s:String
+		x:Key="daf.xf.r_bumper.paint">后保险杠-Celeritas（XF Tuning DLC）</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_4x2_p">侧裙-全保护侧裙 4x2</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_4x2_et_p">侧裙-全保护侧裙 4x2 扩容油箱</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_6x2_p">侧裙-全保护侧裙 6x2</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_6x4_p">侧裙-全保护侧裙 6x4</s:String>
+	
+	
+	<s:String
+		x:Key="name.daf.xf_euro6">DAF XF</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xf_euro6">2013</s:Int32>
+	<x:Static
+		x:Key="desc.daf.xf_euro6"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="space.daf.xf_euro6.cabin">Space</s:String>
+	<s:String
+		x:Key="spacespoiler.daf.xf_euro6.cabin">Space Aero</s:String>
+	<s:String
+		x:Key="superspace.daf.xf_euro6.cabin">Super Space</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.chrome">后保险杠-Centurion（XF Tuning DLC）</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.chrome_6">r_bumper.chrome_6</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.steel">后保险杠-Thor（XF Tuning DLC）</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.steel_6">r_bumper.steel_6</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.paint">后保险杠-celeritas（XF Tuning DLC）</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.paint_6">r_bumper.paint_6</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_chs_cover.ch_4x2_p">侧裙-全保护侧裙 4x2</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_chs_cover.ch_6x4_p">侧裙-全保护侧裙 6x4</s:String>
+
+	
+	<s:String
+		x:Key="name.daf.2021">DAF NGD</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.2021">2021</s:Int32>
+	<x:Static
+		x:Key="desc.daf.2021"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="xf.daf.2021.cabin">XF</s:String>
+	<s:String
+		x:Key="xg.daf.2021.cabin">XG</s:String>
+	<s:String
+		x:Key="xg_plus.daf.2021.cabin">XG+</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.2021.mirror.plast">主后视镜-塑料</s:String>
+	<s:String
+		x:Key="daf.2021.mirror.semi">主后视镜-喷漆和塑料</s:String>
+	<s:String
+		x:Key="daf.2021.mirror.cam_semi">DAF Digital Vision</s:String>
+	<s:String
+		x:Key="daf.2021.sunshield.paint_xf">遮阳板-喷漆（XF）</s:String>
+	<s:String
+		x:Key="daf.2021.sunshield.paint_xg">遮阳板-喷漆（XG）</s:String>
+	<s:String
+		x:Key="daf.2021.sunshield.paint_xgp">遮阳板-喷漆（XG+）</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.pnt_4x2_xf">侧裙-喷漆（XF）</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.pnt_4x2">侧裙-喷漆</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv_4x2_xf">侧裙-豪华喷漆（XF）</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv_4x2">侧裙-豪华喷漆</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv2_4x2_xf">侧裙-豪华喷漆 II（XF）</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv2_4x2">侧裙-豪华喷漆 II</s:String>
+
+	
+	
+	<s:String
+		x:Key="name.daf.xd">DAF XD</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xd">2022</s:Int32>
+	<s:String
+		x:Key="desc.daf.xd">Toybed is too high, sitting model may clip through the higher bed</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.daf.xd.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="sl.daf.xd.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="slh.daf.xd.cabin">Sleeper High</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.xd.mirror.plast">主后视镜-塑料</s:String>
+	<s:String
+		x:Key="daf.xd.mirror.semi">主后视镜-喷漆和塑料</s:String>
+	<s:String
+		x:Key="daf.xd.mirror.cam_semi">DAF Digital Vision</s:String>
+	<s:String
+		x:Key="daf.xd.mirror.cam_semi_h">DAF Digital Vision（Sleeper High）</s:String>
+	<s:String
+		x:Key="daf.xd.sunshield.paint_slh">遮阳板-喷漆（Sleeper High）</s:String>
+	<s:String
+		x:Key="daf.xd.sideskirt.pnt_4x2s">侧裙-喷漆（Sleeper, Sleeper High）</s:String>
+
+	
+	
+	<s:String
+		x:Key="name.daf.xf_electric">DAF XF Electric</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xf_electric">2025</s:Int32>
+	<s:String
+		x:Key="desc.daf.xf_electric">Currently no accessory locator</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="slh.daf.xf_electric.cabin">Sleeper High</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.iveco.stralis">Iveco Stralis</s:String>
+	<s:Int32
+		x:Key="prodYear.iveco.stralis">2002</s:Int32>
+	<s:String
+		x:Key="desc.iveco.stralis">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="at.iveco.stralis.cabin">Active Space</s:String>
+	<s:String
+		x:Key="at_higher.iveco.stralis.cabin">Active Super</s:String>
+	<s:String
+		x:Key="as_higher.iveco.stralis.cabin">Active Space Super</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.iveco.hiway">Iveco Stralis Hi-Way</s:String>
+	<s:Int32
+		x:Key="prodYear.iveco.hiway">2012</s:Int32>
+	<s:String
+		x:Key="desc.iveco.hiway">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="hiway.iveco.hiway.cabin">Hi-Way</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.iveco.sway">Iveco S-Way</s:String>
+	<s:Int32
+		x:Key="prodYear.iveco.sway">2019</s:Int32>
+	<x:Static
+		x:Key="desc.iveco.sway"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="as.iveco.sway.cabin">Active Space</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="iveco.sway.sideskirt.pnt_4x2">喷漆</s:String>
+	<s:String
+		x:Key="iveco.sway.sideskirt.pnt_4x2_a">喷漆, Aero</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.man.tgx">MAN TGX Euro 5</s:String>
+	<s:Int32
+		x:Key="prodYear.man.tgx">2008</s:Int32>
+	<s:String
+		x:Key="desc.man.tgx">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="xl_cab.man.tgx.cabin">XL</s:String>
+	<s:String
+		x:Key="xlx_cab.man.tgx.cabin">XLX</s:String>
+	<s:String
+		x:Key="xxl_cab.man.tgx.cabin">XXL</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.man.tgx_euro6">MAN TGX Euro 6</s:String>
+	<s:Int32
+		x:Key="prodYear.man.tgx_euro6">2015</s:Int32>
+	<x:Static
+		x:Key="desc.man.tgx_euro6"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="xl_cab.man.tgx_euro6.cabin">XL</s:String>
+	<s:String
+		x:Key="xlx_cab.man.tgx_euro6.cabin">XLX</s:String>
+	<s:String
+		x:Key="xxl_cab.man.tgx_euro6.cabin">XXL</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="man.tgx_euro6.mirror.paint">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_4x2">侧裙-原厂 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x22">侧裙-原厂 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x24">侧裙-原厂 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x2_2">侧裙-原厂 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x4">侧裙-原厂 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_8x4">侧裙-原厂 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_4x2">侧裙-喷漆 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x22">侧裙-喷漆 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x24">侧裙-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x2_2">侧裙-喷漆 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x4">侧裙-喷漆 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_8x4">侧裙-喷漆 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_4x2">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x22">后挡泥板-喷漆 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x24">后挡泥板-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x2_2">后挡泥板-喷漆 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x4">后挡泥板-喷漆 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_8x4">后挡泥板-喷漆 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_4x2">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x22">后挡泥板顶盖-喷漆 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x24">后挡泥板顶盖-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x2_2">后挡泥板顶盖-喷漆 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x4">后挡泥板顶盖-喷漆 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_8x4">后挡泥板顶盖-喷漆 8x4</s:String>
+
+	
+	
+	<s:String
+		x:Key="name.man.tgx_2020">MAN TGX</s:String>
+	<s:Int32
+		x:Key="prodYear.man.tgx_2020">2020</s:Int32>
+	<x:Static
+		x:Key="desc.man.tgx_2020"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="gn.man.tgx_2020.cabin">GN</s:String>
+	<s:String
+		x:Key="gm.man.tgx_2020.cabin">GM</s:String>
+	<s:String
+		x:Key="gx.man.tgx_2020.cabin">GX</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="man.tgx_2020.mirror.cam_pnt">主后视镜-喷漆, 电子后视镜</s:String>
+	<s:String
+		x:Key="man.tgx_2020.mirror.cam_pnt_gn">主后视镜-喷漆, 电子后视镜 GN</s:String>
+	<s:String
+		x:Key="man.tgx_2020.mirror.pnt_pla">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="man.tgx_2020.mirror.pnt_pla_bs">主后视镜-喷漆, 传感器</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gn">车顶导流板-原厂 GN</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gm">车顶导流板-原厂</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gm_2024">车顶导流板-原厂 II</s:String>
+	<s:String
+		x:Key="man.tgx_2020.f_bumper.pnt_pla_duty">前保险杠_Duty 喷漆</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_4x2">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_6x22">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_6x4">后挡泥板-喷漆 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_8x4">后挡泥板-喷漆 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_4x2">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_6x22">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_6x4">后挡泥板顶盖-喷漆 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_8x4">后挡泥板顶盖-喷漆 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_light.old_pnt">尾灯-喷漆</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_light.led_pnt">尾灯-LED喷漆</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2">侧裙-原厂, Aero 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2_e">侧裙-原厂 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2_p">侧裙-喷漆, Aero 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2_p_e">侧裙-喷漆 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_p">侧裙-原厂, Aero （短）</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_p_e">侧裙-原厂 （短）</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_s">侧裙-喷漆, Aero （短）</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_s_e">侧裙-喷漆 （短）</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.mercedes.actros">Mercedes-Benz Actros</s:String>
+	<s:Int32
+		x:Key="prodYear.mercedes.actros">2009</s:Int32>
+	<s:String
+		x:Key="desc.mercedes.actros">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="cabin_l_lw.mercedes.actros.cabin">Low Roof Sleeper</s:String>
+	<s:String
+		x:Key="cabin_l.mercedes.actros.cabin">high Roof Sleeper</s:String>
+	<s:String
+		x:Key="megaspace.mercedes.actros.cabin">MegaSpace</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mercedes.actros.sunshld.shape14">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="mercedes.actros.sunshld.shape15">遮阳板-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="mercedes.actros.sunshld.shape2">遮阳板-Samurai</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_chs_cover.paint4x2">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_chs_cover.paint6x24">底盘防护罩-Diva 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_chs_cover.paint6x4">底盘防护罩-Diva 6x4</s:String>
+	<s:String
+		x:Key="mercedes.actros.exhaust_m.exhaust1a">后排气管-Thor（MegaSpace）</s:String>
+	<s:String
+		x:Key="mercedes.actros.exhaust_m.exhaust1b">后排气管-Thor（high Roof Sleeper）</s:String>
+	<s:String
+		x:Key="mercedes.actros.exhaust_m.exhaust1c">后排气管-Thor（Low Roof Sleeper）</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fender.4x2paint">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fender.6x24paint">后挡泥板-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fender.6x2paint">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fendr_top.4x2paint">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fendr_top.6x24paint">后挡泥板顶盖-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fendr_top.6x2paint">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2paint">后保险杠-喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v1plate">后保险杠-Centurion 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v1paint">后保险杠-Centurion, 喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v1chrome">后保险杠-Centurion, 镀铬 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v2paint">后保险杠-Thor, 喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v3paint">后保险杠-Diva, 喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2paint">后保险杠-喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v1plate">后保险杠-Centurion  6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v1paint">后保险杠-Centurion, 喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v1chrome">后保险杠-Centurion, 镀铬 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v2paint">后保险杠-Thor, 喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v3paint">后保险杠-Diva, 喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24paint">后保险杠-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v1plate">后保险杠-Centurion 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v1paint">后保险杠-Centurion, 喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v1chrome">后保险杠-Centurion, 镀铬 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v2paint">后保险杠-Thor, 喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v3paint">后保险杠-Diva, 喷漆 6x2/4</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.mercedes.actros2014">Mercedes-Benz New Actros</s:String>
+	<s:Int32
+		x:Key="prodYear.mercedes.actros2014">2014</s:Int32>
+	<x:Static
+		x:Key="desc.mercedes.actros2014"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="streamspace.mercedes.actros2014.cabin">StreamSpace</s:String>
+	<s:String
+		x:Key="bigspace.mercedes.actros2014.cabin">BigSpace</s:String>
+	<s:String
+		x:Key="gigaspace.mercedes.actros2014.cabin">GigaSpace</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mercedes.actros2014.sunshld.paint01">遮阳板-Samurai</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.sunshld.paint02">遮阳板-Titan</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.sunshld.paint03">遮阳板-Viking</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.s_guard.type3">防石击护栏-Extra</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_chs_cover.4x2p">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_chs_cover.6x24p">底盘防护罩-Diva 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_chs_cover.6x2p">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.4x2p">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.6x24p">后挡泥板-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.6x2p">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.8x4p">后挡泥板-喷漆 8x4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.4x2p">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.6x24p">后挡泥板顶盖-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.6x2p">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.8x4p">后挡泥板顶盖-喷漆 8x4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.4x2v3">后保险杠-Diva 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.4x2v2">后保险杠-Centurion 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.4x2v1">后保险杠-Thor 4x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x24v3">后保险杠-Diva 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x24v2">后保险杠-Centurion 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x24v1">后保险杠-Thor 6x2/4</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x2v3">后保险杠-Diva 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x2v2">后保险杠-Centurion 6x2</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x2v1">后保险杠-Thor 6x2</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.renault.magnum">Renault Magnum</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.magnum">1990</s:Int32>
+	<s:String
+		x:Key="desc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="solo.renault.magnum.cabin">Excellence</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.renault.premium">Renault Premium</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.premium">1996</s:Int32>
+	<s:String
+		x:Key="desc.renault.premium">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.renault.premium.cabin">Normal Roof</s:String>
+	<s:String
+		x:Key="higher.renault.premium.cabin">High Roof</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.renault.t">Renault T</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.t">2013</s:Int32>
+	<x:Static
+		x:Key="desc.renault.t"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="sleeper.renault.t.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="high_sleeper.renault.t.cabin">High Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="renault.t.hl_guard.paint">Renault T Tuning DLC</s:String>
+	<s:String
+		x:Key="renault.t.hl_guard.paint_evo">hl_guard.paint_evo</s:String>
+	<s:String
+		x:Key="renault.t.s_guard.renault_pa">s_guard.renault_pa</s:String>
+	<s:String
+		x:Key="renault.t.f_grill.racing_paint">f_grill.racing_paint</s:String>
+	<s:String
+		x:Key="renault.t.f_grill.joker_paint">f_grill.joker_paint</s:String>
+	<s:String
+		x:Key="renault.t.f_grill.hawk_paint">f_grill.hawk_paint</s:String>
+	<s:String
+		x:Key="renault.t.b_grill.paint_mirage">b_grill.paint_mirage</s:String>
+	<s:String
+		x:Key="renault.t.b_grill.paint_pride">b_grill.paint_pride</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2plain">侧裙</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2satin">sideskirt.4x2satin</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2shp">侧裙-喷漆护罩（短） 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side1p">侧裙-喷漆 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side1p24">侧裙-喷漆, 2024 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side2pg">侧裙-喷漆和灰色塑料护罩 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side3">侧裙-喷漆和塑料护罩 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24plain">sideskirt.6x24plain</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24satin">sideskirt.6x24satin</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24shp">侧裙-喷漆护罩（短） 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side1p">侧裙-喷漆 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side1p24">侧裙-喷漆, 2024 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side2pg">侧裙-喷漆和灰色塑料护罩 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side3">侧裙-喷漆和塑料护罩 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2plain">sideskirt.6x2plain</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2satin">sideskirt.6x2satin</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2shp">侧裙-喷漆护罩（短） 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side1p">侧裙-喷漆 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side1p24">侧裙-喷漆, 2024 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side2pg">侧裙-喷漆和灰色塑料护罩 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side3">侧裙-喷漆和塑料护罩 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskrt_bar.4x2_paint">侧裙边条</s:String>
+	<s:String
+		x:Key="renault.t.sideskrt_bar.6x24_paint">sideskrt_bar.6x24_paint</s:String>
+	<s:String
+		x:Key="renault.t.sideskrt_bar.6x2_paint">sideskrt_bar.6x2_paint</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2_diva">r_chs_cover.4x2_diva</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2_thor_pn">r_chs_cover.4x2_thor_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2t_diva">r_chs_cover.4x2t_diva</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2t_thor_pn">r_chs_cover.4x2t_thor_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x24_diva">r_chs_cover.6x24_diva</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x24_thor_pn">r_chs_cover.6x24_thor_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x2_diva">r_chs_cover.6x2_diva</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x2_thor_pn">r_chs_cover.6x2_thor_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2_satin">r_chs_cover.4x2_satin</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2t_satin">r_chs_cover.4x2t_satin</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x24_satin">r_chs_cover.6x24_satin</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x2_satin">r_chs_cover.6x2_satin</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.4x2_pn">后挡泥板</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.4x2_pn_ch">r_fender.4x2_pn_ch</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x24_pn">r_fender.6x24_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x24_pn_ch">r_fender.6x24_pn_ch</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x2_pn">r_fender.6x2_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x2_pn_ch">r_fender.6x2_pn_ch</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.4x2_pn">后挡泥板顶盖</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.4x2_pn_ch">r_fendr_top.4x2_pn_ch</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x24_pn">r_fendr_top.6x24_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x24_pn_ch">r_fendr_top.6x24_pn_ch</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x2_pn">r_fendr_top.6x2_pn</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x2_pn_ch">r_fendr_top.6x2_pn_ch</s:String>
+	<s:String
+		x:Key="renault.t.r_bumper.4x2_racing">后保险杠</s:String>
+	<s:String
+		x:Key="renault.t.r_bumper.6x24_racing">r_bumper.6x24_racing</s:String>
+	<s:String
+		x:Key="renault.t.r_bumper.6x2_racing">r_bumper.6x2_racing</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.4x2pnt">后挡泥帘</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x24pnt">r_mudflap.6x24pnt</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x2pnt">r_mudflap.6x2pnt</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.4x2pntw">r_mudflap.4x2pntw</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x24pntw">r_mudflap.6x24pntw</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x2pntw">r_mudflap.6x2pntw</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.renault.etech_t">Renault E-Tech T</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.etech_t">2023</s:Int32>
+	<s:String
+		x:Key="desc.renault.etech_t">Currently no accessory locator</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="sleeper.renault.etech_t.cabin">Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.scania.r">Scania R 2009</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.r">2009</s:Int32>
+	<s:String
+		x:Key="desc.scania.r">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.r.cabin">Normal</s:String>
+	<s:String
+		x:Key="highline.scania.r.cabin">Highline</s:String>
+	<s:String
+		x:Key="topline.scania.r.cabin">Topline</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.r.r_chs_cover.chscmg4x203">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="scania.r.r_chs_cover.chscmg6x203">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="scania.r.r_chs_cover.chscmg6x2403">底盘防护罩-Diva 6x2/4</s:String>
+	<s:String
+		x:Key="scania.r.r_bumper.arbumpermg01">后保险杠-Diva</s:String>
+	<s:String
+		x:Key="scania.r.r_bumper.arbumpermg03">后保险杠-Thor</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.streamline">Scania Streamline</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.streamline">2013</s:Int32>
+	<s:String
+		x:Key="desc.scania.streamline">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.streamline.cabin">Normal</s:String>
+	<s:String
+		x:Key="highline.scania.streamline.cabin">Highline</s:String>
+	<s:String
+		x:Key="topline.scania.streamline.cabin">Topline</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.streamline.r_chs_cover.chscmg4x203">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="scania.streamline.r_chs_cover.chscmg6x203">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="scania.streamline.r_chs_cover.chscmg6x2403">底盘防护罩-Diva 6x2/4</s:String>
+	<s:String
+		x:Key="scania.streamline.r_bumper.grbumpermg01">后保险杠-Diva</s:String>
+	<s:String
+		x:Key="scania.streamline.r_bumper.arbumpermg03">后保险杠-Thor</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.r_2016">Scania R</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.r_2016">2016</s:Int32>
+	<x:Static
+		x:Key="desc.scania.r_2016"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.r_2016.cabin">Normal Roof</s:String>
+	<s:String
+		x:Key="highline.scania.r_2016.cabin">High Roof</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.r_2016.sunshld.stock">遮阳板-原厂</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_01">遮阳板-原厂 II</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_04">遮阳板-Ranger</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_05">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_06">遮阳板-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="scania.r_2016.mirror.painted">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.mirror.painted_f">主后视镜-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mirror.painted">前反光镜-喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.s_mirror.painted">侧反光镜-喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_equip.super_lo_pnt">前配设-喷漆, 低</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_equip.super_md_pnt">前配设-喷漆, 高</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_logo.painted">前车标-喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.kotrh">前挡泥帘-公路之王, 喷漆 高</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.kotr">前挡泥帘-公路之王, 喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.kotrl">前挡泥帘-公路之王, 喷漆 低</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniah">前挡泥帘-Scania, 喷漆 高</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scania">前挡泥帘-Scania, 喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scanial">前挡泥帘-Scania, 喷漆 低</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniamgh">前挡泥帘-Mighty Griffin 高</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniamg">前挡泥帘-Mighty Griffin</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniamgl">前挡泥帘-Mighty Griffin 低</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.v8h">前挡泥帘-Scania V8 Power 高</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.v8">前挡泥帘-Scania V8 Power</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.v8l">前挡泥帘-Scania V8 Power 低</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p">侧裙-喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_1">侧裙-喷漆和原厂 I 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_2">侧裙-喷漆和原厂 II 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_v8">侧裙-喷漆V8 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_v8_1">侧裙-喷漆V8和原厂I 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_v8_2">侧裙-喷漆V8和原厂II 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p">侧裙-喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_1">侧裙-喷漆和原厂 I 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_2">侧裙-喷漆和原厂 II 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_v8">侧裙-喷漆V8 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_v8_1">侧裙-喷漆V8和原厂I 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_v8_2">侧裙-喷漆V8和原厂II 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p">侧裙-喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_1">侧裙-喷漆和原厂 I 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_2">侧裙-喷漆和原厂 II 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_v8">侧裙-喷漆V8 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_v8_1">侧裙-喷漆V8和原厂I 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_v8_2">侧裙-喷漆V8和原厂II 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_chs_cover.4x2_p">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_chs_cover.6xn_p">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_chs_cover.6xnl_p">底盘防护罩-Diva 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fender.4x2_p">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fender.6x2_p">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fender.6x2l_p">后挡泥板-喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.4x2_p">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.low_4x2_p">后挡泥板顶盖-低, 喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.6x2_p">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.low_6x2_p">后挡泥板顶盖-低, 喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.6x2l_p">后挡泥板顶盖-喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.low_6x2l_p">后挡泥板顶盖-低, 喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.stock_p">后保险杠-喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.duty_p">后保险杠-Duty 喷漆</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.mg01">后保险杠-Diva</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.mg03">后保险杠-Thor</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.mg04">后保险杠-Chariot</s:String>
+	<s:String
+		x:Key="scania.r_2016.exhaust_m.mg01">后排气管-Wing Master V8</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.s_2016">Scania S</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.s_2016">2016</s:Int32>
+	<x:Static
+		x:Key="desc.scania.s_2016"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.s_2016.cabin">Normal Roof</s:String>
+	<s:String
+		x:Key="highline.scania.s_2016.cabin">High Roof</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.s_2016.sunshld.stock">遮阳板-原厂</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_01">遮阳板-原厂 II</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_04">遮阳板-Ranger</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_05">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_06">遮阳板-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="scania.s_2016.mirror.painted">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.mirror.painted_f">主后视镜-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mirror.painted">前反光镜-喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.s_mirror.painted">侧反光镜-喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_equip.super_hi_pnt">前配设-喷漆, 高</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_equip.super_md_pnt">前配设-喷漆, 中</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_logo.painted">前车标-喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.kotrh">前挡泥帘-公路之王, 喷漆 高</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.kotr">前挡泥帘-公路之王, 喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.kotrl">前挡泥帘-公路之王, 喷漆 低</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniah">前挡泥帘-Scania, 喷漆 高</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scania">前挡泥帘-Scania, 喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scanial">前挡泥帘-Scania, 喷漆 低</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniamgh">前挡泥帘-Mighty Griffin 高</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniamg">前挡泥帘-Mighty Griffin</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniamgl">前挡泥帘-Mighty Griffin 低</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.v8h">前挡泥帘-Scania V8 Power 高</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.v8">前挡泥帘-Scania V8 Power</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.v8l">前挡泥帘-Scania V8 Power 低</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p">侧裙-喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_1">侧裙-喷漆和原厂 I 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_2">侧裙-喷漆和原厂 II 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_v8">侧裙-喷漆V8 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_v8_1">侧裙-喷漆V8和原厂I 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_v8_2">侧裙-喷漆V8和原厂II 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p">侧裙-喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_1">侧裙-喷漆和原厂 I 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_2">侧裙-喷漆和原厂 II 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_v8">侧裙-喷漆V8 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_v8_1">侧裙-喷漆V8和原厂I 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_v8_2">侧裙-喷漆V8和原厂II 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p">侧裙-喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_1">侧裙-喷漆和原厂 I 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_2">侧裙-喷漆和原厂 II 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_v8">侧裙-喷漆V8 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_v8_1">侧裙-喷漆V8和原厂I 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_v8_2">侧裙-喷漆V8和原厂II 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_chs_cover.4x2_p">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_chs_cover.6xn_p">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_chs_cover.6xnl_p">底盘防护罩-Diva 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fender.4x2_p">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fender.6x2_p">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fender.6x2l_p">后挡泥板-喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.4x2_p">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.low_4x2_p">后挡泥板顶盖-低, 喷漆 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.6x2_p">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.low_6x2_p">后挡泥板顶盖-低, 喷漆 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.6x2l_p">后挡泥板顶盖-喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.low_6x2l_p">后挡泥板顶盖-低, 喷漆 6x2 长</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.stock_p">后保险杠-喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.duty_p">后保险杠-Duty 喷漆</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.mg01">后保险杠-Diva</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.mg03">后保险杠-Thor</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.mg04">后保险杠-Chariot</s:String>
+	<s:String
+		x:Key="scania.s_2016.exhaust_m.mg01">后排气管-Wing Master V8</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.s_2024e">Scania S BEV</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.s_2024e">2024</s:Int32>
+	<x:Static
+		x:Key="desc.scania.s_2024e"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="highline.scania.s_2024e.cabin">High Roof</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh16">Volvo FH3</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh16">2009</s:Int32>
+	<s:String
+		x:Key="desc.volvo.fh16">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1.volvo.fh16.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh16.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh16.cabin">Globetrotter XL</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh16.sunshld.shape2">遮阳板-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh16.sunshld.sunshield01">遮阳板-豪华喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16.sunshld.sunshield02">遮阳板-豪华喷漆和镀铬</s:String>
+	<s:String
+		x:Key="volvo.fh16.sunshld.sunshield03">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16.mirror.shape3">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16.mirror.led3">主后视镜-喷漆, 3 LED</s:String>
+	<s:String
+		x:Key="volvo.fh16.mirror.led4">主后视镜-喷漆, 4 LED</s:String>
+	<s:String
+		x:Key="volvo.fh16.f_mirror.paint">前反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16.f_mirror.paintl">前反光镜-喷漆 长</s:String>
+	<s:String
+		x:Key="volvo.fh16.s_mirror.paint">侧反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16.f_grill.paint1">防撞条-Quarterback</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_grill.paint1">灯架-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_grill.paint1_h1">灯架-喷漆 Sleeper</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_4x">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_dia_4x">底盘防护罩-Centurion 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_6x">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_dia_6x">底盘防护罩-Centurion 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_bumper.shape1">后保险杠-Diva</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_bumper.shape2">后保险杠-Chariot</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_chr_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_chr_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16.exhaust_m.exh_m_02">后排气管-Diva Globetrotter XL</s:String>
+	<s:String
+		x:Key="volvo.fh16.exhaust_m.exh_m_02b">后排气管-Diva </s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh16_2012">Volvo FH4</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh16_2012">2012</s:Int32>
+	<s:String
+		x:Key="desc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1.volvo.fh16_2012.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh16_2012.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh16_2012.cabin">Globetrotter XL</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.shape1">遮阳板-原厂</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.shape2">遮阳板-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.dual">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.quatro">遮阳板-豪华喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.triangle">遮阳板-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_mirror.painted">前反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_mirror.paintedl">前反光镜-喷漆 长</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.s_mirror.paint">侧反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.shape3">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.chrome_led">主后视镜-喷漆, LED</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.chrome_logo">主后视镜-喷漆和镀铬</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.chrom_spec">主后视镜-镀铬, 豪华</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_grill.net">防撞条-喷漆网</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.filter.paint_slep">空气过滤器-喷漆 Sleeper</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.filter.paint_gl">空气过滤器-喷漆 Globetrotter</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.filter.paint_glxl">空气过滤器-喷漆 Globetrotter XL</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.shape2">侧裙-全保护侧裙</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.stock_6x">侧裙-全保护侧裙 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_4x">侧裙-喷漆和镀铬 II 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_6x">侧裙-喷漆和镀铬 II 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_fender_chs.paint">前挡泥板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.exhaust_m.shape2">后排气管-Centurion</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.exhaust_m.shape1">后排气管-Diva</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.painted_4x">底盘防护罩-Diva 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.painted_6x">底盘防护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.mix_4x">底盘防护罩-Centurion 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.mix_6x">底盘防护罩-Centurion 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fender.paint_8x">后挡泥板-喷漆 8x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_8x">后挡泥板顶盖-喷漆 8x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_8x">后挡泥板顶盖-喷漆和镀铬 8x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_bumper.painted">后保险杠-Chariot</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_bumper.smoth">后保险杠-Diva</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_bumper.bend">后保险杠-Thor</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh_2021">Volvo FH5</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh_2021">2021</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.fh_2021"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1.volvo.fh_2021.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh_2021.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh_2021.cabin">Globetrotter XL</s:String>
+	<s:String
+		x:Key="l2h3_8x4.volvo.fh_2021.cabin">Globetrotter XL 8x4</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.shape1">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.shape2">遮阳板-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.dual">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.quatro">遮阳板-豪华喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.triangle">遮阳板-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.chrom_spec">主后视镜-喷漆 豪华</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.chrome_led">主后视镜-喷漆, LED</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.chrome_logo">主后视镜-喷漆和镀铬</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.shape3">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.shape4">主后视镜-豪华</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_mirror.painted">前反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_mirror.paintedl">前反光镜-喷漆 长</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.s_mirror.paint">侧反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.filter.paint_h1">空气过滤器-喷漆 Sleeper</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.filter.paint_h2">空气过滤器-喷漆 Globetrotter</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.filter.paint_h3">空气过滤器-喷漆 Globetrotter XL</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_grill.net">防撞条-喷漆网</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_fender_chs.paint">前挡泥板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.stock_6x_a">侧裙-Aero 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.stock_4x_a">侧裙-Aero 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_4x">侧裙-喷漆和镀铬 II 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_6x">侧裙-喷漆和镀铬 II 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.exhaust_m.shape2">后排气管-Centurion</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.exhaust_m.shape1">后排气管-Diva</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.painted_4x">底盘保护罩-Diva （油箱520+315L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.painted_4x_2">底盘保护罩-Diva （油箱600+340L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.painted_6x">底盘保护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.mix_4x">底盘保护罩-Centurion （油箱520+315L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.mix_4x_2">底盘保护罩-Centurion （油箱600+340L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.mix_6x">底盘保护罩-Centurion 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fender.paint_8x">后挡泥板-喷漆 8x4</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.paint_8x">后挡泥板顶盖-喷漆 8x4</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_8x">后挡泥板顶盖-喷漆和镀铬 8x4</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_bumper.bend">后保险杠-Thor</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_bumper.painted">后保险杠-Chariot</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_bumper.smoth">后保险杠-Diva</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh_2024">Volvo FH6</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh_2024">2024</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.fh_2024"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1_aero.volvo.fh_2024.cabin">Aero Sleeper</s:String>
+	<s:String
+		x:Key="l2h1.volvo.fh_2024.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2_aero.volvo.fh_2024.cabin">Aero Globetrotter</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh_2024.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3_aero.volvo.fh_2024.cabin">Aero Globetrotter XL</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh_2024.cabin">Globetrotter XL</s:String>
+	<s:String
+		x:Key="l2h3_8x4_a.volvo.fh_2024.cabin">Aero Globetrotter XL 8x4</s:String>
+	<s:String
+		x:Key="l2h3_8x4.volvo.fh_2024.cabin">Globetrotter XL 8x4</s:String>
+	<s:String
+		x:Key="l3h3_aero.volvo.fh_2024.cabin">Aero Globetrotter XXL</s:String>
+	<s:String
+		x:Key="l3h3.volvo.fh_2024.cabin">Globetrotter XXL</s:String>
+	<s:String
+		x:Key="l3h3_8x4_a.volvo.fh_2024.cabin">Aero Globetrotter XXL 8x4</s:String>
+	<s:String
+		x:Key="l3h3_8x4.volvo.fh_2024.cabin">Globetrotter XXL 8x4</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.shape1">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.shape2">遮阳板-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.dual">遮阳板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.quatro">遮阳板-豪华喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.triangle">遮阳板-喷漆, 豪华</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.shape3">主后视镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.shape3_a">主后视镜-喷漆 Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrome_led">主后视镜-喷漆, LED</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrome_led_a">主后视镜-喷漆, LED Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrome_logo">主后视镜-喷漆和镀铬</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrom_logo_a">主后视镜-喷漆和镀铬 Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.cam_digi">主后视镜-电子后视镜</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.cam_digi_a">主后视镜-电子后视镜 Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrom_spec">主后视镜-镀铬 豪华</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrom_spec_a">主后视镜-镀铬 豪华 Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_mirror.painted">前反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_mirror.paintedl">前反光镜-喷漆 长</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.s_mirror.paint">侧反光镜-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_slp">空气过滤器-喷漆 Sleeper</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_gt">空气过滤器-喷漆 Globetrotter</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_gtxl">空气过滤器-喷漆 Globetrotter XL</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_gtxxl">空气过滤器-喷漆 Globetrotter XXL</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_grill.net">防撞条-喷漆网</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_fender_chs.paint">前挡泥板-喷漆</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.s_deflector.stock_gtxxl">侧导流板-喷漆 Globetrotter XXL</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.s_deflector.light_xxl">侧导流板-喷漆, LED Globetrotter XXL</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.stock_4x_a">侧裙-Aero 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.stock_6x_a">侧裙-Aero 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_4x">侧裙-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_6x">侧裙-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 II 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 II 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.painted_4x">底盘保护罩-Diva （油箱520+315L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.painted_4x_2">底盘保护罩-Diva （油箱600+340L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.painted_6x">底盘保护罩-Diva 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.mix_4x">底盘保护罩-Centurion （油箱520+315L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.mix_4x_2">底盘保护罩-Centurion （油箱600+340L）</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.mix_6x">底盘保护罩-Centurion 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_bumper.bend">后保险杠-Thor</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_bumper.painted">后保险杠-Chariot</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_bumper.smoth">后保险杠-Diva</s:String>
+
+	
+	
+	
+	
+	
+
+
+	<!--卡车备注 ATS-->
+	<s:String
+		x:Key="name.freightliner.cascadia2019">Freightliner Cascadia 2019</s:String>
+	<s:Int32
+		x:Key="prodYear.freightliner.cascadia2019">2019</s:Int32>
+	<x:Static
+		x:Key="desc.freightliner.cascadia2019"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.freightliner.cascadia2019.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.freightliner.cascadia2019.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s72_xt.freightliner.cascadia2019.cabin">72" Sleeper XT</s:String>
+	<s:String
+		x:Key="s72_rr.freightliner.cascadia2019.cabin">72" Sleeper RR</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="freightliner.cascadia2019.sunshield.stock">遮阳板-标准</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.day_std">驾驶室导流板-标准 Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.day_aero">驾驶室导流板-Aero Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.s48_aero">驾驶室导流板-Aero 48" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.s72_xt_a">驾驶室导流板-Aero 72" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.s72_xt_ax">驾驶室导流板-AeroX</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cor_def.aero">导流板-Aero 2020</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.std_pt">保险杠-喷漆</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.fog_std_pt">保险杠-喷漆, 雾灯</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.aero_pt">保险杠-Aero 喷漆</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.aero_pt20">保险杠-Aero 喷漆 2020</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.fog_aero_pt">保险杠-Aero 喷漆, 雾灯</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.fog_a_pt20">保险杠-Aero 喷漆, 雾灯 2020</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr120_eal">侧裙-铝制油箱 短 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr160_eal">侧裙-铝制油箱 短 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_eal">侧裙-铝制油箱 中 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_eal">侧裙-铝制油箱 中 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_eal">侧裙-铝制油箱 长 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_eal">侧裙-铝制油箱 长 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr120_e">侧裙-镀铬油箱 短 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr160_e">侧裙-镀铬油箱 短 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_e">侧裙-镀铬油箱 中 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_e">侧裙-镀铬油箱 中 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_e">侧裙-镀铬油箱 长 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_e">侧裙-镀铬油箱 长 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr160_pt">侧裙-喷漆 短 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_pt">侧裙-喷漆 中 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_pt">侧裙-喷漆 中 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_pt">侧裙-喷漆 长 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_pt">侧裙-喷漆 长 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_pt_a">侧裙-Aero 喷漆 中 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_pt_a">侧裙-Aero 喷漆 中 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_pt_a">侧裙-Aero 喷漆 长 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_pt_a">侧裙-Aero 喷漆 长 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.mudflaps.aero_pnt">挡泥帘-FlowBelow 喷漆</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.freightliner.cascadia2024">Freightliner Cascadia</s:String>
+	<s:Int32
+		x:Key="prodYear.freightliner.cascadia2024">2024</s:Int32>
+	<x:Static
+		x:Key="desc.freightliner.cascadia2024"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.freightliner.cascadia2024.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.freightliner.cascadia2024.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s72_xt.freightliner.cascadia2024.cabin">72" Sleeper XT</s:String>
+	<s:String
+		x:Key="s72_rr.freightliner.cascadia2024.cabin">72" Sleeper RR</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="freightliner.cascadia2024.sunshield.paint">遮阳板-标准</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.day_std">驾驶室导流板-标准 Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.day_aero">驾驶室导流板-Aero Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.s48_aero">驾驶室导流板-Aero 48" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.s72_xt_a">驾驶室导流板-Aero 72" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.s72_xt_ax">驾驶室导流板-AeroX</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cor_def.aero">导流板-Aero</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.bumper.paint">保险杠-喷漆</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.airdam.paint">气坝-喷漆</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.airdam.pnt_aerox">气坝-AeroX, 喷漆</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr120_eal">侧裙-铝制油箱 短 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr160_eal">侧裙-铝制油箱 短 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr120_e">侧裙-镀铬油箱 短 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr160_e">侧裙-镀铬油箱 短 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr160_pt">侧裙-喷漆 短 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.mid200_pt_a">侧裙-Aero 喷漆 中 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.mid220_pt_a">侧裙-Aero 喷漆 中 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.lng200_pt_a">侧裙-Aero 喷漆 长 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.lng240_pt_a">侧裙-Aero 喷漆 长 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.mudflaps.aero_pnt">侧裙-FlowBelow 喷漆</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.freightliner.ecascadia">Freightliner ECascadia</s:String>
+	<s:Int32
+		x:Key="prodYear.freightliner.ecascadia">2022</s:Int32>
+	<x:Static
+		x:Key="desc.freightliner.ecascadia"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.intnational.9900i">International 9900i</s:String>
+	<s:Int32
+		x:Key="prodYear.intnational.9900i">2000</s:Int32>
+	<s:String
+		x:Key="desc.intnational.9900i">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.intnational.9900i.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s51.intnational.9900i.cabin">51" Sleeper</s:String>
+	<s:String
+		x:Key="s72.intnational.9900i.cabin">71" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="intnational.9900i.sunshield.standard">遮阳板-标准</s:String>
+	<s:String
+		x:Key="intnational.9900i.cabdefl.day">驾驶室导流板-标准</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.intnational.lonestar">International LoneStar</s:String>
+	<s:Int32
+		x:Key="prodYear.intnational.lonestar">2008</s:Int32>
+	<x:Static
+		x:Key="desc.intnational.lonestar"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.intnational.lonestar.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="hirise.intnational.lonestar.cabin">Hi-Rise Sleeper</s:String>
+	<s:String
+		x:Key="skyrise.intnational.lonestar.cabin">Sky-Rise Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="intnational.lonestar.sunshield.standard">遮阳板-标准</s:String>
+	<s:String
+		x:Key="intnational.lonestar.bumper.standard">保险杠-标准</s:String>
+	<s:String
+		x:Key="intnational.lonestar.bumper.sensor">保险杠-传感器</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.intnational.lt">International LT</s:String>
+	<s:Int32
+		x:Key="prodYear.intnational.lt">2017</s:Int32>
+	<x:Static
+		x:Key="desc.intnational.lt"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.intnational.lt.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="hirise.intnational.lt.cabin">Hi-Rise Sleeper</s:String>
+	<s:String
+		x:Key="skyrise.intnational.lt.cabin">Sky-Rise Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="intnational.lt.sunshield.standard">遮阳板-标准</s:String>
+	<s:String
+		x:Key="intnational.lt.cabdefl.hi_std">驾驶室导流板-标准</s:String>
+	<s:String
+		x:Key="intnational.lt.cabdefl.hi_ext">驾驶室导流板-延长</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.lux">保险杠-喷漆镀铬</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint">保险杠-喷漆</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint_pl_s13">保险杠-喷漆 S13 塑料</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint_s13">保险杠-喷漆 S13</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.shr_pn">侧裙-喷漆 短</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.shr_pn_s13">侧裙-喷漆 S13 短</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.mid_pn">侧裙-喷漆 中</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.mid_pn_s13">侧裙-喷漆 S13 中</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.lng_pn">侧裙-喷漆 长</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.lng_pn_s13">侧裙-喷漆 S13 长</s:String>
+	<s:String
+		x:Key="intnational.lt.mudflaps.aero_paint">挡泥帘-FlowBelow 喷漆</s:String>
+	<s:String
+		x:Key="intnational.lt.mudflaps.aero_pnt_6x4">挡泥帘-FlowBelow 喷漆 6x4</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.t680">Kenworth T680 2014</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.t680">2014</s:Int32>
+	<x:Static
+		x:Key="desc.kenworth.t680"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.kenworth.t680.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="standard.kenworth.t680.cabin">Mid Roof Sleeper</s:String>
+	<s:String
+		x:Key="exclusive.kenworth.t680.cabin">Hi Rise Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.t680_2022">Kenworth T680</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.t680_2022">2022</s:Int32>
+	<s:String
+		x:Key="desc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.kenworth.t680_2022.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s52m.kenworth.t680_2022.cabin">52" Sleeper</s:String>
+	<s:String
+		x:Key="s76h.kenworth.t680_2022.cabin">76" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.low_pnt_f">保险杠-低 喷漆, 雾灯</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.low_pnt_f_a">保险杠-低 Aero 喷漆, 雾灯</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.std_pnt_f">保险杠-喷漆, 雾灯</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.std_pnt_f_a">保险杠-Aero 喷漆, 雾灯</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.hood.long">引擎盖-标准</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.day_l_pnt">侧裙-喷漆 Day Cab 长</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.day_s_pnt">侧裙-喷漆 Day Cab 短</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s52_l_pnt">侧裙-喷漆 52" Sleeper 长</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s52_s_pnt">侧裙-喷漆 52" Sleeper 短</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s76_l_pnt">侧裙-喷漆 76" Sleeper 长</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s76_s_pnt">侧裙-喷漆 76" Sleeper 短</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.w900">Kenworth W900</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.w900">2023</s:Int32>
+	<s:String
+		x:Key="desc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.kenworth.w900.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s72f.kenworth.w900.cabin">72" Flat Roof Sleeper</s:String>
+	<s:String
+		x:Key="s72.kenworth.w900.cabin">72" Aerodyne Sleeper</s:String>
+	<s:String
+		x:Key="s86.kenworth.w900.cabin">86" Studio Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="kenworth.w900.sunshield.bat_pnt">sunshield.bat_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.shape01_pnt">sunshield.shape01_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.shape02_pnt">sunshield.shape02_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.shape03_pnt">sunshield.shape03_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.untie_pnt">sunshield.untie_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.modern1_pnt">mirror.modern1_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.modern2_pnt">mirror.modern2_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.nxtgen1_pnt">mirror.nxtgen1_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.nxtgen2_pnt">mirror.nxtgen2_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.shape1_pnt">mirror.shape1_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.shape2_pnt">mirror.shape2_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.fl_mirror.shape1_pnt">fl_mirror.shape1_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.fl_mirror.shape2_pnt">fl_mirror.shape2_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.fr_mirror.shape1_pnt">fr_mirror.shape1_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.fr_mirror.shape2_pnt">fr_mirror.shape2_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.diamond_cut">grill.diamond_cut</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.louver_a_pnt">grill.louver_a_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.louver_pnt">grill.louver_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.srd_pnt">grill.srd_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.std_pnt">grill.std_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.v18_pnt">grill.v18_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_120">doorstep.pnt2_120</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_150">doorstep.pnt2_150</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_180">doorstep.pnt2_180</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_180b">doorstep.pnt2_180b</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_235">doorstep.pnt2_235</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_235b">doorstep.pnt2_235b</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_260">doorstep.pnt2_260</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_120">doorstep.pnt_120</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_150">doorstep.pnt_150</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_180">doorstep.pnt_180</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_180b">doorstep.pnt_180b</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_235">doorstep.pnt_235</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_235b">doorstep.pnt_235b</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_260">doorstep.pnt_260</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.bull_black_p">f_logo.bull_black_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.bull_blue_p">f_logo.bull_blue_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.bull_red_p">f_logo.bull_red_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_blk_p">f_logo.kw_blk_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_chr_p">f_logo.kw_chr_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_p">f_logo.kw_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_rtr_blk_p">f_logo.kw_rtr_blk_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_rtr_p">f_logo.kw_rtr_p</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.boxer_pnt">bumper.boxer_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.foreman_pnt">bumper.foreman_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.mirage_pnt">bumper.mirage_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.ram_pnt">bumper.ram_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.ranger_pnt">bumper.ranger_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape01_pnt">bumper.shape01_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape02_pnt">bumper.shape02_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape03_pnt">bumper.shape03_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape04_pnt">bumper.shape04_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape05_pnt">bumper.shape05_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.storm_chr">bumper.storm_chr</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.storm_pnt">bumper.storm_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.whale_pnt">cabdefl.whale_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.wing_pnt">cabdefl.wing_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.s72_std">驾驶室导流板-标准 72" Aerodyne Sleeper</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.s86_std">驾驶室导流板-标准 86" Studio Sleeper</s:String>
+	<s:String
+		x:Key="kenworth.w900.deflector.aero_pnt">deflector.aero_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.deflector.shape01_pnt">deflector.shape01_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_sa_l_pnt">exhaust.day_sa_l_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_sn_l_pnt">exhaust.day_sn_l_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_sn_s_pnt">exhaust.day_sn_s_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_ss_l_pnt">exhaust.day_ss_l_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_ss_s_pnt">exhaust.day_ss_s_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.slp_kn_l_pnt">exhaust.slp_kn_l_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.slp_ks_l_pnt">exhaust.slp_ks_l_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_chs_cover.pln_pnt_sng">r_chs_cover.pln_pnt_sng</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.100yp2_ln260">tank.100yp2_ln260</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.100yp_ln260">tank.100yp_ln260</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln220n">tank.pnt2_ln220n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln235">tank.pnt2_ln235</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln260">tank.pnt2_ln260</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln300">tank.pnt2_ln300</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln300n">tank.pnt2_ln300n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md220n">tank.pnt2_md220n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md235">tank.pnt2_md235</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md260">tank.pnt2_md260</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md300">tank.pnt2_md300</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md300n">tank.pnt2_md300n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh120">tank.pnt2_sh120</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh150n">tank.pnt2_sh150n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh180">tank.pnt2_sh180</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh220n">tank.pnt2_sh220n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln220n">tank.pnt_ln220n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln235">tank.pnt_ln235</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln260">tank.pnt_ln260</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln300">tank.pnt_ln300</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln300n">tank.pnt_ln300n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md220n">tank.pnt_md220n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md235">tank.pnt_md235</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md260">tank.pnt_md260</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md300">tank.pnt_md300</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md300n">tank.pnt_md300n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh120">tank.pnt_sh120</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh150n">tank.pnt_sh150n</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh180">tank.pnt_sh180</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh220n">tank.pnt_sh220n</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.fiberg_full">后挡泥板-</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.fiberg_half">r_fender.fiberg_half</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_cur_dbl">r_fender.hump_cur_dbl</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_cur_tri">r_fender.hump_cur_tri</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_dbl">r_fender.hump_dbl</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_tri">r_fender.hump_tri</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_dbl">r_fender.pnt_dbl</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_full">r_fender.pnt_full</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_half">r_fender.pnt_half</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_tri">r_fender.pnt_tri</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_kw_pnt">r_fender.qrt_kw_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_log_pnt">r_fender.qrt_log_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_pnt">r_fender.qrt_pnt</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.storm_pnt">r_fender.storm_pnt</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.w990">Kenworth W990</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.w990">2018</s:Int32>
+	<x:Static
+		x:Key="desc.kenworth.w990"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.mack.pinnacle">Mack Pinnacle</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.pinnacle">2006</s:Int32>
+	<x:Static
+		x:Key="desc.mack.pinnacle"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.mack.pinnacle.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.mack.pinnacle.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s70.mack.pinnacle.cabin">70" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mack.pinnacle.cabdefl.s70_rcap">驾驶室导流板-车顶盖 70"</s:String>
+	<s:String
+		x:Key="mack.pinnacle.cabdefl.s70_rcap_ext">驾驶室导流板-豪华车顶盖 70"</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.mack.anthem">Mack Anthem</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.anthem">2018</s:Int32>
+	<x:Static
+		x:Key="desc.mack.anthem"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.mack.anthem.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.mack.anthem.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s70.mack.anthem.cabin">70" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mack.anthem.cabdefl.day_rcap_bl">驾驶室导流板-车顶盖 Day Cab</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.day_rcap_ch">驾驶室导流板-镀铬车顶盖 Day Cab</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s48_rcap_bl">驾驶室导流板-车顶盖 48"</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s48_rcap_ch">驾驶室导流板-镀铬车顶盖 48"</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s70_rcap">驾驶室导流板-车顶盖 70"</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s70_rcap_ext">驾驶室导流板-豪华车顶盖 70"</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72_p">侧裙-喷漆 短 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72_pc">侧裙-喷漆和镀铬 短 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72d_p">侧裙-喷漆, D形 短 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72d_pc">侧裙-喷漆和镀铬, D形 短 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_p">侧裙-喷漆 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_pc">侧裙-喷漆和镀铬 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_pcs">侧裙-喷漆和镀铬, 踏板 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_ps">侧裙-喷漆, 踏板 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_p">侧裙-喷漆, D形 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_pc">侧裙-喷漆和镀铬, D形 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_pcs">侧裙-喷漆和镀铬, D形, 踏板 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_ps">侧裙-喷漆, D形, 踏板 短 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93d_p">侧裙-喷漆, D形 中 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93d_pc">侧裙-喷漆和镀铬, D形 中 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_p">侧裙-喷漆 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_pc">侧裙-喷漆和镀铬 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_pcs">侧裙-喷漆和镀铬, 踏板 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_ps">侧裙-喷漆, 踏板 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_p">侧裙-喷漆, D形 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_pc">侧裙-喷漆和镀铬, D形 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_pcs">侧裙-喷漆和镀铬, D形, 踏板 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_ps">侧裙-喷漆, D形, 踏板 中 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93_p">侧裙-喷漆 中 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93_pc">侧裙-喷漆和镀铬 中 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117_p">侧裙-喷漆 长 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117_pc">侧裙-喷漆和镀铬 长 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117d_p">侧裙-喷漆, D形 长 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117d_pc">侧裙-喷漆和镀铬, D形 长 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_p">侧裙-喷漆 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_pc">侧裙-喷漆和镀铬 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_pcs">侧裙-喷漆和镀铬, 踏板 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_ps">侧裙-喷漆, 踏板 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_p">侧裙-喷漆, D形 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_pc">侧裙-喷漆和镀铬, D形 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_pcs">侧裙-喷漆和镀铬, D形, 踏板 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_ps">侧裙-喷漆, D形, 踏板 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_ucs">侧裙-镀铬油箱, D形, 踏板 长 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.mudflaps.aero_pnt">挡泥帘-FlowBelow 喷漆</s:String>
+
+	
+	
+	
+	
+	<s:String
+		x:Key="name.mack.anthem2026">Mack Anthem</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.anthem2026">2026</s:Int32>
+	<x:Static
+		x:Key="desc.mack.anthem2026"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	<s:String
+		x:Key="name.mack.pioneer">Mack Pioneer</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.pioneer">2025</s:Int32>
+	<x:Static
+		x:Key="desc.mack.pioneer"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.389">Peterbilt 389</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.389">2007</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.389"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.peterbilt.389.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="standard.peterbilt.389.cabin">Low Roof Sleeper</s:String>
+	<s:String
+		x:Key="exclusive.peterbilt.389.cabin">Ultra Cab Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.579">Peterbilt 579</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.579">2012</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.579"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.peterbilt.579.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="standard.peterbilt.579.cabin">Stand Up Sleeper</s:String>
+	<s:String
+		x:Key="exclusive.peterbilt.579.cabin">Hi Rise Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.579_2022">Peterbilt 579</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.579_2022">2022</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.579_2022"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.589">Peterbilt 589</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.589">2025</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.589"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnl">Volvo VNL 2014</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnl">2014</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnl"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.volvo.vnl.cabin">300</s:String>
+	<s:String
+		x:Key="standard.volvo.vnl.cabin">730</s:String>
+	<s:String
+		x:Key="exclusive.volvo.vnl.cabin">780</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnl2018">Volvo VNL 2018</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnl2018">2018</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnl2018"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.volvo.vnl2018.cabin">300</s:String>
+	<s:String
+		x:Key="s740.volvo.vnl2018.cabin">740</s:String>
+	<s:String
+		x:Key="s860.volvo.vnl2018.cabin">860</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2b_aero">挡泥帘-Aero, 喷漆和塑料 黑</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2b_aero_l">挡泥帘-Aero, 喷漆和塑料 黑 LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2b_aero_w">挡泥帘-Aero, 喷漆和塑料 黑 白</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2w_aero">挡泥帘-Aero, 喷漆和塑料 白</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2w_aero_l">挡泥帘-Aero, 喷漆和塑料 白 LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2w_aero_w">挡泥帘-Aero, 喷漆和塑料 白 白</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntb_aero">挡泥帘-Aero, 喷漆 黑</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntb_aero_l">挡泥帘-Aero, 喷漆 黑 LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntb_aero_w">挡泥帘-Aero, 喷漆 黑 白</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntw_aero">挡泥帘-Aero, 喷漆 白</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntw_aero_l">挡泥帘-Aero, 喷漆 白 LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntw_aero_w">挡泥帘-Aero, 喷漆 白 白</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnr_e">Volvo VNR Electric</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnr_e">2021</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnr_e"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.volvo.vnr_e.cabin">300</s:String>
+	<!--Accessory-->
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnl2025">Volvo VNL</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnl2025">2025</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnl2025"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="dc.volvo.vnl2025.cabin">300</s:String>
+	<s:String
+		x:Key="42m.volvo.vnl2025.cabin">440</s:String>
+	<s:String
+		x:Key="74m.volvo.vnl2025.cabin">840</s:String>
+	<s:String
+		x:Key="74h.volvo.vnl2025.cabin">860</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.vnl2025.cabdefl.std_74m">驾驶室导流板-标准 840</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.sideskirt.std_pnt_dc">侧裙-喷漆 300</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.sideskirt.std_pnt_42">侧裙-喷漆 440</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.sideskirt.std_pnt_74">侧裙-喷漆 840/860</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.r_bumper.fl_pnt">FlowBelow 喷漆</s:String>
+	
+	
+	
+	<s:String
+		x:Key="name.westernstar.5700xe">Western Star 5700XE</s:String>
+	<s:Int32
+		x:Key="prodYear.westernstar.5700xe">2015</s:Int32>
+	<s:String
+		x:Key="desc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.westernstar.5700xe.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s54.westernstar.5700xe.cabin">54" Sleeper</s:String>
+	<s:String
+		x:Key="s82.westernstar.5700xe.cabin">82" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="westernstar.5700xe.sunshield.stock_day">遮阳板-标准 Day Cab</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sunshield.stock_slp">遮阳板-标准 Sleeper</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.cabdefl.s82">驾驶室导流板-豪华 82"</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.f_fender.stock">前挡泥板-原厂</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.bumper.stock">保险杠-原厂</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.bumper.highway">保险杠-高级</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.bumper.duty">保险杠-豪华</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sideskirt.day">侧裙-标准 Day Cab</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sideskirt.s54">侧裙-标准 54"</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sideskirt.s82">侧裙-标准 82"</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.mudflaps.aero_pnt">挡泥帘-FlowBelow 喷漆</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.westernstar.49x">Western Star 49X</s:String>
+	<s:Int32
+		x:Key="prodYear.westernstar.49x">2020</s:Int32>
+	<x:Static
+		x:Key="desc.westernstar.49x"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.westernstar.49x.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="daysb.westernstar.49x.cabin">Day Cab 前轴后移</s:String>
+	<s:String
+		x:Key="s48.westernstar.49x.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s48sb.westernstar.49x.cabin">48" Sleeper 前轴后移</s:String>
+	<s:String
+		x:Key="s72.westernstar.49x.cabin">83" Sleeper</s:String>
+	<s:String
+		x:Key="s72sb.westernstar.49x.cabin">83" Sleeper 前轴后移</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="westernstar.49x.hood.power">引擎盖-Power</s:String>
+	<s:String
+		x:Key="westernstar.49x.f_grill.paint">防撞杠-喷漆（装备Logger保险杠）</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.paint">保险杠-喷漆</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.pnt_log">保险杠-喷漆 Logger</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.paint_sb">保险杠-喷漆 前轴后移</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.paint2_sb">保险杠-喷漆 II 前轴后移</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.pnt_log_sb">保险杠-喷漆 Logger 前轴后移</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.pnt2_log_sb">保险杠-喷漆 II Logger 前轴后移</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.westernstar.57x">Western Star 57X</s:String>
+	<s:Int32
+		x:Key="prodYear.westernstar.57x">2022</s:Int32>
+	<x:Static
+		x:Key="desc.westernstar.57x"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.westernstar.57x.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s72_rr.westernstar.57x.cabin">72" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="westernstar.57x.bumper.paint">保险杠-喷漆</s:String>
+	<s:String
+		x:Key="westernstar.57x.cabdefl.day_std">驾驶室导流板-标准</s:String>
+	<s:String
+		x:Key="westernstar.57x.cabdefl.day_aero">驾驶室导流板-Aero</s:String>
+	<s:String
+		x:Key="westernstar.57x.cabdefl.day_aero2">驾驶室导流板-Aero II</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.shr_pt">侧裙-喷漆 （短底盘油箱-铝制120gal 短）</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.shr12_fnd_pt">侧裙-Duty喷漆 （短底盘油箱-120gal长）</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.shr16_fnd_pt">侧裙-Duty喷漆 （短底盘油箱-160gal）</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng_fnd_pt">侧裙-Duty喷漆</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng_hlf_pt">侧裙-喷漆（半包侧裙）</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng20_pt">侧裙-喷漆（全包侧裙，长底盘油箱-200gal）</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng24_pt">侧裙-喷漆（全包侧裙，长底盘油箱-240gal）</s:String>
+</ResourceDictionary>
