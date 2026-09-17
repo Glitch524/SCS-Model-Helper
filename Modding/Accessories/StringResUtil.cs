@@ -79,11 +79,8 @@ class StringResUtil {
 
 	public static string GetStringResResults(string displayName, out string localizedName) {
 		var localeModules = Instances.LocaleModules;
-		var split = displayName.Split("@@");//根据游戏内测试，只有分割后偶数部分是普通文本，奇数部分是资源Key
-		if (!split.Contains("@@")) {//displayName没有@@的话，直接返回原始文本，没必要各种进行各种foreach
-			localizedName = displayName;
-			return localizedName;
-		} else {
+		if (displayName.Contains("@@")) {
+			var split = displayName.Split("@@");//根据游戏内测试，只有分割后偶数部分是普通文本，奇数部分是资源Key
 			Dictionary<string, string[]> values = [];//key: locale名, value: string数组 与split对应
 			foreach (var localeModule in localeModules) {
 				foreach (var dict in localeModule.LocaleList) {
@@ -139,6 +136,9 @@ class StringResUtil {
 			localized ??= displayName.Replace("@@", "");//如果最终还是没有赋值，就使用原始文本
 			localizedName = localized;
 			return finalValue.ToString();
+		} else {//displayName没有@@的话，直接返回原始文本，没必要各种进行各种foreach
+			localizedName = displayName;
+			return localizedName;
 		}
 	}
 
