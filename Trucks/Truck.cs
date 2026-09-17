@@ -198,6 +198,6 @@ public class Truck(
 		}
 	}
 
-	List<Cabin> Cabins = [];
-	List<Accessory> Accessories = [];
+	public List<Cabin> Cabins = [];
+	public List<Accessory> Accessories = [];
 }

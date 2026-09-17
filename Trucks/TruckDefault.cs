@@ -3,6 +3,7 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Xml;
 
 namespace SCS_Mod_Helper.Trucks; 
 class TruckDefault {
@@ -12,7 +13,7 @@ class TruckDefault {
 	public static ResourceDictionary TruckDictionary {
 		get {
 			if (mTruckDictionary == null) {
-				mTruckDictionary = new();
+				mTruckDictionary = [];
 				var lang = Instances.CurrentLanguage;
 				Uri source;
 				if (lang.StartsWith(DictionaryUtil.ExtLangPreffix)) {
@@ -95,14 +96,11 @@ class TruckDefault {
 
 	public static List<Truck> DefaultTrucksETS2 {
 		get {
-			mDefaultTrucksETS2 = [];
-			var dict = TruckDictionary;
-			foreach (string truckID in showingTrucksETS2) {
-				string name = (string)dict["name." + truckID];
-				int prodYear = (int)dict["prodYear." + truckID];
-				string desc = (string)dict["desc." + truckID];
-				Truck truck = new(true, truckID, prodYear, name, desc);
-				mDefaultTrucksETS2.Add(truck);
+			if (mDefaultTrucksETS2 == null) {
+				mDefaultTrucksETS2 = [];
+				foreach (string truckID in showingTrucksETS2) {
+					CollectTruck(mDefaultTrucksETS2, truckID);
+				}
 			}
 			return mDefaultTrucksETS2;
 		}
@@ -167,17 +165,21 @@ class TruckDefault {
 
 	public static List<Truck> DefaultTrucksATS {
 		get {
-			mDefaultTrucksATS = [];
-			var dict = TruckDictionary;
-			foreach (string truckID in showingTrucksATS) {
-				string name = (string)dict["name." + truckID];
-				int prodYear = (int)dict["prodYear." + truckID];
-				string desc = (string)dict["desc." + truckID];
-				Truck truck = new(false, truckID, prodYear, name, desc);
-				mDefaultTrucksATS.Add(truck);
+			if (mDefaultTrucksATS == null) {
+				mDefaultTrucksATS = [];
+				foreach (string truckID in showingTrucksATS) {
+					CollectTruck(mDefaultTrucksATS, truckID);
+				}
 			}
 			return mDefaultTrucksATS;
 		}
+	}
+	private static void CollectTruck(List<Truck> trucks, string truckID) {
+		string name = (string)TruckDictionary["name." + truckID];
+		int prodYear = (int)TruckDictionary["prodYear." + truckID];
+		string desc = (string)TruckDictionary["desc." + truckID];
+		Truck truck = new(false, truckID, prodYear, name, desc);
+		trucks.Add(truck);
 	}
 
 	private static ObservableCollection<ModelTypeInfo>? mModelTypes = null;
