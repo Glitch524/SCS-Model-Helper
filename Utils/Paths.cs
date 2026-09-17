@@ -40,12 +40,12 @@ class Paths {
 		return Path.Combine(dir, $"{suiFilename}.sui");
 	}
 
-	public static string LanguageDir() => Path.Combine(Environment.CurrentDirectory, "Language");
-	public static string TrucksLanguageDir() => Path.Combine(Environment.CurrentDirectory, "Language\\Trucks");
-	public static string SavedPhysicsFile() => Path.Combine(Environment.CurrentDirectory, "Physics.DEP");
-	public static string DefaultDEDDir() => Path.Combine(Environment.CurrentDirectory, "Def Files");
+	public static string LanguageDir() => "Language";
+	public static string TrucksLanguageDir() => "Language\\Trucks";
+	public static string SavedPhysicsFile() => "Physics.DEP";
+	public static string DefaultDEDDir() => "Def Files";
 
-	public static string ExcpPath() => Path.Combine(Environment.CurrentDirectory, $"Excp_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt");
-	public static string TrucksETS2Path() => Path.Combine(Environment.CurrentDirectory, "TrucksETS2.DET");
-	public static string TrucksATSPath() => Path.Combine(Environment.CurrentDirectory, "TrucksATS.DET");
+	public static string ExcpPath() => $"Excp_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt";
+	public static string TrucksETS2Path() => "TrucksETS2.DET";
+	public static string TrucksATSPath() => "TrucksATS.DET";
 }
