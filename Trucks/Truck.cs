@@ -72,7 +72,7 @@ public class Truck(
 		}
 	}
 	private string? mTruckName = null;
-	public string TruckName {
+	private string TruckName {
 		get {
 			if (mTruckName == null) {
 				var truckIDDot = TruckID.IndexOf('.');
