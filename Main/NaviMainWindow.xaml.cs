@@ -2,6 +2,7 @@
 using SCS_Mod_Helper.ConverterPix;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.PaintJob;
+using SCS_Mod_Helper.Setting;
 using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Windows;

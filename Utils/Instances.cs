@@ -1,6 +1,6 @@
 ﻿using SCS_Mod_Helper.Localization;
-using SCS_Mod_Helper.Main;
 using SCS_Mod_Helper.Modding.Accessories;
+using SCS_Mod_Helper.Setting;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;

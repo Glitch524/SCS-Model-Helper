@@ -6,6 +6,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:local="clr-namespace:SCS_Mod_Helper.Main"
+	xmlns:setting="clr-namespace:SCS_Mod_Helper.Setting"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	xmlns:manifest="clr-namespace:SCS_Mod_Helper.Manifest"
 	xmlns:localization="clr-namespace:SCS_Mod_Helper.Localization"
@@ -76,7 +77,7 @@
 				<ui:NavigationViewItem
 					Content="Settings"
 					Icon="{ui:SymbolIcon Settings32}"
-					TargetPageType="{x:Type local:SettingsPage}" />
+					TargetPageType="{x:Type setting:SettingsPage}" />
 			</ui:NavigationView.FooterMenuItems>
 		</ui:NavigationView>
 	</Grid>

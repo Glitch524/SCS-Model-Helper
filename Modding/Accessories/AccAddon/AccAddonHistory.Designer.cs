@@ -8,16 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCS_Mod_Helper.Settings {
+namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.10.0.0")]
-    internal sealed partial class PathHistories : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class AccAddonHistory : global::System.Configuration.ApplicationSettingsBase {
         
-        private static PathHistories defaultInstance = ((PathHistories)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new PathHistories())));
+        private static AccAddonHistory defaultInstance = ((AccAddonHistory)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new AccAddonHistory())));
         
-        public static PathHistories Default {
+        public static AccAddonHistory Default {
             get {
                 return defaultInstance;
             }
@@ -44,6 +44,30 @@ namespace SCS_Mod_Helper.Settings {
             }
             set {
                 this["ChooseModelHistory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IconDefCreateOnAccessory {
+            get {
+                return ((bool)(this["IconDefCreateOnAccessory"]));
+            }
+            set {
+                this["IconDefCreateOnAccessory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoFillSelectAll {
+            get {
+                return ((bool)(this["AutoFillSelectAll"]));
+            }
+            set {
+                this["AutoFillSelectAll"] = value;
             }
         }
     }

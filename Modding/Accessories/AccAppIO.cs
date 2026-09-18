@@ -377,67 +377,6 @@ class AccAppIO {
 	private const string NameTrucksETS2 = "TrucksETS2";
 	private const string NameTrucksATS = "TrucksATS";
 
-	public static void SaveAccAddon(AccAddonBinding binding, string dedFile) {
-		TabCount = 0;
-		using StreamWriter sw = new(dedFile);
-		WriteFileHeader(sw);
-		BraceIn(sw);
-		WriteLine(sw, NameProjectLocation, AccAddonBinding.ProjectLocation);
-		WriteLine(sw, NameModelName, binding.ModelName);
-
-		WriteLine(sw, NameDisplayName, binding.DisplayName);
-		WriteLine(sw, NamePrice, binding.Price);
-		WriteLine(sw, NameUnlockLevel, binding.UnlockLevel);
-		WriteLine(sw, NameIconName, binding.IconName);
-		WriteLine(sw, NamePartType, binding.PartType);
-		WriteLine(sw, NameModelPath, binding.ModelPath);
-		WriteLine(sw, NameModelPathUK, binding.ModelPathUK);
-		WriteLine(sw, NameExtModelPath, binding.ExtModelPath);
-		WriteLine(sw, NameExtModelPathUK, binding.ExtModelPathUK);
-		WriteLine(sw, NameModelColl, binding.CollPath);
-		WriteLine(sw, NameModelType, binding.ModelType);
-		WriteLine(sw, NameLook, binding.Look);
-		WriteLine(sw, NameVariant, binding.Variant);
-		if (binding.HideIn != 0)
-			WriteLine(sw, NameHideIn, binding.HideIn);
-		if (binding.ElectricType != "vehicle")
-			WriteLine(sw, NameElectricType, binding.ElectricType);
-
-		void WriteLists(string name, ObservableCollection<string> list) {
-			if (list.Count > 0)
-				WriteLine(sw, name, string.Join(TruckDefault.ItemSplit, list));
-		}
-		WriteLists(NameData, binding.Data);
-		WriteLists(NameSuitableFor, binding.SuitableFor);
-		WriteLists(NameConflictWith, binding.ConflictWith);
-		WriteLists(NameDefaults, binding.Defaults);
-		WriteLists(NameOverrides, binding.Overrides);
-		WriteLists(NameRequire, binding.Require);
-
-		var setTruckHeader = true;
-		if (binding.TrucksETS2.Count > 0 || binding.TrucksATS.Count > 0) {
-			foreach (var truck in binding.TrucksETS2) {
-				if (truck.Check && (truck.ModelType.Length != 0 || truck.Look.Length != 0 || truck.Variant.Length != 0)) {
-					if (setTruckHeader) {
-						WriteLine(sw, NameTrucksHeader, Truck.DEDHeader());
-						setTruckHeader = false;
-					}
-					WriteLine(sw, NameTrucksETS2, truck.ToDEDLine());
-				}
-			}
-			foreach (var truck in binding.TrucksATS) {
-				if (truck.Check && (truck.ModelType.Length != 0 || truck.Look.Length != 0 || truck.Variant.Length != 0)) {
-					if (setTruckHeader) {
-						WriteLine(sw, NameTrucksHeader, Truck.DEDHeader());
-						setTruckHeader = false;
-					}
-					WriteLine(sw, NameTrucksATS, truck.ToDEDLine());
-				}
-			}
-		}
-		BraceOut(sw);
-	}
-
 	public static void LoadAccAddon(Window window, AccAddonBinding binding, string dedFile) {
 		using StreamReader sr = new(dedFile);
 		string? line = sr.ReadLine();

@@ -54,12 +54,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Settings\PathHistories.Designer.cs">
+    <Compile Update="Modding\Accessories\AccAddon\AccAddonHistory.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PathHistories.settings</DependentUpon>
+      <DependentUpon>AccAddonHistory.settings</DependentUpon>
     </Compile>
-    <Compile Update="Settings\Settings.Designer.cs">
+    <Compile Update="Setting\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -73,11 +73,11 @@
     <None Update="Language\example.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Settings\PathHistories.settings">
+    <None Update="Modding\Accessories\AccAddon\AccAddonHistory.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>PathHistories.Designer.cs</LastGenOutput>
+      <LastGenOutput>AccAddonHistory.Designer.cs</LastGenOutput>
     </None>
-    <None Update="Settings\Settings.settings">
+    <None Update="Setting\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>

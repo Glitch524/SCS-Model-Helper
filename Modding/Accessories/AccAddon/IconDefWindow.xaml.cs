@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Setting;
 using System.Windows;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;

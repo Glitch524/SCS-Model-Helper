@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
-namespace SCS_Mod_Helper.Settings;
+namespace SCS_Mod_Helper.Setting;
 /// <summary>
 /// SettingsPage.xaml 的交互逻辑
 /// </summary>

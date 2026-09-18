@@ -194,10 +194,10 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 						data.InvokeChange(nameof(data.RequireListContent));
 						break;
 					case TITLE_TRUCKS_ETS2:
-						ReadTruck(child, data.TrucksETS2);
+						data.SelectedCountETS2 = ReadTruck(child, data.TrucksETS2);
 						break;
 					case TITLE_TRUCKS_ATS:
-						ReadTruck(child, data.TrucksATS);
+						data.SelectedCountATS = ReadTruck(child, data.TrucksATS);
 						break;
 				}
             }
@@ -210,8 +210,9 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 			}
 		}
 
-		private void ReadTruck(XmlNode node, Collection<Truck> trucks) {
-			List<int> indexes = Enumerable.Range(0, trucks.Count).ToList();
+		private static int ReadTruck(XmlNode node, Collection<Truck> trucks) {
+			int selected = 0;
+			List<int> indexes = [.. Enumerable.Range(0, trucks.Count)];
 			int i = 0;
 			foreach (XmlNode t in node.ChildNodes) {
 				if (t.Name != TITLE_TRUCK) 
@@ -222,6 +223,8 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 					var truck = trucks[indexes[i]];
 					if (truckID == truck.TruckID) {
 						truck.Check = GetAttributeBool(t, ATTR_TRUCK_CHECK);
+						if (truck.Check)
+							selected++;
 						truck.ModelType = GetAttribute(t, ATTR_MODEL_TYPE);
 						truck.Look = GetAttribute(t, ATTR_LOOK);
 						truck.Variant = GetAttribute(t, ATTR_VARIANT);
@@ -232,6 +235,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 				}
 				i += 1;
 			}
+			return selected;
 		}
 	}
 
