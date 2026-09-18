@@ -1,6 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
-using System.Diagnostics;
 using System.Xml;
 
 namespace SCS_Mod_Helper.Trucks;
@@ -32,7 +31,7 @@ public class CustomTruckIO: AppIO {
 
 
 	public void SaveCustomTruck(bool isETS2, List<Truck> trucks) {
-		CreateXmlDeclaration();
+		WriteXmlDeclaration();
 
 		WriteElement(TITLE_VEHICLE, () => {
 			WriteAttribute(ATTR_IS_ETS2, isETS2.ToString());
@@ -65,52 +64,11 @@ public class CustomTruckIO: AppIO {
 							});
 						}
 					});
-					//AppendTruckNode(currentNode!, truck);
 				}
 			});
 		});
-
-		//XmlElement elementVehicle = CreateElement(TITLE_VEHICLE);
-		//CreateAttribute(elementVehicle, ATTR_IS_ETS2, isETS2.ToString());
-		//doc.AppendChild(elementVehicle);
-
-		//XmlElement elementTrucks = CreateElement(TITLE_TRUCKS);
-		//elementVehicle.AppendChild(elementTrucks);
-
-		//foreach (Truck truck in trucks) {
-		//	AppendTruckNode(elementTrucks, truck);
-		//}
 		SaveDocument(isETS2 ? PATH_ETS2_CUSTOM_TRUCK : PATH_ATS_CUSTOM_TRUCK);
 	}
-
-	//private void AppendTruckNode(XmlElement root, Truck truck) {
-	//	XmlElement elementTruck = CreateElement(TITLE_TRUCK);
-	//	CreateAttribute(elementTruck, ATTR_TRUCK_ID, truck.TruckID);
-	//	CreateAttribute(elementTruck, ATTR_TRUCK_PROD_YEAR, truck.ProductionYear.ToString());
-	//	CreateAttribute(elementTruck, ATTR_TRUCK_NAME, truck.IngameName);
-	//	CreateAttribute(elementTruck, ATTR_TRUCK_DESC, truck.Description);
-
-	//	if (truck.Cabins.Count > 0) {
-	//		XmlElement elementCabins = CreateElement(TITLE_CABINS);
-	//		foreach(Cabin cabin in truck.Cabins) {
-	//			XmlElement elementCabin = CreateElement(TITLE_CABIN);
-	//			CreateAttribute(elementCabin, ATTR_CABIN_ID, cabin.CabinID);
-	//			CreateAttribute(elementCabin, ATTR_CABIN_NAME, cabin.CabinName);
-	//			elementCabins.AppendChild(elementCabin);
-	//		}
-	//	}
-
-	//	if (truck.Accessories.Count > 0) {
-	//		XmlElement elementAccs = CreateElement(TITLE_ACCESSORIES);
-	//		foreach(Accessory acc in truck.Accessories) {
-	//			XmlElement elementAcc = CreateElement(TITLE_ACCESSORY);
-	//			CreateAttribute(elementAcc, ATTR_ACC_ID, acc.AccID);
-	//			CreateAttribute(elementAcc, ATTR_ACC_NAME, acc.AccName);
-	//			elementAccs.AppendChild(elementAcc);
-	//		}
-	//	}
-	//	root.AppendChild(elementTruck);
-	//}
 
 	public List<Truck> LoadCustomTruck(bool isETS2) {
 		doc.Load(isETS2 ? PATH_ETS2_CUSTOM_TRUCK : PATH_ATS_CUSTOM_TRUCK);

@@ -140,7 +140,6 @@ namespace SCS_Mod_Helper.Utils {
 	}
 
 	static class CollectionUtil {
-
 		public static void AddItem<T>(DataGrid table, ObservableCollection<T> list, T newItem) {
 			int selectedIndex = table.SelectedIndex;
 			if (selectedIndex == -1) {
