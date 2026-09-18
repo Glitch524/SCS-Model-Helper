@@ -13,16 +13,6 @@ public abstract class AppIO {
 		doc.AppendChild(doc.CreateXmlDeclaration("1.0", "UTF-8", null));
 	}
 
-	//protected XmlElement CreateElement(string elementName) {
-	//	return doc.CreateElement(elementName);
-	//}
-
-	//protected void CreateAttribute(XmlElement element, string attrName, string value) {
-	//	XmlAttribute attr = doc.CreateAttribute(attrName);
-	//	attr.Value = value;
-	//	element.Attributes.Append(attr);
-	//}
-
 	protected XmlElement? currentNode = null;
 	protected void WriteElement(string name, Action action) {
 		var formerNode = currentNode;
@@ -76,8 +66,8 @@ public abstract class AppIO {
 		doc.Save(writer);
 	}
 
-	protected string GetAttribute(XmlNode node, string attrProperty) => ((XmlElement)node).GetAttribute(attrProperty);
-	protected bool GetAttributeBool(XmlNode node, string attrProperty) => bool.Parse(GetAttribute(node, attrProperty));
-	protected int GetAttributeInt(XmlNode node, string attrProperty) => int.Parse(GetAttribute(node, attrProperty));
-	protected long GetAttributeLong(XmlNode node, string attrProperty) => long.Parse(GetAttribute(node, attrProperty));
+	protected static string GetAttribute(XmlNode node, string attrProperty) => ((XmlElement)node).GetAttribute(attrProperty);
+	protected static bool GetAttributeBool(XmlNode node, string attrProperty) => bool.Parse(GetAttribute(node, attrProperty));
+	protected static int GetAttributeInt(XmlNode node, string attrProperty) => int.Parse(GetAttribute(node, attrProperty));
+	protected static long GetAttributeLong(XmlNode node, string attrProperty) => long.Parse(GetAttribute(node, attrProperty));
 }
