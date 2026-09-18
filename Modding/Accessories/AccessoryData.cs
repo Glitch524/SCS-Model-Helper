@@ -151,6 +151,11 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 		string look,
 		string variant,
 		string electricType): AccessoryData(modelName, displayName, price, unlockLevel, iconName, partType) {
+
+		public AccessoryIntData() : this("", "", null, null, "", "", "", "", "", "") {
+
+		}
+
 		protected string mModelColl = modelColl;
 		public string CollPath {
 			get => mModelColl;

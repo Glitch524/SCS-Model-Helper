@@ -3,6 +3,7 @@ using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Popup;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
+using SCS_Mod_Helper.Settings;
 using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
@@ -17,10 +18,13 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	private readonly AccessoryAddonData mAddonItem = new();
 	public AccessoryAddonData AddonItem => mAddonItem;
 
-	public void SaveHistory() => AddonItem.SaveHistory();
-
+	public void SaveHistory() {
+		new AccAddonHistoryIO().LoadAddon(this);
+	}
 
 	public AccAddonBinding() {
+		new AccAddonHistoryIO().LoadAddon(this);
+
 		ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(AddonItem.IconName);
 
 		UseCollPath = CollPath.Length > 0;
@@ -735,7 +739,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	}
 
 	private static string GetDEDInitDir() {
-		var dedPath = AccAddonHistory.Default.DEDLocation;
+		var dedPath = PathHistories.Default.DEDLocation;
 		if (dedPath.Length == 0) {
 			dedPath = Paths.DefaultDEDDir();
 			Directory.CreateDirectory(dedPath);
@@ -746,11 +750,11 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	private static void SaveDedLocation(string filename) {
 		var dir = new DirectoryInfo(filename).Parent!.FullName;
 		if (dir == Paths.DefaultDEDDir()) {
-			AccAddonHistory.Default.DEDLocation = "";
+			PathHistories.Default.DEDLocation = "";
 		} else {
-			AccAddonHistory.Default.DEDLocation = dir;
+			PathHistories.Default.DEDLocation = dir;
 		}
-		AccAddonHistory.Default.Save();
+		PathHistories.Default.Save();
 	}
 
 	public AddTruckUC? AddTruckUC;
@@ -914,8 +918,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		} else if (!path.EndsWith(".pim") && !path.EndsWith(".pmd")) {
 			throw new(Util.GetString("MessageInvalidExt"));
 		}
-		AccAddonHistory.Default.ChooseModelHistory = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
-		AccAddonHistory.Default.Save();
+		PathHistories.Default.ChooseModelHistory = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
+		PathHistories.Default.Save();
 		LoadLooksAndVariants(window, path);//修改模型路径后，look和variant都不同，需要重新读取
 		string inProjectPath = path.Replace(ProjectLocation, "");
 		var s = inProjectPath.Split('\\');
