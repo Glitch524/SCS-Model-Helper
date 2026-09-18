@@ -673,7 +673,7 @@ class AccAppIO {
 		using StreamWriter sw = new(truckFile);
 		WriteFileHeader(sw);
 		BraceIn(sw);
-		WriteLine(sw, NameTruckVersion, TruckDefault.TruckVersion);
+		WriteLine(sw, NameTruckVersion, Instances.GameVersion);
 		WriteLine(sw, NameTrucksHeader, Truck.TruckHeader());
 		foreach (var truck in trucks) {
 			WriteLine(sw, ets2 ? NameTrucksETS2 : NameTrucksATS, truck.ToTruckLine());
@@ -715,7 +715,7 @@ class AccAppIO {
 							trucksHeader = read[1].Split(TruckDefault.ItemSplit);
 							break;
 						case NameTruckVersion:
-							updateTruckName = read[1] != TruckDefault.TruckVersion;
+							updateTruckName = read[1] != Instances.GameVersion;
 							break;
 						case NameTrucksETS2:
 							if (ets2)

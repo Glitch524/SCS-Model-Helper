@@ -48,4 +48,5 @@ class Paths {
 	public static string ExcpPath() => $"Excp_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt";
 	public static string TrucksETS2Path() => "TrucksETS2.DET";
 	public static string TrucksATSPath() => "TrucksATS.DET";
+	public static string HistoryFile() => "History.DED";
 }

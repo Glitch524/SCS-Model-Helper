@@ -96,6 +96,18 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		set {
 			AddonItem.Price = value;
 			InvokeChange();
+			InvokeChange(nameof(PriceString));
+		}
+	}
+	public string PriceString {
+		get => Price.ToString() ?? "";
+		set {
+			if (long.TryParse(value, out long res)) {
+				Price = res;
+			} else
+				Price = null;
+			InvokeChange();
+			InvokeChange(nameof(Price));
 		}
 	}
 
@@ -104,6 +116,18 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		set {
 			AddonItem.UnlockLevel = value;
 			InvokeChange();
+			InvokeChange(nameof(UnlockLevelString));
+		}
+	}
+	public string UnlockLevelString {
+		get => UnlockLevel.ToString() ?? "";
+		set {
+			if (uint.TryParse(value, out uint res)) {
+				UnlockLevel = res;
+			} else
+				UnlockLevel = null;
+			InvokeChange();
+			InvokeChange(nameof(UnlockLevel));
 		}
 	}
 
@@ -676,7 +700,10 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			saveFileDialog.FileName = LoadedFilename;
 		if (saveFileDialog.ShowDialog() == true) {
 			SaveDedLocation(saveFileDialog.FileName);
-			AccAppIO.SaveAccAddon(this, saveFileDialog.FileName);
+
+			new AccAddonDEDIO(saveFileDialog.FileName).SaveAddon(this);
+			//AccAppIO.SaveAccAddon(this, saveFileDialog.FileName);
+
 			MessageBox.Show(window, Util.GetString("MessageSaveDED"));
 		}
 	}
@@ -696,7 +723,10 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			if (openFileDialog.ShowDialog() == true) {
 				SaveDedLocation(openFileDialog.FileName);
 				LoadedFilename = openFileDialog.SafeFileName;
-				AccAppIO.LoadAccAddon(window, this, openFileDialog.FileName);
+
+				new AccAddonDEDIO(openFileDialog.FileName).LoadAddon(this);
+				//AccAppIO.LoadAccAddon(window, this, openFileDialog.FileName);
+
 				UpdateOthersChecked();
 			}
 		} catch (Exception ex) {

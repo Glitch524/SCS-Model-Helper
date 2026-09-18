@@ -688,7 +688,7 @@
 							Text="{DynamicResource ModelPrice}" />
 						<TextBox
 							x:Name="TextPrice"
-							Text="{Binding Price}"
+							Text="{Binding PriceString}"
 							MaxLines="1"
 							PreviewTextInput="NumberOnly"
 							TextWrapping="Wrap"
@@ -734,7 +734,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextUnlockLevel"
-							Text="{Binding UnlockLevel}"
+							Text="{Binding UnlockLevelString}"
 							MaxLines="1"
 							PreviewTextInput="NumberOnly"
 							TextWrapping="Wrap"

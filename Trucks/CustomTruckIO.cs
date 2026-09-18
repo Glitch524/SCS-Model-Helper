@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Utils;
 using System.Diagnostics;
 using System.Xml;
 
@@ -7,6 +8,7 @@ namespace SCS_Mod_Helper.Trucks;
 public class CustomTruckIO: AppIO {
 	public const string TITLE_VEHICLE = "Vehicle";
 	public const string ATTR_IS_ETS2 = "isETS2";
+	public const string ATTR_GAME_VERSION = "GameVersion";
 	public const string TITLE_TRUCKS = "Trucks";
 	public const string TITLE_TRUCK = "Truck";
 	public const string ATTR_TRUCK_ID = "truckID";
@@ -27,52 +29,88 @@ public class CustomTruckIO: AppIO {
 	public const string PATH_ETS2_CUSTOM_TRUCK = "TrucksETS2T.DET";
 	public const string PATH_ATS_CUSTOM_TRUCK = "TrucksATST.DET";
 
+
+
 	public void SaveCustomTruck(bool isETS2, List<Truck> trucks) {
-		doc.AppendChild(doc.CreateXmlDeclaration("1.0", "UTF-8", null));
+		CreateXmlDeclaration();
 
-		XmlElement elementVehicle = CreateElement(TITLE_VEHICLE);
-		CreateAttribute(elementVehicle, ATTR_IS_ETS2, isETS2.ToString());
-		doc.AppendChild(elementVehicle);
+		WriteElement(TITLE_VEHICLE, () => {
+			WriteAttribute(ATTR_IS_ETS2, isETS2.ToString());
+			WriteAttribute(ATTR_GAME_VERSION, Instances.GameVersion);
+			WriteElement(TITLE_TRUCKS, () => {
+				foreach(Truck truck in trucks) {
+					WriteElement(TITLE_TRUCK, () => {
+						WriteAttribute(ATTR_TRUCK_ID, truck.TruckID);
+						WriteAttribute(ATTR_TRUCK_PROD_YEAR, truck.ProductionYear);
+						WriteAttribute(ATTR_TRUCK_NAME, truck.IngameName);
+						WriteAttribute(ATTR_TRUCK_DESC, truck.Description);
+						if(truck.Cabins.Count > 0) {
+							WriteElement(TITLE_CABINS, () => {
+								foreach (Cabin cabin in truck.Cabins) {
+									WriteElement(TITLE_CABIN, () => {
+										WriteAttribute(ATTR_CABIN_ID, cabin.CabinID);
+										WriteAttribute(ATTR_CABIN_NAME, cabin.CabinName);
+									});
+								}
+							});
+						}
+						if (truck.Accessories.Count > 0) {
+							WriteElement(TITLE_ACCESSORIES, () => {
+								foreach (Accessory accessory in truck.Accessories) {
+									WriteElement(TITLE_ACCESSORIES, () => {
+										WriteAttribute(ATTR_ACC_ID, accessory.AccID);
+										WriteAttribute(ATTR_ACC_NAME, accessory.AccName);
+									});
+								}
+							});
+						}
+					});
+					//AppendTruckNode(currentNode!, truck);
+				}
+			});
+		});
 
-		XmlElement elementTrucks = CreateElement(TITLE_TRUCKS);
-		elementVehicle.AppendChild(elementTrucks);
+		//XmlElement elementVehicle = CreateElement(TITLE_VEHICLE);
+		//CreateAttribute(elementVehicle, ATTR_IS_ETS2, isETS2.ToString());
+		//doc.AppendChild(elementVehicle);
 
-		foreach (Truck truck in trucks) {
-			AppendTruckNode(elementTrucks, truck);
-		}
+		//XmlElement elementTrucks = CreateElement(TITLE_TRUCKS);
+		//elementVehicle.AppendChild(elementTrucks);
+
+		//foreach (Truck truck in trucks) {
+		//	AppendTruckNode(elementTrucks, truck);
+		//}
 		SaveDocument(isETS2 ? PATH_ETS2_CUSTOM_TRUCK : PATH_ATS_CUSTOM_TRUCK);
-
-		Process.Start("explorer.exe", $"/select,\"{(isETS2 ? PATH_ETS2_CUSTOM_TRUCK : PATH_ATS_CUSTOM_TRUCK)}\"");
 	}
 
-	private void AppendTruckNode(XmlElement root, Truck truck) {
-		XmlElement elementTruck = CreateElement(TITLE_TRUCK);
-		CreateAttribute(elementTruck, ATTR_TRUCK_ID, truck.TruckID);
-		CreateAttribute(elementTruck, ATTR_TRUCK_PROD_YEAR, truck.ProductionYear.ToString());
-		CreateAttribute(elementTruck, ATTR_TRUCK_NAME, truck.IngameName);
-		CreateAttribute(elementTruck, ATTR_TRUCK_DESC, truck.Description);
+	//private void AppendTruckNode(XmlElement root, Truck truck) {
+	//	XmlElement elementTruck = CreateElement(TITLE_TRUCK);
+	//	CreateAttribute(elementTruck, ATTR_TRUCK_ID, truck.TruckID);
+	//	CreateAttribute(elementTruck, ATTR_TRUCK_PROD_YEAR, truck.ProductionYear.ToString());
+	//	CreateAttribute(elementTruck, ATTR_TRUCK_NAME, truck.IngameName);
+	//	CreateAttribute(elementTruck, ATTR_TRUCK_DESC, truck.Description);
 
-		if (truck.Cabins.Count > 0) {
-			XmlElement elementCabins = CreateElement(TITLE_CABINS);
-			foreach(Cabin cabin in truck.Cabins) {
-				XmlElement elementCabin = CreateElement(TITLE_CABIN);
-				CreateAttribute(elementCabin, ATTR_CABIN_ID, cabin.CabinID);
-				CreateAttribute(elementCabin, ATTR_CABIN_NAME, cabin.CabinName);
-				elementCabins.AppendChild(elementCabin);
-			}
-		}
+	//	if (truck.Cabins.Count > 0) {
+	//		XmlElement elementCabins = CreateElement(TITLE_CABINS);
+	//		foreach(Cabin cabin in truck.Cabins) {
+	//			XmlElement elementCabin = CreateElement(TITLE_CABIN);
+	//			CreateAttribute(elementCabin, ATTR_CABIN_ID, cabin.CabinID);
+	//			CreateAttribute(elementCabin, ATTR_CABIN_NAME, cabin.CabinName);
+	//			elementCabins.AppendChild(elementCabin);
+	//		}
+	//	}
 
-		if (truck.Accessories.Count > 0) {
-			XmlElement elementAccs = CreateElement(TITLE_ACCESSORIES);
-			foreach(Accessory acc in truck.Accessories) {
-				XmlElement elementAcc = CreateElement(TITLE_ACCESSORY);
-				CreateAttribute(elementAcc, ATTR_ACC_ID, acc.AccID);
-				CreateAttribute(elementAcc, ATTR_ACC_NAME, acc.AccName);
-				elementAccs.AppendChild(elementAcc);
-			}
-		}
-		root.AppendChild(elementTruck);
-	}
+	//	if (truck.Accessories.Count > 0) {
+	//		XmlElement elementAccs = CreateElement(TITLE_ACCESSORIES);
+	//		foreach(Accessory acc in truck.Accessories) {
+	//			XmlElement elementAcc = CreateElement(TITLE_ACCESSORY);
+	//			CreateAttribute(elementAcc, ATTR_ACC_ID, acc.AccID);
+	//			CreateAttribute(elementAcc, ATTR_ACC_NAME, acc.AccName);
+	//			elementAccs.AppendChild(elementAcc);
+	//		}
+	//	}
+	//	root.AppendChild(elementTruck);
+	//}
 
 	public List<Truck> LoadCustomTruck(bool isETS2) {
 		doc.Load(isETS2 ? PATH_ETS2_CUSTOM_TRUCK : PATH_ATS_CUSTOM_TRUCK);

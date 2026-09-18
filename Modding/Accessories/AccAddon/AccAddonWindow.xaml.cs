@@ -218,9 +218,17 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void ButtonStartClick(object sender, RoutedEventArgs e) => binding.StartCreateSii(this);
 
-	private void ButtonSaveClick(object sender, RoutedEventArgs e) => binding.SaveDED(this);
+	private void ButtonSaveClick(object sender, RoutedEventArgs e) {
+		//AccAddonHistoryIO aahio = new();
+		//aahio.SaveAddon(binding.AddonItem);
+
+		binding.SaveDED(this);
+	}
 
 	private void ButtonLoadClick(object sender, RoutedEventArgs e) {
+		//AccAddonHistoryIO aahio = new();
+		//aahio.LoadAddon(binding.AddonItem);
+
 		binding.LoadDED(this);
 		binding.LoadLooksAndVariants(this);
 	}
@@ -231,6 +239,9 @@ public partial class AccAddonWindow: BaseWindow {
 	private partial Regex RegexNumber();
 
 	private void ButtonTruckInitialize(object sender, RoutedEventArgs e) {
+		CustomTruckIO stio = new();
+		stio.SaveCustomTruck(true, TrucksETS2.ToList());
+
 		binding.PopupAddTruckOpen = false;
 		binding.ReinitTruckList();
 	}
