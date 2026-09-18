@@ -8,6 +8,7 @@ using Wpf.Ui.Appearance;
 
 namespace SCS_Mod_Helper.Utils;
 public static class Instances {
+	public static string GameVersion = "1.61";
 
 	public static string CurrentLanguage {
 		get {
