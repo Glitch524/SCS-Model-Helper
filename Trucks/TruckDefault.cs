@@ -3,11 +3,9 @@ using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using System.Xml;
 
 namespace SCS_Mod_Helper.Trucks; 
 class TruckDefault {
-	public static string TruckVersion = "1.61";
 
 	private static ResourceDictionary? mTruckDictionary = null;
 	public static ResourceDictionary TruckDictionary {
