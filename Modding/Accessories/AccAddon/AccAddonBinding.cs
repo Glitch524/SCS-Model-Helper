@@ -3,7 +3,7 @@ using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Popup;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
-using SCS_Mod_Helper.Settings;
+using SCS_Mod_Helper.Setting;
 using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
@@ -587,13 +587,14 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				return null;
 		}
 		set {
-			if (value == true)
-				SelectedCountETS2 = TrucksETS2.Count;
-			else if (value == false)
+			if (SelectedCountETS2 == TrucksETS2.Count) {
 				SelectedCountETS2 = 0;
+				SelectAllTruck(TrucksETS2, false);
+			} else {
+				SelectedCountETS2 = TrucksETS2.Count;
+				SelectAllTruck(TrucksETS2, true);
+			}
 			InvokeChange();
-			if (value != null)
-				SelectAllTruck(TrucksETS2, (bool)value);
 		}
 	}
 	private int mSelectedCountETS2 = 0;
@@ -616,13 +617,14 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				return null;
 		}
 		set {
-			if (value == true)
-				SelectedCountATS = TrucksATS.Count;
-			else if (value == false)
+			if (SelectedCountATS == TrucksATS.Count) {
 				SelectedCountATS = 0;
+				SelectAllTruck(TrucksATS, false);
+			} else {
+				SelectedCountATS = TrucksATS.Count;
+				SelectAllTruck(TrucksATS, true);
+			}
 			InvokeChange();
-			if (value != null)
-				SelectAllTruck(TrucksATS, (bool)value);
 		}
 	}
 
@@ -739,7 +741,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	}
 
 	private static string GetDEDInitDir() {
-		var dedPath = PathHistories.Default.DEDLocation;
+		var dedPath = AccAddonHistory.Default.DEDLocation;
 		if (dedPath.Length == 0) {
 			dedPath = Paths.DefaultDEDDir();
 			Directory.CreateDirectory(dedPath);
@@ -750,11 +752,11 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	private static void SaveDedLocation(string filename) {
 		var dir = new DirectoryInfo(filename).Parent!.FullName;
 		if (dir == Paths.DefaultDEDDir()) {
-			PathHistories.Default.DEDLocation = "";
+			AccAddonHistory.Default.DEDLocation = "";
 		} else {
-			PathHistories.Default.DEDLocation = dir;
+			AccAddonHistory.Default.DEDLocation = dir;
 		}
-		PathHistories.Default.Save();
+		AccAddonHistory.Default.Save();
 	}
 
 	public AddTruckUC? AddTruckUC;
@@ -918,8 +920,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		} else if (!path.EndsWith(".pim") && !path.EndsWith(".pmd")) {
 			throw new(Util.GetString("MessageInvalidExt"));
 		}
-		PathHistories.Default.ChooseModelHistory = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
-		PathHistories.Default.Save();
+		AccAddonHistory.Default.ChooseModelHistory = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
+		AccAddonHistory.Default.Save();
 		LoadLooksAndVariants(window, path);//修改模型路径后，look和variant都不同，需要重新读取
 		string inProjectPath = path.Replace(ProjectLocation, "");
 		var s = inProjectPath.Split('\\');
