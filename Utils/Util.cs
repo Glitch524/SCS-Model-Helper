@@ -1,9 +1,7 @@
 ﻿using Pfim;
-using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,17 +49,14 @@ namespace SCS_Mod_Helper.Utils {
 
 		public static Window? MainWindow = null;
 		public static string GetString(string key, params object[] args) {
-			string res;
-			try {
-				res = Application.Current.FindResource(key).ToString()!;
-			} catch (NullReferenceException) {
-				//"Object reference not set to an instance of an object." 如果字典的值为空就会出现这个报错
-				res = "";
-			}
+			string res = Application.Current.FindResource(key).ToString()!;//"Object reference not set to an instance of an object." 如果字典的值为空就会出现这个报错
 			if (args.Length > 0) {
 				res = string.Format(res, args);
 			}
 			return res;
+		}
+		public static int GetInt(string key) {
+			return (int)Application.Current.FindResource(key);//"Object reference not set to an instance of an object." 如果字典的值为空就会出现这个报错
 		}
 
 		public static string GetFilter(string key) {
@@ -124,18 +119,6 @@ namespace SCS_Mod_Helper.Utils {
 				default:
 					throw new Exception($"Unable to convert {image.Format} to WPF PixelFormat");
 			}
-		}
-
-		public static string Join<T>(ObservableCollection<T> trucks, Func<T, string> toLine, Func<T, bool>? condition = null) {
-			StringBuilder sb = new();
-			foreach (var truck in trucks) {
-				if (condition?.Invoke(truck) ?? true) {
-					if (sb.Length > 0)
-						sb.Append(TruckDefault.LineSplit);
-					sb.Append(toLine(truck));
-				}
-			}
-			return sb.ToString();
 		}
 	}
 
