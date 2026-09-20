@@ -70,5 +70,273 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
                 this["AutoFillSelectAll"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DisplayName {
+            get {
+                return ((string)(this["DisplayName"]));
+            }
+            set {
+                this["DisplayName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelName {
+            get {
+                return ((string)(this["ModelName"]));
+            }
+            set {
+                this["ModelName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PartType {
+            get {
+                return ((string)(this["PartType"]));
+            }
+            set {
+                this["PartType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Price {
+            get {
+                return ((string)(this["Price"]));
+            }
+            set {
+                this["Price"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string UnlockLevel {
+            get {
+                return ((string)(this["UnlockLevel"]));
+            }
+            set {
+                this["UnlockLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IconName {
+            get {
+                return ((string)(this["IconName"]));
+            }
+            set {
+                this["IconName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelPath {
+            get {
+                return ((string)(this["ModelPath"]));
+            }
+            set {
+                this["ModelPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelPathUK {
+            get {
+                return ((string)(this["ModelPathUK"]));
+            }
+            set {
+                this["ModelPathUK"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExtModelPath {
+            get {
+                return ((string)(this["ExtModelPath"]));
+            }
+            set {
+                this["ExtModelPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ExtModelPathUK {
+            get {
+                return ((string)(this["ExtModelPathUK"]));
+            }
+            set {
+                this["ExtModelPathUK"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CollisionPath {
+            get {
+                return ((string)(this["CollisionPath"]));
+            }
+            set {
+                this["CollisionPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelType {
+            get {
+                return ((string)(this["ModelType"]));
+            }
+            set {
+                this["ModelType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Look {
+            get {
+                return ((string)(this["Look"]));
+            }
+            set {
+                this["Look"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Variant {
+            get {
+                return ((string)(this["Variant"]));
+            }
+            set {
+                this["Variant"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection DataList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DataList"]));
+            }
+            set {
+                this["DataList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection SuitableForList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["SuitableForList"]));
+            }
+            set {
+                this["SuitableForList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection ConflictWithList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["ConflictWithList"]));
+            }
+            set {
+                this["ConflictWithList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection DefaultsList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DefaultsList"]));
+            }
+            set {
+                this["DefaultsList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection OverridesList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["OverridesList"]));
+            }
+            set {
+                this["OverridesList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RequireList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RequireList"]));
+            }
+            set {
+                this["RequireList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection TrucksETS2 {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["TrucksETS2"]));
+            }
+            set {
+                this["TrucksETS2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection TrucksATS {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["TrucksATS"]));
+            }
+            set {
+                this["TrucksATS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ElectricType {
+            get {
+                return ((string)(this["ElectricType"]));
+            }
+            set {
+                this["ElectricType"] = value;
+            }
+        }
     }
 }

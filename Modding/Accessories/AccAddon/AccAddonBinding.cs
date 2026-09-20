@@ -3,33 +3,166 @@ using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Popup;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
-using SCS_Mod_Helper.Setting;
 using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 public class AccAddonBinding: BaseBinding, IListDataInterface {
 	private readonly AccessoryAddonData mAddonItem = new();
 	public AccessoryAddonData AddonItem => mAddonItem;
 
-	public void SaveHistory() {
-		new AccAddonHistoryIO().LoadAddon(this);
-	}
 
 	public AccAddonBinding() {
-		new AccAddonHistoryIO().LoadAddon(this);
+	}
 
-		ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(AddonItem.IconName);
+	private bool mLoading = true;
+	public bool Loading {
+		get => mLoading;
+		set {
+			mLoading = value;
+			InvokeChange();
+		}
+	}
 
-		UseCollPath = CollPath.Length > 0;
+	public void LoadHistory() {
+		DisplayName = AccAddonHistory.Default.DisplayName;
+		ModelName = AccAddonHistory.Default.ModelName;
+		PartType = AccAddonHistory.Default.PartType;
+		PriceString = AccAddonHistory.Default.Price;
+		UnlockLevelString = AccAddonHistory.Default.UnlockLevel;
+		IconName = AccAddonHistory.Default.IconName;
+		ModelPath = AccAddonHistory.Default.ModelPath;
+		ModelPathUK = AccAddonHistory.Default.ModelPathUK;
+		ExtModelPath = AccAddonHistory.Default.ExtModelPath;
+		ExtModelPathUK = AccAddonHistory.Default.ExtModelPathUK;
+		CollPath = AccAddonHistory.Default.CollisionPath;
+		ModelType = AccAddonHistory.Default.ModelType;
+		Look = AccAddonHistory.Default.Look;
+		Variant = AccAddonHistory.Default.Variant;
+		ElectricType = AccAddonHistory.Default.ElectricType;
+		LoadList(AccAddonHistory.Default.DataList, Data);
+		if (Data.Count > 0)
+			InvokeChange(nameof(DataListContent));
+		LoadList(AccAddonHistory.Default.SuitableForList, SuitableFor);
+		if (SuitableFor.Count > 0)
+			InvokeChange(nameof(SuitableForListContent));
+		LoadList(AccAddonHistory.Default.ConflictWithList, ConflictWith);
+		if (ConflictWith.Count > 0)
+			InvokeChange(nameof(ConflictWithListContent));
+		LoadList(AccAddonHistory.Default.DefaultsList, Defaults);
+		if (Defaults.Count > 0)
+			InvokeChange(nameof(DefaultsListContent));
+		LoadList(AccAddonHistory.Default.OverridesList, Overrides);
+		if (Overrides.Count > 0)
+			InvokeChange(nameof(OverridesListContent));
+		LoadList(AccAddonHistory.Default.RequireList, Require);
+		if (Require.Count > 0)
+			InvokeChange(nameof(RequireListContent));
+		ReadTruckHistory(AccAddonHistory.Default.TrucksETS2, TrucksETS2);
+		ReadTruckHistory(AccAddonHistory.Default.TrucksATS, TrucksATS);
+	}
+	private static void LoadList(StringCollection? strings, ObservableCollection<string> list) {
+		if (strings == null)
+			return;
+		list.Clear();
+		foreach (var s in strings) {
+			if (s == null)
+				continue;
+			list.Add(s);
+		}
+	}
 
-		UpdateOthersChecked();
+	protected static int ReadTruckHistory(StringCollection historyList, Collection<Truck> trucks) {
+		Dictionary<string, Truck> truckDict = trucks.ToDictionary(t => t.TruckID);
+		int selected = 0;
+		foreach (var h in historyList) {
+			if (h == null)
+				continue;
+			string[] split = h.Split(",");
+			string truckID = split[1];
+			if (truckDict.TryGetValue(truckID, out var truck)) {
+				truck.Check = bool.Parse(split[0]);
+				if (truck.Check)
+					selected++;
+				truck.ModelType = split[2];
+				truck.Look = split[3];
+				truck.Variant = split[4];
+			}
+		}
+		return selected;
+	}
+
+	public void SaveHistory() {
+		AccAddonHistory.Default.DisplayName = DisplayName;
+		AccAddonHistory.Default.ModelName = ModelName;
+		AccAddonHistory.Default.PartType = PartType;
+		AccAddonHistory.Default.Price = PriceString;
+		AccAddonHistory.Default.UnlockLevel = UnlockLevelString;
+		AccAddonHistory.Default.IconName = IconName;
+		AccAddonHistory.Default.ModelPath = ModelPath;
+		AccAddonHistory.Default.ModelPathUK = ModelPathUK;
+		AccAddonHistory.Default.ExtModelPath = ExtModelPath;
+		AccAddonHistory.Default.ExtModelPathUK = ExtModelPathUK;
+		AccAddonHistory.Default.CollisionPath = CollPath;
+		AccAddonHistory.Default.ModelType = ModelType;
+		AccAddonHistory.Default.Look = Look;
+		AccAddonHistory.Default.Variant = Variant;
+		AccAddonHistory.Default.ElectricType = ElectricType;
+		var dataList = Data.ToArray();
+		var suitableForList = SuitableFor.ToArray();
+		var conflictWithList = ConflictWith.ToArray();
+		var defaultsList = Defaults.ToArray();
+		var overridesList = Overrides.ToArray();
+		var requireList = Require.ToArray();
+		var truckListETS2 = TrucksETS2.ToArray();
+		var truckListATS = TrucksATS.ToArray();
+		Task.Run(() => {
+			AccAddonHistory.Default.DataList = ObservableCollectionToStringCollection(dataList);
+			AccAddonHistory.Default.SuitableForList = ObservableCollectionToStringCollection(suitableForList);
+			AccAddonHistory.Default.ConflictWithList = ObservableCollectionToStringCollection(conflictWithList);
+			AccAddonHistory.Default.DefaultsList = ObservableCollectionToStringCollection(defaultsList);
+			AccAddonHistory.Default.OverridesList = ObservableCollectionToStringCollection(overridesList);
+			AccAddonHistory.Default.RequireList = ObservableCollectionToStringCollection(requireList);
+			AccAddonHistory.Default.TrucksETS2 = TrucksToStrings(truckListETS2);
+			AccAddonHistory.Default.TrucksATS = TrucksToStrings(truckListATS);
+			AccAddonHistory.Default.Save();
+		});
+	}
+	private static StringCollection ObservableCollectionToStringCollection(string[] collection) {
+		var strings = new StringCollection();
+		strings.AddRange([.. collection]);
+		return strings;
+	}
+	private static StringCollection TrucksToStrings(Truck[] trucks) {
+		var strings = new StringCollection();
+		foreach(var truck in trucks) {
+			strings.Add($"{truck.Check},{truck.TruckID},{truck.ModelType},{truck.Look},{truck.Variant}");
+		}
+		return strings;
+	}
+
+
+	public async Task LoadTrucks() {
+		var tETS2 = TrucksIO.LoadTrucks(true, TrucksETS2);
+		await tETS2;
+		var tATS = TrucksIO.LoadTrucks(false, TrucksATS);
+		await tATS;
+	}
+
+	public void ReinitTruckList() {
+		TrucksIO.ClearTruckList();
+		TrucksETS2.Clear();
+		TrucksATS.Clear();
+		_ = LoadTrucks();
 	}
 
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -244,9 +377,9 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			InvokeChange();
 
 			bool? flag = null;
-			if (value == $"{TruckDefault.TypeFlagL}/{TruckDefault.TypeFlagFL}") {
+			if (value == $"{AccessoryType.TypeFlagL}/{AccessoryType.TypeFlagFL}") {
 				flag = true;
-			} else if (value == $"{TruckDefault.TypeFlagR}/{TruckDefault.TypeFlagFR}") {
+			} else if (value == $"{AccessoryType.TypeFlagR}/{AccessoryType.TypeFlagFR}") {
 				flag = false;
 			}
 			if (flag != null) {
@@ -268,7 +401,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	private ObservableCollection<ModelTypeInfo>? mModelTypes = null;
 	public ObservableCollection<ModelTypeInfo> ModelTypes {
 		get {
-			mModelTypes ??= TruckDefault.ModelTypes;
+			mModelTypes ??= AccessoryType.ModelTypes;
 			return mModelTypes;
 		}
 	}
@@ -341,7 +474,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				VariantList.Clear();
 			}, DispatcherPriority.DataBind);
 
-			AccDataIO.ReadLookAndVariant(path, LookList, VariantList);
+			AccSCSIO.ReadLookAndVariant(path, LookList, VariantList);
 
 			static void setValue(ObservableCollection<string> list, string oldValue, Action<string> set) {
 				if (list.Count > 0) {
@@ -368,7 +501,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			InvokeChange();
 		}
 	}
-	private void UpdateOthersChecked() {
+	public void UpdateOthersChecked() {
 		OthersChecked = HideIn != 0
 			|| ElectricType != "vehicle"
 			|| Data.Count > 0
@@ -544,6 +677,31 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		InvokeChange(nameof(RequireListContent));
 	}
 
+	private void ClearAllText() {
+		ModelName = "";
+		DisplayName = "";
+		PriceString = "";
+		UnlockLevelString = "";
+		IconName = "";
+		PartType = "unknown";
+		ModelPath = "";
+		ModelPathUK = "";
+		ExtModelPath = "";
+		ExtModelPathUK = "";
+		CollPath = "";
+		ModelType = "";
+		Look = "";
+		Variant = "";
+		HideIn = 0;
+		ElectricType = "vehicle";
+		Data.Clear();
+		SuitableFor.Clear();
+		ConflictWith.Clear();
+		Defaults.Clear();
+		Overrides.Clear();
+		Require.Clear();
+	}
+
 	public ListDataUC? ListDataUC = null;
 
 
@@ -674,18 +832,6 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	public ObservableCollection<Truck> TrucksETS2 => AddonItem.TrucksETS2;
 	public ObservableCollection<Truck> TrucksATS => AddonItem.TrucksATS;
 
-	public void LoadTrucks() {
-		SelectedCountETS2 = AccAppIO.LoadTruckList(true, TrucksETS2);
-		SelectedCountATS = AccAppIO.LoadTruckList(false, TrucksATS);
-	}
-
-	public void ReinitTruckList() {
-		AccAppIO.ClearTruckList();
-		TrucksETS2.Clear();
-		TrucksATS.Clear();
-		LoadTrucks();
-	}
-
 	string? LoadedFilename = null;
 	public void SaveDED(Window window) {
 		PopupAddTruckOpen = false;
@@ -707,7 +853,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		if (saveFileDialog.ShowDialog() == true) {
 			SaveDedLocation(saveFileDialog.FileName);
 
-			new AccAddonDEDIO(saveFileDialog.FileName).SaveAddon(this);
+			new AddonAppIO(saveFileDialog.FileName).SaveAddon(this);
 			//AccAppIO.SaveAccAddon(this, saveFileDialog.FileName);
 
 			MessageBox.Show(window, Util.GetString("MessageSaveDED"));
@@ -730,9 +876,9 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				SaveDedLocation(openFileDialog.FileName);
 				LoadedFilename = openFileDialog.SafeFileName;
 
-				new AccAddonDEDIO(openFileDialog.FileName).LoadAddon(this);
-				//AccAppIO.LoadAccAddon(window, this, openFileDialog.FileName);
+				ClearAllText();
 
+				new AddonAppIO(openFileDialog.FileName).LoadAddon(this);
 				UpdateOthersChecked();
 			}
 		} catch (Exception ex) {
@@ -791,7 +937,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 				}
 				Trucks.Insert(0, newTruck);
 			}
-			AccAppIO.SaveTruckList(isETS2, Trucks);
+			TrucksIO.AddTruck(newTruck);
 		} catch (Exception ex) {
 			MessageBox.Show(window, ex.Message, Util.GetString("MessageTitleErr"));
 		}
@@ -799,14 +945,16 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public static void DeleteTruck(bool ets2, ObservableCollection<Truck> Trucks, DataGrid Table) {
 		var changed = false;
+		List<string> truckIDs = [];
 		while (Table.SelectedIndex != -1) {
 			changed = true;
 			var selected = Trucks[Table.SelectedIndex];
 			Trucks.Remove(selected);
+			truckIDs.Add(selected.TruckID);
 		}
 		Table.UnselectAll();
-		if (changed)
-			AccAppIO.SaveTruckList(ets2, Trucks);
+		if (truckIDs.Count > 0)
+			TrucksIO.DeleteTrucks(ets2, truckIDs);
 	}
 
 
@@ -839,7 +987,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			} catch {
 				throw new(Util.GetString("ModelPriceErrNoNumber"));
 			}
-			var created = AccAddonDataIO.CreateAccAddonSii(this);
+			var created = AccAddonSCSIO.CreateAccAddonSii(this);
 			MessageBox.Show(window, Util.GetString(created == 0 ? "MessageCreateSiiZero" : "MessageCreateSiiResult"));
 		} catch (Exception ex) {
 			MessageBox.Show(window, ex.Message);

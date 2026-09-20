@@ -46,7 +46,7 @@ class PhysicsBinding: BaseBinding {
 	public ObservableCollection<PhysicsData> PhysicsItems {
 		get {
 			if (LocalPhysics)
-				return AccAppIO.PhysicsItems;
+				return AccessoryPhysicsIO.PhysicsItems;
 			else if (CurrentSuiItem != null)
 				return CurrentSuiItem.PhysicsItems;
 			else

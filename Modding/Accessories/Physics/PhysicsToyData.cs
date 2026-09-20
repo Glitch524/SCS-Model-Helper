@@ -87,7 +87,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.Physics {
 						set(list[0]);
 				}
 			}
-			AccDataIO.ReadLookAndVariant(path, mLookList, mVariantList);
+			AccSCSIO.ReadLookAndVariant(path, mLookList, mVariantList);
 			setValue(mLookList, oldLook, (set) => Look = set);
 			setValue(mVariantList, oldVariant, (set) => Variant = set);
 		}

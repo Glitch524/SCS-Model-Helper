@@ -98,7 +98,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.Physics {
 				var physics = Binding.CurrentPhysicsItem;
 				if (physics == null)
 					return;
-				AccAppIO.AddPhysicsToList(physics);
+				AccessoryPhysicsIO.AddPhysicsToList(physics);
 				MessageBox.Show(Window.GetWindow(this), Util.GetString("MessageResultPhysSaved"));
 			}
 		}

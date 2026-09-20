@@ -4,7 +4,7 @@ using SCS_Mod_Helper.Utils;
 using System.IO;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
-	public class AccAddonDataIO(): AccDataIO {
+	public class AccAddonSCSIO(): AccSCSIO {
 		private const string NameIntHeader = "accessory_addon_int_data";
 		private const string NamePatchHeader = "accessory_addon_patch_data";
 		private const string NameAAExtModel = "exterior_model";
@@ -45,7 +45,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 			};
 		}
 
-		public static int CreateAccAddonSii(AccAddonBinding binding) => new AccAddonDataIO().CreateAccAddonSiiInternal(binding);
+		public static int CreateAccAddonSii(AccAddonBinding binding) => new AccAddonSCSIO().CreateAccAddonSiiInternal(binding);
 
 		private int CreateAccAddonSiiInternal(AccAddonBinding binding) {
 			var created = 0;
@@ -126,7 +126,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 						}
 						if (dataWriiten)
 							continue;
-						foreach (var physItem in AccAppIO.PhysicsItems) {
+						foreach (var physItem in AccessoryPhysicsIO.PhysicsItems) {
 							if (pn == physItem.PhysicsName) {
 								WritePhysicsData(sw, physItem);
 								break;

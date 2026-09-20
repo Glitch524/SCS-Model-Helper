@@ -3,6 +3,7 @@ using SCS_Mod_Helper.Modding.Accessories.Physics;
 using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,10 +17,12 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 public partial class AccAddonWindow: BaseWindow {
 	private readonly AccAddonBinding binding = new();
 	private bool TruckExpandedETS2 {
-		get => binding.TruckExpandedETS2; set => binding.TruckExpandedETS2 = value;
+		get => binding.TruckExpandedETS2; 
+		set => binding.TruckExpandedETS2 = value;
 	}
 	private bool TruckExpandedATS {
-		get => binding.TruckExpandedATS; set => binding.TruckExpandedATS = value;
+		get => binding.TruckExpandedATS; 
+		set => binding.TruckExpandedATS = value;
 	}
 
 	private ObservableCollection<Truck> TrucksETS2 => binding.TrucksETS2;
@@ -44,11 +47,15 @@ public partial class AccAddonWindow: BaseWindow {
 		Loaded += OnLoaded;
 	}
 
-	private void OnLoaded(object sender, RoutedEventArgs e) {
-		Task.Run(() => {
-			binding.LoadTrucks();
-			binding.LoadLooksAndVariants(this);
-		});
+	private async void OnLoaded(object sender, RoutedEventArgs e) {
+		var tLoad = binding.LoadTrucks();
+		await tLoad;
+		binding.LoadHistory();
+		binding.ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(binding.IconName);
+
+		binding.LoadLooksAndVariants(this);
+		binding.UpdateOthersChecked();
+		binding.Loading = false;
 	}
 
 	private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
@@ -188,8 +195,8 @@ public partial class AccAddonWindow: BaseWindow {
 		if (result == true) {
 			var selected = physicsWindow.SelectedPhysicsData;
 			var physName = selected.PhysicsName;
-			if (!physName.EndsWith(AccDataIO.NamePSuffix))
-				physName += AccDataIO.NamePSuffix;
+			if (!physName.EndsWith(AccSCSIO.NamePSuffix))
+				physName += AccSCSIO.NamePSuffix;
 			binding.AddNewData(physName);
 			TextData.Focus();
 
@@ -219,15 +226,16 @@ public partial class AccAddonWindow: BaseWindow {
 	private void ButtonStartClick(object sender, RoutedEventArgs e) => binding.StartCreateSii(this);
 
 	private void ButtonSaveClick(object sender, RoutedEventArgs e) {
-		//AccAddonHistoryIO aahio = new();
-		//aahio.SaveAddon(binding.AddonItem);
+
+		//AddonHistoryIO aahio = new();
+		//aahio.SaveAddon(binding);
 
 		binding.SaveDED(this);
 	}
 
 	private void ButtonLoadClick(object sender, RoutedEventArgs e) {
-		//AccAddonHistoryIO aahio = new();
-		//aahio.LoadAddon(binding.AddonItem);
+		//AddonHistoryIO aahio = new();
+		//aahio.LoadAddon(binding);
 
 		binding.LoadDED(this);
 		binding.LoadLooksAndVariants(this);
@@ -239,9 +247,6 @@ public partial class AccAddonWindow: BaseWindow {
 	private partial Regex RegexNumber();
 
 	private void ButtonTruckInitialize(object sender, RoutedEventArgs e) {
-		CustomTruckIO stio = new();
-		stio.SaveCustomTruck(true, TrucksETS2.ToList());
-
 		binding.PopupAddTruckOpen = false;
 		binding.ReinitTruckList();
 	}

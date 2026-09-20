@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Manifest {
-	public class ManifestIO(): ModIO {
+	public class ManifestIO(): SCSIO {
 		private const string NameMFHeader = "mod_package : .package_name";
 		private const string NameMFPackageVersion = "package_version";
 		private const string NameMFDisplayName = "display_name";

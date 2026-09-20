@@ -61,7 +61,7 @@ public class AccessoryHookupData(string modelName): AccessoryIntData(modelName, 
 					set(list[0]);
 			}
 		}
-		AccDataIO.ReadLookAndVariant(path, mLookList, mVariantList);
+		AccSCSIO.ReadLookAndVariant(path, mLookList, mVariantList);
 		setValue(mLookList, oldLook, (set) => Look = set);
 		setValue(mVariantList, oldVariant, (set) => Variant = set);
 	}

@@ -5,14 +5,9 @@ using System.Collections.ObjectModel;
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 public class AccessoryAddonData: AccessoryIntData {
 	public AccessoryAddonData() : base() {
-		mModelType = "";
-		mModelPath = "";
-		mModelPathUK = "";
-		mExtModelPath = "";
-		mExtModelPathUK = "";
 	}
 
-	private string mModelPath;
+	private string mModelPath = "";
 	public string ModelPath {
 		get => mModelPath;
 		set {
@@ -21,7 +16,7 @@ public class AccessoryAddonData: AccessoryIntData {
 		}
 	}
 
-	private string mModelPathUK;
+	private string mModelPathUK = "";
 	public string ModelPathUK {
 		get => mModelPathUK;
 		set {
@@ -30,7 +25,7 @@ public class AccessoryAddonData: AccessoryIntData {
 		}
 	}
 
-	private string mExtModelPath;
+	private string mExtModelPath = "";
 	public string ExtModelPath {
 		get => mExtModelPath;
 		set {
@@ -39,7 +34,7 @@ public class AccessoryAddonData: AccessoryIntData {
 		}
 	}
 
-	private string mExtModelPathUK;
+	private string mExtModelPathUK = "";
 	public string ExtModelPathUK {
 		get => mExtModelPathUK;
 		set {
@@ -48,7 +43,7 @@ public class AccessoryAddonData: AccessoryIntData {
 		}
 	}
 
-	private string mModelType;
+	private string mModelType = "";
 	public string ModelType {
 		get => mModelType;
 		set {

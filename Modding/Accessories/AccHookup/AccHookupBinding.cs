@@ -235,8 +235,8 @@ public class AccHookupBinding: BaseBinding, IListDataInterface {
 		if (physicsData == null)
 			return;
 		var physName = physicsData.PhysicsName;
-		if (!physName.EndsWith(AccDataIO.NamePSuffix))
-			physName += AccDataIO.NamePSuffix;
+		if (!physName.EndsWith(AccSCSIO.NamePSuffix))
+			physName += AccSCSIO.NamePSuffix;
 		AddNewData(physName);
 	}
 

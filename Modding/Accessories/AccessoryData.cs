@@ -6,14 +6,23 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Modding.Accessories {
-	public abstract class AccessoryData(
-			string modelName,
-			string displayName,
-			long? price,
-			uint? unlockLevel,
-			string iconName,
-			string partType): BaseBinding {
-		protected string mModelName = modelName;
+	public abstract class AccessoryData(): BaseBinding {
+		public AccessoryData(
+				string modelName,
+				string displayName,
+				long? price,
+				uint? unlockLevel,
+				string iconName,
+				string partType): this() {
+			mModelName = modelName;
+			mDisplayName = displayName;
+			mPrice = price;
+			mUnlockLevel = unlockLevel;
+			mIconName = iconName;
+			mPartType = partType;
+		}
+
+		protected string mModelName = "";
 		public string ModelName {
 			get => mModelName;
 			set {
@@ -26,7 +35,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 
 		public bool NameOver12 => ModelName.Length > 12;
 
-		protected string mDisplayName = displayName;
+		protected string mDisplayName = "";
 		public string DisplayName {
 			get => mDisplayName;
 			set {
@@ -39,7 +48,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 
 		public Visibility CheckResVisibility => DisplayName.Contains("@@") ? Visibility.Visible : Visibility.Collapsed;
 
-		protected long? mPrice = price;
+		protected long? mPrice = null;
 		public long? Price {
 			get => mPrice;
 			set {
@@ -48,7 +57,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
-		protected uint? mUnlockLevel = unlockLevel;
+		protected uint? mUnlockLevel = null;
 		public uint? UnlockLevel {
 			get => mUnlockLevel;
 			set {
@@ -57,7 +66,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
-		protected string mIconName = iconName;
+		protected string mIconName = "";
 		public string IconName {
 			get => mIconName;
 			set {
@@ -76,7 +85,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
-		protected string mPartType = partType;
+		protected string mPartType = "unknown";
 		public string PartType {
 			get => mPartType;
 			set {
@@ -140,23 +149,28 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 		}
 	}
 
-	public abstract class AccessoryIntData(
-		string modelName,
-		string displayName,
-		long? price,
-		uint? unlockLevel,
-		string iconName,
-		string partType,
-		string modelColl,
-		string look,
-		string variant,
-		string electricType): AccessoryData(modelName, displayName, price, unlockLevel, iconName, partType) {
-
-		public AccessoryIntData() : this("", "", null, null, "", "", "", "", "", "") {
+	public abstract class AccessoryIntData: AccessoryData {
+		public AccessoryIntData() : base() {
 
 		}
+		public AccessoryIntData(
+			string modelName,
+			string displayName,
+			long? price,
+			uint? unlockLevel,
+			string iconName,
+			string partType,
+			string modelColl,
+			string look,
+			string variant,
+			string electricType) : base(modelName, displayName, price, unlockLevel, iconName, partType) {
+			mModelColl = modelColl;
+			mLook = look;
+			mVariant = variant;
+			mElectricType = electricType;
+		}
 
-		protected string mModelColl = modelColl;
+		protected string mModelColl = "";
 		public string CollPath {
 			get => mModelColl;
 			set {
@@ -165,7 +179,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
-		protected string mLook = look;
+		protected string mLook = "";
 		public string Look {
 			get => mLook;
 			set {
@@ -174,7 +188,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
-		protected string mVariant = variant;
+		protected string mVariant = "";
 		public string Variant {
 			get => mVariant;
 			set {
@@ -183,7 +197,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
-		private string mElectricType = electricType;
+		private string mElectricType = "vehicle";
 		public string ElectricType {
 			get => mElectricType;
 			set {

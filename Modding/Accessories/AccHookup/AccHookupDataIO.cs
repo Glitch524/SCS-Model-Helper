@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccHookup {
-	public class AccHookupDataIO(): AccDataIO {
+	public class AccHookupDataIO(): AccSCSIO {
 		//addon hookup storage
 		private const string NameAHSPreffix = "addon_hookup_storage";
 

@@ -346,7 +346,8 @@
 				Value="14" />
 		</Style>
 	</base:BaseWindow.Resources>
-	<Grid>
+	<Grid
+		x:Name="GridMain">
 		<Grid.RowDefinitions>
 			<RowDefinition
 				Height="Auto" />
@@ -356,7 +357,6 @@
 		<ui:TitleBar
 			Title="{DynamicResource TitleAccessoryAddon}" />
 		<Grid
-			x:Name="GridMain"
 			Grid.Row="1"
 			Margin="10,0,10,10">
 			<Grid.ColumnDefinitions>
@@ -2382,5 +2382,24 @@
 					Click="ButtonStartClick" />
 			</Grid>
 		</Grid>
+			<ui:ProgressRing
+				Grid.Row="1"
+				IsIndeterminate="True">
+				<ui:ProgressRing.Style>
+					<Style
+						TargetType="ui:ProgressRing"
+						BasedOn="{StaticResource {x:Type ui:ProgressRing}}">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding Loading}"
+								Value="False">
+								<Setter
+									Property="Visibility"
+									Value="Collapsed" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</ui:ProgressRing.Style>
+			</ui:ProgressRing>
 	</Grid>
 </base:BaseWindow>

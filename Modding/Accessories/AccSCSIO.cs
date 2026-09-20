@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Threading;
 
 namespace SCS_Mod_Helper.Modding.Accessories {
-	public abstract class AccDataIO(): ModIO {
+	public abstract class AccSCSIO(): SCSIO {
 
 		protected const string NameDisplayName = "name";
 		protected const string NamePrice = "price";

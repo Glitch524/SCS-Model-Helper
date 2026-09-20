@@ -1,7 +1,7 @@
 ﻿using System.IO;
 
 namespace SCS_Mod_Helper.Base {
-	public abstract class ModIO() {
+	public abstract class SCSIO() {
 		protected const string FileHeader = "SiiNunit";
 		protected int TabCount = 0;
 

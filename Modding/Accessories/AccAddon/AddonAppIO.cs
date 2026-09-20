@@ -6,53 +6,53 @@ using System.Xml;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 {
-    public class AccAddonDEDIO(string savePath): AppIO
+    public class AddonAppIO(string savePath): AppIO
     {
-        private const string TITLE_ACCESSORY_ADDON = "AccessoryAddon";
+        protected const string TITLE_ACCESSORY_ADDON = "AccessoryAddon";
 		public const string ATTR_GAME_VERSION = "GameVersion";
-		private const string TITLE_MODEL_NAME = "ModelName";
-        private const string TITLE_DISPLAY_NAME = "DisplayName";
-        private const string TITLE_PRICE = "Price";
-        private const string TITLE_UNLOCK_LEVEL = "UnlockLevel";
-        private const string TITLE_ICON_NAME = "IconName";
-        private const string TITLE_PART_TYPE = "PartType";
-        private const string TITLE_MODEL_PATH = "ModelPath";
-        private const string TITLE_MODEL_PATH_UK = "ModelPathUK";
-        private const string TITLE_EXT_MODEL_PATH = "ExternalModelPath";
-        private const string TITLE_EXT_MODEL_PATH_UK = "ExternalModelPathUK";
-        private const string TITLE_COLLISION_PATH = "CollPath";
-        private const string TITLE_MODEL_TYPE = "ModelType";
-        private const string TITLE_LOOK = "Look";
-        private const string TITLE_VARIANT = "variant";
+		protected const string TITLE_MODEL_NAME = "ModelName";
+        protected const string TITLE_DISPLAY_NAME = "DisplayName";
+        protected const string TITLE_PRICE = "Price";
+        protected const string TITLE_UNLOCK_LEVEL = "UnlockLevel";
+        protected const string TITLE_ICON_NAME = "IconName";
+        protected const string TITLE_PART_TYPE = "PartType";
+        protected const string TITLE_MODEL_PATH = "ModelPath";
+        protected const string TITLE_MODEL_PATH_UK = "ModelPathUK";
+        protected const string TITLE_EXT_MODEL_PATH = "ExternalModelPath";
+        protected const string TITLE_EXT_MODEL_PATH_UK = "ExternalModelPathUK";
+        protected const string TITLE_COLLISION_PATH = "CollPath";
+        protected const string TITLE_MODEL_TYPE = "ModelType";
+        protected const string TITLE_LOOK = "Look";
+        protected const string TITLE_VARIANT = "variant";
 
-        private const string TITLE_HIDE_IN = "HideIn";
-        private const string TITLE_ELECTRIC_TYPE = "ElectricType";
+        protected const string TITLE_HIDE_IN = "HideIn";
+        protected const string TITLE_ELECTRIC_TYPE = "ElectricType";
 
-        private const string TITLE_DATA_LIST = "DataList";
-        private const string TITLE_DATA = "Data";
-        private const string TITLE_SUITABLE_FOR_LIST = "SuitableForList";
-        private const string TITLE_SUITABLE_FOR = "SuitableFor";
-        private const string TITLE_CONFLICT_WITH_LIST = "ConflictWithList";
-        private const string TITLE_CONFLICT_WITH = "ConflictWith";
-        private const string TITLE_DEFAULTS_LIST = "DefaultsList";
-		private const string TITLE_DEFAULTS = "Defaults";
-        private const string TITLE_OVERRIDES_LIST = "OverridesList";
-        private const string TITLE_OVERRIDES = "Overrides";
-        private const string TITLE_REQUIRE_LIST = "RequireList";
-        private const string TITLE_REQUIRE = "Require";
+        protected const string TITLE_DATA_LIST = "DataList";
+        protected const string TITLE_DATA = "Data";
+        protected const string TITLE_SUITABLE_FOR_LIST = "SuitableForList";
+        protected const string TITLE_SUITABLE_FOR = "SuitableFor";
+        protected const string TITLE_CONFLICT_WITH_LIST = "ConflictWithList";
+        protected const string TITLE_CONFLICT_WITH = "ConflictWith";
+        protected const string TITLE_DEFAULTS_LIST = "DefaultsList";
+		protected const string TITLE_DEFAULTS = "Defaults";
+        protected const string TITLE_OVERRIDES_LIST = "OverridesList";
+        protected const string TITLE_OVERRIDES = "Overrides";
+        protected const string TITLE_REQUIRE_LIST = "RequireList";
+        protected const string TITLE_REQUIRE = "Require";
 
-        private const string TITLE_TRUCKS_ETS2 = "TrucksETS2";
-        private const string TITLE_TRUCKS_ATS = "TrucksATS";
-        private const string TITLE_TRUCK = "Truck";
-		private const string ATTR_TRUCK_CHECK = "Check";
-		private const string ATTR_TRUCK_ID = "TruckID";
-        private const string ATTR_MODEL_TYPE = "ModelType";
-        private const string ATTR_LOOK = "Look";
-        private const string ATTR_VARIANT = "Variant";
-		private readonly string SavePath = savePath;
+        protected const string TITLE_TRUCKS_ETS2 = "TrucksETS2";
+        protected const string TITLE_TRUCKS_ATS = "TrucksATS";
+        protected const string TITLE_TRUCK = "Truck";
+		protected const string ATTR_TRUCK_CHECK = "Check";
+		protected const string ATTR_TRUCK_ID = "TruckID";
+        protected const string ATTR_MODEL_TYPE = "ModelType";
+        protected const string ATTR_LOOK = "Look";
+        protected const string ATTR_VARIANT = "Variant";
+		protected readonly string SavePath = savePath;
 
         public void SaveAddon(AccAddonBinding data) {
-            CreateXmlDeclaration();
+            WriteXmlDeclaration();
             SkipCreatingIFEmpty = true;
 
             WriteElement(TITLE_ACCESSORY_ADDON, () => {
@@ -88,7 +88,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
             SaveDocument(SavePath);
 		}
 
-		private void WriteList(string listTitle, Collection<string> list, string subTitle) {
+		protected void WriteList(string listTitle, Collection<string> list, string subTitle) {
 			if (list.Count == 0)
 				return;
 			WriteElement(listTitle, () => {
@@ -98,7 +98,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 			});
 		}
 
-		private void WriteTrucks(string listTitle, Collection<Truck> trucks) {
+		protected void WriteTrucks(string listTitle, Collection<Truck> trucks) {
 			if (trucks.Count == 0)
 				return;
 			WriteElement(listTitle, () => {
@@ -203,43 +203,38 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
             }
         }
 
-		private static void ReadList(XmlNode node, string title, Collection<string> list) {
+		protected static void ReadList(XmlNode node, string title, Collection<string> list) {
 			foreach (XmlNode c in node.ChildNodes) {
 				if (c.Name == title)
 					list.Add(c.InnerText);
 			}
 		}
 
-		private static int ReadTruck(XmlNode node, Collection<Truck> trucks) {
+		protected static int ReadTruck(XmlNode node, Collection<Truck> trucks) {
+			Dictionary<string, Truck> truckDict = trucks.ToDictionary(t => t.TruckID);
 			int selected = 0;
-			List<int> indexes = [.. Enumerable.Range(0, trucks.Count)];
-			int i = 0;
 			foreach (XmlNode t in node.ChildNodes) {
 				if (t.Name != TITLE_TRUCK) 
 					continue;
 				var truckID = GetAttribute(t, ATTR_TRUCK_ID);
-				for (int j = 0; j < indexes.Count; j++) {
-					i = (i + j) % indexes.Count;
-					var truck = trucks[indexes[i]];
-					if (truckID == truck.TruckID) {
-						truck.Check = GetAttributeBool(t, ATTR_TRUCK_CHECK);
-						if (truck.Check)
-							selected++;
-						truck.ModelType = GetAttribute(t, ATTR_MODEL_TYPE);
-						truck.Look = GetAttribute(t, ATTR_LOOK);
-						truck.Variant = GetAttribute(t, ATTR_VARIANT);
-						indexes.RemoveAt(i);
-						i -= 1;
-						break;
-					}
+				if (truckDict.TryGetValue(truckID, out var truck)) {
+					truck.Check = GetAttributeBool(t, ATTR_TRUCK_CHECK);
+					if (truck.Check)
+						selected++;
+					truck.ModelType = GetAttribute(t, ATTR_MODEL_TYPE);
+					truck.Look = GetAttribute(t, ATTR_LOOK);
+					truck.Variant = GetAttribute(t, ATTR_VARIANT);
+					truckDict.Remove(truckID);
 				}
-				i += 1;
+			}
+			foreach (var truckKV in truckDict) {//如果出现记录里没有出现过的新车，会导致新车内容没有被读取内容覆盖。
+				var truck = truckKV.Value;
+				truck.Check = false;
+				truck.ModelType = "";
+				truck.Look = "";
+				truck.Variant = "";
 			}
 			return selected;
 		}
-	}
-
-	public class AccAddonHistoryIO(): AccAddonDEDIO(Paths.HistoryFile()) {
-
 	}
 }
