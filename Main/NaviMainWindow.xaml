@@ -68,6 +68,13 @@
 					Command="{Binding WindowCommand}"
 					CommandParameter="ConverterPIX"
 					Cursor="Hand" />
+				<ui:NavigationViewItem
+					Content="Test"
+					Icon="{ui:SymbolIcon Lightbulb20}"
+					Command="{Binding TestCommand}"
+					CommandParameter="test"
+					Visibility="{Binding TestVisibility}"
+					Cursor="Hand" />
 			</ui:NavigationView.MenuItems>
 			<ui:NavigationView.FooterMenuItems>
 				<ui:NavigationViewItem
