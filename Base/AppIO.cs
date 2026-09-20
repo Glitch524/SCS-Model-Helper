@@ -9,7 +9,9 @@ public abstract class AppIO {
 
 	}
 
-	protected void CreateXmlDeclaration() {
+	protected void NewDoc() => doc = new();
+
+	protected void WriteXmlDeclaration() {
 		doc.AppendChild(doc.CreateXmlDeclaration("1.0", "UTF-8", null));
 	}
 
@@ -25,21 +27,36 @@ public abstract class AppIO {
 		action();
 		currentNode = formerNode;
 	}
-	protected void WriteValueElement(string name, string value) {
+	protected void WriteValueElement(string name, string? value) {
 		if (SkipCreatingIFEmpty && string.IsNullOrEmpty(value)) 
 			return;
 		var element = doc.CreateElement(name);
-		element.InnerText = value;
+		element.InnerText = value ?? "";
 		if (currentNode == null)
 			doc.AppendChild(element);
 		else
 			currentNode.AppendChild(element);
 	}
 
-	protected void WriteValueElement(string name, int value) => WriteValueElement(name, value.ToString());
-	protected void WriteValueElement(string name, long value) => WriteValueElement(name, value.ToString());
+	protected void WriteValueElement(string name, int? value) => WriteValueElement(name, value?.ToString() ?? null);
+	protected void WriteValueElement(string name, long? value) => WriteValueElement(name, value?.ToString() ?? null);
+	protected void WriteValueElement(string name, float? value) => WriteValueElement(name, value?.ToString() ?? null);
+	protected void WriteValueElement(string name, float?[] value) {
+		string? valueString = string.Join(',', value);
+		if (valueString == ",," || valueString == ",")
+			valueString = null;
+		WriteValueElement(name, valueString);
+	}
+	protected void WriteValueElement(string name, float[]? value) {
+		string? valueString;
+		if (value == null)
+			valueString = null;
+		else
+			valueString = string.Join(',', value);
+		WriteValueElement(name, valueString);
+	}
 
-	protected void WriteAttribute(string attrName, string value) {
+	protected void WriteAttribute(string attrName, string? value) {
 		if (SkipCreatingIFEmpty && string.IsNullOrEmpty(value))
 			return;
 		if (currentNode == null)
@@ -48,9 +65,9 @@ public abstract class AppIO {
 		attr.Value = value;
 		currentNode.Attributes.Append(attr);
 	}
-	protected void WriteAttribute(string name, int value) => WriteAttribute(name, value.ToString());
-	protected void WriteAttribute(string name, long value) => WriteAttribute(name, value.ToString());
-	protected void WriteAttribute(string name, bool value) => WriteAttribute(name, value.ToString());
+	protected void WriteAttribute(string name, int? value) => WriteAttribute(name, value?.ToString() ?? null);
+	protected void WriteAttribute(string name, long? value) => WriteAttribute(name, value?.ToString() ?? null);
+	protected void WriteAttribute(string name, bool? value) => WriteAttribute(name, value?.ToString() ?? null);
 
 	protected bool SkipCreatingIFEmpty = false;
 	protected XmlWriterSettings settings = new() {
