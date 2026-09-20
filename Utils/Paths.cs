@@ -3,14 +3,12 @@
 namespace SCS_Mod_Helper.Utils;
 
 class Paths {
-	public static string ManifestFile(string projectLocation) =>
-		$@"{projectLocation}\manifest.sii";
-	public static string DefTruckDir(string projectLocation) =>
-		$@"{projectLocation}\def\vehicle\truck";
+	public static string ManifestFile(string projectLocation) => Path.Combine(projectLocation, "manifest.sii");
+	public static string DefTruckDir(string projectLocation) => Path.Combine(projectLocation, @"def\vehicle\truck");
 	public static string SiiFile(string projectLocation, string truckId, string modelType, string modelName) {
-		string dir = @$"{projectLocation}\def\vehicle\truck\{truckId}\accessory\{modelType}";
+		string dir = Path.Combine(projectLocation, @"def\vehicle\truck", truckId, "accessory", modelType);
 		Directory.CreateDirectory(dir);
-		return @$"{dir}\{modelName}.sii";
+		return Path.Combine(dir, $"{modelName}.sii");
 	}
 	public static string LocaleDir(string projectLocation) => Path.Combine(projectLocation, "locale");
 	public static string LocaleFile(string projectLocation, string locale, string moduleName, bool createDir = true) {
@@ -20,25 +18,25 @@ class Paths {
 		return Path.Combine(dir, $"local_module.{moduleName}.sii");
 	}
 	public static string AccessoryIconDir(string projectLocation, string sub = "") {
-		var p = $@"{projectLocation}\material\ui\accessory";
-		if (p.Length > 0)
-			p += $"\\{sub}";
+		var p = Path.Combine(projectLocation, @"material\ui\accessory");
+		if (sub.Length > 0)
+			p = Path.Combine(p, sub);
 		return p;
 	}
 
-	public static string IntDecorsDir(string projectLocation) =>
-		$@"{projectLocation}\vehicle\truck\upgrade\interior_decors";
+	public static string IntDecorsDir(string projectLocation) => Path.Combine(projectLocation, @"vehicle\truck\upgrade\interior_decors");
 	public static string HookupFile(string projectLocation, string hookupName) {
-		string dir = $@"{projectLocation}\unit\hookup\vehicle";
+		string dir = Path.Combine(projectLocation, @"unit\hookup\vehicle");
 		Directory.CreateDirectory(dir);
 		return Path.Combine(dir, $"{hookupName}.sii");
 	}
 	public static string HookupStorageDir(string projectLocation) => Path.Combine(projectLocation, @"def\vehicle");
 	public static string AddonHookupsDir(string projectLocation, string suiFilename) {
-		var dir = $@"{projectLocation}\def\vehicle\addon_hookups";
+		string dir = Path.Combine(projectLocation, @"def\vehicle\addon_hookups");
 		Directory.CreateDirectory(dir);
 		return Path.Combine(dir, $"{suiFilename}.sui");
 	}
+	public static string TrucksDBPath() => "Trucks.db";
 
 	public static string LanguageDir() => "Language";
 	public static string TrucksLanguageDir() => "Language\\Trucks";
@@ -46,7 +44,4 @@ class Paths {
 	public static string DefaultDEDDir() => "Def Files";
 
 	public static string ExcpPath() => $"Excp_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt";
-	public static string TrucksETS2Path() => "TrucksETS2.DET";
-	public static string TrucksATSPath() => "TrucksATS.DET";
-	public static string HistoryFile() => "History.DED";
 }
