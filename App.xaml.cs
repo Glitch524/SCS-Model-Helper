@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Modding.Accessories;
+using SCS_Mod_Helper.Modding.Accessories.Physics;
 using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Windows;
@@ -34,7 +35,8 @@ public partial class App: Application {
 	}
 
 	private void OnExit(object sender, ExitEventArgs e) {
-		AccAppIO.SavePhysicsList();
+		new AccessoryPhysicsIO().SavePhysics();
+		//AccAppIO.SavePhysicsList();
 	}
 }
 

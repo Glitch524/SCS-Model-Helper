@@ -1,4 +1,5 @@
-﻿using SCS_Mod_Helper.Localization;
+﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Setting;
 using System.Collections.ObjectModel;
@@ -207,6 +208,6 @@ class DictionaryUtil {
 
 	public static string GetSystemTheme() {
 		SystemThemeManager.UpdateSystemThemeCache();
-		return Wpf.Ui.Appearance.SystemThemeManager.GetCachedSystemTheme().ToString();
+		return SystemThemeManager.GetCachedSystemTheme().ToString();
 	}
 }

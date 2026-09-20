@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <RootNamespace>SCS_Mod_Helper</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -30,6 +30,7 @@
     <None Remove="Modding\PaintJob\arrow.png" />
     <None Remove="App.config" />
     <None Remove="Images\AppIcon.png" />
+    <None Remove="Trucks\DefaultTrucks.db" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,10 +40,14 @@
 
   <ItemGroup>
     <EmbeddedResource Include="App.config" />
+    <EmbeddedResource Include="Trucks\DefaultTrucks.db">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HelixToolkit.Wpf" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="11.0.0-rc.1.26425.128" />
     <PackageReference Include="Pfim" Version="0.11.4" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2.3" />
     <PackageReference Include="System.Drawing.Common" Version="11.0.0-rc.1.26425.128" />
