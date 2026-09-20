@@ -63,9 +63,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 			Binding.DirBack(index);
 		}
 
-		public void ListBoxScrollToTop() {
-			ListFiles.ScrollIntoView(Binding.FileList[0]);
-		}
+		public void ListBoxScrollToTop(PIXFile file) => ListFiles.ScrollIntoView(file);
 
 		private void ButtonExtractFileClick(object sender, RoutedEventArgs e) {
 			if (Binding.SelectedFile is PIXFile pixFile) {

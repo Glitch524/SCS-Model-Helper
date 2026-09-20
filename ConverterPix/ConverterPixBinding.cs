@@ -9,8 +9,10 @@ using System.Windows.Input;
 using Wpf.Ui.Input;
 
 namespace SCS_Mod_Helper.ConverterPix {
-	public class ConverterPixBinding(Action listBoxScrollToTop): BaseBinding {
-		private Action ListBoxScrollToTop = listBoxScrollToTop;
+	public class ConverterPixBinding(Action<PIXFile> listBoxScrollToTop): BaseBinding {
+		private readonly Action<PIXFile> ScrollToFile = listBoxScrollToTop;
+
+		private void ScrollToTop() => ScrollToFile(FileList[0]);
 
 		public string mPackPath = "";
 		public string PackPath {
@@ -60,12 +62,12 @@ namespace SCS_Mod_Helper.ConverterPix {
 		}
 
 
-		public void ReadDir() {
+		public void ReadDir(string? focusPath = null) {
 			string args = $"-b \"{PackPath}\" -listdir \"{PackDir}\"";
 			Process p = CallPix(args);
 
 			p.Start();
-
+			PIXFile? focusFile = null;
 			bool error = false;
 			bool clearList = true;
 			string? line;
@@ -85,15 +87,23 @@ namespace SCS_Mod_Helper.ConverterPix {
 				if (line.Contains("Done"))
 					break;
 				if (line.StartsWith("[D]")) {
-					FileList.Add(new PIXFile(line[4..], true));
+					string path = line[4..];
+					var file = new PIXFile(path, true);
+					if (focusPath == path)
+						focusFile = file;
+					FileList.Add(file);
 				} else if (line.StartsWith("[F]")) {
 					FileList.Add(new PIXFile(line[4..], false));
 				}
 			}
 			p.WaitForExit();
 			p.Close();
-			if (!error)
-				ListBoxScrollToTop();
+			if (!error) {
+				if (focusFile == null)
+					ScrollToTop();
+				else
+					ScrollToFile(focusFile);
+			}
 		}
 
 		public ICommand OpenFileCommand => new RelayCommand<object>(OpenFile);
@@ -117,10 +127,11 @@ namespace SCS_Mod_Helper.ConverterPix {
 		public ObservableCollection<PackDir> DirList => mDirList;
 
 		public void DirBack(int index) {
+			string focusFile = DirList[index + 1].DirName;
 			while (DirList.Count > index + 1) {
 				DirList.RemoveAt(index + 1);
 			}
-			ReadDir();
+			ReadDir(focusFile);
 		}
 
 		private static Process CallPix(string args) {
