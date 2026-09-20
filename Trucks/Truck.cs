@@ -18,20 +18,9 @@ public class Truck(
 	bool ets2 = false): BaseBinding, IComparable {
 
 	public Truck(
-		string truckID,
-		int productionYear,
-		string ingameName,
-		[CallerMemberName] string caller = "") : this(
-			truckID,
-			productionYear,
-			ingameName,
-			Util.GetString("TruckDesc." + truckID),
-			caller.EndsWith("ETS2")) {
-		//给默认列表使用，备注在字典里
-	}
-	public Truck(
 		bool isETS2,
 		string truckID,
+		string manifaturer,
 		int productionYear,
 		string ingameName,
 		string description) : this(
@@ -41,14 +30,7 @@ public class Truck(
 			description,
 			isETS2) {
 		IsETS2 = isETS2;
-		//给默认列表使用，备注在字典里
-	}
-
-	public static Truck? LineParse(string line) {
-		var items = line.Trim().Split(TruckDefault.ItemSplit);
-		if (items.Length < 8)
-			return null;
-		return new Truck(items[0], int.Parse(items[1]), items[2], items[3], bool.Parse(items[4]), items[5], items[6], items[7]);
+		mManifaturer = manifaturer;
 	}
 
 	private string mTruckID = truckID;
@@ -56,6 +38,15 @@ public class Truck(
 		get => mTruckID;
 		set {
 			mTruckID = value;
+			InvokeChange();
+		}
+	}
+
+	private bool mDefaultTruck = false;
+	public bool DefaultTruck {
+		get => mDefaultTruck;
+		set {
+			mDefaultTruck = value;
 			InvokeChange();
 		}
 	}
@@ -145,45 +136,6 @@ public class Truck(
 		}
 	}
 
-	public const int IndexDTruckID = 0;
-	public const int IndexDModelType = 1;
-	public const int IndexDLook = 2;
-	public const int IndexDVariant = 3;
-	public static string DEDHeader() => string.Join(TruckDefault.ItemSplit, [nameof(TruckID), nameof(ModelType), nameof(Look), nameof(Variant)]);
-
-	public string ToDEDLine() => string.Join(TruckDefault.ItemSplit, [TruckID, ModelType, Look, Variant]);
-
-	public const int IndexTTruckID = 0;
-	public const int IndexTProductionYear = 1;
-	public const int IndexTIngameName = 2;
-	public const int IndexTDescription = 3;
-	public const int IndexTCheck = 4;
-	public const int IndexTModelType = 5;
-	public const int IndexTLook = 6;
-	public const int IndexTVariant = 7;
-	public static int[] Indexes => [-1, -1, -1, -1, -1, -1, -1, -1];
-	public static string TruckHeader() => string.Join(TruckDefault.ItemSplit, [
-		nameof(TruckID),
-		nameof(ProductionYear),
-		nameof(IngameName),
-		nameof(Description),
-		nameof(Check),
-		nameof(ModelType),
-		nameof(Look),
-		nameof(Variant)
-		]);
-
-	public string ToTruckLine() => string.Join(TruckDefault.ItemSplit, [
-		TruckID,
-		ProductionYear,
-		IngameName,
-		Description,
-		Check,
-		ModelType,
-		Look,
-		Variant
-		]);
-
 	public int CompareTo(object? obj) {
 		if (obj is Truck other) {
 			var c = Manifaturer.CompareTo(other.Manifaturer);
@@ -200,4 +152,18 @@ public class Truck(
 
 	public List<Cabin> Cabins = [];
 	public List<Accessory> Accessories = [];
+
+	public override string ToString() => $"{TruckID} {IngameName} {ProductionYear}";
+}
+
+public class Cabin(string truckID, string cabinID, string cabinName) {
+	public string TruckID = truckID;
+	public string CabinID = cabinID;
+	public string CabinName = cabinName;
+}
+
+public class Accessory(string truckID, string accID, string accName) {
+	public string TruckID = truckID;
+	public string AccID = accID;
+	public string AccName = accName;
 }
