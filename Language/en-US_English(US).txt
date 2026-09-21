@@ -17,6 +17,7 @@
 	<s:String x:Key="ThemeFollowSystem">Follow System</s:String>
 	<s:String x:Key="ThemeLight">Light</s:String>
 	<s:String x:Key="ThemeDark">Dark</s:String>
+	<s:String x:Key="MessagePixNotSet">ConverterPix.exe not found, please set the path in settings.</s:String>
 	
 	<!--MOD Manifest-->
 	<s:String x:Key="TitleModManifest">MOD Manifest</s:String>
@@ -28,6 +29,7 @@
 	<s:String x:Key="Author">Author: </s:String>
 	<s:String x:Key="CheckBoxMP">MP Mod Optional</s:String>
 	<s:String x:Key="CheckBoxMPTip">Specifies whether players can join a multiplayer game with this mod installed, even if the server or other players do not have this mod. Such mod must not affect gameplay in a way that would require all participants to have it installed.</s:String>
+	<s:String x:Key="ResultSaved">Manifest Saved</s:String>
 		<!--Icon-->
 	<s:String x:Key="TitleModIcon">MOD Icon（JPG 276x162）</s:String>
 	<s:String x:Key="IconName">Icon Filename: </s:String>
@@ -59,7 +61,7 @@
 	<s:String x:Key="MessageManifestNotFilled">Please fill in all necessary content</s:String>
 
 
-
+	<s:String x:Key="TitleAccessory">Accessory Settings</s:String>
 	<!--AccAddonWindow-->
 	<s:String x:Key="TitleAccessoryAddon">Create Accessory Addon</s:String>
 	<s:String x:Key="SCSProjectLocation">Project Location</s:String>
@@ -72,7 +74,7 @@
 	<s:String x:Key="ModelPriceErrNot0">Price cannot be 0, or the accessory will not be visible to the player.</s:String>
 	<s:String x:Key="ModelPriceErrNoNumber">Characters other than number is not allowed</s:String>
 	<s:String x:Key="ModelUnlockLevel">Unlock Level</s:String>
-	<s:String x:Key="ModelIcon">Icon Name(TGA 256x64)</s:String>
+	<s:String x:Key="ModelIcon">Icon Name(TGA/DDS 256x64)</s:String>
 	<s:String x:Key="PartType">PartType</s:String>
 	<s:String x:Key="PartTypeTip">The part type will show up in the top-right corner of the icon in game(Unknown by default)</s:String>
 	<s:String x:Key="ModelFilePath">Model Path(.pim will be transformed to .pmd)</s:String>
@@ -207,7 +209,7 @@
 	
 	
 	<!--Physics Model Page-->
-	<s:String x:Key="TitlePhysicsToyData">Physics Toy Data</s:String>
+	<s:String x:Key="TitlePhysicsToyData">Physics Toy Data Preset</s:String>
 	<s:String x:Key="MsgPhysics1">Define physics models, and add it in model's data to add physics model</s:String>
 	<s:String x:Key="MsgPhysics2">Choose a physics data to add to the model definition</s:String>
 	
@@ -270,7 +272,7 @@
 	<s:String x:Key="TitleLiftCoefficient">Lift Coefficient</s:String>
 	
 	
-	<!--PhysicsUC.cs-->
+		<!--PhysicsUC.cs-->
 	<s:String x:Key="MessageResultPhysSaved">Physics definition saved.</s:String>
 	<s:String x:Key="DialogTitleChooseRope">Choose Rope Material File(mat file or its image file)</s:String>
 	<s:String x:Key="DialogTitleChoosePatch">Choose Patch Material File(mat file or its image file)</s:String>
@@ -278,6 +280,58 @@
 	<s:String x:Key="MessageErrorChooseMaterial">Chosen file must be mat file or its image file</s:String>
 	
 	
+	<!--Paint Job Page-->
+	<s:String x:Key="TitleSetupPaintJob">Setup Paint Job</s:String>
+	<s:String x:Key="TitleTruck">Truck</s:String>
+	<s:String x:Key="TitleCabin">Cabin</s:String>
+	<s:String x:Key="TitleBaseColor">Base Color</s:String>
+	<s:String x:Key="ToolTipBaseColor">Defines the default color of the paint job.</s:String>
+	<s:String x:Key="TitleColorCustomizable">Customizable</s:String>
+	<s:String x:Key="TooltipColorCustomizable">Allows players to customize colors</s:String>
+	<s:String x:Key="TitleAlternateUVSet">Alternate UV Set</s:String>
+	<s:String x:Key="TooltipAlternateUVSet">When true, the resulting material will have the altuv flavor. This triggers usage of the alternate UV layout, if configured.</s:String>
+	<s:String x:Key="TitlePaintJobTexture">Paint Job Texture</s:String>
+	<s:String x:Key="TextureRequire">(TOBJ, or the image it represents)</s:String>
+	<s:String x:Key="TooltipPaintJobTexture">Defines the path to the texture resource (.tobj) to be used for color masking (colormask) or for blending (airbrush). If empty, mask is ignored and final result is composed purely from color attributes."</s:String>
+	<s:String x:Key="TitleBaseTextureOverride">Base Texture Override</s:String>
+	<s:String x:Key="TooltipBaseTextureOverride">Defines the path to a texture resource (.tobj) to override the base texture of the truckpaint material(s). If empty, the base texture will be used as defined in the truckpaint material(s). This is useful for overriding the alpha channel of the base texture if a different specularity is desired.</s:String>
+	
+	<s:String x:Key="HeaderAirbrush">Airbrush</s:String>
+	<s:String x:Key="ExplainAirbrush">In the airbrush mode, the RGB of paint_job_mask is blended with the base color, using the alpha channel as the blend factor.</s:String>
+	<s:String x:Key="TitleFlipFlake">Flip and Flake</s:String>
+	<s:String x:Key="TitleFlipColor">Flip Color</s:String>
+	<s:String x:Key="TooltipFlipColor">Defines the flip color of the paint job.</s:String>
+	<s:String x:Key="TitleFlipStrength">Flip Strength</s:String>
+	<s:String x:Key="TooltipFlipStrength">Defines the relative strength of the flip effect.</s:String>
+	<s:String x:Key="TitleFlakeColor">Flake Color</s:String>
+	<s:String x:Key="TooltipFlakeColor">Defines the flake color of the paint job.</s:String>
+	<s:String x:Key="TitleFlakeShininess">Flake Shininess</s:String>
+	<s:String x:Key="TitleFlakeDensity">Flake Density</s:String>
+	<s:String x:Key="TooltipFlakeDensity">Defines how 'tight' the flake effect is to the specular highlight. Higher values result in a smaller area of the flake effect, while smaller values result in a broad area having it.</s:String>
+	<s:String x:Key="TitleFlakeClearcoatRolloff">Flake Clearcoat Rolloff</s:String>
+	<s:String x:Key="TooltipFlakeClearcoatRolloff">Adjusts the sharpness of the clearcoat specular highlight. Higher values yield sharper edges.</s:String>
+	<s:String x:Key="TitleFlakeUVScale">Flake UV Scale</s:String>
+	<s:String x:Key="TooltipFlakeUVScale">Defines how many times the flake_noise texture repeats within one UV tile.</s:String>
+	<s:String x:Key="TitleFlakeNoise">Flake Noise</s:String>
+	<s:String x:Key="TooltipFlakeNoise">Path to the flipflake texture. The RGB component multiplies the flake_color, and the A component masks the flake effect.</s:String>
+	
+	<s:String x:Key="HeaderColormask">Colormask</s:String>
+	<s:String x:Key="ExplainColormask">The color mask uses the RGB Alpha channels of the spray paint texture for color blending</s:String>
+	<s:String x:Key="ErrorColorHex">Pasted the wrong color hex code</s:String>
+	<s:String x:Key="TitleMaskR">Colormask Red</s:String>
+	<s:String x:Key="TooltipMaskR">Defines the Colormask Red color of the paint job.</s:String>
+	<s:String x:Key="TitleMaskG">Colormask Green</s:String>
+	<s:String x:Key="TooltipMaskG">Defines the Colormask Green color of the paint job.</s:String>
+	<s:String x:Key="TitleMaskB">Colormask Blue</s:String>
+	<s:String x:Key="TooltipMaskB">Defines the Colormask Blue color of the paint job.</s:String>
+	
+	<s:String x:Key="TitlePaintJobOverride">Paint Job Override for Accessory</s:String>
+	<s:String x:Key="TitleOverrides">Overrides</s:String>
+	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
+	<s:String x:Key="TitleAccessoryParts">Accessory</s:String>
+	
+	<s:String x:Key="DialogFilterTextureFile">Texture File|*.tobj;*.dds;*.tga;*.jpg;*.jpeg;*.png</s:String>
+	<s:String x:Key="DialogResultFileOutsideProject">Please put the image into the project location first</s:String>
 	
 	
 
@@ -313,6 +367,38 @@
 	<s:String x:Key="MessageCreateSuccess">File Created</s:String>
 
 
+	<!--Converter PIX-->
+	<s:String x:Key="TitleConverterPIX">Converter PIX</s:String>
+	<s:String x:Key="TitleModPath">Mod Path:</s:String>
+	<s:String x:Key="TitleCustomExportPath">Custom Export Path:</s:String>
+	<s:String x:Key="DialogFilterMod">"SCS Mod File|*.scs;*.zip|All Files|*.*"</s:String>
+	<s:String x:Key="TitleExtractFile">Extract File</s:String>
+	<s:String x:Key="TitleOpenExtractedLocation">Open Extracted Location</s:String>
+	<s:String x:Key="TitleFindAnim">Find Animation File</s:String>
+	<s:String x:Key="TitleGlanceFile">Glance File</s:String>
+	<s:String x:Key="TitleEDF">Extract and decrypt all files</s:String>
+	<s:String x:Key="TooltipEDF">Except the auto-generated files</s:String>
+	<s:String x:Key="DialogMessageEDF">Careful, you can't use this tool to decrypt someone else's Mod project for other purposes without permission.</s:String>
+	<s:String x:Key="MessageGatherFiles">Gathering Files...</s:String>
+	<s:String x:Key="MessageExtractPMD">Extracting model files...</s:String>
+	<s:String x:Key="MessageExtractTOBJ">Extracting TOBJ files...</s:String>
+	<s:String x:Key="MessageExtractDDS">Extracting DDS files...</s:String>
+	<s:String x:Key="MessageExtractDEF">Extracting DEF files...</s:String>
+	<s:String x:Key="MessageExtractMAT">Extracting MAT files...</s:String>
+	<s:String x:Key="MessageExtractOther">Extracting other files...</s:String>
+	<s:String x:Key="MessageExtractDir">Extracting empty folders...&#10;(I don't know why, but I just did)</s:String>
+	<s:String x:Key="CurrentFilePMD">PMD File:</s:String>
+	<s:String x:Key="CurrentFileTOBJ">TOBJ File:</s:String>
+	<s:String x:Key="CurrentFileDDS">DDS File:</s:String>
+	<s:String x:Key="CurrentFileDEF">DEF File:</s:String>
+	<s:String x:Key="CurrentFileMAT">MAT File:</s:String>
+	<s:String x:Key="CurrentFileOther">Other File:</s:String>
+	<s:String x:Key="CurrentFileDir">Folder:</s:String>
+	<s:String x:Key="MessageExtractedModel">Extracted and decrypted model successfully to:</s:String>
+	<s:String x:Key="MessageExtractedTobj">Extracted and decrypted tobj file and its image successfully to:</s:String>
+	<s:String x:Key="MessageExtractedFile">Extracted file successfully to:</s:String>
+	<s:String x:Key="MessageExtractFail">Failed to extract the file.&#10;Error:</s:String>
+	
 
 
 
@@ -337,11 +423,8 @@
 	<s:String x:Key="MessageSaveSuccess">File saved</s:String>
 	<s:String x:Key="MessageDeleteLocale">Are you sure to delete this translation file?</s:String>
 	<s:String x:Key="MessageUniEmpty">Universal translation is empty, the language without definition will not show translation properly, anre you sure to continue?</s:String>
-	
-	
-	<!--paint job-->
-	<s:String x:Key="TitleSetupPaintJob">添加喷漆</s:String>
 
+	
 	
 	
 	<!--About-->
@@ -357,7 +440,7 @@
 	<s:String x:Key="TipsCustomLanguage">Find the Language directory in the app's location, place a translated xaml file and rename in the specific format, then you can find the new language here.</s:String>
 	<s:String x:Key="ButtonLanguageDir">Language folder</s:String>
 	<s:String x:Key="ColorMode">Color Mode</s:String>
-	<s:String x:Key="ConverterPixPath"> Path</s:String>
+	<s:String x:Key="ExternalToolsPath"> Path</s:String>
 	<s:String x:Key="FilterCPix">App|converter_pix.exe</s:String>
 	<s:String x:Key="MessageErrNotCPix">Selected file is not ConverterPix.exe</s:String>
 	<s:String x:Key="MessageErrDifferentStructure">Selected file's directory seems different, continue?</s:String>
@@ -367,6 +450,7 @@
 
 	<s:String x:Key="MessageTitleNotice">Notice</s:String>
 	<s:String x:Key="MessageTitleErr">Error</s:String>
+	<s:String x:Key="MessageTitleResult">Result</s:String>
 	<s:String x:Key="StatusEmpty">Empty</s:String>
 	<s:String x:Key="ButtonOK">OK</s:String>
 	<s:String x:Key="ButtonCancel">Cancel</s:String>
@@ -379,66 +463,12 @@
 	<s:String x:Key="ButtonOpenFile">Open File</s:String>
 	<s:String x:Key="ButtonSelect">Select</s:String>
 	<s:String x:Key="ButtonBrowse">Browse</s:String>
+	<s:String x:Key="ButtonDontShowAgain">Don't show again</s:String>
 	<s:String x:Key="CheckBoxSelectAll">Select All</s:String>
 
 	<s:String x:Key="FilterAllFiles">All Files|*.*</s:String>
 
 	
-	<!--Truck Description ETS2-->
-	<x:Static x:Key="TruckDesc.daf.2021" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.daf.xd">Toybed is too high, sitting model，sitting model may clip through the higher bed</s:String>
-	<s:String x:Key="TruckDesc.daf.xf">EOL</s:String>
-	<x:Static x:Key="TruckDesc.daf.xf_euro6" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.daf.xf_electric">Currently no accessory locator</s:String>
-	<s:String x:Key="TruckDesc.iveco.hiway">EOL</s:String>
-	<s:String x:Key="TruckDesc.iveco.stralis">EOL</s:String>
-	<x:Static x:Key="TruckDesc.iveco.sway" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.man.tgx">EOL</s:String>
-	<x:Static x:Key="TruckDesc.man.tgx_2020" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.man.tgx_euro6" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.mercedes.actros">EOL</s:String>
-	<x:Static x:Key="TruckDesc.mercedes.actros2014" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.renault.etech_t">Currently no accessory locator</s:String>
-	<s:String x:Key="TruckDesc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
-	<s:String x:Key="TruckDesc.renault.premium">EOL</s:String>
-	<x:Static x:Key="TruckDesc.renault.t" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.scania.r">EOL</s:String>
-	<x:Static x:Key="TruckDesc.scania.r_2016" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.scania.s_2016" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.scania.s_2024e" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.scania.streamline">EOL</s:String>
-	<s:String x:Key="TruckDesc.volvo.fh16">EOL</s:String>
-	<s:String x:Key="TruckDesc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
-	<x:Static x:Key="TruckDesc.volvo.fh_2021" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.volvo.fh_2024">Toybed has a small table, clipping may happen when sitting</s:String>
-
-
-	<!--Truck Description ATS-->
-	<s:String x:Key="TruckDesc.freightliner.cascadia2019">There's no toybed in this truck</s:String>
-	<x:Static x:Key="TruckDesc.freightliner.cascadia2024" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.freightliner.ecascadia">TBA</s:String>
-	<s:String x:Key="TruckDesc.intnational.9900i">EOL</s:String>
-	<x:Static x:Key="TruckDesc.intnational.lonestar" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.intnational.lt">Toybed is just as same as LoneStar</s:String>
-	<x:Static x:Key="TruckDesc.kenworth.t680" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<s:String x:Key="TruckDesc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<s:String x:Key="TruckDesc.kenworth.w990">TBA</s:String>
-	<x:Static x:Key="TruckDesc.mack.anthem" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.mack.pinnacle" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.mack.anthem2026" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.mack.pioneer">TBA</s:String>
-	<x:Static x:Key="TruckDesc.peterbilt.389" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.peterbilt.579" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.peterbilt.579_2022">TBA</s:String>
-	<x:Static x:Key="TruckDesc.peterbilt.589" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.vnl" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.volvo.vnl2018" Member="s:String.Empty" />
-	<s:String x:Key="TruckDesc.volvo.vnl2024">TBA</s:String>
-	<s:String x:Key="TruckDesc.volvo.vnr_electric">TBA</s:String>
-	<s:String x:Key="TruckDesc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
-	<x:Static x:Key="TruckDesc.westernstar.49x" Member="s:String.Empty" />
-	<x:Static x:Key="TruckDesc.westernstar.57x" Member="s:String.Empty" />
 
 
 	<!--accessory-->
@@ -457,6 +487,7 @@
 	<s:String x:Key="Acc.toyhang">Hanging Items</s:String>
 	<s:String x:Key="Acc.toyac">Air Conditioner Items</s:String>
 	<s:String x:Key="Acc.toystand">Console Items</s:String>
+	<s:String x:Key="Acc.toydash">Dashboard Storage Items</s:String>
 	<s:String x:Key="Acc.toyseat">Seat Items(Co-Driver's Seat)</s:String>
 	<s:String x:Key="Acc.toybed">Bed Items</s:String>
 	<s:String x:Key="Acc.toybig">Center Floor Items</s:String>

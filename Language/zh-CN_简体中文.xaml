@@ -394,9 +394,12 @@
 	<s:String x:Key="CurrentFileMAT">MAT文件：</s:String>
 	<s:String x:Key="CurrentFileOther">其他文件：</s:String>
 	<s:String x:Key="CurrentFileDir">文件夹：</s:String>
+	<s:String x:Key="MessageExtractedModel">成功提取并解密模型至：</s:String>
+	<s:String x:Key="MessageExtractedTobj">成功提取并解密Tobj及贴图至：</s:String>
+	<s:String x:Key="MessageExtractedFile">成功提取文件至：</s:String>
+	<s:String x:Key="MessageExtractFail">提取文件失败&#10;错误原因：</s:String>
 	
-
-
+	
 
 
 	<!--设置多语言字典页-->
@@ -419,8 +422,9 @@
 	<s:String x:Key="MessageSaveErrNoName">翻译文件列表中存在未命名的文件</s:String>
 	<s:String x:Key="MessageSaveSuccess">文件已保存</s:String>
 	<s:String x:Key="MessageDeleteLocale">确定是否删除此翻译文件？</s:String>
-	<s:String
-		x:Key="MessageUniEmpty">通用翻译为空,没有定义翻译的语言可能无法正常显示，是否继续？</s:String>
+	<s:String x:Key="MessageUniEmpty">通用翻译为空,没有定义翻译的语言可能无法正常显示，是否继续？</s:String>
+	
+	
 	
 	
 	<!--关于-->
@@ -446,6 +450,7 @@
 	
 	<s:String x:Key="MessageTitleNotice">注意</s:String>
 	<s:String x:Key="MessageTitleErr">错误</s:String>
+	<s:String x:Key="MessageTitleResult">结果</s:String>
 	<s:String x:Key="StatusEmpty">空</s:String>
 	<s:String x:Key="ButtonYes">是</s:String>
 	<s:String x:Key="ButtonNo">否</s:String>
