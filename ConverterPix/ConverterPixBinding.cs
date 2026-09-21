@@ -146,7 +146,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 			return p;
 		}
 
-		public void TestExtract(Window window, PIXFile pixFile) {
+		public void ExtractFile(Window window, PIXFile pixFile) {
 			StringBuilder args = new($"-b \"{PackPath}\" -e \"{DestPath}\"");
 			int type = 0;
 			if (pixFile.IsDir) {
@@ -200,24 +200,26 @@ namespace SCS_Mod_Helper.ConverterPix {
 			p.Close();
 			if (success) {
 				string osFilename = pixFile.Filename.Replace('/', '\\');
+				string filePath = Path.Combine(DestPath, osFilename);
 				if (OpenExtracted) {
 					if (type == 1) {
 						osFilename = osFilename[..^4] + ".pim";
 					}
-					string path = $"D:\\test{osFilename}";
-					if (File.Exists(path)) {
-						Process.Start("explorer.exe", $"/select,\"{path}\"");
+					if (File.Exists(filePath)) {
+						Process.Start("explorer.exe", $"/select,\"{filePath}\"");
 						return;
 					}
 				}
-				string resultMessage = type switch {
-					1 => $"Model extracted and decrypted successfully to D:\\test{osFilename[..^4]}",
-					2 => $"Tobj extracted and decrypted successfully to D:\\test{osFilename}",
-					_ => $"File extracted successfully to D:\\test{osFilename}",
+
+				string key = type switch {
+					1 => "MessageExtractedModel",
+					2 => "MessageExtractedTobj",
+					_ => "MessageExtractedFile",
 				};
+				string resultMessage = $"{Util.GetString(key)} {filePath}";
 				MessageBox.Show(window, resultMessage, "Result");
 			} else {
-				string resultMessage = $"Failed to extract and decrypt the file. \nErrors:\n{string.Join(Environment.NewLine, errors)}";
+				string resultMessage = $"{Util.GetString("MessageExtractFail")}\n{string.Join(Environment.NewLine, errors)}";
 				MessageBox.Show(window, resultMessage, "Result");
 			}
 		}
@@ -263,7 +265,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 		}
 
 		//可以用来查看文字文件内容，比如sii、mat、cfg，无法打开其他文件，tobj也不行 即使能读，也只有一点点就没有了
-		public void TestShow(Window window, PIXFile pixFile) {
+		public void ShowFile(Window window, PIXFile pixFile) {
 			StringBuilder args = new($"-b \"{PackPath}\" -show_f \"{pixFile.Filename}\"");
 
 			Process p = CallPix(args.ToString());

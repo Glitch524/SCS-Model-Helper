@@ -67,7 +67,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 		private void ButtonExtractFileClick(object sender, RoutedEventArgs e) {
 			if (Binding.SelectedFile is PIXFile pixFile) {
-				Binding.TestExtract(this, pixFile);
+				Binding.ExtractFile(this, pixFile);
 			}
 		}
 
@@ -75,7 +75,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 			if (Binding.SelectedFile is PIXFile pixFile) {
 				if (pixFile.IsDir)
 					return;
-				Binding.TestShow(this, pixFile);
+				Binding.ShowFile(this, pixFile);
 			}
 		}
 
