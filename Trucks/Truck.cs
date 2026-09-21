@@ -1,8 +1,4 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Utils;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows;
 
 namespace SCS_Mod_Helper.Trucks;
 
