@@ -41,7 +41,7 @@ public partial class CreatedModelWindow: BaseWindow {
 
 	private void OnClosed(object? sender, EventArgs e) => source.Cancel();
 
-	private readonly DirectoryInfo defDir = new(Paths.DefTruckDir(Instances.ProjectLocation));
+	private readonly DirectoryInfo defDir = new(Paths.DefTruckDir());
 	readonly Dictionary<string, CreatedModel> ModelPair = [];
 
 	private void LoadCreatedSii() {

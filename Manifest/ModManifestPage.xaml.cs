@@ -88,7 +88,7 @@ public partial class ModManifestPage: BasePage {
 			try {
 				Bitmap bitmap = new(ofd.FileName);
 				if (bitmap.Width == 276 && bitmap.Height == 162) {
-					binding.ModIcon = Util.LoadIcon(ofd.FileName);
+					binding.ModIcon = Util.LoadImage(ofd.FileName);
 					binding.NewIcon = true;
 				} else {
 					var result = MessageBox.Show(Window.GetWindow(this), GetString("MessageIconErrWrongSize"), GetString("MessageTitleNotice"), MessageBoxButton.YesNo);

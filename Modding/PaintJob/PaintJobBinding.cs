@@ -2,22 +2,87 @@
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
+using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Windows.Media.AppRecording;
+using Wpf.Ui.Extensions;
 
 namespace SCS_Mod_Helper.Modding.PaintJob {
-	internal partial class PaintJobBinding: BaseBinding {
+	public partial class PaintJobBinding: BaseBinding {
+		public Window? PreviewWindow;
+		public bool IsPreviewOpen => PreviewWindow != null;
 
-		private readonly AccessoryPaintJobData mPaintJobData = new();
-		public AccessoryPaintJobData PaintJobData => mPaintJobData;
+		public void OpenPaintJobPreview(PaintJobWindow window) {
+			if (PreviewWindow == null) {
+				PreviewWindow = new PaintJobTexPreviewWindow(this) {
+					Owner = window
+				};
+				PreviewWindow.Show();
+			} else
+				PreviewWindow.Focus();
+		}
+
+
+		private readonly AccPaintJobData mPaintJobData = new();
+		public AccPaintJobData PaintJobData => mPaintJobData;
 		public PaintJobBinding() {
 		}
+
+		public string ModelName {
+			get => PaintJobData.ModelName;
+			set {
+				PaintJobData.ModelName = value;
+				InvokeChange();
+
+				InvokeChange(nameof(NameOver12));
+			}
+		}
+
+		public bool NameOver12 => ModelName.Length > 12;
+
+		public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
+
+		public string PartType {
+			get => PaintJobData.PartType;
+			set {
+				PaintJobData.PartType = value;
+				InvokeChange();
+			}
+		}
+
+		public ObservableCollection<Truck> Trucks => PaintJobData.Trucks;
+
+		public Truck? CurrentTruck {
+			get => PaintJobData.CurrentTruck;
+			set {
+				CleanAOvrAccessories();
+				PaintJobData.CurrentTruck = value;
+				InvokeChange();
+				InvokeChange(nameof(CabinList));
+				InvokeChange(nameof(AccessoryList));
+			}
+		}
+		public List<Cabin>? CabinList => PaintJobData.CabinList;
+
+		public Cabin? CurrentCabin {
+			get => PaintJobData.CurrentCabin;
+			set {
+				PaintJobData.CurrentCabin = value;
+				InvokeChange();
+				GetCabinUV();
+			}
+		}
+
+		public List<Accessory>? AccessoryList => PaintJobData.AccessoryList;
 
 
 		//Display Name
@@ -76,33 +141,20 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-		public string ModelName {
-			get => PaintJobData.ModelName;
-			set {
-				PaintJobData.ModelName = value;
-				InvokeChange();
-
-				InvokeChange(nameof(NameOver12));
-			}
-		}
-
-		public bool NameOver12 => ModelName.Length > 12;
-
-		public string PartType {
-			get => PaintJobData.PartType;
-			set {
-				PaintJobData.PartType = value;
-				InvokeChange();
-			}
-		}
-
-		public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
-
 		public long? Price {
 			get => PaintJobData.Price;
 			set {
 				PaintJobData.Price = value;
 				InvokeChange();
+				InvokeChange(nameof(PriceString));
+			}
+		}
+		public string PriceString {
+			get => Price.ToString() ?? "";
+			set {
+				Price = value.Length == 0 ? null : long.Parse(value);
+				InvokeChange();
+				InvokeChange(nameof(Price));
 			}
 		}
 
@@ -111,10 +163,19 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			set {
 				PaintJobData.UnlockLevel = value;
 				InvokeChange();
+				InvokeChange(nameof(UnlockLevelString));
+			}
+		}
+		public string UnlockLevelString {
+			get => UnlockLevel.ToString() ?? "";
+			set {
+				UnlockLevel = value.Length == 0 ? null : uint.Parse(value);
+				InvokeChange();
+				InvokeChange(nameof(UnlockLevel));
 			}
 		}
 
-		public string SuitableForListContent => PaintJobData.SuitableForListContent;
+		//todo suitablefor conflictwith
 
 
 		//以下为Accessory Paint Job Data内容
@@ -127,7 +188,8 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange(nameof(BaseColorVisual));
 			}
 		}
-		public Brush BaseColorVisual => PaintJobData.BaseColorVisual;
+
+		public Brush BaseColorVisual => BaseColor.ToBrush();
 
 		public bool BaseColorCustomizable {
 			get => PaintJobData.BaseColorCustomizable;
@@ -136,6 +198,8 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool BaseColorLocked => !BaseColorCustomizable;
+
 
 		public bool AlternateUVSet {
 			get => PaintJobData.AlternateUVSet;
@@ -145,20 +209,13 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-
+		public string PaintJobTexRealPath = "";
 		public string PaintJobTex {
 			get => PaintJobData.PaintJobTex;
 			set {
 				PaintJobData.PaintJobTex = value;
 				InvokeChange();
 				InvokeChange(nameof(PaintJobTexVisibility));
-			}
-		}
-		public BitmapSource? PaintJobTexImage {
-			get => PaintJobData.PaintJobTexImage;
-			set {
-				PaintJobData.PaintJobTexImage = value;
-				InvokeChange();
 			}
 		}
 		public Visibility PaintJobTexVisibility => PaintJobData.PaintJobTexVisibility;
@@ -174,8 +231,129 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		public Visibility BaseTexOverrideVisibility => PaintJobData.BaseTexOverrideVisibility;
 
+		public ObservableCollection<ColorVariant> ColorVariantList => PaintJobData.ColorVariantList;
+
+		public void AddColorVariant() {
+			ColorVariantList.Add(new());
+			InvokeChange(nameof(CurrentVariant));
+		}
+
+		public void RemoveColorVariant(ColorVariant variant) {
+			ColorVariantList.Remove(variant);
+			if (CurrentVariant == variant) {
+				if (ColorVariantList.Count > 0)
+					CurrentVariant = ColorVariantList[0];
+				else
+					CurrentVariant = null;
+			}
+		}
+
+		private ColorVariant? mCurrentVariant = null;
+		public ColorVariant? CurrentVariant {
+			get {
+				if (ColorVariantList.Count == 0)
+					return null;
+				mCurrentVariant ??= ColorVariantList[0];
+				return mCurrentVariant;
+			}
+			set {
+				mCurrentVariant = value;
+				InvokeChange();
+				InvokeChange(nameof(VariantColorBase));
+				InvokeChange(nameof(VariantColorBaseBrush));
+				InvokeChange(nameof(VariantColor1));
+				InvokeChange(nameof(VariantColor1Brush));
+				InvokeChange(nameof(VariantColor2));
+				InvokeChange(nameof(VariantColor2Brush));
+				InvokeChange(nameof(VariantColor3));
+				InvokeChange(nameof(VariantColor3Brush));
+			}
+		}
+
+		public Color VariantColorBase {
+			get => CurrentVariant?.ColorBase ?? Colors.White;
+			set {
+				if (CurrentVariant == null)
+					return;
+				CurrentVariant.ColorBase = value;
+				InvokeChange();
+				InvokeChange(nameof(VariantColorBaseBrush));
+			}
+		}
+		public Brush VariantColorBaseBrush => VariantColorBase.ToBrush();
+
+		public Color VariantColor1 {
+			get => CurrentVariant?.Color1 ?? (Airbrush ? Colors.Red : Colors.Blue);
+			set {
+				if (CurrentVariant == null)
+					return;
+				CurrentVariant.Color1 = value;
+				InvokeChange();
+				InvokeChange(nameof(VariantColor1Brush));
+			}
+		}
+		public Brush VariantColor1Brush => VariantColor1.ToBrush();
+
+		public Color VariantColor2 {
+			get => CurrentVariant?.Color2 ?? Color.FromRgb(0, 255, 0);
+			set {
+				if (CurrentVariant == null)
+					return;
+				CurrentVariant.Color2 = value;
+				InvokeChange();
+				InvokeChange(nameof(VariantColor2Brush));
+			}
+		}
+		public Brush VariantColor2Brush => VariantColor2.ToBrush();
+
+		public Color VariantColor3 {
+			get => CurrentVariant?.Color3 ?? Colors.Red;
+			set {
+				if (CurrentVariant == null)
+					return;
+				CurrentVariant.Color3 = value;
+				InvokeChange();
+				InvokeChange(nameof(VariantColor3Brush));
+			}
+		}
+		public Brush VariantColor3Brush => VariantColor3.ToBrush();
+
+		private int mTabIndex = 0;
+		public int TabIndex {
+			get => mTabIndex;
+			set {
+				mTabIndex = value;
+				InvokeChange();
+				InvokeChange(nameof(VariantColor1Brush));
+				InvokeChange(nameof(Airbrush));
+				LoadColorChannel();
+			}
+		}
+
+		public bool Airbrush {
+			get => TabIndex == 0;
+			set {
+				TabIndex = value ? 0 : 1;
+				InvokeChange();
+				InvokeChange(nameof(TableIndex));
+			}
+		}
 
 		//以下为ColorMask内容
+
+		public static string ColorToHex(Color color) {
+			string r = string.Format("{0:x2}", color.R).ToUpper();
+			string g = string.Format("{0:x2}", color.G).ToUpper();
+			string b = string.Format("{0:x2}", color.B).ToUpper();
+			return r + g + b;
+		}
+
+		public static Color HexToColor(string hex) {
+			byte r = (byte)Convert.ToInt32($"{hex[0]}{hex[1]}");
+			byte g = (byte)Convert.ToInt32($"{hex[2]}{hex[3]}");
+			byte b = (byte)Convert.ToInt32($"{hex[4]}{hex[5]}");
+			return Color.FromRgb(r, g, b);
+		}
 
 		public Color MaskRColor {
 			get => PaintJobData.MaskRColor;
@@ -184,14 +362,17 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeMaskR();
 			}
 		}
-		public Brush MaskRColorVisual => PaintJobData.MaskRColorVisual;
+
+		public Brush MaskRColorVisual => MaskRColor.ToBrush();
+
 		public string MaskRColorHex {
-			get => PaintJobData.MaskRColorHex;
+			get => ColorToHex(MaskRColor);
 			set {
-				PaintJobData.MaskRColorHex = value;
+				MaskRColor = HexToColor(value);
 				InvokeMaskR();
 			}
 		}
+
 		public byte MaskRColorR {
 			get => PaintJobData.MaskRColorR;
 			set {
@@ -230,6 +411,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool MaskRLocked => !MaskRCustomizable;
 
 
 		public Color MaskGColor {
@@ -239,14 +421,17 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeMaskG();
 			}
 		}
-		public Brush MaskGColorVisual => PaintJobData.MaskGColorVisual;
+
+		public Brush MaskGColorVisual => MaskGColor.ToBrush();
+
 		public string MaskGColorHex {
-			get => PaintJobData.MaskGColorHex;
+			get => ColorToHex(MaskGColor);
 			set {
-				PaintJobData.MaskGColorHex = value;
+				MaskGColor = HexToColor(value);
 				InvokeMaskG();
 			}
 		}
+
 		public byte MaskGColorR {
 			get => PaintJobData.MaskGColorR;
 			set {
@@ -285,6 +470,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool MaskGLocked => !MaskGCustomizable;
 
 		public Color MaskBColor {
 			get => PaintJobData.MaskBColor;
@@ -293,11 +479,12 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeMaskB();
 			}
 		}
-		public Brush MaskBColorVisual => PaintJobData.MaskBColorVisual;
+
+		public Brush MaskBColorVisual => MaskBColor.ToBrush();
 		public string MaskBColorHex {
-			get => PaintJobData.MaskBColorHex;
+			get => ColorToHex(MaskBColor);
 			set {
-				PaintJobData.MaskBColorHex = value;
+				MaskBColor = HexToColor(value);
 				InvokeMaskB();
 			}
 		}
@@ -339,6 +526,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool MaskBLocked => !MaskBCustomizable;
 
 		public bool FlipFlake {
 			get => PaintJobData.Flipflake;
@@ -348,7 +536,24 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-		public Brush FlipColorVisual => PaintJobData.FlipColorVisual;
+		public bool AlternateFlipFlakeUVSet {
+			get => PaintJobData.AlternateFlipFlakeUVSet;
+			set {
+				PaintJobData.AlternateFlipFlakeUVSet = value;
+				InvokeChange();
+			}
+		}
+
+		public Color FlipColor {
+			get => PaintJobData.FlipColor;
+			set {
+				PaintJobData.FlipColor = value;
+				InvokeChange();
+				InvokeChange(nameof(FlipColorVisual));
+			}
+		}
+
+		public Brush FlipColorVisual => FlipColor.ToBrush();
 
 		public bool FlipColorCustomizable {
 			get => PaintJobData.FlipColorCustomizable;
@@ -357,16 +562,28 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool FlipColorLocked => !FlipColorCustomizable;
 
 		public float FlipStrength {
 			get => PaintJobData.FlipStrength;
 			set {
 				PaintJobData.FlipStrength = value;
 				InvokeChange();
+				InvokeChange(nameof(IsFlipStrengthDefault));
+			}
+		}
+		public bool IsFlipStrengthDefault => PaintJobData.IsFlipStrengthDefault;
+
+		public Color FlakeColor {
+			get => PaintJobData.FlakeColor;
+			set {
+				PaintJobData.FlakeColor = value;
+				InvokeChange();
+				InvokeChange(nameof(FlakeColorVisual));
 			}
 		}
 
-		public Brush FlakeColorVisual => PaintJobData.FlakeColorVisual;
+		public Brush FlakeColorVisual => FlakeColor.ToBrush();
 
 		public bool FlakeColorCustomizable {//固定鳞片漆颜色
 			get => PaintJobData.FlakeColorCustomizable;
@@ -375,58 +592,123 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool FlakeColorLocked => !FlakeColorCustomizable;
 
 		public float FlakeShininess {
 			get => PaintJobData.FlakeShininess;
 			set {
 				PaintJobData.FlakeShininess = value;
 				InvokeChange();
+				InvokeChange(nameof(IsFlakeShininessDefault));
 			}
 		}
+		public bool IsFlakeShininessDefault => PaintJobData.IsFlakeShininessDefault;
 
 		public float FlakeDensity {
 			get => PaintJobData.FlakeDensity;
 			set {
 				PaintJobData.FlakeDensity = value;
 				InvokeChange();
+				InvokeChange(nameof(IsFlakeDensityDefault));
 			}
 		}
+		public bool IsFlakeDensityDefault => PaintJobData.IsFlakeDensityDefault;
 
 		public float FlakeClearcoatRolloff {
 			get => PaintJobData.FlakeClearcoatRolloff;
 			set {
 				PaintJobData.FlakeClearcoatRolloff = value;
 				InvokeChange();
+				InvokeChange(nameof(IsFlakeClearcoatRolloffDefault));
 			}
 		}
+		public bool IsFlakeClearcoatRolloffDefault => PaintJobData.IsFlakeClearcoatRolloffDefault;
 
 		public float FlakeUVScale {
 			get => PaintJobData.FlakeUVScale;
 			set {
 				PaintJobData.FlakeUVScale = value;
 				InvokeChange();
+				InvokeChange(nameof(IsFlakeUVScaleDefault));
 			}
 		}
+		public bool IsFlakeUVScaleDefault => PaintJobData.IsFlakeUVScaleDefault;
+
+		public float FlakeVRatio {
+			get => PaintJobData.FlakeVRatio;
+			set {
+				PaintJobData.FlakeVRatio = value;
+				InvokeChange();
+				InvokeChange(nameof(IsFlakeVRatioDefault));
+			}
+		}
+		public bool IsFlakeVRatioDefault => PaintJobData.IsFlakeVRatioDefault;
 
 		public string FlakeNoise {
 			get => PaintJobData.FlakeNoise;
 			set {
 				PaintJobData.FlakeNoise = value;
 				InvokeChange();
+				InvokeChange(nameof(IsFlakeNoiseDefault));
 			}
 		}
+		public bool IsFlakeNoiseDefault => PaintJobData.IsFlakeNoiseDefault;
 
 		public Visibility FlakeNoiseVisibility => PaintJobData.FlakeNoiseVisibility;
+
+
 
 		public ObservableCollection<PaintJobOverrideData> OverrideList => PaintJobData.OverrideList;
 
 		public PaintJobOverrideData? SelectedOverride {
 			get => PaintJobData.SelectedOverride;
 			set {
+				ChangeCheckState = true;
+				ObservableCollection<Accessory> accList;
+				if (PaintJobData.SelectedOverride != null) {
+					accList = PaintJobData.SelectedOverride.AccList;
+					foreach(var acc in accList) {
+						acc.Check = false;
+					}
+				}
 				PaintJobData.SelectedOverride = value;
+				if (value != null) {
+					accList = value.AccList;
+					foreach (var acc in accList) {
+						acc.Check = true;
+					}
+				}
+				ChangeCheckState = false;
 				InvokeChange();
+				InvokeChange(nameof(AccTex));
+				InvokeChange(nameof(AccTexImage));
+				InvokeChange(nameof(AccFlakeUVScale));
+				InvokeChange(nameof(IsAccFlakeUVScaleDefault));
+				InvokeChange(nameof(AccFlakeVRatio));
+				InvokeChange(nameof(IsAccFlakeVRatioDefault));
 			}
 		}
+		bool ChangeCheckState = false;
+		public void AccessoryChecked(Accessory accessory) {
+			if (ChangeCheckState)
+				return;
+			if (SelectedOverride == null)
+				return;
+			accessory.BelongingOverride?.AccList.Remove(accessory);
+			SelectedOverride.AccList.Add(accessory);
+			accessory.BelongingOverride = SelectedOverride;
+		}
+
+		public void AccessoryUnchecked(Accessory accessory) {
+			if (ChangeCheckState)
+				return;
+			if (SelectedOverride == null)
+				return;
+			SelectedOverride.AccList.Remove(accessory);
+			accessory.BelongingOverride = null;
+		}
+
+
 		public string AccTex {
 			get => PaintJobData.AccTex;
 			set {
@@ -448,17 +730,28 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			set {
 				PaintJobData.AccFlakeUVScale = value;
 				InvokeChange();
+				InvokeChange(nameof(IsAccFlakeUVScaleDefault));
 			}
 		}
+		public bool IsAccFlakeUVScaleDefault => AccFlakeUVScale == 32f;
 		public float? AccFlakeVRatio {
 			get => PaintJobData.AccFlakeVRatio;
 			set {
 				PaintJobData.AccFlakeVRatio = value;
 				InvokeChange();
+				InvokeChange(nameof(IsAccFlakeVRatioDefault));
 			}
 		}
-		public ObservableCollection<string> AccList => PaintJobData.AccList;
+		public bool IsAccFlakeVRatioDefault => AccFlakeVRatio == 1f;
 
+		private bool mSyncOverNetwork = false;
+		public bool SyncOverNetwork {
+			get => mSyncOverNetwork;
+			set {
+				mSyncOverNetwork = value;
+				InvokeChange();
+			}
+		}
 
 
 
@@ -532,6 +825,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				switch (type) {
 					case TEX_PAINT_JOB:
 						PaintJobTex = inProjectpath;
+						PaintJobTexRealPath = path;
 						break;
 					case TEX_BASE_TEX_OVR:
 						BaseTexOverride = inProjectpath;
@@ -549,21 +843,51 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 					if (type == TEX_PAINT_JOB || type == TEX_ACC_TEX) {
 						imagePath = imagePath.ToLower();
 						if (imagePath.EndsWith(".dds") || imagePath.EndsWith(".tga")) {
-							if (type == TEX_PAINT_JOB)
-								PaintJobTexImage = Util.LoadPfimIcon(imagePath);
-							else
-								AccTexImage = Util.LoadPfimIcon(imagePath);
+							if (type == TEX_PAINT_JOB) {
+								LoadTexImage(imagePath);
+							} else
+								AccTexImage = Util.LoadPfimImage(imagePath);
 						} else {
-							if (type == TEX_PAINT_JOB)
-								PaintJobTexImage = Util.LoadIcon(imagePath);
-							else
-								AccTexImage = Util.LoadIcon(imagePath);
+							if (type == TEX_PAINT_JOB) {
+								LoadTexImage(imagePath);
+							} else
+								AccTexImage = Util.LoadImage(imagePath);
 						}
 					}
 				}
 			} else {
 				MessageBox.Show(window, Util.GetString("DialogResultFileOutsideProject"));
 			}
+		}
+
+		public void LoadTexImage(string imagePath) {
+			PaintJobTexImage = null;
+			PaintJobChannelR = null;
+			PaintJobChannelG = null;
+			PaintJobChannelB = null;
+			if (IsPreviewOpen) {
+				PaintJobTexImage = Util.LoadPfimImage(imagePath);
+				LoadColorChannel();
+			}
+		}
+
+		public void LoadColorChannel() {
+			if (!Airbrush && PaintJobTexImage != null && PaintJobChannelR == null) {
+				ChannelExtraction.ExtractRGBChannels(PaintJobTexImage, out WriteableBitmap rBmp, out WriteableBitmap gBmp, out WriteableBitmap bBmp);
+				PaintJobChannelR = rBmp;
+				PaintJobChannelG = gBmp;
+				PaintJobChannelB = bBmp;
+			}
+		}
+
+
+
+		private static void SaveBmp(WriteableBitmap bitmap, string filePath) {
+			filePath += ".png";
+			PngBitmapEncoder encode = new();
+			encode.Frames.Add(BitmapFrame.Create(bitmap));
+			using FileStream fs = new(filePath, FileMode.Create);
+			encode.Save(fs);
 		}
 
 		private static string? GetPathFromTobj(string tobjPath) {
@@ -597,5 +921,88 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		[GeneratedRegex(@"map[\s\t]2d")]
 		private static partial Regex deMap2D();
+
+
+		public BitmapSource? PaintJobTexImage {
+			get => PaintJobData.PaintJobTexImage;
+			set {
+				PaintJobData.PaintJobTexImage = value;
+				InvokeChange();
+			}
+		}
+		public BitmapSource? PaintJobChannelR {
+			get => PaintJobData.PaintJobChannelR;
+			set {
+				PaintJobData.PaintJobChannelR = value;
+				InvokeChange();
+			}
+		}
+		public BitmapSource? PaintJobChannelG {
+			get => PaintJobData.PaintJobChannelG;
+			set {
+				PaintJobData.PaintJobChannelG = value;
+				InvokeChange();
+			}
+		}
+		public BitmapSource? PaintJobChannelB {
+			get => PaintJobData.PaintJobChannelB;
+			set {
+				PaintJobData.PaintJobChannelB = value;
+				InvokeChange();
+			}
+		}
+
+		private BitmapImage? mCabinUV = null;
+		public BitmapImage? CabinUV {
+			get => mCabinUV;
+			set {
+				mCabinUV = value;
+				InvokeChange();
+			}
+		}
+
+		private void GetCabinUV() {
+			if (CurrentCabin == null)
+				return;
+			var uri = new Uri($"/Modding/PaintJob/TruckUV/{CurrentCabin!.CabinID}.png", UriKind.Relative);
+			CabinUV = new BitmapImage(uri);
+		}
+
+
+
+
+		public void ControlOvrTab(PaintJobOverrideData ovrData) {
+			int index = OverrideList.IndexOf(ovrData);
+			OverrideList.RemoveAt(index);
+			for (int i = index; i < OverrideList.Count; i++) {
+				OverrideList[i].Index = i;
+			}
+		}
+
+		public void AddOvr() {
+			OverrideList.Add(new(OverrideList.Count));
+			SelectedOverride = OverrideList.Last();
+		}
+
+		public void CleanAOvrAccessories() {
+			foreach(var ovr in OverrideList) {
+				foreach(var acc in ovr.AccList) {
+					acc.BelongingOverride = null;
+				}
+				ovr.AccList.Clear();
+			}
+		}
+
+		public void CreatePaintJobSii(Window window) {
+			if (ModelName.Length == 0
+				|| CurrentTruck == null
+				|| DisplayName.Length == 0
+				|| Price == null
+				|| UnlockLevel == null
+				|| IconName.Length == 0)
+				return;
+			new PaintJobSCSIO().WritePaintJobData(this);
+			MessageBox.Show(window, GetString("MessagePaintJobCreateSuccess"));
+		}
 	}
 }

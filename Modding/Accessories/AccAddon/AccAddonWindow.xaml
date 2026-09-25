@@ -2119,7 +2119,7 @@
 							<DataGridTextColumn
 								Header="{DynamicResource TruckName}"
 								Width="6*"
-								Binding="{Binding IngameName}"
+								Binding="{Binding DisplayName}"
 								FontSize="12"
 								ElementStyle="{DynamicResource DataGridElementStyle}"
 								CellStyle="{DynamicResource DataGridCellToolTip}" />
@@ -2265,7 +2265,7 @@
 							<DataGridTextColumn
 								Header="{DynamicResource TruckName}"
 								Width="6*"
-								Binding="{Binding IngameName}"
+								Binding="{Binding DisplayName}"
 								FontSize="12"
 								ElementStyle="{DynamicResource DataGridElementStyle}"
 								CellStyle="{DynamicResource DataGridCellToolTip}" />

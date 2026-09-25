@@ -61,7 +61,6 @@
 	<s:String x:Key="MessageManifestNotFilled">请填好必填内容</s:String>
 
 	
-
 	<s:String x:Key="TitleAccessory">配件设计</s:String>
 	<!--摆件模型定义页-->
 	<s:String x:Key="TitleAccessoryAddon">摆件模型定义文件&#10;(Accessory Addon)</s:String>
@@ -94,8 +93,7 @@
 	<s:String x:Key="HideIn">隐藏</s:String>
 	<s:String x:Key="ElectricType">Electric Type</s:String>
 	<s:String x:Key="Others">其他参数</s:String>
-	<s:String
-		x:Key="OthersTip">上述没有的内容可以在下面添加&#10;右键会显示推荐项&#10;重复项只会使用最前的值</s:String>
+	<s:String x:Key="OthersTip">上述没有的内容可以在下面添加&#10;右键会显示推荐项&#10;重复项只会使用最前的值</s:String>
 		<!--其他内容-->
 	<s:String x:Key="Data">物理模型(data)</s:String>
 	<s:String x:Key="SuitableFor">适用于...(suitable_for)</s:String>
@@ -113,6 +111,7 @@
 	<s:String x:Key="TruckID">卡车ID</s:String>
 	<s:String x:Key="TruckProdYear">生产年份</s:String>
 	<s:String x:Key="TruckName">卡车名称</s:String>
+	<s:String x:Key="TruckManifaturer">制造商</s:String>
 	<s:String x:Key="TruckDescription">卡车备注</s:String>
 		<!--侧边按钮-->
 	<s:String x:Key="ButtonDeleteTruck">删除车型</s:String>
@@ -297,10 +296,13 @@
 	<s:String x:Key="TooltipPaintJobTexture">用在颜色遮罩或贴图混合的贴图资源路径（.tobj）。</s:String>
 	<s:String x:Key="TitleBaseTextureOverride">覆盖基础贴图</s:String>
 	<s:String x:Key="TooltipBaseTextureOverride">定义一个纹理资源（.tobj）的路径，用来覆盖卡车喷漆材质的基础纹理。如果为空则使用默认的基础贴图。如果想要不同的高光效果，这个对覆盖基础纹理的透明通道很有用。</s:String>
+	<s:String x:Key="TitleColorVariant">预设颜色列表</s:String>
+	<s:String x:Key="TitleColorVariantNoCustomizable">请先让任意一个颜色设为自定义</s:String>
 	
 	<s:String x:Key="HeaderAirbrush">喷枪模式</s:String>
 	<s:String x:Key="ExplainAirbrush">在喷枪模式内，将根据喷漆贴图的透明通道将贴图与基础颜色混合。</s:String>
 	<s:String x:Key="TitleFlipFlake">变色龙漆、鳞片涂料</s:String>
+	<s:String x:Key="TitleAlternateFlipFlakeUVSet">Alternate Flip Flake UV Set</s:String>
 	<s:String x:Key="TitleFlipColor">变色龙漆颜色</s:String>
 	<s:String x:Key="TooltipFlipColor">定义喷漆的变色龙漆颜色</s:String>
 	<s:String x:Key="TitleFlipStrength">变色龙漆强度</s:String>
@@ -314,6 +316,7 @@
 	<s:String x:Key="TooltipFlakeClearcoatRolloff">调节清漆镜面高光的锐度。数值越高，高光边缘越锐利。</s:String>
 	<s:String x:Key="TitleFlakeUVScale">鳞片涂料UV比例</s:String>
 	<s:String x:Key="TooltipFlakeUVScale">定义鳞片噪点贴图在一张UV图内重复的次数</s:String>
+	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
 	<s:String x:Key="TitleFlakeNoise">鳞片噪点</s:String>
 	<s:String x:Key="TooltipFlakeNoise">鳞片贴图的资源路径。RGB通道用于与鳞片颜色相乘，A通道用于对鳞片效果进行遮罩。</s:String>
 	
@@ -323,16 +326,29 @@
 	<s:String x:Key="TitleMaskR">颜色遮罩（红）</s:String>
 	<s:String x:Key="TooltipMaskR">定义喷漆的颜色遮罩（红）的颜色</s:String>
 	<s:String x:Key="TitleMaskG">颜色遮罩（绿）</s:String>
-	<s:String x:Key="TooltipMaskG">定义喷漆的颜色遮罩（红）的颜色</s:String>
+	<s:String x:Key="TooltipMaskG">定义喷漆的颜色遮罩（绿）的颜色</s:String>
 	<s:String x:Key="TitleMaskB">颜色遮罩（蓝）</s:String>
-	<s:String x:Key="TooltipMaskB">定义喷漆的颜色遮罩（红）的颜色</s:String>
+	<s:String x:Key="TooltipMaskB">定义喷漆的颜色遮罩（蓝）的颜色</s:String>
 	
 	<s:String x:Key="TitlePaintJobOverride">配件喷漆设置</s:String>
 	<s:String x:Key="TitleOverrides">设置</s:String>
-	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
 	<s:String x:Key="TitleAccessoryParts">配件</s:String>
 	
+	<s:String x:Key="BaseColorShort">基础</s:String>
+	<s:String x:Key="FlipColorShort">变色</s:String>
+	<s:String x:Key="FlakeColorShort">鳞片</s:String>
+	<s:String x:Key="MaskRShort">红</s:String>
+	<s:String x:Key="MaskGShort">绿</s:String>
+	<s:String x:Key="MaskBShort">蓝</s:String>
+	
 	<s:String x:Key="DialogFilterTextureFile">贴图文件|*.tobj;*.dds;*.tga;*.jpg;*.jpeg;*.png</s:String>
+	<s:String x:Key="DialogResultFileOutsideProject">Please put the image into the project location first</s:String>
+	
+	<s:String x:Key="MessagePaintJobCreateSuccess">创建喷漆Sii成功</s:String>
+	
+	<!--喷漆预览-->
+	<s:String x:Key="TitlePaintJobPreview">喷漆预览</s:String>
+	<s:String x:Key="ButtonPreviewPaintJob">预览喷漆贴图</s:String>
 
 
 	<!--浏览已创建模型定义文件-->

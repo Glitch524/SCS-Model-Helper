@@ -31,14 +31,19 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			NameConflictWith or
 			NameDefaults or
 			NameOverrides or
-			NameRequire or
+			NameRequire => true,
 			_ => false,
 		};
 
 		protected override bool HasQuote(string name) => name switch {
 			NameDisplayName or
 			NameIconName or
-			NameCollPath => true,
+			NameCollPath or
+			NameSuitableFor or
+			NameConflictWith or
+			NameDefaults or
+			NameOverrides or
+			NameRequire => true,
 			_ => false,
 		};
 

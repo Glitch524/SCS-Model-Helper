@@ -180,7 +180,7 @@ public static class AccessoryDataUtil {
 	public static BitmapSource? LoadModelIcon(string? iconPath) {
 		if (iconPath == null || !File.Exists(iconPath))
 			return null;
-		return Util.LoadPfimIcon(iconPath);
+		return Util.LoadPfimImage(iconPath);
 	}
 
 	public static string? ChooseRope() => ChooseMaterial(Util.GetString("DialogTitleChooseRope"));

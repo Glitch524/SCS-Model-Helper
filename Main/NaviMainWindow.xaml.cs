@@ -3,7 +3,6 @@ using SCS_Mod_Helper.ConverterPix;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.PaintJob;
 using SCS_Mod_Helper.Setting;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Diagnostics;
 using System.IO;
@@ -64,7 +63,6 @@ public partial class NaviMainWindow: BaseWindow {
 	}
 
 	private void Test(string? value) {
-		Debug.WriteLine(Paths.SiiFile("project", "id", "type", "name"));
 	}
 
 	private void NaviMainWindowLoaded(object sender, RoutedEventArgs e) => Navigation.Navigate("ModManifest");
@@ -77,5 +75,5 @@ public class MainWindowBinding(RelayCommand<string> windowCommand, RelayCommand<
 
 	public RelayCommand<string> TestCommand { get; } = testCommand;
 
-	public Visibility TestVisibility => Debugger.IsAttached ? Visibility.Visible : Visibility.Collapsed;
+	public static Visibility TestVisibility => Debugger.IsAttached ? Visibility.Visible : Visibility.Collapsed;
 }

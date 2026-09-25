@@ -111,6 +111,7 @@
 	<s:String x:Key="TruckID">Truck ID</s:String>
 	<s:String x:Key="TruckProdYear">Production Year</s:String>
 	<s:String x:Key="TruckName">Truck Name</s:String>
+	<s:String x:Key="TruckManifaturer">Manifaturer</s:String>
 	<s:String x:Key="TruckDescription">Truck Description</s:String>
 		<!--Side Button-->
 	<s:String x:Key="ButtonDeleteTruck">Delete Truck</s:String>
@@ -295,10 +296,13 @@
 	<s:String x:Key="TooltipPaintJobTexture">Defines the path to the texture resource (.tobj) to be used for color masking (colormask) or for blending (airbrush). If empty, mask is ignored and final result is composed purely from color attributes."</s:String>
 	<s:String x:Key="TitleBaseTextureOverride">Base Texture Override</s:String>
 	<s:String x:Key="TooltipBaseTextureOverride">Defines the path to a texture resource (.tobj) to override the base texture of the truckpaint material(s). If empty, the base texture will be used as defined in the truckpaint material(s). This is useful for overriding the alpha channel of the base texture if a different specularity is desired.</s:String>
+	<s:String x:Key="TitleColorVariant">Color Variant List</s:String>
+	<s:String x:Key="TitleColorVariantNoCustomizable">Please set any color customizable first</s:String>
 	
 	<s:String x:Key="HeaderAirbrush">Airbrush</s:String>
 	<s:String x:Key="ExplainAirbrush">In the airbrush mode, the RGB of paint_job_mask is blended with the base color, using the alpha channel as the blend factor.</s:String>
 	<s:String x:Key="TitleFlipFlake">Flip and Flake</s:String>
+	<s:String x:Key="TitleAlternateFlipFlakeUVSet">Alternate Flip Flake UV Set</s:String>
 	<s:String x:Key="TitleFlipColor">Flip Color</s:String>
 	<s:String x:Key="TooltipFlipColor">Defines the flip color of the paint job.</s:String>
 	<s:String x:Key="TitleFlipStrength">Flip Strength</s:String>
@@ -312,6 +316,7 @@
 	<s:String x:Key="TooltipFlakeClearcoatRolloff">Adjusts the sharpness of the clearcoat specular highlight. Higher values yield sharper edges.</s:String>
 	<s:String x:Key="TitleFlakeUVScale">Flake UV Scale</s:String>
 	<s:String x:Key="TooltipFlakeUVScale">Defines how many times the flake_noise texture repeats within one UV tile.</s:String>
+	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
 	<s:String x:Key="TitleFlakeNoise">Flake Noise</s:String>
 	<s:String x:Key="TooltipFlakeNoise">Path to the flipflake texture. The RGB component multiplies the flake_color, and the A component masks the flake effect.</s:String>
 	
@@ -327,12 +332,23 @@
 	
 	<s:String x:Key="TitlePaintJobOverride">Paint Job Override for Accessory</s:String>
 	<s:String x:Key="TitleOverrides">Overrides</s:String>
-	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
 	<s:String x:Key="TitleAccessoryParts">Accessory</s:String>
+	
+	<s:String x:Key="BaseColorShort">Base</s:String>
+	<s:String x:Key="FlipColorShort">Flip</s:String>
+	<s:String x:Key="FlakeColorShort">Flake</s:String>
+	<s:String x:Key="MaskRShort">Mask R</s:String>
+	<s:String x:Key="MaskGShort">Mask G</s:String>
+	<s:String x:Key="MaskBShort">Mask B</s:String>
 	
 	<s:String x:Key="DialogFilterTextureFile">Texture File|*.tobj;*.dds;*.tga;*.jpg;*.jpeg;*.png</s:String>
 	<s:String x:Key="DialogResultFileOutsideProject">Please put the image into the project location first</s:String>
 	
+	<s:String x:Key="MessagePaintJobCreateSuccess">Paint Job Sii Created</s:String>
+	
+	<!--Paint Job Preview-->
+	<s:String x:Key="TitlePaintJobPreview">Paint Job Preview</s:String>
+	<s:String x:Key="ButtonPreviewPaintJob">Preview Paint Job Texture</s:String>
 	
 
 	<!--Created Sii Files-->

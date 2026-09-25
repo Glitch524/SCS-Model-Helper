@@ -1,33 +1,16 @@
 ﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Modding.PaintJob;
+using System.Windows;
 
 namespace SCS_Mod_Helper.Trucks;
 
 public class Truck(
 	string truckID,
 	int productionYear,
-	string ingameName,
+	string displayName,
 	string description,
-	bool check = false,
-	string modelType = "",
-	string look = "",
-	string variant = "",
+	string manifaturer,
 	bool ets2 = false): BaseBinding, IComparable {
-
-	public Truck(
-		bool isETS2,
-		string truckID,
-		string manifaturer,
-		int productionYear,
-		string ingameName,
-		string description) : this(
-			truckID,
-			productionYear,
-			ingameName,
-			description,
-			isETS2) {
-		IsETS2 = isETS2;
-		mManifaturer = manifaturer;
-	}
 
 	private string mTruckID = truckID;
 	public string TruckID {
@@ -47,17 +30,8 @@ public class Truck(
 		}
 	}
 
-	private string? mManifaturer = null;
-	public string Manifaturer {
-		get {
-			if (mManifaturer == null) {
-				var truckIDDot = TruckID.IndexOf('.');
-				mManifaturer = truckIDDot == -1 ? "" : TruckID[..truckIDDot];
-				mTruckName = truckIDDot == -1 ? TruckID : TruckID[(truckIDDot + 1)..];
-			}
-			return mManifaturer;
-		}
-	}
+	private string mManifaturer = manifaturer;
+	public string Manifaturer => mManifaturer;
 	private string? mTruckName = null;
 	private string TruckName {
 		get {
@@ -71,20 +45,11 @@ public class Truck(
 	}
 
 	public int ProductionYear = productionYear;
-
-	private bool mCheck = check;
-	public bool Check {
-		get => mCheck;
+	private string mDisplayName = displayName;
+	public string DisplayName {
+		get => mDisplayName;
 		set {
-			mCheck = value;
-			InvokeChange();
-		}
-	}
-	private string mIngameName = ingameName;
-	public string IngameName {
-		get => mIngameName;
-		set {
-			mIngameName = value;
+			mDisplayName = value;
 			InvokeChange();
 		}
 	}
@@ -93,32 +58,6 @@ public class Truck(
 		get => mDescription;
 		set {
 			mDescription = value;
-			InvokeChange();
-		}
-	}
-	private string mModelType = modelType;
-	public string ModelType {
-		get => mModelType;
-		set {
-			mModelType = value;
-			InvokeChange();
-		}
-	}
-
-	private string mLook = look;
-	public string Look {
-		get => mLook;
-		set {
-			mLook = value;
-			InvokeChange();
-		}
-	}
-
-	private string mVariant = variant;
-	public string Variant {
-		get => mVariant;
-		set {
-			mVariant = value;
 			InvokeChange();
 		}
 	}
@@ -149,17 +88,100 @@ public class Truck(
 	public List<Cabin> Cabins = [];
 	public List<Accessory> Accessories = [];
 
-	public override string ToString() => $"{TruckID} {IngameName} {ProductionYear}";
+	public override string ToString() => $"{TruckID} {DisplayName} {ProductionYear}";
 }
 
-public class Cabin(string truckID, string cabinID, string cabinName) {
-	public string TruckID = truckID;
-	public string CabinID = cabinID;
-	public string CabinName = cabinName;
+public class Cabin(string truckID, string cabinID, string cabinName): BaseBinding {
+	public string mTruckID = truckID;
+	public string TruckID {
+		get => mTruckID;
+		set {
+			mTruckID = value;
+			InvokeChange();
+		}
+	}
+	public string mCabinID = cabinID;
+	public string CabinID {
+		get => mCabinID;
+		set {
+			mCabinID = value;
+			InvokeChange();
+		}
+	}
+	public string mCabinName = cabinName;
+	public string CabinName {
+		get => mCabinName;
+		set {
+			mCabinName = value;
+			InvokeChange();
+		}
+	}
 }
 
-public class Accessory(string truckID, string accID, string accName) {
-	public string TruckID = truckID;
-	public string AccID = accID;
-	public string AccName = accName;
+public class Accessory(string truckID, string accID, string accName): BaseBinding {
+	private PaintJobOverrideData? mBelongingOverride = null;
+	public PaintJobOverrideData? BelongingOverride {
+		get => mBelongingOverride;
+		set {
+			mBelongingOverride = value;
+			InvokeChange();
+		}
+	}
+
+	private Visibility mIndexVisibility = Visibility.Visible;
+	public Visibility IndexVisibility {
+		get => mIndexVisibility;
+		set {
+			mIndexVisibility = value;
+			InvokeChange();
+		}
+	}
+
+	public bool IndexVisible {
+		get => IndexVisibility == Visibility.Visible;
+		set {
+			if (BelongingOverride != null && value)
+				IndexVisibility = Visibility.Visible;
+			else
+				IndexVisibility = Visibility.Hidden;
+		}
+	}
+
+	private bool mCheck = false;
+	public bool Check {
+		get => mCheck;
+		set {
+			mCheck = value;
+			if (value || BelongingOverride == null) {
+				IndexVisible = false;
+			} else
+				IndexVisible = true;
+			InvokeChange();
+		}
+	}
+
+	public string mTruckID = truckID;
+	public string TruckID {
+		get => mTruckID;
+		set {
+			mTruckID = value;
+			InvokeChange();
+		}
+	}
+	public string mAccID = accID;
+	public string AccID {
+		get => mAccID;
+		set {
+			mAccID = value;
+			InvokeChange();
+		}
+	}
+	public string mAccName = accName;
+	public string AccName {
+		get => mAccName;
+		set {
+			mAccName = value;
+			InvokeChange();
+		}
+	}
 }

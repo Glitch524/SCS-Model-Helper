@@ -34,7 +34,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccHookup {
 				MessageBox.Show(window, Util.GetString("MessageSaveSui0"));
 				return;
 			}
-			var StorageDir = Paths.HookupStorageDir(Instances.ProjectLocation);
+			var StorageDir = Paths.HookupStorageDir();
 			Directory.CreateDirectory(StorageDir);
 			var storageFilename = $"{NameAHSPreffix}.{viewModel.StorageName}.sii";
 			var storageFile = Path.Combine(StorageDir, storageFilename);
@@ -74,7 +74,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccHookup {
 		}
 
 		private void CreateAddonHookupSui(SuiItem sui) {
-			var suiPath = Paths.AddonHookupsDir(Instances.ProjectLocation, sui.SuiFilename);
+			var suiPath = Paths.AddonHookupsDir(sui.SuiFilename);
 			var physicsDatas = new List<PhysicsData>();
 			physicsDatas.AddRange(sui.PhysicsItems);
 			using StreamWriter sw = new(suiPath);
@@ -116,7 +116,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccHookup {
 			}
 		}
 		public static void LoadAddonHookup(AccHookupBinding viewModel) {
-			DirectoryInfo accHookupDir = new(Paths.HookupStorageDir(Instances.ProjectLocation));
+			DirectoryInfo accHookupDir = new(Paths.HookupStorageDir());
 			FileInfo? storageFile = null;
 			bool skip = true;
 			foreach (var file in accHookupDir.GetFiles()) {

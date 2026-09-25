@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Modding.Accessories;
+using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
@@ -6,12 +7,44 @@ using System.Windows.Media.Imaging;
 using Wpf.Ui.Extensions;
 
 namespace SCS_Mod_Helper.Modding.PaintJob {
-	public class AccessoryPaintJobData(): AccessoryData("", "", null, null, "", "unknown") {
+	public class AccPaintJobData(): AccessoryData("", "", null, null, "", "unknown") {
 		//name 从accessoryData继承的变量
 		//icon
 		//price
 		//unlock
 		//part_type
+		
+		private ObservableCollection<Truck>? mTrucks = null;
+		public ObservableCollection<Truck> Trucks {
+			get {
+				if (mTrucks == null) {
+					mTrucks = [];
+					TrucksIO.LoadPaintJobTrucks(mTrucks);
+				}
+				return mTrucks;
+			}
+		}
+
+		private Truck? mCurrentTruck = null;
+		public Truck? CurrentTruck {
+			get => mCurrentTruck;
+			set {
+				mCurrentTruck = value;
+				InvokeChange();
+			}
+		}
+
+		public List<Cabin>? CabinList => CurrentTruck?.Cabins ?? null;
+
+		private Cabin? mCurrentCabin = null;
+		public Cabin? CurrentCabin {
+			get => mCurrentCabin;
+			set {
+				mCurrentCabin = value;
+				InvokeChange();
+			}
+		}
+		public List<Accessory>? AccessoryList => CurrentTruck?.Accessories ?? null;
 
 		private bool mAirbrush = false;
 		public bool Airbrush {
@@ -26,15 +59,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			get => mPaintJobTex;
 			set {
 				mPaintJobTex = value;
-				InvokeChange();
-			}
-		}
-		protected BitmapSource? mPaintJobTexImage = null;
-		public BitmapSource? PaintJobTexImage {
-			get => mPaintJobTexImage;
-			set {
-				mPaintJobTexImage?.Freeze();
-				mPaintJobTexImage = value;
 				InvokeChange();
 			}
 		}
@@ -61,7 +85,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
-		public Brush BaseColorVisual => BaseColor.ToBrush();
 
 		private bool mBaseColorLocked = true;
 		public bool BaseColorLocked {//固定基本颜色
@@ -100,20 +123,54 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
+		public ObservableCollection<ColorVariant> ColorVariantList = [];
+
+		protected BitmapSource? mPaintJobTexImage = null;
+		public BitmapSource? PaintJobTexImage {
+			get => mPaintJobTexImage;
+			set {
+				mPaintJobTexImage?.Freeze();
+				mPaintJobTexImage = value;
+				InvokeChange();
+			}
+		}
+		protected BitmapSource? mPaintJobMaskR = null;
+		public BitmapSource? PaintJobChannelR {
+			get => mPaintJobMaskR;
+			set {
+				mPaintJobMaskR?.Freeze();
+				mPaintJobMaskR = value;
+				InvokeChange();
+			}
+		}
+		protected BitmapSource? mPaintJobMaskG = null;
+		public BitmapSource? PaintJobChannelG {
+			get => mPaintJobMaskG;
+			set {
+				mPaintJobMaskG?.Freeze();
+				mPaintJobMaskG = value;
+				InvokeChange();
+			}
+		}
+		protected BitmapSource? mPaintJobMaskB = null;
+		public BitmapSource? PaintJobChannelB {
+			get => mPaintJobMaskB;
+			set {
+				mPaintJobMaskB?.Freeze();
+				mPaintJobMaskB = value;
+				InvokeChange();
+			}
+		}
+
+
+
+
+
 		private Color mMaskRColor = Colors.Red;
 		public Color MaskRColor {//6位hex 遮罩颜色（红）
 			get => mMaskRColor;
 			set {
 				mMaskRColor = value;
-				InvokeMaskR();
-			}
-		}
-		public Brush MaskRColorVisual => MaskRColor.ToBrush();
-
-		public string MaskRColorHex {
-			get => ColorToHex(mMaskRColor);
-			set {
-				mMaskRColor = HexToColor(value);
 				InvokeMaskR();
 			}
 		}
@@ -142,8 +199,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		private void InvokeMaskR() {
 			InvokeChange(nameof(MaskRColor));
-			InvokeChange(nameof(MaskRColorVisual));
-			InvokeChange(nameof(MaskRColorHex));
 			InvokeChange(nameof(MaskRColorR));
 			InvokeChange(nameof(MaskRColorG));
 			InvokeChange(nameof(MaskRColorB));
@@ -178,15 +233,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeMaskG();
 			}
 		}
-		public Brush MaskGColorVisual => MaskGColor.ToBrush();
-
-		public string MaskGColorHex {
-			get => ColorToHex(MaskGColor);
-			set {
-				mMaskGColor = HexToColor(value);
-				InvokeMaskG();
-			}
-		}
 
 		public byte MaskGColorR {
 			get => mMaskGColor.R;
@@ -212,8 +258,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		private void InvokeMaskG() {
 			InvokeChange(nameof(MaskGColor));
-			InvokeChange(nameof(MaskGColorVisual));
-			InvokeChange(nameof(MaskGColorHex));
 			InvokeChange(nameof(MaskGColorR));
 			InvokeChange(nameof(MaskGColorG));
 			InvokeChange(nameof(MaskGColorB));
@@ -248,15 +292,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeMaskB();
 			}
 		}
-		public Brush MaskBColorVisual => MaskBColor.ToBrush();
-
-		public string MaskBColorHex {
-			get => ColorToHex(mMaskBColor);
-			set {
-				mMaskBColor = HexToColor(value);
-				InvokeMaskB();
-			}
-		}
 
 		public byte MaskBColorR {
 			get => mMaskBColor.R;
@@ -282,8 +317,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		private void InvokeMaskB() {
 			InvokeChange(nameof(MaskBColor));
-			InvokeChange(nameof(MaskBColorVisual));
-			InvokeChange(nameof(MaskBColorHex));
 			InvokeChange(nameof(MaskBColorR));
 			InvokeChange(nameof(MaskBColorG));
 			InvokeChange(nameof(MaskBColorB));
@@ -309,21 +342,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-		public static string ColorToHex(Color color) {
-			string r = string.Format("{0:x2}", color.R).ToUpper();
-			string g = string.Format("{0:x2}", color.G).ToUpper();
-			string b = string.Format("{0:x2}", color.B).ToUpper();
-			return r + g + b;
-		}
-
-		public static Color HexToColor(string hex) {
-			byte r = (byte)Convert.ToInt32($"{hex[0]}{hex[1]}");
-			byte g = (byte)Convert.ToInt32($"{hex[2]}{hex[3]}");
-			byte b = (byte)Convert.ToInt32($"{hex[4]}{hex[5]}");
-			return Color.FromRgb(r, g, b);
-		}
-
-
 
 		private bool mFlipflake = false;
 		public bool Flipflake {
@@ -334,17 +352,23 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
+		private bool mAlternateFlipFlakeUVSet = false;
+		public bool AlternateFlipFlakeUVSet {
+			get => mAlternateFlipFlakeUVSet;
+			set {
+				mAlternateFlipFlakeUVSet = value;
+				InvokeChange();
+			}
+		}
+
 		private Color mFlipColor = Colors.Red;
 		public Color FlipColor {//变色龙漆颜色
 			get => mFlipColor;
 			set {
 				mFlipColor = value;
 				InvokeChange();
-				InvokeChange(nameof(FlipColorVisual));
 			}
 		}
-
-		public Brush FlipColorVisual => mFlipColor.ToBrush();
 
 		private bool mFlipColorLocked = true;
 		public bool FlipColorLocked {//固定金属漆颜色
@@ -365,7 +389,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-
 		private float mFlipStrength = 0.27f;
 		public float FlipStrength {//金属漆效果强度
 			get => mFlipStrength;
@@ -374,6 +397,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool IsFlipStrengthDefault => FlipStrength == 0.27f;
 
 
 		private Color mFlakeColor = Color.FromRgb(0, 255, 0);
@@ -382,11 +406,8 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			set {
 				mFlakeColor = value;
 				InvokeChange();
-				InvokeChange(nameof(FlakeColorVisual));
 			}
 		}
-		public Brush FlakeColorVisual => FlakeColor.ToBrush();
-
 
 		private bool mFlakeColorLocked = true;
 		public bool FlakeColorLocked {//固定鳞片漆颜色
@@ -414,6 +435,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool IsFlakeShininessDefault => FlakeShininess == 50f;
 
 		private float mFlakeDensity = 1f;
 		public float FlakeDensity {//鳞片密度
@@ -423,6 +445,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool IsFlakeDensityDefault => FlakeDensity == 1f;
 
 		private float mFlakeClearcoatRolloff = 2.2f;
 		public float FlakeClearcoatRolloff {//鳞片漆清漆层滚落效应		调整透明涂层镜面反射高光的锐度。值越高，边缘越清晰。
@@ -432,6 +455,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool IsFlakeClearcoatRolloffDefault => FlakeClearcoatRolloff == 2.2f;
 
 		private float mFlakeUVScale = 32f;
 		public float FlakeUVScale {//UV比率
@@ -441,9 +465,19 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool IsFlakeUVScaleDefault => FlakeUVScale == 32f;
 
-		//private readonly string FlakeNoiseDefault = "/material/custom/flake_noise.tobj";
-		public static string DefaultFlakeNoise = "/material/custom/flake_noise.tobj";
+		private float mFlakeVRatio = 1f;
+		public float FlakeVRatio {//UV比率
+			get => mFlakeVRatio;
+			set {
+				mFlakeVRatio = value;
+				InvokeChange();
+			}
+		}
+		public bool IsFlakeVRatioDefault => FlakeVRatio == 1f;
+
+		public const string DefaultFlakeNoise = "/material/custom/flake_noise.tobj";
 		private string mFlakeNoise = "/material/custom/flake_noise.tobj";
 		public string FlakeNoise {//珠光噪声图
 			get => mFlakeNoise;
@@ -452,8 +486,9 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
+		public bool IsFlakeNoiseDefault => FlakeNoise == "/material/custom/flake_noise.tobj";
 
-		public Visibility FlakeNoiseVisibility => FlakeNoise.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+		public Visibility FlakeNoiseVisibility => FlakeNoise == DefaultFlakeNoise ? Visibility.Visible : Visibility.Collapsed;
 
 
 		//Override 部分
@@ -521,139 +556,5 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				}
 			}
 		}
-
-		public ObservableCollection<string> AccList => SelectedOverride?.AccList ?? [];
-
-		//private List<string> mSuitableFor = [];//不同车架
-
-
-		//simple_paint_job_data : .ovr0+
-
-		//paint_job_mask:""
-		//flake_uvscale
-		//flake_vratio
-		//acc_list[]: ""
 	}
-
-	//all
-	//base_color float3(1, 1, 1)   |定义涂装作业的默认颜色。
-	//base_color_locked bool	true	锁定基础颜色，设置为false时，玩家可以使用选色器修改基础颜色 all When false, the player may change the base color via the color picker.
-	//alternate_uvset bool    false	|When true, the resulting material will have the alt uv flavor. This triggers usage of the alternate UV layout, if configured.
-	//stock   bool    false	|Defaults to false. This was previously used to mark paintjobs available when purchasing a truck when true, and only available from the upgrade shop when false. Currently must be set to false to avoid undesirable behavior.
-	//paint_job_mask  string |定义纹理资源 （.tobj） 的路径，用于颜色遮罩 （colormask） 或混合 （喷枪）。如果为空，则忽略蒙版，最终结果纯粹由颜色属性组成。Defines the path to the texture resource (.tobj) to be used for color masking(colormask) or for blending(airbrush). If empty, mask is ignored and final result is composed purely from color attributes.
-	//base_texture_override string |定义纹理资源 （.tobj） 的路径，以覆盖 truckpaint 材质的基础纹理。如果为空，则将按照 truckpaint 材质中的定义使用基础纹理。如果需要不同的镜面反射，这对于覆盖基础纹理的 alpha 通道非常有用。
-
-	//airbrush bool	false		When true, airbrush behavior and attributes are enabled.Cannot be used with colormask.
-
-	//colormask 
-	//mask_r_color float3(1, 0, 0)   |定义应用于颜色蒙版的每个通道的默认颜色。
-	//mask_g_color(0, 1, 0)
-	//mask_b_color(0, 0, 1)
-	//mask_r_locked bool	true	|如果为 false，则播放器可以通过颜色选择器更改每个通道的颜色。
-	//mask_g_locked	true
-	//mask_b_locked	true
-
-	//flipflake   bool    false		When true, flipflake (metallic/pearlescent) behavior and attributes are enabled.Cannot be used with colormask.
-
-	//flipflake
-	//flip_color float3(1, 0, 0)   |定义翻转效果的颜色。
-	//flip_color_locked bool	true	 |When false, the player may change the flip color via the color picker.
-	//flip_strength float	0.27	|Defines the relative strength of the flip effect.
-
-	//flake_color float3(0, 1, 0)   |Defines the color of the flake effect.
-	//flake_color_locked bool	true	|When false, the player may change the flake color via the color picker.
-	//flake_uvscale   float   32.0	|Defines how many times the flake_noise texture repeats within one UV tile. (Another way to think of this is that the UV coordinates are divided by this factor when addressing flake_noise.)
-	//flake_density float	1.0	|Defines how 'tight' the flake effect is to the specular highlight.Higher values result in a smaller area of the flake effect, while smaller values result in a broad area having it.
-	//flake_shininess float   50.0	|
-	//flake_clearcoat_rolloff float   2.2	|Adjusts the sharpness of the clearcoat specular highlight.Higher values yield sharper edges.
-	//flake_noise string  "/material/custom/flake_noise.tobj"	|翻片纹理的路径。RGB 组件将flake_color相乘，A 组件遮罩薄片效果。
-
-
-
-
-
-
-
-	//sui
-	//	name
-	//	price
-	//	airbrush
-	//	base color
-	//	icon
-	//	part type
-
-	//sii
-	//	name
-	//	include
-	//	paintjobmask
-	//	suitablefor
-
-
-	//accessory
-
 }
-
-//accessory_paint_job_data : 喷漆名.车型.paint_job
-//纯色通用贴图 4x4
-
-//daf.2021 1:1	2048x2048
-//	xg.daf.2021.cabin			驾驶室-XG
-//	xg_plus.daf.2021.cabin		驾驶室-XG+
-//	xf.daf.2021.cabin			驾驶室-XF
-
-//	主后视镜 ？
-//	mirror.cam_semi				主后视镜-电子镜-喷漆
-//	mirror.plast				主后视镜-塑料
-//	mirror.semi					主后视镜-喷漆和塑料？
-
-//	遮阳板  8:1	1024x128
-//	sunshield.paint_xg			遮阳板-喷漆 XG
-//	sunshield.paint_xgp			遮阳板-喷漆 XG+
-//	sunshield.paint_xf			遮阳板-喷漆 XF
-
-//	侧裙 2:1 1024x512
-//	sideskirt.pnt_4x2			侧裙-喷漆 XG/XG+
-//	sideskirt.pnt_4x2_xf		侧裙-喷漆 XF
-//	sideskirt.slv_4x2			侧裙-豪华喷漆 XG/XG+
-//	sideskirt.slv2_4x2			侧裙-豪华喷漆II XG/XG+
-//	sideskirt.slv_4x2_xf		侧裙-豪华喷漆 XG/XG+
-//	sideskirt.slv2_4x2_xf		侧裙-豪华喷漆II XG/XG+
-
-//daf.xd
-//	day.daf.xd.cabin
-//	sl.daf.xd.cabin
-//	slh.daf.xf.cabin
-
-//	mirror.cam_semi
-//	mirror.cam_semi_h
-//	mirror.plast
-//	mirror.semi
-//	sunshield.paint_slh
-//	sideskirt.pnt_4x2s
-
-//daf.xf
-//	space_cab.daf.xf.cabin
-//	s_cab_plus.daf.xf.cabin
-//	super_s_cab.daf.xf.cabin
-
-//	r_bumper.chrome
-//	r_bumper.paint
-//	r_bumper.steel
-
-//	r_chs_cover.ch_4x2_et_p
-//	r_chs_cover.ch_6x2_p
-//	r_chs_cover.ch_6x4_p
-
-//daf.xf_euro6
-//	space.daf.xf_euro6.cabin
-//	superspace.daf.xf_euro6.cabin
-//	spacespoiler.daf.xf_euro6.cabin
-
-//	r_bumper.chrome
-//	r_bumper.chrome_6
-//	r_bumper.paint
-//	r_bumper.paint_6
-//	r_bumper.steel
-//	r_bumper.steel_6
-//	r_chs_cover.ch_4x2_p
-//	r_chs_cover.ch_6x4_p
