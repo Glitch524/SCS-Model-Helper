@@ -1,24 +1,10 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 
 namespace SCS_Mod_Helper.Modding.PaintJob {
-	public class PaintJobOverrideData(int index): BaseBinding {
-
-		public override string ToString() => OvrName;
-
-		private int mIndex = index;
-		public int Index {
-			get => mIndex;
-			set {
-				mIndex = value;
-				InvokeChange();
-				InvokeChange(nameof(OvrName));
-			}
-		}
-
-		public string OvrName => ".ovr" + Index;
+	public class PaintJobOverrideData(string ovrName): BaseBinding {
+		public string OvrName = ovrName;
 
 		private string mAccTexture = "";
 		public string AccTex {
@@ -58,12 +44,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-		public readonly ObservableCollection<Accessory> AccList = [];
-
-		public void CheckAccList(bool check) {
-			foreach(var acc in AccList) {
-				acc.Check = check;
-			}
-		}
+		private readonly ObservableCollection<string> mAccList = [];
+		public ObservableCollection<string> AccList => mAccList;
 	}
 }

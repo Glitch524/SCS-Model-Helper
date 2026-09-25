@@ -1,6 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -35,22 +34,6 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 		}
 
 		public bool NameOver12 => ModelName.Length > 12;
-
-		protected string mPartType = "unknown";
-		public string PartType {
-			get => mPartType;
-			set {
-				mPartType = value;
-				InvokeChange();
-			}
-		}
-
-		public static List<PartTypeItem> PartTypes => [
-			new("unknown", Util.GetString("PartTypeUnknown")),
-			new("aftermarket", Util.GetString("PartTypeAftermarket")),
-			new("factory", Util.GetString("PartTypeFactory")),
-			new("licensed", Util.GetString("PartTypeLicensed"))];
-
 
 		protected string mDisplayName = "";
 		public string DisplayName {
@@ -102,6 +85,21 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 			}
 		}
 
+		protected string mPartType = "unknown";
+		public string PartType {
+			get => mPartType;
+			set {
+				mPartType = value;
+				InvokeChange();
+			}
+		}
+
+		public static List<PartTypeItem> PartTypes => [
+			new("unknown", Util.GetString("PartTypeUnknown")),
+			new("aftermarket", Util.GetString("PartTypeAftermarket")),
+			new("factory", Util.GetString("PartTypeFactory")),
+			new("licensed", Util.GetString("PartTypeLicensed"))];
+
 		private ObservableCollection<string> data = [];
 		private ObservableCollection<string> suitableFor = [];
 		private ObservableCollection<string> conflictWith = [];
@@ -149,8 +147,6 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 				};
 			}
 		}
-
-		public static bool SyncOverNetworkDefault = false;
 	}
 
 	public abstract class AccessoryIntData: AccessoryData {

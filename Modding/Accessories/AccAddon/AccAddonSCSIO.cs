@@ -58,7 +58,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 		private int CreateSii(AccAddonBinding binding, bool isETS2) {
 			int numberCreated = 0;
 			foreach (var truck in isETS2 ? binding.TrucksETS2 : binding.TrucksATS) {
-				var siiFile = Paths.AccAddonFile(truck.TruckID, truck.ModelType, binding.ModelName);
+				var siiFile = Paths.SiiFile(Instances.ProjectLocation, truck.TruckID, truck.ModelType, binding.ModelName);
 				if (truck.Check) {
 					if (truck.ModelType.Length == 0 || truck.TruckID.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)//确保modeltype look variant 都有值，否则跳过
 						continue;
@@ -67,6 +67,9 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 						File.Delete(siiFile);
 					continue;
 				}
+				DirectoryInfo sii = new(siiFile);
+				if (!sii.Parent!.Exists)
+					sii.Parent!.Create();
 				isPatch = truck.ModelType switch {//当modeltype为flag等，addon_data的标题应为accessory_addon_patch_data才能让旗子正常显示，而且填写物理模型的data并非数组，不带中括号
 					"flag_l" or "flag_r" or "flag_f_l" or "flag_f_r" => true,
 					_ => false,

@@ -98,7 +98,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 			});
 		}
 
-		protected void WriteTrucks(string listTitle, Collection<AccessoryTruck> trucks) {
+		protected void WriteTrucks(string listTitle, Collection<Truck> trucks) {
 			if (trucks.Count == 0)
 				return;
 			WriteElement(listTitle, () => {
@@ -210,8 +210,8 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 			}
 		}
 
-		protected static int ReadTruck(XmlNode node, Collection<AccessoryTruck> trucks) {
-			Dictionary<string, AccessoryTruck> truckDict = trucks.ToDictionary(t => t.TruckID);
+		protected static int ReadTruck(XmlNode node, Collection<Truck> trucks) {
+			Dictionary<string, Truck> truckDict = trucks.ToDictionary(t => t.TruckID);
 			int selected = 0;
 			foreach (XmlNode t in node.ChildNodes) {
 				if (t.Name != TITLE_TRUCK) 

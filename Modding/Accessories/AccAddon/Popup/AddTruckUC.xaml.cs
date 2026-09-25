@@ -19,7 +19,7 @@ public partial class AddTruckUC: UserControl {
 	public delegate void OnButtonClicked(bool ok);
 	private readonly OnButtonClicked onButtonClicked;
 
-	public AccessoryTruck? NewTruck;
+	public Truck? NewTruck;
 
 	public AddTruckUC(bool isETS2, OnButtonClicked onButtonClicked) {
 		InitializeComponent();
@@ -32,7 +32,6 @@ public partial class AddTruckUC: UserControl {
 		binding.TruckID = string.Empty;
 		binding.ProdYear = null;
 		binding.IngameName = string.Empty;
-		binding.Manifaturer = string.Empty;
 		binding.Description = string.Empty;
 	}
 
@@ -41,20 +40,10 @@ public partial class AddTruckUC: UserControl {
 			MessageBox.Show(Window.GetWindow(this), Util.GetString("MessageAddErrNotFilled"));
 			return;
 		}
-		if (sender == ButtonOK) {
-			NewTruck = new(binding.TruckID,
-				  binding.ProdYear ?? DateTime.Now.Year,
-				  binding.IngameName,
-				  binding.Description,
-				  binding.Manifaturer,
-				  IsETS2,
-				  false);
-			TrucksIO.AddTruck(NewTruck);
-		}
-
+		if (sender == ButtonOK)
+			NewTruck = new(binding.TruckID, binding.ProdYear ?? DateTime.Now.Year, binding.IngameName, binding.Description, false, "", "", "", IsETS2);
 		onButtonClicked(sender == ButtonOK);
 	}
-
 	private void NumberOnly(object sender, TextCompositionEventArgs e) => e.Handled = RegexNumber().IsMatch(e.Text);
 
 	[GeneratedRegex("[^0-9]+")]
@@ -93,15 +82,6 @@ public class AddTruckBinding: BaseBinding {
 			InvokeChange();
 
 			InvokeChange(nameof(OKEnabled));
-		}
-	}
-
-	private string mManifaturer = string.Empty;
-	public string Manifaturer {
-		get => mManifaturer;
-		set {
-			mManifaturer = value;
-			InvokeChange();
 		}
 	}
 	private string mDescription = string.Empty;

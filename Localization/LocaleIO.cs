@@ -25,7 +25,7 @@ namespace SCS_Mod_Helper.Localization {
 
 		public static void ReadLocaleDict(ObservableCollection<LocaleModule> moduleList) {
 			moduleList.Clear();
-			var localeDir = new DirectoryInfo(Paths.LocaleDir());
+			var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
 			if (!localeDir.Exists)
 				return;
 			foreach (var dir in localeDir.GetDirectories()) {//地区文件夹
@@ -128,7 +128,7 @@ namespace SCS_Mod_Helper.Localization {
 		private void CreateLocaleSii(string moduleName, ModLocale locale, ObservableCollection<LocalePair> universal) {
 			ObservableCollection<LocalePair> dict;
 			bool Genearated = false;
-			var localeFile = Paths.LocaleFile(locale.LocaleValue, moduleName);
+			var localeFile = Paths.LocaleFile(Instances.ProjectLocation, locale.LocaleValue, moduleName);
 			if (locale.Dictionary.Count > 0)//如果当前字典内有值，就输出字典的值
 				dict = locale.Dictionary;
 			else if (universal.Count > 0) {//如果有通用字典，则输出通用字典内容，并将代表通用字典内容的generated设置为true
@@ -174,13 +174,13 @@ namespace SCS_Mod_Helper.Localization {
 		private static void DeleteLocaleSii(LocaleModule module) {
 			var moduleName = module.ModuleName;
 			foreach (var locale in module.LocaleList) {
-				var localeFile = Paths.LocaleFile(locale.LocaleValue, moduleName, false);
+				var localeFile = Paths.LocaleFile(Instances.ProjectLocation, locale.LocaleValue, moduleName, false);
 				File.Delete(localeFile);
 				var parent = Directory.GetParent(localeFile)!;
 				if (parent.GetFiles().Length == 0)
 					parent.Delete();
 			}
-			var localeDir = new DirectoryInfo(Paths.LocaleDir());
+			var localeDir = new DirectoryInfo(Paths.LocaleDir(Instances.ProjectLocation));
 			if (localeDir.GetDirectories().Length == 0 && localeDir.GetFiles().Length == 0)
 				localeDir.Delete();
 		}

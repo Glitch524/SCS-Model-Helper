@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Modding.Accessories.Physics;
+using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
@@ -67,8 +68,8 @@ public class AccessoryAddonData: AccessoryIntData {
 	}
 
 	//卡车列表
-	public ObservableCollection<AccessoryTruck> mTrucksETS2 = [];
-	public ObservableCollection<AccessoryTruck> TrucksETS2 => mTrucksETS2;
-	public ObservableCollection<AccessoryTruck> mTrucksATS = [];
-	public ObservableCollection<AccessoryTruck> TrucksATS => mTrucksATS;
+	public ObservableCollection<Truck> mTrucksETS2 = [];
+	public ObservableCollection<Truck> TrucksETS2 => mTrucksETS2;
+	public ObservableCollection<Truck> mTrucksATS = [];
+	public ObservableCollection<Truck> TrucksATS => mTrucksATS;
 }

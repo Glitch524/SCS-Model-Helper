@@ -112,6 +112,7 @@ namespace SCS_Mod_Helper.Manifest {
 				});
 			});
 		}
+
 		public static void LoadManifest(ManifestBinding binding) {
 			var manifest = Paths.ManifestFile(binding.ProjectLocation);
 			if (!File.Exists(manifest))
@@ -119,10 +120,10 @@ namespace SCS_Mod_Helper.Manifest {
 			try {
 				using StreamReader sr = new(manifest);
 				string? line = sr.ReadLine()?.Trim();
-				if (line == null || !line.StartsWith(FileHeader))
+				if (line == null || !line.Equals(FileHeader))
 					throw new(Util.GetString("MessageLoadManifestErrNotManifest"));
 				while ((line = sr.ReadLine()?.Trim()) != null) {
-					if (line.Length == 0 || line == "{" || line == "}" || line.StartsWith('#') || line.StartsWith(NameMFHeader))
+					if (line.Length == 0 || line == "{" || line == "}" || line.StartsWith('#') || line == NameMFHeader)
 						continue;
 					int colonIndex = line.IndexOf(':');
 					var name = line[..colonIndex].Trim();
@@ -148,7 +149,7 @@ namespace SCS_Mod_Helper.Manifest {
 							binding.OldIconName = value;
 							var iconFile = Path.Combine(binding.ProjectLocation, binding.IconName);
 							if (File.Exists(iconFile))
-								binding.ModIcon = Util.LoadImage(iconFile);
+								binding.ModIcon = Util.LoadIcon(iconFile);
 							break;
 						case NameMFDescriptionFile:
 							binding.DescriptionName = value;

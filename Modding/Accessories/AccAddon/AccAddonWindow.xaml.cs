@@ -25,8 +25,8 @@ public partial class AccAddonWindow: BaseWindow {
 		set => binding.TruckExpandedATS = value;
 	}
 
-	private ObservableCollection<AccessoryTruck> TrucksETS2 => binding.TrucksETS2;
-	private ObservableCollection<AccessoryTruck> TrucksATS => binding.TrucksATS;
+	private ObservableCollection<Truck> TrucksETS2 => binding.TrucksETS2;
+	private ObservableCollection<Truck> TrucksATS => binding.TrucksATS;
 
 	private readonly ContextMenu MenuStringRes, MenuModelType, MenuLook, MenuVariant;
 
@@ -66,7 +66,7 @@ public partial class AccAddonWindow: BaseWindow {
 		MenuItem item = (MenuItem)sender;
 		ContextMenu cm = (ContextMenu)item.Parent;
 		if (cm == MenuModelType) {
-			AccessoryTruck truck = (AccessoryTruck)cm.DataContext;
+			Truck truck = (Truck)cm.DataContext;
 			var type = (string)item.Tag;
 			int i;
 			if ((i = type.IndexOf('/')) == -1)
@@ -90,7 +90,7 @@ public partial class AccAddonWindow: BaseWindow {
 					StringResUtil.ApplyStringRes(TextDisplayName, tag);
 				}
 			} else {
-				AccessoryTruck truck = (AccessoryTruck)cm.DataContext;
+				Truck truck = (Truck)cm.DataContext;
 				if (cm == MenuModelType) {
 				} else if (cm == MenuLook) {
 					truck.Look = (string)item.DataContext;
@@ -263,7 +263,7 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void AddTruckResult(bool OK) {
 		if (OK) {
-			AccessoryTruck newTruck = binding.AddTruckUC?.NewTruck!;
+			Truck newTruck = binding.AddTruckUC?.NewTruck!;
 			binding.AddNewTruck(this, newTruck);
 		}
 		PopupAddTruck.IsOpen = false;
@@ -280,15 +280,15 @@ public partial class AccAddonWindow: BaseWindow {
 	}
 
 	private void ButtonCoverValue(object sender, RoutedEventArgs e) {
-		void ForeachValue(Action<AccessoryTruck> value, Action<AccessoryTruck>? valueATS = null) {
+		void ForeachValue(Action<Truck> value, Action<Truck>? valueATS = null) {
 			if (TruckExpandedETS2) {
-				foreach (AccessoryTruck t in TrucksETS2) {
+				foreach (Truck t in TrucksETS2) {
 					if (t.Check)
 						value(t);
 				}
 			}
 			if (TruckExpandedATS) {
-				foreach (AccessoryTruck t in TrucksATS) {
+				foreach (Truck t in TrucksATS) {
 					if (t.Check) {
 						if (valueATS != null) {
 							valueATS(t);
@@ -317,7 +317,7 @@ public partial class AccAddonWindow: BaseWindow {
 
 	private void TruckCheckBoxClick(object sender, RoutedEventArgs e) {
 		CheckBox box = (CheckBox)sender;
-		AccessoryTruck selected = (AccessoryTruck)box.DataContext;
+		Truck selected = (Truck)box.DataContext;
 		binding.SetSelected(selected);
 		binding.OverwriteEmpty(selected, selected.Check);
 	}

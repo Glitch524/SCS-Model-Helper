@@ -1,7 +1,4 @@
-﻿using SCS_Mod_Helper.Modding.PaintJob;
-using System.IO;
-using System.Windows.Media;
-using Windows.Networking.Vpn;
+﻿using System.IO;
 
 namespace SCS_Mod_Helper.Base {
 	public abstract class SCSIO() {
@@ -13,14 +10,6 @@ namespace SCS_Mod_Helper.Base {
 			sw.WriteLine(FileHeader);
 			BraceIn(sw);
 			action();
-			BraceOut(sw);
-		}
-
-		protected void WriteDataHeader (StreamWriter sw, string header, string name, Action data) {
-			sw.Write(new string('\t', TabCount));
-			sw.WriteLine($"{header} : {name}");
-			BraceIn(sw);
-			data();
 			BraceOut(sw);
 		}
 
@@ -43,125 +32,46 @@ namespace SCS_Mod_Helper.Base {
 
 		protected static void WriteEmptyLine(StreamWriter sw) => sw.WriteLine("");
 
-		protected void WriteLine(StreamWriter sw, string name, string? value) {
-			if (value == null)
+		protected void WriteLine(StreamWriter sw, string name, object? valueObj, object skipValue) {
+			if (valueObj == null)
 				return;
-			if (value.Length == 0)
+			var vals = valueObj.ToString();
+			var skips = skipValue.ToString();
+			if (vals == skips)
 				return;
-			Write(sw, name, value);
-		}
-		protected void WriteLine(StreamWriter sw, string name, string? value, string defaultValue) {
-			if (value == defaultValue)
-				return;
-			WriteLine(sw, name, value);
+			WriteLine(sw, name, valueObj);
 		}
 
-		protected void WriteLine(StreamWriter sw, string name, bool value) => Write(sw, name, value.ToString());
-
-		protected void WriteLine(StreamWriter sw, string name, bool value, bool defaultValue) {
-			if (value == defaultValue)
+		protected void WriteLine(StreamWriter sw, string name, object? valueObj) {
+			if (valueObj == null)
 				return;
-			WriteLine(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, long? value) {
-			if (value == null)
-				return;
-			Write(sw, name, FloatToString(value));
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, long? value, long defaultValue) {
-			if (value == defaultValue)
-				return;
-			WriteLine(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, uint? value) {
-			if (value == null)
-				return;
-			Write(sw, name, FloatToString(value));
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, uint? value, uint defaultValue) {
-			if (value == defaultValue)
-				return;
-			WriteLine(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, float? value) {
-			if (value == null)
-				return;
-			Write(sw, name, FloatToString(value));
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, float? value, float defaultValue) {
-			if (value == defaultValue)
-				return;
-			WriteLine(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, float?[] floats) {
-			if (floats == null)
-				return;
-			string value;
-
-			switch (floats.Length) {
-				case 2:
-					if (floats[0] == null && floats[1] == null)
-						return;
-					value = $"({FloatToString(floats[0])},{FloatToString(floats[1])})";
-					break;
-				case 3:
-					if (floats[0] == null && floats[1] == null && floats[2] == null)
-						return;
-					value = $"({FloatToString(floats[0])},{FloatToString(floats[1])},{FloatToString(floats[2])})";
-					break;
-				default:
-					throw new ArgumentException("");
+			if (valueObj is string s) {
+				if (s.Length == 0)
+					return;
 			}
-			Write(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, float?[] floats, float[] defaultValue) {
-			if (Array.Equals(floats, defaultValue))
-				return;
-			WriteLine(sw, name, floats);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, float[]? floats) {
-			if (floats == null)
-				return;
-			string value = floats.Length switch {
-				2 => $"({FloatToString(floats[0])},{FloatToString(floats[1])})",
-				3 => $"({FloatToString(floats[0])},{FloatToString(floats[1])},{FloatToString(floats[2])})",
-				_ => throw new ArgumentException(""),
-			};
-			Write(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, float[]? floats, float[] defaultValue) {
-			if (Equals(floats, defaultValue))
-				return;
-			WriteLine(sw, name, floats);
-		}
-		protected void WriteLine(StreamWriter sw, string name, Color? color) {
-			if (color == null)
-				return;
-			float[] floats = ((Color) color).ToFloat3();
-			string value = $"({FloatToString(floats[0])},{FloatToString(floats[1])},{FloatToString(floats[2])})";
-			Write(sw, name, value);
-		}
-
-		protected void WriteLine(StreamWriter sw, string name, Color? color, Color defaultColor) {
-			if (Equals(color, defaultColor))
-				return;
-			WriteLine(sw, name, color);
-		}
-
-		private void Write(StreamWriter sw, string name, string value) {
 			var isArray = IsArray(name);
 			var hasQuote = HasQuote(name);
 
+			string value;
+			if (valueObj is float?[] floats) {
+				if (floats.Length == 2) {
+					if (floats[0] == null && floats[1] == null)
+						return;
+					value = $"({FloatToString(floats[0])},{FloatToString(floats[1])})";
+				} else {
+					if (floats[0] == null && floats[1] == null && floats[2] == null)
+						return;
+					value = $"({FloatToString(floats[0])},{FloatToString(floats[1])},{FloatToString(floats[2])})";
+				}
+			} else if (valueObj is float[] floatsN) {
+				if (floatsN.Length == 2) {
+					value = $"({FloatToString(floatsN[0])},{FloatToString(floatsN[1])})";
+				} else
+					value = $"({FloatToString(floatsN[0])},{FloatToString(floatsN[1])},{FloatToString(floatsN[2])})";
+			} else if (valueObj is float f) {
+				value = FloatToString(f);
+			} else
+				value = valueObj.ToString() ?? "";
 			sw.Write(new string('\t', TabCount));
 			sw.Write(name);
 			if (isArray)

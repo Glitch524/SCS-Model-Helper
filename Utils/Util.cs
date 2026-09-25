@@ -81,7 +81,7 @@ namespace SCS_Mod_Helper.Utils {
 			pro.Start();
 		}
 
-		public static BitmapImage LoadImage(string filename) {
+		public static BitmapImage LoadIcon(string filename) {
 			var image = new BitmapImage();
 			image.BeginInit();
 			image.CacheOption = BitmapCacheOption.OnLoad;
@@ -91,7 +91,7 @@ namespace SCS_Mod_Helper.Utils {
 			return image;
 		}
 
-		public static BitmapSource LoadPfimImage(string filename) {
+		public static BitmapSource LoadPfimIcon(string filename) {
 			var image = Pfimage.FromFile(filename);
 			var pixelFormat = PfimGetPixelFormat(image);
 			var handle = GCHandle.Alloc(image.Data, GCHandleType.Pinned);

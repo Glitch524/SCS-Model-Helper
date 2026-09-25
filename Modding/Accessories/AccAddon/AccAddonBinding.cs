@@ -12,6 +12,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 public class AccAddonBinding: BaseBinding, IListDataInterface {
@@ -79,8 +81,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	protected static int ReadTruckHistory(StringCollection historyList, Collection<AccessoryTruck> trucks) {
-		Dictionary<string, AccessoryTruck> truckDict = trucks.ToDictionary(t => t.TruckID);
+	protected static int ReadTruckHistory(StringCollection historyList, Collection<Truck> trucks) {
+		Dictionary<string, Truck> truckDict = trucks.ToDictionary(t => t.TruckID);
 		int selected = 0;
 		foreach (var h in historyList) {
 			if (h == null)
@@ -140,7 +142,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		strings.AddRange([.. collection]);
 		return strings;
 	}
-	private static StringCollection TrucksToStrings(AccessoryTruck[] trucks) {
+	private static StringCollection TrucksToStrings(Truck[] trucks) {
 		var strings = new StringCollection();
 		foreach(var truck in trucks) {
 			strings.Add($"{truck.Check},{truck.TruckID},{truck.ModelType},{truck.Look},{truck.Variant}");
@@ -150,9 +152,9 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 
 	public async Task LoadTrucks() {
-		var tETS2 = TrucksIO.LoadAccessoryTrucks(true, TrucksETS2);
+		var tETS2 = TrucksIO.LoadTrucks(true, TrucksETS2);
 		await tETS2;
-		var tATS = TrucksIO.LoadAccessoryTrucks(false, TrucksATS);
+		var tATS = TrucksIO.LoadTrucks(false, TrucksATS);
 		await tATS;
 	}
 
@@ -794,7 +796,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public void SetSelected(AccessoryTruck truck) {
+	public void SetSelected(Truck truck) {
 		bool check = truck.Check;
 		if (truck.IsETS2) {
 			if (check)
@@ -809,14 +811,14 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public void SelectAllTruck(ObservableCollection<AccessoryTruck> trucks, bool check) {
-		foreach (AccessoryTruck truck in trucks) {
+	public void SelectAllTruck(ObservableCollection<Truck> trucks, bool check) {
+		foreach (Truck truck in trucks) {
 			truck.Check = check;
 			OverwriteEmpty(truck, check);
 		}
 	}
 
-	public void OverwriteEmpty(AccessoryTruck truck, bool check) {
+	public void OverwriteEmpty(Truck truck, bool check) {
 		if (check) {
 			if (truck.ModelType.Length == 0)
 				truck.ModelType = ModelType;
@@ -827,8 +829,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public ObservableCollection<AccessoryTruck> TrucksETS2 => AddonItem.TrucksETS2;
-	public ObservableCollection<AccessoryTruck> TrucksATS => AddonItem.TrucksATS;
+	public ObservableCollection<Truck> TrucksETS2 => AddonItem.TrucksETS2;
+	public ObservableCollection<Truck> TrucksATS => AddonItem.TrucksATS;
 
 	string? LoadedFilename = null;
 	public void SaveDED(Window window) {
@@ -905,10 +907,10 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public AddTruckUC? AddTruckUC;
 
-	public void AddNewTruck(Window window, AccessoryTruck newTruck) {
+	public void AddNewTruck(Window window, Truck newTruck) {
 		try {
 			bool isETS2 = newTruck.IsETS2;
-			ObservableCollection<AccessoryTruck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
+			ObservableCollection<Truck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
 			if (newTruck.TruckID[0] <= 'm') {
 				for (int i = 0; i < Trucks.Count; i++) {
 					var cTruck = Trucks[i];
@@ -941,9 +943,11 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public static void DeleteTruck(bool ets2, ObservableCollection<AccessoryTruck> Trucks, DataGrid Table) {
+	public static void DeleteTruck(bool ets2, ObservableCollection<Truck> Trucks, DataGrid Table) {
+		var changed = false;
 		List<string> truckIDs = [];
 		while (Table.SelectedIndex != -1) {
+			changed = true;
 			var selected = Trucks[Table.SelectedIndex];
 			Trucks.Remove(selected);
 			truckIDs.Add(selected.TruckID);

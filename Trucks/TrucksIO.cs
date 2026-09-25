@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.Sqlite;
-using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -73,7 +72,7 @@ public static class TrucksIO {
 		cmd.Parameters.AddWithValue("$id", truck.TruckID);
 		cmd.Parameters.AddWithValue("$mani", truck.Manifaturer);
 		cmd.Parameters.AddWithValue("$prodYear", truck.ProductionYear);
-		cmd.Parameters.AddWithValue("$tname", truck.DisplayName);
+		cmd.Parameters.AddWithValue("$tname", truck.IngameName);
 		cmd.Parameters.AddWithValue("$desc", truck.Description);
 		cmd.ExecuteNonQuery();
 	}
@@ -120,60 +119,18 @@ public static class TrucksIO {
 		cmd.Parameters.AddWithValue("$id", truck.TruckID);
 		cmd.Parameters.AddWithValue("$mani", truck.Manifaturer);
 		cmd.Parameters.AddWithValue("$prodYear", truck.ProductionYear);
-		cmd.Parameters.AddWithValue("$tname", truck.DisplayName);
+		cmd.Parameters.AddWithValue("$tname", truck.IngameName);
 		cmd.Parameters.AddWithValue("$desc", truck.Description);
 		cmd.Parameters.AddWithValue("$default", 0);
 		cmd.ExecuteNonQuery();
 	}
 
-	public static async Task LoadAccessoryTrucks(bool isETS2, ObservableCollection<AccessoryTruck> trucks) {
+	public static async Task LoadTrucks(bool isETS2, ObservableCollection<Truck> trucks) {
 		CheckDBExistence();
 		string table = isETS2 ? TABLE_TRUCKS_ETS2 : TABLE_TRUCKS_ATS;
 		using var conn = new SqliteConnection(ConnString);
 		conn.Open();
 		var cmd = conn.CreateCommand();
-		cmd.CommandText = $"Select *  from {table} order by Manifaturer, ProductionYear, TruckID";
-		using var reader = cmd.ExecuteReader();
-		List<AccessoryTruck> loadedTruck = [];
-		while (reader.Read()) {
-			string truckID = reader.GetString(0);
-			string manifaturer = reader.GetString(1);
-			int prodYear = reader.GetInt32(2);
-			string? truckName;
-			if (reader.IsDBNull(3)) {
-				truckName = GetTruckName(truckID);
-			} else
-				truckName = reader.GetString(3);
-			string? desc;
-			if (reader.IsDBNull(4)) {
-				desc = GetTruckDesc(truckID);
-			} else
-				desc = reader.GetString(4);
-			AccessoryTruck truck = new AccessoryTruck(truckID, prodYear, truckName, desc, manifaturer, isETS2);
-			loadedTruck.Add(truck);
-		}
-		await Application.Current.Dispatcher.InvokeAsync(() => {
-			foreach (var t in loadedTruck) {
-				trucks.Add(t);
-			}
-		});
-	}
-
-	public static void LoadPaintJobTrucks(ObservableCollection<Truck> trucks) {
-		LoadPaintJobTrucks(true, trucks);
-		LoadPaintJobTrucks(false, trucks);
-	}
-
-	private static void LoadPaintJobTrucks(bool isETS2, ObservableCollection<Truck> trucks) {
-		CheckDBExistence();
-		string table = isETS2 ? TABLE_TRUCKS_ETS2 : TABLE_TRUCKS_ATS;
-		using var conn = new SqliteConnection(ConnString);
-		conn.Open();
-		var cmd = conn.CreateCommand();
-
-		var cabinDict = LoadCabins(cmd, isETS2);
-		var accDict = LoadAccessories(cmd, isETS2);
-
 		cmd.CommandText = $"Select *  from {table} order by Manifaturer, ProductionYear, TruckID";
 		using var reader = cmd.ExecuteReader();
 		List<Truck> loadedTruck = [];
@@ -191,60 +148,14 @@ public static class TrucksIO {
 				desc = GetTruckDesc(truckID);
 			} else
 				desc = reader.GetString(4);
-			Truck truck = new(truckID, prodYear, truckName, desc, manifaturer, isETS2);
+			Truck truck = new(isETS2, truckID, manifaturer, prodYear, truckName, desc);
 			loadedTruck.Add(truck);
-			if (cabinDict.TryGetValue(truckID, out var cabins)) {
-				truck.Cabins = cabins;
-			}
-			if (accDict.TryGetValue(truckID, out var accessories)) {
-				truck.Accessories = accessories;
-			}
 		}
-		foreach (var t in loadedTruck) {
-			trucks.Add(t);
-		}
-	}
-
-	public static Dictionary<string, List<Cabin>> LoadCabins(SqliteCommand cmd, bool isETS2) {
-		string table = isETS2 ? TABLE_CABINS_ETS2 : TABLE_CABINS_ATS;
-		cmd.CommandText = $"Select * from {table} order by TruckID";
-		using var reader = cmd.ExecuteReader();
-		Dictionary<string, List<Cabin>> dict = [];
-		while(reader.Read()) {
-			string truckID = reader.GetString(0);
-			string cabinID = reader.GetString(1);
-			string cabinName = reader.IsDBNull(2) ? GetCabinName(cabinID) : reader.GetString(2);
-			List<Cabin>? cabins;
-			if (dict.TryGetValue(truckID, out List<Cabin>? value)) {
-				cabins = value;
-			} else {
-				cabins = [];
-				dict[truckID] = cabins;
+		await Application.Current.Dispatcher.InvokeAsync(() => {
+			foreach (var t in loadedTruck) {
+				trucks.Add(t);
 			}
-			cabins.Add(new(truckID, cabinID, cabinName));
-		}
-		return dict;
-	}
-	public static Dictionary<string, List<Accessory>> LoadAccessories(SqliteCommand cmd, bool isETS2) {
-		string table = isETS2 ? TABLE_ACC_ETS2 : TABLE_ACC_ATS;
-		cmd.CommandText = $"Select * from {table} order by TruckID";
-		using var reader = cmd.ExecuteReader();
-		Dictionary<string, List<Accessory>> dict = [];
-		while (reader.Read()) {
-			string truckID = reader.GetString(0);
-			string accID = reader.GetString(1);
-			string accName = reader.IsDBNull(2) ? GetAccessoryName(truckID, accID) : reader.GetString(2);
-			List<Accessory>? accessories;
-			if (dict.TryGetValue(truckID, out List<Accessory>? value)) {
-				accessories = value;
-			} else {
-				accessories = [];
-				dict[truckID] = accessories;
-			}
-
-			accessories.Add(new(truckID, accID, accName));
-		}
-		return dict;
+		});
 	}
 
 	public static void ClearTruckList() {

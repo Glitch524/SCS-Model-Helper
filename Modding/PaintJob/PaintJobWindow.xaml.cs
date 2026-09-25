@@ -1,13 +1,9 @@
-﻿using ColorPicker;
-using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Localization;
+﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -16,19 +12,18 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 	/// PaintJobWindow.xaml 的交互逻辑
 	/// </summary>
 	public partial class PaintJobWindow: BaseWindow {
-		private readonly PaintJobBinding Binding = new();
+		private readonly PaintJobBinding binding = new();
 
 		private readonly ContextMenu MenuStringRes;
 		public PaintJobWindow() {
 			InitializeComponent();
 
-			GridMain.DataContext = Binding;
+			GridMain.DataContext = binding;
 
 			MenuStringRes = (ContextMenu)Resources["MenuStringRes"];
 			MenuStringRes.PlacementTarget = ButtonChooseRes;
-			MenuStringRes.DataContext = Binding;
+			MenuStringRes.DataContext = binding;
 		}
-
 
 		public static Color ColorMask(
 		Color baseColor,
@@ -170,59 +165,43 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		}
 
-		private void CheckStringRes(object sender, RoutedEventArgs e) => Binding.CheckNameStringRes();
+		private void CheckStringRes(object sender, RoutedEventArgs e) => binding.CheckNameStringRes();
 		private void ChooseStringRes(object sender, RoutedEventArgs e) => MenuStringRes.IsOpen = true;
 
-		private void ButtonChooseIcon(object sender, RoutedEventArgs e) => Binding.ChooseIcon(this);
+		private void ButtonChooseIcon(object sender, RoutedEventArgs e) => binding.ChooseIcon(this);
 
 		private void ButtonChooseColor(object sender, RoutedEventArgs e) {
 			PopupColorPicker.PlacementTarget = (UIElement)sender;
 			PopupColorPicker.IsOpen = true;
-			string property;
 			if (sender == ButtonBaseColor) {
-				property = "BaseColor";
-			} else if (sender == ButtonVariantBase) {
-				property = "VariantColorBase";
-			} else if (sender == ButtonVariant1) {
-				property = "VariantColor1";
-			} else if (sender == ButtonVariant2) {
-				property = "VariantColor2";
-			} else if (sender == ButtonVariant3) {
-				property = "VariantColor3";
+
 			} else if (sender == ButtonFlipColor) {
-				property = "FlipColor";
+
 			} else if (sender == ButtonFlakeColor) {
-				property = "FlakeColor";
+
 			} else if (sender == ButtonMaskR) {
-				property = "MaskRColor";
+
 			} else if (sender == ButtonMaskG) {
-				property = "MaskGColor";
+
 			} else if (sender == ButtonMaskB) {
-				property = "MaskBColor";
-			} else
-				throw new ArgumentException("");
-			Binding colorBinding = new() {
-				Source = Binding,
-				Path = new PropertyPath(property),
-				Mode = BindingMode.TwoWay
-			};
-			TruckColorPicker.SetBinding(PickerControlBase.SelectedColorProperty, colorBinding);
+
+			}
 		}
 
 		private void ButtonClearClick(object sender, RoutedEventArgs e) {
 			if (sender == ButtonIconNameClear) {
-				Binding.IconName = "";
-				Binding.ModelIcon = null;
+				binding.IconName = "";
+				binding.ModelIcon = null;
 			} else if (sender == ButtonPaintJobTexClear) {
-				Binding.PaintJobTex = "";
-				Binding.PaintJobTexImage = null;
+				binding.PaintJobTex = "";
+				binding.PaintJobTexImage = null;
 			} else if (sender == ButtonBaseTexOverrideClear) {
-				Binding.BaseTexOverride = "";
+				binding.BaseTexOverride = "";
 			} else if (sender == ButtonFlakeNoiseClear) {
-				Binding.FlakeNoise = AccPaintJobData.DefaultFlakeNoise;
+				binding.FlakeNoise = AccessoryPaintJobData.DefaultFlakeNoise;
 			} else if (sender == ButtonAccTexClear) {
-				Binding.AccTex = "";
-				Binding.AccTexImage = null;
+				binding.AccTex = "";
+				binding.AccTexImage = null;
 			}
 		}
 
@@ -237,72 +216,38 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			} else if (sender == ButtonChooseAccTex) {
 				type = PaintJobBinding.TEX_ACC_TEX;
 			} else { return; }
-			Binding.ChooseTex(this, type);
-		}
-
-		private void ColorVariantClick(object sender, RoutedEventArgs e) {
-			if (PopupVariantList.IsOpen)
-				return;
-			PopupVariantList.IsOpen = true;
-		}
-
-		private void VariantColorSelected(object sender, SelectionChangedEventArgs e) {
-			if (sender is ListBox) {
-				if (PopupVariantList.IsOpen)
-					PopupVariantList.IsOpen = false;
-			}
-		}
-
-		private void AddVariantClick(object sender, RoutedEventArgs e) {
-			Binding.AddColorVariant();
-		}
-
-		private void RemoveVariantClick(object sender, RoutedEventArgs e) {
-			if (sender is Button button) {
-				var variant = (ColorVariant) button.DataContext;
-				Binding.RemoveColorVariant(variant);
-			}
-		}
-
-		private void OvrTabClick(object sender, RoutedEventArgs e) {
-			if (sender is Button button) {
-				var ovrData = (PaintJobOverrideData)button.DataContext;
-				Binding.ControlOvrTab(ovrData);
-			}
-		}
-
-		private void AddOvrClick(object sender, RoutedEventArgs e) => Binding.AddOvr();
-
-		private void AccessoryChecked(object sender, RoutedEventArgs e) {
-			if (sender is CheckBox checkBox) {
-				var acc = (Accessory)checkBox.DataContext;
-				Binding.AccessoryChecked(acc);
-			}
-		}
-
-		private void AccessoryUnchecked(object sender, RoutedEventArgs e) {
-			if (sender is CheckBox checkBox) {
-				var acc = (Accessory)checkBox.DataContext;
-				Binding.AccessoryUnchecked(acc);
-			}
+			binding.ChooseTex(this, type);
 		}
 
 		private void FileDrop(object sender, DragEventArgs e) {
 
 		}
 
-		private void ButtonPaintJobPreviewClick(object sender, RoutedEventArgs e) {
-			Binding.OpenPaintJobPreview(this);
+		private void ButtonAddRowClick(object sender, RoutedEventArgs e) {
+			if (sender == ButtonOvrAdd) {
+				int size = binding.OverrideList.Count;
+				string ovrName = ".ovr" + size;
+				PaintJobOverrideData overrideData = new(ovrName);
+				binding.OverrideList.Add(overrideData);
+			} else if (sender == ButtonPartAdd) {
+
+			}
 		}
 
-		private void ButtonStartClick(object sender, RoutedEventArgs e) {
-			Binding.CreatePaintJobSii(this);
+		private void ButtonDeleteRowClick(object sender, RoutedEventArgs e) {
+			if (sender == ButtonOvrRemove) {
+				int selectedIndex;
+				while ((selectedIndex = ListOverrides.SelectedIndex) != -1) {
+					binding.OverrideList.RemoveAt(selectedIndex);
+				}
+			} else if (sender == ButtonPartRemove) {
+				int selectedIndex;
+				while ((selectedIndex = ListAccList.SelectedIndex) != -1) {
+					binding.AccList.RemoveAt(selectedIndex);
+				}
+			}
 		}
-
-		private void ListBoxItemRequestBringIntoViewHandler(object sender, RequestBringIntoViewEventArgs e) {
-			e.Handled = true;
-		}
-    }
+	}
 }
 
 

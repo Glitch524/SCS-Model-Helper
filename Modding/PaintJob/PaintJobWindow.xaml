@@ -12,9 +12,9 @@
 	d:DataContext="{d:DesignInstance Type=local:PaintJobBinding}"
 	ExtendsContentIntoTitleBar="True"
 	mc:Ignorable="d"
-	Height="Auto"
+	Width="1060"
+	MinHeight="690"
 	WindowStartupLocation="CenterOwner"
-	SizeToContent="Height"
 	Title="{DynamicResource TitleSetupPaintJob}">
 	<base:BaseWindow.Resources>
 		<Style
@@ -36,30 +36,6 @@
 			<TextBlock
 				Text="{Binding Path=.}" />
 		</DataTemplate>
-		<Style
-			TargetType="Grid">
-			<Style.Triggers>
-				<Trigger
-					Property="IsEnabled"
-					Value="False">
-					<Setter
-						Property="Opacity"
-						Value="0.5" />
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-		<Style
-			TargetType="StackPanel">
-			<Style.Triggers>
-				<Trigger
-					Property="IsEnabled"
-					Value="False">
-					<Setter
-						Property="Opacity"
-						Value="0.5" />
-				</Trigger>
-			</Style.Triggers>
-		</Style>
 
 		<ContextMenu
 			x:Key="MenuStringRes"
@@ -165,8 +141,6 @@
 				Height="Auto" />
 			<RowDefinition
 				Height="*" />
-			<RowDefinition
-				Height="Auto" />
 		</Grid.RowDefinitions>
 		<ui:TitleBar
 			Title="{DynamicResource TitleSetupPaintJob}"
@@ -174,44 +148,44 @@
 		<Popup
 			x:Name="PopupColorPicker"
 			PopupAnimation="Slide"
-			StaysOpen="False"
 			AllowsTransparency="True">
-			<Grid>
+			<Grid
+				Background="White">
 				<Border
 					Style="{DynamicResource PopupBorder}" />
 				<colorpicker:StandardColorPicker
-					x:Name="TruckColorPicker"
 					Width="40"
 					Height="40"
-					Foreground="White"
-					ShowAlpha="False"
-					UseLayoutRounding="True"
-					Style="{StaticResource ColorPickerStyle}" />
+					Foreground="White" 
+					Style="{StaticResource ColorPickerStyle}"/>
+
 			</Grid>
 		</Popup>
+		
 		<Grid
 			x:Name="GridBasicData"
 			Grid.Row="1"
 			Margin="10">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition
-					Width="*"
-					MinWidth="200" />
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="10" />
+				<ColumnDefinition
+					Width="*" />
 				<ColumnDefinition
 					Width="10" />
 				<ColumnDefinition
 					Width="*"
-					MinWidth="200" />
-				<ColumnDefinition
-					Width="10" />
-				<ColumnDefinition
-					Width="*"
-					MinWidth="200" />
-				<ColumnDefinition
-					Width="10" />
-				<ColumnDefinition
-					Width="*"
-					MinWidth="200" />
+					MaxWidth="200" />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition
@@ -219,13 +193,15 @@
 				<RowDefinition
 					Height="15" />
 				<RowDefinition
-					Height="Auto" />
-				<RowDefinition
 					Height="*" />
 			</Grid.RowDefinitions>
+			<TreeView
+				Grid.RowSpan="3">
+
+			</TreeView>
 			<Grid
 				Grid.Column="0"
-				Grid.ColumnSpan="7">
+				Grid.ColumnSpan="9">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition
 						Width="*" />
@@ -241,6 +217,11 @@
 						Width="10" />
 					<ColumnDefinition
 						Width="*" />
+					<ColumnDefinition
+						Width="10" />
+					<ColumnDefinition
+						Width="*"
+						MaxWidth="200" />
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
 					<RowDefinition
@@ -369,27 +350,33 @@
 						TextWrapping="Wrap"
 						VerticalAlignment="Bottom"
 						Text="{DynamicResource TitleTruck}" />
-					<ComboBox
-						DisplayMemberPath="DisplayName"
-						SelectedValuePath="TruckID"
-						SelectedItem="{Binding CurrentTruck}"
-						ItemsSource="{Binding Trucks}">
-						<ComboBox.Style>
-							<Style
-								TargetType="ComboBox"
-								BasedOn="{StaticResource {x:Type ComboBox}}">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding CurrentTruck}"
-										Value="{x:Null}">
-										<Setter
-											Property="Background"
-											Value="Yellow" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</ComboBox.Style>
-					</ComboBox>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBox
+							Text="{Binding SuitableForListContent, Mode=OneWay}"
+							MaxLines="1"
+							TextWrapping="Wrap"
+							IsEnabled="True"
+							Style="{StaticResource TextBoxBorderless}">
+						</TextBox>
+						<Button
+							Grid.Column="2"
+							Style="{StaticResource ButtonBorderless}"
+							Click="ButtonChooseTruck">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="VehicleTruckProfile20" />
+							</Viewbox>
+						</Button>
+						<Border
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
+					</Grid>
 				</StackPanel>
 				<StackPanel
 					Grid.Column="6"
@@ -398,27 +385,36 @@
 						TextWrapping="Wrap"
 						VerticalAlignment="Top"
 						Text="{DynamicResource TitleCabin}" />
-					<ComboBox
-						DisplayMemberPath="CabinName"
-						SelectedValuePath="CabinID"
-						SelectedItem="{Binding CurrentCabin}"
-						ItemsSource="{Binding CabinList}">
-						<ComboBox.Style>
-							<Style
-								TargetType="ComboBox"
-								BasedOn="{StaticResource {x:Type ComboBox}}">
-								<Style.Triggers>
-									<DataTrigger
-										Binding="{Binding CurrentCabin}"
-										Value="{x:Null}">
-										<Setter
-											Property="Background"
-											Value="Yellow" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</ComboBox.Style>
-					</ComboBox>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBox
+							Text="{Binding SuitableForListContent, Mode=OneWay}"
+							MaxLines="1"
+							TextWrapping="Wrap"
+							IsEnabled="True"
+							Style="{StaticResource TextBoxBorderless}"
+							Cursor="IBeam">
+						</TextBox>
+						<Button
+							Grid.Column="2"
+							Style="{StaticResource ButtonBorderless}"
+							Click="ButtonChooseTruck">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="VehicleTruckProfile20" />
+							</Viewbox>
+						</Button>
+						<Border
+							Grid.ColumnSpan="3"
+							Style="{DynamicResource MultiControlBorder}" />
+					</Grid>
 				</StackPanel>
 
 
@@ -560,7 +556,6 @@
 						</Border>
 
 						<CheckBox
-							x:Name="CheckBoxColorBaseCustomizable"
 							Grid.Column="3"
 							Content="{DynamicResource TitleColorCustomizable}"
 							IsChecked="{Binding BaseColorCustomizable}"
@@ -576,7 +571,7 @@
 						</Grid.ColumnDefinitions>
 						<Border
 							d:Background="Blue"
-							Background="{Binding BaseColorVisual, Mode=OneWay}"
+							Background="{Binding BaseColorVisual}"
 							Style="{DynamicResource MultiControlBorder}" />
 						<Button
 							x:Name="ButtonBaseColor"
@@ -606,7 +601,7 @@
 						Text="{DynamicResource ModelPrice}" />
 					<TextBox
 						x:Name="TextPrice"
-						Text="{Binding PriceString, UpdateSourceTrigger=PropertyChanged}"
+						Text="{Binding Price}"
 						MaxLines="1"
 						PreviewTextInput="NumberOnly"
 						TextWrapping="Wrap"
@@ -650,7 +645,7 @@
 					</TextBlock>
 					<TextBox
 						x:Name="TextUnlockLevel"
-						Text="{Binding UnlockLevelString, UpdateSourceTrigger=PropertyChanged}"
+						Text="{Binding UnlockLevel}"
 						MaxLines="1"
 						PreviewTextInput="NumberOnly"
 						TextWrapping="Wrap"
@@ -672,7 +667,7 @@
 						</TextBox.Style>
 					</TextBox>
 				</StackPanel>
-
+				
 				<StackPanel
 					x:Name="PanelIconName"
 					Grid.Row="6"
@@ -767,7 +762,7 @@
 							BasedOn="{StaticResource MultiControlBorder}">
 							<Style.Triggers>
 								<DataTrigger
-									Binding="{Binding ModelIcon, Mode=OneWay}"
+									Binding="{Binding ModelIcon}"
 									Value="{x:Null}">
 									<Setter
 										Property="Visibility"
@@ -784,792 +779,6 @@
 							Height="64" />
 					</Viewbox>
 				</Border>
-
-
-				<Grid
-					Grid.Row="8"
-					Grid.ColumnSpan="3">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition
-							Width="3*" />
-						<ColumnDefinition
-							Width="*" />
-					</Grid.ColumnDefinitions>
-					<StackPanel
-						VerticalAlignment="Top">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<TextBlock
-								TextWrapping="Wrap"
-								VerticalAlignment="Bottom"
-								Text="{DynamicResource TitleColorVariant}" />
-							<Border
-								Grid.Column="1"
-								ToolTip="{DynamicResource ToolTipBaseColor}"
-								Height="{Binding ActualHeight, ElementName=TitleBaseColor, Mode=OneWay}"
-								VerticalAlignment="Bottom">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="ChatWarning20" />
-								</Viewbox>
-							</Border>
-						</Grid>
-						<Grid
-							Grid.Row="1"
-							Height="{Binding ActualHeight, ElementName=TextPaintJobTex, Mode=OneWay}">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<Grid
-								MinWidth="160">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-								</Grid.ColumnDefinitions>
-								<TextBlock
-									Text="{DynamicResource BaseColorShort}"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
-										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding BaseColorCustomizable}"
-													Value="false">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariantBase"
-									Grid.Column="1"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Black"
-									Background="{Binding VariantColorBaseBrush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding BaseColorCustomizable}"
-													Value="false">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Button.Style>
-								</Button>
-								<TextBlock
-									Grid.Column="2"
-									Margin="5,0,0,0"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
-										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Setter
-												Property="Text"
-												Value="{DynamicResource MaskBShort}" />
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="True">
-													<Setter
-														Property="Text"
-														Value="{DynamicResource FlipColorShort}" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="true" />
-														<Condition
-															Binding="{Binding FlipColorCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskBCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariant1"
-									Grid.Column="3"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Blue"
-									Background="{Binding VariantColor1Brush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
-											<Style.Triggers>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="true" />
-														<Condition
-															Binding="{Binding FlipColorCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskBCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Button.Style>
-								</Button>
-								<TextBlock
-									Grid.Column="4"
-									Margin="5,0,0,0"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
-										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Setter
-												Property="Text"
-												Value="{DynamicResource MaskGShort}" />
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="True">
-													<Setter
-														Property="Text"
-														Value="{DynamicResource FlakeColorShort}" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="true" />
-														<Condition
-															Binding="{Binding FlakeColorCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskGCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariant2"
-									Grid.Column="5"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Lime"
-									Background="{Binding VariantColor2Brush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
-											<Style.Triggers>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="true" />
-														<Condition
-															Binding="{Binding FlakeColorCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskGCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Button.Style>
-								</Button>
-								<TextBlock
-									Text="{DynamicResource MaskRShort}"
-									Grid.Column="6"
-									Margin="5,0,0,0"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
-										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Style.Triggers>
-
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="true">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskRCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariant3"
-									Grid.Column="7"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Red"
-									Background="{Binding VariantColor3Brush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="true">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskRCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Button.Style>
-								</Button>
-								<Border
-									Grid.ColumnSpan="8"
-									Background="#BFFFFFFF">
-									<Border.Style>
-										<Style
-											TargetType="Border">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding CurrentVariant}"
-													Value="{x:Null}">
-													<Setter
-														Property="Visibility"
-														Value="Visible" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Border.Style>
-								</Border>
-							</Grid>
-							<Button
-								x:Name="ButtonColorVariant"
-								Grid.Column="1"
-								Margin="15,0,0,0"
-								Click="ColorVariantClick"
-								Style="{StaticResource ButtonBorderless}">
-								<Viewbox>
-									<ui:SymbolIcon
-										Symbol="AppsListDetail20" />
-								</Viewbox>
-							</Button>
-							<Popup
-								x:Name="PopupVariantList"
-								Placement="Bottom"
-								PopupAnimation="Slide"
-								AllowsTransparency="True"
-								PlacementTarget="{Binding ElementName=ButtonColorVariant}"
-								StaysOpen="False">
-								<Grid
-									MinWidth="167">
-									<Border
-										Grid.RowSpan="2"
-										Style="{DynamicResource PopupBorder}" />
-									<TextBlock
-										Margin="5"
-										Text="{DynamicResource TitleColorVariantNoCustomizable}">
-										<TextBlock.Style>
-											<Style
-												TargetType="TextBlock"
-												BasedOn="{StaticResource {x:Type TextBlock}}">
-												<Setter
-													Property="Visibility"
-													Value="Collapsed" />
-												<Style.Triggers>
-													<MultiDataTrigger>
-														<MultiDataTrigger.Conditions>
-															<Condition
-																Binding="{Binding BaseColorCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding FlipColorCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding FlakeColorCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding MaskRCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding MaskGCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding MaskBCustomizable}"
-																Value="False" />
-														</MultiDataTrigger.Conditions>
-														<Setter
-															Property="Visibility"
-															Value="Visible" />
-													</MultiDataTrigger>
-												</Style.Triggers>
-											</Style>
-										</TextBlock.Style>
-									</TextBlock>
-									<Grid
-										Margin="5">
-										<Grid.Style>
-											<Style
-												TargetType="Grid">
-												<Style.Triggers>
-													<MultiDataTrigger>
-														<MultiDataTrigger.Conditions>
-															<Condition
-																Binding="{Binding BaseColorCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding FlipColorCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding FlakeColorCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding MaskRCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding MaskGCustomizable}"
-																Value="False" />
-															<Condition
-																Binding="{Binding MaskBCustomizable}"
-																Value="False" />
-														</MultiDataTrigger.Conditions>
-														<Setter
-															Property="Visibility"
-															Value="Collapsed" />
-													</MultiDataTrigger>
-												</Style.Triggers>
-											</Style>
-										</Grid.Style>
-										<Grid.RowDefinitions>
-											<RowDefinition
-												Height="Auto" />
-											<RowDefinition
-												Height="Auto" />
-										</Grid.RowDefinitions>
-										<Button
-											Content="Add"
-											Padding="10,3"
-											Margin="5"
-											Click="AddVariantClick"
-											HorizontalAlignment="Right" />
-										<TextBlock
-											Grid.Row="1"
-											Margin="5"
-											Text="{DynamicResource StatusEmpty}"
-											HorizontalAlignment="Right">
-											<TextBlock.Style>
-												<Style
-													TargetType="TextBlock"
-													BasedOn="{StaticResource {x:Type TextBlock}}">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-													<Style.Triggers>
-														<DataTrigger
-															Binding="{Binding ColorVariantList.Count}"
-															Value="0">
-															<Setter
-																Property="Visibility"
-																Value="Visible" />
-														</DataTrigger>
-													</Style.Triggers>
-												</Style>
-											</TextBlock.Style>
-										</TextBlock>
-										<ListBox
-											Grid.Row="1"
-											Margin="5"
-											ItemsSource="{Binding ColorVariantList}"
-											SelectedValue="{Binding CurrentVariant}"
-											IsSynchronizedWithCurrentItem="True"
-											SelectionChanged="VariantColorSelected">
-											<ListBox.Style>
-												<Style
-													TargetType="ListBox"
-													BasedOn="{StaticResource {x:Type ListBox}}">
-													<Style.Triggers>
-														<DataTrigger
-															Binding="{Binding ColorVariantList.Count}"
-															Value="0">
-															<Setter
-																Property="Visibility"
-																Value="Collapsed" />
-														</DataTrigger>
-													</Style.Triggers>
-												</Style>
-											</ListBox.Style>
-											<ListBox.ItemTemplate>
-												<DataTemplate>
-													<Grid
-														Margin="0,1">
-														<Grid.Resources>
-															<Style
-																x:Key="colorBlocks"
-																TargetType="Border">
-																<Setter
-																	Property="Width"
-																	Value="20" />
-																<Setter
-																	Property="Height"
-																	Value="20" />
-																<Setter
-																	Property="BorderThickness"
-																	Value="1" />
-																<Setter
-																	Property="BorderBrush"
-																	Value="LightGray" />
-															</Style>
-														</Grid.Resources>
-														<Grid.ColumnDefinitions>
-															<ColumnDefinition
-																Width="Auto" />
-															<ColumnDefinition
-																Width="Auto" />
-															<ColumnDefinition
-																Width="Auto" />
-															<ColumnDefinition
-																Width="Auto" />
-															<ColumnDefinition
-																Width="*" />
-															<ColumnDefinition
-																Width="Auto" />
-														</Grid.ColumnDefinitions>
-														<Border
-															Grid.Column="0">
-															<Border.Style>
-																<Style
-																	TargetType="Border"
-																	BasedOn="{StaticResource colorBlocks}">
-																	<Setter
-																		Property="Background"
-																		Value="{Binding ColorBaseBrush, Mode=OneWay}" />
-																	<Style.Triggers>
-																		<DataTrigger
-																			Binding="{Binding ColorBaseBrush}"
-																			Value="{x:Null}">
-																			<Setter
-																				Property="Background"
-																				Value="White" />
-																		</DataTrigger>
-																		<DataTrigger
-																			Binding="{Binding ElementName=CheckBoxColorBaseCustomizable, Path=IsChecked}"
-																			Value="False">
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</DataTrigger>
-																	</Style.Triggers>
-																</Style>
-															</Border.Style>
-														</Border>
-														<Border
-															Grid.Column="1"
-															Margin="10,0,0,0">
-															<Border.Style>
-																<Style
-																	TargetType="Border"
-																	BasedOn="{StaticResource colorBlocks}">
-																	<Setter
-																		Property="Background"
-																		Value="{Binding Color1Brush, Mode=OneWay}" />
-																	<Style.Triggers>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding Color1Brush}"
-																					Value="{x:Null}" />
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="0" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Background"
-																				Value="Red" />
-																		</MultiDataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding Color1Brush}"
-																					Value="{x:Null}" />
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="1" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Background"
-																				Value="Blue" />
-																		</MultiDataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="0" />
-																				<Condition
-																					Binding="{Binding ElementName=CheckBoxFlipColorCustomizable, Path=IsChecked}"
-																					Value="False" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</MultiDataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="1" />
-																				<Condition
-																					Binding="{Binding ElementName=CheckBoxMaskBCustomizable, Path=IsChecked}"
-																					Value="False" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</MultiDataTrigger>
-																	</Style.Triggers>
-																</Style>
-															</Border.Style>
-														</Border>
-														<Border
-															Grid.Column="2"
-															Margin="10,0,0,0">
-															<Border.Style>
-																<Style
-																	TargetType="Border"
-																	BasedOn="{StaticResource colorBlocks}">
-																	<Setter
-																		Property="Background"
-																		Value="{Binding Color2Brush, Mode=OneWay}" />
-																	<Style.Triggers>
-																		<DataTrigger
-																			Binding="{Binding Color2Brush}"
-																			Value="{x:Null}">
-																			<Setter
-																				Property="Background"
-																				Value="Lime" />
-																		</DataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="0" />
-																				<Condition
-																					Binding="{Binding ElementName=CheckBoxFlakeColorCustomizable, Path=IsChecked}"
-																					Value="False" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</MultiDataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="1" />
-																				<Condition
-																					Binding="{Binding ElementName=CheckBoxMaskGCustomizable, Path=IsChecked}"
-																					Value="False" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</MultiDataTrigger>
-																	</Style.Triggers>
-																</Style>
-															</Border.Style>
-														</Border>
-														<Border
-															Grid.Column="3"
-															Margin="10,0,0,0">
-															<Border.Style>
-																<Style
-																	TargetType="Border"
-																	BasedOn="{StaticResource colorBlocks}">
-																	<Setter
-																		Property="Background"
-																		Value="{Binding Color3Brush, Mode=OneWay}" />
-																	<Style.Triggers>
-																		<DataTrigger
-																			Binding="{Binding Color3Brush}"
-																			Value="{x:Null}">
-																			<Setter
-																				Property="Background"
-																				Value="Red" />
-																		</DataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="0" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</MultiDataTrigger>
-																		<MultiDataTrigger>
-																			<MultiDataTrigger.Conditions>
-																				<Condition
-																					Binding="{Binding ElementName=TabMode, Path=SelectedIndex}"
-																					Value="1" />
-																				<Condition
-																					Binding="{Binding ElementName=CheckBoxMaskRCustomizable, Path=IsChecked}"
-																					Value="False" />
-																			</MultiDataTrigger.Conditions>
-																			<Setter
-																				Property="Visibility"
-																				Value="Collapsed" />
-																		</MultiDataTrigger>
-																	</Style.Triggers>
-																</Style>
-															</Border.Style>
-														</Border>
-														<Button
-															x:Name="ButtonRemoveVariant"
-															Width="20"
-															Height="20"
-															Grid.Column="5"
-															Margin="5,0,0,0"
-															Click="RemoveVariantClick">
-															<Viewbox>
-																<ui:SymbolIcon
-																	Symbol="Dismiss20" />
-															</Viewbox>
-														</Button>
-													</Grid>
-												</DataTemplate>
-											</ListBox.ItemTemplate>
-										</ListBox>
-									</Grid>
-								</Grid>
-							</Popup>
-						</Grid>
-					</StackPanel>
-				</Grid>
 
 				<StackPanel
 					Grid.Row="6"
@@ -1714,6 +923,36 @@
 							Style="{DynamicResource MultiControlBorder}" />
 					</Grid>
 				</StackPanel>
+
+				<Border
+					Grid.Column="8"
+					Grid.RowSpan="9"
+					BorderThickness="1"
+					BorderBrush="Black"
+					d:Background="LimeGreen"
+					VerticalAlignment="Top"
+					MaxWidth="200"
+					MaxHeight="200">
+					<Border.Style>
+						<Style
+							TargetType="Border">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding PaintJobTex.Length}"
+									Value="0">
+									<Setter
+										Property="Visibility"
+										Value="Collapsed" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Border.Style>
+					<Viewbox>
+						<Image
+							d:Source="/Accessory/PaintJob/arrow.png"
+							Source="{Binding PaintJobTexImage}" />
+					</Viewbox>
+				</Border>
 			</Grid>
 
 			<Border
@@ -1721,52 +960,28 @@
 				HorizontalAlignment="Stretch"
 				Grid.Row="1"
 				Grid.Column="0"
-				Grid.ColumnSpan="7"
+				Grid.ColumnSpan="9"
 				Background="LightGray"
 				VerticalAlignment="Center" />
 
-			<TextBlock
-				Grid.Row="2"
-				Grid.ColumnSpan="3"
-				Text="{DynamicResource TitlePaintJobOverride}"
-				FontSize="16"
-				HorizontalAlignment="Center"
-				Margin="0,5,0,0" />
-
 			<TabControl
-				x:Name="TabMode"
-				Grid.Row="3"
+				Grid.Row="2"
 				Grid.Column="0"
 				Grid.ColumnSpan="3"
-				SelectedIndex="{Binding TabIndex}">
+				SelectedIndex="0">
 				<TabItem
 					Header="{DynamicResource HeaderAirbrush}">
-					<StackPanel
-						x:Name="PanelAirbrush">
+					<StackPanel>
 						<TextBlock
 							Margin="0,5,0,0"
 							TextWrapping="Wrap"
 							Text="{DynamicResource ExplainAirbrush}" />
-						<Grid
-							Margin="0,5,0,10">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="*" />
-								<ColumnDefinition
-									Width="5" />
-								<ColumnDefinition
-									Width="*" />
-							</Grid.ColumnDefinitions>
-							<CheckBox
-								x:Name="CheckFlipFlake"
-								Content="{DynamicResource TitleFlipFlake}"
-								IsChecked="{Binding FlipFlake}" />
-							<CheckBox
-								x:Name="CheckAltFlipFlakeUVSet"
-								Grid.Column="2"
-								Content="{DynamicResource TitleAlternateFlipFlakeUVSet}"
-								IsChecked="{Binding AlternateFlipFlakeUVSet}" />
-						</Grid>
+						<CheckBox
+							x:Name="CheckFlipFlake"
+							Margin="0,5,0,10"
+							Content="{DynamicResource TitleFlipFlake}"
+							IsChecked="{Binding FlipFlake}"
+							HorizontalAlignment="Stretch" />
 						<Grid
 							IsEnabled="{Binding FlipFlake}">
 							<Grid.RowDefinitions>
@@ -1838,7 +1053,6 @@
 								</Border>
 
 								<CheckBox
-									x:Name="CheckBoxFlipColorCustomizable"
 									Grid.Column="3"
 									Content="{DynamicResource TitleColorCustomizable}"
 									IsChecked="{Binding FlipColorCustomizable}"
@@ -1855,7 +1069,7 @@
 								</Grid.ColumnDefinitions>
 								<Border
 									d:Background="Pink"
-									Background="{Binding FlipColorVisual, Mode=OneWay}"
+									Background="{Binding FlipColorVisual}"
 									Style="{DynamicResource MultiControlBorder}" />
 								<Button
 									x:Name="ButtonFlipColor"
@@ -1902,25 +1116,10 @@
 								x:Name="TextFlipStrength"
 								Grid.Row="1"
 								Grid.Column="2"
-								Text="{Binding FlipStrength, UpdateSourceTrigger=PropertyChanged}"
+								Text="{Binding FlipStrength}"
 								PreviewTextInput="FloatOnly"
 								TextWrapping="Wrap"
 								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox"
-										BasedOn="{StaticResource {x:Type TextBox}}">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding IsFlipStrengthDefault}"
-												Value="True">
-												<Setter
-													Property="Foreground"
-													Value="LightGray" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
 							</TextBox>
 
 							<Grid
@@ -1955,7 +1154,6 @@
 								</Border>
 
 								<CheckBox
-									x:Name="CheckBoxFlakeColorCustomizable"
 									Grid.Column="3"
 									Content="{DynamicResource TitleColorCustomizable}"
 									IsChecked="{Binding FlakeColorCustomizable}"
@@ -1972,7 +1170,7 @@
 								</Grid.ColumnDefinitions>
 								<Border
 									d:Background="LimeGreen"
-									Background="{Binding FlakeColorVisual, Mode=OneWay}"
+									Background="{Binding FlakeColorVisual}"
 									Style="{DynamicResource MultiControlBorder}" />
 								<Button
 									x:Name="ButtonFlakeColor"
@@ -1996,25 +1194,10 @@
 								Grid.Row="4"
 								Grid.Column="2"
 								MaxLines="1"
-								Text="{Binding FlakeShininess, UpdateSourceTrigger=PropertyChanged}"
+								Text="{Binding FlakeShininess}"
 								PreviewTextInput="FloatOnly"
 								TextWrapping="Wrap"
 								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox"
-										BasedOn="{StaticResource {x:Type TextBox}}">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding IsFlakeShininessDefault}"
-												Value="True">
-												<Setter
-													Property="Foreground"
-													Value="LightGray" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
 							</TextBox>
 
 
@@ -2039,25 +1222,10 @@
 							<TextBox
 								Grid.Row="7"
 								MaxLines="1"
-								Text="{Binding FlakeDensity, UpdateSourceTrigger=PropertyChanged}"
+								Text="{Binding FlakeDensity}"
 								PreviewTextInput="FloatOnly"
 								TextWrapping="Wrap"
 								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox"
-										BasedOn="{StaticResource {x:Type TextBox}}">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding IsFlakeDensityDefault}"
-												Value="True">
-												<Setter
-													Property="Foreground"
-													Value="LightGray" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
 							</TextBox>
 
 
@@ -2084,25 +1252,10 @@
 							<TextBox
 								Grid.Row="7"
 								Grid.Column="2"
-								Text="{Binding FlakeClearcoatRolloff, UpdateSourceTrigger=PropertyChanged}"
+								Text="{Binding FlakeClearcoatRolloff}"
 								PreviewTextInput="FloatOnly"
 								TextWrapping="Wrap"
 								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox"
-										BasedOn="{StaticResource {x:Type TextBox}}">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding IsFlakeClearcoatRolloffDefault}"
-												Value="True">
-												<Setter
-													Property="Foreground"
-													Value="LightGray" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
 							</TextBox>
 
 
@@ -2127,57 +1280,10 @@
 							</StackPanel>
 							<TextBox
 								Grid.Row="10"
-								Text="{Binding FlakeUVScale, UpdateSourceTrigger=PropertyChanged}"
+								Text="{Binding FlakeUVScale}"
 								PreviewTextInput="FloatOnly"
 								TextWrapping="Wrap"
 								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox"
-										BasedOn="{StaticResource {x:Type TextBox}}">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding IsFlakeUVScaleDefault}"
-												Value="True">
-												<Setter
-													Property="Foreground"
-													Value="LightGray" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
-							</TextBox>
-
-							<TextBlock
-								x:Name="TitleFlakeVRatio"
-								Grid.Row="9"
-								Grid.Column="2"
-								TextWrapping="Wrap"
-								VerticalAlignment="Bottom"
-								Text="{DynamicResource TitleFlakeVRatio}"
-								ToolTip="{DynamicResource TooltipFlakeVRatio}" />
-							<TextBox
-								Grid.Row="10"
-								Grid.Column="2"
-								Text="{Binding FlakeVRatio, UpdateSourceTrigger=PropertyChanged}"
-								PreviewTextInput="FloatOnly"
-								TextWrapping="Wrap"
-								VerticalAlignment="Top">
-								<TextBox.Style>
-									<Style
-										TargetType="TextBox"
-										BasedOn="{StaticResource {x:Type TextBox}}">
-										<Style.Triggers>
-											<DataTrigger
-												Binding="{Binding IsFlakeVRatioDefault}"
-												Value="True">
-												<Setter
-													Property="Foreground"
-													Value="LightGray" />
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBox.Style>
 							</TextBox>
 
 							<StackPanel
@@ -2214,23 +1320,7 @@
 									MaxLines="1"
 									TextWrapping="Wrap"
 									AllowDrop="True"
-									Drop="FileDrop">
-									<TextBox.Style>
-										<Style
-											TargetType="TextBox"
-											BasedOn="{StaticResource {x:Type TextBox}}">
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding IsFlakeNoiseDefault}"
-													Value="True">
-													<Setter
-														Property="Foreground"
-														Value="LightGray" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBox.Style>
-								</TextBox>
+									Drop="FileDrop" />
 								<Button
 									x:Name="ButtonFlakeNoiseClear"
 									Grid.Column="1"
@@ -2263,8 +1353,7 @@
 				</TabItem>
 				<TabItem
 					Header="{DynamicResource HeaderColormask}">
-					<Grid
-						Height="{Binding ActualHeight, ElementName=PanelAirbrush, Mode=OneWay}">
+					<Grid>
 						<Grid.Resources>
 							<Style
 								x:Key="StyleTextBlockColor"
@@ -2384,7 +1473,6 @@
 							</Border>
 
 							<CheckBox
-								x:Name="CheckBoxMaskRCustomizable"
 								Grid.Column="3"
 								Content="{DynamicResource TitleColorCustomizable}"
 								ToolTip="{DynamicResource TooltipColorCustomizable}"
@@ -2400,7 +1488,7 @@
 							</Grid.ColumnDefinitions>
 							<Border
 								d:Background="Red"
-								Background="{Binding MaskRColorVisual, Mode=OneWay}"
+								Background="{Binding MaskRColorVisual}"
 								Style="{DynamicResource StyleColorResult}" />
 							<Button
 								x:Name="ButtonMaskR"
@@ -2523,7 +1611,6 @@
 							</Border>
 
 							<CheckBox
-								x:Name="CheckBoxMaskGCustomizable"
 								Grid.Column="3"
 								Content="{DynamicResource TitleColorCustomizable}"
 								ToolTip="{DynamicResource TooltipColorCustomizable}"
@@ -2539,7 +1626,7 @@
 							</Grid.ColumnDefinitions>
 							<Border
 								d:Background="Green"
-								Background="{Binding MaskGColorVisual, Mode=OneWay}"
+								Background="{Binding MaskGColorVisual}"
 								Style="{DynamicResource StyleColorResult}" />
 							<Button
 								x:Name="ButtonMaskG"
@@ -2661,7 +1748,6 @@
 							</Border>
 
 							<CheckBox
-								x:Name="CheckBoxMaskBCustomizable"
 								Grid.Column="3"
 								Content="{DynamicResource TitleColorCustomizable}"
 								ToolTip="{DynamicResource TooltipColorCustomizable}"
@@ -2677,7 +1763,7 @@
 							</Grid.ColumnDefinitions>
 							<Border
 								d:Background="Blue"
-								Background="{Binding MaskBColorVisual, Mode=OneWay}"
+								Background="{Binding MaskBColorVisual}"
 								Style="{DynamicResource StyleColorResult}" />
 							<Button
 								x:Name="ButtonMaskB"
@@ -2775,25 +1861,19 @@
 				Width="1"
 				VerticalAlignment="Stretch"
 				Grid.Row="2"
-				Grid.RowSpan="2"
 				Grid.Column="3"
 				Background="LightGray"
 				HorizontalAlignment="Center" />
 
-			<TextBlock
-				Grid.Row="2"
-				Grid.Column="4"
-				Grid.ColumnSpan="3"
-				Text="{DynamicResource TitlePaintJobOverride}"
-				FontSize="16"
-				HorizontalAlignment="Center"
-				Margin="0,5,0,0" />
-
 			<Grid
-				Grid.Row="3"
+				Grid.Row="10"
 				Grid.Column="4"
-				Grid.ColumnSpan="3">
+				Grid.ColumnSpan="5">
 				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="*" />
+					<ColumnDefinition
+						Width="10" />
 					<ColumnDefinition
 						Width="*" />
 					<ColumnDefinition
@@ -2805,67 +1885,132 @@
 					<RowDefinition
 						Height="Auto" />
 					<RowDefinition
-						Height="Auto" />
-					<RowDefinition
 						Height="*" />
 				</Grid.RowDefinitions>
-				<DockPanel
-					MinHeight="37"
-					Grid.Row="1"
-					Grid.ColumnSpan="5">
-					<TabControl
-						x:Name="TabOvr"
-						Grid.Row="1"
-						Grid.ColumnSpan="5"
-						SelectedValue="{Binding SelectedOverride}"
-						d:ItemsSource="{d:SampleData ItemCount=2}"
-						ItemsSource="{Binding OverrideList}"
-						VerticalAlignment="Top">
-						<TabControl.ItemTemplate>
-							<DataTemplate>
-								<StackPanel
-									Orientation="Horizontal">
-									<TextBlock
-										Text="{Binding OvrName}" />
-									<Button
-										Margin="3,0,0,0"
-										BorderThickness="0"
-										Click="OvrTabClick">
-										<Viewbox>
-											<ui:SymbolIcon
-												Symbol="Dismiss20" />
-										</Viewbox>
-									</Button>
-								</StackPanel>
-							</DataTemplate>
-						</TabControl.ItemTemplate>
-						<TabControl.ContentTemplate>
-							<DataTemplate />
-						</TabControl.ContentTemplate>
-					</TabControl>
+				<TextBlock
+					Grid.ColumnSpan="5"
+					Text="{DynamicResource TitlePaintJobOverride}"
+					FontSize="16"
+					HorizontalAlignment="Center"
+					Margin="0,5"></TextBlock>
+				
+				<Grid
+					Grid.Row="1">
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="*" />
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Border
+						Grid.RowSpan="2"
+						Grid.ColumnSpan="3"
+						BorderThickness="1"
+						BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+						CornerRadius="5" />
+					<TextBlock
+						FontSize="12"
+						Text="{DynamicResource TitleOverrides}"
+						Margin="5,0,0,0"
+						VerticalAlignment="Bottom" />
+
+					<Border
+						Grid.Column="1"
+						Grid.ColumnSpan="2"
+						Style="{DynamicResource MultiControlBorder}" />
 					<Button
-						Margin="5,10,0,3"
+						x:Name="ButtonOvrAdd"
+						Grid.Column="1"
+						Click="ButtonAddRowClick"
 						VerticalAlignment="Bottom"
-						BorderThickness="0"
-						Background="{x:Null}"
-						Click="AddOvrClick"
-						Height="24">
+						Style="{StaticResource GridButton}">
 						<Viewbox>
 							<ui:SymbolIcon
-								Symbol="Add20" />
+								Symbol="Add16" />
 						</Viewbox>
 					</Button>
-				</DockPanel>
+					<Button
+						x:Name="ButtonOvrRemove"
+						Grid.Column="2"
+						Click="ButtonDeleteRowClick"
+						VerticalAlignment="Bottom">
+						<Viewbox>
+							<ui:SymbolIcon
+								Symbol="Dismiss16" />
+						</Viewbox>
+						<Button.Style>
+							<Style
+								TargetType="Button"
+								BasedOn="{StaticResource GridButton}">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding SelectedIndex, ElementName=ListOverrides}"
+										Value="-1">
+										<Setter
+											Property="IsEnabled"
+											Value="False" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Button.Style>
+					</Button>
+
+					<ListBox
+						x:Name="ListOverrides"
+						Grid.Row="1"
+						Grid.ColumnSpan="3"
+						SelectionMode="Single"
+						Margin="0,5,0,0"
+						BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+						d:ItemsSource="{d:SampleData ItemCount=2}"
+						ItemsSource="{Binding OverrideList}"
+						SelectedItem="{Binding SelectedOverride}"
+						SelectedIndex="0">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock
+									Text="{Binding OvrName}"
+									FontSize="13">
+									<TextBlock.Style>
+										<Style
+											TargetType="TextBlock"
+											BasedOn="{StaticResource {x:Type TextBlock}}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+													Value="True">
+													<Setter
+														Property="Foreground"
+														Value="White" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+
 				<Grid
-					Grid.Row="2"
-					Grid.ColumnSpan="3">
+					Grid.Column="2"
+					Grid.ColumnSpan="3"
+					Grid.Row="1">
 					<Grid.Style>
 						<Style
 							TargetType="Grid">
 							<Style.Triggers>
 								<DataTrigger
-									Binding="{Binding SelectedOverride}"
-									Value="{x:Null}">
+									Binding="{Binding SelectedIndex, ElementName=ListOverrides}"
+									Value="-1">
 									<Setter
 										Property="IsEnabled"
 										Value="False" />
@@ -2897,7 +2042,6 @@
 						<RowDefinition
 							Height="*" />
 					</Grid.RowDefinitions>
-
 
 					<StackPanel
 						Grid.ColumnSpan="3"
@@ -2933,7 +2077,7 @@
 							</Grid.ColumnDefinitions>
 							<TextBox
 								x:Name="TextAccTex"
-								Text="{Binding AccTex, UpdateSourceTrigger=PropertyChanged}"
+								Text="{Binding AccTex}"
 								MaxLines="1"
 								TextWrapping="Wrap"
 								Style="{StaticResource TextBoxBorderless}"
@@ -2969,84 +2113,8 @@
 						</Grid>
 					</StackPanel>
 
-
-					<Grid
-						Grid.Row="2"
-						Grid.RowSpan="5">
-						<Grid.RowDefinitions>
-							<RowDefinition
-								Height="Auto" />
-							<RowDefinition
-								Height="*" />
-						</Grid.RowDefinitions>
-						<Border
-							Grid.RowSpan="2"
-							BorderThickness="1,0,1,1"
-							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
-							CornerRadius="0,0,5,5" />
-						<Border
-							BorderThickness="0,0,0,1"
-							Margin="1,0"
-							CornerRadius="0"
-							BorderBrush="{DynamicResource TextControlElevationBorderBrush}" />
-						<StackPanel
-							Orientation="Horizontal"
-							Margin="6,0,0,0">
-							<CheckBox />
-							<TextBlock
-								Text="{DynamicResource TitleAccessoryParts}"
-								FontSize="12"
-								Margin="0,5,5,5"
-								VerticalAlignment="Bottom"></TextBlock>
-						</StackPanel>
-
-						<ListBox
-							x:Name="ListAccList"
-							Grid.Row="1"
-							SelectionMode="Single"
-							Margin="0,5,0,0"
-							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
-							BorderThickness="1"
-							d:ItemsSource="{d:SampleData ItemCount=2}"
-							ItemsSource="{Binding AccessoryList}">
-							<ListBox.ItemContainerStyle>
-								<Style
-									TargetType="ListBoxItem"
-									BasedOn="{StaticResource {x:Type ListBoxItem}}">
-									<EventSetter
-										Event="RequestBringIntoView"
-										Handler="ListBoxItemRequestBringIntoViewHandler" />
-								</Style>
-							</ListBox.ItemContainerStyle>
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel
-										Orientation="Horizontal">
-										<TextBlock
-											d:Text="N"
-											Text="{Binding BelongingOverride.Index}"
-											Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-											HorizontalAlignment="Center"
-											VerticalAlignment="Center"
-											TextAlignment="Center"
-											FontWeight="Heavy"
-											Visibility="{Binding IndexVisibility}">
-										</TextBlock>
-										<CheckBox
-											Content="{Binding Path=AccName}"
-											ToolTip="{Binding Path=AccName}"
-											IsChecked="{Binding Check}"
-											Checked="AccessoryChecked"
-											Unchecked="AccessoryUnchecked" />
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
-					</Grid>
-
 					<StackPanel
-						Grid.Row="2"
-						Grid.Column="2">
+						Grid.Row="2">
 						<StackPanel
 							Orientation="Horizontal">
 							<TextBlock
@@ -3066,30 +2134,14 @@
 						</StackPanel>
 						<TextBox
 							MaxLines="1"
-							Text="{Binding AccFlakeUVScale, UpdateSourceTrigger=PropertyChanged}"
+							Text="{Binding AccFlakeUVScale}"
 							PreviewTextInput="FloatOnly"
 							TextWrapping="Wrap"
 							VerticalAlignment="Top">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource {x:Type TextBox}}">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding IsAccFlakeUVScaleDefault}"
-											Value="True">
-											<Setter
-												Property="Foreground"
-												Value="LightGray" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
 						</TextBox>
 					</StackPanel>
 					<StackPanel
-						Grid.Row="4"
-						Grid.Column="2">
+						Grid.Row="4">
 						<StackPanel
 							Orientation="Horizontal">
 							<TextBlock
@@ -3099,41 +2151,148 @@
 						</StackPanel>
 						<TextBox
 							MaxLines="1"
-							Text="{Binding AccFlakeVRatio, UpdateSourceTrigger=PropertyChanged}"
+							Text="{Binding AccFlakeVRatio}"
 							PreviewTextInput="FloatOnly"
 							TextWrapping="Wrap"
 							VerticalAlignment="Top">
-							<TextBox.Style>
-								<Style
-									TargetType="TextBox"
-									BasedOn="{StaticResource {x:Type TextBox}}">
-									<Style.Triggers>
-										<DataTrigger
-											Binding="{Binding IsAccFlakeVRatioDefault}"
-											Value="True">
-											<Setter
-												Property="Foreground"
-												Value="LightGray" />
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</TextBox.Style>
 						</TextBox>
 					</StackPanel>
 
 					<Grid
-						x:Name="GridAccTex"
-						Grid.Column="3"
-						Grid.Row="6"
-						HorizontalAlignment="Center">
-						<Viewbox
-							Grid.Column="3"
-							Grid.Row="6"
-							HorizontalAlignment="Center"
-							MaxHeight="{Binding ActualHeight, ElementName=GridAccTex, Mode=OneWay}">
-							<Viewbox.Style>
+						Grid.Row="6">
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="*" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<Border
+							Grid.RowSpan="2"
+							Grid.ColumnSpan="3"
+							BorderThickness="1"
+							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+							CornerRadius="5" />
+						<TextBlock
+							Text="{DynamicResource TitleAccessoryParts}"
+							FontSize="12"
+							Margin="5,0,0,0"
+							VerticalAlignment="Bottom"></TextBlock>
+
+
+						<Border
+							Grid.Column="1"
+							Grid.ColumnSpan="2"
+							Style="{DynamicResource MultiControlBorder}" />
+						<Button
+							x:Name="ButtonPartAdd"
+							Grid.Column="1"
+							Click="ButtonAddRowClick"
+							VerticalAlignment="Bottom">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Add16" />
+							</Viewbox>
+							<Button.Style>
 								<Style
-									TargetType="Viewbox">
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListOverrides}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<Button
+							x:Name="ButtonPartRemove"
+							Grid.Column="2"
+							Click="ButtonDeleteRowClick"
+							VerticalAlignment="Bottom">
+							<Viewbox>
+								<ui:SymbolIcon
+									Symbol="Dismiss16" />
+							</Viewbox>
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource GridButton}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding SelectedIndex, ElementName=ListAccList}"
+											Value="-1">
+											<Setter
+												Property="IsEnabled"
+												Value="False" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
+						</Button>
+						<ListBox
+							x:Name="ListAccList"
+							Grid.Row="1"
+							Grid.ColumnSpan="3"
+							SelectionMode="Single"
+							Margin="0,5,0,0"
+							BorderBrush="{DynamicResource TextControlElevationBorderBrush}"
+							BorderThickness="1"
+							d:ItemsSource="{d:SampleData ItemCount=2}"
+							ItemsSource="{Binding AccList}">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock
+										Text="{Binding Path=.}"
+										FontSize="13">
+										<TextBlock.Style>
+											<Style
+												TargetType="TextBlock"
+												BasedOn="{StaticResource {x:Type TextBlock}}">
+												<Style.Triggers>
+													<DataTrigger
+														Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+														Value="True">
+														<Setter
+															Property="Foreground"
+															Value="White" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Grid>
+
+					<Grid
+						Grid.Column="2"
+						Grid.Row="2"
+						Grid.RowSpan="5">
+						<Border
+							BorderThickness="1"
+							BorderBrush="Black"
+							d:Background="LimeGreen"
+							Width="200"
+							Height="200"
+							MaxWidth="200"
+							MaxHeight="200"
+							VerticalAlignment="Bottom">
+							<Border.Style>
+								<Style
+									TargetType="Border">
 									<Style.Triggers>
 										<DataTrigger
 											Binding="{Binding AccTex.Length}"
@@ -3144,109 +2303,290 @@
 										</DataTrigger>
 									</Style.Triggers>
 								</Style>
-							</Viewbox.Style>
-							<Grid>
-								<Border
-									BorderThickness="1"
-									BorderBrush="Black"
-									d:Background="Lime">
-								</Border>
+							</Border.Style>
+							<Viewbox>
 								<Image
-									d:Source="/Modding/PaintJob/TruckUV/daf.2021-XG+.png"
+									d:Source="/Accessory/PaintJob/arrow.png"
 									Source="{Binding AccTexImage}" />
-							</Grid>
-						</Viewbox>
+							</Viewbox>
+						</Border>
 					</Grid>
 				</Grid>
-
 			</Grid>
 		</Grid>
 
+
 		<Grid
-			Grid.Row="2"
-			Margin="10">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="*" />
-				<ColumnDefinition
-					Width="Auto" />
-				<ColumnDefinition
-					Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<Button
-				Padding="20,7"
-				Content="{DynamicResource ButtonPreviewPaintJob}"
-				Click="ButtonPaintJobPreviewClick"/>
-			<CheckBox
-				Grid.Column="2"
-				Margin="0,0,5,0"
-				Content="Sync over network"
-				IsChecked="{Binding SyncOverNetwork}" />
-			<Button
-				Grid.Column="3"
-				Content="{DynamicResource ButtonStart}"
-				Padding="70,7"
-				Click="ButtonStartClick">
-				<Button.Style>
-					<Style
-						TargetType="Button"
-						BasedOn="{StaticResource {x:Type Button}}">
-						<Style.Triggers>
-							<DataTrigger
-								Binding="{Binding ModelName.Length}"
-								Value="0">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding CurrentTruck}"
-								Value="{x:Null}">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding CurrentCabin}"
-								Value="{x:Null}">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding DisplayName.Length}"
-								Value="0">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding PriceString.Length}"
-								Value="0">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding UnlockLevelString.Length}"
-								Value="0">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-							<DataTrigger
-								Binding="{Binding IconName.Length}"
-								Value="0">
-								<Setter
-									Property="IsEnabled"
-									Value="False" />
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Button.Style>
-			</Button>
+			Visibility="Collapsed">
+			<!--ShowViewCube="True" 属性用于关闭旋转控制3D互动的图标-->
+			<!--ViewCubeWidth="200" 设置旋转图标的宽度-->
+			<!--ViewCubeHeight="200" 设置旋转图标的高度-->
+			<!--ViewCubeHorizontalPosition="Left" 设置旋转图标的水平位置-->
+			<!--ViewCubeVerticalPosition="Top" 设置垂直图标的位置-->
+			<!--ViewCubeFrontText="前" 设置旋转图标前文本-->
+			<!--ViewCubeTopText="上" 设置旋转图标上文本-->
+
+			<!--ShowCoordinateSystem="True" 设置显示坐标轴-->
+			<!--CoordinateSystemLabelForeground="#5000" 设置坐标系统的字体颜色-->
+			<!--CoordinateSystemHorizontalPosition="Center" 设置坐标系的水平位置-->
+			<!--CoordinateSystemVerticalPosition="Center" 设置坐标系的垂直位置-->
+			<h:HelixViewport3D
+				ShowViewCube="True"
+				ViewCubeWidth="100"
+				ViewCubeHeight="100"
+				ViewCubeHorizontalPosition="Right"
+				ViewCubeVerticalPosition="Bottom"
+				ViewCubeFrontText="前"
+				ViewCubeBackText="后"
+				ViewCubeTopText="上"
+				ViewCubeBottomText="下"
+				ViewCubeLeftText="左"
+				ViewCubeRightText="右"
+				ShowCoordinateSystem="True"
+				CoordinateSystemLabelForeground="#5000"
+				CoordinateSystemHorizontalPosition="Right"
+				CoordinateSystemVerticalPosition="Top"
+				Margin="-10,0,10,0">
+				<!--相机-->
+				<h:HelixViewport3D.Camera>
+					<!-- PerspectiveCamera标签-透视相机（近比例长远比例小，符合我们正常观察事物的视觉-常用）-->
+					<!--Position="100,100,100" 设置视角x,y,z-->
+					<!--LookDirection="-2,-2,-2" 设置相机的观看视角-相机观察的方向-->
+					<!--FieldOfView="90" 调整相机焦距 设置相机与观看物体的距离，离得远观看物体区域范围大，离得近观看物体区域范围小 -->
+					<!--UpDirection="0,1,0" （x, y,z）设置相机视口的旋转角度，斜着拍还是正着拍 -->
+					<!--FarPlaneDistance="1000" 设置相机远处景色的渲染范围，如果值设置的比较小，远处景色是模糊的-->
+					<!--NearPlaneDistance="1" 设置相机近处的晶圆渲染范围，如果值越大，近处景色是模糊的-->
+					<PerspectiveCamera
+						Position="10,10,10"
+						LookDirection="-2,-2,-2"
+						FieldOfView="50"
+						UpDirection="0,1,0"
+						FarPlaneDistance="1000"
+						NearPlaneDistance="1">
+						<!--设置相机旋转标签-->
+						<PerspectiveCamera.Transform>
+							<!--分组标签，在分组标签内可以有多个变形标签-->
+							<Transform3DGroup>
+								<!--CenterX="0" CenterY="0" CenterZ="0" 设置相机旋转中心点-->
+								<RotateTransform3D
+									CenterX="0"
+									CenterY="0"
+									CenterZ="0">
+									<!--设置相机旋转方式标签-->
+									<RotateTransform3D.Rotation>
+										<!--AxisAngleRotation3D 设置相机按照轴的方式旋转标签-->
+										<!--Angle="45" 设置相机按照45度角旋转-->
+										<!--Axis="0 1 0" 设置以那个轴进行旋转 （x y z）-->
+										<AxisAngleRotation3D
+											Angle="0"
+											Axis="0 1 0"
+											x:Name="aar" />
+									</RotateTransform3D.Rotation>
+								</RotateTransform3D>
+								<!--平移标签-->
+								<!--OffsetX="1" OffsetY="1" OffsetZ="1" 设置 x y z 三个方向的移动距离-->
+								<TranslateTransform3D
+									OffsetX="0"
+									OffsetY="0"
+									OffsetZ="0"
+									x:Name="tt" />
+								<!--缩放标签-->
+								<!--ScaleX="1" ScaleY="1" ScaleZ="1" 设置图像缩放大小 1是原始大小 小于1是相机尺寸变小，图像变大 大于1是相机尺寸变大，图像变小 -->
+								<!--一般很少使用相机平移调整图像放大缩小，可以使用相机视野调整图像放大与缩小-->
+								<ScaleTransform3D
+									ScaleX="1"
+									ScaleY="1"
+									ScaleZ="1" />
+							</Transform3DGroup>
+						</PerspectiveCamera.Transform>
+					</PerspectiveCamera>
+					<!--正交相机（远近比例都一样-很少用）-->
+					<!--Width="50" 相当与透视相机的视野范围属性-->
+					<!--<OrthographicCamera Position="100,100,100"
+     LookDirection="-2,-2,-2"
+     Width="50"
+     UpDirection="0,1,0"
+     FarPlaneDistance="1000"
+      NearPlaneDistance="1"/>-->
+				</h:HelixViewport3D.Camera>
+
+
+				<!--设置旋转动作靠什么来操作-->
+				<h:HelixViewport3D.RotateGesture>
+					<!--设置鼠标操作旋转动作-->
+					<!--MouseAction="LeftClick" 设置鼠标左键旋转-->
+					<MouseGesture
+						MouseAction="LeftClick" />
+				</h:HelixViewport3D.RotateGesture>
+				<!--设置3D图像移动操作-->
+				<h:HelixViewport3D.PanGesture>
+					<!--设置鼠标右键移动3D图像-->
+					<MouseGesture
+						MouseAction="RightClick" />
+				</h:HelixViewport3D.PanGesture>
+
+
+				<!--第二步在3D世界设置光源进来，没有光源全是黑的呀-->
+				<!--光源标签-设置光源的相关属性-->
+				<ModelVisual3D>
+					<!--光源内容标签-->
+					<ModelVisual3D.Content>
+						<!--多个光源可以组合使用-会出现不同的效果-->
+						<Model3DGroup>
+							<!--环境光标签    -->
+							<!--Color="White"-设置环境光颜色 -->
+							<AmbientLight
+								Color="White" />
+
+							<!--平行光-设置某一个方向上照射的光-平行光不发散 -->
+							<!--Direction="-1,-1,-1" （x,y,z）三个方向照射的光 设置平行光的照射方向-->
+							<!--<DirectionalLight Color="White" Direction="-1,-1,-1"/>-->
+
+							<!--点光源-点光源是向四面八方发散的光源 -->
+							<!--Position="100,100,100" （x,y,z） 设置光源点-->
+							<!--Range="200" 设置光源的照射范围-->
+							<!--<PointLight Color="White" Position="100,100,100" Range="200"/>-->
+
+							<!--射灯光源（聚光灯，手电筒）-某一个方向去发射光源-相当于手电筒有一个中心的光柱（比较亮的）以及两遍发散的光源（相对较暗） -->
+							<!--InnerConeAngle="100" 设置中心范围光柱的角度-->
+							<!--OuterConeAngle="40" 设置两遍光源的范围角度-->
+							<!--Position="50,50,50" 设置光源的中心位置-->
+							<!--Direction="-1,-1,-1" （x,y,z）三个方向照射的光 设置光源的照射方向-->
+							<!--<SpotLight Color="Orange" InnerConeAngle="100"
+   OuterConeAngle="40"
+   Position="50,50,50"
+   Direction="-1,-1,-1"/>-->
+						</Model3DGroup>
+					</ModelVisual3D.Content>
+				</ModelVisual3D>
+
+				<!--动态库提供的光源-比较全-建议使用这个-当然自己写也可以 -->
+				<!--<h:DefaultLights/>-->
+
+
+				<!--3D图形的第一个面 可以把所有的面放在一起写-->
+				<!--3DUIElement标签-固定写法-->
+				<!--MouseLeftButtonDown 鼠标左键点击事件-->
+				<ModelUIElement3D>
+					<ModelUIElement3D.Model>
+						<!--GeometryModel3D网格标签-->
+						<GeometryModel3D>
+							<!--第三步物体需要呈现出来需要材质-->
+							<!--3D的材质 标签-->
+							<GeometryModel3D.Material>
+								<MaterialGroup>
+									<!--漫反射的一种材质 材质是与网格属性标签组合在一起使用的-->
+									<!--DiffuseMaterial 慢反射材质标签-->
+									<!--Brush 设置材质颜色或图片-->
+									<!--<DiffuseMaterial Brush="Orange"/>-->
+									<!--3D面设置背景图-需要在网格标签中设置TextureCoordinates="0,1 0,0 1,0 1,1"属性，背景图显示方向，才能显示出背景图 -->
+									<DiffuseMaterial>
+										<DiffuseMaterial.Brush>
+											<ImageBrush
+												ImageSource="Arrow.png" />
+										</DiffuseMaterial.Brush>
+									</DiffuseMaterial>
+									<!--自发光-->
+									<!--<EmissiveMaterial Brush="Red"/>-->
+									<!--<SpecularMaterial Brush="Blue"/>-->
+								</MaterialGroup>
+							</GeometryModel3D.Material>
+							<!--BackMaterial 异面材质标签-->
+							<GeometryModel3D.BackMaterial>
+								<DiffuseMaterial
+									Brush="Green" />
+							</GeometryModel3D.BackMaterial>
+							<!--网格标签-->
+							<GeometryModel3D.Geometry>
+								<!-- MeshGeometry3D呈现3D图形的标签  Positions="0,0,0（x,y,z）     3,0,0      3,2,0      0,2,0" 一个面的4个点-->
+								<!--TriangleIndices ="0,2,3（第一组-这里的坐标点需要逆时针顺序） 0,1,2（第二组）" 设置Positions的3个点组成一个三角行 -->
+								<!--这里如果呈现的是三角行而不是四边行的画，是因为TriangleIndices="0,2,3 0,1,2"的画点顺序需要逆时针顺序-->
+								<!--TextureCoordinates 设置平面对象与3D对象的映射关系-用来解决平面设置背景图显示问题-如果不设置这个属性平面设置的背景图不显示-->
+								<MeshGeometry3D
+									Positions="0,0,0     3,0,0      3,2,0      0,2,0"
+									TriangleIndices="0,2,3 0,1,2"
+									TextureCoordinates="1,1 1,0 0,0 0,1" />
+								<!--箭头向下-->
+								<!--TextureCoordinates="1,1 0,1 0,0 1,0"/> 箭头向左-->
+								<!--TextureCoordinates="0,1 1,1 1,0 0,0"/> 箭头向右-->
+								<!--TextureCoordinates="0,1 0,0 1,0 1,1"/>-->
+								<!--  箭头向上-->
+							</GeometryModel3D.Geometry>
+						</GeometryModel3D>
+					</ModelUIElement3D.Model>
+				</ModelUIElement3D>
+
+				<!--Viewport2DVisual3D 平面对象加载标签用于在3D对象中呈现2D控件-->
+				<Viewport2DVisual3D>
+					<!--网格标签-->
+					<Viewport2DVisual3D.Geometry>
+						<!-- MeshGeometry3D呈现3D图形的标签  Positions="0,0,0（x,y,z）     3,0,0      3,2,0      0,2,0" 一个面的4个点-->
+						<!--TriangleIndices ="0,2,3（第一组-这里的坐标点需要逆时针顺序） 0,1,2（第二组）" 设置Positions的3个点组成一个三角行 -->
+						<!--这里如果呈现的是三角行而不是四边行的画，是因为TriangleIndices="0,2,3 0,1,2"的画点顺序需要逆时针顺序-->
+						<!--TextureCoordinates 设置平面对象与3D对象的映射关系-用来解决平面设置背景图显示问题-如果不设置这个属性平面设置的背景图不显示-->
+						<MeshGeometry3D
+							Positions="0,0,1     3,0,1      3,2,1      0,2,1"
+							TriangleIndices="0,2,3 0,1,2"
+							TextureCoordinates="0,1 1,1 1,0 0,0" />
+					</Viewport2DVisual3D.Geometry>
+					<!--Material设置3D的材质 标签-->
+					<Viewport2DVisual3D.Material>
+						<!--IsVisualHostMaterial 属性是将DiffuseMaterial材质设置成2D平面的盒子 - 用于解决将Button按钮显示出来 -->
+						<DiffuseMaterial
+							Viewport2DVisual3D.IsVisualHostMaterial="True" />
+					</Viewport2DVisual3D.Material>
+
+					<Border>
+						<Button
+							Content="Hello" />
+					</Border>
+				</Viewport2DVisual3D>
+
+				<!--3D图形的第二个面 可以把所有的面放在一起写 这里没有放在一起写是因为可以给每个面设置不同的颜色-->
+				<!--3DUIElement标签-固定写法-->
+				<ModelUIElement3D>
+					<ModelUIElement3D.Model>
+						<!--GeometryModel3D网格标签-->
+						<GeometryModel3D>
+							<!--第三步物体需要呈现出来需要材质-->
+							<!--3D的材质 标签-->
+							<GeometryModel3D.Material>
+								<MaterialGroup>
+									<!--漫反射的一种材质 材质是与网格属性标签组合在一起使用的-->
+									<!--DiffuseMaterial 慢反射材质标签-->
+									<!--Brush 设置材质颜色或图片-->
+									<DiffuseMaterial
+										Brush="Red" />
+									<!--<DiffuseMaterial>
+          <DiffuseMaterial.Brush>
+              <ImageBrush ImageSource="Arrow.png"/>
+          </DiffuseMaterial.Brush>
+      </DiffuseMaterial>-->
+									<!--自发光 标签-用于设置在没有光源的情况下可以看见自发光颜色-在有光源的情况下自发光颜色会影响到材质颜色的显示 -->
+									<!--<EmissiveMaterial Brush="Green"/>-->
+									<!--全反射标签 目前只是了解一下-->
+									<!--<SpecularMaterial Brush="Blue"/>-->
+								</MaterialGroup>
+							</GeometryModel3D.Material>
+							<!--BackMaterial 异面材质标签-->
+							<GeometryModel3D.BackMaterial>
+								<DiffuseMaterial
+									Brush="Blue" />
+							</GeometryModel3D.BackMaterial>
+							<!--网格标签-->
+							<GeometryModel3D.Geometry>
+								<!-- 呈现3D图形的标签  Positions="0,0,0（x,y,z）     3,0,0      3,2,0      0,2,0" 一个面的4个点-->
+								<!--TriangleIndices ="0,2,3（第一组-这里的坐标点需要逆时针顺序） 0,1,2（第二组）" 设置Positions的3个点组成一个三角行 -->
+								<!--这里如果呈现的是三角行而不是四边行的画，是因为TriangleIndices="0,2,3 0,1,2"的画点顺序需要逆时针顺序-->
+								<MeshGeometry3D
+									Positions="3,2,1     3,2,0      3,0,0      3,0,1"
+									TriangleIndices="0,3,1    1,3,2" />
+							</GeometryModel3D.Geometry>
+						</GeometryModel3D>
+					</ModelUIElement3D.Model>
+				</ModelUIElement3D>
+
+			</h:HelixViewport3D>
 		</Grid>
 	</Grid>
 

@@ -12,7 +12,6 @@
 	  <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
 	  <AssemblyName>SCS Mod Helper</AssemblyName>
 	  <Platforms>AnyCPU;x86</Platforms>
-	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,13 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Modding\PaintJob\arrow.png" />
     <None Remove="App.config" />
     <None Remove="Images\AppIcon.png" />
-    <None Remove="Modding\PaintJob\ChannelColorizeEffect.ps" />
     <None Remove="Trucks\DefaultTrucks.db" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Modding\PaintJob\arrow.png" />
     <Resource Include="Images\AppIcon.ico" />
   </ItemGroup>
 
@@ -51,14 +51,11 @@
     <PackageReference Include="Pfim" Version="0.11.4" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2.3" />
     <PackageReference Include="System.Drawing.Common" Version="11.0.0-rc.1.26425.128" />
-    <PackageReference Include="System.Reflection.Metadata" Version="11.0.0-rc.1.26425.128" />
     <PackageReference Include="WPF-UI" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\AppIcon.png" />
-    <Resource Include="Modding\PaintJob\ChannelColorizeEffect.ps" />
-    <Resource Include="Modding\PaintJob\TruckUV\xg_plus.daf.2021.cabin.png" />
   </ItemGroup>
 
   <ItemGroup>
