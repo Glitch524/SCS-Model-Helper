@@ -2,7 +2,7 @@
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 
-namespace SCS_Mod_Helper.Trucks; 
+namespace SCS_Mod_Helper.Vehicles; 
 class AccessoryType {
 	private static ObservableCollection<ModelTypeInfo>? mModelTypes = null;
 	public static ObservableCollection<ModelTypeInfo> ModelTypes {

@@ -19,19 +19,19 @@
 		x:Key="super_s_cab.daf.xf.cabin">Super Space</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="daf.xf.r_bumper.chrome">后保险杠-centurion（XF Tuning DLC）</s:String>
+		x:Key="daf.xf.r_bumper.chrome">后保险杠-Centurion (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf.r_bumper.steel">后保险杠-thor（XF Tuning DLC）</s:String>
+		x:Key="daf.xf.r_bumper.steel">后保险杠-Thor (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf.r_bumper.paint">后保险杠-celeritas（XF Tuning DLC）</s:String>
+		x:Key="daf.xf.r_bumper.paint">后保险杠-Celeritas (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf.r_chs_cover.ch_4x2_p">侧裙-全保护侧裙 4x2</s:String>
+		x:Key="daf.xf.r_chs_cover.ch_4x2_p">底盘保护罩-Diva 4x2 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf.r_chs_cover.ch_4x2_et_p">侧裙-全保护侧裙 4x2 扩容油箱</s:String>
+		x:Key="daf.xf.r_chs_cover.ch_4x2_et_p">底盘保护罩-Diva 4x2扩容油箱 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf.r_chs_cover.ch_6x2_p">侧裙-全保护侧裙 6x2</s:String>
+		x:Key="daf.xf.r_chs_cover.ch_6x2_p">底盘保护罩-Diva 6x2 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf.r_chs_cover.ch_6x4_p">侧裙-全保护侧裙 6x4</s:String>
+		x:Key="daf.xf.r_chs_cover.ch_6x4_p">底盘保护罩-Diva 6x4 (XF Tuning DLC)</s:String>
 	
 	
 	<s:String
@@ -50,21 +50,21 @@
 		x:Key="superspace.daf.xf_euro6.cabin">Super Space</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="daf.xf_euro6.r_bumper.chrome">后保险杠-centurion（XF Tuning DLC）</s:String>
+		x:Key="daf.xf_euro6.r_bumper.chrome">后保险杠-Centurion (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_bumper.chrome_6">r_bumper.chrome_6</s:String>
+		x:Key="daf.xf_euro6.r_bumper.chrome_6">后保险杠-Centurion 4x2 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_bumper.steel">后保险杠-thor（XF Tuning DLC）</s:String>
+		x:Key="daf.xf_euro6.r_bumper.steel">后保险杠-Thor (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_bumper.steel_6">r_bumper.steel_6</s:String>
+		x:Key="daf.xf_euro6.r_bumper.steel_6">后保险杠-Thor 4x2 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_bumper.paint">后保险杠-celeritas（XF Tuning DLC）</s:String>
+		x:Key="daf.xf_euro6.r_bumper.paint">后保险杠-Celeritas (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_bumper.paint_6">r_bumper.paint_6</s:String>
+		x:Key="daf.xf_euro6.r_bumper.paint_6">后保险杠-Celeritas 4x2 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_chs_cover.ch_4x2_p">侧裙-全保护侧裙 4x2</s:String>
+		x:Key="daf.xf_euro6.r_chs_cover.ch_4x2_p">底盘保护罩-Diva 4x2 (XF Tuning DLC)</s:String>
 	<s:String
-		x:Key="daf.xf_euro6.r_chs_cover.ch_6x4_p">侧裙-全保护侧裙 6x4</s:String>
+		x:Key="daf.xf_euro6.r_chs_cover.ch_6x4_p">底盘保护罩-Diva 6x4 (XF Tuning DLC)</s:String>
 
 	
 	<s:String
@@ -87,7 +87,7 @@
 	<s:String
 		x:Key="daf.2021.mirror.semi">主后视镜-喷漆和塑料</s:String>
 	<s:String
-		x:Key="daf.2021.mirror.cam_semi">DAF Digital Vision</s:String>
+		x:Key="daf.2021.mirror.cam_semi">主后视镜-DAF Digital Vision</s:String>
 	<s:String
 		x:Key="daf.2021.sunshield.paint_xf">遮阳板-喷漆（XF）</s:String>
 	<s:String
@@ -143,7 +143,7 @@
 	<s:Int32
 		x:Key="prodYear.daf.xf_electric">2025</s:Int32>
 	<s:String
-		x:Key="desc.daf.xf_electric">目前没有装饰位</s:String>
+		x:Key="desc.daf.xf_electric">目前没有内饰装饰位</s:String>
 	<!--Cabin-->
 	<s:String
 		x:Key="slh.daf.xf_electric.cabin">Sleeper High</s:String>
@@ -193,9 +193,9 @@
 		x:Key="as.iveco.sway.cabin">Active Space</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="iveco.sway.sideskirt.pnt_4x2">喷漆</s:String>
+		x:Key="iveco.sway.sideskirt.pnt_4x2">侧裙-喷漆</s:String>
 	<s:String
-		x:Key="iveco.sway.sideskirt.pnt_4x2_a">喷漆, Aero</s:String>
+		x:Key="iveco.sway.sideskirt.pnt_4x2_a">侧裙-喷漆, Aero</s:String>
 
 	
 	
@@ -301,21 +301,21 @@
 		x:Key="gx.man.tgx_2020.cabin">GX</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="man.tgx_2020.mirror.cam_pnt">主后视镜-喷漆, 电子后视镜</s:String>
-	<s:String
-		x:Key="man.tgx_2020.mirror.cam_pnt_gn">主后视镜-喷漆, 电子后视镜 GN</s:String>
-	<s:String
 		x:Key="man.tgx_2020.mirror.pnt_pla">主后视镜-喷漆</s:String>
 	<s:String
 		x:Key="man.tgx_2020.mirror.pnt_pla_bs">主后视镜-喷漆, 传感器</s:String>
 	<s:String
-		x:Key="man.tgx_2020.r_deflector.gn">车顶导流板-原厂 GN</s:String>
+		x:Key="man.tgx_2020.mirror.cam_pnt">主后视镜-喷漆, 电子后视镜</s:String>
 	<s:String
-		x:Key="man.tgx_2020.r_deflector.gm">车顶导流板-原厂</s:String>
+		x:Key="man.tgx_2020.mirror.cam_pnt_gn">主后视镜-喷漆, 电子后视镜 GN</s:String>
 	<s:String
-		x:Key="man.tgx_2020.r_deflector.gm_2024">车顶导流板-原厂 II</s:String>
+		x:Key="man.tgx_2020.r_deflector.gn">车顶导流板-Aero GN</s:String>
 	<s:String
-		x:Key="man.tgx_2020.f_bumper.pnt_pla_duty">前保险杠_Duty 喷漆</s:String>
+		x:Key="man.tgx_2020.r_deflector.gm">车顶导流板-Aero</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gm_2024">车顶导流板-Aero II</s:String>
+	<s:String
+		x:Key="man.tgx_2020.f_bumper.pnt_pla_duty">前保险杠-Duty 喷漆</s:String>
 	<s:String
 		x:Key="man.tgx_2020.r_fender.pnt_4x2">后挡泥板-喷漆 4x2</s:String>
 	<s:String
@@ -345,13 +345,13 @@
 	<s:String
 		x:Key="man.tgx_2020.sideskirt.4x2_p_e">侧裙-喷漆 4x2</s:String>
 	<s:String
-		x:Key="man.tgx_2020.sideskirt.fender_p">侧裙-原厂, Aero （短）</s:String>
+		x:Key="man.tgx_2020.sideskirt.fender_s">侧裙-原厂, Aero （短）</s:String>
 	<s:String
-		x:Key="man.tgx_2020.sideskirt.fender_p_e">侧裙-原厂 （短）</s:String>
+		x:Key="man.tgx_2020.sideskirt.fender_s_e">侧裙-原厂 （短）</s:String>
 	<s:String
-		x:Key="man.tgx_2020.sideskirt.fender_s">侧裙-喷漆, Aero （短）</s:String>
+		x:Key="man.tgx_2020.sideskirt.fender_p">侧裙-喷漆, Aero （短）</s:String>
 	<s:String
-		x:Key="man.tgx_2020.sideskirt.fender_s_e">侧裙-喷漆 （短）</s:String>
+		x:Key="man.tgx_2020.sideskirt.fender_p_e">侧裙-喷漆 （短）</s:String>
 
 	
 	
@@ -371,71 +371,71 @@
 		x:Key="megaspace.mercedes.actros.cabin">MegaSpace</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="mercedes.actros.sunshld.shape14">遮阳板-喷漆</s:String>
+		x:Key="mercedes.actros.sunshld.shape14">遮阳板-喷漆 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.sunshld.shape15">遮阳板-喷漆, 豪华</s:String>
+		x:Key="mercedes.actros.sunshld.shape15">遮阳板-喷漆, 豪华 (Actros Tuning Pack)</s:String>
 	<s:String
 		x:Key="mercedes.actros.sunshld.shape2">遮阳板-Samurai</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_chs_cover.paint4x2">底盘防护罩-Diva 4x2</s:String>
+		x:Key="mercedes.actros.r_chs_cover.paint4x2">底盘防护罩-Diva 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_chs_cover.paint6x24">底盘防护罩-Diva 6x2/4</s:String>
+		x:Key="mercedes.actros.r_chs_cover.paint6x24">底盘防护罩-Diva 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_chs_cover.paint6x4">底盘防护罩-Diva 6x4</s:String>
+		x:Key="mercedes.actros.r_chs_cover.paint6x4">底盘防护罩-Diva 6x4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.exhaust_m.exhaust1a">后排气管-Thor（MegaSpace）</s:String>
+		x:Key="mercedes.actros.exhaust_m.exhaust1a">后排气管-Thor（MegaSpace） (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.exhaust_m.exhaust1b">后排气管-Thor（high Roof Sleeper）</s:String>
+		x:Key="mercedes.actros.exhaust_m.exhaust1b">后排气管-Thor（high Roof Sleeper） (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.exhaust_m.exhaust1c">后排气管-Thor（Low Roof Sleeper）</s:String>
+		x:Key="mercedes.actros.exhaust_m.exhaust1c">后排气管-Thor（Low Roof Sleeper） (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_fender.4x2paint">后挡泥板-喷漆 4x2</s:String>
+		x:Key="mercedes.actros.r_fender.4x2paint">后挡泥板-喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_fender.6x24paint">后挡泥板-喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros.r_fender.6x24paint">后挡泥板-喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_fender.6x2paint">后挡泥板-喷漆 6x2</s:String>
+		x:Key="mercedes.actros.r_fender.6x2paint">后挡泥板-喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_fendr_top.4x2paint">后挡泥板顶盖-喷漆 4x2</s:String>
+		x:Key="mercedes.actros.r_fendr_top.4x2paint">后挡泥板顶盖-喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_fendr_top.6x24paint">后挡泥板顶盖-喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros.r_fendr_top.6x24paint">后挡泥板顶盖-喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_fendr_top.6x2paint">后挡泥板顶盖-喷漆 6x2</s:String>
+		x:Key="mercedes.actros.r_fendr_top.6x2paint">后挡泥板顶盖-喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.4x2paint">后保险杠-喷漆 4x2</s:String>
+		x:Key="mercedes.actros.r_bumper.4x2paint">后保险杠-喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.4x2v1plate">后保险杠-Centurion 4x2</s:String>
+		x:Key="mercedes.actros.r_bumper.4x2v1plate">后保险杠-Centurion 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.4x2v1paint">后保险杠-Centurion, 喷漆 4x2</s:String>
+		x:Key="mercedes.actros.r_bumper.4x2v1paint">后保险杠-Centurion, 喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.4x2v1chrome">后保险杠-Centurion, 镀铬 4x2</s:String>
+		x:Key="mercedes.actros.r_bumper.4x2v1chrome">后保险杠-Centurion, 镀铬 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.4x2v2paint">后保险杠-Thor, 喷漆 4x2</s:String>
+		x:Key="mercedes.actros.r_bumper.4x2v2paint">后保险杠-Thor, 喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.4x2v3paint">后保险杠-Diva, 喷漆 4x2</s:String>
+		x:Key="mercedes.actros.r_bumper.4x2v3paint">后保险杠-Diva, 喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x2paint">后保险杠-喷漆 6x2</s:String>
+		x:Key="mercedes.actros.r_bumper.6x2paint">后保险杠-喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x2v1plate">后保险杠-Centurion  6x2</s:String>
+		x:Key="mercedes.actros.r_bumper.6x2v1plate">后保险杠-Centurion  6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x2v1paint">后保险杠-Centurion, 喷漆 6x2</s:String>
+		x:Key="mercedes.actros.r_bumper.6x2v1paint">后保险杠-Centurion, 喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x2v1chrome">后保险杠-Centurion, 镀铬 6x2</s:String>
+		x:Key="mercedes.actros.r_bumper.6x2v1chrome">后保险杠-Centurion, 镀铬 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x2v2paint">后保险杠-Thor, 喷漆 6x2</s:String>
+		x:Key="mercedes.actros.r_bumper.6x2v2paint">后保险杠-Thor, 喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x2v3paint">后保险杠-Diva, 喷漆 6x2</s:String>
+		x:Key="mercedes.actros.r_bumper.6x2v3paint">后保险杠-Diva, 喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x24paint">后保险杠-喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros.r_bumper.6x24paint">后保险杠-喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x24v1plate">后保险杠-Centurion 6x2/4</s:String>
+		x:Key="mercedes.actros.r_bumper.6x24v1plate">后保险杠-Centurion 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x24v1paint">后保险杠-Centurion, 喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros.r_bumper.6x24v1paint">后保险杠-Centurion, 喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x24v1chrome">后保险杠-Centurion, 镀铬 6x2/4</s:String>
+		x:Key="mercedes.actros.r_bumper.6x24v1chrome">后保险杠-Centurion, 镀铬 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x24v2paint">后保险杠-Thor, 喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros.r_bumper.6x24v2paint">后保险杠-Thor, 喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros.r_bumper.6x24v3paint">后保险杠-Diva, 喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros.r_bumper.6x24v3paint">后保险杠-Diva, 喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 
 	
 	
@@ -456,53 +456,53 @@
 		x:Key="gigaspace.mercedes.actros2014.cabin">GigaSpace</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="mercedes.actros2014.sunshld.paint01">遮阳板-Samurai</s:String>
+		x:Key="mercedes.actros2014.sunshld.paint01">遮阳板-Samurai (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.sunshld.paint02">遮阳板-Titan</s:String>
+		x:Key="mercedes.actros2014.sunshld.paint02">遮阳板-Titan (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.sunshld.paint03">遮阳板-Viking</s:String>
+		x:Key="mercedes.actros2014.sunshld.paint03">遮阳板-Viking (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.s_guard.type3">防石击护栏-Extra</s:String>
+		x:Key="mercedes.actros2014.s_guard.type3">防石击护栏-Extra (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_chs_cover.4x2p">底盘防护罩-Diva 4x2</s:String>
+		x:Key="mercedes.actros2014.r_chs_cover.4x2p">底盘防护罩-Diva 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_chs_cover.6x24p">底盘防护罩-Diva 6x2/4</s:String>
+		x:Key="mercedes.actros2014.r_chs_cover.6x24p">底盘防护罩-Diva 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_chs_cover.6x2p">底盘防护罩-Diva 6x2</s:String>
+		x:Key="mercedes.actros2014.r_chs_cover.6x2p">底盘防护罩-Diva 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fender.4x2p">后挡泥板-喷漆 4x2</s:String>
+		x:Key="mercedes.actros2014.r_fender.4x2p">后挡泥板-喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fender.6x24p">后挡泥板-喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros2014.r_fender.6x24p">后挡泥板-喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fender.6x2p">后挡泥板-喷漆 6x2</s:String>
+		x:Key="mercedes.actros2014.r_fender.6x2p">后挡泥板-喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fender.8x4p">后挡泥板-喷漆 8x4</s:String>
+		x:Key="mercedes.actros2014.r_fender.8x4p">后挡泥板-喷漆 8x4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fendr_top.4x2p">后挡泥板顶盖-喷漆 4x2</s:String>
+		x:Key="mercedes.actros2014.r_fendr_top.4x2p">后挡泥板顶盖-喷漆 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fendr_top.6x24p">后挡泥板顶盖-喷漆 6x2/4</s:String>
+		x:Key="mercedes.actros2014.r_fendr_top.6x24p">后挡泥板顶盖-喷漆 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fendr_top.6x2p">后挡泥板顶盖-喷漆 6x2</s:String>
+		x:Key="mercedes.actros2014.r_fendr_top.6x2p">后挡泥板顶盖-喷漆 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_fendr_top.8x4p">后挡泥板顶盖-喷漆 8x4</s:String>
+		x:Key="mercedes.actros2014.r_fendr_top.8x4p">后挡泥板顶盖-喷漆 8x4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.4x2v3">后保险杠-Diva 4x2</s:String>
+		x:Key="mercedes.actros2014.r_bumper.4x2v3">后保险杠-Diva 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.4x2v2">后保险杠-Centurion 4x2</s:String>
+		x:Key="mercedes.actros2014.r_bumper.4x2v2">后保险杠-Centurion 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.4x2v1">后保险杠-Thor 4x2</s:String>
+		x:Key="mercedes.actros2014.r_bumper.4x2v1">后保险杠-Thor 4x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.6x24v3">后保险杠-Diva 6x2/4</s:String>
+		x:Key="mercedes.actros2014.r_bumper.6x24v3">后保险杠-Diva 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.6x24v2">后保险杠-Centurion 6x2/4</s:String>
+		x:Key="mercedes.actros2014.r_bumper.6x24v2">后保险杠-Centurion 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.6x24v1">后保险杠-Thor 6x2/4</s:String>
+		x:Key="mercedes.actros2014.r_bumper.6x24v1">后保险杠-Thor 6x2/4 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.6x2v3">后保险杠-Diva 6x2</s:String>
+		x:Key="mercedes.actros2014.r_bumper.6x2v3">后保险杠-Diva 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.6x2v2">后保险杠-Centurion 6x2</s:String>
+		x:Key="mercedes.actros2014.r_bumper.6x2v2">后保险杠-Centurion 6x2 (Actros Tuning Pack)</s:String>
 	<s:String
-		x:Key="mercedes.actros2014.r_bumper.6x2v1">后保险杠-Thor 6x2</s:String>
+		x:Key="mercedes.actros2014.r_bumper.6x2v1">后保险杠-Thor 6x2 (Actros Tuning Pack)</s:String>
 
 	
 	
@@ -549,25 +549,25 @@
 		x:Key="high_sleeper.renault.t.cabin">High Sleeper</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="renault.t.hl_guard.paint">Renault T Tuning DLC</s:String>
+		x:Key="renault.t.hl_guard.paint">大灯护罩-喷漆 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.hl_guard.paint_evo">hl_guard.paint_evo</s:String>
+		x:Key="renault.t.hl_guard.paint_evo">大灯护罩-喷漆 Evolution (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.s_guard.renault_pa">s_guard.renault_pa</s:String>
+		x:Key="renault.t.s_guard.renault_pa">防石击护栏-Renault喷漆 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.f_grill.racing_paint">f_grill.racing_paint</s:String>
+		x:Key="renault.t.f_grill.racing_paint">防撞杠-Racing喷漆 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.f_grill.joker_paint">f_grill.joker_paint</s:String>
+		x:Key="renault.t.f_grill.joker_paint">防撞杠-Joker喷漆 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.f_grill.hawk_paint">f_grill.hawk_paint</s:String>
+		x:Key="renault.t.f_grill.hawk_paint">防撞杠-Hawk喷漆 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.b_grill.paint_mirage">b_grill.paint_mirage</s:String>
+		x:Key="renault.t.b_grill.paint_mirage">下格栅护栏-喷漆Mirage (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.b_grill.paint_pride">b_grill.paint_pride</s:String>
+		x:Key="renault.t.b_grill.paint_pride">下格栅护栏-喷漆Pride (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.sideskirt.4x2plain">侧裙</s:String>
+		x:Key="renault.t.sideskirt.4x2plain">侧裙-基本喷漆 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.sideskirt.4x2satin">sideskirt.4x2satin</s:String>
+		x:Key="renault.t.sideskirt.4x2satin">侧裙-Satin 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
 		x:Key="renault.t.sideskirt.4x2shp">侧裙-喷漆护罩（短） 4x2</s:String>
 	<s:String
@@ -579,9 +579,9 @@
 	<s:String
 		x:Key="renault.t.sideskirt.4x2side3">侧裙-喷漆和塑料护罩 4x2</s:String>
 	<s:String
-		x:Key="renault.t.sideskirt.6x24plain">sideskirt.6x24plain</s:String>
+		x:Key="renault.t.sideskirt.6x24plain">侧裙-基本喷漆 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.sideskirt.6x24satin">sideskirt.6x24satin</s:String>
+		x:Key="renault.t.sideskirt.6x24satin">侧裙-Satin 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
 		x:Key="renault.t.sideskirt.6x24shp">侧裙-喷漆护罩（短） 6x2/4</s:String>
 	<s:String
@@ -593,9 +593,9 @@
 	<s:String
 		x:Key="renault.t.sideskirt.6x24side3">侧裙-喷漆和塑料护罩 6x2/4</s:String>
 	<s:String
-		x:Key="renault.t.sideskirt.6x2plain">sideskirt.6x2plain</s:String>
+		x:Key="renault.t.sideskirt.6x2plain">侧裙-基本喷漆 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.sideskirt.6x2satin">sideskirt.6x2satin</s:String>
+		x:Key="renault.t.sideskirt.6x2satin">侧裙-Satin 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
 		x:Key="renault.t.sideskirt.6x2shp">侧裙-喷漆护罩（短） 6x2</s:String>
 	<s:String
@@ -607,77 +607,77 @@
 	<s:String
 		x:Key="renault.t.sideskirt.6x2side3">侧裙-喷漆和塑料护罩 6x2</s:String>
 	<s:String
-		x:Key="renault.t.sideskrt_bar.4x2_paint">侧裙边条</s:String>
+		x:Key="renault.t.sideskrt_bar.4x2_paint">侧裙边条-喷漆 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.sideskrt_bar.6x24_paint">sideskrt_bar.6x24_paint</s:String>
+		x:Key="renault.t.sideskrt_bar.6x24_paint">侧裙边条-喷漆 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.sideskrt_bar.6x2_paint">sideskrt_bar.6x2_paint</s:String>
+		x:Key="renault.t.sideskrt_bar.6x2_paint">侧裙边条-喷漆 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.4x2_diva">r_chs_cover.4x2_diva</s:String>
+		x:Key="renault.t.r_chs_cover.4x2_satin">底盘防护罩-Satin 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.4x2_thor_pn">r_chs_cover.4x2_thor_pn</s:String>
+		x:Key="renault.t.r_chs_cover.4x2t_satin">底盘防护罩-Satin 4x2扩容油箱 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.4x2t_diva">r_chs_cover.4x2t_diva</s:String>
+		x:Key="renault.t.r_chs_cover.6x24_satin">底盘防护罩-Satin 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.4x2t_thor_pn">r_chs_cover.4x2t_thor_pn</s:String>
+		x:Key="renault.t.r_chs_cover.6x2_satin">底盘防护罩-Satin 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.6x24_diva">r_chs_cover.6x24_diva</s:String>
+		x:Key="renault.t.r_chs_cover.4x2_diva">底盘防护罩-Diva 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.6x24_thor_pn">r_chs_cover.6x24_thor_pn</s:String>
+		x:Key="renault.t.r_chs_cover.4x2t_diva">底盘防护罩-Diva 4x2扩容油箱 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.6x2_diva">r_chs_cover.6x2_diva</s:String>
+		x:Key="renault.t.r_chs_cover.6x24_diva">底盘防护罩-Diva 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.6x2_thor_pn">r_chs_cover.6x2_thor_pn</s:String>
+		x:Key="renault.t.r_chs_cover.6x2_diva">底盘防护罩-Diva 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.4x2_satin">r_chs_cover.4x2_satin</s:String>
+		x:Key="renault.t.r_chs_cover.4x2_thor_pn">底盘防护罩-Thor喷漆 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.4x2t_satin">r_chs_cover.4x2t_satin</s:String>
+		x:Key="renault.t.r_chs_cover.4x2t_thor_pn">底盘防护罩-Thor喷漆 4x2扩容油箱 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.6x24_satin">r_chs_cover.6x24_satin</s:String>
+		x:Key="renault.t.r_chs_cover.6x24_thor_pn">底盘防护罩-Thor喷漆 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_chs_cover.6x2_satin">r_chs_cover.6x2_satin</s:String>
+		x:Key="renault.t.r_chs_cover.6x2_thor_pn">底盘防护罩-Thor喷漆 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fender.4x2_pn">后挡泥板</s:String>
+		x:Key="renault.t.r_fender.4x2_pn">后挡泥板-喷漆 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fender.4x2_pn_ch">r_fender.4x2_pn_ch</s:String>
+		x:Key="renault.t.r_fender.6x24_pn">后挡泥板-喷漆 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fender.6x24_pn">r_fender.6x24_pn</s:String>
+		x:Key="renault.t.r_fender.6x2_pn">后挡泥板-喷漆 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fender.6x24_pn_ch">r_fender.6x24_pn_ch</s:String>
+		x:Key="renault.t.r_fender.4x2_pn_ch">后挡泥板-喷漆和镀铬 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fender.6x2_pn">r_fender.6x2_pn</s:String>
+		x:Key="renault.t.r_fender.6x24_pn_ch">后挡泥板-喷漆和镀铬 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fender.6x2_pn_ch">r_fender.6x2_pn_ch</s:String>
+		x:Key="renault.t.r_fender.6x2_pn_ch">后挡泥板-喷漆和镀铬 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fendr_top.4x2_pn">后挡泥板顶盖</s:String>
+		x:Key="renault.t.r_fendr_top.4x2_pn">后挡泥板顶盖-喷漆 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fendr_top.4x2_pn_ch">r_fendr_top.4x2_pn_ch</s:String>
+		x:Key="renault.t.r_fendr_top.6x24_pn">后挡泥板顶盖-喷漆 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fendr_top.6x24_pn">r_fendr_top.6x24_pn</s:String>
+		x:Key="renault.t.r_fendr_top.6x2_pn">后挡泥板顶盖-喷漆 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fendr_top.6x24_pn_ch">r_fendr_top.6x24_pn_ch</s:String>
+		x:Key="renault.t.r_fendr_top.4x2_pn_ch">后挡泥板顶盖-喷漆和镀铬 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fendr_top.6x2_pn">r_fendr_top.6x2_pn</s:String>
+		x:Key="renault.t.r_fendr_top.6x24_pn_ch">后挡泥板顶盖-喷漆和镀铬 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_fendr_top.6x2_pn_ch">r_fendr_top.6x2_pn_ch</s:String>
+		x:Key="renault.t.r_fendr_top.6x2_pn_ch">后挡泥板顶盖-喷漆和镀铬 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_bumper.4x2_racing">后保险杠</s:String>
+		x:Key="renault.t.r_bumper.4x2_racing">后保险杠-Racing 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_bumper.6x24_racing">r_bumper.6x24_racing</s:String>
+		x:Key="renault.t.r_bumper.6x24_racing">后保险杠-Racing 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_bumper.6x2_racing">r_bumper.6x2_racing</s:String>
+		x:Key="renault.t.r_bumper.6x2_racing">后保险杠-Racing 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_mudflap.4x2pnt">后挡泥帘</s:String>
+		x:Key="renault.t.r_mudflap.4x2pnt">后挡泥帘-喷漆 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_mudflap.6x24pnt">r_mudflap.6x24pnt</s:String>
+		x:Key="renault.t.r_mudflap.6x24pnt">后挡泥帘-喷漆 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_mudflap.6x2pnt">r_mudflap.6x2pnt</s:String>
+		x:Key="renault.t.r_mudflap.6x2pnt">后挡泥帘-喷漆 6x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_mudflap.4x2pntw">r_mudflap.4x2pntw</s:String>
+		x:Key="renault.t.r_mudflap.4x2pntw">后挡泥帘-喷漆（宽） 4x2 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_mudflap.6x24pntw">r_mudflap.6x24pntw</s:String>
+		x:Key="renault.t.r_mudflap.6x24pntw">后挡泥帘-喷漆（宽） 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
 	<s:String
-		x:Key="renault.t.r_mudflap.6x2pntw">r_mudflap.6x2pntw</s:String>
+		x:Key="renault.t.r_mudflap.6x2pntw">后挡泥帘-喷漆（宽） 6x2 (Renault Trucks T Tuning DLC)</s:String>
 
 	
 	
@@ -710,15 +710,15 @@
 		x:Key="topline.scania.r.cabin">Topline</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="scania.r.r_chs_cover.chscmg4x203">底盘防护罩-Diva 4x2</s:String>
+		x:Key="scania.r.r_chs_cover.chscmg4x203">底盘防护罩-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r.r_chs_cover.chscmg6x203">底盘防护罩-Diva 6x2</s:String>
+		x:Key="scania.r.r_chs_cover.chscmg6x203">底盘防护罩-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r.r_chs_cover.chscmg6x2403">底盘防护罩-Diva 6x2/4</s:String>
+		x:Key="scania.r.r_chs_cover.chscmg6x2403">底盘防护罩-Diva 6x2/4 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r.r_bumper.arbumpermg01">后保险杠-Diva</s:String>
+		x:Key="scania.r.r_bumper.arbumpermg01">后保险杠-Diva (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r.r_bumper.arbumpermg03">后保险杠-Thor</s:String>
+		x:Key="scania.r.r_bumper.arbumpermg03">后保险杠-Thor (Mighty Griffin Tuning Pack)</s:String>
 
 	
 	
@@ -738,15 +738,15 @@
 		x:Key="topline.scania.streamline.cabin">Topline</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="scania.streamline.r_chs_cover.chscmg4x203">底盘防护罩-Diva 4x2</s:String>
+		x:Key="scania.streamline.r_chs_cover.chscmg4x203">底盘防护罩-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.streamline.r_chs_cover.chscmg6x203">底盘防护罩-Diva 6x2</s:String>
+		x:Key="scania.streamline.r_chs_cover.chscmg6x203">底盘防护罩-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.streamline.r_chs_cover.chscmg6x2403">底盘防护罩-Diva 6x2/4</s:String>
+		x:Key="scania.streamline.r_chs_cover.chscmg6x2403">底盘防护罩-Diva 6x2/4 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.streamline.r_bumper.grbumpermg01">后保险杠-Diva</s:String>
+		x:Key="scania.streamline.r_bumper.grbumpermg01">后保险杠-Diva (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.streamline.r_bumper.arbumpermg03">后保险杠-Thor</s:String>
+		x:Key="scania.streamline.r_bumper.arbumpermg03">后保险杠-Thor (Mighty Griffin Tuning Pack)</s:String>
 
 	
 	
@@ -765,53 +765,53 @@
 		x:Key="highline.scania.r_2016.cabin">High Roof</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="scania.r_2016.sunshld.stock">遮阳板-原厂</s:String>
+		x:Key="scania.r_2016.sunshld.stock">遮阳板-原厂I</s:String>
 	<s:String
-		x:Key="scania.r_2016.sunshld.sunshld_01">遮阳板-原厂 II</s:String>
+		x:Key="scania.r_2016.sunshld.sunshld_01">遮阳板-原厂II</s:String>
 	<s:String
-		x:Key="scania.r_2016.sunshld.sunshld_04">遮阳板-Ranger</s:String>
+		x:Key="scania.r_2016.sunshld.sunshld_04">遮阳板-Ranger (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.sunshld.sunshld_05">遮阳板-喷漆</s:String>
+		x:Key="scania.r_2016.sunshld.sunshld_05">遮阳板-喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.sunshld.sunshld_06">遮阳板-喷漆, 豪华</s:String>
+		x:Key="scania.r_2016.sunshld.sunshld_06">遮阳板-喷漆, 豪华 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.r_2016.mirror.painted">主后视镜-喷漆</s:String>
 	<s:String
-		x:Key="scania.r_2016.mirror.painted_f">主后视镜-喷漆, 豪华</s:String>
+		x:Key="scania.r_2016.mirror.painted_f">主后视镜-喷漆, 豪华 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.r_2016.f_mirror.painted">前反光镜-喷漆</s:String>
 	<s:String
-		x:Key="scania.r_2016.s_mirror.painted">侧反光镜-喷漆</s:String>
+		x:Key="scania.r_2016.s_mirror.painted">侧视镜-喷漆</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_equip.super_lo_pnt">前配设-喷漆, 低</s:String>
+		x:Key="scania.r_2016.f_equip.super_lo_pnt">前配设-SUPER,喷漆,低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_equip.super_md_pnt">前配设-喷漆, 高</s:String>
+		x:Key="scania.r_2016.f_equip.super_md_pnt">前配设-SUPER,喷漆,高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_logo.painted">前车标-喷漆</s:String>
+		x:Key="scania.r_2016.f_logo.painted">前车标-喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.kotrh">前挡泥帘-公路之王, 喷漆 高</s:String>
+		x:Key="scania.r_2016.f_mudflap.kotrh">前挡泥帘-公路之王, 喷漆 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.kotr">前挡泥帘-公路之王, 喷漆</s:String>
+		x:Key="scania.r_2016.f_mudflap.kotr">前挡泥帘-公路之王, 喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.kotrl">前挡泥帘-公路之王, 喷漆 低</s:String>
+		x:Key="scania.r_2016.f_mudflap.kotrl">前挡泥帘-公路之王, 喷漆 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.scaniah">前挡泥帘-Scania, 喷漆 高</s:String>
+		x:Key="scania.r_2016.f_mudflap.scaniah">前挡泥帘-Scania, 喷漆 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.scania">前挡泥帘-Scania, 喷漆</s:String>
+		x:Key="scania.r_2016.f_mudflap.scania">前挡泥帘-Scania, 喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.scanial">前挡泥帘-Scania, 喷漆 低</s:String>
+		x:Key="scania.r_2016.f_mudflap.scanial">前挡泥帘-Scania, 喷漆 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.scaniamgh">前挡泥帘-Mighty Griffin 高</s:String>
+		x:Key="scania.r_2016.f_mudflap.scaniamgh">前挡泥帘-Mighty Griffin 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.scaniamg">前挡泥帘-Mighty Griffin</s:String>
+		x:Key="scania.r_2016.f_mudflap.scaniamg">前挡泥帘-Mighty Griffin (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.scaniamgl">前挡泥帘-Mighty Griffin 低</s:String>
+		x:Key="scania.r_2016.f_mudflap.scaniamgl">前挡泥帘-Mighty Griffin 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.v8h">前挡泥帘-Scania V8 Power 高</s:String>
+		x:Key="scania.r_2016.f_mudflap.v8h">前挡泥帘-Scania V8 Power 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.v8">前挡泥帘-Scania V8 Power</s:String>
+		x:Key="scania.r_2016.f_mudflap.v8">前挡泥帘-Scania V8 Power (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.f_mudflap.v8l">前挡泥帘-Scania V8 Power 低</s:String>
+		x:Key="scania.r_2016.f_mudflap.v8l">前挡泥帘-Scania V8 Power 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.r_2016.sideskirt.4x2_p">侧裙-喷漆 4x2</s:String>
 	<s:String
@@ -849,11 +849,11 @@
 	<s:String
 		x:Key="scania.r_2016.sideskirt.6x2l_p_v8_2">侧裙-喷漆V8和原厂II 6x2 长</s:String>
 	<s:String
-		x:Key="scania.r_2016.r_chs_cover.4x2_p">底盘防护罩-Diva 4x2</s:String>
+		x:Key="scania.r_2016.r_chs_cover.4x2_p">底盘防护罩-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.r_chs_cover.6xn_p">底盘防护罩-Diva 6x2</s:String>
+		x:Key="scania.r_2016.r_chs_cover.6xn_p">底盘防护罩-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.r_chs_cover.6xnl_p">底盘防护罩-Diva 6x2 长</s:String>
+		x:Key="scania.r_2016.r_chs_cover.6xnl_p">底盘防护罩-Diva 6x2 长 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.r_2016.r_fender.4x2_p">后挡泥板-喷漆 4x2</s:String>
 	<s:String
@@ -877,13 +877,13 @@
 	<s:String
 		x:Key="scania.r_2016.r_bumper.duty_p">后保险杠-Duty 喷漆</s:String>
 	<s:String
-		x:Key="scania.r_2016.r_bumper.mg01">后保险杠-Diva</s:String>
+		x:Key="scania.r_2016.r_bumper.mg01">后保险杠-Diva (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.r_bumper.mg03">后保险杠-Thor</s:String>
+		x:Key="scania.r_2016.r_bumper.mg03">后保险杠-Thor (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.r_bumper.mg04">后保险杠-Chariot</s:String>
+		x:Key="scania.r_2016.r_bumper.mg04">后保险杠-Chariot (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.r_2016.exhaust_m.mg01">后排气管-Wing Master V8</s:String>
+		x:Key="scania.r_2016.exhaust_m.mg01">后排气管-Wing Master V8 (Mighty Griffin Tuning Pack)</s:String>
 
 	
 	
@@ -906,49 +906,49 @@
 	<s:String
 		x:Key="scania.s_2016.sunshld.sunshld_01">遮阳板-原厂 II</s:String>
 	<s:String
-		x:Key="scania.s_2016.sunshld.sunshld_04">遮阳板-Ranger</s:String>
+		x:Key="scania.s_2016.sunshld.sunshld_04">遮阳板-Ranger (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.sunshld.sunshld_05">遮阳板-喷漆</s:String>
+		x:Key="scania.s_2016.sunshld.sunshld_05">遮阳板-喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.sunshld.sunshld_06">遮阳板-喷漆, 豪华</s:String>
+		x:Key="scania.s_2016.sunshld.sunshld_06">遮阳板-喷漆, 豪华 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.s_2016.mirror.painted">主后视镜-喷漆</s:String>
 	<s:String
-		x:Key="scania.s_2016.mirror.painted_f">主后视镜-喷漆, 豪华</s:String>
+		x:Key="scania.s_2016.mirror.painted_f">主后视镜-喷漆, 豪华 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.s_2016.f_mirror.painted">前反光镜-喷漆</s:String>
 	<s:String
 		x:Key="scania.s_2016.s_mirror.painted">侧反光镜-喷漆</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_equip.super_hi_pnt">前配设-喷漆, 高</s:String>
+		x:Key="scania.s_2016.f_equip.super_hi_pnt">前配设-SUPER,喷漆,高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_equip.super_md_pnt">前配设-喷漆, 中</s:String>
+		x:Key="scania.s_2016.f_equip.super_md_pnt">前配设-SUPER,喷漆,中 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_logo.painted">前车标-喷漆</s:String>
+		x:Key="scania.s_2016.f_logo.painted">前车标-喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.kotrh">前挡泥帘-公路之王, 喷漆 高</s:String>
+		x:Key="scania.s_2016.f_mudflap.kotrh">前挡泥帘-公路之王, 喷漆 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.kotr">前挡泥帘-公路之王, 喷漆</s:String>
+		x:Key="scania.s_2016.f_mudflap.kotr">前挡泥帘-公路之王, 喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.kotrl">前挡泥帘-公路之王, 喷漆 低</s:String>
+		x:Key="scania.s_2016.f_mudflap.kotrl">前挡泥帘-公路之王, 喷漆 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.scaniah">前挡泥帘-Scania, 喷漆 高</s:String>
+		x:Key="scania.s_2016.f_mudflap.scaniah">前挡泥帘-Scania, 喷漆 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.scania">前挡泥帘-Scania, 喷漆</s:String>
+		x:Key="scania.s_2016.f_mudflap.scania">前挡泥帘-Scania, 喷漆 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.scanial">前挡泥帘-Scania, 喷漆 低</s:String>
+		x:Key="scania.s_2016.f_mudflap.scanial">前挡泥帘-Scania, 喷漆 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.scaniamgh">前挡泥帘-Mighty Griffin 高</s:String>
+		x:Key="scania.s_2016.f_mudflap.scaniamgh">前挡泥帘-Mighty Griffin 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.scaniamg">前挡泥帘-Mighty Griffin</s:String>
+		x:Key="scania.s_2016.f_mudflap.scaniamg">前挡泥帘-Mighty Griffin (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.scaniamgl">前挡泥帘-Mighty Griffin 低</s:String>
+		x:Key="scania.s_2016.f_mudflap.scaniamgl">前挡泥帘-Mighty Griffin 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.v8h">前挡泥帘-Scania V8 Power 高</s:String>
+		x:Key="scania.s_2016.f_mudflap.v8h">前挡泥帘-Scania V8 Power 高 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.v8">前挡泥帘-Scania V8 Power</s:String>
+		x:Key="scania.s_2016.f_mudflap.v8">前挡泥帘-Scania V8 Power (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.f_mudflap.v8l">前挡泥帘-Scania V8 Power 低</s:String>
+		x:Key="scania.s_2016.f_mudflap.v8l">前挡泥帘-Scania V8 Power 低 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.s_2016.sideskirt.4x2_p">侧裙-喷漆 4x2</s:String>
 	<s:String
@@ -986,11 +986,11 @@
 	<s:String
 		x:Key="scania.s_2016.sideskirt.6x2l_p_v8_2">侧裙-喷漆V8和原厂II 6x2 长</s:String>
 	<s:String
-		x:Key="scania.s_2016.r_chs_cover.4x2_p">底盘防护罩-Diva 4x2</s:String>
+		x:Key="scania.s_2016.r_chs_cover.4x2_p">底盘防护罩-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.r_chs_cover.6xn_p">底盘防护罩-Diva 6x2</s:String>
+		x:Key="scania.s_2016.r_chs_cover.6xn_p">底盘防护罩-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.r_chs_cover.6xnl_p">底盘防护罩-Diva 6x2 长</s:String>
+		x:Key="scania.s_2016.r_chs_cover.6xnl_p">底盘防护罩-Diva 6x2 长 (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
 		x:Key="scania.s_2016.r_fender.4x2_p">后挡泥板-喷漆 4x2</s:String>
 	<s:String
@@ -1014,13 +1014,13 @@
 	<s:String
 		x:Key="scania.s_2016.r_bumper.duty_p">后保险杠-Duty 喷漆</s:String>
 	<s:String
-		x:Key="scania.s_2016.r_bumper.mg01">后保险杠-Diva</s:String>
+		x:Key="scania.s_2016.r_bumper.mg01">后保险杠-Diva (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.r_bumper.mg03">后保险杠-Thor</s:String>
+		x:Key="scania.s_2016.r_bumper.mg03">后保险杠-Thor (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.r_bumper.mg04">后保险杠-Chariot</s:String>
+		x:Key="scania.s_2016.r_bumper.mg04">后保险杠-Chariot (Mighty Griffin Tuning Pack)</s:String>
 	<s:String
-		x:Key="scania.s_2016.exhaust_m.mg01">后排气管-Wing Master V8</s:String>
+		x:Key="scania.s_2016.exhaust_m.mg01">后排气管-Wing Master V8 (Mighty Griffin Tuning Pack)</s:String>
 
 	
 	
@@ -1056,57 +1056,57 @@
 	<s:String
 		x:Key="volvo.fh16.sunshld.shape2">遮阳板-Samurai</s:String>
 	<s:String
-		x:Key="volvo.fh16.sunshld.sunshield01">遮阳板-豪华喷漆</s:String>
+		x:Key="volvo.fh16.sunshld.sunshield01">遮阳板-豪华喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.sunshld.sunshield02">遮阳板-豪华喷漆和镀铬</s:String>
+		x:Key="volvo.fh16.sunshld.sunshield02">遮阳板-豪华喷漆和镀铬 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.sunshld.sunshield03">遮阳板-喷漆</s:String>
+		x:Key="volvo.fh16.sunshld.sunshield03">遮阳板-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh16.mirror.shape3">主后视镜-喷漆</s:String>
 	<s:String
-		x:Key="volvo.fh16.mirror.led3">主后视镜-喷漆, 3 LED</s:String>
+		x:Key="volvo.fh16.mirror.led3">主后视镜-喷漆, 3 LED (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.mirror.led4">主后视镜-喷漆, 4 LED</s:String>
+		x:Key="volvo.fh16.mirror.led4">主后视镜-喷漆, 4 LED (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.f_mirror.paint">前反光镜-喷漆</s:String>
+		x:Key="volvo.fh16.f_mirror.paint">前反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.f_mirror.paintl">前反光镜-喷漆 长</s:String>
+		x:Key="volvo.fh16.f_mirror.paintl">前反光镜-喷漆 长 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.s_mirror.paint">侧反光镜-喷漆</s:String>
+		x:Key="volvo.fh16.s_mirror.paint">侧反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.f_grill.paint1">防撞条-Quarterback</s:String>
+		x:Key="volvo.fh16.f_grill.paint1">防撞杠-Quarterback (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_grill.paint1">灯架-喷漆</s:String>
+		x:Key="volvo.fh16.r_grill.paint1">灯架-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_grill.paint1_h1">灯架-喷漆 Sleeper</s:String>
+		x:Key="volvo.fh16.r_grill.paint1_h1">灯架-喷漆 Sleeper (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_chs_cover.paint_4x">底盘防护罩-Diva 4x2</s:String>
+		x:Key="volvo.fh16.r_chs_cover.paint_4x">底盘防护罩-Diva 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_chs_cover.paint_dia_4x">底盘防护罩-Centurion 4x2</s:String>
+		x:Key="volvo.fh16.r_chs_cover.paint_dia_4x">底盘防护罩-Centurion 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_chs_cover.paint_6x">底盘防护罩-Diva 6x2</s:String>
+		x:Key="volvo.fh16.r_chs_cover.paint_6x">底盘防护罩-Diva 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_chs_cover.paint_dia_6x">底盘防护罩-Centurion 6x2</s:String>
+		x:Key="volvo.fh16.r_chs_cover.paint_dia_6x">底盘防护罩-Centurion 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_bumper.shape1">后保险杠-Diva</s:String>
+		x:Key="volvo.fh16.r_bumper.shape1">后保险杠-Diva (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_bumper.shape2">后保险杠-Chariot</s:String>
+		x:Key="volvo.fh16.r_bumper.shape2">后保险杠-Chariot (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+		x:Key="volvo.fh16.r_fender.paint_4x">后挡泥板-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+		x:Key="volvo.fh16.r_fender.paint_6x">后挡泥板-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+		x:Key="volvo.fh16.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+		x:Key="volvo.fh16.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_fendr_top.paint_chr_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh16.r_fendr_top.paint_chr_4x">后挡泥板顶盖-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.r_fendr_top.paint_chr_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh16.r_fendr_top.paint_chr_6x">后挡泥板顶盖-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.exhaust_m.exh_m_02">后排气管-Diva Globetrotter XL</s:String>
+		x:Key="volvo.fh16.exhaust_m.exh_m_02">后排气管-Diva Globetrotter XL (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16.exhaust_m.exh_m_02b">后排气管-Diva </s:String>
+		x:Key="volvo.fh16.exhaust_m.exh_m_02b">后排气管-Diva (FH Tuning Pack)</s:String>
 
 	
 	
@@ -1130,83 +1130,83 @@
 	<s:String
 		x:Key="volvo.fh16_2012.sunshld.shape2">遮阳板-Samurai</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sunshld.dual">遮阳板-喷漆</s:String>
+		x:Key="volvo.fh16_2012.sunshld.dual">遮阳板-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sunshld.quatro">遮阳板-豪华喷漆</s:String>
+		x:Key="volvo.fh16_2012.sunshld.quatro">遮阳板-豪华喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sunshld.triangle">遮阳板-喷漆, 豪华</s:String>
+		x:Key="volvo.fh16_2012.sunshld.triangle">遮阳板-喷漆, 豪华 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.f_mirror.painted">前反光镜-喷漆</s:String>
+		x:Key="volvo.fh16_2012.f_mirror.painted">前反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.f_mirror.paintedl">前反光镜-喷漆 长</s:String>
+		x:Key="volvo.fh16_2012.f_mirror.paintedl">前反光镜-喷漆 长 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.s_mirror.paint">侧反光镜-喷漆</s:String>
+		x:Key="volvo.fh16_2012.s_mirror.paint">侧反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh16_2012.mirror.shape3">主后视镜-喷漆</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.mirror.chrome_led">主后视镜-喷漆, LED</s:String>
+		x:Key="volvo.fh16_2012.mirror.chrome_led">主后视镜-喷漆, LED (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.mirror.chrome_logo">主后视镜-喷漆和镀铬</s:String>
+		x:Key="volvo.fh16_2012.mirror.chrome_logo">主后视镜-喷漆和镀铬 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.mirror.chrom_spec">主后视镜-镀铬, 豪华</s:String>
+		x:Key="volvo.fh16_2012.mirror.chrom_spec">主后视镜-镀铬, 豪华 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.f_grill.net">防撞条-喷漆网</s:String>
+		x:Key="volvo.fh16_2012.f_grill.net">防撞杠-喷漆网</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.filter.paint_slep">空气过滤器-喷漆 Sleeper</s:String>
+		x:Key="volvo.fh16_2012.filter.paint_slep">空气过滤器-喷漆 Sleeper (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.filter.paint_gl">空气过滤器-喷漆 Globetrotter</s:String>
+		x:Key="volvo.fh16_2012.filter.paint_gl">空气过滤器-喷漆 Globetrotter (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.filter.paint_glxl">空气过滤器-喷漆 Globetrotter XL</s:String>
+		x:Key="volvo.fh16_2012.filter.paint_glxl">空气过滤器-喷漆 Globetrotter XL (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh16_2012.sideskirt.shape2">侧裙-全保护侧裙</s:String>
 	<s:String
 		x:Key="volvo.fh16_2012.sideskirt.stock_6x">侧裙-全保护侧裙 6x2</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh16_2012.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh16_2012.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sideskirt.chrome_4x">侧裙-喷漆和镀铬 II 4x2</s:String>
+		x:Key="volvo.fh16_2012.sideskirt.chrome_4x">侧裙-喷漆和镀铬 II 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.sideskirt.chrome_6x">侧裙-喷漆和镀铬 II 6x2</s:String>
+		x:Key="volvo.fh16_2012.sideskirt.chrome_6x">侧裙-喷漆和镀铬 II 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.f_fender_chs.paint">前挡泥板-喷漆</s:String>
+		x:Key="volvo.fh16_2012.f_fender_chs.paint">前挡泥板-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.exhaust_m.shape2">后排气管-Centurion</s:String>
+		x:Key="volvo.fh16_2012.exhaust_m.shape2">后排气管-Centurion (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.exhaust_m.shape1">后排气管-Diva</s:String>
+		x:Key="volvo.fh16_2012.exhaust_m.shape1">后排气管-Diva (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_chs_cover.painted_4x">底盘防护罩-Diva 4x2</s:String>
+		x:Key="volvo.fh16_2012.r_chs_cover.painted_4x">底盘防护罩-Diva 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_chs_cover.painted_6x">底盘防护罩-Diva 6x2</s:String>
+		x:Key="volvo.fh16_2012.r_chs_cover.painted_6x">底盘防护罩-Diva 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_chs_cover.mix_4x">底盘防护罩-Centurion 4x2</s:String>
+		x:Key="volvo.fh16_2012.r_chs_cover.mix_4x">底盘防护罩-Centurion 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_chs_cover.mix_6x">底盘防护罩-Centurion 6x2</s:String>
+		x:Key="volvo.fh16_2012.r_chs_cover.mix_6x">底盘防护罩-Centurion 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+		x:Key="volvo.fh16_2012.r_fender.paint_4x">后挡泥板-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+		x:Key="volvo.fh16_2012.r_fender.paint_6x">后挡泥板-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fender.paint_8x">后挡泥板-喷漆 8x2</s:String>
+		x:Key="volvo.fh16_2012.r_fender.paint_8x">后挡泥板-喷漆 8x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fendr_top.paint_8x">后挡泥板顶盖-喷漆 8x2</s:String>
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_8x">后挡泥板顶盖-喷漆 8x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_8x">后挡泥板顶盖-喷漆和镀铬 8x2</s:String>
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_8x">后挡泥板顶盖-喷漆和镀铬 8x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_bumper.painted">后保险杠-Chariot</s:String>
+		x:Key="volvo.fh16_2012.r_bumper.painted">后保险杠-Chariot (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_bumper.smoth">后保险杠-Diva</s:String>
+		x:Key="volvo.fh16_2012.r_bumper.smoth">后保险杠-Diva (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh16_2012.r_bumper.bend">后保险杠-Thor</s:String>
+		x:Key="volvo.fh16_2012.r_bumper.bend">后保险杠-Thor (FH Tuning Pack)</s:String>
 
 	
 	
@@ -1233,89 +1233,89 @@
 	<s:String
 		x:Key="volvo.fh_2021.sunshld.shape2">遮阳板-Samurai</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sunshld.dual">遮阳板-喷漆</s:String>
+		x:Key="volvo.fh_2021.sunshld.dual">遮阳板-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sunshld.quatro">遮阳板-豪华喷漆</s:String>
+		x:Key="volvo.fh_2021.sunshld.quatro">遮阳板-豪华喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sunshld.triangle">遮阳板-喷漆, 豪华</s:String>
-	<s:String
-		x:Key="volvo.fh_2021.mirror.chrom_spec">主后视镜-喷漆 豪华</s:String>
-	<s:String
-		x:Key="volvo.fh_2021.mirror.chrome_led">主后视镜-喷漆, LED</s:String>
-	<s:String
-		x:Key="volvo.fh_2021.mirror.chrome_logo">主后视镜-喷漆和镀铬</s:String>
+		x:Key="volvo.fh_2021.sunshld.triangle">遮阳板-喷漆, 豪华 (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh_2021.mirror.shape3">主后视镜-喷漆</s:String>
 	<s:String
 		x:Key="volvo.fh_2021.mirror.shape4">主后视镜-豪华</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.f_mirror.painted">前反光镜-喷漆</s:String>
+		x:Key="volvo.fh_2021.mirror.chrome_led">主后视镜-喷漆, LED (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.f_mirror.paintedl">前反光镜-喷漆 长</s:String>
+		x:Key="volvo.fh_2021.mirror.chrom_spec">主后视镜-镀铬 豪华 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.s_mirror.paint">侧反光镜-喷漆</s:String>
+		x:Key="volvo.fh_2021.mirror.chrome_logo">主后视镜-喷漆和镀铬 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.filter.paint_h1">空气过滤器-喷漆 Sleeper</s:String>
+		x:Key="volvo.fh_2021.f_mirror.painted">前反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.filter.paint_h2">空气过滤器-喷漆 Globetrotter</s:String>
+		x:Key="volvo.fh_2021.f_mirror.paintedl">前反光镜-喷漆 长 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.filter.paint_h3">空气过滤器-喷漆 Globetrotter XL</s:String>
+		x:Key="volvo.fh_2021.s_mirror.paint">侧反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.f_grill.net">防撞条-喷漆网</s:String>
+		x:Key="volvo.fh_2021.filter.paint_h1">空气过滤器-喷漆 Sleeper (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.f_fender_chs.paint">前挡泥板-喷漆</s:String>
+		x:Key="volvo.fh_2021.filter.paint_h2">空气过滤器-喷漆 Globetrotter (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh_2021.filter.paint_h3">空气过滤器-喷漆 Globetrotter XL (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh_2021.f_grill.net">防撞杠-喷漆网 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_fender_chs.paint">前挡泥板-喷漆 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh_2021.sideskirt.stock_6x_a">侧裙-Aero 6x2</s:String>
 	<s:String
 		x:Key="volvo.fh_2021.sideskirt.stock_4x_a">侧裙-Aero 4x2</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sideskirt.chrome_4x">侧裙-喷漆和镀铬 II 4x2</s:String>
+		x:Key="volvo.fh_2021.sideskirt.chrome_4x">侧裙-喷漆和镀铬 II 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.sideskirt.chrome_6x">侧裙-喷漆和镀铬 II 6x2</s:String>
+		x:Key="volvo.fh_2021.sideskirt.chrome_6x">侧裙-喷漆和镀铬 II 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.exhaust_m.shape2">后排气管-Centurion</s:String>
+		x:Key="volvo.fh_2021.exhaust_m.shape2">后排气管-Centurion (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.exhaust_m.shape1">后排气管-Diva</s:String>
+		x:Key="volvo.fh_2021.exhaust_m.shape1">后排气管-Diva (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_chs_cover.painted_4x">底盘保护罩-Diva （油箱520+315L）</s:String>
+		x:Key="volvo.fh_2021.r_chs_cover.painted_4x">底盘保护罩-Diva （油箱520+315L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_chs_cover.painted_4x_2">底盘保护罩-Diva （油箱600+340L）</s:String>
+		x:Key="volvo.fh_2021.r_chs_cover.painted_4x_2">底盘保护罩-Diva （油箱600+340L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_chs_cover.painted_6x">底盘保护罩-Diva 6x2</s:String>
+		x:Key="volvo.fh_2021.r_chs_cover.painted_6x">底盘保护罩-Diva 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_chs_cover.mix_4x">底盘保护罩-Centurion （油箱520+315L）</s:String>
+		x:Key="volvo.fh_2021.r_chs_cover.mix_4x">底盘保护罩-Centurion （油箱520+315L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_chs_cover.mix_4x_2">底盘保护罩-Centurion （油箱600+340L）</s:String>
+		x:Key="volvo.fh_2021.r_chs_cover.mix_4x_2">底盘保护罩-Centurion （油箱600+340L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_chs_cover.mix_6x">底盘保护罩-Centurion 6x2</s:String>
+		x:Key="volvo.fh_2021.r_chs_cover.mix_6x">底盘保护罩-Centurion 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+		x:Key="volvo.fh_2021.r_fender.paint_4x">后挡泥板-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+		x:Key="volvo.fh_2021.r_fender.paint_6x">后挡泥板-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fender.paint_8x">后挡泥板-喷漆 8x4</s:String>
+		x:Key="volvo.fh_2021.r_fender.paint_8x">后挡泥板-喷漆 8x4 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+		x:Key="volvo.fh_2021.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+		x:Key="volvo.fh_2021.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fendr_top.paint_8x">后挡泥板顶盖-喷漆 8x4</s:String>
+		x:Key="volvo.fh_2021.r_fendr_top.paint_8x">后挡泥板顶盖-喷漆 8x4 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_8x">后挡泥板顶盖-喷漆和镀铬 8x4</s:String>
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_8x">后挡泥板顶盖-喷漆和镀铬 8x4 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_bumper.bend">后保险杠-Thor</s:String>
+		x:Key="volvo.fh_2021.r_bumper.bend">后保险杠-Thor (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_bumper.painted">后保险杠-Chariot</s:String>
+		x:Key="volvo.fh_2021.r_bumper.painted">后保险杠-Chariot (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2021.r_bumper.smoth">后保险杠-Diva</s:String>
+		x:Key="volvo.fh_2021.r_bumper.smoth">后保险杠-Diva (FH Tuning Pack)</s:String>
 
 	
 	
@@ -1358,95 +1358,95 @@
 	<s:String
 		x:Key="volvo.fh_2024.sunshld.shape2">遮阳板-Samurai</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sunshld.dual">遮阳板-喷漆</s:String>
+		x:Key="volvo.fh_2024.sunshld.dual">遮阳板-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sunshld.quatro">遮阳板-豪华喷漆</s:String>
+		x:Key="volvo.fh_2024.sunshld.quatro">遮阳板-豪华喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sunshld.triangle">遮阳板-喷漆, 豪华</s:String>
+		x:Key="volvo.fh_2024.sunshld.triangle">遮阳板-喷漆, 豪华 (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.mirror.shape3">主后视镜-喷漆</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.mirror.shape3_a">主后视镜-喷漆 Aero</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.mirror.chrome_led">主后视镜-喷漆, LED</s:String>
+		x:Key="volvo.fh_2024.mirror.chrome_led">主后视镜-喷漆, LED (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.mirror.chrome_led_a">主后视镜-喷漆, LED Aero</s:String>
+		x:Key="volvo.fh_2024.mirror.chrome_led_a">主后视镜-喷漆, LED Aero (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.mirror.chrome_logo">主后视镜-喷漆和镀铬</s:String>
+		x:Key="volvo.fh_2024.mirror.chrome_logo">主后视镜-喷漆和镀铬 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.mirror.chrom_logo_a">主后视镜-喷漆和镀铬 Aero</s:String>
+		x:Key="volvo.fh_2024.mirror.chrom_logo_a">主后视镜-喷漆和镀铬 Aero (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.mirror.cam_digi">主后视镜-电子后视镜</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.mirror.cam_digi_a">主后视镜-电子后视镜 Aero</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.mirror.chrom_spec">主后视镜-镀铬 豪华</s:String>
+		x:Key="volvo.fh_2024.mirror.chrom_spec">主后视镜-镀铬 豪华 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.mirror.chrom_spec_a">主后视镜-镀铬 豪华 Aero</s:String>
+		x:Key="volvo.fh_2024.mirror.chrom_spec_a">主后视镜-镀铬 豪华 Aero (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.f_mirror.painted">前反光镜-喷漆</s:String>
+		x:Key="volvo.fh_2024.f_mirror.painted">前反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.f_mirror.paintedl">前反光镜-喷漆 长</s:String>
+		x:Key="volvo.fh_2024.f_mirror.paintedl">前反光镜-喷漆 长 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.s_mirror.paint">侧反光镜-喷漆</s:String>
+		x:Key="volvo.fh_2024.s_mirror.paint">侧反光镜-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.filter.paint_slp">空气过滤器-喷漆 Sleeper</s:String>
+		x:Key="volvo.fh_2024.filter.paint_slp">空气过滤器-喷漆 Sleeper (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.filter.paint_gt">空气过滤器-喷漆 Globetrotter</s:String>
+		x:Key="volvo.fh_2024.filter.paint_gt">空气过滤器-喷漆 Globetrotter (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.filter.paint_gtxl">空气过滤器-喷漆 Globetrotter XL</s:String>
+		x:Key="volvo.fh_2024.filter.paint_gtxl">空气过滤器-喷漆 Globetrotter XL (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.filter.paint_gtxxl">空气过滤器-喷漆 Globetrotter XXL</s:String>
+		x:Key="volvo.fh_2024.filter.paint_gtxxl">空气过滤器-喷漆 Globetrotter XXL (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.f_grill.net">防撞条-喷漆网</s:String>
+		x:Key="volvo.fh_2024.f_grill.net">防撞杠-喷漆网 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.f_fender_chs.paint">前挡泥板-喷漆</s:String>
+		x:Key="volvo.fh_2024.f_fender_chs.paint">前挡泥板-喷漆 (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.s_deflector.stock_gtxxl">侧导流板-喷漆 Globetrotter XXL</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.s_deflector.light_xxl">侧导流板-喷漆, LED Globetrotter XXL</s:String>
+		x:Key="volvo.fh_2024.s_deflector.light_xxl">侧导流板-喷漆, LED Globetrotter XXL (FH Tuning Pack)</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.sideskirt.stock_4x_a">侧裙-Aero 4x2</s:String>
 	<s:String
 		x:Key="volvo.fh_2024.sideskirt.stock_6x_a">侧裙-Aero 6x2</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sideskirt.chrome_4x">侧裙-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh_2024.sideskirt.chrome_4x">侧裙-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sideskirt.chrome_6x">侧裙-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh_2024.sideskirt.chrome_6x">侧裙-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 II 4x2</s:String>
+		x:Key="volvo.fh_2024.sideskirt.chrome_s4x">侧裙-喷漆和镀铬 II 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 II 6x2</s:String>
+		x:Key="volvo.fh_2024.sideskirt.chrome_s6x">侧裙-喷漆和镀铬 II 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_chs_cover.painted_4x">底盘保护罩-Diva （油箱520+315L）</s:String>
+		x:Key="volvo.fh_2024.r_chs_cover.painted_4x">底盘保护罩-Diva （油箱520+315L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_chs_cover.painted_4x_2">底盘保护罩-Diva （油箱600+340L）</s:String>
+		x:Key="volvo.fh_2024.r_chs_cover.painted_4x_2">底盘保护罩-Diva （油箱600+340L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_chs_cover.painted_6x">底盘保护罩-Diva 6x2</s:String>
+		x:Key="volvo.fh_2024.r_chs_cover.painted_6x">底盘保护罩-Diva 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_chs_cover.mix_4x">底盘保护罩-Centurion （油箱520+315L）</s:String>
+		x:Key="volvo.fh_2024.r_chs_cover.mix_4x">底盘保护罩-Centurion （油箱520+315L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_chs_cover.mix_4x_2">底盘保护罩-Centurion （油箱600+340L）</s:String>
+		x:Key="volvo.fh_2024.r_chs_cover.mix_4x_2">底盘保护罩-Centurion （油箱600+340L） (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_chs_cover.mix_6x">底盘保护罩-Centurion 6x2</s:String>
+		x:Key="volvo.fh_2024.r_chs_cover.mix_6x">底盘保护罩-Centurion 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_fender.paint_4x">后挡泥板-喷漆 4x2</s:String>
+		x:Key="volvo.fh_2024.r_fender.paint_4x">后挡泥板-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_fender.paint_6x">后挡泥板-喷漆 6x2</s:String>
+		x:Key="volvo.fh_2024.r_fender.paint_6x">后挡泥板-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2</s:String>
+		x:Key="volvo.fh_2024.r_fendr_top.paint_4x">后挡泥板顶盖-喷漆 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2</s:String>
+		x:Key="volvo.fh_2024.r_fendr_top.paint_6x">后挡泥板顶盖-喷漆 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2</s:String>
+		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_4x">后挡泥板顶盖-喷漆和镀铬 4x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2</s:String>
+		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_6x">后挡泥板顶盖-喷漆和镀铬 6x2 (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_bumper.bend">后保险杠-Thor</s:String>
+		x:Key="volvo.fh_2024.r_bumper.bend">后保险杠-Thor (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_bumper.painted">后保险杠-Chariot</s:String>
+		x:Key="volvo.fh_2024.r_bumper.painted">后保险杠-Chariot (FH Tuning Pack)</s:String>
 	<s:String
-		x:Key="volvo.fh_2024.r_bumper.smoth">后保险杠-Diva</s:String>
+		x:Key="volvo.fh_2024.r_bumper.smoth">后保险杠-Diva (FH Tuning Pack)</s:String>
 
 	
 	
@@ -1603,7 +1603,7 @@
 	<s:String
 		x:Key="freightliner.cascadia2024.sideskirt.lng240_pt_a">侧裙-Aero 喷漆 长 6x2/6x4 240gal</s:String>
 	<s:String
-		x:Key="freightliner.cascadia2024.mudflaps.aero_pnt">侧裙-FlowBelow 喷漆</s:String>
+		x:Key="freightliner.cascadia2024.mudflaps.aero_pnt">挡泥帘-FlowBelow 喷漆</s:String>
 
 	
 	
@@ -1689,13 +1689,13 @@
 	<s:String
 		x:Key="intnational.lt.cabdefl.hi_ext">驾驶室导流板-延长</s:String>
 	<s:String
-		x:Key="intnational.lt.bumper.lux">保险杠-喷漆镀铬</s:String>
-	<s:String
 		x:Key="intnational.lt.bumper.paint">保险杠-喷漆</s:String>
 	<s:String
-		x:Key="intnational.lt.bumper.paint_pl_s13">保险杠-喷漆 S13 塑料</s:String>
+		x:Key="intnational.lt.bumper.lux">保险杠-喷漆镀铬</s:String>
 	<s:String
 		x:Key="intnational.lt.bumper.paint_s13">保险杠-喷漆 S13</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint_pl_s13">保险杠-喷漆 S13 塑料</s:String>
 	<s:String
 		x:Key="intnational.lt.sideskirt.shr_pn">侧裙-喷漆 短</s:String>
 	<s:String
@@ -1791,231 +1791,231 @@
 		x:Key="s86.kenworth.w900.cabin">86" Studio Sleeper</s:String>
 	<!--Accessory-->
 	<s:String
-		x:Key="kenworth.w900.sunshield.bat_pnt">sunshield.bat_pnt</s:String>
+		x:Key="kenworth.w900.sunshield.bat_pnt">遮阳板-Batvisor, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.sunshield.shape01_pnt">sunshield.shape01_pnt</s:String>
+		x:Key="kenworth.w900.sunshield.shape01_pnt">遮阳板-标准, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.sunshield.shape02_pnt">sunshield.shape02_pnt</s:String>
+		x:Key="kenworth.w900.sunshield.shape02_pnt">遮阳板-Blind Mount Visor, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.sunshield.shape03_pnt">sunshield.shape03_pnt</s:String>
+		x:Key="kenworth.w900.sunshield.shape03_pnt">遮阳板-豪华, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.sunshield.untie_pnt">sunshield.untie_pnt</s:String>
+		x:Key="kenworth.w900.sunshield.untie_pnt">遮阳板-Untie, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.mirror.modern1_pnt">mirror.modern1_pnt</s:String>
+		x:Key="kenworth.w900.mirror.modern1_pnt">主后视镜-现代, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.mirror.modern2_pnt">mirror.modern2_pnt</s:String>
+		x:Key="kenworth.w900.mirror.modern2_pnt">主后视镜-高级现代, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.mirror.nxtgen1_pnt">mirror.nxtgen1_pnt</s:String>
+		x:Key="kenworth.w900.mirror.nxtgen1_pnt">主后视镜-Duty II, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.mirror.nxtgen2_pnt">mirror.nxtgen2_pnt</s:String>
+		x:Key="kenworth.w900.mirror.nxtgen2_pnt">主后视镜-标准 II, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.mirror.shape1_pnt">mirror.shape1_pnt</s:String>
+		x:Key="kenworth.w900.mirror.shape1_pnt">主后视镜-Duty, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.mirror.shape2_pnt">mirror.shape2_pnt</s:String>
+		x:Key="kenworth.w900.mirror.shape2_pnt">主后视镜-标准, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.fl_mirror.shape1_pnt">fl_mirror.shape1_pnt</s:String>
+		x:Key="kenworth.w900.fl_mirror.shape1_pnt">补盲镜（左）-经典, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.fl_mirror.shape2_pnt">fl_mirror.shape2_pnt</s:String>
+		x:Key="kenworth.w900.fl_mirror.shape2_pnt">补盲镜（左）-标准, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.fr_mirror.shape1_pnt">fr_mirror.shape1_pnt</s:String>
+		x:Key="kenworth.w900.fr_mirror.shape1_pnt">补盲镜（右）-经典, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.fr_mirror.shape2_pnt">fr_mirror.shape2_pnt</s:String>
+		x:Key="kenworth.w900.fr_mirror.shape2_pnt">补盲镜（右）-标准, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.grill.diamond_cut">grill.diamond_cut</s:String>
+		x:Key="kenworth.w900.grill.diamond_cut">进气格栅-Diamond Cut(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.grill.louver_a_pnt">grill.louver_a_pnt</s:String>
+		x:Key="kenworth.w900.grill.louver_a_pnt">进气格栅-Louvered Angle, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.grill.louver_pnt">grill.louver_pnt</s:String>
+		x:Key="kenworth.w900.grill.louver_pnt">进气格栅-Louvered, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.grill.srd_pnt">grill.srd_pnt</s:String>
+		x:Key="kenworth.w900.grill.srd_pnt">进气格栅-Surround, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.grill.std_pnt">grill.std_pnt</s:String>
+		x:Key="kenworth.w900.grill.std_pnt">进气格栅-标准, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.grill.v18_pnt">grill.v18_pnt</s:String>
+		x:Key="kenworth.w900.grill.v18_pnt">进气格栅-V18, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_120">doorstep.pnt2_120</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_120">登车踏板-喷漆 短底盘120gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_150">doorstep.pnt2_150</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_150">登车踏板-喷漆 短底盘150gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_180">doorstep.pnt2_180</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_180">登车踏板-喷漆 短底盘180gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_180b">doorstep.pnt2_180b</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_180b">登车踏板-喷漆, 基本 短底盘180gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_235">doorstep.pnt2_235</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_235">登车踏板-喷漆 中长底盘220+gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_235b">doorstep.pnt2_235b</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_235b">登车踏板-喷漆, 基本 中长底盘220+gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt2_260">doorstep.pnt2_260</s:String>
+		x:Key="kenworth.w900.doorstep.pnt_260">登车踏板-喷漆, 豪华 长底盘220+gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_120">doorstep.pnt_120</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_120">登车踏板-喷漆II 短底盘120gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_150">doorstep.pnt_150</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_150">登车踏板-喷漆II 短底盘150gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_180">doorstep.pnt_180</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_180">登车踏板-喷漆II 短底盘180gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_180b">doorstep.pnt_180b</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_180b">登车踏板-喷漆II, 基本 短底盘180gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_235">doorstep.pnt_235</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_235">登车踏板-喷漆II 中长底盘 220+gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_235b">doorstep.pnt_235b</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_235b">登车踏板-喷漆II, 基本 中长底盘 220+gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.doorstep.pnt_260">doorstep.pnt_260</s:String>
+		x:Key="kenworth.w900.doorstep.pnt2_260">登车踏板-喷漆II, 豪华 长底盘 220+gal(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.bull_black_p">f_logo.bull_black_p</s:String>
+		x:Key="kenworth.w900.f_logo.bull_black_p">前车标-黑色长角牛角, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.bull_blue_p">f_logo.bull_blue_p</s:String>
+		x:Key="kenworth.w900.f_logo.bull_blue_p">前车标-蓝色长角牛角, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.bull_red_p">f_logo.bull_red_p</s:String>
+		x:Key="kenworth.w900.f_logo.bull_red_p">前车标-红色长角牛角, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.kw_blk_p">f_logo.kw_blk_p</s:String>
+		x:Key="kenworth.w900.f_logo.kw_blk_p">前车标-Kenworth黑色, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.kw_chr_p">f_logo.kw_chr_p</s:String>
+		x:Key="kenworth.w900.f_logo.kw_chr_p">前车标-Kenworth豪华, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.kw_p">f_logo.kw_p</s:String>
+		x:Key="kenworth.w900.f_logo.kw_p">前车标-Kenworth, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.kw_rtr_blk_p">f_logo.kw_rtr_blk_p</s:String>
+		x:Key="kenworth.w900.f_logo.kw_rtr_blk_p">前车标-复古Kenworth黑色, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.f_logo.kw_rtr_p">f_logo.kw_rtr_p</s:String>
+		x:Key="kenworth.w900.f_logo.kw_rtr_p">前车标-复古Kenworth, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.boxer_pnt">bumper.boxer_pnt</s:String>
+		x:Key="kenworth.w900.bumper.boxer_pnt">保险杠-Boxer, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.foreman_pnt">bumper.foreman_pnt</s:String>
+		x:Key="kenworth.w900.bumper.foreman_pnt">保险杠-Foreman, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.mirage_pnt">bumper.mirage_pnt</s:String>
+		x:Key="kenworth.w900.bumper.mirage_pnt">保险杠-Mirage, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.ram_pnt">bumper.ram_pnt</s:String>
+		x:Key="kenworth.w900.bumper.ram_pnt">保险杠-Ram, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.ranger_pnt">bumper.ranger_pnt</s:String>
+		x:Key="kenworth.w900.bumper.ranger_pnt">保险杠-Ranger, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.shape01_pnt">bumper.shape01_pnt</s:String>
+		x:Key="kenworth.w900.bumper.shape01_pnt">保险杠-标准, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.shape02_pnt">bumper.shape02_pnt</s:String>
+		x:Key="kenworth.w900.bumper.shape02_pnt">保险杠-Shield, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.shape03_pnt">bumper.shape03_pnt</s:String>
+		x:Key="kenworth.w900.bumper.shape03_pnt">保险杠-Firefly, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.shape04_pnt">bumper.shape04_pnt</s:String>
+		x:Key="kenworth.w900.bumper.shape04_pnt">保险杠-现代, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.shape05_pnt">bumper.shape05_pnt</s:String>
+		x:Key="kenworth.w900.bumper.shape05_pnt">保险杠-Quarterback, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.storm_chr">bumper.storm_chr</s:String>
+		x:Key="kenworth.w900.bumper.storm_chr">保险杠-Storm(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.bumper.storm_pnt">bumper.storm_pnt</s:String>
-	<s:String
-		x:Key="kenworth.w900.cabdefl.whale_pnt">cabdefl.whale_pnt</s:String>
-	<s:String
-		x:Key="kenworth.w900.cabdefl.wing_pnt">cabdefl.wing_pnt</s:String>
+		x:Key="kenworth.w900.bumper.storm_pnt">保险杠-Storm, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
 		x:Key="kenworth.w900.cabdefl.s72_std">驾驶室导流板-标准 72" Aerodyne Sleeper</s:String>
 	<s:String
 		x:Key="kenworth.w900.cabdefl.s86_std">驾驶室导流板-标准 86" Studio Sleeper</s:String>
 	<s:String
-		x:Key="kenworth.w900.deflector.aero_pnt">deflector.aero_pnt</s:String>
+		x:Key="kenworth.w900.cabdefl.whale_pnt">驾驶室导流板-鲸尾式, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.deflector.shape01_pnt">deflector.shape01_pnt</s:String>
+		x:Key="kenworth.w900.cabdefl.wing_pnt">驾驶室导流板-导流翼, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.day_sa_l_pnt">exhaust.day_sa_l_pnt</s:String>
+		x:Key="kenworth.w900.deflector.shape01_pnt">挡虫板-金属 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.day_sn_l_pnt">exhaust.day_sn_l_pnt</s:String>
+		x:Key="kenworth.w900.deflector.aero_pnt">挡虫板-Aero 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.day_sn_s_pnt">exhaust.day_sn_s_pnt</s:String>
+		x:Key="kenworth.w900.exhaust.day_sa_l_pnt">排气管-牛角 长, 喷漆 Day Cab(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.day_ss_l_pnt">exhaust.day_ss_l_pnt</s:String>
+		x:Key="kenworth.w900.exhaust.day_ss_s_pnt">排气管-标准平顶 短, 喷漆 Day Cab(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.day_ss_s_pnt">exhaust.day_ss_s_pnt</s:String>
+		x:Key="kenworth.w900.exhaust.day_ss_l_pnt">排气管-标准平顶 长, 喷漆 Day Cab(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.slp_kn_l_pnt">exhaust.slp_kn_l_pnt</s:String>
+		x:Key="kenworth.w900.exhaust.day_sn_s_pnt">排气管-斜顶 短, 喷漆 Day Cab(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.exhaust.slp_ks_l_pnt">exhaust.slp_ks_l_pnt</s:String>
+		x:Key="kenworth.w900.exhaust.day_sn_l_pnt">排气管-斜顶 长, 喷漆 Day Cab(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_chs_cover.pln_pnt_sng">r_chs_cover.pln_pnt_sng</s:String>
+		x:Key="kenworth.w900.exhaust.slp_ks_l_pnt">排气管-Kenworth 平顶 长, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.100yp2_ln260">tank.100yp2_ln260</s:String>
+		x:Key="kenworth.w900.exhaust.slp_kn_l_pnt">排气管-Kenworth 斜顶 长, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.100yp_ln260">tank.100yp_ln260</s:String>
+		x:Key="kenworth.w900.r_chs_cover.pln_pnt_sng">底盘防护罩-喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_ln220n">tank.pnt2_ln220n</s:String>
+		x:Key="kenworth.w900.tank.pnt_sh120">油箱-喷漆120gal 短底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_ln235">tank.pnt2_ln235</s:String>
+		x:Key="kenworth.w900.tank.pnt_sh150n">油箱-喷漆150gal 短底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_ln260">tank.pnt2_ln260</s:String>
+		x:Key="kenworth.w900.tank.pnt_sh180">油箱-喷漆180gal 短底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_ln300">tank.pnt2_ln300</s:String>
+		x:Key="kenworth.w900.tank.pnt_sh220n">油箱-喷漆220gal 短底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_ln300n">tank.pnt2_ln300n</s:String>
+		x:Key="kenworth.w900.tank.pnt_md220n">油箱-喷漆220gal 中底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_md220n">tank.pnt2_md220n</s:String>
+		x:Key="kenworth.w900.tank.pnt_md235">油箱-喷漆235gal 中底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_md235">tank.pnt2_md235</s:String>
+		x:Key="kenworth.w900.tank.pnt_md260">油箱-喷漆260gal 中底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_md260">tank.pnt2_md260</s:String>
+		x:Key="kenworth.w900.tank.pnt_md300">油箱-喷漆300gal 中底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_md300">tank.pnt2_md300</s:String>
+		x:Key="kenworth.w900.tank.pnt_md300n">油箱-喷漆300gal 中底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_md300n">tank.pnt2_md300n</s:String>
+		x:Key="kenworth.w900.tank.pnt_ln220n">油箱-喷漆和镀铬220gal 长底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_sh120">tank.pnt2_sh120</s:String>
+		x:Key="kenworth.w900.tank.pnt_ln235">油箱-喷漆235gal 长底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_sh150n">tank.pnt2_sh150n</s:String>
+		x:Key="kenworth.w900.tank.pnt_ln260">油箱-喷漆260gal 长底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_sh180">tank.pnt2_sh180</s:String>
+		x:Key="kenworth.w900.tank.pnt_ln300">油箱-喷漆300gal 长底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt2_sh220n">tank.pnt2_sh220n</s:String>
+		x:Key="kenworth.w900.tank.pnt_ln300n">油箱-喷漆300gal 长底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_ln220n">tank.pnt_ln220n</s:String>
+		x:Key="kenworth.w900.tank.100yp_ln260">油箱-喷漆260gal 长6x4 (W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_ln235">tank.pnt_ln235</s:String>
+		x:Key="kenworth.w900.tank.pnt2_sh120">油箱-喷漆和镀铬120gal 短底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_ln260">tank.pnt_ln260</s:String>
+		x:Key="kenworth.w900.tank.pnt2_sh150n">油箱-喷漆和镀铬150gal 短底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_ln300">tank.pnt_ln300</s:String>
+		x:Key="kenworth.w900.tank.pnt2_sh180">油箱-喷漆和镀铬180gal 短底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_ln300n">tank.pnt_ln300n</s:String>
+		x:Key="kenworth.w900.tank.pnt2_sh220n">油箱-喷漆和镀铬220gal 短底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_md220n">tank.pnt_md220n</s:String>
+		x:Key="kenworth.w900.tank.pnt2_md220n">油箱-喷漆和镀铬220gal 中底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_md235">tank.pnt_md235</s:String>
+		x:Key="kenworth.w900.tank.pnt2_md235">油箱-喷漆和镀铬235gal 中底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_md260">tank.pnt_md260</s:String>
+		x:Key="kenworth.w900.tank.pnt2_md260">油箱-喷漆和镀铬260gal 中底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_md300">tank.pnt_md300</s:String>
+		x:Key="kenworth.w900.tank.pnt2_md300">油箱-喷漆和镀铬300gal 中底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_md300n">tank.pnt_md300n</s:String>
+		x:Key="kenworth.w900.tank.pnt2_md300n">油箱-喷漆和镀铬300gal 中底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_sh120">tank.pnt_sh120</s:String>
+		x:Key="kenworth.w900.tank.pnt2_ln220n">油箱-喷漆和镀铬220gal 长底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_sh150n">tank.pnt_sh150n</s:String>
+		x:Key="kenworth.w900.tank.pnt2_ln235">油箱-喷漆和镀铬235gal 长底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_sh180">tank.pnt_sh180</s:String>
+		x:Key="kenworth.w900.tank.pnt2_ln260">油箱-喷漆和镀铬260gal 长底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.tank.pnt_sh220n">tank.pnt_sh220n</s:String>
+		x:Key="kenworth.w900.tank.pnt2_ln300">油箱-喷漆和镀铬300gal 长底盘(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.fiberg_full">后挡泥板-</s:String>
+		x:Key="kenworth.w900.tank.pnt2_ln300n">油箱-喷漆和镀铬300gal 长底盘+C15发动机(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.fiberg_half">r_fender.fiberg_half</s:String>
+		x:Key="kenworth.w900.tank.100yp2_ln260">油箱-喷漆和镀铬260gal 长6x4 (W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.hump_cur_dbl">r_fender.hump_cur_dbl</s:String>
+		x:Key="kenworth.w900.r_fender.pnt_half">后挡泥板-喷漆 半盖(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.hump_cur_tri">r_fender.hump_cur_tri</s:String>
+		x:Key="kenworth.w900.r_fender.pnt_full">后挡泥板-喷漆 全盖(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.hump_dbl">r_fender.hump_dbl</s:String>
+		x:Key="kenworth.w900.r_fender.pnt_dbl">后挡泥板-喷漆 双轮(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.hump_tri">r_fender.hump_tri</s:String>
+		x:Key="kenworth.w900.r_fender.pnt_tri">后挡泥板-喷漆 三轮(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.pnt_dbl">r_fender.pnt_dbl</s:String>
+		x:Key="kenworth.w900.r_fender.fiberg_half">后挡泥板-玻璃纤维半盖(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.pnt_full">r_fender.pnt_full</s:String>
+		x:Key="kenworth.w900.r_fender.fiberg_full">后挡泥板-玻璃纤维全盖(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.pnt_half">r_fender.pnt_half</s:String>
+		x:Key="kenworth.w900.r_fender.hump_dbl">后挡泥板-驼峰式 双轮(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.pnt_tri">r_fender.pnt_tri</s:String>
+		x:Key="kenworth.w900.r_fender.hump_tri">后挡泥板-驼峰式 三轮(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.qrt_kw_pnt">r_fender.qrt_kw_pnt</s:String>
+		x:Key="kenworth.w900.r_fender.hump_cur_dbl">后挡泥板-弧度驼峰式 双轮(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.qrt_log_pnt">r_fender.qrt_log_pnt</s:String>
+		x:Key="kenworth.w900.r_fender.hump_cur_tri">后挡泥板-弧度驼峰式 三轮(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.qrt_pnt">r_fender.qrt_pnt</s:String>
+		x:Key="kenworth.w900.r_fender.qrt_pnt">后挡泥板-四分之一, 喷漆(W900 Tuning Pack)</s:String>
 	<s:String
-		x:Key="kenworth.w900.r_fender.storm_pnt">r_fender.storm_pnt</s:String>
+		x:Key="kenworth.w900.r_fender.qrt_kw_pnt">后挡泥板-Kenworth 四分之一, 喷漆(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_log_pnt">后挡泥板-Logo 四分之一, 喷漆(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.storm_pnt">后挡泥板-Storm, 喷漆(W900 Tuning Pack)</s:String>
 
 	
 	
@@ -2348,7 +2348,7 @@
 	<s:String
 		x:Key="volvo.vnl2025.sideskirt.std_pnt_74">侧裙-喷漆 840/860</s:String>
 	<s:String
-		x:Key="volvo.vnl2025.r_bumper.fl_pnt">FlowBelow 喷漆</s:String>
+		x:Key="volvo.vnl2025.r_bumper.fl_pnt">后保险杠-FlowBelow 喷漆</s:String>
 	
 	
 	
@@ -2373,7 +2373,7 @@
 	<s:String
 		x:Key="westernstar.5700xe.cabdefl.s82">驾驶室导流板-豪华 82"</s:String>
 	<s:String
-		x:Key="westernstar.5700xe.f_fender.stock">前挡泥板-原厂</s:String>
+		x:Key="westernstar.5700xe.f_fender.stock">前挡泥板-标准</s:String>
 	<s:String
 		x:Key="westernstar.5700xe.bumper.stock">保险杠-原厂</s:String>
 	<s:String
@@ -2461,11 +2461,126 @@
 	<s:String
 		x:Key="westernstar.57x.sideskirt.shr16_fnd_pt">侧裙-Duty喷漆 （短底盘油箱-160gal）</s:String>
 	<s:String
-		x:Key="westernstar.57x.sideskirt.lng_fnd_pt">侧裙-Duty喷漆</s:String>
+		x:Key="westernstar.57x.sideskirt.lng_fnd_pt">侧裙-Duty喷漆（长底盘）</s:String>
 	<s:String
 		x:Key="westernstar.57x.sideskirt.lng_hlf_pt">侧裙-喷漆（半包侧裙）</s:String>
 	<s:String
 		x:Key="westernstar.57x.sideskirt.lng20_pt">侧裙-喷漆（全包侧裙，长底盘油箱-200gal）</s:String>
 	<s:String
 		x:Key="westernstar.57x.sideskirt.lng24_pt">侧裙-喷漆（全包侧裙，长底盘油箱-240gal）</s:String>
+	
+	
+	
+	<!--乘用车 ETS2-->
+	<!--乘用车 ATS-->
+	<s:String
+		x:Key="name.ford.bronco_24">Ford Bronco 2024</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.bronco_24">2024</s:Int32>
+	<x:Static
+		x:Key="desc.ford.bronco_24"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="offrd_4d.ford.bronco_24.cabin">Sedan</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="ford.bronco_24.grill.bad_pnt">进气格栅-Badlands，喷漆</s:String>
+	<s:String
+		x:Key="ford.bronco_24.fenders.std_pnt">挡泥板-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.bronco_24.fenders.ssq_pnt">挡泥板-Sasquatch，喷漆</s:String>
+	<s:String
+		x:Key="ford.bronco_24.doorhndl.std_pnt">车门把手-标准喷漆</s:String>
+	<s:String
+		x:Key="ford.bronco_24.mirror.std_pnt">主后视镜-标准，喷漆</s:String>
+	
+	
+	
+	<s:String
+		x:Key="name.ford.f150_23">Ford F150 2023</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.f150_23">2023</s:Int32>
+	<x:Static
+		x:Key="desc.ford.f150_23"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="pckup4d_55.ford.f150_23.cabin">Sedan</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="ford.f150_23.f_bumper.std_pnt">前保险杠-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.f150_23.mirror.std_pnt">主后视镜-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.f150_23.doorhndl.std_pnt">车门把手-标准喷漆</s:String>
+	<s:String
+		x:Key="ford.f150_23.trunk.std_pnt">后备箱-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.f150_23.trunk.std_chr">后备箱-标准，镀铬</s:String>
+	<s:String
+		x:Key="ford.f150_23.r_bumper.std_pnt">后保险杠-标准，喷漆</s:String>
+	
+	
+	
+	<s:String
+		x:Key="name.ford.mustang_67">Ford Mustang 1967</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.mustang_67">1967</s:Int32>
+	<x:Static
+		x:Key="desc.ford.mustang_67"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="fastb.ford.mustang_67.cabin">Sedan</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.ford.victoria_06">Ford Crown Victoria 2006</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.victoria_06">2006</s:Int32>
+	<x:Static
+		x:Key="desc.ford.victoria_06"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="sedan.ford.victoria_06.cabin">Sedan</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="ford.victoria_06.f_bumper.std_pnt">前保险杠-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.f_bumper.std_pnf">前保险杠-标准，完全喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.f_bumper.std_pnc">前保险杠-标准，喷漆，镀铬</s:String>
+	<s:String
+		x:Key="ford.victoria_06.grill.std_pnt">进气格栅-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.grill.lx_pnt">进气格栅-LX，喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.mirror.std_pnt">主后视镜-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.doorhndl.std_pnt">车门把手-标准，完全喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.s_strip.std_pnt">侧条带-标准，完全喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.s_strip.std_pnc">侧条带-标准，喷漆和镀铬</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_panel.std_pnf">面板-标准，完全喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_panel.std_pnc">面板-标准，喷漆，镀铬条</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_bumper.std_pnt">后保险杠-标准，喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_bumper.std_pnf">后保险杠-标准，完全喷漆</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_bumper.std_pnc">后保险杠-标准，喷漆，镀铬</s:String>
+	
+	
+	
+	
+	<!--客车 ETS2-->
+	<!--客车 ATS-->
+	
 </ResourceDictionary>

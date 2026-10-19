@@ -1,18 +1,19 @@
-﻿using SCS_Mod_Helper.Trucks;
+﻿using SCS_Mod_Helper.Vehicles;
 
 namespace SCS_Mod_Helper.Modding.Accessories;
 
-public class AccessoryTruck(
-	string truckID,
+public class AccessoryVehicle(
+	string vehicleID,
 	int productionYear,
-	string ingameName,
+	string vehicleName,
 	string description,
+	string vehicleType,
 	string manifaturer,
 	bool ets2 = false,
 	bool check = false,
 	string modelType = "",
 	string look = "",
-	string variant = ""): Truck(truckID, productionYear, ingameName, description, manifaturer, ets2) {
+	string variant = ""): Vehicle(vehicleID, productionYear, vehicleName, description, vehicleType, manifaturer, ets2) {
 
 	private bool mCheck = check;
 	public bool Check {

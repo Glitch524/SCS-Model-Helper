@@ -1,0 +1,2585 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:s="clr-namespace:System;assembly=mscorlib"
+	xml:space="preserve">
+	<!--Truck Description ETS2-->
+	<s:String
+		x:Key="name.daf.xf">DAF XF105</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xf">2005</s:Int32>
+	<s:String
+		x:Key="desc.daf.xf">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="space_cab.daf.xf.cabin">Space</s:String>
+	<s:String
+		x:Key="s_cab_plus.daf.xf.cabin">Space Cab Plus</s:String>
+	<s:String
+		x:Key="super_s_cab.daf.xf.cabin">Super Space</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.xf.r_bumper.chrome">Rear Bumper-Centurion (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf.r_bumper.steel">Rear Bumper-Thor (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf.r_bumper.paint">Rear Bumper-Celeritas (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_4x2_p">Chassis Cover-Diva 4x2 (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_4x2_et_p">Chassis Cover-Diva 4x2 Extra Tank (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_6x2_p">Chassis Cover-Diva 6x2 (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf.r_chs_cover.ch_6x4_p">Chassis Cover-Diva 6x4 (XF Tuning DLC)</s:String>
+	
+	
+	<s:String
+		x:Key="name.daf.xf_euro6">DAF XF</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xf_euro6">2013</s:Int32>
+	<x:Static
+		x:Key="desc.daf.xf_euro6"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="space.daf.xf_euro6.cabin">Space</s:String>
+	<s:String
+		x:Key="spacespoiler.daf.xf_euro6.cabin">Space Aero</s:String>
+	<s:String
+		x:Key="superspace.daf.xf_euro6.cabin">Super Space</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.chrome">Rear Bumper-Centurion (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.chrome_6">Rear Bumper-Centurion 4x2 (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.steel">Rear Bumper-Thor (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.steel_6">Rear Bumper-Thor 4x2 (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.paint">Rear Bumper-Celeritas (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_bumper.paint_6">Rear Bumper-Celeritas 4x2 (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_chs_cover.ch_4x2_p">Chassis Cover-Diva 4x2 (XF Tuning DLC)</s:String>
+	<s:String
+		x:Key="daf.xf_euro6.r_chs_cover.ch_6x4_p">Chassis Cover-Diva 6x4 (XF Tuning DLC)</s:String>
+
+	
+	<s:String
+		x:Key="name.daf.2021">DAF NGD</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.2021">2021</s:Int32>
+	<x:Static
+		x:Key="desc.daf.2021"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="xf.daf.2021.cabin">XF</s:String>
+	<s:String
+		x:Key="xg.daf.2021.cabin">XG</s:String>
+	<s:String
+		x:Key="xg_plus.daf.2021.cabin">XG+</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.2021.mirror.plast">Main Mirrors-Plastic</s:String>
+	<s:String
+		x:Key="daf.2021.mirror.semi">Main Mirrors-Painted &#38; Plastic</s:String>
+	<s:String
+		x:Key="daf.2021.mirror.cam_semi">Main Mirrors-DAF Digital Vision</s:String>
+	<s:String
+		x:Key="daf.2021.sunshield.paint_xf">Sun Visor-Painted (XF)</s:String>
+	<s:String
+		x:Key="daf.2021.sunshield.paint_xg">Sun Visor-Painted (XG)</s:String>
+	<s:String
+		x:Key="daf.2021.sunshield.paint_xgp">Sun Visor-Painted (XG+)</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.pnt_4x2_xf">Sideskirts-Painted (XF)</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.pnt_4x2">Sideskirts-Painted</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv_4x2_xf">Sideskirts-Exclusive Painted (XF)</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv_4x2">Sideskirts-Exclusive Painted</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv2_4x2_xf">Sideskirts-Exclusive Painted II (XF)</s:String>
+	<s:String
+		x:Key="daf.2021.sideskirt.slv2_4x2">Sideskirts-Exclusive Painted II</s:String>
+
+	
+	
+	<s:String
+		x:Key="name.daf.xd">DAF XD</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xd">2022</s:Int32>
+	<s:String
+		x:Key="desc.daf.xd">Toybed is too high, sitting model may clip through the higher bed</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.daf.xd.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="sl.daf.xd.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="slh.daf.xd.cabin">Sleeper High</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="daf.xd.mirror.plast">Main Mirrors-Plastic</s:String>
+	<s:String
+		x:Key="daf.xd.mirror.semi">Main Mirrors-Painted &#38; Plastic</s:String>
+	<s:String
+		x:Key="daf.xd.mirror.cam_semi">DAF Digital Vision</s:String>
+	<s:String
+		x:Key="daf.xd.mirror.cam_semi_h">DAF Digital Vision (Sleeper High)</s:String>
+	<s:String
+		x:Key="daf.xd.sunshield.paint_slh">Sun Visor-Painted (Sleeper High)</s:String>
+	<s:String
+		x:Key="daf.xd.sideskirt.pnt_4x2s">Sideskirts-Painted (Sleeper, Sleeper High)</s:String>
+
+	
+	
+	<s:String
+		x:Key="name.daf.xf_electric">DAF XF Electric</s:String>
+	<s:Int32
+		x:Key="prodYear.daf.xf_electric">2025</s:Int32>
+	<s:String
+		x:Key="desc.daf.xf_electric">Currently no interior accessory locator</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="slh.daf.xf_electric.cabin">Sleeper High</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.iveco.stralis">Iveco Stralis</s:String>
+	<s:Int32
+		x:Key="prodYear.iveco.stralis">2002</s:Int32>
+	<s:String
+		x:Key="desc.iveco.stralis">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="at.iveco.stralis.cabin">Active Space</s:String>
+	<s:String
+		x:Key="at_higher.iveco.stralis.cabin">Active Super</s:String>
+	<s:String
+		x:Key="as_higher.iveco.stralis.cabin">Active Space Super</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.iveco.hiway">Iveco Stralis Hi-Way</s:String>
+	<s:Int32
+		x:Key="prodYear.iveco.hiway">2012</s:Int32>
+	<s:String
+		x:Key="desc.iveco.hiway">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="hiway.iveco.hiway.cabin">Hi-Way</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.iveco.sway">Iveco S-Way</s:String>
+	<s:Int32
+		x:Key="prodYear.iveco.sway">2019</s:Int32>
+	<x:Static
+		x:Key="desc.iveco.sway"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="as.iveco.sway.cabin">Active Space</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="iveco.sway.sideskirt.pnt_4x2">Sideskirts-Painted</s:String>
+	<s:String
+		x:Key="iveco.sway.sideskirt.pnt_4x2_a">Sideskirts-Painted, Aero</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.man.tgx">MAN TGX Euro 5</s:String>
+	<s:Int32
+		x:Key="prodYear.man.tgx">2008</s:Int32>
+	<s:String
+		x:Key="desc.man.tgx">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="xl_cab.man.tgx.cabin">XL</s:String>
+	<s:String
+		x:Key="xlx_cab.man.tgx.cabin">XLX</s:String>
+	<s:String
+		x:Key="xxl_cab.man.tgx.cabin">XXL</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.man.tgx_euro6">MAN TGX Euro 6</s:String>
+	<s:Int32
+		x:Key="prodYear.man.tgx_euro6">2015</s:Int32>
+	<x:Static
+		x:Key="desc.man.tgx_euro6"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="xl_cab.man.tgx_euro6.cabin">XL</s:String>
+	<s:String
+		x:Key="xlx_cab.man.tgx_euro6.cabin">XLX</s:String>
+	<s:String
+		x:Key="xxl_cab.man.tgx_euro6.cabin">XXL</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="man.tgx_euro6.mirror.paint">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_4x2">Sideskirts-Stock 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x22">Sideskirts-Stock 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x24">Sideskirts-Stock 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x2_2">Sideskirts-Stock 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_6x4">Sideskirts-Stock 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.stock_8x4">Sideskirts-Stock 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_4x2">Sideskirts-Painted 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x22">Sideskirts-Painted 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x24">Sideskirts-Painted 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x2_2">Sideskirts-Painted 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_6x4">Sideskirts-Painted 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.sideskirt.paint_8x4">Sideskirts-Painted 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_4x2">Rear Fender-Painted 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x22">Rear Fender-Painted 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x24">Rear Fender-Painted 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x2_2">Rear Fender-Painted 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_6x4">Rear Fender-Painted 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fender.paint_8x4">Rear Fender-Painted 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_4x2">Rear Fender Top-Painted 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x22">Rear Fender Top-Painted 6x2/2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x24">Rear Fender Top-Painted 6x2/4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x2_2">Rear Fender Top-Painted 6x2-2</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_6x4">Rear Fender Top-Painted 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_euro6.r_fendr_top.paint_8x4">Rear Fender Top-Painted 8x4</s:String>
+
+	
+	
+	<s:String
+		x:Key="name.man.tgx_2020">MAN TGX</s:String>
+	<s:Int32
+		x:Key="prodYear.man.tgx_2020">2020</s:Int32>
+	<x:Static
+		x:Key="desc.man.tgx_2020"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="gn.man.tgx_2020.cabin">GN</s:String>
+	<s:String
+		x:Key="gm.man.tgx_2020.cabin">GM</s:String>
+	<s:String
+		x:Key="gx.man.tgx_2020.cabin">GX</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="man.tgx_2020.mirror.pnt_pla">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="man.tgx_2020.mirror.pnt_pla_bs">Main Mirrors-Painted, Sensor</s:String>
+	<s:String
+		x:Key="man.tgx_2020.mirror.cam_pnt">Main Mirrors-Painted, Camera</s:String>
+	<s:String
+		x:Key="man.tgx_2020.mirror.cam_pnt_gn">Main Mirrors-Painted, Camera GN</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gn">Roof Deflector-Aero GN</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gm">Roof Deflector-Aero</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_deflector.gm_2024">Roof Deflector-Aero II</s:String>
+	<s:String
+		x:Key="man.tgx_2020.f_bumper.pnt_pla_duty">Front Bumper-Duty Painted</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_4x2">Rear Fender-Painted 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_6x22">Rear Fender-Painted 6x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_6x4">Rear Fender-Painted 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fender.pnt_8x4">Rear Fender-Painted 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_4x2">Rear Fender Top-Painted 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_6x22">Rear Fender Top-Painted 6x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_6x4">Rear Fender Top-Painted 6x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_fendr_top.pnt_8x4">Rear Fender Top-Painted 8x4</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_light.old_pnt">Rear Light-Painted</s:String>
+	<s:String
+		x:Key="man.tgx_2020.r_light.led_pnt">Rear Light-LED Painted</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2">Sideskirts-Stock, Aero 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2_e">Sideskirts-Stock 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2_p">Sideskirts-Painted, Aero 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.4x2_p_e">Sideskirts-Painted 4x2</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_s">Sideskirts-Stock, Aero (Short)</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_s_e">Sideskirts-Stock (Short)</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_p">Sideskirts-Painted, Aero (Short)</s:String>
+	<s:String
+		x:Key="man.tgx_2020.sideskirt.fender_p_e">Sideskirts-Painted (Short)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.mercedes.actros">Mercedes-Benz Actros</s:String>
+	<s:Int32
+		x:Key="prodYear.mercedes.actros">2009</s:Int32>
+	<s:String
+		x:Key="desc.mercedes.actros">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="cabin_l_lw.mercedes.actros.cabin">Low Roof Sleeper</s:String>
+	<s:String
+		x:Key="cabin_l.mercedes.actros.cabin">high Roof Sleeper</s:String>
+	<s:String
+		x:Key="megaspace.mercedes.actros.cabin">MegaSpace</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mercedes.actros.sunshld.shape14">Sun Visor-Painted (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.sunshld.shape15">Sun Visor-Painted, Luxury (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.sunshld.shape2">Sun Visor-Samurai</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_chs_cover.paint4x2">Chassis Cover-Diva 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_chs_cover.paint6x24">Chassis Cover-Diva 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_chs_cover.paint6x4">Chassis Cover-Diva 6x4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.exhaust_m.exhaust1a">Rear Exhaust-Thor (MegaSpace) (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.exhaust_m.exhaust1b">Rear Exhaust-Thor (high Roof Sleeper) (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.exhaust_m.exhaust1c">Rear Exhaust-Thor (Low Roof Sleeper) (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fender.4x2paint">Rear Fender-Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fender.6x24paint">Rear Fender-Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fender.6x2paint">Rear Fender-Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fendr_top.4x2paint">Rear Fender Top-Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fendr_top.6x24paint">Rear Fender Top-Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_fendr_top.6x2paint">Rear Fender Top-Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2paint">Rear Bumper-Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v1plate">Rear Bumper-Centurion 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v1paint">Rear Bumper-Centurion, Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v1chrome">Rear Bumper-Centurion, Chromed 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v2paint">Rear Bumper-Thor, Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.4x2v3paint">Rear Bumper-Diva, Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2paint">Rear Bumper-Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v1plate">Rear Bumper-Centurion  6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v1paint">Rear Bumper-Centurion, Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v1chrome">Rear Bumper-Centurion, Chromed 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v2paint">Rear Bumper-Thor, Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x2v3paint">Rear Bumper-Diva, Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24paint">Rear Bumper-Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v1plate">Rear Bumper-Centurion 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v1paint">Rear Bumper-Centurion, Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v1chrome">Rear Bumper-Centurion, Chromed 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v2paint">Rear Bumper-Thor, Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros.r_bumper.6x24v3paint">Rear Bumper-Diva, Painted 6x2/4 (Actros Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.mercedes.actros2014">Mercedes-Benz New Actros</s:String>
+	<s:Int32
+		x:Key="prodYear.mercedes.actros2014">2014</s:Int32>
+	<x:Static
+		x:Key="desc.mercedes.actros2014"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="streamspace.mercedes.actros2014.cabin">StreamSpace</s:String>
+	<s:String
+		x:Key="bigspace.mercedes.actros2014.cabin">BigSpace</s:String>
+	<s:String
+		x:Key="gigaspace.mercedes.actros2014.cabin">GigaSpace</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mercedes.actros2014.sunshld.paint01">Sun Visor-Samurai (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.sunshld.paint02">Sun Visor-Titan (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.sunshld.paint03">Sun Visor-Viking (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.s_guard.type3">Stoneguard-Extra (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_chs_cover.4x2p">Chassis Cover-Diva 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_chs_cover.6x24p">Chassis Cover-Diva 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_chs_cover.6x2p">Chassis Cover-Diva 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.4x2p">Rear Fender-Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.6x24p">Rear Fender-Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.6x2p">Rear Fender-Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fender.8x4p">Rear Fender-Painted 8x4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.4x2p">Rear Fender Top-Painted 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.6x24p">Rear Fender Top-Painted 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.6x2p">Rear Fender Top-Painted 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_fendr_top.8x4p">Rear Fender Top-Painted 8x4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.4x2v3">Rear Bumper-Diva 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.4x2v2">Rear Bumper-Centurion 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.4x2v1">Rear Bumper-Thor 4x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x24v3">Rear Bumper-Diva 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x24v2">Rear Bumper-Centurion 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x24v1">Rear Bumper-Thor 6x2/4 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x2v3">Rear Bumper-Diva 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x2v2">Rear Bumper-Centurion 6x2 (Actros Tuning Pack)</s:String>
+	<s:String
+		x:Key="mercedes.actros2014.r_bumper.6x2v1">Rear Bumper-Thor 6x2 (Actros Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.renault.magnum">Renault Magnum</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.magnum">1990</s:Int32>
+	<s:String
+		x:Key="desc.renault.magnum">EOL, toybed is a seat, clipping may happen when sleeping</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="solo.renault.magnum.cabin">Excellence</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.renault.premium">Renault Premium</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.premium">1996</s:Int32>
+	<s:String
+		x:Key="desc.renault.premium">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.renault.premium.cabin">Normal Roof</s:String>
+	<s:String
+		x:Key="higher.renault.premium.cabin">High Roof</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.renault.t">Renault T</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.t">2013</s:Int32>
+	<x:Static
+		x:Key="desc.renault.t"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="sleeper.renault.t.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="high_sleeper.renault.t.cabin">High Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="renault.t.hl_guard.paint">Headlight Guard-Painted (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.hl_guard.paint_evo">Headlight Guard-Painted Evolution (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.s_guard.renault_pa">Stoneguard-Renault Painted (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.f_grill.racing_paint">Bull Bar-Racing Painted (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.f_grill.joker_paint">Bull Bar-Joker Painted (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.f_grill.hawk_paint">Bull Bar-Hawk Painted (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.b_grill.paint_mirage">Lower Grille Guard-Painted Mirage (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.b_grill.paint_pride">Lower Grille Guard-Printed Pride (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2plain">Sideskirts-Basic Painted 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2satin">Sideskirts-Satin 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2shp">Sideskirts-Painted Cover (Short) 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side1p">Sideskirts-Painted 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side1p24">Sideskirts-Painted, 2024 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side2pg">Sideskirts-Painted &#38; Plastic Gray Cover 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.4x2side3">Sideskirts-Painted &#38; Plastic Cover 4x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24plain">Sideskirts-Basic Painted 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24satin">Sideskirts-Satin 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24shp">Sideskirts-Painted Cover (Short) 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side1p">Sideskirts-Painted 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side1p24">Sideskirts-Painted, 2024 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side2pg">Sideskirts-Painted &#38; Plastic Gray Cover 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x24side3">Sideskirts-Painted &#38; Plastic Cover 6x2/4</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2plain">Sideskirts-Basic Painted 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2satin">Sideskirts-Satin 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2shp">Sideskirts-Painted Cover (Short) 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side1p">Sideskirts-Painted 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side1p24">Sideskirts-Painted, 2024 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side2pg">Sideskirts-Painted &#38; Plastic Gray Cover 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskirt.6x2side3">Sideskirts-Painted &#38; Plastic Cover 6x2</s:String>
+	<s:String
+		x:Key="renault.t.sideskrt_bar.4x2_paint">Sideskirts Bars-Painted 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskrt_bar.6x24_paint">Sideskirts Bars-Painted 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.sideskrt_bar.6x2_paint">Sideskirts Bars-Painted 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2_satin">Chassis Cover-Satin 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2t_satin">Chassis Cover-Satin 4x2 Extra Tank (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x24_satin">Chassis Cover-Satin 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x2_satin">Chassis Cover-Satin 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2_diva">Chassis Cover-Diva 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2t_diva">Chassis Cover-Diva 4x2 Extra Tank (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x24_diva">Chassis Cover-Diva 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x2_diva">Chassis Cover-Diva 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2_thor_pn">Chassis Cover-Thor Painted 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.4x2t_thor_pn">Chassis Cover-Thor Painted 4x2 Extra Tank (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x24_thor_pn">Chassis Cover-Thor Painted 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_chs_cover.6x2_thor_pn">Chassis Cover-Thor Painted 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.4x2_pn">Rear Fender-Painted 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x24_pn">Rear Fender-Painted 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x2_pn">Rear Fender-Painted 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.4x2_pn_ch">Rear Fender-Painted &#38; Chromed 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x24_pn_ch">Rear Fender-Painted &#38; Chromed 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fender.6x2_pn_ch">Rear Fender-Painted &#38; Chromed 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.4x2_pn">Rear Fender Top-Painted 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x24_pn">Rear Fender Top-Painted 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x2_pn">Rear Fender Top-Painted 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.4x2_pn_ch">Rear Fender Top-Painted &#38; Chromed 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x24_pn_ch">Rear Fender Top-Painted &#38; Chromed 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_fendr_top.6x2_pn_ch">Rear Fender Top-Painted &#38; Chromed 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_bumper.4x2_racing">Rear Bumper-Racing 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_bumper.6x24_racing">Rear Bumper-Racing 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_bumper.6x2_racing">Rear Bumper-Racing 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.4x2pnt">Rear Mudflaps-Painted 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x24pnt">Rear Mudflaps-Painted 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x2pnt">Rear Mudflaps-Painted 6x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.4x2pntw">Rear Mudflaps-Painted (wide) 4x2 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x24pntw">Rear Mudflaps-Painted (wide) 6x2/4 (Renault Trucks T Tuning DLC)</s:String>
+	<s:String
+		x:Key="renault.t.r_mudflap.6x2pntw">Rear Mudflaps-Painted (wide) 6x2 (Renault Trucks T Tuning DLC)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.renault.etech_t">Renault E-Tech T</s:String>
+	<s:Int32
+		x:Key="prodYear.renault.etech_t">2023</s:Int32>
+	<s:String
+		x:Key="desc.renault.etech_t">Currently no accessory locator</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="sleeper.renault.etech_t.cabin">Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.scania.r">Scania R 2009</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.r">2009</s:Int32>
+	<s:String
+		x:Key="desc.scania.r">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.r.cabin">Normal</s:String>
+	<s:String
+		x:Key="highline.scania.r.cabin">Highline</s:String>
+	<s:String
+		x:Key="topline.scania.r.cabin">Topline</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.r.r_chs_cover.chscmg4x203">Chassis Cover-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r.r_chs_cover.chscmg6x203">Chassis Cover-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r.r_chs_cover.chscmg6x2403">Chassis Cover-Diva 6x2/4 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r.r_bumper.arbumpermg01">Rear Bumper-Diva (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r.r_bumper.arbumpermg03">Rear Bumper-Thor (Mighty Griffin Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.streamline">Scania Streamline</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.streamline">2013</s:Int32>
+	<s:String
+		x:Key="desc.scania.streamline">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.streamline.cabin">Normal</s:String>
+	<s:String
+		x:Key="highline.scania.streamline.cabin">Highline</s:String>
+	<s:String
+		x:Key="topline.scania.streamline.cabin">Topline</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.streamline.r_chs_cover.chscmg4x203">Chassis Cover-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.streamline.r_chs_cover.chscmg6x203">Chassis Cover-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.streamline.r_chs_cover.chscmg6x2403">Chassis Cover-Diva 6x2/4 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.streamline.r_bumper.grbumpermg01">Rear Bumper-Diva (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.streamline.r_bumper.arbumpermg03">Rear Bumper-Thor (Mighty Griffin Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.r_2016">Scania R</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.r_2016">2016</s:Int32>
+	<x:Static
+		x:Key="desc.scania.r_2016"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.r_2016.cabin">Normal Roof</s:String>
+	<s:String
+		x:Key="highline.scania.r_2016.cabin">High Roof</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.r_2016.sunshld.stock">Sun Visor-StockI</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_01">Sun Visor-StockII</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_04">Sun Visor-Ranger (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_05">Sun Visor-Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.sunshld.sunshld_06">Sun Visor-Painted, Luxury (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.mirror.painted">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="scania.r_2016.mirror.painted_f">Main Mirrors-Painted, Luxury (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mirror.painted">Front Mirror-Painted</s:String>
+	<s:String
+		x:Key="scania.r_2016.s_mirror.painted">Side Mirror-Painted</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_equip.super_lo_pnt">Front Equipment-SUPER,Painted,Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_equip.super_md_pnt">Front Equipment-SUPER,Painted,High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_logo.painted">Front Logo-Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.kotrh">Front Mudflaps-King of the Road, Painted High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.kotr">Front Mudflaps-King of the Road, Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.kotrl">Front Mudflaps-King of the Road, Painted Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniah">Front Mudflaps-Scania, Painted High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scania">Front Mudflaps-Scania, Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scanial">Front Mudflaps-Scania, Painted Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniamgh">Front Mudflaps-Mighty Griffin High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniamg">Front Mudflaps-Mighty Griffin (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.scaniamgl">Front Mudflaps-Mighty Griffin Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.v8h">Front Mudflaps-Scania V8 Power High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.v8">Front Mudflaps-Scania V8 Power (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.f_mudflap.v8l">Front Mudflaps-Scania V8 Power Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p">Sideskirts-Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_1">Sideskirts-Painted &#38; Stock I 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_2">Sideskirts-Painted &#38; Stock II 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_v8">Sideskirts-Painted V8 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_v8_1">Sideskirts-Painted V8 &#38; Stock I 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.4x2_p_v8_2">Sideskirts-Painted V8 &#38; Stock II 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p">Sideskirts-Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_1">Sideskirts-Painted &#38; Stock I 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_2">Sideskirts-Painted &#38; Stock II 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_v8">Sideskirts-Painted V8 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_v8_1">Sideskirts-Painted V8 &#38; Stock I 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2_p_v8_2">Sideskirts-Painted V8 &#38; Stock II 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p">Sideskirts-Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_1">Sideskirts-Painted &#38; Stock I 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_2">Sideskirts-Painted &#38; Stock II 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_v8">Sideskirts-Painted V8 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_v8_1">Sideskirts-Painted V8 &#38; Stock I 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.sideskirt.6x2l_p_v8_2">Sideskirts-Painted V8 &#38; Stock II 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_chs_cover.4x2_p">Chassis Cover-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_chs_cover.6xn_p">Chassis Cover-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_chs_cover.6xnl_p">Chassis Cover-Diva 6x2 Long (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fender.4x2_p">Rear Fender-Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fender.6x2_p">Rear Fender-Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fender.6x2l_p">Rear Fender-Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.4x2_p">Rear Fender Top-Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.low_4x2_p">Rear Fender Top-Low, Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.6x2_p">Rear Fender Top-Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.low_6x2_p">Rear Fender Top-Low, Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.6x2l_p">Rear Fender Top-Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_fendr_top.low_6x2l_p">Rear Fender Top-Low, Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.stock_p">Rear Bumper-Painted</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.duty_p">Rear Bumper-Duty Painted</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.mg01">Rear Bumper-Diva (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.mg03">Rear Bumper-Thor (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.r_bumper.mg04">Rear Bumper-Chariot (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.r_2016.exhaust_m.mg01">Rear Exhaust-Wing Master V8 (Mighty Griffin Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.s_2016">Scania S</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.s_2016">2016</s:Int32>
+	<x:Static
+		x:Key="desc.scania.s_2016"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="normal.scania.s_2016.cabin">Normal Roof</s:String>
+	<s:String
+		x:Key="highline.scania.s_2016.cabin">High Roof</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="scania.s_2016.sunshld.stock">Sun Visor-Stock</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_01">Sun Visor-Stock II</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_04">Sun Visor-Ranger (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_05">Sun Visor-Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.sunshld.sunshld_06">Sun Visor-Painted, Luxury (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.mirror.painted">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="scania.s_2016.mirror.painted_f">Main Mirrors-Painted, Luxury (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mirror.painted">Front Mirror-Painted</s:String>
+	<s:String
+		x:Key="scania.s_2016.s_mirror.painted">Side Mirror-Painted</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_equip.super_hi_pnt">Front Equipment-SUPER, Painted, High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_equip.super_md_pnt">Front Equipment-SUPER, Painted, Mid (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_logo.painted">Front Logo-Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.kotrh">Front Mudflaps-King of the Road, Painted High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.kotr">Front Mudflaps-King of the Road, Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.kotrl">Front Mudflaps-King of the Road, Painted Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniah">Front Mudflaps-Scania, Painted High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scania">Front Mudflaps-Scania, Painted (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scanial">Front Mudflaps-Scania, Painted Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniamgh">Front Mudflaps-Mighty Griffin High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniamg">Front Mudflaps-Mighty Griffin (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.scaniamgl">Front Mudflaps-Mighty Griffin Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.v8h">Front Mudflaps-Scania V8 Power High (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.v8">Front Mudflaps-Scania V8 Power (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.f_mudflap.v8l">Front Mudflaps-Scania V8 Power Low (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p">Sideskirts-Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_1">Sideskirts-Painted &#38; Stock I 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_2">Sideskirts-Painted &#38; Stock II 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_v8">Sideskirts-Painted V8 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_v8_1">Sideskirts-Painted V8 &#38; StockI 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.4x2_p_v8_2">Sideskirts-Painted V8 &#38; StockII 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p">Sideskirts-Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_1">Sideskirts-Painted &#38; Stock I 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_2">Sideskirts-Painted &#38; Stock II 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_v8">Sideskirts-Painted V8 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_v8_1">Sideskirts-Painted V8 &#38; StockI 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2_p_v8_2">Sideskirts-Painted V8 &#38; StockII 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p">Sideskirts-Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_1">Sideskirts-Painted &#38; Stock I 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_2">Sideskirts-Painted &#38; Stock II 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_v8">Sideskirts-Painted V8 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_v8_1">Sideskirts-Painted V8 &#38; StockI 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.sideskirt.6x2l_p_v8_2">Sideskirts-Painted V8 &#38; StockII 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_chs_cover.4x2_p">Chassis Cover-Diva 4x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_chs_cover.6xn_p">Chassis Cover-Diva 6x2 (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_chs_cover.6xnl_p">Chassis Cover-Diva 6x2 Long (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fender.4x2_p">Rear Fender-Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fender.6x2_p">Rear Fender-Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fender.6x2l_p">Rear Fender-Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.4x2_p">Rear Fender Top-Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.low_4x2_p">Rear Fender Top-Low, Painted 4x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.6x2_p">Rear Fender Top-Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.low_6x2_p">Rear Fender Top-Low, Painted 6x2</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.6x2l_p">Rear Fender Top-Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_fendr_top.low_6x2l_p">Rear Fender Top-Low, Painted 6x2 Long</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.stock_p">Rear Bumper-Painted</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.duty_p">Rear Bumper-Duty Painted</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.mg01">Rear Bumper-Diva (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.mg03">Rear Bumper-Thor (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.r_bumper.mg04">Rear Bumper-Chariot (Mighty Griffin Tuning Pack)</s:String>
+	<s:String
+		x:Key="scania.s_2016.exhaust_m.mg01">Rear Exhaust-Wing Master V8 (Mighty Griffin Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.scania.s_2024e">Scania S BEV</s:String>
+	<s:Int32
+		x:Key="prodYear.scania.s_2024e">2024</s:Int32>
+	<x:Static
+		x:Key="desc.scania.s_2024e"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="highline.scania.s_2024e.cabin">High Roof</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh16">Volvo FH3</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh16">2009</s:Int32>
+	<s:String
+		x:Key="desc.volvo.fh16">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1.volvo.fh16.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh16.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh16.cabin">Globetrotter XL</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh16.sunshld.shape2">Sun Visor-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh16.sunshld.sunshield01">Sun Visor-Exclusive Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.sunshld.sunshield02">Sun Visor-Exclusive Painted &#38; Chromed (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.sunshld.sunshield03">Sun Visor-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.mirror.shape3">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="volvo.fh16.mirror.led3">Main Mirrors-Painted, 3 LED (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.mirror.led4">Main Mirrors-Painted, 4 LED (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.f_mirror.paint">Front Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.f_mirror.paintl">Front Mirror-Painted Long (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.s_mirror.paint">Side Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.f_grill.paint1">Bull Bar-Quarterback (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_grill.paint1">Light Bar-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_grill.paint1_h1">Light Bar-Painted Sleeper (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_4x">Chassis Cover-Diva 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_dia_4x">Chassis Cover-Centurion 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_6x">Chassis Cover-Diva 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_chs_cover.paint_dia_6x">Chassis Cover-Centurion 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_bumper.shape1">Rear Bumper-Diva (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_bumper.shape2">Rear Bumper-Chariot (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fender.paint_4x">Rear Fender-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fender.paint_6x">Rear Fender-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_4x">Rear Fender Top-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_6x">Rear Fender Top-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_chr_4x">Rear Fender Top-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.r_fendr_top.paint_chr_6x">Rear Fender Top-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.exhaust_m.exh_m_02">Rear Exhaust-Diva Globetrotter XL (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16.exhaust_m.exh_m_02b">Rear Exhaust-Diva (FH Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh16_2012">Volvo FH4</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh16_2012">2012</s:Int32>
+	<s:String
+		x:Key="desc.volvo.fh16_2012">EOL, UK seat locator rotates counter-clockwise about 50°</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1.volvo.fh16_2012.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh16_2012.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh16_2012.cabin">Globetrotter XL</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.shape1">Sun Visor-Stock</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.shape2">Sun Visor-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.dual">Sun Visor-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.quatro">Sun Visor-Exclusive Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sunshld.triangle">Sun Visor-Painted, Luxury (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_mirror.painted">Front Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_mirror.paintedl">Front Mirror-Painted Long (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.s_mirror.paint">Side Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.shape3">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.chrome_led">Main Mirrors-Painted, LED (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.chrome_logo">Main Mirrors-Painted &#38; Chromed (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.mirror.chrom_spec">Main Mirrors-Chromed Luxury (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_grill.net">Bull Bar-Painted Net</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.filter.paint_slep">Air Filter-Painted Sleeper (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.filter.paint_gl">Air Filter-Painted Globetrotter (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.filter.paint_glxl">Air Filter-Painted Globetrotter XL (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.shape2">Sideskirts-Full Protection Sideskirts</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.stock_6x">Sideskirts-Full Protection Sideskirts 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_s4x">Sideskirts-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_s6x">Sideskirts-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_4x">Sideskirts-Painted &#38; Chromed II 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.sideskirt.chrome_6x">Sideskirts-Painted &#38; Chromed II 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.f_fender_chs.paint">Front Fender-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.exhaust_m.shape2">Rear Exhaust-Centurion (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.exhaust_m.shape1">Rear Exhaust-Diva (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.painted_4x">Chassis Cover-Diva 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.painted_6x">Chassis Cover-Diva 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.mix_4x">Chassis Cover-Centurion 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_chs_cover.mix_6x">Chassis Cover-Centurion 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fender.paint_4x">Rear Fender-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fender.paint_6x">Rear Fender-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fender.paint_8x">Rear Fender-Painted 8x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_4x">Rear Fender Top-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_6x">Rear Fender Top-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.paint_8x">Rear Fender Top-Painted 8x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_4x">Rear Fender Top-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_6x">Rear Fender Top-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_fendr_top.chrome_p_8x">Rear Fender Top-Painted &#38; Chromed 8x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_bumper.painted">Rear Bumper-Chariot (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_bumper.smoth">Rear Bumper-Diva (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh16_2012.r_bumper.bend">Rear Bumper-Thor (FH Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh_2021">Volvo FH5</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh_2021">2021</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.fh_2021"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1.volvo.fh_2021.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh_2021.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh_2021.cabin">Globetrotter XL</s:String>
+	<s:String
+		x:Key="l2h3_8x4.volvo.fh_2021.cabin">Globetrotter XL 8x4</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.shape1">Sun Visor-Painted</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.shape2">Sun Visor-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.dual">Sun Visor-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.quatro">Sun Visor-Exclusive Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sunshld.triangle">Sun Visor-Painted, Luxury (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.shape3">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.shape4">Main Mirrors-Exclusive</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.chrome_led">Main Mirrors-Painted, LED (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.chrom_spec">Main Mirrors-Chromed Luxury (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.mirror.chrome_logo">Main Mirrors-Painted &#38; Chromed (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_mirror.painted">Front Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_mirror.paintedl">Front Mirror-Painted Long (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.s_mirror.paint">Side Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.filter.paint_h1">Air Filter-Painted Sleeper (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.filter.paint_h2">Air Filter-Painted Globetrotter (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.filter.paint_h3">Air Filter-Painted Globetrotter XL (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_grill.net">Bull Bar-Painted Net (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.f_fender_chs.paint">Front Fender-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_s4x">Sideskirts-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_s6x">Sideskirts-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.stock_6x_a">Sideskirts-Aero 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.stock_4x_a">Sideskirts-Aero 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_4x">Sideskirts-Painted &#38; Chromed II 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.sideskirt.chrome_6x">Sideskirts-Painted &#38; Chromed II 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.exhaust_m.shape2">Rear Exhaust-Centurion (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.exhaust_m.shape1">Rear Exhaust-Diva (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.painted_4x">Chassis Cover-Diva (Tank520+315L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.painted_4x_2">Chassis Cover-Diva (Tank600+340L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.painted_6x">Chassis Cover-Diva 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.mix_4x">Chassis Cover-Centurion (Tank520+315L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.mix_4x_2">Chassis Cover-Centurion (Tank600+340L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_chs_cover.mix_6x">Chassis Cover-Centurion 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fender.paint_4x">Rear Fender-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fender.paint_6x">Rear Fender-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fender.paint_8x">Rear Fender-Painted 8x4 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.paint_4x">Rear Fender Top-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.paint_6x">Rear Fender Top-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.paint_8x">Rear Fender Top-Painted 8x4 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_4x">Rear Fender Top-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_6x">Rear Fender Top-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_fendr_top.chrome_p_8x">Rear Fender Top-Painted &#38; Chromed 8x4 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_bumper.bend">Rear Bumper-Thor (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_bumper.painted">Rear Bumper-Chariot (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2021.r_bumper.smoth">Rear Bumper-Diva (FH Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.fh_2024">Volvo FH6</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.fh_2024">2024</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.fh_2024"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="l2h1_aero.volvo.fh_2024.cabin">Aero Sleeper</s:String>
+	<s:String
+		x:Key="l2h1.volvo.fh_2024.cabin">Sleeper</s:String>
+	<s:String
+		x:Key="l2h2_aero.volvo.fh_2024.cabin">Aero Globetrotter</s:String>
+	<s:String
+		x:Key="l2h2.volvo.fh_2024.cabin">Globetrotter</s:String>
+	<s:String
+		x:Key="l2h3_aero.volvo.fh_2024.cabin">Aero Globetrotter XL</s:String>
+	<s:String
+		x:Key="l2h3.volvo.fh_2024.cabin">Globetrotter XL</s:String>
+	<s:String
+		x:Key="l2h3_8x4_a.volvo.fh_2024.cabin">Aero Globetrotter XL 8x4</s:String>
+	<s:String
+		x:Key="l2h3_8x4.volvo.fh_2024.cabin">Globetrotter XL 8x4</s:String>
+	<s:String
+		x:Key="l3h3_aero.volvo.fh_2024.cabin">Aero Globetrotter XXL</s:String>
+	<s:String
+		x:Key="l3h3.volvo.fh_2024.cabin">Globetrotter XXL</s:String>
+	<s:String
+		x:Key="l3h3_8x4_a.volvo.fh_2024.cabin">Aero Globetrotter XXL 8x4</s:String>
+	<s:String
+		x:Key="l3h3_8x4.volvo.fh_2024.cabin">Globetrotter XXL 8x4</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.shape1">Sun Visor-Painted</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.shape2">Sun Visor-Samurai</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.dual">Sun Visor-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.quatro">Sun Visor-Exclusive Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sunshld.triangle">Sun Visor-Painted, Luxury (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.shape3">Main Mirrors-Painted</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.shape3_a">Main Mirrors-Painted Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrome_led">Main Mirrors-Painted, LED (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrome_led_a">Main Mirrors-Painted, LED Aero (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrome_logo">Main Mirrors-Painted &#38; Chromed (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrom_logo_a">Main Mirrors-Painted &#38; Chromed Aero (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.cam_digi">Main Mirrors-Camera</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.cam_digi_a">Main Mirrors-Camera Aero</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrom_spec">Main Mirrors-Chromed Luxury (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.mirror.chrom_spec_a">Main Mirrors-Chromed Luxury Aero (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_mirror.painted">Front Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_mirror.paintedl">Front Mirror-Painted Long (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.s_mirror.paint">Side Mirror-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_slp">Air Filter-Painted Sleeper (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_gt">Air Filter-Painted Globetrotter (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_gtxl">Air Filter-Painted Globetrotter XL (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.filter.paint_gtxxl">Air Filter-Painted Globetrotter XXL (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_grill.net">Bull Bar-Painted Net (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.f_fender_chs.paint">Front Fender-Painted (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.s_deflector.stock_gtxxl">Side Deflectors-Painted Globetrotter XXL</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.s_deflector.light_xxl">Side Deflectors-Painted, LED Globetrotter XXL (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.stock_4x_a">Sideskirts-Aero 4x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.stock_6x_a">Sideskirts-Aero 6x2</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_4x">Sideskirts-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_6x">Sideskirts-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_s4x">Sideskirts-Painted &#38; Chromed II 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.sideskirt.chrome_s6x">Sideskirts-Painted &#38; Chromed II 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.painted_4x">Chassis Cover-Diva (Tank520+315L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.painted_4x_2">Chassis Cover-Diva (Tank600+340L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.painted_6x">Chassis Cover-Diva 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.mix_4x">Chassis Cover-Centurion (Tank520+315L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.mix_4x_2">Chassis Cover-Centurion (Tank600+340L) (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_chs_cover.mix_6x">Chassis Cover-Centurion 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fender.paint_4x">Rear Fender-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fender.paint_6x">Rear Fender-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.paint_4x">Rear Fender Top-Painted 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.paint_6x">Rear Fender Top-Painted 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_4x">Rear Fender Top-Painted &#38; Chromed 4x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_fendr_top.chrome_p_6x">Rear Fender Top-Painted &#38; Chromed 6x2 (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_bumper.bend">Rear Bumper-Thor (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_bumper.painted">Rear Bumper-Chariot (FH Tuning Pack)</s:String>
+	<s:String
+		x:Key="volvo.fh_2024.r_bumper.smoth">Rear Bumper-Diva (FH Tuning Pack)</s:String>
+
+	
+	
+	
+	
+	
+
+
+	<!--卡车备注 ATS-->
+	<s:String
+		x:Key="name.freightliner.cascadia2019">Freightliner Cascadia 2019</s:String>
+	<s:Int32
+		x:Key="prodYear.freightliner.cascadia2019">2019</s:Int32>
+	<x:Static
+		x:Key="desc.freightliner.cascadia2019"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.freightliner.cascadia2019.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.freightliner.cascadia2019.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s72_xt.freightliner.cascadia2019.cabin">72" Sleeper XT</s:String>
+	<s:String
+		x:Key="s72_rr.freightliner.cascadia2019.cabin">72" Sleeper RR</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="freightliner.cascadia2019.sunshield.stock">Sun Visor-Standard</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.day_std">Cabin Deflectors-Standard Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.day_aero">Cabin Deflectors-Aero Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.s48_aero">Cabin Deflectors-Aero 48" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.s72_xt_a">Cabin Deflectors-Aero 72" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cabdefl.s72_xt_ax">Cabin Deflectors-AeroX</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.cor_def.aero">Corner Deflectors-Aero 2020</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.std_pt">Bumper-Painted</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.fog_std_pt">Bumper-Painted, Fog Lights</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.aero_pt">Bumper-Aero Painted</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.aero_pt20">Bumper-Aero Painted 2020</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.fog_aero_pt">Bumper-Aero Painted, Fog Lights</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.bumper.fog_a_pt20">Bumper-Aero Painted, Fog Lights 2020</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr120_eal">Sideskirts-Aluminium Tank Short 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr160_eal">Sideskirts-Aluminium Tank Short 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_eal">Sideskirts-Aluminium Tank Medium 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_eal">Sideskirts-Aluminium Tank Medium 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_eal">Sideskirts-Aluminium Tank Long 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_eal">Sideskirts-Aluminium Tank Long 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr120_e">Sideskirts-Chromed Tank Short 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr160_e">Sideskirts-Chromed Tank Short 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_e">Sideskirts-Chromed Tank Medium 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_e">Sideskirts-Chromed Tank Medium 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_e">Sideskirts-Chromed Tank Long 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_e">Sideskirts-Chromed Tank Long 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.shr160_pt">Sideskirts-Painted Short 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_pt">Sideskirts-Painted Medium 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_pt">Sideskirts-Painted Medium 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_pt">Sideskirts-Painted Long 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_pt">Sideskirts-Painted Long 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid200_pt_a">Sideskirts-Aero Painted Medium 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.mid220_pt_a">Sideskirts-Aero Painted Medium 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng200_pt_a">Sideskirts-Aero Painted Long 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.sideskirt.lng240_pt_a">Sideskirts-Aero Painted Long 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2019.mudflaps.aero_pnt">Mudflaps-FlowBelow Painted</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.freightliner.cascadia2024">Freightliner Cascadia</s:String>
+	<s:Int32
+		x:Key="prodYear.freightliner.cascadia2024">2024</s:Int32>
+	<x:Static
+		x:Key="desc.freightliner.cascadia2024"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.freightliner.cascadia2024.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.freightliner.cascadia2024.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s72_xt.freightliner.cascadia2024.cabin">72" Sleeper XT</s:String>
+	<s:String
+		x:Key="s72_rr.freightliner.cascadia2024.cabin">72" Sleeper RR</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="freightliner.cascadia2024.sunshield.paint">Sun Visor-Painted</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.day_std">Cabin Deflectors-Standard Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.day_aero">Cabin Deflectors-Aero Day Cab</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.s48_aero">Cabin Deflectors-Aero 48" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.s72_xt_a">Cabin Deflectors-Aero 72" Sleeper</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cabdefl.s72_xt_ax">Cabin Deflectors-AeroX</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.cor_def.aero">Corner Deflectors-Aero</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.bumper.paint">Bumper-Painted</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.airdam.paint">Air Dam-Painted</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.airdam.pnt_aerox">Air Dam-AeroX, Painted</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr120_eal">Sideskirts-Aluminium Tank Short 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr160_eal">Sideskirts-Aluminium Tank Short 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr120_e">Sideskirts-Chromed Tank Short 4x2/6x2/6x4 120gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr160_e">Sideskirts-Chromed Tank Short 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.shr160_pt">Sideskirts-Painted Short 4x2/6x2/6x4 160gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.mid200_pt_a">Sideskirts-Aero Painted Medium 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.mid220_pt_a">Sideskirts-Aero Painted Medium 6x2/6x4 220gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.lng200_pt_a">Sideskirts-Aero Painted Long 6x2/6x4 200gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.sideskirt.lng240_pt_a">Sideskirts-Aero Painted Long 6x2/6x4 240gal</s:String>
+	<s:String
+		x:Key="freightliner.cascadia2024.mudflaps.aero_pnt">Mudflaps-FlowBelow Painted</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.freightliner.ecascadia">Freightliner ECascadia</s:String>
+	<s:Int32
+		x:Key="prodYear.freightliner.ecascadia">2022</s:Int32>
+	<x:Static
+		x:Key="desc.freightliner.ecascadia"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.intnational.9900i">International 9900i</s:String>
+	<s:Int32
+		x:Key="prodYear.intnational.9900i">2000</s:Int32>
+	<s:String
+		x:Key="desc.intnational.9900i">EOL</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.intnational.9900i.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s51.intnational.9900i.cabin">51" Sleeper</s:String>
+	<s:String
+		x:Key="s72.intnational.9900i.cabin">71" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="intnational.9900i.sunshield.standard">Sun Visor-Standard</s:String>
+	<s:String
+		x:Key="intnational.9900i.cabdefl.day">Cabin Deflectors-Standard</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.intnational.lonestar">International LoneStar</s:String>
+	<s:Int32
+		x:Key="prodYear.intnational.lonestar">2008</s:Int32>
+	<x:Static
+		x:Key="desc.intnational.lonestar"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.intnational.lonestar.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="hirise.intnational.lonestar.cabin">Hi-Rise Sleeper</s:String>
+	<s:String
+		x:Key="skyrise.intnational.lonestar.cabin">Sky-Rise Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="intnational.lonestar.sunshield.standard">Sun Visor-Standard</s:String>
+	<s:String
+		x:Key="intnational.lonestar.bumper.standard">Bumper-Standard</s:String>
+	<s:String
+		x:Key="intnational.lonestar.bumper.sensor">Bumper-Sensor</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.intnational.lt">International LT</s:String>
+	<s:Int32
+		x:Key="prodYear.intnational.lt">2017</s:Int32>
+	<x:Static
+		x:Key="desc.intnational.lt"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.intnational.lt.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="hirise.intnational.lt.cabin">Hi-Rise Sleeper</s:String>
+	<s:String
+		x:Key="skyrise.intnational.lt.cabin">Sky-Rise Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="intnational.lt.sunshield.standard">Sun Visor-Standard</s:String>
+	<s:String
+		x:Key="intnational.lt.cabdefl.hi_std">Cabin Deflectors-Standard</s:String>
+	<s:String
+		x:Key="intnational.lt.cabdefl.hi_ext">Cabin Deflectors-Entended</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint">Bumper-Painted</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.lux">Bumper-Painted Chromed</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint_s13">Bumper-Painted S13</s:String>
+	<s:String
+		x:Key="intnational.lt.bumper.paint_pl_s13">Bumper-Painted S13 Plastic</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.shr_pn">Sideskirts-Painted Short</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.shr_pn_s13">Sideskirts-Painted S13 Short</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.mid_pn">Sideskirts-Painted Medium</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.mid_pn_s13">Sideskirts-Painted S13 Medium</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.lng_pn">Sideskirts-Painted Long</s:String>
+	<s:String
+		x:Key="intnational.lt.sideskirt.lng_pn_s13">Sideskirts-Painted S13 Long</s:String>
+	<s:String
+		x:Key="intnational.lt.mudflaps.aero_paint">Mudflaps-FlowBelow Painted</s:String>
+	<s:String
+		x:Key="intnational.lt.mudflaps.aero_pnt_6x4">Mudflaps-FlowBelow Painted 6x4</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.t680">Kenworth T680 2014</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.t680">2014</s:Int32>
+	<x:Static
+		x:Key="desc.kenworth.t680"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.kenworth.t680.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="standard.kenworth.t680.cabin">Mid Roof Sleeper</s:String>
+	<s:String
+		x:Key="exclusive.kenworth.t680.cabin">Hi Rise Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.t680_2022">Kenworth T680</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.t680_2022">2022</s:Int32>
+	<s:String
+		x:Key="desc.kenworth.t680_2022">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.kenworth.t680_2022.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s52m.kenworth.t680_2022.cabin">52" Sleeper</s:String>
+	<s:String
+		x:Key="s76h.kenworth.t680_2022.cabin">76" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.low_pnt_f">Bumper-Low Painted, Fog Lights</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.low_pnt_f_a">Bumper-Low Aero Painted, Fog Lights</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.std_pnt_f">Bumper-Painted, Fog Lights</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.bumper.std_pnt_f_a">Bumper-Aero Painted, Fog Lights</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.hood.long">Hood-Standard</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.day_l_pnt">Sideskirts-Painted Day Cab</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.day_s_pnt">Sideskirts-Painted Day Cab MX Optimized</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s52_l_pnt">Sideskirts-Painted 52" Sleeper</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s52_s_pnt">Sideskirts-Painted 52" Sleeper MX Optimized</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s76_l_pnt">Sideskirts-Painted 76" Sleeper</s:String>
+	<s:String
+		x:Key="kenworth.t680_2022.sideskirt.s76_s_pnt">Sideskirts-Painted 76" Sleeper MX Optimized</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.w900">Kenworth W900</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.w900">2023</s:Int32>
+	<s:String
+		x:Key="desc.kenworth.w900">Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.kenworth.w900.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s72f.kenworth.w900.cabin">72" Flat Roof Sleeper</s:String>
+	<s:String
+		x:Key="s72.kenworth.w900.cabin">72" Aerodyne Sleeper</s:String>
+	<s:String
+		x:Key="s86.kenworth.w900.cabin">86" Studio Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="kenworth.w900.sunshield.bat_pnt">Sun Visor-Batvisor, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.shape01_pnt">Sun Visor-Standard, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.shape02_pnt">Sun Visor-Blind Mount Visor, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.shape03_pnt">Sun Visor-Exclusive, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.sunshield.untie_pnt">Sun Visor-Untie, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.modern1_pnt">Main Mirrors-Modern, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.modern2_pnt">Main Mirrors-Modern Premium, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.nxtgen1_pnt">Main Mirrors-Duty II, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.nxtgen2_pnt">Main Mirrors-modern II, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.shape1_pnt">Main Mirrors-Duty, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.mirror.shape2_pnt">Main Mirrors-Standard, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.fl_mirror.shape1_pnt">Front Mirrors (L)-Classic, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.fl_mirror.shape2_pnt">Front Mirrors (L)-Standard, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.fr_mirror.shape1_pnt">Front Mirrors (R)-Classic, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.fr_mirror.shape2_pnt">Front Mirrors (R)-Standard, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.diamond_cut">Grille-Diamond Cut(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.louver_a_pnt">Grille-Louvered Angle, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.louver_pnt">Grille-Louvered, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.srd_pnt">Grille-Surround, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.std_pnt">Grille-Standard, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.grill.v18_pnt">Grille-V18, Pianted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_120">Door Steps-Pianted Short Chassis 120gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_150">Door Steps-Pianted Short Chassis 150gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_180">Door Steps-Pianted Short Chassis 180gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_180b">Door Steps-Pianted, Basic Short Chassis 180gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_235">Door Steps-Pianted Medium/Long Chassis 220+gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_235b">Door Steps-Pianted, Basic Medium/Long Chassis 220+gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt_260">Door Steps-Pianted, Exclusive Long Chassis 220+gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_120">Door Steps-Pianted II Short Chassis 120gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_150">Door Steps-Pianted II Short Chassis 150gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_180">Door Steps-Pianted II Short Chassis 180gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_180b">Door Steps-Pianted II, Basic Short Chassis 180gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_235">Door Steps-Pianted II Medium/Long Chassis 220+gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_235b">Door Steps-Pianted II, Basic Medium/Long Chassis 220+gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.doorstep.pnt2_260">Door Steps-Pianted II, Exclusive Long Chassis 220+gal(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.bull_black_p">Front Logo-Black Longhorn, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.bull_blue_p">Front Logo-Blue Longhorn, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.bull_red_p">Front Logo-Red Longhorn, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_blk_p">Front Logo-Kenworth Black, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_chr_p">Front Logo-Kenworth Exclusive, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_p">Front Logo-Kenworth, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_rtr_blk_p">Front Logo-Kenworth Retro Black, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.f_logo.kw_rtr_p">Front Logo-Kenworth Retro, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.boxer_pnt">Bumper-Boxer, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.foreman_pnt">Bumper-Foreman, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.mirage_pnt">Bumper-Mirage, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.ram_pnt">Bumper-Ram, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.ranger_pnt">Bumper-Ranger, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape01_pnt">Bumper-Standard, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape02_pnt">Bumper-Shield, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape03_pnt">Bumper-Firefly, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape04_pnt">Bumper-Modern, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.shape05_pnt">Bumper-Quarterback, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.storm_chr">Bumper-Storm(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.bumper.storm_pnt">Bumper-Storm, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.s72_std">Cabin Deflectors-Standard 72" Aerodyne Sleeper</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.s86_std">Cabin Deflectors-Standard 86" Studio Sleeper</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.whale_pnt">Cabin Deflectors-Whale Tail, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.cabdefl.wing_pnt">Cabin Deflectors-Turbo Wing, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.deflector.shape01_pnt">Bug Deflector-Metal Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.deflector.aero_pnt">Bug Deflector-Aero Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_sa_l_pnt">Exhaust-Bullhorn Long, Painted Day Cab(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_ss_s_pnt">Exhaust-Standard Flattop Short, Painted Day Cab(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_ss_l_pnt">Exhaust-Standard Flattop Long, Painted Day Cab(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_sn_s_pnt">Exhaust-Curved Short, Painted Day Cab(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.day_sn_l_pnt">Exhaust-Curved Long, Painted Day Cab(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.slp_ks_l_pnt">Exhaust-Kenworth Flattop Long, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.exhaust.slp_kn_l_pnt">Exhaust-Kenworth Curved Long, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_chs_cover.pln_pnt_sng">Chassis Cover-Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh120">Tank-Painted 120gal Short Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh150n">Tank-Painted 150gal Short Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh180">Tank-Painted 180gal Short Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_sh220n">Tank-Painted 220gal Short Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md220n">Tank-Painted 220gal Medium Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md235">Tank-Painted 235gal Medium Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md260">Tank-Painted 260gal Medium Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md300">Tank-Painted 300gal Medium Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_md300n">Tank-Painted 300gal Medium Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln220n">Tank-Painted &#38; Chromed220gal Long Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln235">Tank-Painted 235gal Long Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln260">Tank-Painted 260gal Long Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln300">Tank-Painted 300gal Long Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt_ln300n">Tank-Painted 300gal Long Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.100yp_ln260">Tank-Painted 260gal Long Chassis 6x4 (W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh120">Tank-Painted &#38; Chromed 120gal Short Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh150n">Tank-Painted &#38; Chromed 150gal Short Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh180">Tank-Painted &#38; Chromed 180gal Short Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_sh220n">Tank-Painted &#38; Chromed 220gal Short Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md220n">Tank-Painted &#38; Chromed 220gal Medium Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md235">Tank-Painted &#38; Chromed 235gal Medium Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md260">Tank-Painted &#38; Chromed 260gal Medium Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md300">Tank-Painted &#38; Chromed 300gal Medium Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_md300n">Tank-Painted &#38; Chromed 300gal Medium Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln220n">Tank-Painted &#38; Chromed 220gal Long Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln235">Tank-Painted &#38; Chromed 235gal Long Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln260">Tank-Painted &#38; Chromed 260gal Long Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln300">Tank-Painted &#38; Chromed 300gal Long Chassis(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.pnt2_ln300n">Tank-Painted &#38; Chromed 300gal Long Chassis+C15 Engine(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.tank.100yp2_ln260">Tank-Painted &#38; Chromed 260gal 长6x4 (W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_half">Rear Fender-Painted Half(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_full">Rear Fender-Painted Full(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_dbl">Rear Fender-Painted Double(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.pnt_tri">Rear Fender-Painted Triple(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.fiberg_half">Rear Fender-Fiberglass Half(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.fiberg_full">Rear Fender-Fiberglass Full(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_dbl">Rear Fender-Hump Double(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_tri">Rear Fender-Hump Triple(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_cur_dbl">Rear Fender-Hump Curved Double(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.hump_cur_tri">Rear Fender-Hump Curved Triple(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_pnt">Rear Fender-Quarter, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_kw_pnt">Rear Fender-Kenworth Quarter, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.qrt_log_pnt">Rear Fender-Logo Quarter, Painted(W900 Tuning Pack)</s:String>
+	<s:String
+		x:Key="kenworth.w900.r_fender.storm_pnt">Rear Fender-Storm, Painted(W900 Tuning Pack)</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.kenworth.w990">Kenworth W990</s:String>
+	<s:Int32
+		x:Key="prodYear.kenworth.w990">2018</s:Int32>
+	<x:Static
+		x:Key="desc.kenworth.w990"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.mack.pinnacle">Mack Pinnacle</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.pinnacle">2006</s:Int32>
+	<x:Static
+		x:Key="desc.mack.pinnacle"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.mack.pinnacle.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.mack.pinnacle.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s70.mack.pinnacle.cabin">70" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mack.pinnacle.cabdefl.s70_rcap">Cabin Deflectors-Roof Cap 70"</s:String>
+	<s:String
+		x:Key="mack.pinnacle.cabdefl.s70_rcap_ext">Cabin Deflectors-Exclusive Roof Cap 70"</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.mack.anthem">Mack Anthem</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.anthem">2018</s:Int32>
+	<x:Static
+		x:Key="desc.mack.anthem"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.mack.anthem.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s48.mack.anthem.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s70.mack.anthem.cabin">70" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="mack.anthem.cabdefl.day_rcap_bl">Cabin Deflectors-Roof Cap Day Cab</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.day_rcap_ch">Cabin Deflectors-Roof Cap Chromed Day Cab</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s48_rcap_bl">Cabin Deflectors-Roof Cap 48"</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s48_rcap_ch">Cabin Deflectors-Roof Cap Chromed 48"</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s70_rcap">Cabin Deflectors-Roof Cap 70"</s:String>
+	<s:String
+		x:Key="mack.anthem.cabdefl.s70_rcap_ext">Cabin Deflectors-Exclusive Roof Cap 70"</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72_p">Sideskirts-Painted Short 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72_pc">Sideskirts-Painted &#38; Chromed Short 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72d_p">Sideskirts-Painted, D-Shape Short 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr72d_pc">Sideskirts-Painted &#38; Chromed, D-Shape Short 144gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_p">Sideskirts-Painted Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_pc">Sideskirts-Painted &#38; Chromed Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_pcs">Sideskirts-Painted &#38; Chromed, Steps Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93_ps">Sideskirts-Painted, Steps Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_p">Sideskirts-Painted, D-Shape Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_pc">Sideskirts-Painted &#38; Chromed, D-Shape Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_pcs">Sideskirts-Painted &#38; Chromed, D-Shape, Steps Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.shr93d_ps">Sideskirts-Painted, D-Shape, Steps Short 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93d_p">Sideskirts-Painted, D-Shape Medium 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93d_pc">Sideskirts-Painted &#38; Chromed, D-Shape Medium 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_p">Sideskirts-Painted Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_pc">Sideskirts-Painted &#38; Chromed Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_pcs">Sideskirts-Painted &#38; Chromed, Steps Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117_ps">Sideskirts-Painted, Steps Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_p">Sideskirts-Painted, D-Shape Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_pc">Sideskirts-Painted &#38; Chromed, D-Shape Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_pcs">Sideskirts-Painted &#38; Chromed, D-Shape, Steps Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid117d_ps">Sideskirts-Painted, D-Shape, Steps Medium 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93_p">Sideskirts-Painted Medium 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.mid93_pc">Sideskirts-Painted &#38; Chromed Medium 186gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117_p">Sideskirts-Painted Long 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117_pc">Sideskirts-Painted &#38; Chromed Long 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117d_p">Sideskirts-Painted, D-Shape Long 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng117d_pc">Sideskirts-Painted &#38; Chromed, D-Shape Long 234gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_p">Sideskirts-Painted Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_pc">Sideskirts-Painted &#38; Chromed Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_pcs">Sideskirts-Painted &#38; Chromed, Steps Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142_ps">Sideskirts-Painted, Steps Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_p">Sideskirts-Painted, D-Shape Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_pc">Sideskirts-Painted &#38; Chromed, D-Shape Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_pcs">Sideskirts-Painted &#38; Chromed, D-Shape, Steps Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_ps">Sideskirts-Painted, D-Shape, Steps Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.sideskirt.lng142d_ucs">Sideskirts-Chromed Tank, D-Shape, Steps Long 284gal</s:String>
+	<s:String
+		x:Key="mack.anthem.mudflaps.aero_pnt">Mudflaps-FlowBelow Painted</s:String>
+
+	
+	
+	
+	
+	<s:String
+		x:Key="name.mack.anthem2026">Mack Anthem</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.anthem2026">2026</s:Int32>
+	<x:Static
+		x:Key="desc.mack.anthem2026"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	<s:String
+		x:Key="name.mack.pioneer">Mack Pioneer</s:String>
+	<s:Int32
+		x:Key="prodYear.mack.pioneer">2025</s:Int32>
+	<x:Static
+		x:Key="desc.mack.pioneer"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.389">Peterbilt 389</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.389">2007</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.389"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.peterbilt.389.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="standard.peterbilt.389.cabin">Low Roof Sleeper</s:String>
+	<s:String
+		x:Key="exclusive.peterbilt.389.cabin">Ultra Cab Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.579">Peterbilt 579</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.579">2012</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.579"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.peterbilt.579.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="standard.peterbilt.579.cabin">Stand Up Sleeper</s:String>
+	<s:String
+		x:Key="exclusive.peterbilt.579.cabin">Hi Rise Sleeper</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.579_2022">Peterbilt 579</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.579_2022">2022</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.579_2022"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.peterbilt.589">Peterbilt 589</s:String>
+	<s:Int32
+		x:Key="prodYear.peterbilt.589">2025</s:Int32>
+	<x:Static
+		x:Key="desc.peterbilt.589"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnl">Volvo VNL 2014</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnl">2014</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnl"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="duty.volvo.vnl.cabin">300</s:String>
+	<s:String
+		x:Key="standard.volvo.vnl.cabin">730</s:String>
+	<s:String
+		x:Key="exclusive.volvo.vnl.cabin">780</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnl2018">Volvo VNL 2018</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnl2018">2018</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnl2018"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.volvo.vnl2018.cabin">300</s:String>
+	<s:String
+		x:Key="s740.volvo.vnl2018.cabin">740</s:String>
+	<s:String
+		x:Key="s860.volvo.vnl2018.cabin">860</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2b_aero">Mudflaps-Aero, Painted &#38; Plastic Black</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2b_aero_l">Mudflaps-Aero, Painted &#38; Plastic Black LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2b_aero_w">Mudflaps-Aero, Painted &#38; Plastic Black White</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2w_aero">Mudflaps-Aero, Painted &#38; Plastic White</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2w_aero_l">Mudflaps-Aero, Painted &#38; Plastic White LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pnt2w_aero_w">Mudflaps-Aero, Painted &#38; Plastic White White</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntb_aero">Mudflaps-Aero, Painted Black</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntb_aero_l">Mudflaps-Aero, Painted Black LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntb_aero_w">Mudflaps-Aero, Painted Black White</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntw_aero">Mudflaps-Aero, Painted White</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntw_aero_l">Mudflaps-Aero, Painted White LOGO</s:String>
+	<s:String
+		x:Key="volvo.vnl2018.mudflaps.pntw_aero_w">Mudflaps-Aero, Painted White White</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnr_e">Volvo VNR Electric</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnr_e">2021</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnr_e"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.volvo.vnr_e.cabin">300</s:String>
+	<!--Accessory-->
+
+	
+	
+	
+	<s:String
+		x:Key="name.volvo.vnl2025">Volvo VNL</s:String>
+	<s:Int32
+		x:Key="prodYear.volvo.vnl2025">2025</s:Int32>
+	<x:Static
+		x:Key="desc.volvo.vnl2025"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="dc.volvo.vnl2025.cabin">300</s:String>
+	<s:String
+		x:Key="42m.volvo.vnl2025.cabin">440</s:String>
+	<s:String
+		x:Key="74m.volvo.vnl2025.cabin">840</s:String>
+	<s:String
+		x:Key="74h.volvo.vnl2025.cabin">860</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="volvo.vnl2025.cabdefl.std_74m">Cabin Deflectors-Standard 840</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.sideskirt.std_pnt_dc">Sideskirts-Painted 300</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.sideskirt.std_pnt_42">Sideskirts-Painted 440</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.sideskirt.std_pnt_74">Sideskirts-Painted 840/860</s:String>
+	<s:String
+		x:Key="volvo.vnl2025.r_bumper.fl_pnt">Rear Bumper-FlowBelow Painted</s:String>
+	
+	
+	
+	<s:String
+		x:Key="name.westernstar.5700xe">Western Star 5700XE</s:String>
+	<s:Int32
+		x:Key="prodYear.westernstar.5700xe">2015</s:Int32>
+	<s:String
+		x:Key="desc.westernstar.5700xe">EOL,Toybed is too behind, clipping may happen on the sitting model</s:String>
+	<!--Cabin-->
+	<s:String
+		x:Key="day.westernstar.5700xe.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s54.westernstar.5700xe.cabin">54" Sleeper</s:String>
+	<s:String
+		x:Key="s82.westernstar.5700xe.cabin">82" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="westernstar.5700xe.sunshield.stock_day">Sun Visor-Standard Day Cab</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sunshield.stock_slp">Sun Visor-Standard Sleeper</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.cabdefl.s82">Cabin Deflectors-Exclusive 82"</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.f_fender.stock">Front Fender-Stock</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.bumper.stock">Bumper-Stock</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.bumper.highway">Bumper-Premium</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.bumper.duty">Bumper-Exclusive</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sideskirt.day">Sideskirts-Standard Day Cab</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sideskirt.s54">Sideskirts-Standard 54"</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.sideskirt.s82">Sideskirts-Standard 82"</s:String>
+	<s:String
+		x:Key="westernstar.5700xe.mudflaps.aero_pnt">Mudflaps-FlowBelow Painted</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.westernstar.49x">Western Star 49X</s:String>
+	<s:Int32
+		x:Key="prodYear.westernstar.49x">2020</s:Int32>
+	<x:Static
+		x:Key="desc.westernstar.49x"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.westernstar.49x.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="daysb.westernstar.49x.cabin">Day Cab SBA</s:String>
+	<s:String
+		x:Key="s48.westernstar.49x.cabin">48" Sleeper</s:String>
+	<s:String
+		x:Key="s48sb.westernstar.49x.cabin">48" Sleeper SBA</s:String>
+	<s:String
+		x:Key="s72.westernstar.49x.cabin">83" Sleeper</s:String>
+	<s:String
+		x:Key="s72sb.westernstar.49x.cabin">83" Sleeper SBA</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="westernstar.49x.hood.power">Hood-Power</s:String>
+	<s:String
+		x:Key="westernstar.49x.f_grill.paint">Bull Bar-Painted (Equip LoggerBumper)</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.paint">Bumper-Painted</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.pnt_log">Bumper-Painted Logger</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.paint_sb">Bumper-Painted SBA</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.paint2_sb">Bumper-Painted II SBA</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.pnt_log_sb">Bumper-Painted Logger SBA</s:String>
+	<s:String
+		x:Key="westernstar.49x.bumper.pnt2_log_sb">Bumper-Painted II Logger SBA</s:String>
+
+	
+	
+	
+	<s:String
+		x:Key="name.westernstar.57x">Western Star 57X</s:String>
+	<s:Int32
+		x:Key="prodYear.westernstar.57x">2022</s:Int32>
+	<x:Static
+		x:Key="desc.westernstar.57x"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="day.westernstar.57x.cabin">Day Cab</s:String>
+	<s:String
+		x:Key="s72_rr.westernstar.57x.cabin">72" Sleeper</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="westernstar.57x.bumper.paint">Bumper-Painted</s:String>
+	<s:String
+		x:Key="westernstar.57x.cabdefl.day_std">Cabin Deflectors-Standard</s:String>
+	<s:String
+		x:Key="westernstar.57x.cabdefl.day_aero">Cabin Deflectors-Aero</s:String>
+	<s:String
+		x:Key="westernstar.57x.cabdefl.day_aero2">Cabin Deflectors-Aero II</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.shr_pt">Sideskirts-Painted (Short Chassis Tank-Aluminum 120gal Short)</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.shr12_fnd_pt">Sideskirts-Duty Painted (Short Chassis Tank-120gal Long)</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.shr16_fnd_pt">Sideskirts-Duty Painted (Short Chassis Tank-160gal)</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng_fnd_pt">Sideskirts-Duty Painted</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng_hlf_pt">Sideskirts-Painted (Half Sideskirt)</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng20_pt">Sideskirts-Painted (Full Sideskirt，Long Chassis Tank-200gal)</s:String>
+	<s:String
+		x:Key="westernstar.57x.sideskirt.lng24_pt">Sideskirts-Painted (Full Sideskirt，Long Chassis Tank-240gal)</s:String>
+	
+	
+	
+	<!--Cars ETS2-->
+	<!--Cars ATS-->
+	<s:String
+		x:Key="name.ford.bronco_24">Ford Bronco 2024</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.bronco_24">2024</s:Int32>
+	<x:Static
+		x:Key="desc.ford.bronco_24"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="offrd_4d.ford.bronco_24.cabin">Sedan</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="ford.bronco_24.grill.bad_pnt">Grille-Badlands, Painted</s:String>
+	<s:String
+		x:Key="ford.bronco_24.fenders.std_pnt">Fenders-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.bronco_24.fenders.ssq_pnt">Fenders-Sasquatch, Panted</s:String>
+	<s:String
+		x:Key="ford.bronco_24.doorhndl.std_pnt">Door Handles-Standard Painted</s:String>
+	<s:String
+		x:Key="ford.bronco_24.mirror.std_pnt">Main Mirrors-Standard, Painted</s:String>
+	
+	
+	
+	<s:String
+		x:Key="name.ford.f150_23">Ford F150 2023</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.f150_23">2023</s:Int32>
+	<x:Static
+		x:Key="desc.ford.f150_23"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="pckup4d_55.ford.f150_23.cabin">Sedan</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="ford.f150_23.f_bumper.std_pnt">Front Bumper-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.f150_23.mirror.std_pnt">Main Mirror-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.f150_23.doorhndl.std_pnt">Door Handles-Standard Painted</s:String>
+	<s:String
+		x:Key="ford.f150_23.trunk.std_pnt">Trunk-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.f150_23.trunk.std_chr">Trunk-Standard, Chromed</s:String>
+	<s:String
+		x:Key="ford.f150_23.r_bumper.std_pnt">Rear Bumper-Standard, Painted</s:String>
+	
+	
+	
+	<s:String
+		x:Key="name.ford.mustang_67">Ford Mustang 1967</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.mustang_67">1967</s:Int32>
+	<x:Static
+		x:Key="desc.ford.mustang_67"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="fastb.ford.mustang_67.cabin">Sedan</s:String>
+	<!--Accessory-->
+	
+	
+	
+	<s:String
+		x:Key="name.ford.victoria_06">Ford Crown Victoria 2006</s:String>
+	<s:Int32
+		x:Key="prodYear.ford.victoria_06">2006</s:Int32>
+	<x:Static
+		x:Key="desc.ford.victoria_06"
+		Member="s:String.Empty" />
+	<!--Cabin-->
+	<s:String
+		x:Key="sedan.ford.victoria_06.cabin">Sedan</s:String>
+	<!--Accessory-->
+	<s:String
+		x:Key="ford.victoria_06.f_bumper.std_pnt">Front Bumper-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.f_bumper.std_pnf">Front Bumper-Standard, Fully Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.f_bumper.std_pnc">Front Bumper-Standard, Painted, Chormed</s:String>
+	<s:String
+		x:Key="ford.victoria_06.grill.std_pnt">Grille-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.grill.lx_pnt">Grille-LX, Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.mirror.std_pnt">Main Mirrors-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.doorhndl.std_pnt">Door Handles-Standard, Fully Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.s_strip.std_pnt">Side Stripe-Standard, Fully Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.s_strip.std_pnc">Side Stripe-Standard, Painted &#38; Chromed</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_panel.std_pnf">Panel-Standard, Fully Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_panel.std_pnc">Panel-Standard, Painted, Chromed Strip</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_bumper.std_pnt">Rear Bumper-Standard, Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_bumper.std_pnf">Rear Bumper-Standard, Fully Painted</s:String>
+	<s:String
+		x:Key="ford.victoria_06.r_bumper.std_pnc">Rear Bumper-Standard, Painted, Chromed</s:String>
+	
+	
+	
+	
+	<!--Coaches ETS2-->
+	<!--Coaches ATS-->
+</ResourceDictionary>
