@@ -4,6 +4,7 @@ using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.PaintJob;
 using SCS_Mod_Helper.Setting;
 using SCS_Mod_Helper.Utils;
+using SCS_Mod_Helper.Vehicles;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -19,6 +20,12 @@ public partial class NaviMainWindow: BaseWindow {
 		InitializeComponent();
 		binding = new(new(OpenWindow), new(Test));
 		GridMain.DataContext = binding;
+	}
+
+	protected override void OnContentRendered(EventArgs e) {
+		base.OnContentRendered(e);
+		VehiclesIO.CheckDBMigration(this);
+		_ = Task.Delay(100).ContinueWith(_ => SystemVerification.StorageAsync());
 	}
 
 	private void OpenWindow(string? type) {
