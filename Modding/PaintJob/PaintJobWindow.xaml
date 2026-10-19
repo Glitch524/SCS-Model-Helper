@@ -180,7 +180,7 @@
 				<Border
 					Style="{DynamicResource PopupBorder}" />
 				<colorpicker:StandardColorPicker
-					x:Name="TruckColorPicker"
+					x:Name="VehicleColorPicker"
 					Width="40"
 					Height="40"
 					Foreground="White"
@@ -368,19 +368,19 @@
 					<TextBlock
 						TextWrapping="Wrap"
 						VerticalAlignment="Bottom"
-						Text="{DynamicResource TitleTruck}" />
+						Text="{DynamicResource TitleVehicle}" />
 					<ComboBox
-						DisplayMemberPath="DisplayName"
-						SelectedValuePath="TruckID"
-						SelectedItem="{Binding CurrentTruck}"
-						ItemsSource="{Binding Trucks}">
+						DisplayMemberPath="VehicleName"
+						SelectedValuePath="VehicleID"
+						SelectedItem="{Binding CurrentVehicle}"
+						ItemsSource="{Binding Vehicles}">
 						<ComboBox.Style>
 							<Style
 								TargetType="ComboBox"
 								BasedOn="{StaticResource {x:Type ComboBox}}">
 								<Style.Triggers>
 									<DataTrigger
-										Binding="{Binding CurrentTruck}"
+										Binding="{Binding CurrentVehicle}"
 										Value="{x:Null}">
 										<Setter
 											Property="Background"
@@ -2858,7 +2858,8 @@
 				</DockPanel>
 				<Grid
 					Grid.Row="2"
-					Grid.ColumnSpan="3">
+					Grid.ColumnSpan="3"
+					Height="{Binding ActualHeight, ElementName=PanelAirbrush, Mode=OneWay}">
 					<Grid.Style>
 						<Style
 							TargetType="Grid">
@@ -3152,7 +3153,7 @@
 									d:Background="Lime">
 								</Border>
 								<Image
-									d:Source="/Modding/PaintJob/TruckUV/daf.2021-XG+.png"
+									d:Source="/Vehicles/UV/xg_plus.daf.2021.cabin.png"
 									Source="{Binding AccTexImage}" />
 							</Grid>
 						</Viewbox>
@@ -3202,7 +3203,7 @@
 									Value="False" />
 							</DataTrigger>
 							<DataTrigger
-								Binding="{Binding CurrentTruck}"
+								Binding="{Binding CurrentVehicle}"
 								Value="{x:Null}">
 								<Setter
 									Property="IsEnabled"

@@ -1,9 +1,8 @@
 ﻿using ColorPicker;
 using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.Accessories;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
+using SCS_Mod_Helper.Vehicles;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -166,7 +165,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-		private void ButtonChooseTruck(object sender, RoutedEventArgs e) {
+		private void ButtonChooseVehicle(object sender, RoutedEventArgs e) {
 
 		}
 
@@ -206,7 +205,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				Path = new PropertyPath(property),
 				Mode = BindingMode.TwoWay
 			};
-			TruckColorPicker.SetBinding(PickerControlBase.SelectedColorProperty, colorBinding);
+			VehicleColorPicker.SetBinding(PickerControlBase.SelectedColorProperty, colorBinding);
 		}
 
 		private void ButtonClearClick(object sender, RoutedEventArgs e) {

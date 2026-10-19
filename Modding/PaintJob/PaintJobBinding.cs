@@ -2,17 +2,20 @@
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
-using SCS_Mod_Helper.Trucks;
+using SCS_Mod_Helper.Modding.PaintJob.ColorMask;
 using SCS_Mod_Helper.Utils;
+using SCS_Mod_Helper.Vehicles;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
+using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 using Windows.Media.AppRecording;
 using Wpf.Ui.Extensions;
 
@@ -59,13 +62,13 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			}
 		}
 
-		public ObservableCollection<Truck> Trucks => PaintJobData.Trucks;
+		public ObservableCollection<Vehicle> Vehicles => PaintJobData.Vehicles;
 
-		public Truck? CurrentTruck {
-			get => PaintJobData.CurrentTruck;
+		public Vehicle? CurrentVehicle {
+			get => PaintJobData.CurrentVehicle;
 			set {
 				CleanAOvrAccessories();
-				PaintJobData.CurrentTruck = value;
+				PaintJobData.CurrentVehicle = value;
 				InvokeChange();
 				InvokeChange(nameof(CabinList));
 				InvokeChange(nameof(AccessoryList));
@@ -742,6 +745,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange(nameof(IsAccFlakeVRatioDefault));
 			}
 		}
+
 		public bool IsAccFlakeVRatioDefault => AccFlakeVRatio == 1f;
 
 		private bool mSyncOverNetwork = false;
@@ -751,6 +755,40 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				mSyncOverNetwork = value;
 				InvokeChange();
 			}
+		}
+
+		public void ControlOvrTab(PaintJobOverrideData ovrData) {
+			int index = OverrideList.IndexOf(ovrData);
+			OverrideList.RemoveAt(index);
+			for (int i = index; i < OverrideList.Count; i++) {
+				OverrideList[i].Index = i;
+			}
+		}
+
+		public void AddOvr() {
+			OverrideList.Add(new(OverrideList.Count));
+			SelectedOverride = OverrideList.Last();
+		}
+
+		public void CleanAOvrAccessories() {
+			foreach (var ovr in OverrideList) {
+				foreach (var acc in ovr.AccList) {
+					acc.BelongingOverride = null;
+				}
+				ovr.AccList.Clear();
+			}
+		}
+
+		public void CreatePaintJobSii(Window window) {
+			if (ModelName.Length == 0
+				|| CurrentVehicle == null
+				|| DisplayName.Length == 0
+				|| Price == null
+				|| UnlockLevel == null
+				|| IconName.Length == 0)
+				return;
+			new PaintJobSCSIO().WritePaintJobData(this);
+			MessageBox.Show(window, GetString("MessagePaintJobCreateSuccess"));
 		}
 
 
@@ -816,7 +854,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				} else {
 					imagePath = path;
 					throw new NotImplementedException();
-					//转换为tga或dds 然后问是否创建tobj？
+					//todo 转换为tga或dds 然后问是否创建tobj？
 				}
 				string inProjectpath = tobjPath[projectLocation.Length..];
 				inProjectpath = inProjectpath.Replace("\\", "/");
@@ -923,10 +961,16 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 		private static partial Regex deMap2D();
 
 
+
 		public BitmapSource? PaintJobTexImage {
 			get => PaintJobData.PaintJobTexImage;
 			set {
 				PaintJobData.PaintJobTexImage = value;
+				if (value == null) {
+					PaintJobChannelR = null;
+					PaintJobChannelG = null;
+					PaintJobChannelB = null;
+				}
 				InvokeChange();
 			}
 		}
@@ -964,45 +1008,41 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 		private void GetCabinUV() {
 			if (CurrentCabin == null)
 				return;
-			var uri = new Uri($"/Modding/PaintJob/TruckUV/{CurrentCabin!.CabinID}.png", UriKind.Relative);
-			CabinUV = new BitmapImage(uri);
-		}
-
-
-
-
-		public void ControlOvrTab(PaintJobOverrideData ovrData) {
-			int index = OverrideList.IndexOf(ovrData);
-			OverrideList.RemoveAt(index);
-			for (int i = index; i < OverrideList.Count; i++) {
-				OverrideList[i].Index = i;
+			try {
+				var uri = new Uri($"pack://application:,,,/Vehicles/UV/{CurrentCabin.CabinID}.png", UriKind.RelativeOrAbsolute);
+				var bitmap = new BitmapImage();
+				bitmap.BeginInit();
+				bitmap.CacheOption = BitmapCacheOption.OnLoad;
+				bitmap.UriSource = uri;
+				bitmap.EndInit();
+				bitmap.Freeze();
+				CabinUV = bitmap;
+			} catch {
+				CabinUV = null;
 			}
 		}
 
-		public void AddOvr() {
-			OverrideList.Add(new(OverrideList.Count));
-			SelectedOverride = OverrideList.Last();
-		}
+		private bool mShowCabinUV = true;
 
-		public void CleanAOvrAccessories() {
-			foreach(var ovr in OverrideList) {
-				foreach(var acc in ovr.AccList) {
-					acc.BelongingOverride = null;
-				}
-				ovr.AccList.Clear();
+		public bool ShowCabinUV {
+			get => mShowCabinUV;
+			set {
+				mShowCabinUV = value;
+				InvokeChange();
 			}
 		}
 
-		public void CreatePaintJobSii(Window window) {
-			if (ModelName.Length == 0
-				|| CurrentTruck == null
-				|| DisplayName.Length == 0
-				|| Price == null
-				|| UnlockLevel == null
-				|| IconName.Length == 0)
-				return;
-			new PaintJobSCSIO().WritePaintJobData(this);
-			MessageBox.Show(window, GetString("MessagePaintJobCreateSuccess"));
+		private int mUVOpacityValue = 50;
+
+		public int UVOpacityValue {
+			get => mUVOpacityValue;
+			set {
+				mUVOpacityValue = value;
+				InvokeChange();
+				InvokeChange(nameof(UVOpacity));
+			}
 		}
+
+		public float UVOpacity => ((float)UVOpacityValue) / 100;
 	}
 }

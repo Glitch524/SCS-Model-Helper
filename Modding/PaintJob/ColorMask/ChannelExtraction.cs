@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace SCS_Mod_Helper.Modding.PaintJob; 
+namespace SCS_Mod_Helper.Modding.PaintJob.ColorMask; 
 public class ChannelExtraction {
 	public static unsafe void ExtractRGBChannels(BitmapSource source, out WriteableBitmap rBmp, out WriteableBitmap gBmp, out WriteableBitmap bBmp) {
 		int width = source.PixelWidth;

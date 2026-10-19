@@ -1,5 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Trucks;
+using SCS_Mod_Helper.Vehicles;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 

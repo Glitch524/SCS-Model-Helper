@@ -2,10 +2,10 @@
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-namespace SCS_Mod_Helper.Modding.PaintJob; 
+namespace SCS_Mod_Helper.Modding.PaintJob.ColorMask; 
 public class ChannelColorizeEffect : ShaderEffect {
 	private static readonly PixelShader _pixelShader = new() {
-		UriSource = new Uri(@"\Modding\PaintJob\ChannelColorizeEffect.ps", UriKind.Relative)
+		UriSource = new Uri(@"\Modding\PaintJob\ColorMask\ChannelColorizeEffect.ps", UriKind.Relative)
 	};
 
 	public ChannelColorizeEffect() {

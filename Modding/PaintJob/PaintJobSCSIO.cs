@@ -1,5 +1,4 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Windows.Media;
@@ -79,17 +78,17 @@ public class PaintJobSCSIO(): SCSIO {
 		_ => false
 	};
 
-	private void WriteAccPaintJobData(StreamWriter sw, string paintJobName, string truckID, Action data) {
-		WriteDataHeader(sw, HeaderAccPaintJob, $"{paintJobName}.{truckID}.paint_job", data);
+	private void WriteAccPaintJobData(StreamWriter sw, string paintJobName, string vehicleID, Action data) {
+		WriteDataHeader(sw, HeaderAccPaintJob, $"{paintJobName}.{vehicleID}.paint_job", data);
 	}
 
 	public void WritePaintJobData(PaintJobBinding binding) {
-		var truckID = binding.CurrentTruck!.TruckID;
+		var vehicleID = binding.CurrentVehicle!.VehicleID;
 		var paintJobName = binding.ModelName;
-		var siiFile = Paths.AccPaintJobFile(truckID, paintJobName);
+		var siiFile = Paths.AccPaintJobFile(vehicleID, paintJobName);
 		using StreamWriter sw = new(siiFile);
 		WriteFileStructure(sw, () => {
-			WriteAccPaintJobData(sw, paintJobName, truckID, () => {
+			WriteAccPaintJobData(sw, paintJobName, vehicleID, () => {
 				bool customBase, custom1, custom2, custom3;
 
 				WriteLine(sw, NameDisplayName, binding.DisplayName);
@@ -167,9 +166,9 @@ public class PaintJobSCSIO(): SCSIO {
 	private void WriteOvrPaintJobData(PaintJobBinding binding) {
 		if (binding.OverrideList.Count == 0)
 			return;
-		var truckID = binding.CurrentTruck!.TruckID;
+		var vehicleID = binding.CurrentVehicle!.VehicleID;
 		var paintJobName = binding.ModelName;
-		var siiFile = Paths.SimplePaintJobFile(truckID, paintJobName);
+		var siiFile = Paths.SimplePaintJobFile(vehicleID, paintJobName);
 		using StreamWriter sw = new(siiFile);
 		WriteFileStructure(sw, () => {
 			for (int i = 0; i < binding.OverrideList.Count; i++) {

@@ -1,40 +1,39 @@
 ﻿using SCS_Mod_Helper.Modding.Accessories;
-using SCS_Mod_Helper.Trucks;
+using SCS_Mod_Helper.Vehicles;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Wpf.Ui.Extensions;
 
 namespace SCS_Mod_Helper.Modding.PaintJob {
-	public class AccPaintJobData(): AccessoryData("", "", null, null, "", "unknown") {
+	public class AccPaintJobData(): AccessoryData() {
 		//name 从accessoryData继承的变量
 		//icon
 		//price
 		//unlock
 		//part_type
 		
-		private ObservableCollection<Truck>? mTrucks = null;
-		public ObservableCollection<Truck> Trucks {
+		private ObservableCollection<Vehicle>? mVehicles = null;
+		public ObservableCollection<Vehicle> Vehicles {
 			get {
-				if (mTrucks == null) {
-					mTrucks = [];
-					TrucksIO.LoadPaintJobTrucks(mTrucks);
+				if (mVehicles == null) {
+					mVehicles = [];
+					VehiclesIO.LoadPaintJobVehicles(mVehicles);
 				}
-				return mTrucks;
+				return mVehicles;
 			}
 		}
 
-		private Truck? mCurrentTruck = null;
-		public Truck? CurrentTruck {
-			get => mCurrentTruck;
+		private Vehicle? mCurrentVehicle = null;
+		public Vehicle? CurrentVehicle {
+			get => mCurrentVehicle;
 			set {
-				mCurrentTruck = value;
+				mCurrentVehicle = value;
 				InvokeChange();
 			}
 		}
 
-		public List<Cabin>? CabinList => CurrentTruck?.Cabins ?? null;
+		public List<Cabin>? CabinList => CurrentVehicle?.Cabins ?? null;
 
 		private Cabin? mCurrentCabin = null;
 		public Cabin? CurrentCabin {
@@ -44,7 +43,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 				InvokeChange();
 			}
 		}
-		public List<Accessory>? AccessoryList => CurrentTruck?.Accessories ?? null;
+		public List<Accessory>? AccessoryList => CurrentVehicle?.Accessories ?? null;
 
 		private bool mAirbrush = false;
 		public bool Airbrush {
@@ -531,9 +530,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 		public BitmapSource? AccTexImage {
 			get => SelectedOverride?.AccTexImage;
 			set {
-				if (SelectedOverride != null) {
-					SelectedOverride.AccTexImage = value;
-				}
+				SelectedOverride?.AccTexImage = value;
 				InvokeChange();
 			}
 		}
