@@ -75,7 +75,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 			if (Binding.SelectedFile is PIXFile pixFile) {
 				if (pixFile.IsDir)
 					return;
-				Binding.ShowFile(this, pixFile);
+				_ = Binding.ShowFile(this, pixFile);
 			}
 		}
 

@@ -20,7 +20,6 @@ namespace SCS_Mod_Helper.ConverterPix {
 			set {
 				mPackPath = value;
 				InvokeChange();
-				InvokeChange(nameof(PathSet));
 			}
 		}
 
@@ -43,8 +42,6 @@ namespace SCS_Mod_Helper.ConverterPix {
 				InvokeChange();
 			}
 		}
-
-		public bool PathSet => PackPath.Length > 0;
 
 		public string PackDir => DirList.LastOrDefault()?.DirName ?? "/";
 
@@ -200,10 +197,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 			p.Close();
 			if (success) {
 				string osFilename = pixFile.Filename.Replace('/', '\\');
-				string filePath = Path.Combine(DestPath, osFilename);
+				string filePath = DestPath + osFilename;
 				if (OpenExtracted) {
 					if (type == 1) {
-						osFilename = osFilename[..^4] + ".pim";
+						filePath = filePath[..^4] + ".pim";
 					}
 					if (File.Exists(filePath)) {
 						Process.Start("explorer.exe", $"/select,\"{filePath}\"");
@@ -249,7 +246,6 @@ namespace SCS_Mod_Helper.ConverterPix {
 			Process p = CallPix(args);
 
 			p.Start();
-			p.WaitForExit();
 			List<string> anims = [];
 			string? line;
 			while ((line = p.StandardOutput.ReadLine()) != null) {
@@ -260,47 +256,73 @@ namespace SCS_Mod_Helper.ConverterPix {
 				}
 			}
 			Debug.WriteLine(p.StandardOutput.ReadToEnd());
+			p.WaitForExit();
 			p.Close();
 			return anims;
 		}
 
 		//可以用来查看文字文件内容，比如sii、mat、cfg，无法打开其他文件，tobj也不行 即使能读，也只有一点点就没有了
-		public void ShowFile(Window window, PIXFile pixFile) {
+		public async Task ShowFile(Window window, PIXFile pixFile) {//todo 根据这个修改其他shell process
 			StringBuilder args = new($"-b \"{PackPath}\" -show_f \"{pixFile.Filename}\"");
 
-			Process p = CallPix(args.ToString());
+			var startInfo = new ProcessStartInfo {
+				FileName = Instances.ConverterPixPath,
+				Arguments = args.ToString(),
+				UseShellExecute = false,
+				CreateNoWindow = true,
+				RedirectStandardInput = true,
+				RedirectStandardOutput = true,
+				RedirectStandardError = true,
+				StandardOutputEncoding = Encoding.UTF8,
+				StandardErrorEncoding = Encoding.UTF8
+			};
 
-			p.Start();
-
-			string? line;
-			bool get = false;
 			List<string> datas = [];
-			while ((line = p.StandardOutput.ReadLine()) != null) {
+			bool get = false;
+			bool fileReadError = false;
+
+			using var p = new Process { StartInfo = startInfo };
+			p.OutputDataReceived += (sender, e) => {
+				if (e.Data == null)
+					return;
+				var line = e.Data;
 				if (line.Trim().StartsWith('*') || line.Length == 0)
-					continue;
+					return;
 				if (line.StartsWith("Unable to open file to read")) {
-					MessageBox.Show(window, "Unable to read this file", pixFile.Filename);
-					break;
+					fileReadError = true;
+					return;
 				}
 				if (line.Trim().Contains('-')) {
-					if (get) {
-						break;
-					} else {
-						get = true;
-						continue;
-					}
+					if (get)
+						return;
+					get = true;
+					return;
 				}
-				if (get) {
+				if (get)
 					datas.Add(line);
-				}
+			};
+
+			var errorString = new StringBuilder();
+			p.ErrorDataReceived += (sender, e) => {
+				if (e.Data != null)
+					errorString.AppendLine(e.Data);
+			};
+
+			p.Start();
+			p.BeginOutputReadLine();
+			p.BeginErrorReadLine();
+
+			await p.WaitForExitAsync();
+			if (fileReadError) {
+				window.Dispatcher.Invoke(() => 
+					MessageBox.Show(window, GetString("MessageReadFileFailed"), pixFile.Filename));
+				return;
 			}
 			if (datas.Count > 0) {
 				Debug.WriteLine(string.Join(Environment.NewLine, datas));
-				MessageBox.Show(window, string.Join(Environment.NewLine, datas), pixFile.Filename);
+				window.Dispatcher.Invoke(() =>
+					MessageBox.Show(window, string.Join(Environment.NewLine, datas), pixFile.Filename));
 			}
-
-			p.WaitForExit();
-			p.Close();
 		}
 
 		public void TestExtractFD(PIXFile pixFile) {
@@ -313,8 +335,8 @@ namespace SCS_Mod_Helper.ConverterPix {
 			Process p = CallPix(args.ToString());
 
 			p.Start();
-			p.WaitForExit();
 			Debug.WriteLine(p.StandardOutput.ReadToEnd());
+			p.WaitForExit();
 			p.Close();
 		}
 	}

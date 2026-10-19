@@ -296,8 +296,21 @@
 
 			<Grid
 				Grid.Row="5"
-				Margin="0,5"
-				IsEnabled="{Binding PathSet}">
+				Margin="0,5">
+				<Grid.Style>
+					<Style
+						TargetType="Grid">
+						<Style.Triggers>
+							<DataTrigger
+								Binding="{Binding PackPath.Length}"
+								Value="0">
+								<Setter
+									Property="IsEnabled"
+									Value="False" />
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Grid.Style>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition
 						Width="Auto" />
