@@ -12,14 +12,16 @@ public static class AccessoryDataUtil {
 	public static string GetInitialPath(params string[] paths) {
 		string? currentPath = null;
 		foreach (var path in paths) {
-			if (path.Length > 0) {
-				currentPath = path;
-				break;
-			}
+			if (string.IsNullOrEmpty(path))
+				continue;
+			currentPath = path;
+			break;
 		}
 		var projectLocation = Instances.ProjectLocation;
 		if (currentPath != null) {
 			currentPath = currentPath.Replace('/', '\\');
+			if (!currentPath.StartsWith('\\'))
+				currentPath = '\\' + currentPath;
 			currentPath = projectLocation + currentPath;
 			while (currentPath.StartsWith(projectLocation) && currentPath.Length > projectLocation.Length) {
 				var parent = new DirectoryInfo(currentPath).Parent;
@@ -45,7 +47,7 @@ public static class AccessoryDataUtil {
 			string projectLocation = Instances.ProjectLocation;
 			if (projectLocation.Length == 0)
 				throw new(Util.GetString("MessageProjectLocationFirst"));
-			var pathAcc = Paths.AccessoryIconDir(projectLocation);
+			var pathAcc = Paths.AccessoryIconDir();
 			var fileDialog = new OpenFileDialog {
 				Multiselect = false,
 				DefaultDirectory = pathAcc,
@@ -222,8 +224,6 @@ public static class AccessoryDataUtil {
 	}
 
 	private static string? CheckRopeMatExistence(DirectoryInfo iconFile) {
-		string projectLocation = Instances.ProjectLocation;
-
 		var deExt = iconFile.FullName[..^4];
 		var matPath = deExt + ".mat";
 		var tobjPath = deExt + ".tobj";

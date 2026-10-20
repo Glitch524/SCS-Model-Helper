@@ -80,16 +80,16 @@ public partial class CreatedModelWindow: BaseWindow {
 				var pathShort = filePath.Replace(Paths.DefTruckDir(ProjectLocation), "");
 
 				var modelName = "";
-				var truckID = "";
+				var vehicleID = "";
 				var modelType = "";
-				var deTruck = filePath.Replace(defDir.FullName + '\\', "");
-				var split = deTruck.Split('\\');
+				var deVehicle = filePath.Replace(defDir.FullName + '\\', "");
+				var split = deVehicle.Split('\\');
 				if (split.Length >= 4) {
-					truckID = split[0];
+					vehicleID = split[0];
 					modelType = split[2];
 					modelName = split[3][..^4];
 				}
-				CreatedModelItem c = new(filePath, pathShort, truckID, modelType, modelName);
+				CreatedModelItem c = new(filePath, pathShort, vehicleID, modelType, modelName);
 
 				if (ModelPair.TryGetValue(modelName, out CreatedModel? createdModel)) {
 					Dispatcher.Invoke(new(() => {

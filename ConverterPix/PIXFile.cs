@@ -42,7 +42,11 @@ namespace SCS_Mod_Helper.ConverterPix {
 		}
 
 		public string Subtitle {
-			get => mIsDir ? "文件夹" : $"{Extension}文件";
+			get => mIsDir ? GetString("SubtitleFolder") : GetString("SubtitleFile", Extension);
+		}
+
+		public override string ToString() {
+			return $"PixFile: {Filename}";
 		}
 	}
 }

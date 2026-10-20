@@ -1,9 +1,7 @@
 ﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
-using SCS_Mod_Helper.Trucks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,17 +14,17 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 /// </summary>
 public partial class AccAddonWindow: BaseWindow {
 	private readonly AccAddonBinding binding = new();
-	private bool TruckExpandedETS2 {
-		get => binding.TruckExpandedETS2; 
-		set => binding.TruckExpandedETS2 = value;
+	private bool VehicleExpandedETS2 {
+		get => binding.VehicleExpandedETS2; 
+		set => binding.VehicleExpandedETS2 = value;
 	}
-	private bool TruckExpandedATS {
-		get => binding.TruckExpandedATS; 
-		set => binding.TruckExpandedATS = value;
+	private bool VehicleExpandedATS {
+		get => binding.VehicleExpandedATS; 
+		set => binding.VehicleExpandedATS = value;
 	}
 
-	private ObservableCollection<Truck> TrucksETS2 => binding.TrucksETS2;
-	private ObservableCollection<Truck> TrucksATS => binding.TrucksATS;
+	private ObservableCollection<AccessoryVehicle> VehiclesETS2 => binding.VehiclesETS2;
+	private ObservableCollection<AccessoryVehicle> VehiclesATS => binding.VehiclesATS;
 
 	private readonly ContextMenu MenuStringRes, MenuModelType, MenuLook, MenuVariant;
 
@@ -48,7 +46,7 @@ public partial class AccAddonWindow: BaseWindow {
 	}
 
 	private async void OnLoaded(object sender, RoutedEventArgs e) {
-		var tLoad = binding.LoadTrucks();
+		var tLoad = binding.LoadVehicles();
 		await tLoad;
 		binding.LoadHistory();
 		binding.ModelIcon = AccessoryDataUtil.LoadModelIconByIconName(binding.IconName);
@@ -66,15 +64,15 @@ public partial class AccAddonWindow: BaseWindow {
 		MenuItem item = (MenuItem)sender;
 		ContextMenu cm = (ContextMenu)item.Parent;
 		if (cm == MenuModelType) {
-			Truck truck = (Truck)cm.DataContext;
+			AccessoryVehicle vehicle = (AccessoryVehicle)cm.DataContext;
 			var type = (string)item.Tag;
 			int i;
 			if ((i = type.IndexOf('/')) == -1)
-				truck.ModelType = (string)item.Tag;
-			else if (truck.IsETS2)
-				truck.ModelType = type[..i];
+				vehicle.ModelType = (string)item.Tag;
+			else if (vehicle.IsETS2)
+				vehicle.ModelType = type[..i];
 			else
-				truck.ModelType = type[(i + 1)..];
+				vehicle.ModelType = type[(i + 1)..];
 		} else {
 			var menuName = (string)item.CommandParameter;
 			cm = menuName switch {
@@ -90,12 +88,12 @@ public partial class AccAddonWindow: BaseWindow {
 					StringResUtil.ApplyStringRes(TextDisplayName, tag);
 				}
 			} else {
-				Truck truck = (Truck)cm.DataContext;
+				AccessoryVehicle vehicle = (AccessoryVehicle)cm.DataContext;
 				if (cm == MenuModelType) {
 				} else if (cm == MenuLook) {
-					truck.Look = (string)item.DataContext;
+					vehicle.Look = (string)item.DataContext;
 				} else if (cm == MenuVariant) {
-					truck.Variant = (string)item.DataContext;
+					vehicle.Variant = (string)item.DataContext;
 				} else
 					return;
 			}
@@ -246,49 +244,49 @@ public partial class AccAddonWindow: BaseWindow {
 	[GeneratedRegex("[^0-9]+")]
 	private partial Regex RegexNumber();
 
-	private void ButtonTruckInitialize(object sender, RoutedEventArgs e) {
-		binding.PopupAddTruckOpen = false;
-		binding.ReinitTruckList();
+	private void ButtonVehicleReinit(object sender, RoutedEventArgs e) {
+		binding.PopupAddVehicleOpen = false;
+		binding.ReinitVehicleList();
 	}
 
-	private void ButtonAddTruckClick(object sender, RoutedEventArgs e) {
-		PopupAddTruck.PlacementTarget = (Button)sender;
-		if (binding.AddTruckUC == null) {
-			binding.AddTruckUC = new(sender == ButtonAddTruckETS2, AddTruckResult);
-			PopupAddTruck.Child = binding.AddTruckUC;
+	private void ButtonAddVehicleClick(object sender, RoutedEventArgs e) {
+		PopupAddVehicle.PlacementTarget = (Button)sender;
+		if (binding.AddVehicleUC == null) {
+			binding.AddVehicleUC = new(sender == ButtonAddVehicleETS2, AddVehicleResult);
+			PopupAddVehicle.Child = binding.AddVehicleUC;
 		}
-		binding.AddTruckUC.Clean();
-		PopupAddTruck.IsOpen = true;
+		binding.AddVehicleUC.Clean();
+		PopupAddVehicle.IsOpen = true;
 	}
 
-	private void AddTruckResult(bool OK) {
+	private void AddVehicleResult(bool OK) {
 		if (OK) {
-			Truck newTruck = binding.AddTruckUC?.NewTruck!;
-			binding.AddNewTruck(this, newTruck);
+			AccessoryVehicle newVehicle = binding.AddVehicleUC?.NewVehicle!;
+			binding.AddNewVehicle(this, newVehicle);
 		}
-		PopupAddTruck.IsOpen = false;
+		PopupAddVehicle.IsOpen = false;
 	}
 
-	private void ButtonDeleteTruckClick(object sender, RoutedEventArgs e) {
-		if (TableTrucksETS2.SelectedIndex == -1 && TableTrucksATS.SelectedIndex == -1)
+	private void ButtonDeleteVehicleClick(object sender, RoutedEventArgs e) {
+		if (TableVehiclesETS2.SelectedIndex == -1 && TableVehiclesATS.SelectedIndex == -1)
 			return;
-		if (sender == ButtonDeleteTruckETS2) {
-			AccAddonBinding.DeleteTruck(true, TrucksETS2, TableTrucksETS2);
-		} else if (sender == ButtonDeleteTruckATS) {
-			AccAddonBinding.DeleteTruck(false, TrucksATS, TableTrucksATS);
+		if (sender == ButtonDeleteVehicleETS2) {
+			AccAddonBinding.DeleteVehicle(true, VehiclesETS2, TableVehiclesETS2);
+		} else if (sender == ButtonDeleteVehicleATS) {
+			AccAddonBinding.DeleteVehicle(false, VehiclesATS, TableVehiclesATS);
 		}
 	}
 
 	private void ButtonCoverValue(object sender, RoutedEventArgs e) {
-		void ForeachValue(Action<Truck> value, Action<Truck>? valueATS = null) {
-			if (TruckExpandedETS2) {
-				foreach (Truck t in TrucksETS2) {
+		void ForeachValue(Action<AccessoryVehicle> value, Action<AccessoryVehicle>? valueATS = null) {
+			if (VehicleExpandedETS2) {
+				foreach (var t in VehiclesETS2) {
 					if (t.Check)
 						value(t);
 				}
 			}
-			if (TruckExpandedATS) {
-				foreach (Truck t in TrucksATS) {
+			if (VehicleExpandedATS) {
+				foreach (var t in VehiclesATS) {
 					if (t.Check) {
 						if (valueATS != null) {
 							valueATS(t);
@@ -315,9 +313,9 @@ public partial class AccAddonWindow: BaseWindow {
 		}
 	}
 
-	private void TruckCheckBoxClick(object sender, RoutedEventArgs e) {
+	private void VehicleCheckBoxClick(object sender, RoutedEventArgs e) {
 		CheckBox box = (CheckBox)sender;
-		Truck selected = (Truck)box.DataContext;
+		AccessoryVehicle selected = (AccessoryVehicle)box.DataContext;
 		binding.SetSelected(selected);
 		binding.OverwriteEmpty(selected, selected.Check);
 	}

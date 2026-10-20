@@ -5,7 +5,7 @@
 	- Creation and Editing for Manifest file
 	- Creation of Mod description file and localization
 	- Interior model definition:
-		- Interior model sii file for selected trucks
+		- Interior model sii file for selected vehicles
 		- Accessory Hookup model
 		- Physics model
 		- Search and clean created sii files

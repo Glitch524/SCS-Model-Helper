@@ -61,18 +61,6 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AutoFillSelectAll {
-            get {
-                return ((bool)(this["AutoFillSelectAll"]));
-            }
-            set {
-                this["AutoFillSelectAll"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DisplayName {
             get {
@@ -307,23 +295,23 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection TrucksETS2 {
+        public global::System.Collections.Specialized.StringCollection VehiclesETS2 {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["TrucksETS2"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["VehiclesETS2"]));
             }
             set {
-                this["TrucksETS2"] = value;
+                this["VehiclesETS2"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection TrucksATS {
+        public global::System.Collections.Specialized.StringCollection VehiclesATS {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["TrucksATS"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["VehiclesATS"]));
             }
             set {
-                this["TrucksATS"] = value;
+                this["VehiclesATS"] = value;
             }
         }
         

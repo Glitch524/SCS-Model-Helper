@@ -15,9 +15,9 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 
 		bool isPatch = false;
 
-		protected void WriteData(StreamWriter sw, bool isPatch, string modelName, string truckID, string modelType, Action data) {
+		protected void WriteData(StreamWriter sw, bool isPatch, string modelName, string vehicleID, string modelType, Action data) {
 			sw.Write(new string('\t', TabCount));
-			sw.WriteLine($"{(isPatch ? NamePatchHeader : NameIntHeader)} : {modelName}.{truckID}.{modelType}");
+			sw.WriteLine($"{(isPatch ? NamePatchHeader : NameIntHeader)} : {modelName}.{vehicleID}.{modelType}");
 			BraceIn(sw);
 			data();
 			BraceOut(sw);
@@ -49,34 +49,31 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 
 		private int CreateAccAddonSiiInternal(AccAddonBinding binding) {
 			var created = 0;
-			if (binding.TruckExpandedETS2)
+			if (binding.VehicleExpandedETS2)
 				created += CreateSii(binding, true);
-			if (binding.TruckExpandedATS)
+			if (binding.VehicleExpandedATS)
 				created += CreateSii(binding, false);
 			return created;
 		}
 		private int CreateSii(AccAddonBinding binding, bool isETS2) {
 			int numberCreated = 0;
-			foreach (var truck in isETS2 ? binding.TrucksETS2 : binding.TrucksATS) {
-				var siiFile = Paths.SiiFile(Instances.ProjectLocation, truck.TruckID, truck.ModelType, binding.ModelName);
-				if (truck.Check) {
-					if (truck.ModelType.Length == 0 || truck.TruckID.Length == 0 || truck.Look.Length == 0 || truck.Variant.Length == 0)//确保modeltype look variant 都有值，否则跳过
+			foreach (var vehicle in isETS2 ? binding.VehiclesETS2 : binding.VehiclesATS) {
+				var siiFile = Paths.AccAddonFile(vehicle.VehicleID, vehicle.ModelType, binding.ModelName);
+				if (vehicle.Check) {
+					if (vehicle.ModelType.Length == 0 || vehicle.VehicleID.Length == 0 || vehicle.Look.Length == 0 || vehicle.Variant.Length == 0)//确保modeltype look variant 都有值，否则跳过
 						continue;
 				} else {
 					if (binding.DeleteUnchecked && File.Exists(siiFile))//如果勾选了删除未勾选sii文件，就将未勾选但存在的sii文件删除
 						File.Delete(siiFile);
 					continue;
 				}
-				DirectoryInfo sii = new(siiFile);
-				if (!sii.Parent!.Exists)
-					sii.Parent!.Create();
-				isPatch = truck.ModelType switch {//当modeltype为flag等，addon_data的标题应为accessory_addon_patch_data才能让旗子正常显示，而且填写物理模型的data并非数组，不带中括号
+				isPatch = vehicle.ModelType switch {//当modeltype为flag等，addon_data的标题应为accessory_addon_patch_data才能让旗子正常显示，而且填写物理模型的data并非数组，不带中括号
 					"flag_l" or "flag_r" or "flag_f_l" or "flag_f_r" => true,
 					_ => false,
 				};
 				using StreamWriter sw = new(siiFile);
 				WriteFileStructure(sw, () => {
-					WriteData(sw, isPatch, binding.ModelName, truck.TruckID, truck.ModelType, () => {
+					WriteData(sw, isPatch, binding.ModelName, vehicle.VehicleID, vehicle.ModelType, () => {
 						WriteLine(sw, NameDisplayName, binding.DisplayName);
 						WriteLine(sw, NamePrice, binding.Price);
 						WriteLine(sw, NameUnlock, binding.UnlockLevel);
@@ -96,8 +93,8 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon {
 								WriteLine(sw, NameAAExtModelUK, binding.ExtModelPathUK);
 						}
 						WriteLine(sw, NameCollPath, binding.CollPath);
-						WriteLine(sw, NameLook, truck.Look, "default");
-						WriteLine(sw, NameVariant, truck.Variant, "default");
+						WriteLine(sw, NameLook, vehicle.Look, "default");
+						WriteLine(sw, NameVariant, vehicle.Variant, "default");
 						WriteLine(sw, NameAAHideIn, binding.HideIn, 0);
 						WriteLine(sw, NameElectricType, binding.ElectricType, "vehicle");
 						WriteList(sw, NameData, binding.Data);

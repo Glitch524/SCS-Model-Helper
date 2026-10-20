@@ -180,10 +180,10 @@
 						</DataGridTextColumn.CellStyle>
 					</DataGridTextColumn>
 					<DataGridTextColumn
-						Header="{DynamicResource TruckID}"
+						Header="{DynamicResource VehicleID}"
 						IsReadOnly="True"
 						Width="6*"
-						Binding="{Binding TruckID}">
+						Binding="{Binding VehicleID}">
 						<DataGridTextColumn.CellStyle>
 							<Style
 								TargetType="DataGridCell">

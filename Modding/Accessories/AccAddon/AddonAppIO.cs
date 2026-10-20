@@ -1,5 +1,4 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Xml;
@@ -41,11 +40,11 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
         protected const string TITLE_REQUIRE_LIST = "RequireList";
         protected const string TITLE_REQUIRE = "Require";
 
-        protected const string TITLE_TRUCKS_ETS2 = "TrucksETS2";
-        protected const string TITLE_TRUCKS_ATS = "TrucksATS";
-        protected const string TITLE_TRUCK = "Truck";
-		protected const string ATTR_TRUCK_CHECK = "Check";
-		protected const string ATTR_TRUCK_ID = "TruckID";
+        protected const string TITLE_VEHICLES_ETS2 = "VehiclesETS2";
+        protected const string TITLE_VEHICLES_ATS = "VehiclesATS";
+        protected const string TITLE_VEHICLE = "Vehicle";
+		protected const string ATTR_VEHICLE_CHECK = "Check";
+		protected const string ATTR_VEHICLE_ID = "VehicleID";
         protected const string ATTR_MODEL_TYPE = "ModelType";
         protected const string ATTR_LOOK = "Look";
         protected const string ATTR_VARIANT = "Variant";
@@ -82,8 +81,8 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 				WriteList(TITLE_OVERRIDES_LIST, data.Overrides, TITLE_OVERRIDES);
 				WriteList(TITLE_REQUIRE_LIST, data.Require, TITLE_REQUIRE);
 
-				WriteTrucks(TITLE_TRUCKS_ETS2, data.TrucksETS2);
-				WriteTrucks(TITLE_TRUCKS_ATS, data.TrucksATS);
+				WriteVehicles(TITLE_VEHICLES_ETS2, data.VehiclesETS2);
+				WriteVehicles(TITLE_VEHICLES_ATS, data.VehiclesATS);
 			});
             SaveDocument(SavePath);
 		}
@@ -98,14 +97,14 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 			});
 		}
 
-		protected void WriteTrucks(string listTitle, Collection<Truck> trucks) {
-			if (trucks.Count == 0)
+		protected void WriteVehicles(string listTitle, Collection<AccessoryVehicle> vehicles) {
+			if (vehicles.Count == 0)
 				return;
 			WriteElement(listTitle, () => {
-				foreach (var te in trucks) {
-					WriteElement(TITLE_TRUCK, () => {
-						WriteAttribute(ATTR_TRUCK_CHECK, te.Check);
-						WriteAttribute(ATTR_TRUCK_ID, te.TruckID);
+				foreach (var te in vehicles) {
+					WriteElement(TITLE_VEHICLE, () => {
+						WriteAttribute(ATTR_VEHICLE_CHECK, te.Check);
+						WriteAttribute(ATTR_VEHICLE_ID, te.VehicleID);
 						WriteAttribute(ATTR_MODEL_TYPE, te.ModelType);
 						WriteAttribute(ATTR_LOOK, te.Look);
 						WriteAttribute(ATTR_VARIANT, te.Variant);
@@ -193,11 +192,11 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 						ReadList(child, TITLE_REQUIRE, data.Require);
 						data.InvokeChange(nameof(data.RequireListContent));
 						break;
-					case TITLE_TRUCKS_ETS2:
-						data.SelectedCountETS2 = ReadTruck(child, data.TrucksETS2);
+					case TITLE_VEHICLES_ETS2:
+						data.SelectedCountETS2 = ReadVehicles(child, data.VehiclesETS2);
 						break;
-					case TITLE_TRUCKS_ATS:
-						data.SelectedCountATS = ReadTruck(child, data.TrucksATS);
+					case TITLE_VEHICLES_ATS:
+						data.SelectedCountATS = ReadVehicles(child, data.VehiclesATS);
 						break;
 				}
             }
@@ -210,29 +209,29 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon
 			}
 		}
 
-		protected static int ReadTruck(XmlNode node, Collection<Truck> trucks) {
-			Dictionary<string, Truck> truckDict = trucks.ToDictionary(t => t.TruckID);
+		protected static int ReadVehicles(XmlNode node, Collection<AccessoryVehicle> vehicles) {
+			Dictionary<string, AccessoryVehicle> vehicleDict = vehicles.ToDictionary(v => v.VehicleID);
 			int selected = 0;
-			foreach (XmlNode t in node.ChildNodes) {
-				if (t.Name != TITLE_TRUCK) 
+			foreach (XmlNode v in node.ChildNodes) {
+				if (v.Name != TITLE_VEHICLE) 
 					continue;
-				var truckID = GetAttribute(t, ATTR_TRUCK_ID);
-				if (truckDict.TryGetValue(truckID, out var truck)) {
-					truck.Check = GetAttributeBool(t, ATTR_TRUCK_CHECK);
-					if (truck.Check)
+				var vehicleID = GetAttribute(v, ATTR_VEHICLE_ID);
+				if (vehicleDict.TryGetValue(vehicleID, out var vehicle)) {
+					vehicle.Check = GetAttributeBool(v, ATTR_VEHICLE_CHECK);
+					if (vehicle.Check)
 						selected++;
-					truck.ModelType = GetAttribute(t, ATTR_MODEL_TYPE);
-					truck.Look = GetAttribute(t, ATTR_LOOK);
-					truck.Variant = GetAttribute(t, ATTR_VARIANT);
-					truckDict.Remove(truckID);
+					vehicle.ModelType = GetAttribute(v, ATTR_MODEL_TYPE);
+					vehicle.Look = GetAttribute(v, ATTR_LOOK);
+					vehicle.Variant = GetAttribute(v, ATTR_VARIANT);
+					vehicleDict.Remove(vehicleID);
 				}
 			}
-			foreach (var truckKV in truckDict) {//如果出现记录里没有出现过的新车，会导致新车内容没有被读取内容覆盖。
-				var truck = truckKV.Value;
-				truck.Check = false;
-				truck.ModelType = "";
-				truck.Look = "";
-				truck.Variant = "";
+			foreach (var vehicleKV in vehicleDict) {//如果出现记录里没有出现过的新车，会导致新车内容没有被读取内容覆盖。
+				var vehicle = vehicleKV.Value;
+				vehicle.Check = false;
+				vehicle.ModelType = "";
+				vehicle.Look = "";
+				vehicle.Variant = "";
 			}
 			return selected;
 		}

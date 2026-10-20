@@ -1,0 +1,181 @@
+﻿<base:BaseWindow
+	x:Class="SCS_Mod_Helper.Modding.PaintJob.PaintJobTexPreviewWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
+	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:SCS_Mod_Helper.Modding.PaintJob"
+	xmlns:colormask="clr-namespace:SCS_Mod_Helper.Modding.PaintJob.ColorMask"
+	d:DataContext="{d:DesignInstance Type=local:PaintJobBinding}"
+	mc:Ignorable="d"
+	MinWidth="256"
+	MinHeight="256"
+	Width="532"
+	Height="624"
+	SizeToContent="Height"
+	ExtendsContentIntoTitleBar="True"
+	WindowStartupLocation="CenterOwner"
+	Title="{DynamicResource TitlePaintJobPreview}">
+    <Grid
+		x:Name="GridMain">
+		<Grid.Resources>
+			<Style
+				x:Key="ImageColorMask"
+				TargetType="Image">
+				<Style.Triggers>
+					<DataTrigger
+						Binding="{Binding Airbrush}"
+						Value="True">
+						<Setter
+							Property="Visibility"
+							Value="Collapsed" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+		</Grid.Resources>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		<ui:TitleBar
+			Title="{DynamicResource TitlePaintJobPreview}" />
+		<Grid
+			x:Name="GridPaintJob"
+			Grid.Row="1"
+			Margin="10,0,10,10">
+			<Viewbox>
+				<Grid
+					Width="{Binding ElementName=GridPaintJob, Path=ActualWidth}"
+					Height="{Binding ElementName=GridPaintJob, Path=ActualHeight}">
+					<Viewbox
+						Stretch="Uniform">
+						<Border
+							x:Name="ImageBaseColor"
+							Width="100"
+							Height="100"
+							Background="{Binding BaseColorVisual}" />
+					</Viewbox>
+					<Image
+						x:Name="ImageTex"
+						Source="{Binding PaintJobTexImage}">
+						<Image.Style>
+							<Style
+								TargetType="Image">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding Airbrush}"
+										Value="False">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Image.Style>
+					</Image>
+					<Image
+						x:Name="ImageMaskB"
+						Source="{Binding PaintJobChannelB}"
+						Style="{DynamicResource ImageColorMask}">
+						<Image.Effect>
+							<colormask:ChannelColorizeEffect
+								TargetColor="{Binding MaskBColor}" />
+						</Image.Effect>
+					</Image>
+					<Image
+						x:Name="ImageMaskG"
+						Source="{Binding PaintJobChannelG}"
+						Style="{DynamicResource ImageColorMask}">
+						<Image.Effect>
+							<colormask:ChannelColorizeEffect
+								TargetColor="{Binding MaskGColor}" />
+						</Image.Effect>
+					</Image>
+					<Image
+						x:Name="ImageMaskR"
+						Source="{Binding PaintJobChannelR}"
+						Style="{DynamicResource ImageColorMask}">
+						<Image.Effect>
+							<colormask:ChannelColorizeEffect
+								TargetColor="{Binding MaskRColor}" />
+						</Image.Effect>
+					</Image>
+					<Image
+						Opacity="{Binding UVOpacity}"
+						Source="{Binding CabinUV}">
+						<Image.Style>
+							<Style
+								TargetType="Image">
+								<Style.Triggers>
+									<DataTrigger
+										Binding="{Binding ShowCabinUV}"
+										Value="False">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Image.Style>
+					</Image>
+				</Grid>
+			</Viewbox>
+		</Grid>
+		<StackPanel
+			Grid.Row="2"
+			d:Visibility="Visible">
+			<StackPanel.Style>
+				<Style
+					TargetType="StackPanel">
+					<Style.Triggers>
+						<DataTrigger
+							Binding="{Binding CabinUV}"
+							Value="{x:Null}">
+							<Setter
+								Property="Visibility"
+								Value="Hidden" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</StackPanel.Style>
+			<Border
+				Height="1"
+				Margin="0,3"
+				Background="Gray" />
+			<StackPanel
+				Margin="5"
+				Orientation="Horizontal">
+				<CheckBox
+					Padding="0"
+					Content="{DynamicResource CheckBoxShowCabinUV}"
+					IsChecked="{Binding ShowCabinUV}">
+				</CheckBox>
+				<StackPanel
+					Orientation="Horizontal">
+					<Label
+						Content="0%"
+						VerticalAlignment="Center"
+						VerticalContentAlignment="Center"
+						Margin="10,0,0,0"
+						Padding="0" />
+					<Slider
+						Maximum="100"
+						Value="{Binding UVOpacityValue}"
+						VerticalAlignment="Center" />
+					<Label
+						Content="100%"
+						VerticalAlignment="Center"
+						VerticalContentAlignment="Center"
+						Padding="0"
+						Margin="0,0,10,0" />
+				</StackPanel>
+			</StackPanel>
+		</StackPanel>
+	</Grid>
+</base:BaseWindow>

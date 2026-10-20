@@ -1,6 +1,7 @@
 ﻿using SCS_Mod_Helper.Base;
 using System.ComponentModel;
 using System.Windows;
+using Windows.ApplicationModel.Activation;
 
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 
@@ -10,19 +11,24 @@ namespace SCS_Mod_Helper.Modding.Accessories.AccAddon;
 public partial class AutoFillSelectionWindow: BaseWindow {
 	private readonly AutoFillBinding binding;
 	public bool CheckModelName {
-		get => binding.CheckModelName; set => binding.CheckModelName = value;
+		get => binding.CheckModelName; 
+		set => binding.CheckModelName = value;
 	}
 	public bool CheckModelType {
-		get => binding.CheckModelType; set => binding.CheckModelType = value;
+		get => binding.CheckModelType; 
+		set => binding.CheckModelType = value;
 	}
 	public bool CheckModelPath {
-		get => binding.CheckModelPath; set => binding.CheckModelPath = value;
+		get => binding.CheckModelPath; 
+		set => binding.CheckModelPath = value;
 	}
 	public bool CheckModelPathUK {
-		get => binding.CheckModelPathUK; set => binding.CheckModelPathUK = value;
+		get => binding.CheckModelPathUK; 
+		set => binding.CheckModelPathUK = value;
 	}
 	public bool CheckCollPath {
-		get => binding.CheckCollPath; set => binding.CheckCollPath = value;
+		get => binding.CheckCollPath; 
+		set => binding.CheckCollPath = value;
 	}
 	public AutoFillSelectionWindow(
 		int type,
@@ -33,18 +39,6 @@ public partial class AutoFillSelectionWindow: BaseWindow {
 		string? collPath) {
 		InitializeComponent();
 		binding = new(type, modelName, modelType, modelPath, modelPathUK, collPath);
-		int selectCount = 0;
-		if (modelName != null)
-			selectCount++;
-		if (modelType != null)
-			selectCount++;
-		if (modelPath != null)
-			selectCount++;
-		if (modelPathUK != null)
-			selectCount++;
-		if (collPath != null)
-			selectCount++;
-		binding.SelectCount = selectCount;
 		StackMain.DataContext = binding;
 	}
 
@@ -52,194 +46,210 @@ public partial class AutoFillSelectionWindow: BaseWindow {
 		DialogResult = true;
 		Close();
 	}
-
-	private void Window_Closing(object sender, CancelEventArgs e) {
-		AccAddonHistory.Default.AutoFillSelectAll = binding.SelectAll;
-		AccAddonHistory.Default.Save();
-	}
 }
 
-public class AutoFillBinding(
-	int chooseType,
-	string? modelName,
-	string? modelType,
-	string? modelPath,
-	string? modelPathUK,
-	string? collPath): BaseBinding {
+public class AutoFillBinding: BaseBinding {
 
-	private int mchooseType = chooseType;
+	public AutoFillBinding(
+		int chooseType,
+		string? modelName,
+		string? modelType,
+		string? modelPath,
+		string? modelPathUK,
+		string? collPath) {
+		mchooseType = chooseType;
+		mCheckModelName = !string.IsNullOrEmpty(modelName);
+		mTextModelName = modelName;
+		mCheckModelType = !string.IsNullOrEmpty(modelType);
+		mTextModelType = modelType;
+		mCheckModelPath = !string.IsNullOrEmpty(modelPath);
+		mTextModelPath = modelPath;
+		mCheckModelPathUK = !string.IsNullOrEmpty(modelPathUK);
+		mTextModelPathUK = modelPathUK;
+		mCheckCollPath = !string.IsNullOrEmpty(collPath);
+		mTextCollPath = collPath;
+
+		mVisibleCount = 0;
+		if (VisibleModelName)
+			mVisibleCount++;
+		if (VisibleModelType)
+			mVisibleCount++;
+		if (VisibleModelPath)
+			mVisibleCount++;
+		if (VisibleModelPathUK)
+			mVisibleCount++;
+		if (VisibleCollPath)
+			mVisibleCount++;
+		CheckCount = mVisibleCount;
+	}
+
+	private int mchooseType;
 	public int ChooseType {
 		get => mchooseType;
 		set {
 			mchooseType = value;
-
-			InvokeChange(nameof(VisibleModelName));
+			InvokeChange(nameof(VisiblilityModelName));
 		}
 	}
 
-	private bool mSelectAll = AccAddonHistory.Default.AutoFillSelectAll;
 	public bool SelectAll {
-		get => mSelectAll;
+		get => (VisibleCount == CheckCount);
 		set {
-			mSelectAll = value;
 			InvokeChange();
-
-			CheckModelName = value;
-			CheckModelType = value;
-			CheckModelPath = value;
-			CheckModelPathUK = value;
-			CheckCollPath = value;
+			if (VisibleModelName) 
+				CheckModelName = value;
+			if (VisibleModelType) 
+				CheckModelType = value;
+			if (VisibleModelPath) 
+				CheckModelPath = value;
+			if (VisibleModelPathUK) 
+				CheckModelPathUK = value;
+			if (VisibleCollPath) 
+				CheckCollPath = value;
 		}
 	}
 
-	private int mSelectCount = 0;
-	public int SelectCount {
-		get => mSelectCount;
+	private void CheckSelectAll(bool value) { 
+		if (value)
+			CheckCount++;
+		else
+			CheckCount--;
+		InvokeChange(nameof(SelectAll));
+	}
+
+	private int mVisibleCount;
+	public int VisibleCount {
+		get => mVisibleCount;
 		set {
-			mSelectCount = value;
+			mVisibleCount = value;
 			InvokeChange();
 		}
 	}
 
-	private bool mCheckModelName = !string.IsNullOrEmpty(modelName);
+	private int CheckCount;
+
+	private bool mCheckModelName;
 	public bool CheckModelName {
 		get => mCheckModelName;
 		set {
 			mCheckModelName = value;
 			InvokeChange();
+			CheckSelectAll(value);
 		}
 	}
 
-	private string? mTextModelName = modelName;
+	private string? mTextModelName;
 	public string? TextModelName {
 		get => mTextModelName;
 		set {
 			mTextModelName = value;
 			InvokeChange();
 
-			InvokeChange(nameof(VisibleModelName));
-		}
-	}
-	public Visibility VisibleModelName {
-		get {
-			if (string.IsNullOrEmpty(TextModelName))
-				return Visibility.Collapsed;
-			return Visibility.Visible;
+			InvokeChange(nameof(VisiblilityModelName));
 		}
 	}
 
+	public bool VisibleModelName => !string.IsNullOrEmpty(TextModelName);
+	public Visibility VisiblilityModelName => VisibleModelName ? Visibility.Visible : Visibility.Collapsed;
 
-	private bool mCheckModelType = !string.IsNullOrEmpty(modelType);
+
+
+	private bool mCheckModelType;
 	public bool CheckModelType {
 		get => mCheckModelType;
 		set {
 			mCheckModelType = value;
 			InvokeChange();
+			CheckSelectAll(value);
 		}
 	}
 
-	private string? mTextModelType = modelType;
+	private string? mTextModelType;
 	public string? TextModelType {
 		get => mTextModelType;
 		set {
 			mTextModelType = value;
 			InvokeChange();
 
-			InvokeChange(nameof(VisibleModelType));
+			InvokeChange(nameof(VisiblilityModelType));
 		}
 	}
-	public Visibility VisibleModelType {
-		get {
-			if (string.IsNullOrEmpty(TextModelType))
-				return Visibility.Collapsed;
-			return Visibility.Visible;
-		}
-	}
+	public bool VisibleModelType => !string.IsNullOrEmpty(TextModelType);
+	public Visibility VisiblilityModelType => VisibleModelType ? Visibility.Visible : Visibility.Collapsed;
 
 
-	private bool mCheckModelPath = !string.IsNullOrEmpty(modelPath);
+	private bool mCheckModelPath;
 	public bool CheckModelPath {
 		get => mCheckModelPath;
 		set {
 			mCheckModelPath = value;
 			InvokeChange();
+			CheckSelectAll(value);
 		}
 	}
 
-	private string? mTextModelPath = modelPath;
+	private string? mTextModelPath;
 	public string? TextModelPath {
 		get => mTextModelPath;
 		set {
 			mTextModelPath = value;
 			InvokeChange();
 
-			InvokeChange(nameof(VisibleModelPath));
+			InvokeChange(nameof(VisiblilityModelPath));
 		}
 	}
 
-	public Visibility VisibleModelPath {
-		get {
-			if (ChooseType == AccAddonBinding.MODEL || ChooseType == AccAddonBinding.EXT_MODEL || string.IsNullOrEmpty(TextModelPath))
-				return Visibility.Collapsed;
-			return Visibility.Visible;
-		}
-	}
+	public bool VisibleModelPath => ChooseType == AccAddonBinding.MODEL || ChooseType == AccAddonBinding.EXT_MODEL || !string.IsNullOrEmpty(TextModelPath);
+	public Visibility VisiblilityModelPath => VisibleModelPath ? Visibility.Visible : Visibility.Collapsed;
 
 
-	private bool mCheckModelPathUK = !string.IsNullOrEmpty(modelPathUK);
+	private bool mCheckModelPathUK;
 	public bool CheckModelPathUK {
 		get => mCheckModelPathUK;
 		set {
 			mCheckModelPathUK = value;
 			InvokeChange();
+			CheckSelectAll(value);
 		}
 	}
 
-	private string? mTextModelPathUK = modelPathUK;
+	private string? mTextModelPathUK;
 	public string? TextModelPathUK {
 		get => mTextModelPathUK;
 		set {
 			mTextModelPathUK = value;
 			InvokeChange();
 
-			InvokeChange(nameof(VisibleModelPathUK));
+			InvokeChange(nameof(VisiblilityModelPathUK));
 		}
 	}
-
-	public Visibility VisibleModelPathUK {
-		get {
-			if (ChooseType == AccAddonBinding.MODEL_UK || ChooseType == AccAddonBinding.EXT_MODEL_UK || string.IsNullOrEmpty(TextModelPathUK))
-				return Visibility.Collapsed;
-			return Visibility.Visible;
-		}
-	}
+	public bool VisibleModelPathUK => ChooseType == AccAddonBinding.MODEL_UK || ChooseType == AccAddonBinding.EXT_MODEL_UK || !string.IsNullOrEmpty(TextModelPathUK);
+	public Visibility VisiblilityModelPathUK => VisibleModelPathUK ? Visibility.Visible : Visibility.Collapsed;
 
 
-	private bool mCheckCollPath = !string.IsNullOrEmpty(collPath);
+	private bool mCheckCollPath;
 	public bool CheckCollPath {
 		get => mCheckCollPath;
 		set {
 			mCheckCollPath = value;
 			InvokeChange();
+			CheckSelectAll(value);
 		}
 	}
 
-	private string? mTextCollPath = collPath;
+	private string? mTextCollPath;
+
+
 	public string? TextCollPath {
 		get => mTextCollPath;
 		set {
 			mTextCollPath = value;
 			InvokeChange();
 
-			InvokeChange(nameof(VisibleCollPath));
+			InvokeChange(nameof(VisiblilityCollPath));
 		}
 	}
 
-	public Visibility VisibleCollPath {
-		get {
-			if (ChooseType == AccAddonBinding.MODEL_COLL || string.IsNullOrEmpty(TextCollPath))
-				return Visibility.Collapsed;
-			return Visibility.Visible;
-		}
-	}
+	public bool VisibleCollPath => ChooseType == AccAddonBinding.MODEL_COLL || !string.IsNullOrEmpty(TextCollPath);
+	public Visibility VisiblilityCollPath => VisibleCollPath ? Visibility.Visible : Visibility.Collapsed;
 }

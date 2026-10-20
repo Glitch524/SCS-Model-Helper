@@ -73,6 +73,7 @@ public static class Instances {
 			Settings.Default.ProjectLocation = value;
 			Settings.Default.Save();
 			StringResUtil.CleanStringResList();
+			localeModules = null;
 		}
 	}
 
@@ -97,6 +98,8 @@ public static class Instances {
 		mLocaleDict = null;
 	}
 
+
+
 	private static Dictionary<string, List<string>>? mLocaleDict = null;
 	public static Dictionary<string, List<string>> LocaleDict {
 		get {
@@ -114,11 +117,11 @@ public static class Instances {
 	}
 
 	public static void LocaleDictAdd(string key, string value) {
-		if (mLocaleDict!.TryGetValue(key, out List<string>? list)) {
+		if (LocaleDict.TryGetValue(key, out List<string>? list)) {
 			list.Add(value);
 		} else {
 			list = [value];
-			mLocaleDict.Add(key, list);
+			LocaleDict.Add(key, list);
 		}
 	}
 }
