@@ -11,9 +11,6 @@
     <Setting Name="IconDefCreateOnAccessory" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="AutoFillSelectAll" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="DisplayName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -74,10 +71,10 @@
     <Setting Name="RequireList" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="TrucksETS2" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="VehiclesETS2" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="TrucksATS" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="VehiclesATS" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ElectricType" Type="System.String" Scope="User">

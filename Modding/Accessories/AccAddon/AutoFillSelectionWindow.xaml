@@ -11,9 +11,9 @@
 	mc:Ignorable="d"
 	ExtendsContentIntoTitleBar="True"
 	Width="400"
+	Title="{DynamicResource TitleAutoRecognize}"
 	WindowStartupLocation="CenterOwner"
 	SizeToContent="Height"
-	Closing="Window_Closing"
 	MinWidth="10"
 	MinHeight="10">
 	<Grid>
@@ -46,8 +46,8 @@
 						BasedOn="{StaticResource {x:Type CheckBox}}">
 						<Style.Triggers>
 							<DataTrigger
-								Binding="{Binding SelectCount}"
-								Value="2">
+								Binding="{Binding VisibleCount}"
+								Value="1">
 								<Setter
 									Property="Visibility"
 									Value="Collapsed" />
@@ -61,59 +61,60 @@
 				Margin="0,5,0,0"
 				IsChecked="{Binding CheckModelName}"
 				Content="{DynamicResource CheckHeadModelName}"
-				Visibility="{Binding VisibleModelName}" />
+				Visibility="{Binding VisiblilityModelName}" />
 			<TextBlock
 				Margin="20,0,0,0"
 				Text="{Binding TextModelName}"
-				Visibility="{Binding VisibleModelName}"
+				Visibility="{Binding VisiblilityModelName}"
 				TextWrapping="Wrap" />
 			<CheckBox
 				x:Name="CheckBoxModelType"
 				Margin="0,5,0,0"
 				IsChecked="{Binding CheckModelType}"
 				Content="{DynamicResource CheckHeadModelType}"
-				Visibility="{Binding VisibleModelType}" />
+				Visibility="{Binding VisiblilityModelType}" />
 			<TextBlock
 				Margin="20,0,0,0"
 				Text="{Binding TextModelType}"
-				Visibility="{Binding VisibleModelType}"
+				Visibility="{Binding VisiblilityModelType}"
 				TextWrapping="Wrap" />
 			<CheckBox
 				x:Name="CheckBoxModelPath"
 				Margin="0,5,0,0"
 				IsChecked="{Binding CheckModelPath}"
 				Content="{DynamicResource CheckHeadModelPath}"
-				Visibility="{Binding VisibleModelPath}" />
+				Visibility="{Binding VisiblilityModelPath}" />
 			<TextBlock
 				Margin="20,0,0,0"
 				Text="{Binding TextModelPath}"
-				Visibility="{Binding VisibleModelPath}"
+				Visibility="{Binding VisiblilityModelPath}"
 				TextWrapping="Wrap" />
 			<CheckBox
 				x:Name="CheckBoxModelPathUK"
 				Margin="0,5,0,0"
 				IsChecked="{Binding CheckModelPathUK}"
 				Content="{DynamicResource CheckHeadModelPathUK}"
-				Visibility="{Binding VisibleModelPathUK}" />
+				Visibility="{Binding VisiblilityModelPathUK}" />
 			<TextBlock
 				Margin="20,0,0,0"
 				Text="{Binding TextModelPathUK}"
-				Visibility="{Binding VisibleModelPathUK}"
+				Visibility="{Binding VisiblilityModelPathUK}"
 				TextWrapping="Wrap" />
 			<CheckBox
 				x:Name="CheckBoxModelColl"
 				Margin="0,5,0,0"
 				IsChecked="{Binding CheckCollPath}"
 				Content="{DynamicResource CheckHeadCollPath}"
-				Visibility="{Binding VisibleCollPath}" />
+				Visibility="{Binding VisiblilityCollPath}" />
 			<TextBlock
 				Margin="20,0,0,0"
 				Text="{Binding TextCollPath}"
-				Visibility="{Binding VisibleCollPath}"
+				Visibility="{Binding VisiblilityCollPath}"
 				TextWrapping="Wrap" />
 			<Button
 				x:Name="ButtonOK"
 				Margin="10,15,10,0"
+				Padding="0,5"
 				Content="{DynamicResource ButtonOK}"
 				Click="ResultClick"
 				HorizontalAlignment="Stretch" />
