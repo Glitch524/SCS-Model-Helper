@@ -67,8 +67,8 @@ public class AccessoryAddonData: AccessoryIntData {
 	}
 
 	//卡车列表
-	public ObservableCollection<AccessoryTruck> mTrucksETS2 = [];
-	public ObservableCollection<AccessoryTruck> TrucksETS2 => mTrucksETS2;
-	public ObservableCollection<AccessoryTruck> mTrucksATS = [];
-	public ObservableCollection<AccessoryTruck> TrucksATS => mTrucksATS;
+	public ObservableCollection<AccessoryVehicle> mVehiclesETS2 = [];
+	public ObservableCollection<AccessoryVehicle> VehiclesETS2 => mVehiclesETS2;
+	public ObservableCollection<AccessoryVehicle> mVehiclesATS = [];
+	public ObservableCollection<AccessoryVehicle> VehiclesATS => mVehiclesATS;
 }

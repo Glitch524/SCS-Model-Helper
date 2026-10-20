@@ -224,8 +224,6 @@ public static class AccessoryDataUtil {
 	}
 
 	private static string? CheckRopeMatExistence(DirectoryInfo iconFile) {
-		string projectLocation = Instances.ProjectLocation;
-
 		var deExt = iconFile.FullName[..^4];
 		var matPath = deExt + ".mat";
 		var tobjPath = deExt + ".tobj";

@@ -103,17 +103,18 @@
 	<s:String x:Key="Require">Require</s:String>
 	<s:String x:Key="ListCount">Counts:</s:String>
 	
-		<!--Truck List-->
-	<s:String x:Key="ModelTruckTip">If theres new trucks that cannot find in here, press "New Truck" to and new trucks&#10;"Delete Truck" will delete selected trucks(not checked trucks)&#10;Model type, look and variant can be separatly set in the following list.</s:String>
-	<s:String x:Key="ButtonInitializeTrucks">Initialize Trucks</s:String>
+		<!--Vehicle List-->
+	<s:String x:Key="ModelVehicleTip">If theres new vehicles that cannot find in here, press "New Vehicle" to and new vehicles&#10;"Delete Vehicle" will delete selected vehicles(not checked vehicles)&#10;Model type, look and variant can be separatly set in the following list.</s:String>
+	<s:String x:Key="ButtonInitializeVehicles">Initialize Vehicles</s:String>
 	<s:String x:Key="ExpanderETS2">Euro Truck Simulator 2(Expand to apply/export to ETS2)</s:String>
 	<s:String x:Key="ExpanderATS">American Truck Simulator(Expand to apply/export to ATS)</s:String>
-	<s:String x:Key="TruckID">Truck ID</s:String>
-	<s:String x:Key="TruckProdYear">Production Year</s:String>
-	<s:String x:Key="TruckName">Truck Name</s:String>
-	<s:String x:Key="TruckDescription">Truck Description</s:String>
+	<s:String x:Key="VehicleID">Vehicle ID</s:String>
+	<s:String x:Key="VehicleProdYear">Production Year</s:String>
+	<s:String x:Key="VehicleName">Vehicle Name</s:String>
+	<s:String x:Key="VehicleManufacturer">Manufacturer</s:String>
+	<s:String x:Key="VehicleDescription">Vehicle Description</s:String>
 		<!--Side Button-->
-	<s:String x:Key="ButtonDeleteTruck">Delete Truck</s:String>
+	<s:String x:Key="ButtonDeleteVehicle">Delete Vehicle</s:String>
 	<s:String x:Key="CheckBoxDeleteUnchecked">Delete Existing Unchecked Sii</s:String>
 	
 		<!--Localization Menu-->
@@ -129,7 +130,7 @@
 	
 	
 		<!--AccAddonWindow.CS-->
-	<s:String x:Key="MessageLoadTruckErr">Error occurs when loading truck list, reseting truck list</s:String>
+	<s:String x:Key="MessageLoadVehicleErr">Error occurs when loading vehicle list, reseting vehicle list</s:String>
 	<s:String x:Key="MessageLoadOtherskErr">Error occurs when loading others list</s:String>
 	<s:String x:Key="MessageNoManifest">The Project dose not have a manifest file, are you sure to continue?</s:String>
 	<s:String x:Key="MessageProjectLocationFirst">Please set the project location first</s:String>
@@ -166,10 +167,10 @@
 	<s:String x:Key="CheckBoxCreateAtAcc">Create on accessory directory</s:String>
 	<s:String x:Key="TextIconNotInAcc">The icon file is not in accessory directory, you can only create files on accessory</s:String>
 	
-		<!--Add Truck-->
-	<s:String x:Key="TitleAddTruck">New Truck</s:String>
-	<s:String x:Key="MessageAddErrNotFilled">Please at least fill in the TruckID and Truck name</s:String>
-	<s:String x:Key="MessageAddErrSameID">There's already a truck with the same ID</s:String>
+		<!--Add Vehicle-->
+	<s:String x:Key="TitleAddVehicle">New Vehicle</s:String>
+	<s:String x:Key="MessageAddErrNotFilled">Please at least fill in the VehicleID and Vehicle name</s:String>
+	<s:String x:Key="MessageAddErrSameID">There's already a vehicle with the same ID</s:String>
 	
 		<!--Hide In-->
 	<s:String x:Key="TitleHideIn">Tick the following content will let content hide in the ticked Perspective</s:String>
@@ -282,7 +283,7 @@
 	
 	<!--Paint Job Page-->
 	<s:String x:Key="TitleSetupPaintJob">Setup Paint Job</s:String>
-	<s:String x:Key="TitleTruck">Truck</s:String>
+	<s:String x:Key="TitleVehicle">Vehicle</s:String>
 	<s:String x:Key="TitleCabin">Cabin</s:String>
 	<s:String x:Key="TitleBaseColor">Base Color</s:String>
 	<s:String x:Key="ToolTipBaseColor">Defines the default color of the paint job.</s:String>
@@ -294,11 +295,14 @@
 	<s:String x:Key="TextureRequire">(TOBJ, or the image it represents)</s:String>
 	<s:String x:Key="TooltipPaintJobTexture">Defines the path to the texture resource (.tobj) to be used for color masking (colormask) or for blending (airbrush). If empty, mask is ignored and final result is composed purely from color attributes."</s:String>
 	<s:String x:Key="TitleBaseTextureOverride">Base Texture Override</s:String>
-	<s:String x:Key="TooltipBaseTextureOverride">Defines the path to a texture resource (.tobj) to override the base texture of the truckpaint material(s). If empty, the base texture will be used as defined in the truckpaint material(s). This is useful for overriding the alpha channel of the base texture if a different specularity is desired.</s:String>
+	<s:String x:Key="TooltipBaseTextureOverride">Defines the path to a texture resource (.tobj) to override the base texture of the paint material(s). If empty, the base texture will be used as defined in the paint material(s). This is useful for overriding the alpha channel of the base texture if a different specularity is desired.</s:String>
+	<s:String x:Key="TitleColorVariant">Color Variant List</s:String>
+	<s:String x:Key="TitleColorVariantNoCustomizable">Please set any color customizable first</s:String>
 	
 	<s:String x:Key="HeaderAirbrush">Airbrush</s:String>
 	<s:String x:Key="ExplainAirbrush">In the airbrush mode, the RGB of paint_job_mask is blended with the base color, using the alpha channel as the blend factor.</s:String>
 	<s:String x:Key="TitleFlipFlake">Flip and Flake</s:String>
+	<s:String x:Key="TitleAlternateFlipFlakeUVSet">Alternate Flip Flake UV Set</s:String>
 	<s:String x:Key="TitleFlipColor">Flip Color</s:String>
 	<s:String x:Key="TooltipFlipColor">Defines the flip color of the paint job.</s:String>
 	<s:String x:Key="TitleFlipStrength">Flip Strength</s:String>
@@ -312,6 +316,7 @@
 	<s:String x:Key="TooltipFlakeClearcoatRolloff">Adjusts the sharpness of the clearcoat specular highlight. Higher values yield sharper edges.</s:String>
 	<s:String x:Key="TitleFlakeUVScale">Flake UV Scale</s:String>
 	<s:String x:Key="TooltipFlakeUVScale">Defines how many times the flake_noise texture repeats within one UV tile.</s:String>
+	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
 	<s:String x:Key="TitleFlakeNoise">Flake Noise</s:String>
 	<s:String x:Key="TooltipFlakeNoise">Path to the flipflake texture. The RGB component multiplies the flake_color, and the A component masks the flake effect.</s:String>
 	
@@ -327,12 +332,24 @@
 	
 	<s:String x:Key="TitlePaintJobOverride">Paint Job Override for Accessory</s:String>
 	<s:String x:Key="TitleOverrides">Overrides</s:String>
-	<s:String x:Key="TitleFlakeVRatio">Flake V Ratio</s:String>
 	<s:String x:Key="TitleAccessoryParts">Accessory</s:String>
+	
+	<s:String x:Key="BaseColorShort">Base</s:String>
+	<s:String x:Key="FlipColorShort">Flip</s:String>
+	<s:String x:Key="FlakeColorShort">Flake</s:String>
+	<s:String x:Key="MaskRShort">Mask R</s:String>
+	<s:String x:Key="MaskGShort">Mask G</s:String>
+	<s:String x:Key="MaskBShort">Mask B</s:String>
 	
 	<s:String x:Key="DialogFilterTextureFile">Texture File|*.tobj;*.dds;*.tga;*.jpg;*.jpeg;*.png</s:String>
 	<s:String x:Key="DialogResultFileOutsideProject">Please put the image into the project location first</s:String>
 	
+	<s:String x:Key="MessagePaintJobCreateSuccess">Paint Job Sii Created</s:String>
+	
+	<!--Paint Job Preview-->
+	<s:String x:Key="TitlePaintJobPreview">Paint Job Preview</s:String>
+	<s:String x:Key="ButtonPreviewPaintJob">Preview Paint Job Texture</s:String>
+	<s:String x:Key="CheckBoxShowCabinUV">Show Cabin UV</s:String>
 	
 
 	<!--Created Sii Files-->
@@ -398,6 +415,7 @@
 	<s:String x:Key="MessageExtractedTobj">Extracted and decrypted tobj file and its image successfully to:</s:String>
 	<s:String x:Key="MessageExtractedFile">Extracted file successfully to:</s:String>
 	<s:String x:Key="MessageExtractFail">Failed to extract the file.&#10;Error:</s:String>
+	<s:String x:Key="MessageReadFileFailed">Unable to read this file</s:String>
 	
 
 
@@ -423,7 +441,21 @@
 	<s:String x:Key="MessageSaveSuccess">File saved</s:String>
 	<s:String x:Key="MessageDeleteLocale">Are you sure to delete this translation file?</s:String>
 	<s:String x:Key="MessageUniEmpty">Universal translation is empty, the language without definition will not show translation properly, anre you sure to continue?</s:String>
-
+	
+	
+	
+	<!--卡车数据库迁移-->
+	<s:String x:Key="TextOldVersion">Old Version</s:String>
+	<s:String x:Key="TextNewVersion">New Version</s:String>
+	<s:String x:Key="HeaderVehicleID">Vehicle ID</s:String>
+	<s:String x:Key="HeaderVehicleType">Vehicle Type</s:String>
+	<s:String x:Key="HeaderVehicleName">Vehicle Name</s:String>
+	<s:String x:Key="HeaderProdYear">Production Year</s:String>
+	<s:String x:Key="HeaderDescription">Description</s:String>
+	<s:String x:Key="HeaderCabins">Cabins</s:String>
+	<s:String x:Key="HeaderAccessories">Accessories</s:String>
+	<s:String x:Key="TitleUpdateMigrationCount">Update migration count</s:String>
+	<s:String x:Key="ButtonFinish">Finish</s:String>
 	
 	
 	
@@ -561,4 +593,6 @@
 	<s:String x:Key="locale.tr_tr">Turkish</s:String>
 	<s:String x:Key="locale.uk_uk">Ukrainian</s:String>
 	<s:String x:Key="locale.vi_vn">Vietnamese</s:String>
+	
+	<s:String x:Key="MessageCheck">This software was first released for free on GitHub:https://github.com/Glitch524/SCS-Model-Helper. Unless distributed by the author themselves, any (paid) acquisition is not the author's action. If you paid anyone to get it, please request a refund as soon as possible.</s:String>
 </ResourceDictionary>

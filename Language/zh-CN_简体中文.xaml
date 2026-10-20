@@ -14,10 +14,18 @@
 	<s:String x:Key="ETS2Short">欧卡2</s:String>
 	<s:String x:Key="ATSShort">美卡</s:String>
 	
+	<s:String x:Key="VehicleTypeTruck">卡车</s:String>
+	<s:String x:Key="VehicleTypeTrailer">挂车</s:String>
+	<s:String x:Key="VehicleTypeCar">乘用车</s:String>
+	<s:String x:Key="VehicleTypeCoach">客车</s:String>
+
 	<s:String x:Key="ThemeFollowSystem">跟随系统</s:String>
 	<s:String x:Key="ThemeLight">浅色</s:String>
 	<s:String x:Key="ThemeDark">深色</s:String>
 	<s:String x:Key="MessagePixNotSet">找不到ConverterPix程序，请先在设置内设定</s:String>
+	
+	<s:String x:Key="SubtitleFolder">文件夹</s:String>
+	<s:String x:Key="SubtitleFile">{0}文件</s:String>
 	
 	<!--MOD基本内容页-->
 	<s:String x:Key="TitleModManifest">MOD基本内容</s:String>
@@ -103,18 +111,18 @@
 	<s:String x:Key="Require">需要(require)</s:String>
 	<s:String x:Key="ListCount">数量：</s:String>
 	
-		<!--卡车列表-->
-	<s:String x:Key="ModelTruckTip">如有这里没有的新车型，点击新增添加&#10;删除按钮会删除选中的车型（不是打勾，而是左键选中）&#10;Model类型、外观和变体可以在下面分别设置</s:String>
-	<s:String x:Key="ButtonInitializeTrucks">初始化车型数据</s:String>
+		<!--车辆列表-->
+	<s:String x:Key="ModelVehicleTip">如有这里没有的新车型，点击新增添加&#10;删除按钮会删除选中的车型（不是打勾，而是左键选中）&#10;Model类型、外观和变体可以在下面分别设置</s:String>
+	<s:String x:Key="ButtonInitializeVehicles">初始化车型数据</s:String>
 	<s:String x:Key="ExpanderETS2">欧洲卡车模拟2 （展开以输出/应用至欧卡2）</s:String>
 	<s:String x:Key="ExpanderATS">美洲卡车模拟（展开以输出/应用至美卡）</s:String>
-	<s:String x:Key="TruckID">卡车ID</s:String>
-	<s:String x:Key="TruckProdYear">生产年份</s:String>
-	<s:String x:Key="TruckName">卡车名称</s:String>
-	<s:String x:Key="TruckManifaturer">制造商</s:String>
-	<s:String x:Key="TruckDescription">卡车备注</s:String>
+	<s:String x:Key="VehicleID">车辆ID</s:String>
+	<s:String x:Key="VehicleProdYear">生产年份</s:String>
+	<s:String x:Key="VehicleName">车辆名称</s:String>
+	<s:String x:Key="VehicleManufacturer">制造商</s:String>
+	<s:String x:Key="VehicleDescription">车辆备注</s:String>
 		<!--侧边按钮-->
-	<s:String x:Key="ButtonDeleteTruck">删除车型</s:String>
+	<s:String x:Key="ButtonDeleteVehicle">删除车辆</s:String>
 	<s:String x:Key="CheckBoxDeleteUnchecked">删除已存在但未勾选的sii文件</s:String>
 	
 		<!--多语言菜单-->
@@ -130,7 +138,7 @@
 	
 	
 		<!--摆件模型定义页.CS-->
-	<s:String x:Key="MessageLoadTruckErr">读取卡车列表出错，重置卡车列表</s:String>
+	<s:String x:Key="MessageLoadVehicleErr">读取车辆列表出错，重置车辆列表</s:String>
 	<s:String x:Key="MessageLoadOtherskErr">读取其他内容列表出错</s:String>
 	<s:String x:Key="MessageNoManifest">项目文件夹内没有manifest文件，是否继续？</s:String>
 	<s:String x:Key="MessageProjectLocationFirst">请先输入项目目录</s:String>
@@ -167,10 +175,10 @@
 	<s:String x:Key="CheckBoxCreateAtAcc">在accessory文件夹处生成</s:String>
 	<s:String x:Key="TextIconNotInAcc">图标文件不在Accessory文件夹内，只能将mat和tobj文件生成在Accessory文件夹处</s:String>
 
-		<!--新增车型页-->
-	<s:String x:Key="TitleAddTruck">新增车型</s:String>
-	<s:String x:Key="MessageAddErrNotFilled">请至少填写卡车的ID与名称</s:String>
-	<s:String x:Key="MessageAddErrSameID">已有相同ID的卡车</s:String>
+		<!--新增车辆页-->
+	<s:String x:Key="TitleAddVehicle">新增车辆</s:String>
+	<s:String x:Key="MessageAddErrNotFilled">请至少填写车辆的ID与名称</s:String>
+	<s:String x:Key="MessageAddErrSameID">已有相同ID的车辆</s:String>
 	
 		<!--隐藏代码页-->
 	<s:String x:Key="TitleHideIn">勾选下列内容让物品在选中的视角中隐藏</s:String>
@@ -283,7 +291,7 @@
 	
 	<!--设置喷漆页-->
 	<s:String x:Key="TitleSetupPaintJob">添加喷漆</s:String>
-	<s:String x:Key="TitleTruck">卡车</s:String>
+	<s:String x:Key="TitleVehicle">车辆</s:String>
 	<s:String x:Key="TitleCabin">驾驶室</s:String>
 	<s:String x:Key="TitleBaseColor">基础颜色</s:String>
 	<s:String x:Key="ToolTipBaseColor">定义喷漆的默认颜色</s:String>
@@ -295,7 +303,7 @@
 	<s:String x:Key="TextureRequire">（TOBJ，或其代表的图片）</s:String>
 	<s:String x:Key="TooltipPaintJobTexture">用在颜色遮罩或贴图混合的贴图资源路径（.tobj）。</s:String>
 	<s:String x:Key="TitleBaseTextureOverride">覆盖基础贴图</s:String>
-	<s:String x:Key="TooltipBaseTextureOverride">定义一个纹理资源（.tobj）的路径，用来覆盖卡车喷漆材质的基础纹理。如果为空则使用默认的基础贴图。如果想要不同的高光效果，这个对覆盖基础纹理的透明通道很有用。</s:String>
+	<s:String x:Key="TooltipBaseTextureOverride">定义一个纹理资源（.tobj）的路径，用来覆盖车辆喷漆材质的基础纹理。如果为空则使用默认的基础贴图。如果想要不同的高光效果，这个对覆盖基础纹理的透明通道很有用。</s:String>
 	<s:String x:Key="TitleColorVariant">预设颜色列表</s:String>
 	<s:String x:Key="TitleColorVariantNoCustomizable">请先让任意一个颜色设为自定义</s:String>
 	
@@ -349,6 +357,7 @@
 	<!--喷漆预览-->
 	<s:String x:Key="TitlePaintJobPreview">喷漆预览</s:String>
 	<s:String x:Key="ButtonPreviewPaintJob">预览喷漆贴图</s:String>
+	<s:String x:Key="CheckBoxShowCabinUV">显示车辆UV展开图</s:String>
 
 
 	<!--浏览已创建模型定义文件-->
@@ -414,6 +423,8 @@
 	<s:String x:Key="MessageExtractedTobj">成功提取并解密Tobj及贴图至：</s:String>
 	<s:String x:Key="MessageExtractedFile">成功提取文件至：</s:String>
 	<s:String x:Key="MessageExtractFail">提取文件失败&#10;错误原因：</s:String>
+	<s:String x:Key="MessageReadFileFailed">无法读取此文件</s:String>
+	<s:String x:Key="MessageLinkFileNotExist">这个文件似乎不存在这个包里，你需要在其他包里面查找</s:String>
 	
 	
 
@@ -442,6 +453,27 @@
 	
 	
 	
+	<!--数据库迁移-->
+	<s:String x:Key="TitleVehicleMigration">车辆迁移</s:String>
+	<s:String x:Key="TextOldVersion">旧版本</s:String>
+	<s:String x:Key="TextNewVersion">新版本</s:String>
+	<s:String x:Key="HeaderVehicleID">车辆ID</s:String>
+	<s:String x:Key="HeaderVehicleType">车辆类型</s:String>
+	<s:String x:Key="HeaderVehicleName">车辆名称</s:String>
+	<s:String x:Key="HeaderProdYear">生产年份</s:String>
+	<s:String x:Key="HeaderDescription">描述</s:String>
+	<s:String x:Key="HeaderCabins">驾驶室</s:String>
+	<s:String x:Key="HeaderAccessories">配件</s:String>
+	<s:String x:Key="TitleUpdateMigrationCount">迁移数量</s:String>
+	<s:String x:Key="ButtonFinish">完成</s:String>
+	<s:String x:Key="MessageDBMigration">发现新的车辆数据，是否迁移旧车辆？</s:String>
+	<s:String x:Key="MessageDBMigrationResultSuccess">迁移成功！</s:String>
+	<s:String x:Key="MessageDBMigrationResultFailed">迁移失败！</s:String>
+	<s:String x:Key="MessageDBClose">所有未保存的数据将被丢弃，您确定要关闭吗？</s:String>
+	<s:String x:Key="MessageDBFinish1">您确定要继续吗？</s:String>
+	<s:String x:Key="MessageDBFinishWithUnselected">未选择的数据将被丢弃</s:String>
+	
+	
 	
 	<!--关于-->
 	<s:String x:Key="TitleAbout">关于</s:String>
@@ -465,6 +497,7 @@
 	
 	
 	<s:String x:Key="MessageTitleNotice">注意</s:String>
+	<s:String x:Key="MessageTitleWarning">警告</s:String>
 	<s:String x:Key="MessageTitleErr">错误</s:String>
 	<s:String x:Key="MessageTitleResult">结果</s:String>
 	<s:String x:Key="StatusEmpty">空</s:String>
@@ -577,4 +610,6 @@
 	<s:String x:Key="locale.tr_tr">土耳其语</s:String>
 	<s:String x:Key="locale.uk_uk">乌克兰语</s:String>
 	<s:String x:Key="locale.vi_vn">越南语</s:String>
+	
+	<s:String x:Key="MessageCheck">此软件免费发布于Github:https://github.com/Glitch524/SCS-Model-Helper，除非作者本人分发，任何（有偿）获取都不属于作者本人行为。如果向任何人付费获取，请尽快退款。</s:String>
 </ResourceDictionary>

@@ -3,8 +3,8 @@ using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Popup;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
+using SCS_Mod_Helper.Vehicles;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -65,8 +65,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		LoadList(AccAddonHistory.Default.RequireList, Require);
 		if (Require.Count > 0)
 			InvokeChange(nameof(RequireListContent));
-		ReadTruckHistory(AccAddonHistory.Default.TrucksETS2, TrucksETS2);
-		ReadTruckHistory(AccAddonHistory.Default.TrucksATS, TrucksATS);
+		ReadVehiclesHistory(AccAddonHistory.Default.VehiclesETS2, VehiclesETS2);
+		ReadVehiclesHistory(AccAddonHistory.Default.VehiclesATS, VehiclesATS);
 	}
 	private static void LoadList(StringCollection? strings, ObservableCollection<string> list) {
 		if (strings == null)
@@ -79,21 +79,23 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	protected static int ReadTruckHistory(StringCollection historyList, Collection<AccessoryTruck> trucks) {
-		Dictionary<string, AccessoryTruck> truckDict = trucks.ToDictionary(t => t.TruckID);
+	protected static int ReadVehiclesHistory(StringCollection? historyList, Collection<AccessoryVehicle> vehicles) {
+		Dictionary<string, AccessoryVehicle> vehicleDict = vehicles.ToDictionary(t => t.VehicleID);
 		int selected = 0;
+		if (historyList == null)
+			return selected;
 		foreach (var h in historyList) {
 			if (h == null)
 				continue;
 			string[] split = h.Split(",");
-			string truckID = split[1];
-			if (truckDict.TryGetValue(truckID, out var truck)) {
-				truck.Check = bool.Parse(split[0]);
-				if (truck.Check)
+			string vehicleID = split[1];
+			if (vehicleDict.TryGetValue(vehicleID, out var vehicle)) {
+				vehicle.Check = bool.Parse(split[0]);
+				if (vehicle.Check)
 					selected++;
-				truck.ModelType = split[2];
-				truck.Look = split[3];
-				truck.Variant = split[4];
+				vehicle.ModelType = split[2];
+				vehicle.Look = split[3];
+				vehicle.Variant = split[4];
 			}
 		}
 		return selected;
@@ -121,46 +123,46 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		var defaultsList = Defaults.ToArray();
 		var overridesList = Overrides.ToArray();
 		var requireList = Require.ToArray();
-		var truckListETS2 = TrucksETS2.ToArray();
-		var truckListATS = TrucksATS.ToArray();
-		Task.Run(() => {
-			AccAddonHistory.Default.DataList = ObservableCollectionToStringCollection(dataList);
-			AccAddonHistory.Default.SuitableForList = ObservableCollectionToStringCollection(suitableForList);
-			AccAddonHistory.Default.ConflictWithList = ObservableCollectionToStringCollection(conflictWithList);
-			AccAddonHistory.Default.DefaultsList = ObservableCollectionToStringCollection(defaultsList);
-			AccAddonHistory.Default.OverridesList = ObservableCollectionToStringCollection(overridesList);
-			AccAddonHistory.Default.RequireList = ObservableCollectionToStringCollection(requireList);
-			AccAddonHistory.Default.TrucksETS2 = TrucksToStrings(truckListETS2);
-			AccAddonHistory.Default.TrucksATS = TrucksToStrings(truckListATS);
+		var vehicleListETS2 = VehiclesETS2.ToArray();
+		var vehicleListATS = VehiclesATS.ToArray();
+		Task.Run((Action)(() => {
+			AccAddonHistory.Default.DataList = ObservableCollectionToStringCollection((string[])dataList);
+			AccAddonHistory.Default.SuitableForList = ObservableCollectionToStringCollection((string[])suitableForList);
+			AccAddonHistory.Default.ConflictWithList = ObservableCollectionToStringCollection((string[])conflictWithList);
+			AccAddonHistory.Default.DefaultsList = ObservableCollectionToStringCollection((string[])defaultsList);
+			AccAddonHistory.Default.OverridesList = ObservableCollectionToStringCollection((string[])overridesList);
+			AccAddonHistory.Default.RequireList = ObservableCollectionToStringCollection((string[])requireList);
+			AccAddonHistory.Default.VehiclesETS2 = VehiclesToStrings(vehicleListETS2);
+			AccAddonHistory.Default.VehiclesATS = VehiclesToStrings(vehicleListATS);
 			AccAddonHistory.Default.Save();
-		});
+		}));
 	}
 	private static StringCollection ObservableCollectionToStringCollection(string[] collection) {
 		var strings = new StringCollection();
 		strings.AddRange([.. collection]);
 		return strings;
 	}
-	private static StringCollection TrucksToStrings(AccessoryTruck[] trucks) {
+	private static StringCollection VehiclesToStrings(AccessoryVehicle[] vehicles) {
 		var strings = new StringCollection();
-		foreach(var truck in trucks) {
-			strings.Add($"{truck.Check},{truck.TruckID},{truck.ModelType},{truck.Look},{truck.Variant}");
+		foreach(var vehicle in vehicles) {
+			strings.Add($"{vehicle.Check},{vehicle.VehicleID},{vehicle.ModelType},{vehicle.Look},{vehicle.Variant}");
 		}
 		return strings;
 	}
 
 
-	public async Task LoadTrucks() {
-		var tETS2 = TrucksIO.LoadAccessoryTrucks(true, TrucksETS2);
-		await tETS2;
-		var tATS = TrucksIO.LoadAccessoryTrucks(false, TrucksATS);
-		await tATS;
+	public async Task LoadVehicles() {
+		var vETS2 = VehiclesIO.LoadAccessoryVehicle(true, VehiclesETS2);
+		await vETS2;
+		var vATS = VehiclesIO.LoadAccessoryVehicle(false, VehiclesATS);
+		await vATS;
 	}
 
-	public void ReinitTruckList() {
-		TrucksIO.ClearTruckList();
-		TrucksETS2.Clear();
-		TrucksATS.Clear();
-		_ = LoadTrucks();
+	public void ReinitVehicleList() {
+		VehiclesIO.ClearVehicleList();
+		VehiclesETS2.Clear();
+		VehiclesATS.Clear();
+		_ = LoadVehicles();
 	}
 
 	public static string ProjectLocation => Instances.ProjectLocation;
@@ -703,32 +705,32 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	public ListDataUC? ListDataUC = null;
 
 
-	private bool mTruckExpandedETS2 = true;
-	public bool TruckExpandedETS2 {
-		get => mTruckExpandedETS2;
+	private bool mVehicleExpandedETS2 = true;
+	public bool VehicleExpandedETS2 {
+		get => mVehicleExpandedETS2;
 		set {
-			mTruckExpandedETS2 = value;
+			mVehicleExpandedETS2 = value;
 			InvokeChange();
 
-			PopupAddTruckOpen = false;
+			PopupAddVehicleOpen = false;
 		}
 	}
-	private bool mTruckExpandedATS = true;
-	public bool TruckExpandedATS {
-		get => mTruckExpandedATS;
+	private bool mVehicleExpandedATS = true;
+	public bool VehicleExpandedATS {
+		get => mVehicleExpandedATS;
 		set {
-			mTruckExpandedATS = value;
+			mVehicleExpandedATS = value;
 			InvokeChange();
 
-			PopupAddTruckOpen = false;
+			PopupAddVehicleOpen = false;
 		}
 	}
 
-	private bool mPopupAddTruckOpen = false;
-	public bool PopupAddTruckOpen {
-		get => mPopupAddTruckOpen;
+	private bool mPopupAddVehicleOpen = false;
+	public bool PopupAddVehicleOpen {
+		get => mPopupAddVehicleOpen;
 		set {
-			mPopupAddTruckOpen = value;
+			mPopupAddVehicleOpen = value;
 			InvokeChange();
 		}
 	}
@@ -737,18 +739,18 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		get {
 			if (SelectedCountETS2 == 0)
 				return false;
-			else if (SelectedCountETS2 == TrucksETS2.Count)
+			else if (SelectedCountETS2 == VehiclesETS2.Count)
 				return true;
 			else
 				return null;
 		}
 		set {
-			if (SelectedCountETS2 == TrucksETS2.Count) {
+			if (SelectedCountETS2 == VehiclesETS2.Count) {
 				SelectedCountETS2 = 0;
-				SelectAllTruck(TrucksETS2, false);
+				SelectAllVehicle(VehiclesETS2, false);
 			} else {
-				SelectedCountETS2 = TrucksETS2.Count;
-				SelectAllTruck(TrucksETS2, true);
+				SelectedCountETS2 = VehiclesETS2.Count;
+				SelectAllVehicle(VehiclesETS2, true);
 			}
 			InvokeChange();
 		}
@@ -767,18 +769,18 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		get {
 			if (SelectedCountATS == 0)
 				return false;
-			else if (SelectedCountATS == TrucksATS.Count)
+			else if (SelectedCountATS == VehiclesATS.Count)
 				return true;
 			else
 				return null;
 		}
 		set {
-			if (SelectedCountATS == TrucksATS.Count) {
+			if (SelectedCountATS == VehiclesATS.Count) {
 				SelectedCountATS = 0;
-				SelectAllTruck(TrucksATS, false);
+				SelectAllVehicle(VehiclesATS, false);
 			} else {
-				SelectedCountATS = TrucksATS.Count;
-				SelectAllTruck(TrucksATS, true);
+				SelectedCountATS = VehiclesATS.Count;
+				SelectAllVehicle(VehiclesATS, true);
 			}
 			InvokeChange();
 		}
@@ -794,9 +796,9 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public void SetSelected(AccessoryTruck truck) {
-		bool check = truck.Check;
-		if (truck.IsETS2) {
+	public void SetSelected(AccessoryVehicle vehicle) {
+		bool check = vehicle.Check;
+		if (vehicle.IsETS2) {
 			if (check)
 				SelectedCountETS2++;
 			else
@@ -809,30 +811,30 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public void SelectAllTruck(ObservableCollection<AccessoryTruck> trucks, bool check) {
-		foreach (AccessoryTruck truck in trucks) {
-			truck.Check = check;
-			OverwriteEmpty(truck, check);
+	public void SelectAllVehicle(ObservableCollection<AccessoryVehicle> vehicles, bool check) {
+		foreach (AccessoryVehicle vehicle in vehicles) {
+			vehicle.Check = check;
+			OverwriteEmpty(vehicle, check);
 		}
 	}
 
-	public void OverwriteEmpty(AccessoryTruck truck, bool check) {
+	public void OverwriteEmpty(AccessoryVehicle vehicle, bool check) {
 		if (check) {
-			if (truck.ModelType.Length == 0)
-				truck.ModelType = ModelType;
-			if (truck.Look.Length == 0)
-				truck.Look = Look;
-			if (truck.Variant.Length == 0)
-				truck.Variant = Variant;
+			if (vehicle.ModelType.Length == 0)
+				vehicle.ModelType = ModelType;
+			if (vehicle.Look.Length == 0)
+				vehicle.Look = Look;
+			if (vehicle.Variant.Length == 0)
+				vehicle.Variant = Variant;
 		}
 	}
 
-	public ObservableCollection<AccessoryTruck> TrucksETS2 => AddonItem.TrucksETS2;
-	public ObservableCollection<AccessoryTruck> TrucksATS => AddonItem.TrucksATS;
+	public ObservableCollection<AccessoryVehicle> VehiclesETS2 => AddonItem.VehiclesETS2;
+	public ObservableCollection<AccessoryVehicle> VehiclesATS => AddonItem.VehiclesATS;
 
 	string? LoadedFilename = null;
 	public void SaveDED(Window window) {
-		PopupAddTruckOpen = false;
+		PopupAddVehicleOpen = false;
 		SaveFileDialog saveFileDialog = new() {
 			Title = Util.GetString("SaveDED"),
 			AddExtension = true,
@@ -860,7 +862,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public void LoadDED(Window window) {
 		try {
-			PopupAddTruckOpen = false;
+			PopupAddVehicleOpen = false;
 			OpenFileDialog openFileDialog = new() {
 				Title = Util.GetString("LoadDED"),
 				Multiselect = false,
@@ -903,54 +905,54 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		AccAddonHistory.Default.Save();
 	}
 
-	public AddTruckUC? AddTruckUC;
+	public AddVehicleUC? AddVehicleUC;
 
-	public void AddNewTruck(Window window, AccessoryTruck newTruck) {
+	public void AddNewVehicle(Window window, AccessoryVehicle newVehicle) {
 		try {
-			bool isETS2 = newTruck.IsETS2;
-			ObservableCollection<AccessoryTruck> Trucks = isETS2 ? TrucksETS2 : TrucksATS;
-			if (newTruck.TruckID[0] <= 'm') {
-				for (int i = 0; i < Trucks.Count; i++) {
-					var cTruck = Trucks[i];
-					var cResult = newTruck.CompareTo(cTruck);
+			bool isETS2 = newVehicle.IsETS2;
+			ObservableCollection<AccessoryVehicle> Vehicles = isETS2 ? VehiclesETS2 : VehiclesATS;
+			if (newVehicle.VehicleID[0] <= 'm') {
+				for (int i = 0; i < Vehicles.Count; i++) {
+					var cVehicle = Vehicles[i];
+					var cResult = newVehicle.CompareTo(cVehicle);
 					if (cResult == 0) {
 						throw new(Util.GetString("MessageAddErrSameID"));
 					} else if (cResult < 0) {
-						Trucks.Insert(i, newTruck);
+						Vehicles.Insert(i, newVehicle);
 						break;
-					} else if (i == Trucks.Count - 1)
-						Trucks.Add(newTruck);
+					} else if (i == Vehicles.Count - 1)
+						Vehicles.Add(newVehicle);
 				}
 			} else {
-				for (int i = Trucks.Count - 1; i >= 0; i--) {
-					var cTruck = Trucks[i];
-					var cResult = newTruck.TruckID.CompareTo(cTruck.TruckID);
+				for (int i = Vehicles.Count - 1; i >= 0; i--) {
+					var cVehicle = Vehicles[i];
+					var cResult = newVehicle.VehicleID.CompareTo(cVehicle.VehicleID);
 					if (cResult == 0) {
 						throw new(Util.GetString("MessageAddErrSameID"));
 					} else if (cResult > 0) {
-						Trucks.Insert(i + 1, newTruck);
+						Vehicles.Insert(i + 1, newVehicle);
 						break;
 					} else if (i == 0)
-						Trucks.Insert(0, newTruck);
+						Vehicles.Insert(0, newVehicle);
 				}
-				Trucks.Insert(0, newTruck);
+				Vehicles.Insert(0, newVehicle);
 			}
-			TrucksIO.AddTruck(newTruck);
+			VehiclesIO.AddVehicle(newVehicle);
 		} catch (Exception ex) {
 			MessageBox.Show(window, ex.Message, Util.GetString("MessageTitleErr"));
 		}
 	}
 
-	public static void DeleteTruck(bool ets2, ObservableCollection<AccessoryTruck> Trucks, DataGrid Table) {
-		List<string> truckIDs = [];
+	public static void DeleteVehicle(bool ets2, ObservableCollection<AccessoryVehicle> Vehicles, DataGrid Table) {
+		List<string> vehicleIDs = [];
 		while (Table.SelectedIndex != -1) {
-			var selected = Trucks[Table.SelectedIndex];
-			Trucks.Remove(selected);
-			truckIDs.Add(selected.TruckID);
+			var selected = Vehicles[Table.SelectedIndex];
+			Vehicles.Remove(selected);
+			vehicleIDs.Add(selected.VehicleID);
 		}
 		Table.UnselectAll();
-		if (truckIDs.Count > 0)
-			TrucksIO.DeleteTrucks(ets2, truckIDs);
+		if (vehicleIDs.Count > 0)
+			VehiclesIO.DeleteVehicle(ets2, vehicleIDs);
 	}
 
 
@@ -965,8 +967,8 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 
 	public void StartCreateSii(Window window) {
 		try {
-			PopupAddTruckOpen = false;
-			if (!TruckExpandedETS2 && !TruckExpandedATS)
+			PopupAddVehicleOpen = false;
+			if (!VehicleExpandedETS2 && !VehicleExpandedATS)
 				throw new(Util.GetString("MessageCreateSiiNoExpanded"));
 			if (ProjectLocation.Length == 0 ||
 				DisplayName.Length == 0 ||
@@ -1165,26 +1167,26 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			AutoFillSelectionWindow arWindow = new(type, modelName, modelType, modelPath, modelPathUK, collPath) { Owner = window };
 			var result = arWindow.ShowDialog();
 			if (result == true) {
-				if (arWindow.CheckModelName)
-					ModelName = modelName!;
-				if (arWindow.CheckModelType) {
+				if (modelName != null && arWindow.CheckModelName)
+					ModelName = modelName;
+				if (modelType != null && arWindow.CheckModelType) {
 					mCurrentModelType = null;
-					ModelType = modelType!;
+					ModelType = modelType;
 				}
-				if (arWindow.CheckModelPath) {
+				if (modelPath != null && arWindow.CheckModelPath) {
 					if (type == EXT_MODEL || type == EXT_MODEL_UK)
-						ExtModelPath = modelPath!;
+						ExtModelPath = modelPath;
 					else
-						ModelPath = modelPath!;
+						ModelPath = modelPath;
 				}
-				if (arWindow.CheckModelPathUK) {
+				if (modelPathUK != null && arWindow.CheckModelPathUK) {
 					if (type == EXT_MODEL || type == EXT_MODEL_UK)
-						ExtModelPathUK = modelPathUK!;
+						ExtModelPathUK = modelPathUK;
 					else
-						ModelPathUK = modelPathUK!;
+						ModelPathUK = modelPathUK;
 				}
-				if (arWindow.CheckCollPath)
-					CollPath = collPath!;
+				if (collPath != null && arWindow.CheckCollPath)
+					CollPath = collPath;
 			}
 		}
 	}

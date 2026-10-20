@@ -57,15 +57,15 @@ public class CreatedModelItem: BaseBinding {
 	public CreatedModelItem(string path, string pathShort) {
 		this.path = path;
 		this.pathShort = pathShort;
-		truckID = Util.GetString("UnknownFile");
+		vehicleID = Util.GetString("UnknownFile");
 		modelType = "";
 		modelName = Util.GetString("Unknown");
 	}
 
-	public CreatedModelItem(string path, string pathShort, string truckID, string modelType, string modelName) {
+	public CreatedModelItem(string path, string pathShort, string vehicleID, string modelType, string modelName) {
 		this.path = path;
 		this.pathShort = pathShort;
-		this.truckID = truckID;
+		this.vehicleID = vehicleID;
 		this.modelType = modelType;
 		this.modelName = modelName;
 	}
@@ -96,11 +96,11 @@ public class CreatedModelItem: BaseBinding {
 		}
 	}
 
-	public string truckID;
-	public string TruckID {
-		get => truckID;
+	public string vehicleID;
+	public string VehicleID {
+		get => vehicleID;
 		set {
-			truckID = value;
+			vehicleID = value;
 			InvokeChange();
 		}
 	}

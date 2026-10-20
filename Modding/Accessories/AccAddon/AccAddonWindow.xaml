@@ -216,7 +216,7 @@
 			ItemTemplate="{StaticResource CMTemplate}" />
 
 		<Style
-			x:Key="TruckTableTextBoxStyle"
+			x:Key="VehicleTableTextBoxStyle"
 			TargetType="TextBox"
 			BasedOn="{StaticResource TableTextBoxStyle}">
 			<Style.Triggers>
@@ -881,25 +881,29 @@
 						Grid.ColumnSpan="3"
 						Content="{DynamicResource ModelSetExterior}"
 						VerticalContentAlignment="Center"
-						HorizontalAlignment="Stretch">
+						HorizontalAlignment="Stretch"
+						d:IsChecked="False">
 						<ui:ToggleSwitch.Style>
 							<Style
 								TargetType="ui:ToggleSwitch"
 								BasedOn="{StaticResource {x:Type ui:ToggleSwitch}}">
+								<Setter
+									Property="IsChecked"
+									Value="True" />
 								<Style.Triggers>
 									<DataTrigger
-										Binding="{Binding ExtModelPath, Converter={StaticResource StringNotEmpty}}"
-										Value="True">
+										Binding="{Binding ExtModelPath}"
+										Value="">
 										<Setter
 											Property="IsChecked"
-											Value="True" />
+											Value="False" />
 									</DataTrigger>
 									<DataTrigger
-										Binding="{Binding ExtModelPathUK, Converter={StaticResource StringNotEmpty}}"
-										Value="True">
+										Binding="{Binding ExtModelPathUK}"
+										Value="">
 										<Setter
 											Property="IsChecked"
-											Value="True" />
+											Value="False" />
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>
@@ -1968,7 +1972,7 @@
 			</ScrollViewer>
 
 			<Grid
-				x:Name="GridTrucks"
+				x:Name="GridVehicles"
 				Grid.Column="2"
 				Height="{Binding ActualHeight, ElementName=ControlPanel, Mode=OneWay}">
 				<Grid.RowDefinitions>
@@ -2018,23 +2022,23 @@
 					</Grid.ColumnDefinitions>
 					<TextBlock>
 					<Run
-							Text="{DynamicResource ModelTruckTip}" />
+							Text="{DynamicResource ModelVehicleTip}" />
 					</TextBlock>
 
 					<Button
 						x:Name="ButtonInitialize"
 						Grid.Column="1"
-						Content="{DynamicResource ButtonInitializeTrucks}"
+						Content="{DynamicResource ButtonInitializeVehicles}"
 						Padding="20,5"
 						FontSize="14"
-						Click="ButtonTruckInitialize"
+						Click="ButtonVehicleReinit"
 						VerticalAlignment="Bottom" />
 				</Grid>
 				<Expander
 					x:Name="ExpanderETS2"
 					Grid.Row="1"
 					Margin="0,5,0,0"
-					IsExpanded="{Binding TruckExpandedETS2}"
+					IsExpanded="{Binding VehicleExpandedETS2}"
 					d:IsExpanded="True"
 					Padding="0,2,0,0"
 					VerticalAlignment="Stretch"
@@ -2058,19 +2062,19 @@
 								IsThreeState="True"
 								Margin="3,0,0,2" />
 							<Button
-								x:Name="ButtonAddTruckETS2"
-								Content="{DynamicResource TitleAddTruck}"
+								x:Name="ButtonAddVehicleETS2"
+								Content="{DynamicResource TitleAddVehicle}"
 								Grid.Column="2"
 								Padding="5,3"
-								Click="ButtonAddTruckClick"
+								Click="ButtonAddVehicleClick"
 								VerticalAlignment="Bottom" />
 							<Button
-								x:Name="ButtonDeleteTruckETS2"
-								Content="{DynamicResource ButtonDeleteTruck}"
+								x:Name="ButtonDeleteVehicleETS2"
+								Content="{DynamicResource ButtonDeleteVehicle}"
 								Grid.Column="3"
 								Margin="5,0"
 								Padding="5,3"
-								Click="ButtonDeleteTruckClick"
+								Click="ButtonDeleteVehicleClick"
 								VerticalAlignment="Bottom">
 								<Button.Style>
 									<Style
@@ -2078,7 +2082,7 @@
 										BasedOn="{StaticResource {x:Type Button}}">
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding SelectedIndex, ElementName=TableTrucksETS2}"
+												Binding="{Binding SelectedIndex, ElementName=TableVehiclesETS2}"
 												Value="-1">
 												<Setter
 													Property="IsEnabled"
@@ -2091,8 +2095,8 @@
 						</Grid>
 					</Expander.Header>
 					<DataGrid
-						x:Name="TableTrucksETS2"
-						ItemsSource="{Binding TrucksETS2}"
+						x:Name="TableVehiclesETS2"
+						ItemsSource="{Binding VehiclesETS2}"
 						d:ItemsSource="{d:SampleData ItemCount=2}">
 						<DataGrid.Columns>
 							<DataGridTemplateColumn
@@ -2101,7 +2105,7 @@
 									<DataTemplate>
 										<CheckBox
 											HorizontalAlignment="Center"
-											Click="TruckCheckBoxClick"
+											Click="VehicleCheckBoxClick"
 											IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}"
 											VerticalContentAlignment="Center"
 											MinWidth="22"
@@ -2110,16 +2114,16 @@
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
 							<DataGridTextColumn
-								Header="{DynamicResource TruckID}"
+								Header="{DynamicResource VehicleID}"
 								Width="6*"
-								Binding="{Binding TruckID}"
+								Binding="{Binding VehicleID}"
 								FontSize="12"
 								ElementStyle="{DynamicResource DataGridElementStyle}"
 								CellStyle="{DynamicResource DataGridCellToolTip}" />
 							<DataGridTextColumn
-								Header="{DynamicResource TruckName}"
+								Header="{DynamicResource VehicleName}"
 								Width="6*"
-								Binding="{Binding DisplayName}"
+								Binding="{Binding VehicleName}"
 								FontSize="12"
 								ElementStyle="{DynamicResource DataGridElementStyle}"
 								CellStyle="{DynamicResource DataGridCellToolTip}" />
@@ -2131,7 +2135,7 @@
 										<TextBox
 											Text="{Binding ModelType, UpdateSourceTrigger=PropertyChanged}"
 											ContextMenu="{StaticResource MenuModelType}"
-											Style="{StaticResource TruckTableTextBoxStyle}" />
+											Style="{StaticResource VehicleTableTextBoxStyle}" />
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
@@ -2143,7 +2147,7 @@
 										<TextBox
 											Text="{Binding Look, UpdateSourceTrigger=PropertyChanged}"
 											ContextMenu="{StaticResource MenuLook}"
-											Style="{StaticResource TruckTableTextBoxStyle}" />
+											Style="{StaticResource VehicleTableTextBoxStyle}" />
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
@@ -2155,12 +2159,12 @@
 										<TextBox
 											Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
 											ContextMenu="{StaticResource MenuVariant}"
-											Style="{StaticResource TruckTableTextBoxStyle}" />
+											Style="{StaticResource VehicleTableTextBoxStyle}" />
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
 							<DataGridTextColumn
-								Header="{DynamicResource TruckDescription}"
+								Header="{DynamicResource VehicleDescription}"
 								Width="8*"
 								Binding="{Binding Description}"
 								FontSize="12"
@@ -2181,7 +2185,7 @@
 				<Expander
 					x:Name="ExpanderATS"
 					Grid.Row="3"
-					IsExpanded="{Binding TruckExpandedATS}"
+					IsExpanded="{Binding VehicleExpandedATS}"
 					d:IsExpanded="True"
 					Padding="0,2,0,0"
 					VerticalAlignment="Stretch"
@@ -2205,19 +2209,19 @@
 								IsThreeState="True"
 								Margin="3,0,0,2" />
 							<Button
-								x:Name="ButtonAddTruckATS"
-								Content="{DynamicResource TitleAddTruck}"
+								x:Name="ButtonAddVehicleATS"
+								Content="{DynamicResource TitleAddVehicle}"
 								Grid.Column="2"
 								Padding="5,3"
-								Click="ButtonAddTruckClick"
+								Click="ButtonAddVehicleClick"
 								VerticalAlignment="Bottom" />
 							<Button
-								x:Name="ButtonDeleteTruckATS"
-								Content="{DynamicResource ButtonDeleteTruck}"
+								x:Name="ButtonDeleteVehicleATS"
+								Content="{DynamicResource ButtonDeleteVehicle}"
 								Grid.Column="3"
 								Margin="5,0"
 								Padding="5,3"
-								Click="ButtonDeleteTruckClick"
+								Click="ButtonDeleteVehicleClick"
 								VerticalAlignment="Bottom">
 								<Button.Style>
 									<Style
@@ -2225,7 +2229,7 @@
 										BasedOn="{StaticResource {x:Type Button}}">
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding SelectedIndex, ElementName=TableTrucksATS}"
+												Binding="{Binding SelectedIndex, ElementName=TableVehiclesATS}"
 												Value="-1">
 												<Setter
 													Property="IsEnabled"
@@ -2238,8 +2242,8 @@
 						</Grid>
 					</Expander.Header>
 					<DataGrid
-						x:Name="TableTrucksATS"
-						ItemsSource="{Binding TrucksATS}"
+						x:Name="TableVehiclesATS"
+						ItemsSource="{Binding VehiclesATS}"
 						d:ItemsSource="{d:SampleData ItemCount=2}">
 						<DataGrid.Columns>
 							<DataGridTemplateColumn
@@ -2248,7 +2252,7 @@
 									<DataTemplate>
 										<CheckBox
 											HorizontalAlignment="Center"
-											Click="TruckCheckBoxClick"
+											Click="VehicleCheckBoxClick"
 											IsChecked="{Binding Check, UpdateSourceTrigger=PropertyChanged}"
 											MinWidth="22"
 											MinHeight="22" />
@@ -2256,16 +2260,16 @@
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
 							<DataGridTextColumn
-								Header="{DynamicResource TruckID}"
+								Header="{DynamicResource VehicleID}"
 								Width="6*"
-								Binding="{Binding TruckID}"
+								Binding="{Binding VehicleID}"
 								FontSize="12"
 								ElementStyle="{DynamicResource DataGridElementStyle}"
 								CellStyle="{DynamicResource DataGridCellToolTip}" />
 							<DataGridTextColumn
-								Header="{DynamicResource TruckName}"
+								Header="{DynamicResource VehicleName}"
 								Width="6*"
-								Binding="{Binding DisplayName}"
+								Binding="{Binding VehicleName}"
 								FontSize="12"
 								ElementStyle="{DynamicResource DataGridElementStyle}"
 								CellStyle="{DynamicResource DataGridCellToolTip}" />
@@ -2277,7 +2281,7 @@
 										<TextBox
 											Text="{Binding ModelType, UpdateSourceTrigger=PropertyChanged}"
 											ContextMenu="{StaticResource MenuModelType}"
-											Style="{StaticResource TruckTableTextBoxStyle}" />
+											Style="{StaticResource VehicleTableTextBoxStyle}" />
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
@@ -2289,7 +2293,7 @@
 										<TextBox
 											Text="{Binding Look, UpdateSourceTrigger=PropertyChanged}"
 											ContextMenu="{StaticResource MenuLook}"
-											Style="{StaticResource TruckTableTextBoxStyle}" />
+											Style="{StaticResource VehicleTableTextBoxStyle}" />
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
@@ -2301,12 +2305,12 @@
 										<TextBox
 											Text="{Binding Variant, UpdateSourceTrigger=PropertyChanged}"
 											ContextMenu="{StaticResource MenuVariant}"
-											Style="{StaticResource TruckTableTextBoxStyle}" />
+											Style="{StaticResource VehicleTableTextBoxStyle}" />
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
 							<DataGridTextColumn
-								Header="{DynamicResource TruckDescription}"
+								Header="{DynamicResource VehicleDescription}"
 								Width="8*"
 								Binding="{Binding Description}"
 								FontSize="12"
@@ -2318,10 +2322,10 @@
 			</Grid>
 
 			<Popup
-				x:Name="PopupAddTruck"
+				x:Name="PopupAddVehicle"
 				PopupAnimation="Slide"
 				AllowsTransparency="True"
-				IsOpen="{Binding PopupAddTruckOpen}" />
+				IsOpen="{Binding PopupAddVehicleOpen}" />
 
 			<Border
 				Grid.Row="1"

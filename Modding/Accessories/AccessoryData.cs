@@ -1,6 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;

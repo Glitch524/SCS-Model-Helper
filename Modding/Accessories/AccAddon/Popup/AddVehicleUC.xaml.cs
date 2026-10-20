@@ -1,6 +1,6 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Trucks;
 using SCS_Mod_Helper.Utils;
+using SCS_Mod_Helper.Vehicles;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,19 +9,19 @@ using System.Windows.Input;
 namespace SCS_Mod_Helper.Modding.Accessories.AccAddon.Popup;
 
 /// <summary>
-/// AddTruckUC.xaml 的交互逻辑
+/// AddVehicleUC.xaml 的交互逻辑
 /// </summary>
-public partial class AddTruckUC: UserControl {
-	private readonly AddTruckBinding binding = new();
+public partial class AddVehicleUC: UserControl {
+	private readonly AddVehicleBinding binding = new();
 
 	public bool IsETS2;
 
 	public delegate void OnButtonClicked(bool ok);
 	private readonly OnButtonClicked onButtonClicked;
 
-	public AccessoryTruck? NewTruck;
+	public AccessoryVehicle? NewVehicle;
 
-	public AddTruckUC(bool isETS2, OnButtonClicked onButtonClicked) {
+	public AddVehicleUC(bool isETS2, OnButtonClicked onButtonClicked) {
 		InitializeComponent();
 		GridMain.DataContext = binding;
 		IsETS2 = isETS2;
@@ -29,27 +29,28 @@ public partial class AddTruckUC: UserControl {
 	}
 
 	public void Clean() {
-		binding.TruckID = string.Empty;
+		binding.VehicleID = string.Empty;
 		binding.ProdYear = null;
-		binding.IngameName = string.Empty;
+		binding.VehicleName = string.Empty;
 		binding.Manifaturer = string.Empty;
 		binding.Description = string.Empty;
 	}
 
 	private void ButtonResultClick(object sender, RoutedEventArgs e) {
-		if (binding.TruckID.Length == 0 || binding.IngameName.Length == 0) {
+		if (binding.VehicleID.Length == 0 || binding.VehicleName.Length == 0) {
 			MessageBox.Show(Window.GetWindow(this), Util.GetString("MessageAddErrNotFilled"));
 			return;
 		}
 		if (sender == ButtonOK) {
-			NewTruck = new(binding.TruckID,
+			NewVehicle = new(binding.VehicleID,
 				  binding.ProdYear ?? DateTime.Now.Year,
-				  binding.IngameName,
+				  binding.VehicleName,
 				  binding.Description,
+				  binding.VehicleType,
 				  binding.Manifaturer,
 				  IsETS2,
 				  false);
-			TrucksIO.AddTruck(NewTruck);
+			VehiclesIO.AddVehicle(NewVehicle);
 		}
 
 		onButtonClicked(sender == ButtonOK);
@@ -61,17 +62,25 @@ public partial class AddTruckUC: UserControl {
 	private partial Regex RegexNumber();
 }
 
-public class AddTruckBinding: BaseBinding {
-	public bool OKEnabled => TruckID != null && ProdYear != null && IngameName != null;
+public class AddVehicleBinding: BaseBinding {
+	public bool OKEnabled => VehicleID != null && ProdYear != null && VehicleName != null;
 
-	private string mTruckID = string.Empty;
-	public string TruckID {
-		get => mTruckID;
+	private string mVehicleID = string.Empty;
+	public string VehicleID {
+		get => mVehicleID;
 		set {
-			mTruckID = value;
+			mVehicleID = value;
 			InvokeChange();
 
 			InvokeChange(nameof(OKEnabled));
+		}
+	}
+	private string mVehicleType = "Truck";
+	public string VehicleType {
+		get => mVehicleType;
+		set {
+			mVehicleType = value;
+			InvokeChange();
 		}
 	}
 
@@ -85,11 +94,11 @@ public class AddTruckBinding: BaseBinding {
 			InvokeChange(nameof(OKEnabled));
 		}
 	}
-	private string mIngameName = string.Empty;
-	public string IngameName {
-		get => mIngameName;
+	private string mVehicleName = string.Empty;
+	public string VehicleName {
+		get => mVehicleName;
 		set {
-			mIngameName = value;
+			mVehicleName = value;
 			InvokeChange();
 
 			InvokeChange(nameof(OKEnabled));
