@@ -848,6 +848,20 @@
 									<ColumnDefinition
 										Width="Auto" />
 								</Grid.ColumnDefinitions>
+								<Grid.Style>
+									<Style
+										TargetType="Grid">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding CurrentVariant}"
+												Value="{x:Null}">
+												<Setter
+													Property="IsEnabled"
+													Value="False" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Grid.Style>
 								<TextBlock
 									Text="{DynamicResource BaseColorShort}"
 									VerticalAlignment="Center">
@@ -1147,27 +1161,6 @@
 										</Style>
 									</Button.Style>
 								</Button>
-								<Border
-									Grid.ColumnSpan="8"
-									Background="#BFFFFFFF">
-									<Border.Style>
-										<Style
-											TargetType="Border">
-											<Setter
-												Property="Visibility"
-												Value="Collapsed" />
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding CurrentVariant}"
-													Value="{x:Null}">
-													<Setter
-														Property="Visibility"
-														Value="Visible" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Border.Style>
-								</Border>
 							</Grid>
 							<Button
 								x:Name="ButtonColorVariant"
