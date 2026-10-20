@@ -3,6 +3,7 @@ using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SCS_Mod_Helper.ConverterPix {
@@ -15,7 +16,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 		public ConverterPixWindow() {
 			InitializeComponent();
 
-			Binding = new(ListBoxScrollToTop);
+			Binding = new(this, ListBoxScrollToTop);
 			GridMain.DataContext = Binding;
 		}
 
@@ -24,10 +25,6 @@ namespace SCS_Mod_Helper.ConverterPix {
 			set => Binding.PackPath = value;
 		}
 
-		public string PackDir => Binding.PackDir;
-		public ObservableCollection<PIXFile> FileList => Binding.FileList;
-		public ObservableCollection<PackDir> DirList => Binding.DirList;//地址栏的列表
-
 		private void ButtonChoosePack(object sender, RoutedEventArgs e) {
 			OpenFileDialog openFileDialog = new() {
 				Filter = Util.GetFilter("DialogFilterMod"),
@@ -35,9 +32,7 @@ namespace SCS_Mod_Helper.ConverterPix {
 			};
 			if (openFileDialog.ShowDialog() == true) {
 				PackPath = openFileDialog.FileName;
-				DirList.Clear();
-				DirList.Add(new("/", openFileDialog.SafeFileName));
-				Binding.ReadDir();
+				Binding.DirStart(openFileDialog.SafeFileName);
 			}
 		}
 
@@ -50,11 +45,11 @@ namespace SCS_Mod_Helper.ConverterPix {
 			}
 		}
 
-		private void ButtonBackClick(object sender, RoutedEventArgs e) => FolderBack();
-
-		private void FolderBack() {
-			if (DirList.Count > 1) {
-				Binding.DirBack(DirList.Count - 2);
+		private void ButtonClick(object sender, RoutedEventArgs e) {
+			if (sender == ButtonBack) {
+				Binding.Undo();
+			} else if (sender == ButtonReturn) {
+				Binding.FolderBack();
 			}
 		}
 
@@ -73,18 +68,16 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 		private void ButtonShowFileClick(object sender, RoutedEventArgs e) {
 			if (Binding.SelectedFile is PIXFile pixFile) {
-				if (pixFile.IsDir)
-					return;
-				_ = Binding.ShowFile(this, pixFile);
+				Binding.ReadFile(this, pixFile);
 			}
 		}
 
 		private void ListBoxKeyDown(object sender, KeyEventArgs e) {
 			if (e.Key == Key.Enter) {
-				Binding.OpenSelectedFile();
+				Binding.OpenSelectedDir();
 			} else if (e.Key == Key.Back) {
-				FolderBack();
-				e.Handled = true;//没有这个会导致在返回时莫名其妙选中第一个文件
+				Binding.FolderBack();
+				e.Handled = true;
 			}
 		}
 

@@ -10,7 +10,7 @@
 	x:Class="SCS_Mod_Helper.ConverterPix.ConverterPixWindow"
 	ExtendsContentIntoTitleBar="True"
 	mc:Ignorable="d"
-	Title="{DynamicResource TitleConverterPix}"
+	Title="{DynamicResource TitleConverterPIX}"
 	WindowStartupLocation="CenterOwner"
 	Height="600"
 	Width="900">
@@ -140,6 +140,8 @@
 					<ColumnDefinition
 						Width="Auto" />
 					<ColumnDefinition
+						Width="Auto" />
+					<ColumnDefinition
 						Width="*" />
 				</Grid.ColumnDefinitions>
 
@@ -147,25 +149,108 @@
 					Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
 				<Button
 					x:Name="ButtonBack"
-					Click="ButtonBackClick"
+					Click="ButtonClick"
 					ToolTip="Go Back"
 					Background="{x:Null}"
 					BorderBrush="{x:Null}"
 					VerticalAlignment="Stretch"
 					HorizontalAlignment="Stretch">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding UndoCount, Mode=OneWay}"
+									Value="0">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+					<Grid>
+						<Viewbox
+							Stretch="UniformToFill">
+							<ui:SymbolIcon
+								Symbol="ArrowLeft20"
+								FontSize="20">
+								<ui:SymbolIcon.Style>
+									<Style
+										TargetType="ui:SymbolIcon">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding UndoCount, Mode=OneWay}"
+												Value="0">
+												<Setter
+													Property="Foreground"
+													Value="LightGray" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</ui:SymbolIcon.Style>
+							</ui:SymbolIcon>
+						</Viewbox>
+					</Grid>
+				</Button>
+
+				<Rectangle
+					Grid.Column="1"
+					Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
+				<Button
+					x:Name="ButtonReturn"
+					Click="ButtonClick"
+					Grid.Column="1"
+					ToolTip="Go Back"
+					Background="{x:Null}"
+					BorderBrush="{x:Null}"
+					VerticalAlignment="Stretch"
+					HorizontalAlignment="Stretch">
+					<Button.Style>
+						<Style
+							TargetType="Button"
+							BasedOn="{StaticResource {x:Type Button}}">
+							<Style.Triggers>
+								<DataTrigger
+									Binding="{Binding DirList.Count, Mode=OneWay}"
+									Value="1">
+									<Setter
+										Property="IsEnabled"
+										Value="False" />
+								</DataTrigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
 					<Viewbox
 						Stretch="UniformToFill">
 						<ui:SymbolIcon
 							Symbol="ArrowUp20"
-							FontSize="20" />
+							FontSize="20">
+							<ui:SymbolIcon.Style>
+								<Style
+									TargetType="ui:SymbolIcon">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding DirList.Count, Mode=OneWay}"
+											Value="1">
+											<Setter
+												Property="Foreground"
+												Value="LightGray" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</ui:SymbolIcon.Style>
+						</ui:SymbolIcon>
 					</Viewbox>
 				</Button>
 
 				<ui:BreadcrumbBar
 					Margin="5"
-					Grid.Column="1"
+					Grid.Column="2"
 					d:ItemsSource="{d:SampleData ItemCount=2}"
 					ItemsSource="{Binding DirList}"
+					
 					ItemClicked="BreadcrumbBarItemClicked"
 					MinHeight="20">
 					<ui:BreadcrumbBar.ItemTemplate>
