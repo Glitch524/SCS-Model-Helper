@@ -113,9 +113,9 @@ public class SettingsBinding(): BaseBinding {
 	}
 
 	public List<ThemeItem> ThemeList { get; set; } = [
-		new(Util.GetString("ThemeFollowSystem"), "FollowSystem"),
-		new(Util.GetString("ThemeLight"), "Light"),
-		new(Util.GetString("ThemeDark"), "Dark")
+		new(GetString("ThemeFollowSystem"), "FollowSystem"),
+		new(GetString("ThemeLight"), "Light"),
+		new(GetString("ThemeDark"), "Dark")
 		];
 
 	public delegate void SetThemeWatcher(bool watch);

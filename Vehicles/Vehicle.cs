@@ -36,10 +36,10 @@ public class Vehicle(
 	private readonly string mVehicleType = vehicleType;
 	public string VehicleType => mVehicleType;
 	public string VehicleTypeName => VehicleType.ToLower() switch {
-		"truck" => Util.GetString("VehicleTypeTruck"),
-		"trailer" => Util.GetString("VehicleTypeTrailer"),
-		"car" => Util.GetString("VehicleTypeCar"),
-		"coach" => Util.GetString("VehicleTypeCoach"),
+		"truck" => GetString("VehicleTypeTruck"),
+		"trailer" => GetString("VehicleTypeTrailer"),
+		"car" => GetString("VehicleTypeCar"),
+		"coach" => GetString("VehicleTypeCoach"),
 		_ => VehicleType
 	};
 

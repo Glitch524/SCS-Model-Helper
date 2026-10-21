@@ -168,15 +168,15 @@ class PhysicsBinding: BaseBinding {
 	//模型、碰撞体
 	public void ChooseModel(bool isColl) {
 		if (ProjectLocation.Length == 0)
-			throw new(Util.GetString("MessageProjectLocationFirst"));
+			throw new(GetString("MessageProjectLocationFirst"));
 		string title, fileter, defaultExt;
 		if (isColl) {
-			title = Util.GetString("DialogTitleChooseColl");
-			fileter = Util.GetFilter("DialogFilterChooseColl");
+			title = GetString("DialogTitleChooseColl");
+			fileter = GetFilter("DialogFilterChooseColl");
 			defaultExt = "pmc";
 		} else {
-			title = Util.GetString("DialogTitleChooseModel");
-			fileter = Util.GetFilter("DialogFilterChooseModel");
+			title = GetString("DialogTitleChooseModel");
+			fileter = GetFilter("DialogFilterChooseModel");
 			defaultExt = "pmd";
 		}
 		var fileDialog = new OpenFileDialog {
@@ -191,12 +191,12 @@ class PhysicsBinding: BaseBinding {
 			return;
 		string path = fileDialog.FileName;
 		if (!path.StartsWith(ProjectLocation) || path.Length == ProjectLocation.Length)
-			throw new(Util.GetString("MessageModelOutsideProject"));
+			throw new(GetString("MessageModelOutsideProject"));
 		if (isColl) {
 			if (!path.EndsWith(".pic") && !path.EndsWith(".pmc"))
-				throw new(Util.GetString("MessageInvalidExtColl"));
+				throw new(GetString("MessageInvalidExtColl"));
 		} else if (!path.EndsWith(".pim") && !path.EndsWith(".pmd")) {
-			throw new(Util.GetString("MessageInvalidExt"));
+			throw new(GetString("MessageInvalidExt"));
 		}
 		AccAddonHistory.Default.ChooseModelHistory = new DirectoryInfo(fileDialog.FileName).Parent!.FullName;
 		AccAddonHistory.Default.Save();

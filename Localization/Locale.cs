@@ -25,7 +25,7 @@ public abstract class Locale(string localeValue, string localeDisplay): BaseBind
 	}
 
 	public void RefreshName() {
-		LocaleDisplay = Util.GetString($"locale.{LocaleValue}");
+		LocaleDisplay = GetString($"locale.{LocaleValue}");
 	}
 
 	protected static List<string[]> SupportedLocales {
@@ -43,7 +43,7 @@ public abstract class Locale(string localeValue, string localeDisplay): BaseBind
 	private static List<string[]> GetLocalePair(params string[] locales) {
 		List<string[]> localeList = [];
 		foreach (var locale in locales) {
-			localeList.Add([locale, Util.GetString($"locale.{locale}")]);
+			localeList.Add([locale, GetString($"locale.{locale}")]);
 		}
 		return localeList;
 	}

@@ -3,7 +3,7 @@ using SCS_Mod_Helper.Utils;
 
 namespace SCS_Mod_Helper.ConverterPix {
 	class ExtractAllBinding: BaseBinding {
-		private string mDialogMessage = Util.GetString("MessageGatherFiles");
+		private string mDialogMessage = GetString("MessageGatherFiles");
 		public string DialogMessage {
 			get => mDialogMessage;
 			set {

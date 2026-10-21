@@ -14,7 +14,7 @@ public class ModelTypeInfo: BaseBinding {
 		if (nameKey == "")
 			mName = "";
 		else
-			mName = Util.GetString(nameKey);
+			mName = GetString(nameKey);
 	}
 
 	public ModelTypeInfo(
@@ -31,7 +31,7 @@ public class ModelTypeInfo: BaseBinding {
 			mAccessoryATS = acc;
 		}
 		NameKey = $"Acc.{acc}";
-		mName = Util.GetString($"Acc.{acc}");
+		mName = GetString($"Acc.{acc}");
 	}
 
 	public ModelTypeInfo() : this("", "", "") { }
@@ -80,7 +80,7 @@ public class ModelTypeInfo: BaseBinding {
 	public void RefreshName() {
 		if (Accessory.Length == 0)
 			return;
-		Name = Util.GetString(NameKey);
+		Name = GetString(NameKey);
 	}
 	private readonly bool? mGameType;
 	public bool? GameType => mGameType;

@@ -57,9 +57,9 @@ public class CreatedModelItem: BaseBinding {
 	public CreatedModelItem(string path, string pathShort) {
 		this.path = path;
 		this.pathShort = pathShort;
-		vehicleID = Util.GetString("UnknownFile");
+		vehicleID = GetString("UnknownFile");
 		modelType = "";
-		modelName = Util.GetString("Unknown");
+		modelName = GetString("Unknown");
 	}
 
 	public CreatedModelItem(string path, string pathShort, string vehicleID, string modelType, string modelName) {

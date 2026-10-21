@@ -1,11 +1,11 @@
-﻿using SCS_Mod_Helper.Localization;
+﻿using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SCS_Mod_Helper.Modding.Accessories;
+namespace SCS_Mod_Helper.Localization;
 
 class StringResUtil {
 	private static readonly ObservableCollection<StringResItem> mStringResList = [];
@@ -77,10 +77,14 @@ class StringResUtil {
 		}
 	}
 
+	/*
+	 * 根据游戏内测试，只有分割后偶数部分是普通文本，奇数部分会作为资源Key查询locale
+	 * 
+	 */
 	public static string GetStringResResults(string displayName, out string localizedName) {
 		var localeModules = Instances.LocaleModules;
 		if (displayName.Contains("@@")) {
-			var split = displayName.Split("@@");//根据游戏内测试，只有分割后偶数部分是普通文本，奇数部分是资源Key
+			var split = displayName.Split("@@");
 			Dictionary<string, string[]> values = [];//key: locale名, value: string数组 与split对应
 			foreach (var localeModule in localeModules) {
 				foreach (var dict in localeModule.LocaleList) {

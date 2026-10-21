@@ -20,7 +20,7 @@ public class HookupBinding: BaseBinding {
 			InvokeChange(nameof(ProjectLocationShow));
 		}
 	}
-	public string ProjectLocationShow => Util.GetString("TextProjectLocation") + MProjectLocation;
+	public string ProjectLocationShow => GetString("TextProjectLocation") + MProjectLocation;
 
 	private bool mIsAnimHookup = true;
 	public bool IsAnimHookup {

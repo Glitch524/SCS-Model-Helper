@@ -285,10 +285,10 @@ public partial class ConverterPixBinding(ConverterPixWindow window, Action<PIXFi
 				2 => "MessageExtractedTobj",
 				_ => "MessageExtractedFile",
 			};
-			string resultMessage = $"{Util.GetString(key)} {filePath}";
+			string resultMessage = $"{GetString(key)} {filePath}";
 			MessageBox.Show(window, resultMessage, "Result");
 		} else {
-			string resultMessage = $"{Util.GetString("MessageExtractFail")}\n{string.Join(Environment.NewLine, errors)}";
+			string resultMessage = $"{GetString("MessageExtractFail")}\n{string.Join(Environment.NewLine, errors)}";
 			MessageBox.Show(window, resultMessage, "Result");
 		}
 	}

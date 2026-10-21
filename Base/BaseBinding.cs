@@ -8,4 +8,5 @@ public class BaseBinding: INotifyPropertyChanged {
 	public void InvokeChange([CallerMemberName] string name = "") => PropertyChanged?.Invoke(this, new(name));
 
 	public static string GetString(string key, params object[] param) => Util.GetString(key, param);
+	public static string GetFilter(string key) => Util.GetFilter(key);
 }

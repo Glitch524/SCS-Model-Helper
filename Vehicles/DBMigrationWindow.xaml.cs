@@ -27,7 +27,7 @@ namespace SCS_Mod_Helper.Vehicles {
 		}
 
 		private void OnWindowClosing(object? sender, System.ComponentModel.CancelEventArgs e) {
-			var result = MessageBox.Show(this, Util.GetString("MessageDBClose"), Util.GetString("MessageTitleWarning"), MessageBoxButton.YesNo);
+			var result = MessageBox.Show(this, GetString("MessageDBClose"), GetString("MessageTitleWarning"), MessageBoxButton.YesNo);
 			if (result == MessageBoxResult.No) {
 				e.Cancel = true;
 			}
@@ -125,11 +125,11 @@ namespace SCS_Mod_Helper.Vehicles {
 		}
 
 		private void ButtonFinishClick(object sender, RoutedEventArgs e) {
-			StringBuilder message = new(Util.GetString("MessageDBFinish1"));
+			StringBuilder message = new(GetString("MessageDBFinish1"));
 			if (Binding.OldVehiclesETS2.Count + Binding.OldVehiclesATS.Count > 0)
-				message.Append('\n').Append(Util.GetString("MessageDBFinishWithUnselected"));
+				message.Append('\n').Append(GetString("MessageDBFinishWithUnselected"));
 
-			var result = MessageBox.Show(this, message.ToString(), Util.GetString("TitleVehicleMigration"), MessageBoxButton.YesNo);
+			var result = MessageBox.Show(this, message.ToString(), GetString("TitleVehicleMigration"), MessageBoxButton.YesNo);
 			if (result == MessageBoxResult.Yes) {
 				DialogResult = true;
 				Close();

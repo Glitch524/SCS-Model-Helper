@@ -10,7 +10,7 @@ internal class CreatedModelBinding: BaseBinding {
 	public string CurrentProjectLocation {
 		get => mCurrentProjectLocation;
 		set {
-			mCurrentProjectLocation = Util.GetString("TextProjectLocation") + value;
+			mCurrentProjectLocation = GetString("TextProjectLocation") + value;
 			InvokeChange();
 		}
 	}

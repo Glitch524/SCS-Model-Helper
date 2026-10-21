@@ -95,10 +95,10 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 		}
 
 		public static List<PartTypeItem> PartTypes => [
-			new("unknown", Util.GetString("PartTypeUnknown")),
-			new("aftermarket", Util.GetString("PartTypeAftermarket")),
-			new("factory", Util.GetString("PartTypeFactory")),
-			new("licensed", Util.GetString("PartTypeLicensed"))];
+			new("unknown", GetString("PartTypeUnknown")),
+			new("aftermarket", GetString("PartTypeAftermarket")),
+			new("factory", GetString("PartTypeFactory")),
+			new("licensed", GetString("PartTypeLicensed"))];
 
 		private ObservableCollection<string> data = [];
 		private ObservableCollection<string> suitableFor = [];

@@ -96,17 +96,17 @@ public class LocaleBinding: BaseBinding {
 		}
 		AddAll(CurrentDict!, universalList);
 		AddAll(UniversalDict, currentList);
-		var title = Util.GetString("MessageTitleSyncResult");
+		var title = GetString("MessageTitleSyncResult");
 		StringBuilder message = new();
 		if (currentList.Count == 0 && universalList.Count == 0) {
-			message.Append(Util.GetString("MessageSyncResultZero"));
+			message.Append(GetString("MessageSyncResultZero"));
 		} else {
 			if (currentList.Count > 0)
-				message.Append(Util.GetString("MessageSyncResultTo", currentList.Count));
+				message.Append(GetString("MessageSyncResultTo", currentList.Count));
 			if (universalList.Count > 0) {
 				if (message.Length > 0)
 					message.Append('\n');
-				message.Append(Util.GetString("MessageSyncResultFrom", universalList.Count));
+				message.Append(GetString("MessageSyncResultFrom", universalList.Count));
 			}
 		}
 		MessageBox.Show(window, message.ToString(), title);

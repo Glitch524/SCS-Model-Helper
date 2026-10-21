@@ -81,10 +81,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			PrepareMode = false;
 			Step = 1;
-			Message = Util.GetString("MessageExtractPMD");
+			Message = GetString("MessageExtractPMD");
 			ProgressCurrent = 0;
 			ProgressMax = fileCount;
-			CurrentFileType = Util.GetString("CurrentFilePMD");
+			CurrentFileType = GetString("CurrentFilePMD");
 
 			reporter.Report("prepareMode");
 			reporter.Report("startStep");
@@ -98,10 +98,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 			}
 
 			Step = 2;
-			Message = Util.GetString("MessageExtractTOBJ");
+			Message = GetString("MessageExtractTOBJ");
 			ProgressCurrent = 0;
 			ProgressMax = fileCount;
-			CurrentFileType = Util.GetString("CurrentFileTOBJ");
+			CurrentFileType = GetString("CurrentFileTOBJ");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < fileCount; i++) {
@@ -113,10 +113,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 			}
 
 			Step = 3;
-			Message = Util.GetString("MessageExtractDDS");
+			Message = GetString("MessageExtractDDS");
 			ProgressCurrent = 0;
 			ProgressMax = fileCount;
-			CurrentFileType = Util.GetString("CurrentFileDDS");
+			CurrentFileType = GetString("CurrentFileDDS");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < fileCount; i++) {
@@ -128,10 +128,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 			}
 
 			Step = 4;
-			Message = Util.GetString("MessageExtractOther");
+			Message = GetString("MessageExtractOther");
 			ProgressCurrent = 0;
 			ProgressMax = fileCount;
-			CurrentFileType = Util.GetString("CurrentFileOther");
+			CurrentFileType = GetString("CurrentFileOther");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < fileCount; i++) {
@@ -143,10 +143,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 			}
 
 			Step = 5;
-			Message = Util.GetString("MessageExtractDir");
+			Message = GetString("MessageExtractDir");
 			ProgressCurrent = 0;
 			ProgressMax = fileCount;
-			CurrentFileType = Util.GetString("CurrentFileDir");
+			CurrentFileType = GetString("CurrentFileDir");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < fileCount; i++) {
@@ -172,10 +172,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			PrepareMode = false;
 			Step = 1;
-			Message = Util.GetString("MessageExtractPMD");
+			Message = GetString("MessageExtractPMD");
 			ProgressCurrent = 0;
 			ProgressMax = pmdFiles.Count;
-			CurrentFileType = Util.GetString("CurrentFilePMD");
+			CurrentFileType = GetString("CurrentFilePMD");
 
 			reporter.Report("prepareMode");
 			reporter.Report("startStep");
@@ -194,10 +194,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			EnsureActive();
 			Step = 2;
-			Message = Util.GetString("MessageExtractTOBJ");
+			Message = GetString("MessageExtractTOBJ");
 			ProgressCurrent = 0;
 			ProgressMax = tobjFiles.Count;
-			CurrentFileType = Util.GetString("CurrentFileTOBJ");
+			CurrentFileType = GetString("CurrentFileTOBJ");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < tobjFiles.Count; i++) {
@@ -214,10 +214,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			EnsureActive();
 			Step = 3;
-			Message = Util.GetString("MessageExtractDDS");
+			Message = GetString("MessageExtractDDS");
 			ProgressCurrent = 0;
 			ProgressMax = ddsFiles.Count;
-			CurrentFileType = Util.GetString("CurrentFileDDS");
+			CurrentFileType = GetString("CurrentFileDDS");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < ddsFiles.Count; i++) {
@@ -234,10 +234,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			EnsureActive();
 			Step = 4;
-			Message = Util.GetString("MessageExtractDEF");
+			Message = GetString("MessageExtractDEF");
 			ProgressCurrent = 0;
 			ProgressMax = defFiles.Count;
-			CurrentFileType = Util.GetString("CurrentFileDEF");
+			CurrentFileType = GetString("CurrentFileDEF");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < defFiles.Count; i++) {
@@ -254,10 +254,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			EnsureActive();
 			Step = 5;
-			Message = Util.GetString("MessageExtractMAT");
+			Message = GetString("MessageExtractMAT");
 			ProgressCurrent = 0;
 			ProgressMax = matFiles.Count;
-			CurrentFileType = Util.GetString("CurrentFileMAT");
+			CurrentFileType = GetString("CurrentFileMAT");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < matFiles.Count; i++) {
@@ -274,10 +274,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			EnsureActive();
 			Step = 6;
-			Message = Util.GetString("MessageExtractOther");
+			Message = GetString("MessageExtractOther");
 			ProgressCurrent = 0;
 			ProgressMax = otherFiles.Count;
-			CurrentFileType = Util.GetString("CurrentFileOther");
+			CurrentFileType = GetString("CurrentFileOther");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < otherFiles.Count; i++) {
@@ -294,10 +294,10 @@ namespace SCS_Mod_Helper.ConverterPix {
 
 			EnsureActive();
 			Step = 7;
-			Message = Util.GetString("MessageExtractDir");
+			Message = GetString("MessageExtractDir");
 			ProgressCurrent = 0;
 			ProgressMax = dirs.Count;
-			CurrentFileType = Util.GetString("CurrentFileDir");
+			CurrentFileType = GetString("CurrentFileDir");
 
 			reporter.Report("startStep");
 			for (int i = 0; i < dirs.Count; i++) {

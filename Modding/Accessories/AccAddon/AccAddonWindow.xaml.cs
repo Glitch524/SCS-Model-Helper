@@ -1,4 +1,5 @@
 ﻿using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
