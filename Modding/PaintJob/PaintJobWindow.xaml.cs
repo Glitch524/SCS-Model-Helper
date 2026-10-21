@@ -1,6 +1,6 @@
 ﻿using ColorPicker;
 using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Modding.Accessories;
+using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Utils;
 using SCS_Mod_Helper.Vehicles;
 using System.Diagnostics;
@@ -92,26 +92,16 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 
 		private void OnMenuClicked(object sender, RoutedEventArgs e) {
 			MenuItem item = (MenuItem)sender;
-			ContextMenu cm = (ContextMenu)item.Parent;
-			if (cm == MenuStringRes) {
-				var menuName = (string)item.CommandParameter;
-				cm = menuName switch {
-					"MenuStringRes" => MenuStringRes,
-					_ => throw new NotImplementedException(),
-				};
-				if (cm == MenuStringRes) {
-					var tag = (string)item.Tag;
-					if (tag.Equals("openLocalization")) {
-						StringResUtil.OpenLocalization(this);
-					} else {
-						StringResUtil.ApplyStringRes(TextDisplayName, tag);
-					}
+			var menuName = (string)item.CommandParameter;
+			if (menuName == "MenuStringRes") {
+				var tag = (string)item.Tag;
+				if (tag.Equals("openLocalization")) {
+					StringResUtil.OpenLocalization(this);
+				} else {
+					StringResUtil.ApplyStringRes(TextDisplayName, tag);
 				}
 			}
 		}
-
-
-
 
 
 		private void NumberOnly(object sender, TextCompositionEventArgs e) => TextControl.NumberOnly(sender, e);

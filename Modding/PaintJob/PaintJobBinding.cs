@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Base;
+using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.Accessories;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.PaintJob.ColorMask;
@@ -93,6 +94,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 			get => PaintJobData.DisplayName;
 			set {
 				PaintJobData.DisplayName = value;
+				CheckResResult = null;
 				InvokeChange();
 				InvokeChange(nameof(CheckResVisibility));
 			}
@@ -807,17 +809,17 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 		public const int TEX_ACC_TEX = 3;
 		public void ChooseTex(Window window, int type) {
 			string title;
-			string filter = Util.GetFilter("DialogFilterTextureFile");
+			string filter = GetFilter("DialogFilterTextureFile");
 			switch (type) {
 				case TEX_PAINT_JOB:
 				case TEX_ACC_TEX:
-					title = Util.GetString("TitlePaintJobTexture");
+					title = GetString("TitlePaintJobTexture");
 					break;
 				case TEX_BASE_TEX_OVR:
-					title = Util.GetString("TitleBaseTexOverride");
+					title = GetString("TitleBaseTexOverride");
 					break;
 				case TEX_FLAKE_NOISE:
-					title = Util.GetString("TitleFlakeNoise");
+					title = GetString("TitleFlakeNoise");
 					break;
 				default:
 					return;
@@ -894,7 +896,7 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 					}
 				}
 			} else {
-				MessageBox.Show(window, Util.GetString("DialogResultFileOutsideProject"));
+				MessageBox.Show(window, GetString("DialogResultFileOutsideProject"));
 			}
 		}
 
