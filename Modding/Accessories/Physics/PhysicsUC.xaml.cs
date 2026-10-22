@@ -153,16 +153,9 @@ namespace SCS_Mod_Helper.Modding.Accessories.Physics {
 
 		private void FloatOnly(object sender, TextCompositionEventArgs e) => TextControl.FloatOnly(sender, e);
 
-		private ContextMenu? MenuInstanceOffset => CurrentToyData?.MenuInstanceOffset;
-
 		private void ButtonInstanceOffsetClicked(object sender, RoutedEventArgs e) {
-			if (sender == ButtonInstanceOffsetAdd) {
-				CurrentToyData?.AddMenuInstanceOffset(Window.GetWindow(this));
-			} else if (sender == ButtonInstanceOffsetRemove) {
-				CurrentToyData?.RemoveMenuInstanceOffset(Window.GetWindow(this));
-			} else if (sender == ButtonInstanceOffsetList) {
-				if (MenuInstanceOffset != null)
-					MenuInstanceOffset.IsOpen = true;
+			if (sender == ButtonInstanceOffsetList) {
+				PopupInstanceOffsetList.IsOpen = true;
 			}
 		}
 

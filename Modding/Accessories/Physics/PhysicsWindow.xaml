@@ -8,8 +8,8 @@
 	xmlns:base="clr-namespace:SCS_Mod_Helper.Base"
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:PhysicsBinding}"
+	Title="{DynamicResource TitlePhysicsToyData}"
 	mc:Ignorable="d"
-	Width="900"
 	Height="Auto"
 	WindowStartupLocation="CenterOwner"
 	SizeToContent="Height"
@@ -47,13 +47,11 @@
 				</TextBlock>
 			</StackPanel>
 
-			<ScrollViewer
-				Grid.Row="1">
-				<local:PhysicsUC
-					x:Name="UCPhysics"
-					LocalPhysics="True"
-					d:Height="433" />
-			</ScrollViewer>
+			<local:PhysicsUC
+				x:Name="UCPhysics"
+				Grid.Row="1"
+				LocalPhysics="True"
+				d:Height="433" />
 
 			<StackPanel
 				x:Name="PanelSelection"

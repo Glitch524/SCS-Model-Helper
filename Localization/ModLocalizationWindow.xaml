@@ -14,10 +14,6 @@
 	Height="600"
 	Width="900"
 	WindowStartupLocation="CenterOwner">
-	<base:BaseWindow.Resources>
-		<utils:BooleanVisibilityConverter
-			x:Key="BooleanVisibilityConverter" />
-	</base:BaseWindow.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition
@@ -269,10 +265,23 @@
 									Padding="0"
 									Margin="5,0"
 									BorderThickness="0"
-									Visibility="{Binding Path=HasLocale, Converter={StaticResource BooleanVisibilityConverter},Mode=OneWay}"
 									VerticalAlignment="Top"
-									Click="DeleteLocaleClick"
-									Style="{DynamicResource GridButton}">
+									Click="DeleteLocaleClick">
+									<Button.Style>
+										<Style
+											TargetType="Button"
+											BasedOn="{StaticResource GridButton}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding HasLocale}"
+													Value="False">
+													<Setter
+														Property="Visibility"
+														Value="Hidden" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Button.Style>
 									<ui:SymbolIcon
 										Symbol="GlobeProhibited20" />
 								</Button>

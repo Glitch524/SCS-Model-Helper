@@ -2,7 +2,6 @@
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon;
-using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
@@ -127,9 +126,6 @@ public class AccHookupBinding: BaseBinding, IListDataInterface {
 			}
 		}
 	}
-
-
-	public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
 
 	public string ModelPath {
 		get => CurrentHookupItem?.ModelPath ?? "";
@@ -280,8 +276,7 @@ public class AccHookupBinding: BaseBinding, IListDataInterface {
 	public string? OpeningList {
 		get => CurrentHookupItem?.OpeningList;
 		set {
-			if (CurrentHookupItem != null)
-				CurrentHookupItem.OpeningList = value;
+			CurrentHookupItem?.OpeningList = value;
 			InvokeChange(nameof(PopupCollection));
 		}
 	}

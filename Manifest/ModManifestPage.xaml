@@ -15,8 +15,6 @@
 	d:DesignWidth="1000"
 	d:Background="White">
 	<base:BasePage.Resources>
-		<utils:BooleanVisibilityConverter
-			x:Key="BooleanVisibilityConverter" />
 		<Style
 			x:Key="CateCheckBox"
 			TargetType="CheckBox"
@@ -622,10 +620,23 @@
 									Padding="0"
 									Margin="5,0"
 									BorderThickness="0"
-									Visibility="{Binding Path=HasDesc, Converter={StaticResource BooleanVisibilityConverter},Mode=OneWay}"
 									VerticalAlignment="Top"
-									Click="DeleteLocaleClick"
-									Style="{DynamicResource GridButton}">
+									Click="DeleteLocaleClick">
+									<Button.Style>
+										<Style
+											TargetType="Button"
+											BasedOn="{StaticResource GridButton}">
+											<Style.Triggers>
+												<DataTrigger
+													Binding="{Binding HasDesc}"
+													Value="False">
+													<Setter
+														Property="Visibility"
+														Value="Hidden" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Button.Style>
 									<ui:SymbolIcon
 										Symbol="GlobeProhibited20" />
 								</Button>

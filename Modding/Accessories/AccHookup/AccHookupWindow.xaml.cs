@@ -39,36 +39,37 @@ public partial class AccHookupWindow: BaseWindow {
 
 	void OnSuiChanged(SuiItem? suiItem) => UCPhysics.CurrentSuiItem = suiItem;
 
-	private void ButtonAddRowClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonSuiAdd) {
-			SuiItem newItem = new("new_sui");
-			Binding.SuiItems.Add(newItem);
-			Binding.CurrentSuiItem = newItem;
-			TableSui.Focus();
-		} else if (sender == ButtonToyAdd) {
-			AccessoryHookupData newItem = new();
-			Binding.Hookups?.Add(newItem);
-			Binding.CurrentHookupItem = newItem;
+	private void ButtonAddSuiClick(object sender, RoutedEventArgs e) {
+		SuiItem newItem = new("new_sui");
+		Binding.SuiItems.Add(newItem);
+		Binding.CurrentSuiItem = newItem;
+	}
+
+	private void ButtonDeleteSuiClick(object sender, RoutedEventArgs e) {
+		if (sender is Button button) {
+			var SuiItem = (SuiItem)button.DataContext;
+			Binding.SuiItems.Remove(SuiItem);
+
+			if (Binding.CurrentSuiItem == SuiItem) {
+				Binding.CurrentSuiItem = Binding.SuiItems.FirstOrDefault();
+
+			}
 		}
+	}
+
+	private void ButtonAddRowClick(object sender, RoutedEventArgs e) {
+		AccessoryHookupData newItem = new();
+		Binding.Hookups?.Add(newItem);
+		Binding.CurrentHookupItem = newItem;
 	}
 
 	private void ButtonDeleteRowClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonSuiRemove) {
-			if (Binding.CurrentSuiItem != null) {
-				Binding.SuiItems.Remove(Binding.CurrentSuiItem);
-				if (Binding.SuiItems.Count > 0)
-					Binding.CurrentSuiItem = Binding.SuiItems.FirstOrDefault();
-			}
-		} else if (sender == ButtonToyRemove) {
-			if (Binding.CurrentHookupItem != null)
-				Binding.Hookups?.Remove(Binding.CurrentHookupItem);
-		}
+		if (Binding.CurrentHookupItem != null)
+			Binding.Hookups?.Remove(Binding.CurrentHookupItem);
 	}
 
 	private void SortButtonClick(object sender, RoutedEventArgs e) {
-		if (sender == ButtonSuiUp || sender == ButtonSuiDown) {
-			CollectionUtil.MoveDataGridItems(sender == ButtonSuiUp, TableSui, Binding.SuiItems);
-		} else if (sender == ButtonToyUp || sender == ButtonToyDown) {
+		if (sender == ButtonToyUp || sender == ButtonToyDown) {
 			CollectionUtil.MoveListBoxItems(sender == ButtonToyUp, ListBoxHookup, Binding.Hookups!);
 		}
 	}

@@ -1,16 +1,17 @@
 ﻿using Microsoft.Win32;
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
-using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.Accessories.AccAddon.Popup;
 using SCS_Mod_Helper.Modding.Accessories.Physics;
 using SCS_Mod_Helper.Utils;
 using SCS_Mod_Helper.Vehicles;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -227,8 +228,6 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		}
 	}
 
-	public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
-
 	public long? Price {
 		get => AddonItem.Price;
 		set {
@@ -399,18 +398,18 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 	}
 
 	//配件类型、look、variant列表以及菜单
-	private ObservableCollection<ModelTypeInfo>? mModelTypes = null;
-	public ObservableCollection<ModelTypeInfo> ModelTypes {
+	private ObservableCollection<AccessoryType>? mModelTypes = null;
+	public ObservableCollection<AccessoryType> ModelTypes {
 		get {
 			mModelTypes ??= AccessoryType.ModelTypes;
 			return mModelTypes;
 		}
 	}
 
-	private readonly ModelTypeInfo emptyAcc = new();
+	private readonly AccessoryType emptyAcc = new();
 
-	public ModelTypeInfo? mCurrentModelType = null;
-	public ModelTypeInfo CurrentModelType {
+	public AccessoryType? mCurrentModelType = null;
+	public AccessoryType CurrentModelType {
 		get {
 			if (mCurrentModelType == null) {
 				foreach (var type in ModelTypes) {
@@ -517,11 +516,14 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 		get => AddonItem.HideIn;
 		set {
 			AddonItem.HideIn = value;
-			InvokeChange();
+			InvokeChange(nameof(HideInString));
 		}
 	}
 
+	public string HideInString => $"0x{Convert.ToInt64(HideIn):X}";
+
 	public HideInUC? HideInUC = null;
+
 	public string ElectricType {
 		get => AddonItem.ElectricType;
 		set {
@@ -1081,7 +1083,7 @@ public class AccAddonBinding: BaseBinding, IListDataInterface {
 			collPath = null;
 
 		for (int i = s.Length - 2; i > 0; i--) {
-			foreach (ModelTypeInfo info in ModelTypes) {//根据路径猜测模型的类型
+			foreach (var info in ModelTypes) {//根据路径猜测模型的类型
 				if (s[i] == info.AccessoryETS2 || s[i] == info.AccessoryATS)
 					modelType = info.Accessory;
 			}

@@ -17,11 +17,6 @@
 	WindowStartupLocation="CenterOwner"
 	Closing="SaveOnClosing">
 	<base:BaseWindow.Resources>
-		<utils:StringNotEmptyConverter
-			x:Key="StringNotEmpty" />
-		<utils:HideInConverter
-			x:Key="HideInConverter" />
-
 		<Style
 			x:Key="CMStyle"
 			TargetType="MenuItem"
@@ -671,12 +666,23 @@
 							x:Name="TextPartType"
 							Grid.Row="1"
 							Grid.ColumnSpan="2"
-							DisplayMemberPath="PartTypeDisplay"
-							SelectedValuePath="PartTypeValue"
+							SelectedValuePath="Tag"
 							SelectedValue="{Binding PartType}"
-							ItemsSource="{Binding PartTypes}"
 							IsEditable="True"
-							IsReadOnly="true" />
+							IsReadOnly="True">
+							<ComboBoxItem
+								Content="{DynamicResource PartTypeUnknown}"
+								Tag="unknown" />
+							<ComboBoxItem
+								Content="{DynamicResource PartTypeAftermarket}"
+								Tag="aftermarket" />
+							<ComboBoxItem
+								Content="{DynamicResource PartTypeFactory}"
+								Tag="factory" />
+							<ComboBoxItem
+								Content="{DynamicResource PartTypeLicensed}"
+								Tag="licensed" />
+						</ComboBox>
 					</Grid>
 
 					<StackPanel
@@ -1495,7 +1501,7 @@
 								x:Name="TextHideIn"
 								Grid.Row="1"
 								IsReadOnly="True"
-								Text="{Binding HideIn, Converter={StaticResource HideInConverter}}"
+								Text="{Binding HideInString, Mode=OneWay}"
 								Style="{StaticResource TextBoxBorderless}" />
 							<Button
 								x:Name="ButtonSetHideIn"
@@ -1505,7 +1511,7 @@
 								Style="{StaticResource ButtonBorderless}">
 								<Viewbox>
 									<ui:SymbolIcon
-										Symbol="Add16" />
+										Symbol="ChevronDown20" />
 								</Viewbox>
 							</Button>
 							<Popup
@@ -1514,7 +1520,7 @@
 								PopupAnimation="Slide"
 								AllowsTransparency="True"
 								StaysOpen="False"
-								Placement="Top">
+								Placement="Bottom">
 							</Popup>
 						</Grid>
 
@@ -1528,14 +1534,18 @@
 								Grid.Row="1"
 								Grid.Column="3"
 								Grid.ColumnSpan="2"
+								SelectedValuePath="Tag"
 								Text="{Binding ElectricType}">
 								<ComboBox.Items>
 									<ComboBoxItem
-										Content="vehicle" />
+										Content="{DynamicResource ElectricTypeVehicle}"
+										Tag="vehicle" />
 									<ComboBoxItem
-										Content="aux_light" />
+										Content="{DynamicResource ElectricTypeAuxLight}"
+										Tag="aux_light"  />
 									<ComboBoxItem
-										Content="vehicle_interior" />
+										Content="{DynamicResource ElectricTypeVehicleInterior}"
+										Tag="vehicle_interior"  />
 								</ComboBox.Items>
 							</ComboBox>
 						</StackPanel>
@@ -1572,18 +1582,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding DataListContent}">
+								Text="{Binding DataListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewData, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewData}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1651,18 +1665,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding SuitableForListContent}">
+								Text="{Binding SuitableForListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewSuitableFor, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewSuitableFor}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1718,18 +1736,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding ConflictWithListContent}">
+								Text="{Binding ConflictWithListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewConflictWith, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewConflictWith}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1786,18 +1808,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding DefaultsListContent}">
+								Text="{Binding DefaultsListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewDefaults, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewDefaults}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1852,18 +1878,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding OverridesListContent}">
+								Text="{Binding OverridesListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewOverrides, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewOverrides}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1920,18 +1950,19 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding RequireListContent}">
+								Text="{Binding RequireListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewRequire, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewRequire}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -2097,7 +2128,8 @@
 					<DataGrid
 						x:Name="TableVehiclesETS2"
 						ItemsSource="{Binding VehiclesETS2}"
-						d:ItemsSource="{d:SampleData ItemCount=2}">
+						d:ItemsSource="{d:SampleData ItemCount=2}"
+						d:SelectedIndex="0">
 						<DataGrid.Columns>
 							<DataGridTemplateColumn
 								Width="Auto">

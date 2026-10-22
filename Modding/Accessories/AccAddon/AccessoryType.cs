@@ -1,11 +1,11 @@
-﻿using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
+﻿using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 
-namespace SCS_Mod_Helper.Vehicles; 
-class AccessoryType {
-	private static ObservableCollection<ModelTypeInfo>? mModelTypes = null;
-	public static ObservableCollection<ModelTypeInfo> ModelTypes {
+namespace SCS_Mod_Helper.Modding.Accessories.AccAddon; 
+public class AccessoryType: BaseBinding {
+	private static ObservableCollection<AccessoryType>? mModelTypes = null;
+	public static ObservableCollection<AccessoryType> ModelTypes {
 		get {
 			mModelTypes ??= GetModelTypes();
 			DictionaryUtil.ChangeLanguage += AccessoryChangeLanguage;
@@ -38,7 +38,7 @@ class AccessoryType {
 	public const string TypeToyBack = "toyback";
 	public const string TypeToySofa = "toysofa";
 	public const string TypeToyTable = "toytable";
-	public static ObservableCollection<ModelTypeInfo> GetModelTypes() {
+	public static ObservableCollection<AccessoryType> GetModelTypes() {
 		return[
 			new(TypeCupHolder),
 			new(TypeCurtainF, true),
@@ -70,4 +70,91 @@ class AccessoryType {
 			acc.RefreshName();
 		}
 	}
+
+
+
+
+	public AccessoryType() : this("", "", "") { }
+
+	public AccessoryType(
+		string accETS2,
+		string accATS,
+		string nameKey) {
+		mAccessoryETS2 = accETS2;
+		mAccessoryATS = accATS;
+		NameKey = nameKey;
+		if (nameKey == "")
+			mName = "";
+		else
+			mName = GetString(nameKey);
+	}
+
+	public AccessoryType(
+		string acc,
+		bool? gameType = null) {// null: both, true: ETS2, false: ATS
+		mAccessoryETS2 = acc;
+		mGameType = gameType;
+		if (gameType == null) {
+			mAccessoryETS2 = acc;
+			mAccessoryATS = acc;
+		} else if (gameType == true) {
+			mAccessoryETS2 = acc;
+		} else {
+			mAccessoryATS = acc;
+		}
+		NameKey = $"Acc.{acc}";
+		mName = GetString($"Acc.{acc}");
+	}
+
+	private string? mAccessoryETS2;
+	public string? AccessoryETS2 {
+		get => mAccessoryETS2;
+		set {
+			mAccessoryETS2 = value;
+			InvokeChange();
+		}
+	}
+
+	private string? mAccessoryATS;
+	public string? AccessoryATS {
+		get => mAccessoryATS;
+		set {
+			mAccessoryATS = value;
+			InvokeChange();
+		}
+	}
+	public string Accessory {
+		get {
+			if (mGameType == null) {
+				if (mAccessoryETS2 == mAccessoryATS)
+					return mAccessoryETS2!;
+				else
+					return $"{mAccessoryETS2}/{mAccessoryATS}";
+			} else if (mGameType == true)
+				return mAccessoryETS2!;
+			else
+				return mAccessoryATS!;
+		}
+	}
+
+	private string NameKey;
+
+	private string mName;
+	public string Name {
+		get => mName;
+		set {
+			mName = value;
+			InvokeChange();
+		}
+	}
+	public void RefreshName() {
+		if (Accessory.Length == 0)
+			return;
+		Name = GetString(NameKey);
+	}
+	private readonly bool? mGameType;
+	public bool? GameType => mGameType;
+
+	public bool ForETS2 => mGameType == null || mGameType == true;
+	public bool ForATS => mGameType == null || mGameType == false;
 }

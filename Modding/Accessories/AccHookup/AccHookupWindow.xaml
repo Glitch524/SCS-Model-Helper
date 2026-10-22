@@ -11,6 +11,7 @@
 	xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
 	d:DataContext="{d:DesignInstance Type=local:AccHookupBinding}"
 	ExtendsContentIntoTitleBar="True"
+	Title="{DynamicResource TitleAccessoryHookup}"
 	mc:Ignorable="d"
 	WindowStartupLocation="CenterOwner"
 	Width="1000"
@@ -24,8 +25,6 @@
 			x:Key="UIntConverter" />
 		<utils:LongConverter
 			x:Key="LongConverter" />
-		<utils:StringNotEmptyConverter
-			x:Key="StringNotEmpty" />
 
 		<ContextMenu
 			x:Key="MenuStringRes"
@@ -176,19 +175,12 @@
 				<RowDefinition
 					Height="Auto" />
 				<RowDefinition
+					Height="Auto" />
+				<RowDefinition
 					Height="*" />
 				<RowDefinition
 					Height="Auto" />
 			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition
-					MinWidth="100"
-					Width="110" />
-				<ColumnDefinition
-					Width="10" />
-				<ColumnDefinition
-					Width="*" />
-			</Grid.ColumnDefinitions>
 			<Grid
 				Grid.ColumnSpan="5"
 				Margin="0,0,0,5">
@@ -225,170 +217,55 @@
 					Grid.Column="1" />
 
 			</Grid>
-			<Grid
+			<DockPanel
 				Grid.Row="1"
-				Height="{Binding ActualHeight, ElementName=ViewSuiContent, Mode=OneWay}">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition
-						Width="*" />
-					<ColumnDefinition
-						Width="Auto" />
-					<ColumnDefinition
-						Width="Auto" />
-					<ColumnDefinition
-						Width="Auto" />
-					<ColumnDefinition
-						Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition
-						Height="Auto" />
-					<RowDefinition
-						Height="*" />
-				</Grid.RowDefinitions>
-				<Border
-					Grid.Column="1"
-					Grid.ColumnSpan="4"
-					Style="{DynamicResource MultiControlBorder}" />
-				<Button
-					x:Name="ButtonSuiAdd"
-					Grid.Column="1"
-					Style="{DynamicResource GridButton}"
-					Click="ButtonAddRowClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="Add16" />
-					</Viewbox>
-				</Button>
-				<Button
-					x:Name="ButtonSuiUp"
-					Grid.Column="2"
-					Click="SortButtonClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="ArrowUp16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=TableSui}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-								<DataTrigger
-									Binding="{Binding Items.Count, ElementName=TableSui}"
-									Value="1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Button
-					x:Name="ButtonSuiDown"
-					Grid.Column="3"
-					Click="SortButtonClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="ArrowDown16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=TableSui}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-								<DataTrigger
-									Binding="{Binding Items.Count, ElementName=TableSui}"
-									Value="1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<Button
-					x:Name="ButtonSuiRemove"
-					Grid.Column="4"
-					Click="ButtonDeleteRowClick">
-					<Viewbox>
-						<ui:SymbolIcon
-							Symbol="Dismiss16" />
-					</Viewbox>
-					<Button.Style>
-						<Style
-							TargetType="Button"
-							BasedOn="{StaticResource GridButton}">
-							<Style.Triggers>
-								<DataTrigger
-									Binding="{Binding SelectedIndex, ElementName=TableSui}"
-									Value="-1">
-									<Setter
-										Property="IsEnabled"
-										Value="False" />
-								</DataTrigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-				</Button>
-				<DataGrid
-					x:Name="TableSui"
-					Grid.Row="1"
-					Grid.ColumnSpan="5"
-					CanUserSortColumns="False"
-					CanUserResizeRows="False"
-					SelectionMode="Single"
+				Grid.ColumnSpan="3">
+				<TabControl
+					x:Name="TabSui"
+					d:ItemsSource="{d:SampleData ItemCount=3}"
 					ItemsSource="{Binding SuiItems}"
-					SelectedItem="{Binding CurrentSuiItem, Mode=TwoWay}"
-					AutoGenerateColumns="False"
-					CanUserAddRows="False"
-					ColumnHeaderStyle="{StaticResource DataGridHeader}"
-					CellStyle="{StaticResource CompatCellStyle}">
-					<DataGrid.Columns>
-						<DataGridTextColumn
-							Header="{DynamicResource HeaderHookupName}"
-							Width="*"
-							Binding="{Binding SuiFilename, UpdateSourceTrigger=PropertyChanged}">
-							<DataGridTextColumn.CellStyle>
-								<Style
-									TargetType="DataGridCell">
-									<Setter
-										Property="ToolTip"
-										Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content.Text}" />
-								</Style>
-							</DataGridTextColumn.CellStyle>
-						</DataGridTextColumn>
-					</DataGrid.Columns>
-				</DataGrid>
-			</Grid>
-
-			<GridSplitter
-				Width="1"
-				Grid.Row="1"
-				Grid.Column="1"
-				Margin="4,0"
-				ResizeBehavior="PreviousAndNext"
-				HorizontalAlignment="Center"
-				Background="#FF4C4B4B" />
+					SelectedValue="{Binding CurrentSuiItem}"
+					VerticalAlignment="Top"
+					d:SelectedIndex="0">
+					<TabControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel
+								Orientation="Horizontal">
+								<TextBlock
+									Text="{Binding SuiFilename}" />
+								<Button
+									Margin="3,0,0,0"
+									BorderThickness="0"
+									Click="ButtonDeleteSuiClick">
+									<Viewbox>
+										<ui:SymbolIcon
+											Symbol="Dismiss20" />
+									</Viewbox>
+								</Button>
+							</StackPanel>
+						</DataTemplate>
+					</TabControl.ItemTemplate>
+					<TabControl.ContentTemplate>
+						<DataTemplate />
+					</TabControl.ContentTemplate>
+				</TabControl>
+				<Button
+					Margin="5,10,0,3"
+					VerticalAlignment="Bottom"
+					BorderThickness="0"
+					Background="{x:Null}"
+					Click="ButtonAddSuiClick"
+					Height="24">
+					<Viewbox>
+						<ui:SymbolIcon
+							Symbol="Add20" />
+					</Viewbox>
+				</Button>
+			</DockPanel>
 
 			<ScrollViewer
 				x:Name="ViewSuiContent"
-				Grid.Row="1"
+				Grid.Row="2"
 				Grid.Column="3"
 				Padding="0,0,10,0">
 				<Grid>
@@ -450,7 +327,7 @@
 									BasedOn="{StaticResource GridButton}">
 									<Style.Triggers>
 										<DataTrigger
-											Binding="{Binding SelectedIndex, ElementName=TableSui}"
+											Binding="{Binding SelectedIndex, ElementName=TabSui}"
 											Value="-1">
 											<Setter
 												Property="IsEnabled"
@@ -622,7 +499,7 @@
 										Value="-1">
 										<Setter
 											Property="Visibility"
-											Value="Collapsed" />
+											Value="Hidden" />
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>
@@ -830,12 +707,23 @@
 							</StackPanel>
 							<ComboBox
 								x:Name="TextPartType"
-								DisplayMemberPath="PartTypeDisplay"
-								SelectedValuePath="PartTypeValue"
+								SelectedValuePath="Tag"
 								SelectedValue="{Binding CurrentHookupItem.PartType}"
-								ItemsSource="{Binding PartTypes}"
 								IsEditable="True"
-								IsReadOnly="true" />
+								IsReadOnly="true">
+								<ComboBoxItem
+									Content="{DynamicResource PartTypeUnknown}"
+									Tag="unknown" />
+								<ComboBoxItem
+									Content="{DynamicResource PartTypeAftermarket}"
+									Tag="aftermarket" />
+								<ComboBoxItem
+									Content="{DynamicResource PartTypeFactory}"
+									Tag="factory" />
+								<ComboBoxItem
+									Content="{DynamicResource PartTypeLicensed}"
+									Tag="licensed" />
+							</ComboBox>
 						</StackPanel>
 
 						<StackPanel
@@ -1281,17 +1169,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding CurrentHookupItem.DataListContent}">
+								Text="{Binding CurrentHookupItem.DataListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewData, Converter={StaticResource StringNotEmpty}}" Value="true">
+												Binding="{Binding NewData}" 
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1362,18 +1255,22 @@
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBlock
 								Grid.Row="1"
-								Text="{Binding CurrentHookupItem.SuitableForListContent}">
+								Text="{Binding CurrentHookupItem.SuitableForListContent}"
+								d:Visibility="Visible">
 								<TextBlock.Style>
 									<Style
 										TargetType="TextBlock"
 										BasedOn="{StaticResource ListHint}">
+										<Setter
+											Property="Visibility"
+											Value="Collapsed" />
 										<Style.Triggers>
 											<DataTrigger
-												Binding="{Binding NewSuitableFor, Converter={StaticResource StringNotEmpty}}"
-												Value="true">
+												Binding="{Binding NewSuitableFor}"
+												Value="">
 												<Setter
 													Property="Visibility"
-													Value="Collapsed" />
+													Value="Visible" />
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
@@ -1503,18 +1400,23 @@
 									Style="{DynamicResource MultiControlBorder}" />
 								<TextBlock
 									Grid.Row="1"
-									Text="{Binding CurrentHookupItem.ConflictWithListContent}">
+									Text="{Binding CurrentHookupItem.ConflictWithListContent}"
+									d:Visibility="Visible"
+									d:Text="newconflictshow">
 									<TextBlock.Style>
 										<Style
 											TargetType="TextBlock"
 											BasedOn="{StaticResource ListHint}">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
 											<Style.Triggers>
 												<DataTrigger
-													Binding="{Binding NewConflictWith, Converter={StaticResource StringNotEmpty}}"
-													Value="true">
+													Binding="{Binding NewConflictWith}"
+													Value="">
 													<Setter
 														Property="Visibility"
-														Value="Collapsed" />
+														Value="Visible" />
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
@@ -1569,18 +1471,22 @@
 									Style="{DynamicResource MultiControlBorder}" />
 								<TextBlock
 									Grid.Row="1"
-									Text="{Binding CurrentHookupItem.DefaultsListContent}">
+									Text="{Binding CurrentHookupItem.DefaultsListContent}"
+									d:Visibility="Visible">
 									<TextBlock.Style>
 										<Style
 											TargetType="TextBlock"
 											BasedOn="{StaticResource ListHint}">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
 											<Style.Triggers>
 												<DataTrigger
-													Binding="{Binding NewDefaults, Converter={StaticResource StringNotEmpty}}"
-													Value="true">
+													Binding="{Binding NewDefaults}"
+													Value="">
 													<Setter
 														Property="Visibility"
-														Value="Collapsed" />
+														Value="Visible" />
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
@@ -1635,18 +1541,22 @@
 									Style="{DynamicResource MultiControlBorder}" />
 								<TextBlock
 									Grid.Row="1"
-									Text="{Binding CurrentHookupItem.OverridesListContent}">
+									Text="{Binding CurrentHookupItem.OverridesListContent}"
+									d:Visibility="Visible">
 									<TextBlock.Style>
 										<Style
 											TargetType="TextBlock"
 											BasedOn="{StaticResource ListHint}">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
 											<Style.Triggers>
 												<DataTrigger
-													Binding="{Binding NewOverrides, Converter={StaticResource StringNotEmpty}}"
-													Value="true">
+													Binding="{Binding NewOverrides}"
+													Value="">
 													<Setter
 														Property="Visibility"
-														Value="Collapsed" />
+														Value="Visible" />
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
@@ -1701,18 +1611,22 @@
 									Style="{DynamicResource MultiControlBorder}" />
 								<TextBlock
 									Grid.Row="1"
-									Text="{Binding CurrentHookupItem.RequireListContent}">
+									Text="{Binding CurrentHookupItem.RequireListContent}"
+									d:Visibility="Visible">
 									<TextBlock.Style>
 										<Style
 											TargetType="TextBlock"
 											BasedOn="{StaticResource ListHint}">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
 											<Style.Triggers>
 												<DataTrigger
-													Binding="{Binding NewRequire, Converter={StaticResource StringNotEmpty}}"
-													Value="true">
+													Binding="{Binding NewRequire}"
+													Value="">
 													<Setter
 														Property="Visibility"
-														Value="Collapsed" />
+														Value="Visible" />
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
@@ -1751,12 +1665,15 @@
 									Text="{DynamicResource ElectricType}" />
 								<ComboBox
 									Grid.Row="1"
+									SelectedValuePath="Tag"
 									Text="{Binding CurrentHookupItem.ElectricType}">
 									<ComboBox.Items>
 										<ComboBoxItem
-											Content="vehicle" />
+											Content="{DynamicResource ElectricTypeVehicle}"
+											Tag="vehicle" />
 										<ComboBoxItem
-											Content="aux_light" />
+											Content="{DynamicResource ElectricTypeAuxLight}"
+											Tag="aux_light" />
 									</ComboBox.Items>
 								</ComboBox>
 							</Grid>
@@ -1787,7 +1704,7 @@
 
 			
 			<StackPanel
-				Grid.Row="2"
+				Grid.Row="3"
 				Grid.ColumnSpan="5"
 				Orientation="Horizontal"
 				FlowDirection="RightToLeft"

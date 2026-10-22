@@ -1,8 +1,6 @@
 ﻿using SCS_Mod_Helper.Modding.PaintJob;
-using SCS_Mod_Helper.Utils;
 using System.IO;
 using System.Windows.Media;
-using Windows.Networking.Vpn;
 
 namespace SCS_Mod_Helper.Base {
 	public abstract class SCSIO() {

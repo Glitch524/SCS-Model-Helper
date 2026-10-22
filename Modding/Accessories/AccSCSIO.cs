@@ -124,7 +124,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 					WriteLine(sw, NamePTRestPositionOffset, toyData.RestPositionOffset);
 					WriteLine(sw, NamePTRestRotationOffset, toyData.RestRotationOffset);
 					foreach (var offset in toyData.InstanceOffsetList) {
-						WriteLine(sw, NamePTInstanceOffset, offset);
+						WriteLine(sw, NamePTInstanceOffset, offset.Offset);
 					}
 					WriteEmptyLine(sw);
 					WriteLine(sw, NamePTAngularStiffness, toyData.AngularStiffness);
@@ -241,7 +241,7 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 					case NamePTInstanceOffset:
 						float[] nf = new float[3];
 						FloatParse(value, (i, v) => nf[i] = v);
-						data.InstanceOffsetList.Add(nf);
+						data.InstanceOffsetList.Add(new(nf));
 						break;
 					case NamePTRopeWidth:
 						data.RopeWidth = float.Parse(value);

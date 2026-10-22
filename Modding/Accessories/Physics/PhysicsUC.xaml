@@ -15,10 +15,6 @@
 	<UserControl.Resources>
 		<utils:FloatConverter
 			x:Key="FloatConverter" />
-		<utils:UIntConverter
-			x:Key="UIntConverter" />
-		<utils:ClearVisibilityConverter
-			x:Key="ClearVisibility" />
 		<ContextMenu
 			x:Key="MenuPhysicsType">
 			<MenuItem
@@ -503,7 +499,6 @@
 			<Grid
 				x:Name="PanelPTD"
 				Grid.Row="2"
-				d:Visibility="Hidden"
 				Visibility="{Binding ToyVisibility}">
 				<Grid.RowDefinitions>
 					<RowDefinition
@@ -536,19 +531,23 @@
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition
-							Width="*" />
+							Width="*" 
+							MinWidth="200"/>
 						<ColumnDefinition
 							Width="5" />
 						<ColumnDefinition
-							Width="*" />
+							Width="*"
+							MinWidth="200" />
 						<ColumnDefinition
 							Width="5" />
 						<ColumnDefinition
-							Width="*" />
+							Width="*"
+							MinWidth="200" />
 						<ColumnDefinition
 							Width="5" />
 						<ColumnDefinition
-							Width="*" />
+							Width="*"
+							MinWidth="200" />
 					</Grid.ColumnDefinitions>
 					<StackPanel>
 						<TextBlock><Run
@@ -652,9 +651,22 @@
 							x:Name="ButtonPhysicsModelPathClear"
 							Grid.Row="1"
 							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding CurrentToyData.ModelPath, Converter={StaticResource ClearVisibility}}">
+							Click="ButtonClearClick">
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource ButtonBorderless}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding CurrentToyData.ModelPath}"
+											Value="">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
 							<Viewbox>
 								<ui:SymbolIcon
 									Symbol="Dismiss16" />
@@ -750,9 +762,22 @@
 							x:Name="ButtonPhysicsCollPathClear"
 							Grid.Row="1"
 							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding CurrentToyData.CollPath, Converter={StaticResource ClearVisibility}}">
+							Click="ButtonClearClick">
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource ButtonBorderless}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding CurrentToyData.CollPath}"
+											Value="">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
 							<Viewbox>
 								<ui:SymbolIcon
 									Symbol="Dismiss16" />
@@ -779,7 +804,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextToyMass"
-							Text="{Binding CurrentToyData.Mass, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.Mass, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<Grid
@@ -850,12 +875,12 @@
 						Grid.Column="4">
 						<TextBlock
 							ToolTip="{DynamicResource TipLinearStiffness}">
-						<Run
+							<Run
 								Text="{DynamicResource TitleLinearStiffness}" />
 						</TextBlock>
 						<TextBox
 							x:Name="TextLinearStiffness"
-							Text="{Binding CurrentToyData.LinearStiffness, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.LinearStiffness, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
@@ -868,7 +893,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextLinearDamping"
-							Text="{Binding CurrentToyData.LinearDamping, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.LinearDamping, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 
@@ -1084,34 +1109,6 @@
 						<Run
 								Text="{DynamicResource TitleInstanceOffset}" />
 						</TextBlock>
-						<Button
-							x:Name="ButtonInstanceOffsetAdd"
-							Grid.Column="1"
-							Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
-							Click="ButtonInstanceOffsetClicked">
-							<ui:SymbolIcon
-								Symbol="Add16" />
-						</Button>
-						<Button
-							x:Name="ButtonInstanceOffsetRemove"
-							Grid.Column="2"
-							Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
-							Click="ButtonInstanceOffsetClicked"
-							Margin="3,0,3,0">
-							<ui:SymbolIcon
-								Symbol="dismiss16" />
-						</Button>
-						<Button
-							x:Name="ButtonInstanceOffsetList"
-							Grid.Column="3"
-							Width="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
-							Height="{Binding ActualHeight, ElementName=TitleInstanceOffset, Mode=OneWay}"
-							Click="ButtonInstanceOffsetClicked">
-							<ui:SymbolIcon
-								Symbol="AppsList20" />
-						</Button>
 						<Grid
 							Grid.Row="1"
 							Grid.ColumnSpan="4">
@@ -1126,36 +1123,232 @@
 									Width="Auto" />
 								<ColumnDefinition
 									Width="*" />
+								<ColumnDefinition
+									Width="Auto" />
 							</Grid.ColumnDefinitions>
 							<Border
 								Grid.ColumnSpan="5"
 								Style="{DynamicResource MultiControlBorder}" />
 							<TextBox
 								x:Name="TextInstanceOffset0"
-								Text="{Binding CurrentToyData.InstanceOffset0, Converter={StaticResource FloatConverter}}"
+								Text="{Binding CurrentToyData.CurrentInstanceOffset.Offset0, Converter={StaticResource FloatConverter}}"
 								d:Text="0.000000"
-								PreviewTextInput="FloatOnly"
-								Style="{StaticResource Float0_11}" />
+								PreviewTextInput="FloatOnly">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource Float0_11}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding CurrentToyData.CurrentInstanceOffset}"
+												Value="{x:Null}">
+												<Setter
+													Property="IsEnabled"
+													Value="False" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
 							<Label
 								Grid.Column="1"
 								Style="{StaticResource FloatCommaToy}" />
 							<TextBox
 								x:Name="TextInstanceOffset1"
 								Grid.Column="2"
-								Text="{Binding CurrentToyData.InstanceOffset1, Converter={StaticResource FloatConverter}}"
+								Text="{Binding CurrentToyData.CurrentInstanceOffset.Offset1, Converter={StaticResource FloatConverter}}"
 								d:Text="0.000000"
-								PreviewTextInput="FloatOnly"
-								Style="{StaticResource Float1_11}" />
+								PreviewTextInput="FloatOnly">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource Float1_11}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding CurrentToyData.CurrentInstanceOffset}"
+												Value="{x:Null}">
+												<Setter
+													Property="IsEnabled"
+													Value="False" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
 							<Label
 								Grid.Column="3"
 								Style="{StaticResource FloatCommaToy}" />
 							<TextBox
 								x:Name="TextInstanceOffset2"
 								Grid.Column="4"
-								Text="{Binding CurrentToyData.InstanceOffset2, Converter={StaticResource FloatConverter}}"
+								Text="{Binding CurrentToyData.CurrentInstanceOffset.Offset2, Converter={StaticResource FloatConverter}}"
 								d:Text="0.000000"
-								PreviewTextInput="FloatOnly"
-								Style="{StaticResource Float2_11}" />
+								PreviewTextInput="FloatOnly">
+								<TextBox.Style>
+									<Style
+										TargetType="TextBox"
+										BasedOn="{StaticResource Float2_11}">
+										<Style.Triggers>
+											<DataTrigger
+												Binding="{Binding CurrentToyData.CurrentInstanceOffset}"
+												Value="{x:Null}">
+												<Setter
+													Property="IsEnabled"
+													Value="False" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBox.Style>
+							</TextBox>
+							<Button
+								x:Name="ButtonInstanceOffsetList"
+								Grid.Column="5"
+                                Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+								Click="ButtonInstanceOffsetClicked"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Left">
+								<ui:SymbolIcon
+									Symbol="AppsList20" />
+							</Button>
+							<Popup
+								x:Name="PopupInstanceOffsetList"
+								Placement="Bottom"
+								PopupAnimation="Slide"
+								AllowsTransparency="True"
+								PlacementTarget="{Binding ElementName=ButtonInstanceOffsetList}"
+								StaysOpen="False">
+								<Grid
+									MinWidth="167">
+									<Border
+										Grid.RowSpan="2"
+										Style="{DynamicResource PopupBorder}" />
+									<Grid
+										Margin="5">
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+										</Grid.RowDefinitions>
+										<Button
+											Padding="10,3"
+											Margin="5"
+											HorizontalAlignment="Right"
+											Command="{Binding CurrentToyData.AddInstanceOffsetCommand}">
+											<Viewbox>
+												<ui:SymbolIcon
+													Symbol="Add20" />
+											</Viewbox>
+										</Button>
+										<TextBlock
+											Grid.Row="1"
+											Margin="5"
+											Text="{DynamicResource StatusEmpty}"
+											HorizontalAlignment="Right">
+											<TextBlock.Style>
+												<Style
+													TargetType="TextBlock"
+													BasedOn="{StaticResource {x:Type TextBlock}}">
+													<Setter
+														Property="Visibility"
+														Value="Collapsed" />
+													<Style.Triggers>
+														<DataTrigger
+															Binding="{Binding CurrentToyData.InstanceOffsetList.Count}"
+															Value="0">
+															<Setter
+																Property="Visibility"
+																Value="Visible" />
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBlock.Style>
+										</TextBlock>
+										<ListBox
+											x:Name="ListBoxInstanceOffset"
+											Grid.Row="1"
+											Margin="5"
+											ItemsSource="{Binding CurrentToyData.InstanceOffsetList}"
+											SelectedValue="{Binding CurrentToyData.CurrentInstanceOffset}"
+											IsSynchronizedWithCurrentItem="True">
+											<ListBox.Style>
+												<Style
+													TargetType="ListBox"
+													BasedOn="{StaticResource {x:Type ListBox}}">
+													<Style.Triggers>
+														<DataTrigger
+															Binding="{Binding CurrentToyData.InstanceOffsetList.Count}"
+															Value="0">
+															<Setter
+																Property="Visibility"
+																Value="Collapsed" />
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</ListBox.Style>
+											<ListBox.ItemTemplate>
+												<DataTemplate>
+													<Grid
+														Margin="0,1">
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition
+																Width="Auto" />
+															<ColumnDefinition
+																Width="*" />
+															<ColumnDefinition
+																Width="Auto" />
+														</Grid.ColumnDefinitions>
+														<TextBlock>
+															<TextBlock.Style>
+																<Style
+																	TargetType="TextBlock"
+																	BasedOn="{StaticResource {x:Type TextBlock}}">
+																	<Style.Triggers>
+																		<DataTrigger
+																			Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+																			Value="True">
+																			<Setter
+																				Property="Foreground"
+																				Value="White" />
+																		</DataTrigger>
+																	</Style.Triggers>
+																</Style>
+															</TextBlock.Style>
+															<Run
+																Text="(" />
+															<Run
+																Text="{Binding Offset0}" />
+															<Run
+																Text="," />
+															<Run
+																Text="{Binding Offset1}" />
+															<Run
+																Text="," />
+															<Run
+																Text="{Binding Offset2}" />
+															<Run
+																Text=")" />
+														</TextBlock>
+														<Button
+															x:Name="ButtonRemoveVariant"
+															Width="20"
+															Height="20"
+															Grid.Column="2"
+															Margin="5,0,0,0"
+															Command="{Binding DataContext.CurrentToyData.RemoveInstanceOffsetCommand, ElementName=ListBoxInstanceOffset}"
+															CommandParameter="{Binding .}">
+															<Viewbox>
+																<ui:SymbolIcon
+																	Symbol="Dismiss20" />
+															</Viewbox>
+														</Button>
+													</Grid>
+												</DataTemplate>
+											</ListBox.ItemTemplate>
+										</ListBox>
+									</Grid>
+								</Grid>
+							</Popup>
 						</Grid>
 					</Grid>
 
@@ -1198,9 +1391,22 @@
 							x:Name="ButtonRopeMaterialClear"
 							Grid.Row="1"
 							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding CurrentToyData.RopeMaterial, Converter={StaticResource ClearVisibility}}">
+							Click="ButtonClearClick">
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource ButtonBorderless}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding CurrentToyData.RopeMaterial}"
+											Value="">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
 							<Viewbox>
 								<ui:SymbolIcon
 									Symbol="Dismiss16" />
@@ -1488,7 +1694,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextRopeWidth"
-							Text="{Binding CurrentToyData.RopeWidth, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.RopeWidth, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
@@ -1500,7 +1706,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextRopeLength"
-							Text="{Binding CurrentToyData.RopeLength, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.RopeLength, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
@@ -1513,7 +1719,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextRopeHookOffset"
-							Text="{Binding CurrentToyData.RopeHookOffset, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.RopeHookOffset, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
@@ -1526,7 +1732,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextRopeToyOffset"
-							Text="{Binding CurrentToyData.RopeToyOffset, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.RopeToyOffset, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
@@ -1565,7 +1771,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextRopeLinearDensity"
-							Text="{Binding CurrentToyData.RopeLinearDensity, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.RopeLinearDensity, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 					<StackPanel
@@ -1578,7 +1784,7 @@
 						</TextBlock>
 						<TextBox
 							x:Name="TextNodeDamping"
-							Text="{Binding CurrentToyData.NodeDamping, Converter={StaticResource FloatConverter}}"
+							Text="{Binding CurrentToyData.NodeDamping, Converter={x:Static utils:FloatConverter.Instance}}"
 							PreviewTextInput="FloatOnly" />
 					</StackPanel>
 				</Grid>
@@ -1586,6 +1792,7 @@
 			<StackPanel
 				x:Name="PanelPPD"
 				Grid.Row="2"
+				d:Visibility="Hidden"
 				Visibility="{Binding PatchVisibility}">
 				<Grid>
 					<Grid.RowDefinitions>
@@ -1705,9 +1912,22 @@
 							x:Name="ButtonPatchMaterialClear"
 							Grid.Row="1"
 							Grid.Column="1"
-							Click="ButtonClearClick"
-							Style="{StaticResource ButtonBorderless}"
-							Visibility="{Binding CurrentPatchData.Material, Converter={StaticResource ClearVisibility}}">
+							Click="ButtonClearClick">
+							<Button.Style>
+								<Style
+									TargetType="Button"
+									BasedOn="{StaticResource ButtonBorderless}">
+									<Style.Triggers>
+										<DataTrigger
+											Binding="{Binding CurrentPatchData.Material}"
+											Value="">
+											<Setter
+												Property="Visibility"
+												Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Button.Style>
 							<Viewbox>
 								<ui:SymbolIcon
 									Symbol="Dismiss16" />
@@ -1734,7 +1954,7 @@
 						<TextBox
 							x:Name="TextAreaDensity"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.AreaDensity, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.AreaDensity, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 					<StackPanel
@@ -1762,7 +1982,7 @@
 						<TextBox
 							x:Name="TextPLinearStiffness"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.LinearStiffness, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.LinearStiffness, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 					<StackPanel
@@ -1774,7 +1994,7 @@
 						<TextBox
 							x:Name="TextDragCoefficient"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.DragCoefficient, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.DragCoefficient, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 					<StackPanel
@@ -1786,7 +2006,7 @@
 						<TextBox
 							x:Name="TextLiftCoefficient"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.LiftCoefficient, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.LiftCoefficient, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 
@@ -1819,7 +2039,7 @@
 							x:Name="TextTCMinFirst0"
 							Grid.Row="1"
 							Style="{StaticResource Float0_Patch}"
-							Text="{Binding CurrentPatchData.TCMinFirst0, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMinFirst0, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 						<Label
 							Grid.Row="1"
@@ -1830,7 +2050,7 @@
 							Grid.Row="1"
 							Grid.Column="2"
 							Style="{StaticResource Float2_Patch}"
-							Text="{Binding CurrentPatchData.TCMinFirst1, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMinFirst1, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</Grid>
 					<Grid
@@ -1862,7 +2082,7 @@
 							x:Name="TextTCMaxFirst0"
 							Grid.Row="1"
 							Style="{StaticResource Float0_Patch}"
-							Text="{Binding CurrentPatchData.TCMaxFirst0, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMaxFirst0, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 						<Label
 							Grid.Row="1"
@@ -1874,7 +2094,7 @@
 							Grid.Row="1"
 							Grid.Column="2"
 							Style="{StaticResource Float2_Patch}"
-							Text="{Binding CurrentPatchData.TCMaxFirst1, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMaxFirst1, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</Grid>
 					<Grid
@@ -1906,7 +2126,7 @@
 							x:Name="TextTCMinSecond0"
 							Grid.Row="1"
 							Style="{StaticResource Float0_Patch}"
-							Text="{Binding CurrentPatchData.TCMinSecond0, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMinSecond0, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 						<Label
 							Grid.Row="1"
@@ -1917,7 +2137,7 @@
 							Grid.Row="1"
 							Grid.Column="2"
 							Style="{StaticResource Float2_Patch}"
-							Text="{Binding CurrentPatchData.TCMinSecond1, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMinSecond1, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</Grid>
 					<Grid
@@ -1949,7 +2169,7 @@
 							x:Name="TextTCMaxSecond0"
 							Grid.Row="1"
 							Style="{StaticResource Float0_Patch}"
-							Text="{Binding CurrentPatchData.TCMaxSecond0, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMaxSecond0, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 						<Label
 							Grid.Row="1"
@@ -1960,7 +2180,7 @@
 							Grid.Row="1"
 							Grid.Column="2"
 							Style="{StaticResource Float2_Patch}"
-							Text="{Binding CurrentPatchData.TCMaxSecond1, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.TCMaxSecond1, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</Grid>
 
@@ -1973,7 +2193,7 @@
 						<TextBox
 							x:Name="TextXRes"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.XRes, Converter={StaticResource UIntConverter}}">
+							Text="{Binding CurrentPatchData.XRes, Converter={x:Static utils:UIntConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 					<StackPanel
@@ -1985,7 +2205,7 @@
 						<TextBox
 							x:Name="TextYRes"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.YRes, Converter={StaticResource UIntConverter}}">
+							Text="{Binding CurrentPatchData.YRes, Converter={x:Static utils:UIntConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 					<StackPanel
@@ -1997,7 +2217,7 @@
 						<TextBox
 							x:Name="TextXSize"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.XSize, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.XSize, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 					<StackPanel
@@ -2009,7 +2229,7 @@
 						<TextBox
 							x:Name="TextYSize"
 							Padding="3,3,3,3"
-							Text="{Binding CurrentPatchData.YSize, Converter={StaticResource FloatConverter}}">
+							Text="{Binding CurrentPatchData.YSize, Converter={x:Static utils:FloatConverter.Instance}}">
 						</TextBox>
 					</StackPanel>
 				</Grid>

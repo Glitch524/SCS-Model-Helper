@@ -136,6 +136,11 @@
 	<s:String x:Key="PartTypeFactory">Factory</s:String>
 	<s:String x:Key="PartTypeLicensed">Licensed</s:String>
 	
+		<!--Electric Type-->
+	<s:String x:Key="ElectricTypeVehicle">vehicle</s:String>
+	<s:String x:Key="ElectricTypeAuxLight">aux_light</s:String>
+	<s:String x:Key="ElectricTypeVehicleInterior">vehicle_interior</s:String>
+	
 	
 		<!--AccAddonWindow.CS-->
 	<s:String x:Key="MessageLoadVehicleErr">Error occurs when loading vehicle list, reseting vehicle list</s:String>

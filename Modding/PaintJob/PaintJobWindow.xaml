@@ -356,12 +356,23 @@
 						x:Name="TextPartType"
 						Grid.Row="1"
 						Grid.ColumnSpan="2"
-						DisplayMemberPath="PartTypeDisplay"
-						SelectedValuePath="PartTypeValue"
+						SelectedValuePath="Tag"
 						SelectedValue="{Binding PartType}"
-						ItemsSource="{Binding PartTypes}"
 						IsEditable="True"
-						IsReadOnly="true" />
+						IsReadOnly="true">
+						<ComboBoxItem
+							Content="{DynamicResource PartTypeUnknown}"
+							Tag="unknown" />
+						<ComboBoxItem
+							Content="{DynamicResource PartTypeAftermarket}"
+							Tag="aftermarket" />
+						<ComboBoxItem
+							Content="{DynamicResource PartTypeFactory}"
+							Tag="factory" />
+						<ComboBoxItem
+							Content="{DynamicResource PartTypeLicensed}"
+							Tag="licensed" />
+					</ComboBox>
 				</Grid>
 				<StackPanel
 					Grid.Column="4">
@@ -797,13 +808,8 @@
 					</Grid.ColumnDefinitions>
 					<StackPanel
 						VerticalAlignment="Top">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
+						<StackPanel
+							Orientation="Horizontal">
 							<TextBlock
 								TextWrapping="Wrap"
 								VerticalAlignment="Bottom"
@@ -818,39 +824,61 @@
 										Symbol="ChatWarning20" />
 								</Viewbox>
 							</Border>
-						</Grid>
-						<Grid
-							Grid.Row="1"
+						</StackPanel>
+						<StackPanel
+							Orientation="Horizontal"
 							Height="{Binding ActualHeight, ElementName=TextPaintJobTex, Mode=OneWay}">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition
-									Width="Auto" />
-								<ColumnDefinition
-									Width="Auto" />
-							</Grid.ColumnDefinitions>
-							<Grid
-								MinWidth="160">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-									<ColumnDefinition
-										Width="Auto" />
-								</Grid.ColumnDefinitions>
-								<Grid.Style>
+							<StackPanel
+								Orientation="Horizontal"
+								MinWidth="160"
+								d:IsEnabled="True">
+								<StackPanel.Resources>
 									<Style
-										TargetType="Grid">
+										x:Key="ColorButtonStyle"
+										TargetType="Button"
+										BasedOn="{StaticResource {x:Type Button}}">
+										<Setter
+											Property="Template">
+											<Setter.Value>
+												<ControlTemplate
+													TargetType="Button">
+													<Border
+														x:Name="border"
+														Background="{TemplateBinding Background}"
+														BorderBrush="{TemplateBinding BorderBrush}"
+														BorderThickness="{TemplateBinding BorderThickness}"
+														CornerRadius="4"
+														Padding="{TemplateBinding Padding}">
+														<ContentPresenter
+															HorizontalAlignment="Center"
+															VerticalAlignment="Center" />
+													</Border>
+													<ControlTemplate.Triggers>
+														<Trigger
+															Property="IsMouseOver"
+															Value="True">
+															<Setter
+																TargetName="border"
+																Property="Opacity"
+																Value="0.9" />
+														</Trigger>
+														<Trigger
+															Property="IsEnabled"
+															Value="False">
+															<Setter
+																TargetName="border"
+																Property="Opacity"
+																Value="0.5" />
+														</Trigger>
+													</ControlTemplate.Triggers>
+												</ControlTemplate>
+											</Setter.Value>
+										</Setter>
+									</Style>
+								</StackPanel.Resources>
+								<StackPanel.Style>
+									<Style
+										TargetType="StackPanel">
 										<Style.Triggers>
 											<DataTrigger
 												Binding="{Binding CurrentVariant}"
@@ -861,14 +889,13 @@
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>
-								</Grid.Style>
-								<TextBlock
-									Text="{DynamicResource BaseColorShort}"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
+								</StackPanel.Style>
+								<StackPanel
+									Orientation="Horizontal">
+									<StackPanel.Style>
 										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
+											TargetType="StackPanel"
+											BasedOn="{StaticResource {x:Type StackPanel}}">
 											<Style.Triggers>
 												<DataTrigger
 													Binding="{Binding BaseColorCustomizable}"
@@ -879,93 +906,26 @@
 												</DataTrigger>
 											</Style.Triggers>
 										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariantBase"
-									Grid.Column="1"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Black"
-									Background="{Binding VariantColorBaseBrush, Mode=OneWay}">
-									<Button.Style>
+									</StackPanel.Style>
+									<TextBlock
+										Text="{DynamicResource BaseColorShort}"
+										VerticalAlignment="Center" />
+									<Button
+										x:Name="ButtonVariantBase"
+										Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+										VerticalAlignment="Stretch"
+										Click="ButtonChooseColor"
+										d:Background="Black"
+										Background="{Binding VariantColorBaseBrush, Mode=OneWay}"
+										Style="{StaticResource ColorButtonStyle}"/>
+								</StackPanel>
+								<StackPanel
+									Orientation="Horizontal"
+									Margin="5,0,0,0">
+									<StackPanel.Style>
 										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding BaseColorCustomizable}"
-													Value="false">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</DataTrigger>
-											</Style.Triggers>
-										</Style>
-									</Button.Style>
-								</Button>
-								<TextBlock
-									Grid.Column="2"
-									Margin="5,0,0,0"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
-										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Setter
-												Property="Text"
-												Value="{DynamicResource MaskBShort}" />
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="True">
-													<Setter
-														Property="Text"
-														Value="{DynamicResource FlipColorShort}" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="true" />
-														<Condition
-															Binding="{Binding FlipColorCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskBCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariant1"
-									Grid.Column="3"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Blue"
-									Background="{Binding VariantColor1Brush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
+											TargetType="StackPanel"
+											BasedOn="{StaticResource {x:Type StackPanel}}">
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -995,69 +955,44 @@
 												</MultiDataTrigger>
 											</Style.Triggers>
 										</Style>
-									</Button.Style>
-								</Button>
-								<TextBlock
-									Grid.Column="4"
-									Margin="5,0,0,0"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
+									</StackPanel.Style>
+									<TextBlock
+										VerticalAlignment="Center">
+										<TextBlock.Style>
+											<Style
+												TargetType="TextBlock"
+												BasedOn="{StaticResource {x:Type TextBlock}}">
+												<Setter
+													Property="Text"
+													Value="{DynamicResource MaskBShort}" />
+												<Style.Triggers>
+													<DataTrigger
+														Binding="{Binding Airbrush}"
+														Value="True">
+														<Setter
+															Property="Text"
+															Value="{DynamicResource FlipColorShort}" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+									<Button
+										x:Name="ButtonVariant1"
+										Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+										VerticalAlignment="Stretch"
+										Click="ButtonChooseColor"
+										d:Background="Blue"
+										Background="{Binding VariantColor1Brush, Mode=OneWay}"
+										Style="{StaticResource ColorButtonStyle}" />
+								</StackPanel>
+								<StackPanel
+									Orientation="Horizontal"
+									Margin="5,0,0,0">
+									<StackPanel.Style>
 										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Setter
-												Property="Text"
-												Value="{DynamicResource MaskGShort}" />
-											<Style.Triggers>
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="True">
-													<Setter
-														Property="Text"
-														Value="{DynamicResource FlakeColorShort}" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="true" />
-														<Condition
-															Binding="{Binding FlakeColorCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskGCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariant2"
-									Grid.Column="5"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Lime"
-									Background="{Binding VariantColor2Brush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
+											TargetType="StackPanel"
+											BasedOn="{StaticResource {x:Type StackPanel}}">
 											<Style.Triggers>
 												<MultiDataTrigger>
 													<MultiDataTrigger.Conditions>
@@ -1087,55 +1022,45 @@
 												</MultiDataTrigger>
 											</Style.Triggers>
 										</Style>
-									</Button.Style>
-								</Button>
-								<TextBlock
-									Text="{DynamicResource MaskRShort}"
-									Grid.Column="6"
-									Margin="5,0,0,0"
-									VerticalAlignment="Center">
-									<TextBlock.Style>
+									</StackPanel.Style>
+									<TextBlock
+										VerticalAlignment="Center">
+										<TextBlock.Style>
+											<Style
+												TargetType="TextBlock"
+												BasedOn="{StaticResource {x:Type TextBlock}}">
+												<Setter
+													Property="Text"
+													Value="{DynamicResource MaskGShort}" />
+												<Style.Triggers>
+													<DataTrigger
+														Binding="{Binding Airbrush}"
+														Value="True">
+														<Setter
+															Property="Text"
+															Value="{DynamicResource FlakeColorShort}" />
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</TextBlock.Style>
+									</TextBlock>
+									<Button
+										x:Name="ButtonVariant2"
+										Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+										VerticalAlignment="Stretch"
+										Click="ButtonChooseColor"
+										d:Background="Lime"
+										Background="{Binding VariantColor2Brush, Mode=OneWay}"
+										Style="{StaticResource ColorButtonStyle}">
+									</Button>
+								</StackPanel>
+								<StackPanel
+									Orientation="Horizontal"
+									Margin="5,0,0,0">
+									<StackPanel.Style>
 										<Style
-											TargetType="TextBlock"
-											BasedOn="{StaticResource {x:Type TextBlock}}">
-											<Style.Triggers>
-
-												<DataTrigger
-													Binding="{Binding Airbrush}"
-													Value="true">
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</DataTrigger>
-												<MultiDataTrigger>
-													<MultiDataTrigger.Conditions>
-														<Condition
-															Binding="{Binding Airbrush}"
-															Value="false" />
-														<Condition
-															Binding="{Binding MaskRCustomizable}"
-															Value="false" />
-													</MultiDataTrigger.Conditions>
-													<Setter
-														Property="Visibility"
-														Value="Collapsed" />
-												</MultiDataTrigger>
-											</Style.Triggers>
-										</Style>
-									</TextBlock.Style>
-								</TextBlock>
-								<Button
-									x:Name="ButtonVariant3"
-									Grid.Column="7"
-									Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
-									VerticalAlignment="Stretch"
-									Click="ButtonChooseColor"
-									d:Background="Red"
-									Background="{Binding VariantColor3Brush, Mode=OneWay}">
-									<Button.Style>
-										<Style
-											TargetType="Button"
-											BasedOn="{StaticResource {x:Type Button}}">
+											TargetType="StackPanel"
+											BasedOn="{StaticResource {x:Type StackPanel}}">
 											<Style.Triggers>
 												<DataTrigger
 													Binding="{Binding Airbrush}"
@@ -1159,12 +1084,22 @@
 												</MultiDataTrigger>
 											</Style.Triggers>
 										</Style>
-									</Button.Style>
-								</Button>
-							</Grid>
+									</StackPanel.Style>
+									<TextBlock
+										Text="{DynamicResource MaskRShort}"
+										VerticalAlignment="Center" />
+									<Button
+										x:Name="ButtonVariant3"
+										Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}"
+										VerticalAlignment="Stretch"
+										Click="ButtonChooseColor"
+										d:Background="Red"
+										Background="{Binding VariantColor3Brush, Mode=OneWay}"
+										Style="{StaticResource ColorButtonStyle}" />
+								</StackPanel>
+							</StackPanel>
 							<Button
 								x:Name="ButtonColorVariant"
-								Grid.Column="1"
 								Margin="15,0,0,0"
 								Click="ColorVariantClick"
 								Style="{StaticResource ButtonBorderless}">
@@ -1266,11 +1201,15 @@
 												Height="Auto" />
 										</Grid.RowDefinitions>
 										<Button
-											Content="Add"
 											Padding="10,3"
 											Margin="5"
 											Click="AddVariantClick"
-											HorizontalAlignment="Right" />
+											HorizontalAlignment="Right">
+											<Viewbox>
+												<ui:SymbolIcon
+													Symbol="Add20" />
+											</Viewbox>
+										</Button>
 										<TextBlock
 											Grid.Row="1"
 											Margin="5"
@@ -1560,7 +1499,7 @@
 									</Grid>
 								</Grid>
 							</Popup>
-						</Grid>
+						</StackPanel>
 					</StackPanel>
 				</Grid>
 

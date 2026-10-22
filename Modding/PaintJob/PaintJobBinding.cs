@@ -2,7 +2,6 @@
 using SCS_Mod_Helper.Base;
 using SCS_Mod_Helper.Localization;
 using SCS_Mod_Helper.Modding.Accessories;
-using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
 using SCS_Mod_Helper.Modding.PaintJob.ColorMask;
 using SCS_Mod_Helper.Utils;
 using SCS_Mod_Helper.Vehicles;
@@ -52,8 +51,6 @@ namespace SCS_Mod_Helper.Modding.PaintJob {
 		}
 
 		public bool NameOver12 => ModelName.Length > 12;
-
-		public static List<PartTypeItem> PartTypes => AccessoryData.PartTypes;
 
 		public string PartType {
 			get => PaintJobData.PartType;

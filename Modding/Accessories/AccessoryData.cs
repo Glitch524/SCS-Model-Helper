@@ -1,6 +1,4 @@
 ﻿using SCS_Mod_Helper.Base;
-using SCS_Mod_Helper.Modding.Accessories.AccAddon.Items;
-using SCS_Mod_Helper.Utils;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -93,12 +91,6 @@ namespace SCS_Mod_Helper.Modding.Accessories {
 				InvokeChange();
 			}
 		}
-
-		public static List<PartTypeItem> PartTypes => [
-			new("unknown", GetString("PartTypeUnknown")),
-			new("aftermarket", GetString("PartTypeAftermarket")),
-			new("factory", GetString("PartTypeFactory")),
-			new("licensed", GetString("PartTypeLicensed"))];
 
 		private ObservableCollection<string> data = [];
 		private ObservableCollection<string> suitableFor = [];

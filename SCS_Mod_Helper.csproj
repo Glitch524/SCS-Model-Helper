@@ -11,11 +11,15 @@
 	  <ApplicationManifest>app.manifest</ApplicationManifest>
 	  <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
 	  <AssemblyName>SCS Mod Helper</AssemblyName>
-	  <Platforms>AnyCPU;x86</Platforms>
+	  <Platforms>AnyCPU;x86;x64</Platforms>
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 

@@ -136,6 +136,11 @@
 	<s:String x:Key="PartTypeFactory">原厂部件</s:String>
 	<s:String x:Key="PartTypeLicensed">特许部件</s:String>
 	
+		<!--Electric Type-->
+	<s:String x:Key="ElectricTypeVehicle">vehicle</s:String>
+	<s:String x:Key="ElectricTypeAuxLight">aux_light</s:String>
+	<s:String x:Key="ElectricTypeVehicleInterior">vehicle_interior</s:String>
+	
 	
 		<!--摆件模型定义页.CS-->
 	<s:String x:Key="MessageLoadVehicleErr">读取车辆列表出错，重置车辆列表</s:String>

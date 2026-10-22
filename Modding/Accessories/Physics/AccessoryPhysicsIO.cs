@@ -108,7 +108,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.Physics {
 				if (toyData.InstanceOffsetList.Count > 0) {
 					WriteElement(ATTR_INSTANCE_OFFSET_LIST, () => {
 						foreach (var offset in toyData.InstanceOffsetList) {
-							WriteValueElement(ATTR_INSTANCE_OFFSET, offset);
+							WriteValueElement(ATTR_INSTANCE_OFFSET, offset.Offset);
 						}
 					});
 				}
@@ -221,7 +221,7 @@ namespace SCS_Mod_Helper.Modding.Accessories.Physics {
 									for (int i = 0; i < 3; i++) {
 										offset[i] = float.Parse(s[i]);
 									}
-									toyData.InstanceOffsetList.Add(offset);
+									toyData.InstanceOffsetList.Add(new(offset));
 								}
 							}
 							break;
